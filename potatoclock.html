@@ -128,336 +128,47 @@ tpwidget("init", {
 			<img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
 		</div>
 	</header> <!-- 头部结束 -->
-	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	<!DOCTYPE html>
-	<html lang="en">
+	<html>
 	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>时钟装置</title>
-		<script src="../js/vue.js"></script>
-		<style>
-			@import url('//fonts.googleapis.com/css?family=Josefin+Slab:400,700');
-			@import url('https://fonts.googleapis.com/css?family=Lato');
+		<meta charset="utf-8">
+		<title>PomodoroClock</title>
 
-			* {
-				margin: 0;
-				padding: 0;
-				transition: all ease-in-out .7s;
-			}
-
-			body {
-				overflow: hidden;
-				font-family: 'Myriad Pro', Arial, sans-serif;
-			}
-
-			h1 {
-				font-family: 'Josefin Slab', cursive;
-				position: absolute;
-				top: 10%;
-				left: 10%;
-				font-size: 40px;
-				animation: fadeInLeft .5s ease-in-out;
-				-webkit-animation: fadeInLeft .5s ease-in-out;
-			}
-
-			button {
-				border: 0;
-				outline: none !important;
-				background-image: -webkit-linear-gradient(top, #a8edea, #fed6e3);
-				-webkit-box-shadow: 0px 5px 5px -3px #fff1eb;
-				text-decoration: none;
-			}
-
-				button:hover, button:active, .selected {
-					background-image: -webkit-linear-gradient(-100deg, #5ee7df 50%, #b490ca 100%);
-				}
-
-			.container {
-				position: absolute;
-				width: 100%;
-				height: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				background: url("http://pic1.win4000.com/wallpaper/e/59929ffe3aff8.jpg") no-repeat;
-				background-size: 100% 100%;
-				-webkit-transition: background-image 0.4s ease-in-out;
-				-webkit-backface-visibility: hidden;
-				-webkit-transform-style: preserve-3d;
-			}
-
-			#sounds {
-				position: absolute;
-				display: inline-block;
-				width: 100%;
-				height: auto;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				margin: 0;
-			}
-
-			button {
-				font-size: 25px;
-				font-family: 'Josefin Slab';
-				width: 20%;
-				height: 40px;
-				border-right: 2px solid #e4efe9;
-			}
-
-			#clock {
-				width: 300px;
-				height: 180px;
-				border-radius: 5px;
-				background: rgba(242, 242, 242,.7);
-				text-align: center;
-				-webkit-box-shadow: -2px -2px 8px #777, 2px 2px 12px #777;
-				box-shadow: -2px -2px 8px #777, 2px 2px 12px #777;
-				animation: lightSpeedIn .5s ease-in-out;
-				transition: all .3s ease-in-out;
-			}
-
-			#timer {
-				font-size: 60px;
-			}
-
-			#countdown {
-				padding-top: 8%;
-			}
-
-			#clock:hover {
-				-webkit-box-shadow: -4px -4px 10px #bfbfbf, 4px 4px 16px #bfbfbf;
-				box-shadow: -4px -4px 10px #fff, 4px 4px 16px #fff;
-			}
-
-			#controlls {
-				text-align: center;
-			}
-
-			button {
-				margin-top: 5%;
-				width: 18%;
-				height: 30px;
-				transition: transform .3s ease-in-out;
-			}
-
-				button:hover {
-					transform: scale(1.1);
-				}
-
-			#options {
-				width: 300px;
-				height: auto;
-				margin-top: 20px;
-				text-align: center;
-				font-family: 'Lato';
-				animation: lightSpeedIn .8s ease-in-out;
-			}
-
-			#session {
-				margin-bottom: 4px;
-			}
-
-			input {
-				width: 33px;
-				outline: none;
-				border: 1.5px;
-				border-radius: 3px;
-				border-style: solid;
-				padding: 2px auto;
-			}
-
-			i:hover {
-				font-weight: bold;
-				cursor: pointer;
-			}
-
-			.break {
-				margin-right: 3px;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Bitter|Sedgwick+Ave+Display" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<div id="container" class="container" ref="con">
-			<div id="pomodoro">
-				<h1>POMODORO CLOCK</h1>
-				<div id="sounds">
-					<button v-for="item in select" @click="selectsound(item)" :class="{'selected':item.show}">
-						{{item.name}}
-					</button>
-				</div>
-				<div id="clock">
-					<div id="timer">
-						<div id="countdown">
-							<span id="min">{{min}}</span> :
-							<span id="sec">{{sec}}</span>
-						</div>
-					</div>
-					<div id="controlls">
-						<button id="start" :disabled="state==='start'" @click="start"><i class="fa fa-play"></i></button>
-						<button id="pause" :disabled="state !== 'start'" @click="pause_clock"><i class="fa fa-pause"></i></button>
-						<button id="reset" :disabled="state!=='start'	&& 	state	!==	'pause'" @click="stop_clock"><i class="fa fa-stop"></i></button>
+		<h1>Yinyou PomodoroClock</h1>
 
-					</div>
+		<div class="main">
+			<div class="control">
+				<div class="break">
+					<p>BREAK LENGTH</p>
+					<i class="fa fa-minus-square-o" aria-hidden="true" id="break-minus"></i>
+					<span id="break-length">5</span>
+					<i class="fa fa-plus-square-o" aria-hidden="true" id="break-plus"></i>
 				</div>
-				<div id="options">
-					<div id="session">
-						<i class="fa fa-angle-double-left" @click="increSession"></i>&nbsp;
-						<span>Sessions</span>
-						<input type="number" id="sessionInput" v-model="session_value" max="60" min="5">&nbsp;m&nbsp;
-						<i class="fa fa-angle-double-right" @click="decreSession"></i>
-					</div>
-					<div id="break">
-						<i class="fa fa-angle-double-left" @click="increBreak"></i>&nbsp;
-						<span class="break">Break</span>
-						<input id="breakInput" type="number" v-model="break_value" max="10" min="1">&nbsp;m&nbsp;
-						<i class="fa fa-angle-double-right" @click="decreBreak"></i>
-					</div>
+				<div class="length">
+					<p>SESSION LENGTH</p>
+					<i class="fa fa-minus-square-o" aria-hidden="true" id="session-minus"></i>
+					<span id="session-length">25</span>
+					<i class="fa fa-plus-square-o" aria-hidden="true" id="session-plus"></i>
 				</div>
+			</div>
+			<div class="clock">
+				<h2 id="show-title">Session</h2>
+				<h2 id="show-time">25:00</h2>
+				<span id="per"></span>
+
 			</div>
 		</div>
 
-		<audio id="sound" loop autoplay="false" src="http://joeweaver.me/codepenassets/freecodecamp/challenges/build-a-pomodoro-clock/forest.mp3">
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<script type="text/javascript" src="js/clock.js"></script>
 	</body>
-	<script>
-    const states={
-	START:'start',
-	PAUSE:'pause',
-	STOP:'stop'
-}
-const clock_states={
-  WORK:'work',
-  REST:'rest'
-}
-var audio=document.getElementById("sound");
-// theme=document.getElementsByClassName("selected");
-var minute=25;
-var second=00;
+</html>
 
-var clock=new Vue({
-	el:'#container',
-	data(){
-    return{
-      minutes:minute,
-      seconds:second,
-      session_value:25,
-      break_value:5,
-      state:states.STOP,
-      clock_state:clock_states.WORK,
-      select:[
-        {name:"lake",show:true},
-        {name:"sky",show:false},
-        {name:"foeset",show:false},
-        {name:"sun",show:false},
-        {name:"mirror",show:false}
-      ],
-
-      bgs:[
-        {name:"lake",value:"https://ts1.cn.mm.bing.net/th/id/R-C.833607b80f8336f133780d4def185f4b?rik=M3XKbz47f4dedQ&riu=http%3a%2f%2f15wo.oss-cn-beijing.aliyuncs.com%2fwallpaper%2fcca%2f5ccca72196313.jpg!1275x717&ehk=ROHctcDszSVvR6HT0r4Ipjh4%2ftjUJcWeWlTX5ufn8Tw%3d&risl=&pid=ImgRaw&r=0"},
-        {name:"sky",value:"https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/08/ChMkJlbKzLiIW8ZdAAflO0W-newAALI4wN8mPQAB-VT760.jpg"},
-        {name:"foeset",value:"https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/08/ChMkJlbKzEmIDETBAKzHbytEEv8AALI0wCqXOYArMeH138.jpg"},
-        {name:"sun",value:"https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/01/0F/ChMkJ1bKwyuIYGqhABal56Dy1KEAALGywIsBK8AFqX_089.jpg"},
-        {name:"mirror",value:"https://img.zcool.cn/community/013c775d8dcb1da8012060be8ddadd.jpg@1280w_1l_2o_100sh.jpg"}
-      ]
-	  };
-  },
-	computed:{
-    min:function(){
-      if(this.state===states.STOP){
-        if(this.minutes!==this.session_value){
-          this.minutes=this.session_value;
-        }
-      }
-      if(this.minutes<10){
-        return '0'+this.minutes;
-      }
-      return this.minutes;
-    },
-    sec:function(){
-      if(this.seconds<10){
-        return '0'+this.seconds;
-      }
-      return this.seconds;
-    }
-	},
-
-  methods:{
-    tick:function(){
-      if(this.seconds!==0){
-        this.seconds--;
-        return;
-      }
-      if(this.minutes!==0){
-        this.minutes--;
-        this.seconds=59;
-        return;
-      }
-      //judge work or rest
-      this.clock_state=
-        this.clock_state===clock_states.WORK?clock_states.REST:clock_states.WORK;
-      if(this.clock_state===
-         clock_states.WORK){
-        this.minutes=minute;
-      }else {
-        this.minutes=this.break_value;
-      }
-    },
-    start:function(){
-      this.state=states.START;
-      this.tick();
-      this.Interval=
-        setInterval(this.tick,1000);
-    },
-    stop_clock:function(){
-      this.state=states.STOP;
-      clearInterval(this.Interval);
-  this.clock_state=clock_states.WORK;
-      this.minutes=minute;
-      this.seconds=0;
-    },
-    pause_clock:function(){
-      this.state=states.PAUSE;
-      clearInterval(this.Interval);
-    },
-    selectsound:function(e){
-       // console.log(this.$refs.con);
-      // this.$refs.con.style.background="url("+this.bgs[1].value+")";
-      this.select.forEach(se=>se.show=false);
-      switch(e.name){
-          case "lake":          audio.setAttribute("src","http://joeweaver.me/codepenassets/freecodecamp/challenges/build-a-pomodoro-clock/forest.mp3");
-          e.show=true;
-          this.$refs.con.style.backgroundImage="url("+this.bgs[0].value+")";
-          break;
-      case "sky": audio.setAttribute("src","http://joeweaver.me/codepenassets/freecodecamp/challenges/build-a-pomodoro-clock/ocean.mp3");
-          this.$refs.con.style.backgroundImage="url("+this.bgs[1].value+")";
-          e.show=true; break;
-      case "foeset": audio.setAttribute("src", "http://joeweaver.me/codepenassets/freecodecamp/challenges/build-a-pomodoro-clock/rain.mp3");
-          this.$refs.con.style.backgroundImage="url("+this.bgs[2].value+")";
-          e.show=true;break;
-      case "sun": audio.setAttribute("src","http://joeweaver.me/codepenassets/freecodecamp/challenges/build-a-pomodoro-clock/peace.mp3");
-          this.$refs.con.style.backgroundImage="url("+this.bgs[3].value+")";e.show=true; break;
-      case "mirror":              audio.setAttribute("src","http://joeweaver.me/codepenassets/freecodecamp/challenges/build-a-pomodoro-clock/cafe.mp3");
-          this.$refs.con.style.backgroundImage="url("+this.bgs[4].value+")";
-          e.show=true;break;
-      }
-    },
-    //increase&decrease five minutes
-    increSession:function(){
-      this.session_value+=5;
-    },
-    decreSession:function(){
-      this.session_value-=5;
-    },
-    increBreak:function(){
-      this.break_value+=5;
-    },
-    decreBreak:function(){
-      this.break_value-=5;
-    }
-  }
-});
 	</script>
 </html>
 	</body>
