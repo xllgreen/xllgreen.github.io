@@ -241,10 +241,18 @@ switchCheckbox.addEventListener('change', function () {
 document.addEventListener('DOMContentLoaded', function () {
     var copyBtns = document.querySelectorAll('.copy-btn');
     copyBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var text = btn.getAttribute('data-copy') || '';
-            function done() {
-                var orig = btn.textContent;
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            // 优先使用 data-copy；缺失时回退到相邻 <pre><code> 的内容
+            var text = btn.getAttribute('data-copy');
+            if (text === null || text === '') {
+                var block = btn.closest('.code-block');
+                var code = block && block.querySelector('pre code');
+                text = code ? code.textContent : '';
+            }
+            if (!text) return;
+            function showCopied() {
+                var orig = btn.getAttribute('data-zh') || btn.textContent;
                 var copiedText = (typeof getCookie === 'function' && getCookie('lang') === 'en') ? 'Copied' : '已复制';
                 btn.textContent = copiedText;
                 btn.classList.add('copied');
@@ -256,18 +264,21 @@ document.addEventListener('DOMContentLoaded', function () {
             function fallback() {
                 var ta = document.createElement('textarea');
                 ta.value = text;
+                ta.setAttribute('readonly', '');
                 ta.style.position = 'fixed';
+                ta.style.top = '-9999px';
                 ta.style.opacity = '0';
                 document.body.appendChild(ta);
                 ta.select();
+                ta.setSelectionRange(0, ta.value.length);
                 try {
-                    document.execCommand('copy');
-                    done();
+                    var ok = document.execCommand('copy');
+                    if (ok) showCopied();
                 } catch (e) {}
                 document.body.removeChild(ta);
             }
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(done).catch(fallback);
+                navigator.clipboard.writeText(text).then(showCopied).catch(fallback);
             } else {
                 fallback();
             }
