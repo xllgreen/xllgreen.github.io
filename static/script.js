@@ -237,6 +237,45 @@ switchCheckbox.addEventListener('change', function () {
     checkProjectItems();
 
 
+/* 代码窗复制按钮 */
+document.addEventListener('DOMContentLoaded', function () {
+    var copyBtns = document.querySelectorAll('.copy-btn');
+    copyBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var text = btn.getAttribute('data-copy') || '';
+            function done() {
+                var orig = btn.textContent;
+                var copiedText = (typeof getCookie === 'function' && getCookie('lang') === 'en') ? 'Copied' : '已复制';
+                btn.textContent = copiedText;
+                btn.classList.add('copied');
+                setTimeout(function () {
+                    btn.textContent = orig;
+                    btn.classList.remove('copied');
+                }, 1500);
+            }
+            function fallback() {
+                var ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    done();
+                } catch (e) {}
+                document.body.removeChild(ta);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done).catch(fallback);
+            } else {
+                fallback();
+            }
+        });
+    });
+});
+
+
 
 
 });

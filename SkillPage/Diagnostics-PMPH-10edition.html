@@ -142,7 +142,7 @@
             </div>
             <p>基于人民卫生出版社《诊断学》第10版的临床技能手册 — <strong>183 项核心诊断技能</strong>。何必苦苦读一本书，只需输入一个问题，自动从课本中找到解决方案。</p>
 
-            <h2>项目简介</h2>
+            <h2 data-zh="项目简介" data-en="Introduction">项目简介</h2>
             <p>本项目系统整合临床诊断学核心领域，涵盖 <strong>183 项关键诊断技能</strong>，分为 14 大分类。基于人民卫生出版社国家级规划教材《诊断学》第 10 版系统整理，覆盖病史采集、体格检查、实验室检验解读、心电图与影像分析、常见症状鉴别诊断、专科操作规范及临床推理方法。</p>
             <ul>
                 <li>🎓 <strong>适用人群</strong>：临床医师、医学生、住培学员、检验与影像技术人员、护理及公共卫生工作者</li>
@@ -150,17 +150,30 @@
             </ul>
             <p class="readme-note">⚠️风险：医疗诊断和操作指导可能被误认为是自主的临床建议。仅将该技能作为临床医生监督的教育和参考资料使用；在应用患者护理指导前，要求合格的临床医生审查。</p>
 
-            <h2>项目结构</h2>
-            <pre>Diagnostic-Medicine-PMPH-10edition/
+            <h2 data-zh="项目结构" data-en="Project Structure">项目结构</h2>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">TREE</span>
+                    <button class="copy-btn" type="button" data-copy="Diagnostic-Medicine-PMPH-10edition/
 ├── SKILL.md              # 核心配置 — 183 项技能注册表
 ├── README.md             # 本文档 — 项目说明与使用指南
 ├── &lt;skill-name&gt;/         # 各项技能的详细定义
 │   └── SKILL.md          #   技能详情（使用时机、执行步骤、注意事项、参考文档）
 ├── scripts/              # 可执行工具脚本
 ├── config/               # 配置文件
-└── tests/                # 验证与测试</pre>
+└── tests/                # 验证与测试" data-zh="复制" data-en="Copy">复制</button>
+                </div>
+                <pre><code>Diagnostic-Medicine-PMPH-10edition/
+├── SKILL.md              # 核心配置 — 183 项技能注册表
+├── README.md             # 本文档 — 项目说明与使用指南
+├── &lt;skill-name&gt;/         # 各项技能的详细定义
+│   └── SKILL.md          #   技能详情（使用时机、执行步骤、注意事项、参考文档）
+├── scripts/              # 可执行工具脚本
+├── config/               # 配置文件
+└── tests/                # 验证与测试</code></pre>
+            </div>
 
-            <h2>技能分类一览</h2>
+            <h2 data-zh="技能分类一览" data-en="Skill Categories">技能分类一览</h2>
             <table class="readme-table">
                 <thead>
                     <tr><th>分类</th><th>技能数</th><th>说明</th></tr>
@@ -183,13 +196,27 @@
                 </tbody>
             </table>
 
-            <h2>快速开始</h2>
-            <h3>安装</h3>
-            <p><strong>CLI：</strong></p>
-            <pre>openclaw skills install diagnostics-pmph-10edition</pre>
-            <p>ClawHub：<a href="https://clawhub.ai/xllgreen/diagnostics-pmph-10edition" target="_blank">https://clawhub.ai/xllgreen/diagnostics-pmph-10edition</a> ｜ GitHub：<a href="https://github.com/xllgreen/Diagnostics-PMPH-10edition" target="_blank">xllgreen/Diagnostics-PMPH-10edition</a></p>
+            <h2 data-zh="快速开始" data-en="Quick Start">快速开始</h2>
+                        <h3 data-zh="安装" data-en="Installation">安装</h3>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-lang">CLI</span>
+                    <button class="copy-btn" type="button" data-copy="openclaw skills install diagnostics-pmph-10edition" data-zh="复制" data-en="Copy">复制</button>
+                </div>
+                <pre><code>openclaw skills install diagnostics-pmph-10edition</code></pre>
+            </div>
+            <div class="repo-links">
+                <a class="repo-link repo-clawhub" href="https://clawhub.ai/xllgreen/diagnostics-pmph-10edition" target="_blank" rel="noopener">
+                    <span class="repo-name">ClawHub</span>
+                    <span class="repo-url">https://clawhub.ai/xllgreen/diagnostics-pmph-10edition</span>
+                </a>
+                <a class="repo-link repo-github" href="https://github.com/xllgreen/Diagnostics-PMPH-10edition" target="_blank" rel="noopener">
+                    <span class="repo-name">GitHub</span>
+                    <span class="repo-url">https://github.com/xllgreen/Diagnostics-PMPH-10edition</span>
+                </a>
+            </div>
 
-            <h3>使用方式</h3>
+            <h3 data-zh="使用方式" data-en="Usage">使用方式</h3>
             <p>每个技能包含四部分内容：</p>
             <ol>
                 <li><strong>使用时机</strong> — 何时触发该技能</li>
@@ -198,24 +225,31 @@
                 <li><strong>参考文档</strong> — 详细补充资料</li>
             </ol>
 
-            <h3>提问策略</h3>
+            <h3 data-zh="提问策略（因模型差异问题，回答可能有所不同，请注意甄别）" data-en="Question Strategy (Answers may vary by model; please use discretion)">提问策略（因模型差异问题，回答可能有所不同，请注意甄别）</h3>
+            <p data-zh="针对不同学习目标，以下是可以直接抛给技能的「真人提问」示例（以 诊断学 为例）：" data-en="For different learning goals, here are example real-world questions you can directly ask the skill (using 诊断学 as an example):">针对不同学习目标，以下是可以直接抛给技能的「真人提问」示例（以 诊断学 为例）：</p>
+
+            <h4 data-zh="一、概念理解" data-en="1. Concepts">一、概念理解</h4>
             <ul>
-                <li><strong>概念查询</strong>：什么是奔马律？有哪些类型？</li>
-                <li><strong>临床案例分析</strong>：男性，65 岁，胸骨后压榨性疼痛 2 小时，向左肩放射，伴大汗、恶心。心电图示 V₁-V₄ 导联 ST 段弓背向上抬高，cTnI 升高。最可能的诊断是什么？</li>
-                <li><strong>鉴别诊断</strong>：女性，28 岁，全身水肿伴泡沫尿 1 周。尿蛋白（+++），24h 尿蛋白 4.5g，血浆白蛋白 25g/L。最可能的诊断及需鉴别的疾病？</li>
+                <li><strong data-zh="定义与定位" data-en="Definition &amp; Role">定义与定位</strong><span data-zh="：「能通俗地讲讲 诊断学 里『XXX』这个结构（或概念）在哪、起什么作用、有什么临床意义吗？」" data-en="“Can you explain in plain language where the structure (or concept) ‘XXX’ sits in 诊断学, what it does, and its clinical significance?”">：「能通俗地讲讲 诊断学 里『XXX』这个结构（或概念）在哪、起什么作用、有什么临床意义吗？」</span></li>
+                <li><strong data-zh="对比鉴别" data-en="Comparison">对比鉴别</strong><span data-zh="：「『A』和『B』我老是分不清，它们到底有什么区别、有什么好记的口诀或技巧吗？」" data-en="“I keep mixing up ‘A’ and ‘B’—what exactly is the difference, and is there a trick or mnemonic to remember it?”">：「『A』和『B』我老是分不清，它们到底有什么区别、有什么好记的口诀或技巧吗？」</span></li>
+                <li><strong data-zh="分类梳理" data-en="Classification">分类梳理</strong><span data-zh="：「诊断学 里这类知识一般按什么维度分类？每一类各管什么、彼此怎么联系？」" data-en="“How is this kind of knowledge in 诊断学 usually categorized, and what does each category cover and how do they connect?”">：「诊断学 里这类知识一般按什么维度分类？每一类各管什么、彼此怎么联系？」</span></li>
             </ul>
 
-            <h2>许可证</h2>
-            <p>本项目内容基于人民卫生出版社《诊断学》第10版整理，仅供学习参考。<a href="https://github.com/xllgreen/Diagnostics-PMPH-10edition/blob/main/LICENSE" target="_blank">MIT License</a>。</p>
-
-            <h2>技术支持</h2>
+            <h4 data-zh="二、临床案例分析" data-en="2. Clinical Case Analysis">二、临床案例分析</h4>
             <ul>
-                <li>PDF2App 项目：<a href="https://pdf2app.cn" target="_blank">https://pdf2app.cn</a></li>
-                <li>Microsoft Visual Studio Code：<a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a></li>
-                <li>Claude Code for VS Code：<a href="https://claude.com/" target="_blank">https://claude.com/</a></li>
-                <li>DeepSeek API：<a href="https://platform.deepseek.com/" target="_blank">https://platform.deepseek.com/</a></li>
-                <li>Xiaomi Mimo API：<a href="https://platform.xiaomimimo.com/" target="_blank">https://platform.xiaomimimo.com/</a></li>
+                <li><strong data-zh="定位诊断" data-en="Localization">定位诊断</strong><span data-zh="：「病人有 XX 症状和体征，按 诊断学 该怎么推断是哪个结构出问题了、依据是什么？」" data-en="“A patient has signs XX—based on 诊断学, how do I infer which structure is involved and what is the reasoning?”">：「病人有 XX 症状和体征，按 诊断学 该怎么推断是哪个结构出问题了、依据是什么？」</span></li>
+                <li><strong data-zh="损伤推断" data-en="Injury Inference">损伤推断</strong><span data-zh="：「患者术后（或外伤后）出现 XX 症状，最可能是哪条神经 / 血管 / 通路受损？」" data-en="“After surgery (or trauma) the patient developed XX—which nerve / vessel / pathway is most likely injured?”">：「患者术后（或外伤后）出现 XX 症状，最可能是哪条神经 / 血管 / 通路受损？」</span></li>
+                <li><strong data-zh="处置思路" data-en="Management">处置思路</strong><span data-zh="：「这个病例还要做哪些检查、要和哪些病鉴别、大致应该怎么处理？」" data-en="“What further tests, which differential diagnoses, and roughly how should this case be managed?”">：「这个病例还要做哪些检查、要和哪些病鉴别、大致应该怎么处理？」</span></li>
             </ul>
+
+            <h4 data-zh="三、考试题目问答" data-en="3. Exam Q&amp;A">三、考试题目问答</h4>
+            <ul>
+                <li><strong data-zh="考点自测" data-en="Self-test">考点自测</strong><span data-zh="：「能给我出几道关于 诊断学 某一章的题练练手，并附标准答案和解析吗？」" data-en="“Can you give me a few practice questions on a 诊断学 chapter, with model answers and explanations?”">：「能给我出几道关于 诊断学 某一章的题练练手，并附标准答案和解析吗？」</span></li>
+                <li><strong data-zh="名词解释" data-en="Definitions">名词解释</strong><span data-zh="：「这一章最常考的名词解释和高频简答考点都有哪些？帮我列一下。」" data-en="“What are the most frequently tested definitions and high-yield short-answer topics in this chapter? List them for me.”">：「这一章最常考的名词解释和高频简答考点都有哪些？帮我列一下。」</span></li>
+                <li><strong data-zh="真题演练" data-en="Past Papers">真题演练</strong><span data-zh="：「这儿有一道历年真题，能按得分点帮我拆解作答、并标出采分关键词吗？」" data-en="“Here is a past exam question—can you break down the answer by scoring points and mark the key scoring terms?”">：「这儿有一道历年真题，能按得分点帮我拆解作答、并标出采分关键词吗？」</span></li>
+            </ul>
+            <h2 data-zh="免责声明" data-en="Disclaimer">免责声明</h2>
+            <p data-zh="本项目输出结果不代表医嘱，不给予任何专业医学建议，内容基于课本提炼所得，经过医学专业人员审核，如需医学帮助，请去正规医院看正规医生，若有错误，欢迎积极指正。" data-en="The output of this project does not constitute medical advice and provides no professional medical recommendations. The content is distilled from textbooks and has been reviewed by medical professionals. If you need medical help, please consult a licensed physician at a proper hospital. Corrections and feedback are welcome.">本项目输出结果不代表医嘱，不给予任何专业医学建议，内容基于课本提炼所得，经过医学专业人员审核，如需医学帮助，请去正规医院看正规医生，若有错误，欢迎积极指正。</p>
         </div>
         <!-- README 融入结束 -->
      <!-- 内容结束 -->
@@ -247,7 +281,7 @@
 
 </body>
 
-<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/script.js?v=1.22"> </script>
 
 
 </html>
