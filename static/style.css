@@ -547,3 +547,72 @@ footer {
 .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
     right: 50%;
 }
+
+/* 语言切换（中/英），样式与主题切换一致 */
+.langswitch {
+    position: relative;
+    width: 46px;
+    height: 20px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.langswitch-checkbox {
+    display: none;
+}
+.langswitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 100%;
+    border-radius: 50px;
+}
+.langswitch-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200%;
+    height: 100%;
+    margin-left: -100%;
+    transition: margin 0.2s ease-in 0s;
+    font-size: 11px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+.langswitch-inner:before,
+.langswitch-inner:after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.langswitch-inner:before {
+    content: "中";
+    background-color: #e4e4e4;
+    color: #FFFFFF;
+}
+.langswitch-inner:after {
+    content: "EN";
+    background-color: #272727;
+    color: #FAFAFA;
+}
+.langswitch-switch {
+    display: block;
+    height: 70%;
+    aspect-ratio: 1/1;
+    background: #FFFFFF;
+    position: absolute;
+    top: 15%;
+    right: 5px;
+    border-radius: 20px;
+    transition: all 0.2s ease-in 0s;
+}
+.langswitch-checkbox:checked + .langswitch-label .langswitch-inner {
+    margin-left: 0;
+}
+.langswitch-checkbox:checked + .langswitch-label .langswitch-switch {
+    right: 50%;
+}

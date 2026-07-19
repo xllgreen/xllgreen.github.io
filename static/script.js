@@ -157,6 +157,26 @@ function getCookie(name) {
     }
     return null;
 }
+
+function applyLanguage(lang) {
+    var nodes = document.querySelectorAll('[data-zh]');
+    for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        el.textContent = (lang === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-zh');
+    }
+    var tips = document.querySelectorAll('[data-zh-tip]');
+    for (var j = 0; j < tips.length; j++) {
+        var t = tips[j];
+        t.setAttribute('data-tip', (lang === 'en') ? t.getAttribute('data-en-tip') : t.getAttribute('data-zh-tip'));
+    }
+    var htmls = document.querySelectorAll('[data-zh-html]');
+    for (var k = 0; k < htmls.length; k++) {
+        var h = htmls[k];
+        h.innerHTML = (lang === 'en') ? h.getAttribute('data-en-html') : h.getAttribute('data-zh-html');
+    }
+    setCookie('lang', lang, 365);
+}
+
 changeTheme(themeState);
    
 
@@ -185,6 +205,17 @@ switchCheckbox.addEventListener('change', function () {
        changeTheme("Dark");
    }
 });
+
+    // 语言切换
+    var langSwitch = document.getElementById('langswitch');
+    if (langSwitch) {
+        var savedLang = getCookie('lang') || 'zh';
+        langSwitch.checked = (savedLang === 'zh');
+        applyLanguage(savedLang);
+        langSwitch.addEventListener('change', function () {
+            applyLanguage(langSwitch.checked ? 'zh' : 'en');
+        });
+    }
 
 
     var projectItems = document.querySelectorAll(".projectItem");
