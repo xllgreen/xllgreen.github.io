@@ -237,8 +237,7 @@ switchCheckbox.addEventListener('change', function () {
     checkProjectItems();
 
 
-/* 代码窗复制按钮 */
-document.addEventListener('DOMContentLoaded', function () {
+/* 代码窗复制按钮（直接注册在外层 DOMContentLoaded 内，确保点击生效） */
     var copyBtns = document.querySelectorAll('.copy-btn');
     copyBtns.forEach(function (btn) {
         btn.addEventListener('click', function (e) {
@@ -289,4 +288,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-});
+
