@@ -616,3 +616,89 @@ footer {
 .langswitch-checkbox:checked + .langswitch-label .langswitch-switch {
     right: 50%;
 }
+
+/* README 融入样式 */
+.readme {
+    max-width: 920px;
+    margin: 10px auto 0;
+    padding: 0 16px;
+    line-height: 1.85;
+    color: var(--main-text-color);
+    font-size: 15px;
+}
+.readme h2 {
+    margin: 30px 0 10px;
+    font-size: 21px;
+    border-left: 4px solid var(--gradient-start, #607df1);
+    padding-left: 12px;
+}
+.readme h3 {
+    margin: 18px 0 6px;
+    font-size: 16px;
+}
+.readme p {
+    margin: 8px 0;
+}
+.readme ul, .readme ol {
+    padding-left: 24px;
+    margin: 8px 0;
+}
+.readme li {
+    margin: 4px 0;
+}
+.readme strong {
+    color: var(--purple-text-color, #2b3ce2);
+}
+.readme-quote {
+    font-style: italic;
+    opacity: 0.85;
+    text-align: center;
+    font-size: 16px;
+    margin: 6px 0 12px;
+}
+.readme-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 14px 0;
+}
+.readme-badges img {
+    height: 20px;
+}
+.readme-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 14px;
+    background: var(--project-item-bg-color, rgba(249,250,251,0.6));
+    border-radius: 10px;
+    overflow: hidden;
+}
+.readme-table th, .readme-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(128,128,128,0.18);
+}
+.readme-table th {
+    background: rgba(128,128,128,0.14);
+    font-weight: 600;
+}
+.readme-table tr:last-child td {
+    border-bottom: none;
+}
+.readme-table a {
+    color: var(--purple-text-color, #2b3ce2);
+    text-decoration: none;
+}
+.readme-table a:hover {
+    text-decoration: underline;
+}
+.readme img {
+    max-width: 100%;
+}
+.readme .readme-note {
+    font-size: 13px;
+    opacity: 0.8;
+    margin: 6px 0 14px;
+}

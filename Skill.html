@@ -17,7 +17,7 @@
     <meta name="og:description" contect="整天半吊子和不学无术的孩子,梦想成为庄稼地里的读书人">
     <meta name="og:site_name" contect=MedicalstuBlog>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/static/style.css?v=1.21">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
 </head>
 
 
@@ -127,171 +127,329 @@
 
 
     <content>
-        <!-- 内容开始 -->
+        <!-- README 融入开始 -->
         <div class="title">
-<svg t="1705257422086" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1891" width="26px" height="26px"><path d="M629.333333 202.666667v213.333333h277.333334v448h-512v-213.333333h-277.333334v-448h512z m213.333334 277.333333h-213.333334v170.666667h-170.666666v149.333333h384v-320z m-277.333334-213.333333h-384v320h213.333334v-170.666667h170.666666v-149.333333z m0 213.333333h-106.666666v106.666667h106.666666v-106.666667z" fill="#000000" p-id="1892"></path></svg>
-            <span data-zh="临床医学" data-en="Clinical Medicine">Clinical Medicine</span></div>
+            <svg t="1705257422086" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1891" width="26px" height="26px"><path d="M629.333333 202.666667v213.333333h277.333334v448h-512v-213.333333h-277.333334v-448h512z m213.333334 277.333333h-213.333334v170.666667h-170.666666v149.333333h384v-320z m-277.333334-213.333333h-384v320h213.333334v-170.666667h170.666666v-149.333333z m0 213.333333h-106.666666v106.666667h106.666666v-106.666667z" fill="#000000" p-id="1892"></path></svg>
+            <span data-zh="仓库说明 · README" data-en="Repository README">Repository README</span>
+        </div>
+        <div class="readme">
+            <p class="readme-quote">「21世纪医学生指南」—— 从基础到临床，一站式医学技能集</p>
+            <div class="readme-badges">
+                <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+                <img src="https://img.shields.io/badge/Claude%20Code-Skill-blueviolet" alt="Claude Code">
+                <img src="https://img.shields.io/badge/skills.sh-Compatible-green" alt="skills.sh">
+                <img src="https://img.shields.io/badge/ClawHub-Skill-orange" alt="ClawHub">
+            </div>
+            <p>基于人民卫生出版社规划教材整理的临床医学技能手册合集，涵盖基础医学与临床医学两大领域，累计 <strong>1600+</strong> 项核心临床技能。适用于 OpenClaw、Claude Code。</p>
+
+            <h2>项目简介</h2>
+            <p>本仓库是 <strong>医学生龙虾技能（Medicine-StudentClaw Skills）</strong> 的汇总索引，整合了基于人民卫生出版社最新版教材整理的一系列 AI 医学技能集。每个子项目均以课本为核心，将知识点重构为可交互的临床技能，帮助医学生和临床医师高效学习与检索。</p>
+            <ul>
+                <li>📚 基于人卫社最新权威教材（第 8/9/10 版）</li>
+                <li>🧠 AI 驱动的技能交互与即时问答</li>
+                <li>🔍 覆盖基础与临床核心学科</li>
+                <li>📊 标准化技能分类与索引体系</li>
+            </ul>
+
+            <h2>Skill 合集</h2>
+        </div>
+
+        <!-- 基础医学 -->
+        <div class="title">
+            <svg t="1705257523159" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2935" width="26px" height="26px"><path d="M98.3 540.2l2.3 2.1 345.3 189.1c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8l344.8-188.8 0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.7-2.1-4.9-2.5-7-0.7l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 687.1l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.4 35.9-25.1 86.7 9.7 118z" fill="#000000" p-id="2936"></path><path d="M925.5 608.3l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 873.9l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.2 35.9-25 86.7 9.8 118l2.3 2.1L446 918.2c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8L920 729.4l0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.8-2.1-4.9-2.5-7.1-0.7zM116.1 372.6l54.5 29.8 290.6 159.1c27.2 24.5 71.4 24.5 98.6 0l290.6-159.1 54.5-29.8c2.6-2.3 4.9-4.8 7-7.4 19.9-24.5 17.7-59.1-7-81.3L559.8 99.3c-27.2-24.5-71.4-24.5-98.6 0L116.1 283.9c-24.6 22.2-26.9 56.7-7 81.3 2.2 2.6 4.4 5.1 7 7.4z" fill="#000000" p-id="2937"></path></svg>
+             <span data-zh="基础医学 Basic Medicine" data-en="Basic Medicine">Basic Medicine</span>
+        </div>
         <div class="projectList">
-            <!-- 项目列表开始 -->
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/surgery-pmph-10edition">
-                <!-- 项目项开始 -->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/systematic-anatomy-10edition">
                 <div class="projectItemLeft">
-                    <h1 data-zh="外科学 PMPH 第十版 v1.0.1" data-en="Surgery PMPH 10edition v1.0.1">Surgery PMPH 10edition v1.0.1</h1>
-                    <p data-zh="外科学 PMPH 第十版 v1.0.1" data-en="Surgery PMPH 10edition v1.0.1">Surgery PMPH 10edition v1.0.1</p>
+                    <h1 data-zh="系统解剖学 PMPH 第十版" data-en="Systematic Anatomy PMPH 10edition">Systematic Anatomy PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 112 项技能" data-en="PMPH 10edition · 112 skills">PMPH 10edition · 112 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!-- 项目列表开始 -->
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/internal-medicine-pmph-10edition">
-                <!-- 项目项开始 -->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/histology-and-embryology-pmph-10edition">
                 <div class="projectItemLeft">
-                    <h1 data-zh="内科学 PMPH 第十版 v1.0.2" data-en="Internal Medicine PMPH 10edition v1.0.2">Internal Medicine PMPH 10edition v1.0.2</h1>
-                    <p data-zh="内科学 PMPH 第十版 v1.0.2" data-en="Internal Medicine PMPH 10edition v1.0.2">Internal Medicine PMPH 10edition v1.0.2</p>
+                    <h1 data-zh="组织学与胚胎学 PMPH 第十版" data-en="Histology and Embryology PMPH 10edition">Histology and Embryology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 124 项技能" data-en="PMPH 10edition · 124 skills">PMPH 10edition · 124 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/skills/obstetrics-and-gynecology-pmph-10edition">
-                <!-- 项目项开始 -->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/biochemistry-and-molecular-biology-pmph-10edition">
                 <div class="projectItemLeft">
-                    <h1 data-zh="妇产科学 PMPH 第十版 v1.0.0" data-en="Obstetrics And Gynecology PMPH 10edition v1.0.0">Obstetrics And Gynecology PMPH 10edition v1.0.0</h1>
-                    <p data-zh="妇产科学 PMPH 第十版 v1.0.0" data-en="Obstetrics And Gynecology PMPH 10edition v1.0.0">Obstetrics And Gynecology PMPH 10edition v1.0.0</p>
+                    <h1 data-zh="生物化学与分子生物学 PMPH 第十版" data-en="Biochemistry and Molecular Biology PMPH 10edition">Biochemistry and Molecular Biology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 154 项技能" data-en="PMPH 10edition · 154 skills">PMPH 10edition · 154 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/skills/pediatrics-pmph-10edition">
-                <!-- 项目项开始 -->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/physiology-pmph-10edition">
                 <div class="projectItemLeft">
-                    <h1 data-zh="儿科学 PMPH 第十版 v1.0.1" data-en="Pediatrics PMPH 10edition v1.0.1">Pediatrics PMPH 10edition v1.0.1</h1>
-                    <p data-zh="儿科学 PMPH 第十版 v1.0.1" data-en="Pediatrics PMPH 10edition v1.0.1">Pediatrics PMPH 10edition v1.0.1</p>
+                    <h1 data-zh="生理学 PMPH 第十版" data-en="Physiology PMPH 10edition">Physiology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 165 项技能" data-en="PMPH 10edition · 165 skills">PMPH 10edition · 165 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/skills/medical-imaging-9th-edition">
-                <!-- 项目项开始 -->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/medical-microbiology-pmph-10edition">
                 <div class="projectItemLeft">
-                    <h1 data-zh="医学影像学 第9版 v1.0.0" data-en="Medical Imaging 9th Edition v1.0.0">Medical Imaging 9th Edition v1.0.0</h1>
-                    <p data-zh="医学影像学 第9版 v1.0.0" data-en="Medical Imaging 9th Edition v1.0.0">Medical Imaging 9th Edition v1.0.0</p>
+                    <h1 data-zh="医学微生物学 PMPH 第十版" data-en="Medical Microbiology PMPH 10edition">Medical Microbiology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 146 项技能" data-en="PMPH 10edition · 146 skills">PMPH 10edition · 146 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/skills/chinese-medicine-10edition">
-                <!-- 项目项开始 -->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/medical-cell-biology-pmph-7edition">
                 <div class="projectItemLeft">
-                    <h1 data-zh="中医学 第十版 v1.0.0" data-en="Chinese Medicine 10edition v1.0.0">Chinese Medicine 10edition v1.0.0</h1>
-                    <p data-zh="中医学 第十版 v1.0.0" data-en="Chinese Medicine 10edition v1.0.0">Chinese Medicine 10edition v1.0.0</p>
+                    <h1 data-zh="医学细胞生物学 PMPH 第七版" data-en="Medical Cell Biology PMPH 7edition">Medical Cell Biology PMPH 7edition</h1>
+                    <p data-zh="人卫社第 7 版 · 146 项技能" data-en="PMPH 7edition · 146 skills">PMPH 7edition · 146 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/medical-genetics-8edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="医学遗传学 PMPH 第八版" data-en="Medical Genetics PMPH 8edition">Medical Genetics PMPH 8edition</h1>
+                    <p data-zh="人卫社第 8 版 · 131 项技能" data-en="PMPH 8edition · 131 skills">PMPH 8edition · 131 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/pharmacology-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="药理学 PMPH 第十版" data-en="Pharmacology PMPH 10edition">Pharmacology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 180 项技能" data-en="PMPH 10edition · 180 skills">PMPH 10edition · 180 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/pathophysiology-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="病理生理学 PMPH 第十版" data-en="Pathophysiology PMPH 10edition">Pathophysiology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 145 项技能" data-en="PMPH 10edition · 145 skills">PMPH 10edition · 145 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
             <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/pathology-pmph-10edition">
-                <!-- 项目项开始 -->
                 <div class="projectItemLeft">
-                    <h1 data-zh="病理学 PMPH 第十版 v1.0.0" data-en="Pathology PMPH 10edition v1.0.0">Pathology PMPH 10edition v1.0.0</h1>
-                    <p data-zh="病理学 PMPH 第十版 v1.0.0" data-en="Pathology PMPH 10edition v1.0.0">Pathology PMPH 10edition v1.0.0</p>
+                    <h1 data-zh="病理学 PMPH 第十版" data-en="Pathology PMPH 10edition">Pathology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 145 项技能" data-en="PMPH 10edition · 145 skills">PMPH 10edition · 145 skills</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/skills/diagnostics-pmph-10edition">
-                <!-- 项目项开始 -->
-                <div class="projectItemLeft">
-                    <h1 data-zh="诊断学 PMPH 第十版 v1.0.0" data-en="Diagnostics PMPH 10edition v1.0.0">Diagnostics PMPH 10edition v1.0.0</h1>
-                    <p data-zh="诊断学 PMPH 第十版 v1.0.0" data-en="Diagnostics PMPH 10edition v1.0.0">Diagnostics PMPH 10edition v1.0.0</p>
-                </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
-            </a>
-            <!---->
-            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/skills/pharmacology-pmph-10edition">
-                <!-- 项目项开始 -->
-                <div class="projectItemLeft">
-                    <h1 data-zh="药理学 PMPH 第十版 v1.0.0" data-en="Pharmacology PMPH 10edition v1.0.0">Pharmacology PMPH 10edition v1.0.0</h1>
-                    <p data-zh="药理学 PMPH 第十版 v1.0.0" data-en="Pharmacology PMPH 10edition v1.0.0">Pharmacology PMPH 10edition v1.0.0</p>
-                </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
-            </a>
-            <!---->
             <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
-                <!-- 项目项开始 -->
                 <div class="projectItemLeft">
-                    <h1 data-zh="传染病学（开发中）" data-en="Infectious Disease Coming Soon!">Infectious Disease Coming Soon!</h1>
-                    <p data-zh="传染病学即将上线！" data-en="Infectious Disease Coming Soon!">Infectious Disease Coming Soon!</p>
+                    <h1 data-zh="卫生法（建设中）" data-en="Health Law (In Progress)">Health Law (In Progress)</h1>
+                    <p data-zh="人卫社第 6 版 · 即将上线" data-en="PMPH 6edition · Coming soon">PMPH 6edition · Coming soon</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
             <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
-                <!-- 项目项开始 -->
                 <div class="projectItemLeft">
-                    <h1 data-zh="眼科学（开发中）" data-en="Ophthalmology Coming Soon!">Ophthalmology Coming Soon!</h1>
-                    <p data-zh="眼科学即将上线！" data-en="Ophthalmology Coming Soon!">Ophthalmology Coming Soon!</p>
+                    <h1 data-zh="医学心理学（建设中）" data-en="Medical Psychology (In Progress)">Medical Psychology (In Progress)</h1>
+                    <p data-zh="人卫社第 8 版 · 即将上线" data-en="PMPH 8edition · Coming soon">PMPH 8edition · Coming soon</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
             <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
-                <!-- 项目项开始 -->
                 <div class="projectItemLeft">
-                    <h1 data-zh="耳鼻喉头颈外科学（开发中）" data-en="Otolaryngology, Head and Neck Surgery Coming Soon!">Otolaryngology, Head and Neck Surgery Coming Soon!</h1>
-                    <p data-zh="耳鼻喉头颈外科学即将上线！" data-en="Otolaryngology, Head and Neck Surgery Coming Soon!">Otolaryngology, Head and Neck Surgery Coming Soon!</p>
+                    <h1 data-zh="医学伦理学（建设中）" data-en="Medical Ethics (In Progress)">Medical Ethics (In Progress)</h1>
+                    <p data-zh="人卫社第 6 版 · 即将上线" data-en="PMPH 6edition · Coming soon">PMPH 6edition · Coming soon</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
-                </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
-            <!---->
             <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
-                <!-- 项目项开始 -->
                 <div class="projectItemLeft">
-                    <h1 data-zh="耳鼻喉头颈外科学（开发中）" data-en="Otolaryngology, Head and Neck Surgery Coming Soon!">Otolaryngology, Head and Neck Surgery Coming Soon!</h1>
-                    <p data-zh="耳鼻喉头颈外科学即将上线！" data-en="Otolaryngology, Head and Neck Surgery Coming Soon!">Otolaryngology, Head and Neck Surgery Coming Soon!</p>
+                    <h1 data-zh="医学统计学（建设中）" data-en="Medical Statistics (In Progress)">Medical Statistics (In Progress)</h1>
+                    <p data-zh="人卫社第 8 版 · 即将上线" data-en="PMPH 8edition · Coming soon">PMPH 8edition · Coming soon</p>
                 </div>
-                <div class="projectItemRight">
-                    <img src="/static/item/i13.png" alt="">
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="医学免疫学（建设中）" data-en="Medical Immunology (In Progress)">Medical Immunology (In Progress)</h1>
+                    <p data-zh="人卫社第 8 版 · 即将上线" data-en="PMPH 8edition · Coming soon">PMPH 8edition · Coming soon</p>
                 </div>
-                <!-- 项目项结束 -->
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="人体寄生虫学（建设中）" data-en="Human Parasitology (In Progress)">Human Parasitology (In Progress)</h1>
+                    <p data-zh="人卫社第 8 版 · 即将上线" data-en="PMPH 8edition · Coming soon">PMPH 8edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
             </a>
         </div>
-        <!-- 项目列表结束 -->
+
+        <!-- 临床医学 -->
+        <div class="title">
+            <svg t="1705257523159" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2935" width="26px" height="26px"><path d="M98.3 540.2l2.3 2.1 345.3 189.1c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8l344.8-188.8 0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.7-2.1-4.9-2.5-7-0.7l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 687.1l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.4 35.9-25.1 86.7 9.7 118z" fill="#000000" p-id="2936"></path><path d="M925.5 608.3l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 873.9l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.2 35.9-25 86.7 9.8 118l2.3 2.1L446 918.2c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8L920 729.4l0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.8-2.1-4.9-2.5-7.1-0.7zM116.1 372.6l54.5 29.8 290.6 159.1c27.2 24.5 71.4 24.5 98.6 0l290.6-159.1 54.5-29.8c2.6-2.3 4.9-4.8 7-7.4 19.9-24.5 17.7-59.1-7-81.3L559.8 99.3c-27.2-24.5-71.4-24.5-98.6 0L116.1 283.9c-24.6 22.2-26.9 56.7-7 81.3 2.2 2.6 4.4 5.1 7 7.4z" fill="#000000" p-id="2937"></path></svg>
+             <span data-zh="临床医学 Clinical Medicine" data-en="Clinical Medicine">Clinical Medicine</span>
+        </div>
+        <div class="projectList">
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/pharmacology-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="药理学 PMPH 第十版" data-en="Pharmacology PMPH 10edition">Pharmacology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 180 项技能" data-en="PMPH 10edition · 180 skills">PMPH 10edition · 180 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/diagnostics-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="诊断学 PMPH 第十版" data-en="Diagnostics PMPH 10edition">Diagnostics PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 183 项技能" data-en="PMPH 10edition · 183 skills">PMPH 10edition · 183 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/pathology-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="病理学 PMPH 第十版" data-en="Pathology PMPH 10edition">Pathology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 145 项技能" data-en="PMPH 10edition · 145 skills">PMPH 10edition · 145 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/chinese-medicine-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="中医学 第十版" data-en="Chinese Medicine 10edition">Chinese Medicine 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 172 项技能" data-en="PMPH 10edition · 172 skills">PMPH 10edition · 172 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/medical-imaging-9th-edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="医学影像学 第9版" data-en="Medical Imaging 9th Edition">Medical Imaging 9th Edition</h1>
+                    <p data-zh="人卫社第 9 版 · 136 项技能" data-en="PMPH 9edition · 136 skills">PMPH 9edition · 136 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/surgery-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="外科学 PMPH 第十版" data-en="Surgery PMPH 10edition">Surgery PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 240 项技能" data-en="PMPH 10edition · 240 skills">PMPH 10edition · 240 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/internal-medicine-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="内科学 PMPH 第十版" data-en="Internal Medicine PMPH 10edition">Internal Medicine PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 423 项技能" data-en="PMPH 10edition · 423 skills">PMPH 10edition · 423 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/obstetrics-and-gynecology-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="妇产科学 PMPH 第十版" data-en="Obstetrics And Gynecology PMPH 10edition">Obstetrics And Gynecology PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 187 项技能" data-en="PMPH 10edition · 187 skills">PMPH 10edition · 187 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://clawhub.ai/xllgreen/pediatrics-pmph-10edition">
+                <div class="projectItemLeft">
+                    <h1 data-zh="儿科学 PMPH 第十版" data-en="Pediatrics PMPH 10edition">Pediatrics PMPH 10edition</h1>
+                    <p data-zh="人卫社第 10 版 · 184 项技能" data-en="PMPH 10edition · 184 skills">PMPH 10edition · 184 skills</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="传染病学（建设中）" data-en="Infectious Disease (In Progress)">Infectious Disease (In Progress)</h1>
+                    <p data-zh="人卫社第 10 版 · 即将上线" data-en="PMPH 10edition · Coming soon">PMPH 10edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="眼科学（建设中）" data-en="Ophthalmology (In Progress)">Ophthalmology (In Progress)</h1>
+                    <p data-zh="人卫社第 10 版 · 即将上线" data-en="PMPH 10edition · Coming soon">PMPH 10edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="耳鼻喉头颈外科学（建设中）" data-en="Otolaryngology (In Progress)">Otolaryngology (In Progress)</h1>
+                    <p data-zh="人卫社第 10 版 · 即将上线" data-en="PMPH 10edition · Coming soon">PMPH 10edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="口腔科学（建设中）" data-en="Stomatology (In Progress)">Stomatology (In Progress)</h1>
+                    <p data-zh="人卫社第 10 版 · 即将上线" data-en="PMPH 10edition · Coming soon">PMPH 10edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="急诊与灾难医学（建设中）" data-en="Emergency and Disaster Medicine (In Progress)">Emergency and Disaster Medicine (In Progress)</h1>
+                    <p data-zh="人卫社第 4 版 · 即将上线" data-en="PMPH 4edition · Coming soon">PMPH 4edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="皮肤性病学（建设中）" data-en="Dermatovenereology (In Progress)">Dermatovenereology (In Progress)</h1>
+                    <p data-zh="人卫社第 10 版 · 即将上线" data-en="PMPH 10edition · Coming soon">PMPH 10edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="神经病学（建设中）" data-en="Neurology (In Progress)">Neurology (In Progress)</h1>
+                    <p data-zh="人卫社第 9 版 · 即将上线" data-en="PMPH 9edition · Coming soon">PMPH 9edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="全科医学概论（建设中）" data-en="General Practice (In Progress)">General Practice (In Progress)</h1>
+                    <p data-zh="人卫社第 6 版 · 即将上线" data-en="PMPH 6edition · Coming soon">PMPH 6edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="精神病学（建设中）" data-en="Psychiatry (In Progress)">Psychiatry (In Progress)</h1>
+                    <p data-zh="人卫社第 9 版 · 即将上线" data-en="PMPH 9edition · Coming soon">PMPH 9edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+            <a class="projectItem" target="_blank" href="https://github.com/xllgreen/Medicine-StudentClaw-Skills">
+                <div class="projectItemLeft">
+                    <h1 data-zh="康复医学（建设中）" data-en="Rehabilitation Medicine (In Progress)">Rehabilitation Medicine (In Progress)</h1>
+                    <p data-zh="人卫社第 7 版 · 即将上线" data-en="PMPH 7edition · Coming soon">PMPH 7edition · Coming soon</p>
+                </div>
+                <div class="projectItemRight"><img src="/static/item/i13.png" alt=""></div>
+            </a>
+        </div>
+
+        <div class="readme">
+            <h2>快速开始</h2>
+            <h3>使用方式</h3>
+            <p>每个技能集均包含标准化的技能结构：</p>
+            <ol>
+                <li>技能注册表（<code>SKILL.md</code>）— 核心配置与技能元数据</li>
+                <li>技能详情（每个技能独立目录中的 <code>SKILL.md</code>）— 使用时机 / 执行步骤 / 注意事项 / 参考文档</li>
+                <li>搜索工具（<code>scripts/</code>）— 按关键词检索技能</li>
+                <li>配置与测试（<code>config/</code> + <code>tests/</code>）— 技能分类配置与完整性校验</li>
+            </ol>
+            <h3>提问策略</h3>
+            <ul>
+                <li>概念查询 — 直接提问学科核心概念与定义</li>
+                <li>临床案例分析 — 输入病例信息进行鉴别诊断分析</li>
+                <li>考试题目 — 模拟选择题与解析</li>
+            </ul>
+            <p>具体示例请见各学科 README 文档。</p>
+            <h3>安装</h3>
+            <p>各学科的安装指令请见对应的独立 README 文件。</p>
+
+            <h2>许可证</h2>
+            <p>本项目各技能集内容均基于对应人民卫生出版社教材整理，仅供学习参考。</p>
+            <p>MIT License</p>
+
+            <h2>技术支持</h2>
+            <ul>
+                <li><a href="https://pdf2app.cn" target="_blank">PDF2App 项目</a></li>
+                <li><a href="https://code.visualstudio.com/" target="_blank">Microsoft Visual Studio Code</a></li>
+                <li><a href="https://claude.com/" target="_blank">Claude Code for VS Code</a> · © 2026 Anthropic PBC</li>
+                <li><a href="https://platform.deepseek.com/" target="_blank">DeepSeek API</a> · © 2026 杭州深度求索人工智能基础技术研究有限公司</li>
+                <li><a href="https://platform.xiaomimimo.com/" target="_blank">Xiaomi Mimo API</a> · Copyright © 2010 - 2026 Xiaomi. All Rights Reserved</li>
+            </ul>
+        </div>
+        <!-- README 融入结束 -->
+    </content> <!-- 内容结束 -->
         <div class="title">
             <svg t="1705257523159" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2935" width="26px" height="26px"><path d="M98.3 540.2l2.3 2.1 345.3 189.1c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8l344.8-188.8 0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.7-2.1-4.9-2.5-7-0.7l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 687.1l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.4 35.9-25.1 86.7 9.7 118z" fill="#424242" p-id="2936"></path><path d="M925.5 608.3l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 873.9l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.2 35.9-25 86.7 9.8 118l2.3 2.1L446 918.2c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8L920 729.4l0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.8-2.1-4.9-2.5-7.1-0.7zM116.1 372.6l54.5 29.8 290.6 159.1c27.2 24.5 71.4 24.5 98.6 0l290.6-159.1 54.5-29.8c2.6-2.3 4.9-4.8 7-7.4 19.9-24.5 17.7-59.1-7-81.3L559.8 99.3c-27.2-24.5-71.4-24.5-98.6 0L116.1 283.9c-24.6 22.2-26.9 56.7-7 81.3 2.2 2.6 4.4 5.1 7 7.4z" fill="#000000" p-id="2937"></path></svg>
              <span data-zh="项目" data-en="Projects">Projects</span></div>
@@ -323,7 +481,6 @@
             <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
         </div>
         <!-- 技能结束 -->
-    </content> <!-- 内容结束 -->
 
     <footer>
         <span data-zh="XLL Studio © 2025 |" data-en="XLL Studio © 2025 |">XLL Studio © 2025 |</span>
