@@ -359,6 +359,21 @@ footer {
     margin-top: 20px;
 }
 
+footer.legal-footer {
+    margin-top: 0;
+    padding-top: 0;
+    opacity: 0.9;
+}
+
+footer.legal-footer a {
+    color: var(--footer-text-color);
+    text-decoration: none;
+}
+
+footer.legal-footer a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) {
     .projectItem {
         width: calc(100% - 20px);
