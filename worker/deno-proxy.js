@@ -37,8 +37,8 @@ function handler(req) {
 
   const targetUrl = new URL(target);
 
-  // 白名单：允许 speedtest 节点（含关键字的主机 或 任意 IPv4 地址）
-  const allowed = /(speedtest|ookla|jsinfo|sccncnc|shtel|bjtelecom|hbtelecom|sncnc|zjtelecom|hinet|singnet|bbtower|asahi-net|pccw|hgc|tk2|kix|sgnet|szhc|jsqiuying|\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b)/i;
+  // 白名单：允许 speedtest 节点（含关键字的主机 / 任意 IPv4 / 教育网测速节点）
+  const allowed = /(speedtest|ookla|jsinfo|sccncnc|shtel|bjtelecom|hbtelecom|sncnc|zjtelecom|hinet|singnet|bbtower|asahi-net|pccw|hgc|tk2|kix|sgnet|szhc|jsqiuying|ustc\.edu\.cn|nju\.edu\.cn|nuaa\.edu\.cn|edu\.cn|\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b)/i;
   if (!allowed.test(targetUrl.hostname)) {
     return new Response("不允许的主机: " + targetUrl.hostname, { status: 403 });
   }
