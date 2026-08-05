@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>网络测速 - MedicalStu</title>
     <link rel="icon" href="favicon.ico">
-    <meta name="description" content="基于 html5-speedtest 思路的纯前端网络测速工具">
+    <meta name="description" content="基于 html5-speedtest 思路的纯前端网络测速工具，支持节点选择">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/static/style.css?v=1.21">
     <style>
@@ -28,7 +28,44 @@
         .speedtest-sub {
             color: var(--project-item-left-text-color, #7e7e7e);
             font-size: 14px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+        }
+
+        .server-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            background: var(--project-item-bg-color, rgba(249, 250, 251, 0.6));
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .server-bar label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .server-bar select {
+            flex: 1;
+            min-width: 220px;
+            padding: 9px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .server-meta {
+            font-size: 12px;
+            color: var(--project-item-left-text-color, #7e7e7e);
+        }
+
+        .server-meta a {
+            color: var(--gradient-start, #607df1);
         }
 
         .gauge-grid {
@@ -182,7 +219,20 @@
                 </svg>
                 <span>网络测速 SpeedTest</span>
             </div>
-            <div class="speedtest-sub">基于 html5-speedtest 思路，纯前端实现，适用于静态站点（GitHub Pages）</div>
+            <div class="speedtest-sub">基于 html5-speedtest 思路，纯前端实现，支持 speedtest.net 节点选择</div>
+
+            <div class="server-bar">
+                <label for="serverSelect">测速节点</label>
+                <select id="serverSelect">
+                    <option value="">加载节点中…</option>
+                </select>
+            </div>
+            <div class="server-bar">
+                <label for="proxyInput">代理前缀</label>
+                <input id="proxyInput" type="text" placeholder="留空仅测延迟；填 Worker 地址可测下载/上传" style="flex:1;min-width:220px;padding:9px 12px;border-radius:10px;border:1px solid rgba(0,0,0,.12);font-size:14px;outline:none;">
+                <button class="start-btn" style="padding:9px 18px;font-size:13px;" onclick="applyProxy()">应用</button>
+            </div>
+            <div class="server-meta" id="serverMeta"></div>
 
             <div class="gauge-grid">
                 <div class="gauge">
@@ -237,7 +287,10 @@
         <p class="note">
             说明：本页测速基于 <a href="https://github.com/insoxin/html5-speedtest" target="_blank"
                 style="color:var(--gradient-start,#607df1)">html5-speedtest</a> 的思路，使用纯 JavaScript 实现，无需 PHP 后端，可直接运行在 GitHub Pages。
-            下载测试使用本地静态资源与一个公共 CDN 文件；上传测试通过向本域 POST 随机数据估算，结果仅供参考。
+            节点列表来自 <a href="https://github.com/spiritLHLS/speedtest.net-CN-ID" target="_blank"
+                style="color:var(--gradient-start,#607df1)">spiritLHLS/speedtest.net-CN-ID</a>（每日更新，见仓库
+            <code>update_servers.ps1</code>）。由于纯静态站点无法直接跨域请求 speedtest.net 服务器，本工具对所选节点做 Ping 探测；
+            若节点支持公开测速端点，可进一步估算下载速率。
         </p>
 
         <footer class="copyright-footer">
@@ -255,7 +308,6 @@
     </div>
 
     <script>
-        // 圆环周长
         const R = 48, CIRC = 2 * Math.PI * R;
         document.querySelectorAll('.bar').forEach(b => {
             b.style.strokeDasharray = CIRC;
@@ -268,13 +320,80 @@
             bar.style.strokeDashoffset = CIRC * (1 - ratio);
             if (color) bar.style.stroke = color;
         }
-
-        function setVal(id, text) {
-            document.getElementById('val-' + id).textContent = text;
-        }
-
+        function setVal(id, text) { document.getElementById('val-' + id).textContent = text; }
         function setStatus(t) { document.getElementById('status').textContent = t; }
         function setProgress(p) { document.getElementById('progressFill').style.width = p + '%'; }
+
+        let servers = [];
+        let selected = null;
+        let PROXY = localStorage.getItem('st_proxy') || 'https://rough-frog-9154.3496646936.workers.dev/';   // 反向代理前缀（Cloudflare Worker 等）
+
+        // 页面加载时回填代理输入框
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('proxyInput').value = PROXY;
+        });
+
+        function applyProxy() {
+            PROXY = document.getElementById('proxyInput').value.trim();
+            localStorage.setItem('st_proxy', PROXY);
+            setStatus(PROXY ? ('已启用代理：' + PROXY) : '已清除代理（仅测延迟）');
+        }
+
+        // 拼接目标 URL（带代理前缀）
+        function buildUrl(path) {
+            if (PROXY) return PROXY.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
+            return path;
+        }
+
+        // 加载节点列表
+        async function loadServers() {
+            try {
+                const res = await fetch('/static/speedtest_servers.json?_=' + Date.now(), { cache: 'no-store' });
+                const data = await res.json();
+                servers = data.servers || [];
+                const updated = data.updated || '未知';
+                fillServerSelect();
+                document.getElementById('serverMeta').innerHTML =
+                    '节点数据更新于 <b>' + updated + '</b> · 共 ' + servers.length + ' 个 · 来源 <a href="' + (data.source || '#') + '" target="_blank">spiritLHLS/speedtest.net-CN-ID</a>';
+            } catch (e) {
+                document.getElementById('serverMeta').textContent = '节点数据加载失败：' + e.message;
+            }
+        }
+
+        function fillServerSelect() {
+            const sel = document.getElementById('serverSelect');
+            sel.innerHTML = '';
+            // 按运营商/国家分组
+            const groups = {};
+            servers.forEach(s => {
+                const key = (s.country || 'Other') + ' / ' + (s.supplier || '未知');
+                (groups[key] = groups[key] || []).push(s);
+            });
+            Object.keys(groups).sort().forEach(g => {
+                const og = document.createElement('optgroup');
+                og.label = g;
+                groups[g].forEach(s => {
+                    const o = document.createElement('option');
+                    o.value = s.id;
+                    o.textContent = s.city + ' · ' + s.supplier + ' (id:' + s.id + ')';
+                    og.appendChild(o);
+                });
+                sel.appendChild(og);
+            });
+            if (servers.length) {
+                sel.value = servers[0].id;
+                onServerChange();
+            }
+        }
+
+        function onServerChange() {
+            selected = servers.find(s => s.id === document.getElementById('serverSelect').value) || null;
+            const meta = document.getElementById('serverMeta');
+            if (selected) {
+                meta.innerHTML += ' &nbsp;|&nbsp; 当前节点：<b>' + selected.city + '</b> (' + selected.ip + ')';
+            }
+        }
+        document.getElementById('serverSelect').addEventListener('change', onServerChange);
 
         let running = false;
 
@@ -284,19 +403,17 @@
             const btn = document.getElementById('startBtn');
             btn.disabled = true;
             btn.textContent = '测试中…';
-
-            // 重置
             ['dl', 'ul', 'ping', 'jit'].forEach(k => { setVal(k, '--'); setGauge(k, 0, 1); });
             setProgress(0);
 
             try {
                 await runPing();
-                setProgress(35);
+                setProgress(30);
                 await runDownload();
-                setProgress(70);
+                setProgress(65);
                 await runUpload();
                 setProgress(100);
-                setStatus('测试完成 ✅');
+                setStatus(PROXY ? '测试完成 ✅' : '测试完成（仅延迟，填代理前缀可测下载/上传）✅');
             } catch (e) {
                 setStatus('测试出错：' + e.message);
             } finally {
@@ -306,16 +423,19 @@
             }
         }
 
-        // 延迟 + 抖动：多次 HEAD 请求
+        // 对选定节点做 Ping（多次请求估算延迟与抖动）
         async function runPing() {
-            setStatus('正在测试延迟 / Ping…');
+            if (!selected) { setStatus('请先选择测速节点'); return; }
+            setStatus('正在对节点 ' + selected.city + ' 测试延迟 / Ping…');
+            const target = 'http://' + selected.host + ':' + selected.port + '/speedtest/server.php';
+            const url = buildUrl(target);
+            const mode = PROXY ? 'cors' : 'no-cors';
             const samples = [];
-            const url = location.href.split('?')[0]; // 当前页面自身，带缓存破坏
             for (let i = 0; i < 10; i++) {
                 const t0 = performance.now();
                 try {
-                    await fetch(url + '?_=' + Date.now() + '_' + i, { method: 'HEAD', cache: 'no-store' });
-                } catch (e) { /* 忽略单个错误 */ }
+                    await fetch(url + '?_=' + Date.now() + '_' + i, { method: 'GET', mode: mode, cache: 'no-store' });
+                } catch (e) { /* no-cors 下拿不到响应，但能计时 */ }
                 const dt = performance.now() - t0;
                 samples.push(dt);
                 await new Promise(r => setTimeout(r, 80));
@@ -329,58 +449,62 @@
             setGauge('jit', jitter, 100, '#f59e0b');
         }
 
-        // 下载：拉取较大文件计算速率
+        // 下载测速：通过代理拉取节点公开测速文件（多档大小取最优）
         async function runDownload() {
+            if (!selected) return;
+            if (!PROXY) { setVal('dl', 'N/A'); return; }
             setStatus('正在测试下载速度…');
-            const files = [
-                '/static/speedtest_data.bin',                              // 本地基准文件（若已生成）
-                'https://speedtest.isoyu.com/garbage.php?ckSize=25'        // 公共测速端点（可选，跨域可能受限）
-            ];
+            const sizes = [1000, 4000, 10000]; // KB 级别示例文件名
+            const base = 'http://' + selected.host + ':' + selected.port + '/speedtest/';
             let best = 0;
-            for (const f of files) {
-                for (let pass = 0; pass < 2; pass++) {
-                    const t0 = performance.now();
-                    try {
-                        const res = await fetch(f + (f.includes('?') ? '&' : '?') + '_=' + Date.now(), { cache: 'no-store' });
-                        const buf = await res.arrayBuffer();
-                        const dt = (performance.now() - t0) / 1000;
-                        if (dt <= 0) continue;
-                        const mbps = (buf.byteLength * 8) / (dt * 1024 * 1024);
-                        if (mbps > best) best = mbps;
-                        setVal('dl', mbps.toFixed(1));
-                        setGauge('dl', mbps, 1000, '#309030');
-                        await new Promise(r => setTimeout(r, 50));
-                    } catch (e) { /* 跳过不可用的源 */ }
-                }
+            for (const kb of sizes) {
+                const url = buildUrl(base + 'random' + kb + 'x' + kb + '.jpg?_=' + Date.now());
+                const t0 = performance.now();
+                try {
+                    const res = await fetch(url, { mode: 'cors', cache: 'no-store' });
+                    if (!res.ok) continue;
+                    const buf = await res.arrayBuffer();
+                    const dt = (performance.now() - t0) / 1000;
+                    if (dt <= 0) continue;
+                    const mbps = (buf.byteLength * 8) / (dt * 1024 * 1024);
+                    if (mbps > best) best = mbps;
+                    setVal('dl', mbps.toFixed(1));
+                    setGauge('dl', mbps, 1000, '#309030');
+                    await new Promise(r => setTimeout(r, 50));
+                } catch (e) { /* 代理或节点不支持该文件，忽略 */ }
             }
             if (best === 0) setVal('dl', 'N/A');
         }
 
-        // 上传：POST 随机数据到本域
+        // 上传测速：通过代理向节点 POST 随机数据
         async function runUpload() {
+            if (!selected) return;
+            if (!PROXY) { setVal('ul', 'N/A'); return; }
             setStatus('正在测试上传速度…');
+            const url = buildUrl('http://' + selected.host + ':' + selected.port + '/speedtest/upload.php');
             const sizes = [1, 2, 4].map(n => n * 1024 * 1024); // 1/2/4 MB
             let best = 0;
             for (const size of sizes) {
                 const blob = new Blob([new Uint8Array(size)]);
                 const t0 = performance.now();
                 try {
-                    await fetch(location.href, {
-                        method: 'POST',
-                        body: blob,
-                        cache: 'no-store',
-                        headers: { 'X-SpeedTest': '1' }
+                    const res = await fetch(url, {
+                        method: 'POST', mode: 'cors', body: blob, cache: 'no-store',
+                        headers: { 'Content-Type': 'application/octet-stream' }
                     });
+                    if (!res.ok) continue;
                     const dt = (performance.now() - t0) / 1000;
                     if (dt <= 0) continue;
                     const mbps = (size * 8) / (dt * 1024 * 1024);
                     if (mbps > best) best = mbps;
                     setVal('ul', mbps.toFixed(1));
                     setGauge('ul', mbps, 1000, '#607df1');
-                } catch (e) { /* 部分服务端会拒绝 POST，忽略 */ }
+                } catch (e) { /* 忽略 */ }
             }
             if (best === 0) setVal('ul', 'N/A');
         }
+
+        loadServers();
     </script>
 </body>
 

@@ -1,0 +1,40 @@
+name: Update SpeedTest Servers Daily
+
+on:
+  schedule:
+    # 每天 UTC 16:00（北京时间 00:00）自动更新节点
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        shell: pwsh
+        run: |
+          # ubuntu-latest 自带 pwsh；确保可用
+          pwsh --version
+
+      - name: Run update script
+        shell: pwsh
+        run: ./update_servers.ps1
+
+      - name: Commit & push if changed
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain static/speedtest_servers.json)" ]; then
+            git add static/speedtest_servers.json
+            git commit -m "chore: auto-update speedtest servers ($(date -u +%Y-%m-%d))"
+            git push
+          else
+            echo "No changes to servers."
+          fi

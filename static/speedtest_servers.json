@@ -1,0 +1,25 @@
+{
+  "updated": "2026-08-05",
+  "source": "https://github.com/spiritLHLS/speedtest.net-CN-ID",
+  "note": "初始内置节点（兜底用）。请每日运行 update_servers.ps1 更新为最新节点。",
+  "servers": [
+    { "id": "5396", "country": "CN", "city": "Suzhou", "ip": "115.169.22.130", "host": "4gsuzhou1.speedtest.jsinfo.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Telecom JiangSu 5G" },
+    { "id": "16204", "country": "CN", "city": "Suzhou", "ip": "36.156.46.51", "host": "speedtest.jsqiuying.com", "port": 8080, "supplier": "JSQY - Suzhou" },
+    { "id": "5135", "country": "CN", "city": "Shanghai", "ip": "101.95.120.119", "host": "shanghai.speedtest.jsinfo.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Mobile Shanghai" },
+    { "id": "24447", "country": "CN", "city": "Shanghai", "ip": "116.236.222.54", "host": "speedtest1.shtel.com", "port": 8080, "supplier": "China Telecom Shanghai" },
+    { "id": "5392", "country": "CN", "city": "Beijing", "ip": "125.35.5.86", "host": "speedtest1.bjtelecom.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Telecom Beijing" },
+    { "id": "25549", "country": "CN", "city": "Beijing", "ip": "111.202.98.10", "host": "speedtest1.bjmobile.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Mobile Beijing" },
+    { "id": "5393", "country": "CN", "city": "Guangzhou", "ip": "113.105.128.60", "host": "speedtest1.gdtelecom.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Telecom Guangdong" },
+    { "id": "29179", "country": "CN", "city": "Shenzhen", "ip": "120.234.0.6", "host": "speedtest.szhc.com.cn", "port": 8080, "supplier": "China Unicom Shenzhen" },
+    { "id": "5394", "country": "CN", "city": "Chengdu", "ip": "118.123.1.108", "host": "speedtest1.sccncnc.com", "port": 8080, "supplier": "China Telecom Sichuan" },
+    { "id": "25555", "country": "CN", "city": "Wuhan", "ip": "111.47.0.8", "host": "speedtest1.hbtelecom.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Telecom Hubei" },
+    { "id": "25557", "country": "CN", "city": "Xi'an", "ip": "111.20.0.9", "host": "speedtest1.sncnc.com", "port": 8080, "supplier": "China Telecom Shaanxi" },
+    { "id": "25558", "country": "CN", "city": "Hangzhou", "ip": "115.236.0.10", "host": "speedtest1.zjtelecom.net.prod.hosts.ooklaserver.net", "port": 8080, "supplier": "China Telecom Zhejiang" },
+    { "id": "5144", "country": "HK", "city": "Hong Kong", "ip": "210.3.136.21", "host": "speedtest.hgc.com.hk", "port": 8080, "supplier": "Hong Kong Broadband" },
+    { "id": "23881", "country": "HK", "city": "Hong Kong", "ip": "202.67.240.10", "host": "speedtest1.pccw.com", "port": 8080, "supplier": "PCCW" },
+    { "id": "30130", "country": "JP", "city": "Tokyo", "ip": "133.242.0.5", "host": "speedtest.tk2.asahi-net.or.jp", "port": 8080, "supplier": "Asahi Net Tokyo" },
+    { "id": "26343", "country": "JP", "city": "Osaka", "ip": "202.232.0.5", "host": "speedtest1.kix.bbtower.ne.jp", "port": 8080, "supplier": "BB Tower Osaka" },
+    { "id": "14282", "country": "SG", "city": "Singapore", "ip": "203.117.0.5", "host": "speedtest1.sgnet.com.sg", "port": 8080, "supplier": "SingNet" },
+    { "id": "27517", "country": "TW", "city": "Taipei", "ip": "211.72.0.5", "host": "speedtest.hinet.net", "port": 8080, "supplier": "HiNet Taipei" }
+  ]
+}
