@@ -239,7 +239,7 @@
                 </svg>
                 <span>网络测速 SpeedTest</span>
             </div>
-            <div class="speedtest-sub">纯前端网络测速 · 支持多节点选择（教育网测速服务器）</div>
+            <div class="speedtest-sub">纯前端网络测速 · 多节点选择（源自教育网测速服务器）</div>
 
             <div class="server-bar">
                 <label for="serverSelect">测速节点</label>
@@ -306,9 +306,9 @@
         </div>
 
         <p class="note">
-            说明：本页为纯前端网络测速工具，使用 JavaScript 实现，无需 PHP 后端，可直接运行在 GitHub Pages。
-            测速节点采用 LibreSpeed 标准后端（默认公共节点自带跨域支持，无需代理即可测速）。
-            若使用教育网等不支持跨域的节点，可在上方填写反向代理前缀后再测。
+            说明：本页为纯前端网络测速工具，使用 JavaScript 实现，无需自有 PHP 后端，可直接运行在 GitHub Pages。
+            测速节点对接教育网测速服务器（基于 LibreSpeed 标准后端）。
+            若某节点后端未开放跨域，测速将不可用，可在上方填写反向代理前缀后重试。
         </p>
 
         <footer class="copyright-footer">
@@ -348,11 +348,11 @@
         // 推荐改用 Deno Deploy（worker/deno-proxy.js）部署后填入下方地址：
         let PROXY = localStorage.getItem('st_proxy') || '';   // 反向代理前缀（留空则直连，依赖节点 CORS）
 
-        // 测速服务器列表（基于 LibreSpeed 标准后端，使用自带 CORS 的公共节点，无需代理即可测速）
+        // 测速服务器列表（直接对接中科大等测速站后端，LibreSpeed 标准接口，无需代理）
         const SERVER_LIST = [
-            { id: 'librespeed-org', name: 'LibreSpeed · 官方公共节点', server: 'https://librespeed.org/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' },
-            { id: 'kleinruhe', name: 'Kleinruhe · 公共节点', server: 'https://speedtest.kleinruhe.com/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' },
-            { id: 'ustc-hf', name: '合肥 · 中科大（需代理）', server: 'https://test.ustc.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' }
+            { id: 'ustc-hf', name: '合肥 · 中国科学技术大学', server: 'https://test.ustc.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php' },
+            { id: 'nju-nj', name: '南京 · 南京大学', server: 'https://test.nju.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php' },
+            { id: 'librespeed-org', name: 'LibreSpeed · 官方公共节点', server: 'https://librespeed.org/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php' }
         ];
 
         // 页面加载时回填代理输入框
@@ -532,7 +532,7 @@
             setStatus('正在测试下载速度…');
             const base = selected.server + selected.dlURL + '?ck=';
             const sizes = [512, 1024, 2048, 4096]; // KB 档位
-            let best = 0, stable = 0, n = 0;
+            let best = 0, stable = 0, n = 0, fail = 0, lastErr = '';
             for (const kb of sizes) {
                 if (stopFlag) break;
                 const url = buildUrl(base + Math.random() + '&size=' + kb) + '&_=' + Date.now();
@@ -540,24 +540,26 @@
                 testCtrl = new AbortController();
                 try {
                     const res = await fetch(url, { mode: 'cors', cache: 'no-store', signal: testCtrl.signal });
-                    if (!res.ok) continue;
+                    if (!res.ok) { fail++; lastErr = 'HTTP ' + res.status; continue; }
                     const buf = await res.arrayBuffer();
                     const dt = (performance.now() - t0) / 1000;
-                    if (dt <= 0) continue;
+                    if (dt <= 0) { fail++; lastErr = '响应时间为0'; continue; }
                     const mbps = (buf.byteLength * 8) / (dt * 1024 * 1024);
                     stable += mbps; n++;
                     if (mbps > best) best = mbps;
                     setVal('dl', mbps.toFixed(1));
                     setGauge('dl', mbps, 1000, '#309030');
                     await new Promise(r => setTimeout(r, 80));
-                } catch (e) { /* 忽略 */ }
+                } catch (e) {
+                    fail++; lastErr = e.name === 'AbortError' ? '请求中断' : (e.message || '网络/CORS错误');
+                }
             }
             if (stopFlag) return;
-            // 取多次均值更稳定
             const avg = n ? stable / n : 0;
-            setVal('dl', (avg || best).toFixed(1));
-            setGauge('dl', (avg || best), 1000, '#309030');
-            if (!avg && !best) setVal('dl', 'N/A');
+            const val = avg || best;
+            setVal('dl', val ? val.toFixed(1) : 'N/A');
+            setGauge('dl', val, 1000, '#309030');
+            if (!val) setStatus('下载测速失败：' + lastErr + '（失败 ' + fail + '/' + sizes.length + '，节点=' + selected.name + '）');
         }
 
         // 上传测速：POST 随机数据到 empty.php（无代理则直连，依赖节点 CORS）
@@ -566,7 +568,7 @@
             setStatus('正在测试上传速度…');
             const url = buildUrl(selected.server + selected.ulURL + '?_=' + Date.now());
             const sizes = [1, 2, 4].map(n => n * 1024 * 1024); // 1/2/4 MB
-            let best = 0, stable = 0, n = 0;
+            let best = 0, stable = 0, n = 0, fail = 0, lastErr = '';
             for (const size of sizes) {
                 if (stopFlag) break;
                 const blob = new Blob([new Uint8Array(size)]);
@@ -577,22 +579,25 @@
                         method: 'POST', mode: 'cors', body: blob, cache: 'no-store', signal: testCtrl.signal,
                         headers: { 'Content-Type': 'application/octet-stream' }
                     });
-                    if (!res.ok) continue;
+                    if (!res.ok) { fail++; lastErr = 'HTTP ' + res.status; continue; }
                     const dt = (performance.now() - t0) / 1000;
-                    if (dt <= 0) continue;
+                    if (dt <= 0) { fail++; lastErr = '响应时间为0'; continue; }
                     const mbps = (size * 8) / (dt * 1024 * 1024);
                     stable += mbps; n++;
                     if (mbps > best) best = mbps;
                     setVal('ul', mbps.toFixed(1));
                     setGauge('ul', mbps, 1000, '#607df1');
                     await new Promise(r => setTimeout(r, 80));
-                } catch (e) { /* 忽略 */ }
+                } catch (e) {
+                    fail++; lastErr = e.name === 'AbortError' ? '请求中断' : (e.message || '网络/CORS错误');
+                }
             }
             if (stopFlag) return;
             const avg = n ? stable / n : 0;
-            setVal('ul', (avg || best).toFixed(1));
-            setGauge('ul', (avg || best), 1000, '#607df1');
-            if (!avg && !best) setVal('ul', 'N/A');
+            const val = avg || best;
+            setVal('ul', val ? val.toFixed(1) : 'N/A');
+            setGauge('ul', val, 1000, '#607df1');
+            if (!val) setStatus('上传测速失败：' + lastErr + '（失败 ' + fail + '/' + sizes.length + '，节点=' + selected.name + '）');
         }
 
         loadServers();
