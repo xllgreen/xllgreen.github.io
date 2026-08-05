@@ -326,7 +326,9 @@
 
         let servers = [];
         let selected = null;
-        let PROXY = localStorage.getItem('st_proxy') || 'https://falling-meadow-9ce5.3496646936.workers.dev/';   // 反向代理前缀（Cloudflare Worker 等）
+        // 默认代理前缀。Cloudflare 免费账户对 speedtest 节点 IP:端口 出站偶发 1003，
+        // 推荐改用 Deno Deploy（worker/deno-proxy.js）部署后填入下方地址：
+        let PROXY = localStorage.getItem('st_proxy') || 'https://modest-caribou-9177.xllgreen.deno.net/';   // 反向代理前缀
 
         // 页面加载时回填代理输入框
         window.addEventListener('DOMContentLoaded', () => {
@@ -339,9 +341,9 @@
             setStatus(PROXY ? ('已启用代理：' + PROXY) : '已清除代理（仅测延迟）');
         }
 
-        // 拼接目标 URL（带代理前缀）。用 ?u= 编码方式，避免 // 被代理规范化吞掉。
+        // 拼接目标 URL（带代理前缀）。用 ?u= base64 编码，避免 URL 暴露明文 http:// 被网络中间件拦截。
         function buildUrl(path) {
-            if (PROXY) return PROXY.replace(/\/$/, '') + '/?u=' + encodeURIComponent(path);
+            if (PROXY) return PROXY.replace(/\/$/, '') + '/?u=' + btoa(path);
             return path;
         }
 

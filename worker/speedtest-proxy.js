@@ -18,15 +18,22 @@ export default {
   async fetch(request) {
     const url = new URL(request.url);
 
-    // 优先用 ?u= 查询参数；否则回退到 path 方式
+    // 优先用 ?u= 查询参数（支持明文 encodeURIComponent 或 base64，避免 URL 暴露明文 http:// 被中间件拦截）
     let target = url.searchParams.get("u");
+    if (target) {
+      // 尝试 base64 解码；若解码后像 URL 则采用，否则当作明文
+      try {
+        const decoded = atob(target);
+        if (/^https?:\/\//i.test(decoded)) target = decoded;
+      } catch (e) { /* 非 base64，按明文处理 */ }
+    }
     if (!target) {
       target = url.pathname.replace(/^\//, "");
     }
     if (!target || !/^https?:\/\//i.test(target)) {
       return new Response(
         "用法:\n" +
-        "  " + url.origin + "/?u=<目标完整URL(需 encodeURIComponent)>\n" +
+        "  " + url.origin + "/?u=<目标完整URL，建议 base64 编码，避免暴露明文 http://>\n" +
         "  " + url.origin + "/<目标完整URL>",
         { status: 400, headers: { "Content-Type": "text/plain; charset=utf-8" } }
       );
