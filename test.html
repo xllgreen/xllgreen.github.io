@@ -307,9 +307,8 @@
 
         <p class="note">
             说明：本页为纯前端网络测速工具，使用 JavaScript 实现，无需 PHP 后端，可直接运行在 GitHub Pages。
-            测速节点采用教育网测速服务器（基于 LibreSpeed 标准后端）。
-            由于纯静态站点存在跨域限制，下载 / 上传测速需填写反向代理前缀（默认已配置）；
-            若未填写代理，仅可测量延迟与抖动。
+            测速节点采用 LibreSpeed 标准后端（默认公共节点自带跨域支持，无需代理即可测速）。
+            若使用教育网等不支持跨域的节点，可在上方填写反向代理前缀后再测。
         </p>
 
         <footer class="copyright-footer">
@@ -347,13 +346,13 @@
         let selected = null;
         // 默认代理前缀。Cloudflare 免费账户对 speedtest 节点 IP:端口 出站偶发 1003，
         // 推荐改用 Deno Deploy（worker/deno-proxy.js）部署后填入下方地址：
-        let PROXY = localStorage.getItem('st_proxy') || 'https://modest-caribou-9177.xllgreen.deno.net/';   // 反向代理前缀
+        let PROXY = localStorage.getItem('st_proxy') || '';   // 反向代理前缀（留空则直连，依赖节点 CORS）
 
-        // 测速服务器列表（基于 LibreSpeed 标准后端，融合教育网测速节点）
+        // 测速服务器列表（基于 LibreSpeed 标准后端，使用自带 CORS 的公共节点，无需代理即可测速）
         const SERVER_LIST = [
-            { id: 'ustc-hf', name: '合肥 · 中科大', server: 'https://test.ustc.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' },
-            { id: 'nju-nj', name: '南京 · 南京大学', server: 'https://test.nju.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' },
-            { id: 'nuaa-nj', name: '南京 · 南京航空航天大学', server: 'https://speedtest.nuaa.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' }
+            { id: 'librespeed-org', name: 'LibreSpeed · 官方公共节点', server: 'https://librespeed.org/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' },
+            { id: 'kleinruhe', name: 'Kleinruhe · 公共节点', server: 'https://speedtest.kleinruhe.com/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' },
+            { id: 'ustc-hf', name: '合肥 · 中科大（需代理）', server: 'https://test.ustc.edu.cn/', dlURL: 'backend/garbage.php', ulURL: 'backend/empty.php', pingURL: 'backend/empty.php', getIpURL: 'backend/getIP.php' }
         ];
 
         // 页面加载时回填代理输入框
@@ -527,10 +526,9 @@
             setGauge('jit', jitter, 100, 100, '#f59e0b');
         }
 
-        // 下载测速：通过代理拉取 garbage.php（多档大小累加，取稳定速率）
+        // 下载测速：拉取 garbage.php（多档大小累加，取稳定速率；无代理则直连，依赖节点 CORS）
         async function runDownload() {
             if (!selected) return;
-            if (!PROXY) { setVal('dl', 'N/A'); return; }
             setStatus('正在测试下载速度…');
             const base = selected.server + selected.dlURL + '?ck=';
             const sizes = [512, 1024, 2048, 4096]; // KB 档位
@@ -562,10 +560,9 @@
             if (!avg && !best) setVal('dl', 'N/A');
         }
 
-        // 上传测速：通过代理 POST 随机数据到 empty.php
+        // 上传测速：POST 随机数据到 empty.php（无代理则直连，依赖节点 CORS）
         async function runUpload() {
             if (!selected) return;
-            if (!PROXY) { setVal('ul', 'N/A'); return; }
             setStatus('正在测试上传速度…');
             const url = buildUrl(selected.server + selected.ulURL + '?_=' + Date.now());
             const sizes = [1, 2, 4].map(n => n * 1024 * 1024); // 1/2/4 MB
