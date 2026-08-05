@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>网络测速 - MedicalStu</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="基于 html5-speedtest 思路的纯前端网络测速工具">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.21">
+    <style>
+        .speedtest-wrap {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 0 16px;
+        }
+
+        .speedtest-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .speedtest-sub {
+            color: var(--project-item-left-text-color, #7e7e7e);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .gauge-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .gauge {
+            background: var(--project-item-bg-color, rgba(249, 250, 251, 0.6));
+            border-radius: 16px;
+            padding: 18px 12px;
+            text-align: center;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+
+        .gauge:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 26px rgba(0, 0, 0, 0.1);
+        }
+
+        .gauge .ring {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 10px;
+        }
+
+        .gauge .ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .gauge .ring .track {
+            fill: none;
+            stroke: rgba(0, 0, 0, 0.08);
+            stroke-width: 10;
+        }
+
+        .gauge .ring .bar {
+            fill: none;
+            stroke: var(--gradient-start, #607df1);
+            stroke-width: 10;
+            stroke-linecap: round;
+            transition: stroke-dashoffset .4s ease, stroke .3s ease;
+        }
+
+        .gauge .val {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .gauge .val small {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--project-item-left-text-color, #7e7e7e);
+        }
+
+        .gauge .label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .start-btn {
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            padding: 12px 38px;
+            border-radius: 999px;
+            background: var(--gradient-start, #607df1);
+            box-shadow: 0 6px 18px rgba(96, 125, 241, 0.35);
+            transition: filter .15s ease, transform .1s ease;
+        }
+
+        .start-btn:hover {
+            filter: brightness(1.05);
+        }
+
+        .start-btn:active {
+            transform: scale(0.97);
+        }
+
+        .start-btn:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            margin: 0 auto 10px;
+            max-width: 420px;
+        }
+
+        .progress .fill {
+            height: 100%;
+            width: 0;
+            background: var(--gradient-start, #607df1);
+            transition: width .3s ease;
+        }
+
+        .status {
+            text-align: center;
+            color: var(--project-item-left-text-color, #7e7e7e);
+            font-size: 13px;
+            min-height: 18px;
+        }
+
+        .note {
+            max-width: 960px;
+            margin: 18px auto 0;
+            padding: 0 16px;
+            font-size: 12px;
+            color: var(--project-item-left-text-color, #7e7e7e);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 720px) {
+            .gauge-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="speedtest-wrap">
+            <div class="speedtest-title">
+                <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px">
+                    <path
+                        d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z"
+                        fill="#000000" p-id="7834"></path>
+                </svg>
+                <span>网络测速 SpeedTest</span>
+            </div>
+            <div class="speedtest-sub">基于 html5-speedtest 思路，纯前端实现，适用于静态站点（GitHub Pages）</div>
+
+            <div class="gauge-grid">
+                <div class="gauge">
+                    <div class="ring">
+                        <svg width="110" height="110" viewBox="0 0 110 110">
+                            <circle class="track" cx="55" cy="55" r="48"></circle>
+                            <circle class="bar" id="bar-dl" cx="55" cy="55" r="48"></circle>
+                        </svg>
+                        <div class="val"><span id="val-dl">--</span><small>Mbps</small></div>
+                    </div>
+                    <div class="label">下载</div>
+                </div>
+                <div class="gauge">
+                    <div class="ring">
+                        <svg width="110" height="110" viewBox="0 0 110 110">
+                            <circle class="track" cx="55" cy="55" r="48"></circle>
+                            <circle class="bar" id="bar-ul" cx="55" cy="55" r="48"></circle>
+                        </svg>
+                        <div class="val"><span id="val-ul">--</span><small>Mbps</small></div>
+                    </div>
+                    <div class="label">上传</div>
+                </div>
+                <div class="gauge">
+                    <div class="ring">
+                        <svg width="110" height="110" viewBox="0 0 110 110">
+                            <circle class="track" cx="55" cy="55" r="48"></circle>
+                            <circle class="bar" id="bar-ping" cx="55" cy="55" r="48"></circle>
+                        </svg>
+                        <div class="val"><span id="val-ping">--</span><small>ms</small></div>
+                    </div>
+                    <div class="label">延迟</div>
+                </div>
+                <div class="gauge">
+                    <div class="ring">
+                        <svg width="110" height="110" viewBox="0 0 110 110">
+                            <circle class="track" cx="55" cy="55" r="48"></circle>
+                            <circle class="bar" id="bar-jit" cx="55" cy="55" r="48"></circle>
+                        </svg>
+                        <div class="val"><span id="val-jit">--</span><small>ms</small></div>
+                    </div>
+                    <div class="label">抖动</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="start-btn" id="startBtn" onclick="startTest()">开始测试</button>
+            </div>
+            <div class="progress"><div class="fill" id="progressFill"></div></div>
+            <div class="status" id="status">准备就绪，点击「开始测试」</div>
+        </div>
+
+        <p class="note">
+            说明：本页测速基于 <a href="https://github.com/insoxin/html5-speedtest" target="_blank"
+                style="color:var(--gradient-start,#607df1)">html5-speedtest</a> 的思路，使用纯 JavaScript 实现，无需 PHP 后端，可直接运行在 GitHub Pages。
+            下载测试使用本地静态资源与一个公共 CDN 文件；上传测试通过向本域 POST 随机数据估算，结果仅供参考。
+        </p>
+
+        <footer class="copyright-footer">
+            <span>Lin Wang©2026 |</span>
+            <a href="https://blog.medicalstu.cn/">版权所有 ©Lin Wang</a>
+        </footer>
+        <footer class="source-footer">
+            <span>source</span>
+            <a href="https://blog.medicalstu.cn/">由Lin Wang制作</a>
+            <span> | </span>
+            <a href="https://blog.medicalstu.cn/PrivacyPolicy.html">隐私政策</a>
+            <span> | </span>
+            <a href="https://blog.medicalstu.cn/TermsOfUse.html">使用条款</a>
+        </footer>
+    </div>
+
+    <script>
+        // 圆环周长
+        const R = 48, CIRC = 2 * Math.PI * R;
+        document.querySelectorAll('.bar').forEach(b => {
+            b.style.strokeDasharray = CIRC;
+            b.style.strokeDashoffset = CIRC;
+        });
+
+        function setGauge(id, value, max, color) {
+            const bar = document.getElementById('bar-' + id);
+            const ratio = Math.max(0, Math.min(1, value / max));
+            bar.style.strokeDashoffset = CIRC * (1 - ratio);
+            if (color) bar.style.stroke = color;
+        }
+
+        function setVal(id, text) {
+            document.getElementById('val-' + id).textContent = text;
+        }
+
+        function setStatus(t) { document.getElementById('status').textContent = t; }
+        function setProgress(p) { document.getElementById('progressFill').style.width = p + '%'; }
+
+        let running = false;
+
+        async function startTest() {
+            if (running) return;
+            running = true;
+            const btn = document.getElementById('startBtn');
+            btn.disabled = true;
+            btn.textContent = '测试中…';
+
+            // 重置
+            ['dl', 'ul', 'ping', 'jit'].forEach(k => { setVal(k, '--'); setGauge(k, 0, 1); });
+            setProgress(0);
+
+            try {
+                await runPing();
+                setProgress(35);
+                await runDownload();
+                setProgress(70);
+                await runUpload();
+                setProgress(100);
+                setStatus('测试完成 ✅');
+            } catch (e) {
+                setStatus('测试出错：' + e.message);
+            } finally {
+                running = false;
+                btn.disabled = false;
+                btn.textContent = '重新测试';
+            }
+        }
+
+        // 延迟 + 抖动：多次 HEAD 请求
+        async function runPing() {
+            setStatus('正在测试延迟 / Ping…');
+            const samples = [];
+            const url = location.href.split('?')[0]; // 当前页面自身，带缓存破坏
+            for (let i = 0; i < 10; i++) {
+                const t0 = performance.now();
+                try {
+                    await fetch(url + '?_=' + Date.now() + '_' + i, { method: 'HEAD', cache: 'no-store' });
+                } catch (e) { /* 忽略单个错误 */ }
+                const dt = performance.now() - t0;
+                samples.push(dt);
+                await new Promise(r => setTimeout(r, 80));
+            }
+            const avg = samples.reduce((a, b) => a + b, 0) / samples.length;
+            const variance = samples.reduce((a, b) => a + Math.pow(b - avg, 2), 0) / samples.length;
+            const jitter = Math.sqrt(variance);
+            setVal('ping', avg.toFixed(0));
+            setVal('jit', jitter.toFixed(0));
+            setGauge('ping', avg, 300, '#e0321b');
+            setGauge('jit', jitter, 100, '#f59e0b');
+        }
+
+        // 下载：拉取较大文件计算速率
+        async function runDownload() {
+            setStatus('正在测试下载速度…');
+            const files = [
+                '/static/speedtest_data.bin',                              // 本地基准文件（若已生成）
+                'https://speedtest.isoyu.com/garbage.php?ckSize=25'        // 公共测速端点（可选，跨域可能受限）
+            ];
+            let best = 0;
+            for (const f of files) {
+                for (let pass = 0; pass < 2; pass++) {
+                    const t0 = performance.now();
+                    try {
+                        const res = await fetch(f + (f.includes('?') ? '&' : '?') + '_=' + Date.now(), { cache: 'no-store' });
+                        const buf = await res.arrayBuffer();
+                        const dt = (performance.now() - t0) / 1000;
+                        if (dt <= 0) continue;
+                        const mbps = (buf.byteLength * 8) / (dt * 1024 * 1024);
+                        if (mbps > best) best = mbps;
+                        setVal('dl', mbps.toFixed(1));
+                        setGauge('dl', mbps, 1000, '#309030');
+                        await new Promise(r => setTimeout(r, 50));
+                    } catch (e) { /* 跳过不可用的源 */ }
+                }
+            }
+            if (best === 0) setVal('dl', 'N/A');
+        }
+
+        // 上传：POST 随机数据到本域
+        async function runUpload() {
+            setStatus('正在测试上传速度…');
+            const sizes = [1, 2, 4].map(n => n * 1024 * 1024); // 1/2/4 MB
+            let best = 0;
+            for (const size of sizes) {
+                const blob = new Blob([new Uint8Array(size)]);
+                const t0 = performance.now();
+                try {
+                    await fetch(location.href, {
+                        method: 'POST',
+                        body: blob,
+                        cache: 'no-store',
+                        headers: { 'X-SpeedTest': '1' }
+                    });
+                    const dt = (performance.now() - t0) / 1000;
+                    if (dt <= 0) continue;
+                    const mbps = (size * 8) / (dt * 1024 * 1024);
+                    if (mbps > best) best = mbps;
+                    setVal('ul', mbps.toFixed(1));
+                    setGauge('ul', mbps, 1000, '#607df1');
+                } catch (e) { /* 部分服务端会拒绝 POST，忽略 */ }
+            }
+            if (best === 0) setVal('ul', 'N/A');
+        }
+    </script>
+</body>
+
+</html>
