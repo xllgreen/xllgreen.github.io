@@ -326,7 +326,7 @@
 
         let servers = [];
         let selected = null;
-        let PROXY = localStorage.getItem('st_proxy') || 'https://rough-frog-9154.3496646936.workers.dev/';   // 反向代理前缀（Cloudflare Worker 等）
+        let PROXY = localStorage.getItem('st_proxy') || 'https://falling-meadow-9ce5.3496646936.workers.dev/';   // 反向代理前缀（Cloudflare Worker 等）
 
         // 页面加载时回填代理输入框
         window.addEventListener('DOMContentLoaded', () => {
@@ -339,9 +339,9 @@
             setStatus(PROXY ? ('已启用代理：' + PROXY) : '已清除代理（仅测延迟）');
         }
 
-        // 拼接目标 URL（带代理前缀）
+        // 拼接目标 URL（带代理前缀）。用 ?u= 编码方式，避免 // 被代理规范化吞掉。
         function buildUrl(path) {
-            if (PROXY) return PROXY.replace(/\/$/, '') + '/' + path.replace(/^\//, '');
+            if (PROXY) return PROXY.replace(/\/$/, '') + '/?u=' + encodeURIComponent(path);
             return path;
         }
 

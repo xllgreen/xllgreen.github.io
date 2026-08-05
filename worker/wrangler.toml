@@ -1,0 +1,8 @@
+name = "speedtest-proxy"
+main = "speedtest-proxy.js"
+compatibility_date = "2024-09-23"
+
+# 部署后默认得到 https://speedtest-proxy.<你的子域>.workers.dev
+# 如需自定义域，取消下面注释并改成你的域名（需在 Cloudflare 托管且该域已 orange-cloud）：
+# [env.production]
+# routes = [{ pattern = "stproxy.yourdomain.com/*", custom_domain = true }]
