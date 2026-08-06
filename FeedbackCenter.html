@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,10 +17,7 @@
     <meta name="og:site_name" contect=MedicalstuBlog>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/static/style.css?v=1.21">
-    <style>
-        .feedback-form { margin: 16px 0; padding-bottom: 16px; text-align: center; border-bottom: 1px solid rgba(128, 128, 128, 0.18); }
-        .feedback-form iframe { max-width: 100%; }
-    </style>
+    <link rel="stylesheet" href="/static/enhance.css?v=1.0">
 </head>
 
 
@@ -90,7 +86,7 @@
                <svg t="1705257654205" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4882" width="22px" height="22px"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z" fill="#000000" p-id="4883"></path></svg>
             </a>
             <!---->
-            <a class="iconItem" data-tip="B站Bilibili" data-zh-tip="B站" data-en-tip="Bilibili" target="_blank" href="https://space.bilibili.com/451418331">
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://space.bilibili.com/451418331">
                 <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
                     <path
@@ -120,13 +116,16 @@
                 </div>
             </a>
             <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
         </div> <!-- 图标容器结束 -->
 
         <div class="tanChiShe">
             <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
         </div>
     </header> <!-- 头部结束 -->
-
 
 
     <content>
@@ -137,10 +136,6 @@
         <div class="feedback-form">
             <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__jNJ8kBUMlRXWDZBMU42SjZVMEJZQjE4SkFCODEzTy4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
         </div>
-        <div class="title">
-            <svg t="1705257523159" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2935" width="26px" height="26px"><path d="M98.3 540.2l2.3 2.1 345.3 189.1c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8l344.8-188.8 0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.7-2.1-4.9-2.5-7-0.7l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 687.1l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.4 35.9-25.1 86.7 9.7 118z" fill="#424242" p-id="2936"></path><path d="M925.5 608.3l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 873.9l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.2 35.9-25 86.7 9.8 118l2.3 2.1L446 918.2c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8L920 729.4l0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.8-2.1-4.9-2.5-7.1-0.7zM116.1 372.6l54.5 29.8 290.6 159.1c27.2 24.5 71.4 24.5 98.6 0l290.6-159.1 54.5-29.8c2.6-2.3 4.9-4.8 7-7.4 19.9-24.5 17.7-59.1-7-81.3L559.8 99.3c-27.2-24.5-71.4-24.5-98.6 0L116.1 283.9c-24.6 22.2-26.9 56.7-7 81.3 2.2 2.6 4.4 5.1 7 7.4z" fill="#000000" p-id="2937"></path></svg>
-             <span data-zh="项目" data-en="Projects">Projects</span></div>
-        <div class="projectList">
         <div class="title">
             <svg t="1705257523159" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2935" width="26px" height="26px"><path d="M98.3 540.2l2.3 2.1 345.3 189.1c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8l344.8-188.8 0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.7-2.1-4.9-2.5-7-0.7l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 687.1l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.4 35.9-25.1 86.7 9.7 118z" fill="#424242" p-id="2936"></path><path d="M925.5 608.3l-33.7 27.4c-2.1 1.7-2.5 4.9-0.7 7 10.6 13 9.7 30.5-2.1 42.7L544.7 873.9l-0.5 0.3-2.3 2.1c-17 15.3-45.8 15.3-62.8 0l-2.3-2.1-344.7-188.8c-11.8-12.2-12.7-29.7-2.1-42.7 1.7-2.1 1.4-5.3-0.7-7l-33.7-27.4c-2.1-1.7-5.3-1.4-7 0.7-29.2 35.9-25 86.7 9.8 118l2.3 2.1L446 918.2c17.6 14.7 40.5 22.8 64.6 22.8 24.1 0 47-8.1 64.6-22.8L920 729.4l0.5-0.3 2.3-2.1c34.8-31.3 39-82 9.8-118-1.8-2.1-4.9-2.5-7.1-0.7zM116.1 372.6l54.5 29.8 290.6 159.1c27.2 24.5 71.4 24.5 98.6 0l290.6-159.1 54.5-29.8c2.6-2.3 4.9-4.8 7-7.4 19.9-24.5 17.7-59.1-7-81.3L559.8 99.3c-27.2-24.5-71.4-24.5-98.6 0L116.1 283.9c-24.6 22.2-26.9 56.7-7 81.3 2.2 2.6 4.4 5.1 7 7.4z" fill="#000000" p-id="2937"></path></svg>
              <span data-zh="项目" data-en="Projects">Projects</span></div>
@@ -225,6 +220,7 @@
     <footer class="copyright-footer">
         <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
         <a href="https://blog.medicalstu.cn/" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
     </footer>
      <footer class="source-footer">
        <span data-zh="源码" data-en="source">source</span>
@@ -252,9 +248,15 @@
 
 
 
-</body>
 
-<script src="/static/script.js?v=1.21"> </script>
 
+    <script src="/static/script.js?v=1.21"> </script>
+    <script src="/static/enhance.js?v=1.0"> </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
 
 </html>

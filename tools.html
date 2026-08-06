@@ -1,44 +1,16 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>关于我 - Medicalstu's Blog</title>
+    <title>工具箱 - Medicalstu's Blog</title>
     <link rel="icon" href="favicon.ico">
-    <meta name="description" content="关于我 —— 庐山下，码农一枚，始于2018">
-    <meta name="keywords" content="Medicalstu's Blog, 关于我, About Us">
-    <meta name="og:title" contect="关于我 - Medicalstu's Blog">
-    <meta name="og:type" contect="website">
-    <meta property="og:locale" content="zh_CN">
-    <meta name="og:image" contect="https://q1.qlogo.cn/g?b=qq&nk=3509679579&s=5">
-    <meta name="og:url" contect="https://blog.medicalstu.cn/AboutUs.html">
-    <meta name="og:description" contect="庐山下，码农一枚，始于2018">
-    <meta name="og:site_name" contect=MedicalstuBlog>
+    <meta name="description" content="纯前端小工具合集：JSON / Base64 / 时间戳 / 二维码 / Markdown">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="/static/style.css?v=1.22">
+    <link rel="stylesheet" href="/static/style.css?v=1.21">
     <link rel="stylesheet" href="/static/enhance.css?v=1.0">
-    <style>
-        /* 仅本页：正文与列表字体调大 */
-        .readme {
-            font-size: 18px;
-            line-height: 1.85;
-        }
-        .readme h2 {
-            font-size: 24px;
-        }
-        .readme p {
-            font-size: 18px;
-        }
-        .readme li {
-            font-size: 18px;
-            line-height: 1.85;
-            margin: 8px 0;
-        }
-        .readme .readme-note {
-            font-size: 15px;
-        }
-    </style>
 </head>
 
 
@@ -52,17 +24,13 @@
         <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
         <div class="iconContainer"> <!-- 图标容器开始 -->
 
-            <!-- 图标我全部是iconfont找的，可以自行更换 -->
-            <!---->
-            
-                        <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="https://blog.medicalstu.cn/">
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="https://blog.medicalstu.cn/">
                 <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
                     <path
                         d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
                         fill="#000000" p-id="3175"></path>
                 </svg>
-                
             </a>
             <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen">
                 <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -70,9 +38,7 @@
                     <path
                         d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
                         fill="#000000" p-id="2488"></path>
-
                 </svg>
-               
             </a>
             <!---->
             <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
@@ -82,7 +48,7 @@
                         d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
                         fill="#000000" p-id="3175"></path>
                 </svg>
-                
+
             </a>
              <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
                 <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -111,7 +77,6 @@
                         fill="#000000" p-id="28588"></path>
                 </svg>
             </a>
-           
             <!---->
             <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
                 <div class="onoffswitch">
@@ -122,7 +87,6 @@
                     </label>
                 </div>
             </a>
-            <!---->
             <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
                 <div class="langswitch">
                     <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
@@ -150,30 +114,71 @@
         <!-- 内容开始 -->
         <div class="title">
             <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
-            <span data-zh="关于我" data-en="About Me">About Me</span></div>
+            <span data-zh="工具箱" data-en="Tools Box">Tools Box</span>
+        </div>
 
         <div class="readme">
-            <!-- 关于我 融入开始 -->
-            <p id="typewriter" class="type-line" data-zh="庐山下，码农一枚。始于 2018，痴迷于代码的艺术，热衷于开源与分享。虽自诩「程序菜鸟」，但初心不改，依然贪恋深夜键盘敲击的孤独与浪漫。" data-en="A coder at the foot of Mount Lu. Started in 2018, obsessed with the art of code and passionate about open source and sharing. Though I call myself a “coding rookie,” my original aspiration never changes — still in love with the solitude and romance of tapping the keyboard deep into the night.">庐山下，码农一枚。始于 2018，痴迷于代码的艺术，热衷于开源与分享。虽自诩「程序菜鸟」，但初心不改，依然贪恋深夜键盘敲击的孤独与浪漫。</p>
+            <p data-zh="纯前端小工具，离线可用，数据不上传服务器。" data-en="Pure front-end tools. Works offline, nothing is uploaded.">纯前端小工具，离线可用，数据不上传服务器。</p>
+        </div>
 
-            <p data-zh="日常爱折腾数码搞机，欢迎同好 tree new bee（同福同享）。" data-en="I love tinkering with gadgets and hardware in my spare time — fellow enthusiasts are welcome to tree new bee (share the fun together).">日常爱折腾数码搞机，欢迎同好 tree new bee（同福同享）。</p>
+        <!-- JSON 工具 -->
+        <div class="tool-panel">
+            <h3 data-zh="JSON 格式化 / 压缩" data-en="JSON Format / Minify">JSON Format / Minify</h3>
+            <textarea id="jsonInput" placeholder='{"hello":"world"}'></textarea>
+            <div class="row">
+                <button id="jsonFormat" data-zh="格式化" data-en="Format">Format</button>
+                <button id="jsonMinify" data-zh="压缩" data-en="Minify">Minify</button>
+            </div>
+            <pre class="result" id="jsonOutput"></pre>
+        </div>
 
-            <h2 data-zh="关于我的一段「误传」" data-en="A Little “Misinformation” About Me">关于我的一段「误传」</h2>
-            <ul>
-                <li data-zh="2005 年就读于美国联邦总局学院" data-en="Class of 2005 outstanding graduate of the U.S. Federal Bureau Academy">2005 年就读于美国联邦总局学院</li>
-                <li data-zh="2006 年美国《时代周刊》年度人物" data-en="Time Magazine Person of the Year 2006">2006 年美国《时代周刊》年度人物</li>
-                <li data-zh="2008 年感动中国组委会特别大奖" data-en="Special Award recipient of &ldquo;Touching China&rdquo; 2008">2008 年感动中国组委会特别大奖</li>
-                <li data-zh="2010 年被奥巴马请回到海豹突击队" data-en="Recruited back to the Navy SEALs by Obama in 2010">2010 年被奥巴马请回到海豹突击队</li>
-                <li data-zh="2011 年参加美国总统选举，二次落选" data-en="A two-time losing candidate in the 2011 U.S. presidential election">2011 年参加美国总统选举，二次落选</li>
-                <li data-zh="2012 年被提名为世界最具影响力人物" data-en="Nominated as one of the world&rsquo;s most influential people in 2012">2012 年被提名为世界最具影响力人物</li>
-                <li data-zh="2018 年急流勇退，隐姓埋名于互联网搬砖" data-en="Retired at my peak in 2018, going incognito to haul bricks on the Internet">2018 年急流勇退，隐姓埋名于互联网搬砖</li>
-                <li data-zh="实则为 Microsoft、Google、Intel、NVIDIA、Qualcomm、中国移动、阿里巴巴、百度、腾讯、京东、哔哩哔哩、招商银行、华为、苹果、中国证监局、国家电网、中国铁路局等数十家国内外企业的投资人之一，长期保持稳定贸易与投资关系，每年助力企业产生数百亿交易额，为人低调。" data-en="In truth, a behind-the-scenes &ldquo;retail&rdquo; investor in dozens of global giants &mdash; Microsoft, Google, Intel, NVIDIA, Qualcomm, China Mobile, Alibaba, Baidu, Tencent, JD, Bilibili, China Merchants Bank, Huawei, Apple, CSRC, State Grid, China Railway, etc. &mdash; maintaining stable long-term trade and investment ties, quietly helping generate tens of billions in annual transactions.">实则为 Microsoft、Google、Intel、NVIDIA、Qualcomm、中国移动、阿里巴巴、百度、腾讯、京东、哔哩哔哩、招商银行、华为、苹果、中国证监局、国家电网、中国铁路局等数十家国内外企业的投资人之一，长期保持稳定贸易与投资关系，每年助力企业产生数百亿交易额，为人低调。</li>
-            </ul>
-            <p class="readme-note" data-zh="※ 以上「误传」纯属玩笑，请勿当真。" data-en="※ The “misinformation” above is purely a joke — please don’t take it seriously.">※ 以上「误传」纯属玩笑，请勿当真。</p>
+        <!-- Base64 工具 -->
+        <div class="tool-panel">
+            <h3 data-zh="Base64 编解码" data-en="Base64 Encode / Decode">Base64 Encode / Decode</h3>
+            <textarea id="b64Input" placeholder="输入要编码或解码的文本 / text"></textarea>
+            <div class="row">
+                <button id="b64Encode" data-zh="编码" data-en="Encode">Encode</button>
+                <button id="b64Decode" data-zh="解码" data-en="Decode">Decode</button>
+            </div>
+            <pre class="result" id="b64Output"></pre>
+        </div>
 
-            <h2 data-zh="彩蛋" data-en="Easter Egg">彩蛋</h2>
-            <p data-zh="主业码农，副业搞机，隐藏身份——医学生（正在努力研究如何给 Bug 做手术）。" data-en="Main job — coder; side gig — hardware tinkerer; hidden identity — medical student (currently working hard on how to perform surgery on bugs).">主业码农，副业搞机，隐藏身份——医学生（正在努力研究如何给 Bug 做手术）。</p>
-            <!-- 关于我 融入结束 -->
+        <!-- 时间戳工具 -->
+        <div class="tool-panel">
+            <h3 data-zh="时间戳 ⇄ 日期" data-en="Timestamp ⇄ Date">Timestamp ⇄ Date</h3>
+            <input id="tsInput" type="text" placeholder="时间戳(秒/毫秒) 或 日期 2026-08-06 12:00:00">
+            <div class="row">
+                <button id="tsToDate" data-zh="转日期" data-en="To Date">To Date</button>
+                <button id="dateToTs" data-zh="转时间戳" data-en="To Timestamp">To Timestamp</button>
+                <button id="tsNow" data-zh="当前时间" data-en="Now">Now</button>
+            </div>
+            <pre class="result" id="tsOutput"></pre>
+        </div>
+
+        <!-- 二维码工具 -->
+        <div class="tool-panel">
+            <h3 data-zh="二维码生成" data-en="QR Code Generator">QR Code Generator</h3>
+            <input id="qrInput" type="text" placeholder="https://blog.medicalstu.cn">
+            <div class="row">
+                <button id="qrGen" data-zh="生成" data-en="Generate">Generate</button>
+            </div>
+            <div id="qrcodeBox"></div>
+        </div>
+
+        <!-- Markdown 预览 -->
+        <div class="tool-panel">
+            <h3 data-zh="Markdown 实时预览" data-en="Markdown Live Preview">Markdown Live Preview</h3>
+            <textarea id="mdInput" placeholder="# 标题&#10;**加粗** 与 `代码`"># Hello Markdown
+
+这是一个 **实时预览** 工具。
+
+- 列表项 1
+- 列表项 2
+
+```js
+console.log('hi');
+```</textarea>
+            <div class="md-preview" id="mdPreview"></div>
         </div>
     </content> <!-- 内容结束 -->
 
@@ -182,40 +187,16 @@
         <a href="https://blog.medicalstu.cn/" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
         <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
     </footer>
-     <footer class="source-footer">
-       <span data-zh="源码" data-en="source">source</span>
-        <a href="https://blog.medicalstu.cn/" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
-        <span data-zh=" | " data-en=" | "> | </span>
-        <a href="https://blog.medicalstu.cn/PrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
-        <span data-zh=" | " data-en=" | "> | </span>
-        <a href="https://blog.medicalstu.cn/TermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
-    </footer>
 </div> <!-- main结束 -->
-
-<!--弹窗-->
-
-<div class="tc">
-    <div class="tc-main">
-        <img class="tc-img" src="" alt="" srcset="">
-    </div>
-    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
-            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
-            <path
-                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
-                p-id="951"></path>
-        </svg></div>
-</div>
-
-
-
-</body>
-
-<script src="/static/script.js?v=1.22"> </script>
-<script src="/static/enhance.js?v=1.0"> </script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <div id="backToTop" title="回到顶部">
     <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
 </div>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 </html>

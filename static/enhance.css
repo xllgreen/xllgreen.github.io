@@ -1,0 +1,255 @@
+/* ===== 站点增强样式（搜索 / 回到顶部 / 工具箱 / 打字机） ===== */
+
+/* 搜索框：放在 header 图标栏，紧跟语言切换右侧
+   默认只显示图标，hover/focus 时展开输入框 */
+.searchBox {
+    display: flex;
+    align-items: center;
+    height: 38px;
+    padding: 0 12px;
+    background: var(--icon-bg-color, rgba(249, 250, 251, 0.6));
+    border-radius: 6px;
+    transition: all 0.35s ease;
+    gap: 6px;
+    width: 42px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.searchBox:hover,
+.searchBox:focus-within {
+    width: 200px;
+    background: var(--project-item-hover-color, rgba(240, 241, 241, 0.6));
+    cursor: text;
+}
+.searchBox svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+.searchBox input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    color: var(--main-text-color, #000);
+    width: 150px;
+    font-family: inherit;
+    opacity: 0;
+    transition: opacity 0.25s ease 0.1s;
+}
+.searchBox:hover input,
+.searchBox:focus-within input {
+    opacity: 1;
+}
+.searchBox input::placeholder {
+    color: var(--project-item-left-text-color, #7e7e7e);
+    opacity: 0.8;
+}
+.search-empty {
+    display: none;
+    text-align: center;
+    color: var(--project-item-left-text-color, #7e7e7e);
+    margin: 10px 0 20px;
+    font-size: 15px;
+}
+
+/* 回到顶部按钮 */
+#backToTop {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--icon-bg-color, rgba(249, 250, 251, 0.6));
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+#backToTop:hover {
+    background: var(--icon-1-hover-color, rgb(68, 120, 241));
+}
+#backToTop svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* 工具箱页面 */
+.tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 5px;
+}
+.tool-card {
+    background-color: var(--project-item-bg-color, rgba(249, 250, 251, 0.6));
+    border-radius: 8px;
+    padding: 16px;
+    width: calc(50% - 24px);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+.tool-card:hover {
+    transform: translateY(-4px);
+    background-color: var(--project-item-hover-color, rgba(240, 241, 241, 0.6));
+}
+.tool-card h3 {
+    font-weight: normal;
+    font-size: 17px;
+    margin-bottom: 6px;
+    color: var(--project-item-left-title-color, #000);
+}
+.tool-card p {
+    font-size: 14px;
+    color: var(--project-item-left-text-color, #7e7e7e);
+}
+
+/* 单个工具面板 */
+.tool-panel {
+    background: var(--project-item-bg-color, rgba(249, 250, 251, 0.6));
+    border-radius: 10px;
+    padding: 18px;
+    margin: 10px 0;
+}
+.tool-panel h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: var(--project-item-left-title-color, #000);
+}
+.tool-panel textarea,
+.tool-panel input[type="text"],
+.tool-panel input[type="number"] {
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--main-bg-color);
+    color: var(--main-text-color, #000);
+    box-sizing: border-box;
+    outline: none;
+    resize: vertical;
+}
+.tool-panel textarea {
+    min-height: 120px;
+}
+.tool-panel .row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+.tool-panel button {
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    background: transparent;
+    color: var(--main-text-color, #000);
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+.tool-panel button:hover {
+    background: var(--icon-1-hover-color, rgb(68, 120, 241));
+    color: #fff;
+    border-color: var(--icon-1-hover-color, rgb(68, 120, 241));
+}
+.tool-panel .result {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--text-bg-color, #f4f4f4);
+    font-size: 14px;
+    word-break: break-all;
+    white-space: pre-wrap;
+    min-height: 20px;
+}
+.tool-panel pre.result {
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+}
+.tool-panel select {
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--main-bg-color);
+    color: var(--main-text-color, #000);
+    outline: none;
+}
+#qrcodeBox {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    background: #fff;
+    border-radius: 8px;
+}
+#qrcodeBox img, #qrcodeBox canvas {
+    max-width: 100%;
+}
+.md-preview {
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 8px;
+    background: var(--text-bg-color, #f4f4f4);
+    line-height: 1.7;
+    word-break: break-word;
+}
+.md-preview h1, .md-preview h2, .md-preview h3 {
+    margin: 10px 0 6px;
+}
+.md-preview code {
+    background: rgba(128,128,128,0.18);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+}
+.md-preview pre {
+    background: rgba(128,128,128,0.18);
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+/* 关于页打字机 */
+.type-line {
+    border-right: 2px solid var(--purple-text-color, #2b3ce2);
+    animation: caretBlink 0.9s step-end infinite;
+    white-space: pre-wrap;
+}
+@keyframes caretBlink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--purple-text-color, #2b3ce2); }
+}
+.type-hidden {
+    visibility: hidden;
+}
+
+@media (max-width: 600px) {
+    .tool-card {
+        width: calc(100% - 12px);
+    }
+    .searchBox:hover,
+    .searchBox:focus-within {
+        width: 160px;
+    }
+    .searchBox input {
+        width: 120px;
+    }
+}
