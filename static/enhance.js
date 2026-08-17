@@ -1,15 +1,28 @@
 /* ===== 站点增强脚本（搜索 / 回到顶部 / 打字机 / 工具箱） ===== */
 
-/* ---- 站内搜索：过滤 .projectItem ---- */
+/* ---- 站内搜索 ----
+ * 首页 / 项目页：过滤 .projectItem 卡片
+ * 软件详情页（存在 .soft-panel）：过滤下载项 .dl-row 与安装教程 .tut-block，
+ *   使在软件页搜索也能命中版本号 / 教程标题，而不只是底部通用项目卡片 */
 function initSearch() {
     var box = document.getElementById('siteSearch');
     if (!box) return;
     var emptyTip = document.getElementById('searchEmpty');
+    var isSoft = !!document.querySelector('.soft-panel');
     box.addEventListener('input', function () {
         var kw = box.value.trim().toLowerCase();
-        var items = document.querySelectorAll('.projectItem');
+        var targets;
+        if (isSoft) {
+            targets = Array.prototype.slice.call(
+                document.querySelectorAll('.dl-row, .tut-block')
+            );
+        } else {
+            targets = Array.prototype.slice.call(
+                document.querySelectorAll('.projectItem')
+            );
+        }
         var shown = 0;
-        items.forEach(function (it) {
+        targets.forEach(function (it) {
             var text = (it.innerText || it.textContent || '').toLowerCase();
             if (!kw || text.indexOf(kw) !== -1) {
                 it.style.display = '';
