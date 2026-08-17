@@ -1,5 +1,45 @@
 
+/* ===== Softwarebase 反爬防护 =====
+ * 仅对 Softwarebase 页面生效（/Softwarebase.html 与 /Softwarebase/*），
+ * 不影响首页 / 工具箱等正常页面。下载按钮为 <a href> 链接，保持可点击。
+ */
+(function antiScrape() {
+    var path = location.pathname.toLowerCase();
+    var isSb = path.indexOf('/softwarebase/') !== -1 || path === '/softwarebase.html' || path.endsWith('/softwarebase');
+    if (!isSb) return;
 
+    // 1) 禁右键 / 禁 F12（保留原有逻辑）
+    document.oncontextmenu = function (e) { e.preventDefault(); return false; };
+    document.onkeydown = function (e) {
+        var k = (e.key || '').toLowerCase();
+        if (e.key === 'F12' || k === 'f12') { e.preventDefault(); return false; }
+        // 拦截 Ctrl/CMD + (U 查看源码 / S 保存 / C 复制 / A 全选 / P 打印)
+        if ((e.ctrlKey || e.metaKey) && ['u', 's', 'c', 'a', 'p'].indexOf(k) !== -1) {
+            e.preventDefault(); return false;
+        }
+    };
+
+    // 2) 禁复制 / 剪切 / 拖拽
+    ['copy', 'cut', 'dragstart', 'selectstart'].forEach(function (ev) {
+        document.addEventListener(ev, function (e) { e.preventDefault(); return false; });
+    });
+
+    // 3) 禁用文本选择（仅内容区，不影响输入框/可访问性关键交互）
+    var style = document.createElement('style');
+    style.textContent = '.main,.tut-block,.post-note,.readme{ -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none; }';
+    document.head.appendChild(style);
+
+    // 4) 无头浏览器 / 自动化检测（navigator.webdriver 为 true 时）
+    if (navigator.webdriver === true) {
+        var warn = document.createElement('div');
+        warn.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99999;background:#c0392b;color:#fff;' +
+            'text-align:center;padding:10px 14px;font-size:14px;line-height:1.5;';
+        warn.textContent = '检测到自动化浏览器环境，部分内容已隐藏。请使用正常浏览器访问。';
+        document.addEventListener('DOMContentLoaded', function () { document.body && document.body.appendChild(warn); });
+    }
+})();
+
+// 以下为原有逻辑（保留兼容）
 document.onkeydown = function (e) {
     if (e.key === "F12") {
         e.preventDefault();

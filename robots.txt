@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /Softwarebase/
+Disallow: /Softwarebase.html
+
+Sitemap: https://blog.medicalstu.cn/sitemap.xml
