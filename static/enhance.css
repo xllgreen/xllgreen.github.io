@@ -88,6 +88,33 @@
 }
 
 /* 工具箱页面 */
+.tool-cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 14px 0 18px;
+}
+.cat-btn {
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    background: var(--project-item-bg-color, rgba(249, 250, 251, 0.6));
+    color: var(--main-text-color, #000);
+    font-size: 14px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+.cat-btn:hover {
+    background: var(--icon-1-hover-color, rgb(68, 120, 241));
+    color: #fff;
+    border-color: var(--icon-1-hover-color, rgb(68, 120, 241));
+}
+.cat-btn.active {
+    background: var(--icon-1-hover-color, rgb(68, 120, 241));
+    color: #fff;
+    border-color: var(--icon-1-hover-color, rgb(68, 120, 241));
+}
 .tools-grid {
     display: flex;
     flex-wrap: wrap;

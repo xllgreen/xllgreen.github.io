@@ -1,0 +1,922 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>classroom-danmaku - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - classroom-danmaku">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+        <span id="theme-icon">🌙</span>
+      </button>
+
+      <nav class="breadcrumb">
+        <a href="../../index.html">首页</a>
+        <span>›</span>
+        课堂弹幕
+      </nav>
+      <!-- 弹幕舞台 -->
+      <div id="danmaku-stage"></div>
+
+      <!-- 留言墙 -->
+      <div id="message-wall">
+        <div class="wall-container" id="wallContainer">
+          <div class="wall-empty" id="wallEmpty">
+            <div class="wall-empty-icon">💭</div>
+            <div class="wall-empty-text">等待留言...</div>
+            <div class="wall-empty-hint">发送的消息将以气泡形式永久展示在这里</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 投屏模式提示 -->
+      <div class="screen-mode-hint" id="screenHint">
+        <div class="icon">📺</div>
+        <h1>等待弹幕...</h1>
+        <p>点击右上角二维码按钮，扫码发送弹幕</p>
+      </div>
+
+      <!-- 统计信息 -->
+      <div class="stats">
+        弹幕:
+        <span id="danmakuCount">0</span>
+        | 在线:
+        <span id="onlineCount">1</span>
+      </div>
+
+      <!-- 顶部工具栏 -->
+      <div class="top-bar">
+        <div class="logo">
+          <span class="logo-icon">💬</span>
+          <span>课堂弹幕</span>
+        </div>
+
+        <div class="mode-tabs">
+          <button class="mode-tab active" data-mode="normal">弹幕模式</button>
+          <button class="mode-tab" data-mode="wall">留言墙</button>
+          <button class="mode-tab" data-mode="screen">投屏模式</button>
+        </div>
+
+        <div class="top-actions">
+          <button class="btn btn-secondary btn-icon" id="qrBtn" title="扫码发弹幕">📱</button>
+          <button class="btn btn-secondary btn-icon" id="clearBtn" title="清空弹幕">🗑️</button>
+          <button class="btn btn-secondary btn-icon" id="fullscreenBtn" title="全屏">⛶</button>
+        </div>
+      </div>
+
+      <!-- 快捷键提示 -->
+      <div class="shortcuts-hint">
+        <kbd>Enter</kbd>
+        发送 |
+        <kbd>F</kbd>
+        全屏 |
+        <kbd>Q</kbd>
+        二维码
+      </div>
+
+      <!-- 控制面板 -->
+      <div class="control-panel" id="controlPanel">
+        <div class="panel-inner">
+          <div class="sender-header">
+            <h2>📱 发送弹幕</h2>
+            <p id="senderRoomInfo">房间号: ---</p>
+          </div>
+
+          <div class="input-row">
+            <input
+              type="text"
+              id="danmaku-input"
+              placeholder="输入弹幕内容..."
+              maxlength="50"
+              autocomplete="off"
+              aria-label="文本输入框"
+            />
+            <button class="btn btn-primary" id="sendBtn">发送</button>
+          </div>
+
+          <div class="options-row">
+            <div class="color-picker" id="colorPicker">
+              <button
+                class="color-btn active"
+                style="background: #fff"
+                data-color="#ffffff"
+              ></button>
+              <button class="color-btn" style="background: #00f5d4" data-color="#00f5d4"></button>
+              <button class="color-btn" style="background: #fee440" data-color="#fee440"></button>
+              <button class="color-btn" style="background: #f72585" data-color="#f72585"></button>
+              <button class="color-btn" style="background: #4cc9f0" data-color="#4cc9f0"></button>
+              <button class="color-btn" style="background: #7209b7" data-color="#7209b7"></button>
+            </div>
+
+            <select class="size-select" id="sizeSelect">
+              <option value="24">小号</option>
+              <option value="32" selected="">中号</option>
+              <option value="48">大号</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 二维码弹窗 -->
+      <div class="qr-modal" id="qrModal">
+        <div class="qr-content">
+          <h3>📱 扫码发弹幕</h3>
+          <p>用手机扫描二维码，即可发送弹幕到大屏</p>
+          <div id="qrcode"></div>
+          <div class="room-info">
+            <span class="label">房间号</span>
+            <span id="roomId">---</span>
+          </div>
+          <button class="btn btn-secondary" id="closeQrBtn" style="width: 100%">关闭</button>
+          <div class="connection-status">
+            <span class="status-dot" id="statusDot"></span>
+            <span id="statusText">连接中...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/vendor/qrcode.min.js"></script>
+    <script src="../static/vendor/mqtt.min.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        // ========== 配置 ==========
+        // 使用 Supabase 公共项目的 Realtime（匿名访问）
+        // 这是一个公开的演示用 Supabase 项目
+        var SUPABASE_URL = "https://xyzcompany.supabase.co";
+        var SUPABASE_ANON_KEY = "public-anon-key";
+
+        // ========== 状态 ==========
+        var state = {
+          color: "#ffffff",
+          size: 32,
+          speed: 8,
+          count: 0,
+          mode: "normal",
+          tracks: [],
+          trackCount: 0,
+          roomId: null,
+          isSender: false,
+          connected: false,
+          onlineCount: 1
+        };
+
+        // ========== DOM 元素 ==========
+        var stage = document.getElementById("danmaku-stage");
+        var input = document.getElementById("danmaku-input");
+        var sendBtn = document.getElementById("sendBtn");
+        var clearBtn = document.getElementById("clearBtn");
+        var fullscreenBtn = document.getElementById("fullscreenBtn");
+        var qrBtn = document.getElementById("qrBtn");
+        var colorPicker = document.getElementById("colorPicker");
+        var sizeSelect = document.getElementById("sizeSelect");
+        var controlPanel = document.getElementById("controlPanel");
+        var countDisplay = document.getElementById("danmakuCount");
+        var onlineDisplay = document.getElementById("onlineCount");
+        var screenHint = document.getElementById("screenHint");
+        var modeTabs = document.querySelectorAll(".mode-tab");
+        var qrModal = document.getElementById("qrModal");
+        var closeQrBtn = document.getElementById("closeQrBtn");
+        var roomIdDisplay = document.getElementById("roomId");
+        var statusDot = document.getElementById("statusDot");
+        var statusText = document.getElementById("statusText");
+        var senderRoomInfo = document.getElementById("senderRoomInfo");
+        var wallContainer = document.getElementById("wallContainer");
+        var wallEmpty = document.getElementById("wallEmpty");
+
+        // 留言墙消息存储
+        var wallMessages = [];
+
+        // ========== 房间 ID 生成 ==========
+        function generateRoomId() {
+          return Math.random().toString(36).substring(2, 8).toUpperCase();
+        }
+
+        function getRoomFromUrl() {
+          var params = new URLSearchParams(window.location.search);
+          return params.get("room");
+        }
+
+        function setRoomInUrl(roomId) {
+          var url = new URL(window.location.href);
+          url.searchParams.set("room", roomId);
+          window.history.replaceState({}, "", url);
+        }
+
+        // ========== BroadcastChannel（同设备同步）==========
+        var localChannel = null;
+        try {
+          localChannel = new BroadcastChannel("classroom-danmaku-" + state.roomId);
+        } catch (err) {}
+
+        function initLocalChannel() {
+          if (localChannel) {
+            localChannel.close();
+          }
+          try {
+            localChannel = new BroadcastChannel("classroom-danmaku-" + state.roomId);
+            localChannel.onmessage = function (e) {
+              if (e.data && e.data.type === "danmaku") {
+                renderDanmaku(e.data);
+              }
+            };
+          } catch (err) {}
+        }
+
+        // ========== MQTT 跨设备通信 ==========
+        // 使用免费的 HiveMQ 公共 MQTT Broker
+        // https://www.hivemq.com/mqtt/public-mqtt-broker/
+        // MQTT topic 天然支持房间隔离
+        var MQTT_BROKER = "wss://broker.hivemq.com:8884/mqtt";
+        var mqttClient = null;
+        var mqttReconnectTimer = null;
+
+        function connectMQTT() {
+          if (mqttClient && mqttClient.connected) return;
+
+          try {
+            var clientId = "danmaku_" + Math.random().toString(36).substring(2, 10);
+            var topic = "classroom-danmaku/" + state.roomId;
+
+            mqttClient = mqtt.connect(MQTT_BROKER, {
+              clientId: clientId,
+              clean: true,
+              connectTimeout: 10000,
+              reconnectPeriod: 3000
+            });
+
+            mqttClient.on("connect", function () {
+              state.connected = true;
+              updateConnectionStatus();
+              console.log("MQTT connected, room:", state.roomId);
+
+              // 订阅房间 topic
+              mqttClient.subscribe(topic, function (err) {
+                if (!err) {
+                  console.log("Subscribed to:", topic);
+                  // 发送上线通知
+                  mqttClient.publish(
+                    topic,
+                    JSON.stringify({
+                      type: "join",
+                      roomId: state.roomId,
+                      timestamp: Date.now()
+                    })
+                  );
+                }
+              });
+            });
+
+            mqttClient.on("message", function (receivedTopic, message) {
+              try {
+                var data = JSON.parse(message.toString());
+
+                if (data.type === "danmaku") {
+                  renderDanmaku(data);
+                  // 同步到本地其他标签页
+                  if (localChannel) {
+                    localChannel.postMessage(data);
+                  }
+                } else if (data.type === "join" || data.type === "leave") {
+                  // 简单的在线人数估算
+                  state.onlineCount = Math.max(
+                    1,
+                    state.onlineCount + (data.type === "join" ? 1 : -1)
+                  );
+                  onlineDisplay.textContent = state.onlineCount;
+                }
+              } catch (err) {
+                console.error("Message parse error:", err);
+              }
+            });
+
+            mqttClient.on("close", function () {
+              state.connected = false;
+              updateConnectionStatus();
+            });
+
+            mqttClient.on("error", function (err) {
+              console.error("MQTT error:", err);
+              state.connected = false;
+              updateConnectionStatus();
+            });
+
+            mqttClient.on("offline", function () {
+              state.connected = false;
+              updateConnectionStatus();
+            });
+          } catch (err) {
+            console.error("MQTT connection error:", err);
+            state.connected = false;
+            updateConnectionStatus();
+          }
+        }
+
+        function updateConnectionStatus() {
+          if (state.connected) {
+            statusDot.classList.add("connected");
+            statusText.textContent = "已连接 - 房间 " + state.roomId;
+          } else {
+            statusDot.classList.remove("connected");
+            statusText.textContent = "连接中...";
+          }
+        }
+
+        // ========== 计算轨道 ==========
+        function calculateTracks() {
+          var trackHeight = 50;
+          state.trackCount = Math.floor((window.innerHeight * 0.7) / trackHeight);
+          state.tracks = new Array(state.trackCount).fill(0);
+        }
+
+        function getAvailableTrack() {
+          var now = Date.now();
+          var minTime = Infinity;
+          var bestTrack = 0;
+
+          for (var i = 0; i < state.trackCount; i++) {
+            if (state.tracks[i] <= now) {
+              return i;
+            }
+            if (state.tracks[i] < minTime) {
+              minTime = state.tracks[i];
+              bestTrack = i;
+            }
+          }
+          return bestTrack;
+        }
+
+        // ========== 颜色到主题映射 ==========
+        function getWallTheme(color) {
+          var themes = {
+            "#ffffff": "cyan",
+            "#00f5d4": "cyan",
+            "#ffd93d": "yellow",
+            "#ff6b9d": "pink",
+            "#38bdf8": "blue",
+            "#a855f7": "purple"
+          };
+          return (
+            themes[color] ||
+            ["cyan", "pink", "yellow", "purple", "blue", "green"][Math.floor(Math.random() * 6)]
+          );
+        }
+
+        // ========== 渲染留言墙气泡 ==========
+        function renderWallBubble(data) {
+          var text = data.text || "";
+          var color = data.color || "#ffffff";
+
+          if (!text.trim()) return;
+
+          // 隐藏空状态提示
+          if (wallEmpty) {
+            wallEmpty.style.display = "none";
+          }
+
+          var bubble = document.createElement("div");
+          bubble.className = "wall-bubble floating theme-" + getWallTheme(color);
+          bubble.textContent = text;
+
+          // 随机位置，避免重叠
+          var containerRect = wallContainer.getBoundingClientRect();
+          var maxX = containerRect.width - 300;
+          var maxY = containerRect.height - 100;
+
+          // 尝试找一个不重叠的位置
+          var attempts = 0;
+          var x, y;
+          do {
+            x = Math.random() * maxX;
+            y = Math.random() * maxY;
+            attempts++;
+          } while (attempts < 10 && isOverlapping(x, y, 280, 60));
+
+          bubble.style.left = x + "px";
+          bubble.style.top = y + "px";
+
+          // 随机延迟浮动动画
+          bubble.style.animationDelay = "0s, " + Math.random() * 2 + "s";
+
+          wallContainer.appendChild(bubble);
+
+          // 存储消息
+          wallMessages.push({
+            text: text,
+            color: color,
+            x: x,
+            y: y,
+            element: bubble
+          });
+
+          // 限制最大消息数
+          if (wallMessages.length > 50) {
+            var oldest = wallMessages.shift();
+            if (oldest.element && oldest.element.parentNode) {
+              oldest.element.style.opacity = "0";
+              oldest.element.style.transform = "scale(0.5)";
+              setTimeout(function () {
+                if (oldest.element.parentNode) {
+                  oldest.element.remove();
+                }
+              }, 500);
+            }
+          }
+
+          state.count++;
+          countDisplay.textContent = state.count;
+        }
+
+        // 检查位置是否重叠
+        function isOverlapping(x, y, width, height) {
+          for (var i = 0; i < wallMessages.length; i++) {
+            var msg = wallMessages[i];
+            if (Math.abs(msg.x - x) < width && Math.abs(msg.y - y) < height) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        // ========== 渲染弹幕 ==========
+        function renderDanmaku(data) {
+          var text = data.text || "";
+          var color = data.color || "#ffffff";
+          var size = data.size || 32;
+          var speed = data.speed || 8;
+
+          if (!text.trim()) return;
+
+          // 发送模式不渲染
+          if (state.isSender) return;
+
+          // 留言墙模式使用气泡渲染
+          if (state.mode === "wall") {
+            renderWallBubble(data);
+            return;
+          }
+
+          // 弹幕模式
+          var el = document.createElement("div");
+          el.className = "danmaku-item";
+          el.textContent = text;
+          el.style.color = color;
+          el.style.fontSize = size + "px";
+
+          var track = getAvailableTrack();
+          var topPos = 50 + track * 50;
+          el.style.top = topPos + "px";
+          el.style.right = "-100%";
+
+          var duration = speed + text.length * 0.1;
+          el.style.animationDuration = duration + "s";
+
+          state.tracks[track] = Date.now() + duration * 0.4 * 1000;
+
+          stage.appendChild(el);
+
+          state.count++;
+          countDisplay.textContent = state.count;
+
+          screenHint.classList.add("has-danmaku");
+
+          el.addEventListener("animationend", function () {
+            el.remove();
+          });
+        }
+
+        // ========== 清空弹幕 ==========
+        function clearAllDanmaku() {
+          // 清空弹幕
+          while (stage.firstChild) {
+            stage.removeChild(stage.firstChild);
+          }
+
+          // 清空留言墙
+          wallMessages = [];
+          var bubbles = wallContainer.querySelectorAll(".wall-bubble");
+          bubbles.forEach(function (b) {
+            b.remove();
+          });
+          if (wallEmpty) {
+            wallEmpty.style.display = "block";
+          }
+
+          state.count = 0;
+          countDisplay.textContent = "0";
+          screenHint.classList.remove("has-danmaku");
+        }
+
+        // ========== 发送弹幕 ==========
+        function sendDanmaku() {
+          var text = input.value.trim();
+          if (!text) return;
+
+          var data = {
+            type: "danmaku",
+            roomId: state.roomId,
+            text: text,
+            color: state.color,
+            size: state.size,
+            speed: state.speed,
+            timestamp: Date.now()
+          };
+
+          // 本地渲染（非发送模式）
+          if (!state.isSender) {
+            renderDanmaku(data);
+          }
+
+          // 通过 MQTT 发送
+          if (mqttClient && mqttClient.connected) {
+            var topic = "classroom-danmaku/" + state.roomId;
+            mqttClient.publish(topic, JSON.stringify(data));
+          }
+
+          // 本地广播
+          if (localChannel) {
+            localChannel.postMessage(data);
+          }
+
+          input.value = "";
+          input.focus();
+
+          // 发送成功反馈
+          if (state.isSender) {
+            sendBtn.textContent = "已发送 ✓";
+            setTimeout(function () {
+              sendBtn.textContent = "发送";
+            }, 1000);
+          }
+        }
+
+        // ========== 生成二维码 ==========
+        var qrInstance = null;
+
+        function showQrCode() {
+          var qrContainer = document.getElementById("qrcode");
+          qrContainer.innerHTML = "";
+
+          var senderUrl =
+            window.location.origin +
+            window.location.pathname +
+            "?room=" +
+            state.roomId +
+            "&mode=sender";
+
+          // 使用 qrcodejs 库
+          qrInstance = new QRCode(qrContainer, {
+            text: senderUrl,
+            width: 200,
+            height: 200,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.M
+          });
+
+          roomIdDisplay.textContent = state.roomId;
+          qrModal.classList.add("show");
+        }
+
+        function hideQrCode() {
+          qrModal.classList.remove("show");
+        }
+
+        // ========== 事件绑定 ==========
+        sendBtn.addEventListener("click", sendDanmaku);
+
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            sendDanmaku();
+          }
+        });
+
+        colorPicker.addEventListener("click", function (e) {
+          var btn = e.target.closest(".color-btn");
+          if (!btn) return;
+
+          colorPicker.querySelectorAll(".color-btn").forEach(function (b) {
+            b.classList.remove("active");
+          });
+          btn.classList.add("active");
+          state.color = btn.dataset.color;
+        });
+
+        sizeSelect.addEventListener("change", function () {
+          state.size = parseInt(this.value, 10);
+        });
+
+        clearBtn.addEventListener("click", clearAllDanmaku);
+
+        qrBtn.addEventListener("click", showQrCode);
+        closeQrBtn.addEventListener("click", hideQrCode);
+
+        qrModal.addEventListener("click", function (e) {
+          if (e.target === qrModal) {
+            hideQrCode();
+          }
+        });
+
+        fullscreenBtn.addEventListener("click", function () {
+          if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(function () {});
+          } else {
+            document.exitFullscreen();
+          }
+        });
+
+        modeTabs.forEach(function (tab) {
+          tab.addEventListener("click", function () {
+            modeTabs.forEach(function (t) {
+              t.classList.remove("active");
+            });
+            this.classList.add("active");
+            state.mode = this.dataset.mode;
+
+            // 清除所有模式类
+            document.body.classList.remove("screen-mode", "wall-mode");
+
+            if (state.mode === "screen") {
+              document.body.classList.add("screen-mode");
+              controlPanel.classList.add("hidden");
+            } else if (state.mode === "wall") {
+              document.body.classList.add("wall-mode");
+              controlPanel.classList.remove("hidden");
+            } else {
+              controlPanel.classList.remove("hidden");
+            }
+          });
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (state.isSender) return;
+
+          if (e.key === "f" || e.key === "F") {
+            if (document.activeElement !== input) {
+              e.preventDefault();
+              fullscreenBtn.click();
+            }
+          }
+
+          if (e.key === "q" || e.key === "Q") {
+            if (document.activeElement !== input) {
+              e.preventDefault();
+              if (qrModal.classList.contains("show")) {
+                hideQrCode();
+              } else {
+                showQrCode();
+              }
+            }
+          }
+
+          if (e.key === "Escape") {
+            if (qrModal.classList.contains("show")) {
+              hideQrCode();
+            } else if (state.mode === "screen") {
+              modeTabs[0].click();
+            }
+          }
+        });
+
+        window.addEventListener("resize", calculateTracks);
+
+        // ========== 初始化 ==========
+        function init() {
+          // 检查 URL 参数
+          var urlRoom = getRoomFromUrl();
+          var urlParams = new URLSearchParams(window.location.search);
+          var isSenderMode = urlParams.get("mode") === "sender";
+
+          if (urlRoom) {
+            state.roomId = urlRoom;
+          } else {
+            state.roomId = generateRoomId();
+            setRoomInUrl(state.roomId);
+          }
+
+          state.isSender = isSenderMode;
+
+          // 初始化本地频道
+          initLocalChannel();
+
+          // 连接 MQTT
+          connectMQTT();
+
+          // 计算弹幕轨道
+          calculateTracks();
+
+          if (state.isSender) {
+            // 发送模式
+            document.body.classList.add("sender-mode");
+            senderRoomInfo.textContent = "房间号: " + state.roomId;
+          } else {
+            // 显示模式
+            input.focus();
+
+            // 欢迎弹幕
+            setTimeout(function () {
+              renderDanmaku({
+                text: "欢迎使用课堂弹幕！点击📱扫码发弹幕",
+                color: "#00f5d4",
+                size: 32,
+                speed: 10
+              });
+            }, 1000);
+          }
+        }
+
+        init();
+      })();
+
+      // Theme toggle
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        document.getElementById("theme-icon").textContent = newTheme === "light" ? "☀️" : "🌙";
+        localStorage.setItem("theme", newTheme);
+      }
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        document.getElementById("theme-icon").textContent = "☀️";
+      }
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

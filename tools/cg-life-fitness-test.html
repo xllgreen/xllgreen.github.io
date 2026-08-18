@@ -1,0 +1,838 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>fitness-test - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - fitness-test">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <div class="container">
+        <h1>🏃 体测成绩计算器</h1>
+        <p class="subtitle">依据《国家学生体质健康标准（2014年修订）》计算</p>
+
+        <!-- 基本信息 -->
+        <div class="card">
+          <div class="card-title">
+            <span>📝</span>
+            基本信息
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>性别</label>
+              <select id="gender" onchange="updateTestItems()">
+                <option value="male">男</option>
+                <option value="female">女</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>年级</label>
+              <select id="grade" onchange="updateTestItems()">
+                <option value="college">大学</option>
+                <option value="high3">高三</option>
+                <option value="high2">高二</option>
+                <option value="high1">高一</option>
+                <option value="middle3">初三</option>
+                <option value="middle2">初二</option>
+                <option value="middle1">初一</option>
+                <option value="primary6">小学六年级</option>
+                <option value="primary5">小学五年级</option>
+                <option value="primary4">小学四年级</option>
+                <option value="primary3">小学三年级</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>身高</label>
+              <div class="input-with-unit">
+                <input type="number" id="height" placeholder="170" step="0.1" />
+                <span class="unit">cm</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>体重</label>
+              <div class="input-with-unit">
+                <input type="number" id="weight" placeholder="65" step="0.1" />
+                <span class="unit">kg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 测试项目 -->
+        <div class="card">
+          <div class="card-title">
+            <span>🎯</span>
+            测试项目
+          </div>
+          <div class="test-items" id="testItems">
+            <!-- 动态生成 -->
+          </div>
+
+          <div class="bonus-section">
+            <div class="bonus-title">附加分（耐力项目成绩达到良好及以上可加分）</div>
+            <div class="bonus-items">
+              <div class="bonus-item">
+                <input type="checkbox" id="bonusEndurance" />
+                <label for="bonusEndurance">耐力项目加分（良好+10分，优秀+20分）</label>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" onclick="calculate()" style="margin-top: 20px">
+            📊 计算成绩
+          </button>
+        </div>
+
+        <!-- 计算结果 -->
+        <div class="result-section" id="resultSection">
+          <div class="card">
+            <div class="total-score" id="totalScoreCard">
+              <div class="total-score-value" id="totalScore">0</div>
+              <div class="total-score-label">总成绩</div>
+              <div class="grade-badge" id="totalGrade">待计算</div>
+            </div>
+
+            <div class="card-title">
+              <span>📋</span>
+              各项成绩明细
+            </div>
+            <table class="score-table">
+              <thead>
+                <tr>
+                  <th>测试项目</th>
+                  <th>成绩</th>
+                  <th>得分</th>
+                  <th>权重</th>
+                  <th>等级</th>
+                </tr>
+              </thead>
+              <tbody id="scoreTableBody">
+                <!-- 动态生成 -->
+              </tbody>
+            </table>
+
+            <div class="info-box">
+              <strong>评分标准：</strong>
+              90分及以上为优秀，80-89.9分为良好，60-79.9分为及格，60分以下为不及格。
+              <br />
+              <strong>注意：</strong>
+              体重指数(BMI)成绩和肺活量体重指数不合格时，总成绩最高为59分。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 评分标准数据（简化版，实际应更详细）
+      const standards = {
+        // 大学男生标准
+        college_male: {
+          bmi: {
+            weight: 15,
+            ranges: [
+              { min: 17.9, max: 23.9, score: 100 },
+              { min: 17.0, max: 17.8, score: 80 },
+              { min: 24.0, max: 27.9, score: 80 },
+              { min: 16.0, max: 16.9, score: 60 },
+              { min: 28.0, max: 29.9, score: 60 },
+              { min: 0, max: 15.9, score: 50 },
+              { min: 30.0, max: 999, score: 50 }
+            ]
+          },
+          vitalCapacity: {
+            weight: 15,
+            unit: "ml/kg",
+            ranges: [
+              { min: 78, score: 100 },
+              { min: 70, score: 86 },
+              { min: 62, score: 72 },
+              { min: 54, score: 58 },
+              { min: 46, score: 44 },
+              { min: 0, score: 30 }
+            ]
+          },
+          run50: {
+            weight: 20,
+            unit: "秒",
+            isLowerBetter: true,
+            ranges: [
+              { max: 6.7, score: 100 },
+              { max: 6.9, score: 95 },
+              { max: 7.1, score: 90 },
+              { max: 7.3, score: 85 },
+              { max: 7.5, score: 80 },
+              { max: 7.7, score: 75 },
+              { max: 7.9, score: 70 },
+              { max: 8.1, score: 65 },
+              { max: 8.3, score: 60 },
+              { max: 9.1, score: 50 },
+              { max: 999, score: 30 }
+            ]
+          },
+          sitAndReach: {
+            weight: 10,
+            unit: "cm",
+            ranges: [
+              { min: 24.9, score: 100 },
+              { min: 21.3, score: 86 },
+              { min: 17.7, score: 72 },
+              { min: 14.1, score: 58 },
+              { min: 10.5, score: 44 },
+              { min: -999, score: 30 }
+            ]
+          },
+          standingJump: {
+            weight: 10,
+            unit: "cm",
+            ranges: [
+              { min: 273, score: 100 },
+              { min: 256, score: 86 },
+              { min: 238, score: 72 },
+              { min: 220, score: 58 },
+              { min: 202, score: 44 },
+              { min: 0, score: 30 }
+            ]
+          },
+          pullUp: {
+            weight: 10,
+            unit: "个",
+            ranges: [
+              { min: 19, score: 100 },
+              { min: 16, score: 86 },
+              { min: 12, score: 72 },
+              { min: 8, score: 58 },
+              { min: 5, score: 44 },
+              { min: 0, score: 30 }
+            ]
+          },
+          run1000: {
+            weight: 20,
+            unit: "分秒",
+            isLowerBetter: true,
+            isEndurance: true,
+            ranges: [
+              { max: 207, score: 100 }, // 3'27"
+              { max: 217, score: 95 }, // 3'37"
+              { max: 227, score: 90 }, // 3'47"
+              { max: 237, score: 85 }, // 3'57"
+              { max: 247, score: 80 }, // 4'07"
+              { max: 257, score: 75 }, // 4'17"
+              { max: 267, score: 70 }, // 4'27"
+              { max: 277, score: 65 }, // 4'37"
+              { max: 290, score: 60 }, // 4'50"
+              { max: 330, score: 50 }, // 5'30"
+              { max: 9999, score: 30 }
+            ]
+          }
+        },
+        // 大学女生标准
+        college_female: {
+          bmi: {
+            weight: 15,
+            ranges: [
+              { min: 17.2, max: 23.9, score: 100 },
+              { min: 16.5, max: 17.1, score: 80 },
+              { min: 24.0, max: 27.9, score: 80 },
+              { min: 15.8, max: 16.4, score: 60 },
+              { min: 28.0, max: 29.9, score: 60 },
+              { min: 0, max: 15.7, score: 50 },
+              { min: 30.0, max: 999, score: 50 }
+            ]
+          },
+          vitalCapacity: {
+            weight: 15,
+            unit: "ml/kg",
+            ranges: [
+              { min: 66, score: 100 },
+              { min: 58, score: 86 },
+              { min: 50, score: 72 },
+              { min: 42, score: 58 },
+              { min: 34, score: 44 },
+              { min: 0, score: 30 }
+            ]
+          },
+          run50: {
+            weight: 20,
+            unit: "秒",
+            isLowerBetter: true,
+            ranges: [
+              { max: 7.5, score: 100 },
+              { max: 7.7, score: 95 },
+              { max: 8.0, score: 90 },
+              { max: 8.3, score: 85 },
+              { max: 8.6, score: 80 },
+              { max: 8.9, score: 75 },
+              { max: 9.2, score: 70 },
+              { max: 9.5, score: 65 },
+              { max: 9.8, score: 60 },
+              { max: 10.6, score: 50 },
+              { max: 999, score: 30 }
+            ]
+          },
+          sitAndReach: {
+            weight: 10,
+            unit: "cm",
+            ranges: [
+              { min: 25.8, score: 100 },
+              { min: 22.0, score: 86 },
+              { min: 18.2, score: 72 },
+              { min: 14.4, score: 58 },
+              { min: 10.6, score: 44 },
+              { min: -999, score: 30 }
+            ]
+          },
+          standingJump: {
+            weight: 10,
+            unit: "cm",
+            ranges: [
+              { min: 207, score: 100 },
+              { min: 193, score: 86 },
+              { min: 178, score: 72 },
+              { min: 163, score: 58 },
+              { min: 148, score: 44 },
+              { min: 0, score: 30 }
+            ]
+          },
+          sitUp: {
+            weight: 10,
+            unit: "个/分钟",
+            ranges: [
+              { min: 56, score: 100 },
+              { min: 48, score: 86 },
+              { min: 40, score: 72 },
+              { min: 32, score: 58 },
+              { min: 24, score: 44 },
+              { min: 0, score: 30 }
+            ]
+          },
+          run800: {
+            weight: 20,
+            unit: "分秒",
+            isLowerBetter: true,
+            isEndurance: true,
+            ranges: [
+              { max: 198, score: 100 }, // 3'18"
+              { max: 208, score: 95 }, // 3'28"
+              { max: 218, score: 90 }, // 3'38"
+              { max: 228, score: 85 }, // 3'48"
+              { max: 238, score: 80 }, // 3'58"
+              { max: 248, score: 75 }, // 4'08"
+              { max: 258, score: 70 }, // 4'18"
+              { max: 268, score: 65 }, // 4'28"
+              { max: 280, score: 60 }, // 4'40"
+              { max: 318, score: 50 }, // 5'18"
+              { max: 9999, score: 30 }
+            ]
+          }
+        }
+      };
+
+      // 测试项目配置
+      const testItemsConfig = {
+        male: [
+          { id: "vitalCapacity", name: "肺活量", unit: "ml", icon: "🫁", weight: 15 },
+          { id: "run50", name: "50米跑", unit: "秒", icon: "🏃", weight: 20 },
+          { id: "sitAndReach", name: "坐位体前屈", unit: "cm", icon: "🧘", weight: 10 },
+          { id: "standingJump", name: "立定跳远", unit: "cm", icon: "🦘", weight: 10 },
+          { id: "pullUp", name: "引体向上", unit: "个", icon: "💪", weight: 10 },
+          { id: "run1000", name: "1000米跑", unit: "", icon: "🏅", weight: 20, isTime: true }
+        ],
+        female: [
+          { id: "vitalCapacity", name: "肺活量", unit: "ml", icon: "🫁", weight: 15 },
+          { id: "run50", name: "50米跑", unit: "秒", icon: "🏃", weight: 20 },
+          { id: "sitAndReach", name: "坐位体前屈", unit: "cm", icon: "🧘", weight: 10 },
+          { id: "standingJump", name: "立定跳远", unit: "cm", icon: "🦘", weight: 10 },
+          { id: "sitUp", name: "仰卧起坐", unit: "个/分", icon: "🤸", weight: 10 },
+          { id: "run800", name: "800米跑", unit: "", icon: "🏅", weight: 20, isTime: true }
+        ]
+      };
+
+      function updateTestItems() {
+        const gender = document.getElementById("gender").value;
+        const items = testItemsConfig[gender];
+        const container = document.getElementById("testItems");
+
+        container.innerHTML = items
+          .map((item) => {
+            if (item.isTime) {
+              return `
+                        <div class="test-item">
+                            <div class="test-item-header">
+                                <span class="test-item-name">${item.icon} ${item.name}</span>
+                                <span class="test-item-weight">${item.weight}%</span>
+                            </div>
+                            <div class="test-item-input">
+                                <input type="number" id="${item.id}_min" placeholder="分" min="0" max="30" style="width: 60px;">
+                                <span class="unit">分</span>
+                                <input type="number" id="${item.id}_sec" placeholder="秒" min="0" max="59" style="width: 60px;">
+                                <span class="unit">秒</span>
+                            </div>
+                        </div>
+                    `;
+            }
+            return `
+                    <div class="test-item">
+                        <div class="test-item-header">
+                            <span class="test-item-name">${item.icon} ${item.name}</span>
+                            <span class="test-item-weight">${item.weight}%</span>
+                        </div>
+                        <div class="test-item-input">
+                            <input type="number" id="${item.id}" placeholder="输入成绩" step="0.1">
+                            <span class="unit">${item.unit}</span>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function getScore(value, ranges, isLowerBetter = false) {
+        if (value === null || isNaN(value)) return { score: 0, grade: "未测" };
+
+        for (const range of ranges) {
+          if (isLowerBetter) {
+            if (range.max !== undefined && value <= range.max) {
+              return { score: range.score, grade: getGrade(range.score) };
+            }
+          } else {
+            if (range.min !== undefined && range.max !== undefined) {
+              if (value >= range.min && value <= range.max) {
+                return { score: range.score, grade: getGrade(range.score) };
+              }
+            } else if (range.min !== undefined && value >= range.min) {
+              return { score: range.score, grade: getGrade(range.score) };
+            }
+          }
+        }
+        return { score: 0, grade: "未测" };
+      }
+
+      function getGrade(score) {
+        if (score >= 90) return "优秀";
+        if (score >= 80) return "良好";
+        if (score >= 60) return "及格";
+        return "不及格";
+      }
+
+      function getGradeClass(grade) {
+        switch (grade) {
+          case "优秀":
+            return "grade-excellent";
+          case "良好":
+            return "grade-good";
+          case "及格":
+            return "grade-pass";
+          default:
+            return "grade-fail";
+        }
+      }
+
+      function calculate() {
+        const gender = document.getElementById("gender").value;
+        const height = parseFloat(document.getElementById("height").value);
+        const weight = parseFloat(document.getElementById("weight").value);
+
+        if (!height || !weight) {
+          alert("请输入身高和体重");
+          return;
+        }
+
+        // 获取标准（简化为大学标准）
+        const standardKey = `college_${gender}`;
+        const standard = standards[standardKey];
+
+        const results = [];
+        let totalWeightedScore = 0;
+        let bmiPassed = true;
+        let enduranceScore = 0;
+
+        // 1. BMI计算
+        const bmi = weight / (height / 100) ** 2;
+        const bmiResult = getScore(bmi, standard.bmi.ranges);
+        results.push({
+          name: "BMI指数",
+          value: bmi.toFixed(1),
+          unit: "kg/m²",
+          score: bmiResult.score,
+          weight: standard.bmi.weight,
+          grade: bmiResult.grade
+        });
+        totalWeightedScore += (bmiResult.score * standard.bmi.weight) / 100;
+        if (bmiResult.score < 60) bmiPassed = false;
+
+        // 2. 肺活量体重指数
+        const vitalCapacity = parseFloat(document.getElementById("vitalCapacity")?.value);
+        if (vitalCapacity) {
+          const vitalIndex = vitalCapacity / weight;
+          const vitalResult = getScore(vitalIndex, standard.vitalCapacity.ranges);
+          results.push({
+            name: "肺活量体重指数",
+            value: vitalIndex.toFixed(0),
+            unit: "ml/kg",
+            score: vitalResult.score,
+            weight: standard.vitalCapacity.weight,
+            grade: vitalResult.grade
+          });
+          totalWeightedScore += (vitalResult.score * standard.vitalCapacity.weight) / 100;
+        }
+
+        // 3. 50米跑
+        const run50 = parseFloat(document.getElementById("run50")?.value);
+        if (run50) {
+          const run50Result = getScore(run50, standard.run50.ranges, true);
+          results.push({
+            name: "50米跑",
+            value: run50.toFixed(1),
+            unit: "秒",
+            score: run50Result.score,
+            weight: standard.run50.weight,
+            grade: run50Result.grade
+          });
+          totalWeightedScore += (run50Result.score * standard.run50.weight) / 100;
+        }
+
+        // 4. 坐位体前屈
+        const sitAndReach = parseFloat(document.getElementById("sitAndReach")?.value);
+        if (sitAndReach !== undefined && !isNaN(sitAndReach)) {
+          const sitAndReachResult = getScore(sitAndReach, standard.sitAndReach.ranges);
+          results.push({
+            name: "坐位体前屈",
+            value: sitAndReach.toFixed(1),
+            unit: "cm",
+            score: sitAndReachResult.score,
+            weight: standard.sitAndReach.weight,
+            grade: sitAndReachResult.grade
+          });
+          totalWeightedScore += (sitAndReachResult.score * standard.sitAndReach.weight) / 100;
+        }
+
+        // 5. 立定跳远
+        const standingJump = parseFloat(document.getElementById("standingJump")?.value);
+        if (standingJump) {
+          const standingJumpResult = getScore(standingJump, standard.standingJump.ranges);
+          results.push({
+            name: "立定跳远",
+            value: standingJump.toFixed(0),
+            unit: "cm",
+            score: standingJumpResult.score,
+            weight: standard.standingJump.weight,
+            grade: standingJumpResult.grade
+          });
+          totalWeightedScore += (standingJumpResult.score * standard.standingJump.weight) / 100;
+        }
+
+        // 6. 引体向上/仰卧起坐
+        if (gender === "male") {
+          const pullUp = parseFloat(document.getElementById("pullUp")?.value);
+          if (pullUp !== undefined && !isNaN(pullUp)) {
+            const pullUpResult = getScore(pullUp, standard.pullUp.ranges);
+            results.push({
+              name: "引体向上",
+              value: pullUp,
+              unit: "个",
+              score: pullUpResult.score,
+              weight: standard.pullUp.weight,
+              grade: pullUpResult.grade
+            });
+            totalWeightedScore += (pullUpResult.score * standard.pullUp.weight) / 100;
+          }
+        } else {
+          const sitUp = parseFloat(document.getElementById("sitUp")?.value);
+          if (sitUp !== undefined && !isNaN(sitUp)) {
+            const sitUpResult = getScore(sitUp, standard.sitUp.ranges);
+            results.push({
+              name: "仰卧起坐",
+              value: sitUp,
+              unit: "个/分钟",
+              score: sitUpResult.score,
+              weight: standard.sitUp.weight,
+              grade: sitUpResult.grade
+            });
+            totalWeightedScore += (sitUpResult.score * standard.sitUp.weight) / 100;
+          }
+        }
+
+        // 7. 1000米/800米跑
+        const enduranceId = gender === "male" ? "run1000" : "run800";
+        const enduranceStandard = gender === "male" ? standard.run1000 : standard.run800;
+        const enduranceMin = parseInt(document.getElementById(`${enduranceId}_min`)?.value) || 0;
+        const enduranceSec = parseInt(document.getElementById(`${enduranceId}_sec`)?.value) || 0;
+
+        if (enduranceMin > 0 || enduranceSec > 0) {
+          const totalSeconds = enduranceMin * 60 + enduranceSec;
+          const enduranceResult = getScore(totalSeconds, enduranceStandard.ranges, true);
+          enduranceScore = enduranceResult.score;
+
+          results.push({
+            name: gender === "male" ? "1000米跑" : "800米跑",
+            value: `${enduranceMin}'${enduranceSec.toString().padStart(2, "0")}"`,
+            unit: "",
+            score: enduranceResult.score,
+            weight: enduranceStandard.weight,
+            grade: enduranceResult.grade
+          });
+          totalWeightedScore += (enduranceResult.score * enduranceStandard.weight) / 100;
+        }
+
+        // 计算加分
+        let bonusScore = 0;
+        if (document.getElementById("bonusEndurance").checked && enduranceScore >= 80) {
+          bonusScore = enduranceScore >= 90 ? 20 : 10;
+        }
+
+        // 计算最终得分
+        let finalScore = totalWeightedScore + bonusScore;
+
+        // BMI不合格限制最高分
+        if (!bmiPassed) {
+          finalScore = Math.min(finalScore, 59);
+        }
+
+        finalScore = Math.min(120, Math.max(0, finalScore));
+
+        // 显示结果
+        document.getElementById("resultSection").classList.add("show");
+        document.getElementById("totalScore").textContent = finalScore.toFixed(1);
+
+        const finalGrade = getGrade(finalScore);
+        const gradeElement = document.getElementById("totalGrade");
+        gradeElement.textContent = finalGrade;
+        gradeElement.className = `grade-badge ${getGradeClass(finalGrade)}`;
+
+        // 更新总分卡片颜色
+        const scoreCard = document.getElementById("totalScoreCard");
+        if (finalScore >= 90) {
+          scoreCard.style.background = `linear-gradient(135deg, ${getComputedStyle(document.documentElement).getPropertyValue("--excellent-color")}, #1e8449)`;
+        } else if (finalScore >= 80) {
+          scoreCard.style.background = `linear-gradient(135deg, ${getComputedStyle(document.documentElement).getPropertyValue("--good-color")}, #2471a3)`;
+        } else if (finalScore >= 60) {
+          scoreCard.style.background = `linear-gradient(135deg, ${getComputedStyle(document.documentElement).getPropertyValue("--pass-color")}, #d68910)`;
+        } else {
+          scoreCard.style.background = `linear-gradient(135deg, ${getComputedStyle(document.documentElement).getPropertyValue("--fail-color")}, #922b21)`;
+        }
+
+        // 渲染成绩表格
+        const tableBody = document.getElementById("scoreTableBody");
+        tableBody.innerHTML = results
+          .map(
+            (r) => `
+                <tr>
+                    <td class="item-name">${r.name}</td>
+                    <td>${r.value} ${r.unit}</td>
+                    <td class="score-cell">${r.score}</td>
+                    <td>${r.weight}%</td>
+                    <td><span class="grade-cell ${getGradeClass(r.grade)}">${r.grade}</span></td>
+                </tr>
+            `
+          )
+          .join("");
+
+        if (bonusScore > 0) {
+          tableBody.innerHTML += `
+                    <tr>
+                        <td class="item-name">耐力加分</td>
+                        <td colspan="2">-</td>
+                        <td class="score-cell" style="color: var(--success-color)">+${bonusScore}</td>
+                        <td><span class="grade-cell grade-excellent">加分</span></td>
+                    </tr>
+                `;
+        }
+
+        // 滚动到结果
+        document.getElementById("resultSection").scrollIntoView({ behavior: "smooth" });
+      }
+
+      // 初始化
+      updateTestItems();
+
+      // Theme toggle
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        document.getElementById("theme-icon").textContent = newTheme === "light" ? "☀️" : "🌙";
+        localStorage.setItem("theme", newTheme);
+      }
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        document.getElementById("theme-icon").textContent = "☀️";
+      }
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

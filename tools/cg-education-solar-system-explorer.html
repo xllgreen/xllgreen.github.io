@@ -1,0 +1,926 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>solar-system-explorer - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - solar-system-explorer">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <main class="main-content">
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🪐</div>
+            <div class="tool-info">
+              <h1>行星 / 太阳系信息查询</h1>
+              <p class="desc">
+                交互式浏览太阳系各天体的物理参数，支持单位换算和星球对比，纯本地处理
+              </p>
+            </div>
+          </div>
+
+          <div class="sse-mode-tabs">
+            <button id="tabDetail" class="sse-mode-tab active">详情查询</button>
+            <button id="tabCompare" class="sse-mode-tab">星球对比</button>
+            <button id="tabConvert" class="sse-mode-tab">单位换算</button>
+          </div>
+
+          <div id="modeDetail">
+            <div class="sse-layout">
+              <div class="sse-sidebar" id="sidebarList"></div>
+              <div class="sse-detail" id="detailPanel"></div>
+            </div>
+          </div>
+
+          <div id="modeCompare" style="display: none">
+            <div class="options-bar">
+              <div class="option-item">
+                <span>排序:</span>
+                <select id="compareSort">
+                  <option value="order">轨道顺序</option>
+                  <option value="mass">质量</option>
+                  <option value="radius">半径</option>
+                  <option value="period">公转周期</option>
+                  <option value="moons">卫星数</option>
+                </select>
+              </div>
+            </div>
+            <div class="sse-compare-grid" id="compareGrid"></div>
+          </div>
+
+          <div id="modeConvert" style="display: none">
+            <div class="sse-converter">
+              <p class="sse-section-title">天文单位换算</p>
+              <div class="sse-converter-row">
+                <input
+                  type="number"
+                  id="convInput"
+                  class="sse-conv-input"
+                  placeholder="输入数值"
+                  value="1"
+                  step="any"
+                />
+                <select id="convFrom" class="sse-conv-select"></select>
+                <span class="sse-conv-label">→</span>
+                <select id="convTo" class="sse-conv-select"></select>
+                <div id="convResult" class="sse-conv-result">—</div>
+              </div>
+              <div id="convExtra"></div>
+            </div>
+            <div style="margin-top: var(--space-5)">
+              <p class="sse-section-title">行星间距参考（1 AU = 1.496 × 10⁸ km）</p>
+              <div id="distanceTable" style="overflow-x: auto"></div>
+            </div>
+          </div>
+
+          <div class="status-bar">
+            <div id="statusMsg" class="status">点击左侧天体查看详情</div>
+          </div>
+        </div>
+        <footer class="footer">
+          <p>
+            <a href="https://github.com/xllgreen/xllgreen.github.io" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <span>·</span>
+            <span>纯前端 · 无服务器</span>
+            <span>·</span>
+            <a href="../../index.html">WebUtils</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "https://tools.realtime-ai.chat/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "教育学习",
+            "item": "https://tools.realtime-ai.chat/#education"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "行星 / 太阳系信息查询",
+            "item": "https://tools.realtime-ai.chat/tools/education/solar-system-explorer.html"
+          }
+        ]
+      }
+    </script>
+    <script>
+      var BODIES = [
+        {
+          id: "sun",
+          name: "太阳",
+          en: "Sun",
+          type: "恒星",
+          emoji: "☀️",
+          order: 0,
+          massKg: 1.989e30,
+          radiusKm: 696340,
+          densityGcm3: 1.41,
+          surfaceGravityMs2: 274,
+          escapeVelocityKms: 617.5,
+          orbitalPeriodDays: null,
+          rotationPeriodDays: 25.38,
+          distanceAU: 0,
+          eccentricity: null,
+          axialTiltDeg: 7.25,
+          moons: 0,
+          rings: false,
+          surfaceTempK: 5778,
+          desc: "太阳是太阳系的中心天体，一颗中等质量的黄矮星（G型主序星），包含太阳系总质量的 99.86%。其核心通过氢聚变为氦的核聚变反应不断产生能量，表面温度约 5778 K，核心温度高达 1500 万 K。"
+        },
+        {
+          id: "mercury",
+          name: "水星",
+          en: "Mercury",
+          type: "类地行星",
+          emoji: "🌑",
+          order: 1,
+          massKg: 3.301e23,
+          radiusKm: 2439.7,
+          densityGcm3: 5.427,
+          surfaceGravityMs2: 3.7,
+          escapeVelocityKms: 4.25,
+          orbitalPeriodDays: 87.97,
+          rotationPeriodDays: 58.65,
+          distanceAU: 0.387,
+          eccentricity: 0.206,
+          axialTiltDeg: 0.034,
+          moons: 0,
+          rings: false,
+          surfaceTempK: 440,
+          desc: "水星是太阳系最小的行星，也是离太阳最近的行星。它几乎没有大气层，昼夜温差极大：白天温度可达 430°C，夜间骤降至 -180°C。水星核心富含铁，铁核相对质量占比为所有行星最高。"
+        },
+        {
+          id: "venus",
+          name: "金星",
+          en: "Venus",
+          type: "类地行星",
+          emoji: "🌕",
+          order: 2,
+          massKg: 4.867e24,
+          radiusKm: 6051.8,
+          densityGcm3: 5.243,
+          surfaceGravityMs2: 8.87,
+          escapeVelocityKms: 10.36,
+          orbitalPeriodDays: 224.7,
+          rotationPeriodDays: -243.02,
+          distanceAU: 0.723,
+          eccentricity: 0.007,
+          axialTiltDeg: 177.4,
+          moons: 0,
+          rings: false,
+          surfaceTempK: 737,
+          desc: "金星是太阳系中最热的行星，表面平均温度约 464°C，超过水星。浓厚的二氧化碳大气产生极端温室效应。金星自转方向与大多数行星相反（逆行自转），且自转极慢，一天比一年更长。"
+        },
+        {
+          id: "earth",
+          name: "地球",
+          en: "Earth",
+          type: "类地行星",
+          emoji: "🌍",
+          order: 3,
+          massKg: 5.972e24,
+          radiusKm: 6371,
+          densityGcm3: 5.514,
+          surfaceGravityMs2: 9.807,
+          escapeVelocityKms: 11.186,
+          orbitalPeriodDays: 365.25,
+          rotationPeriodDays: 0.9973,
+          distanceAU: 1.0,
+          eccentricity: 0.017,
+          axialTiltDeg: 23.44,
+          moons: 1,
+          rings: false,
+          surfaceTempK: 288,
+          desc: "地球是目前已知唯一存在生命的天体，拥有液态水、大气层和磁场的完美组合。地球表面 71% 为海洋覆盖，板块构造运动持续改变地貌。地球唯一的天然卫星月球对地球的潮汐和轴倾有重要影响。"
+        },
+        {
+          id: "mars",
+          name: "火星",
+          en: "Mars",
+          type: "类地行星",
+          emoji: "🔴",
+          order: 4,
+          massKg: 6.39e23,
+          radiusKm: 3389.5,
+          densityGcm3: 3.933,
+          surfaceGravityMs2: 3.72,
+          escapeVelocityKms: 5.03,
+          orbitalPeriodDays: 686.97,
+          rotationPeriodDays: 1.026,
+          distanceAU: 1.524,
+          eccentricity: 0.093,
+          axialTiltDeg: 25.19,
+          moons: 2,
+          rings: false,
+          surfaceTempK: 210,
+          desc: "火星因其红色外表而得名，红色来自地表氧化铁（铁锈）。火星拥有太阳系最高的山奥林匹斯山（21 km），也有最深的峡谷水手号峡谷。火星有两颗小型卫星：福波斯和德摩斯。"
+        },
+        {
+          id: "jupiter",
+          name: "木星",
+          en: "Jupiter",
+          type: "气态巨行星",
+          emoji: "🟤",
+          order: 5,
+          massKg: 1.898e27,
+          radiusKm: 69911,
+          densityGcm3: 1.326,
+          surfaceGravityMs2: 24.79,
+          escapeVelocityKms: 59.5,
+          orbitalPeriodDays: 4332.59,
+          rotationPeriodDays: 0.414,
+          distanceAU: 5.203,
+          eccentricity: 0.049,
+          axialTiltDeg: 3.13,
+          moons: 95,
+          rings: true,
+          surfaceTempK: 165,
+          desc: "木星是太阳系中最大的行星，质量超过其他所有行星质量之和的 2.5 倍。其标志性的大红斑是一场持续了数百年的超级风暴。木星主要由氢和氦组成，拥有至少 95 颗已知卫星。"
+        },
+        {
+          id: "saturn",
+          name: "土星",
+          en: "Saturn",
+          type: "气态巨行星",
+          emoji: "🪐",
+          order: 6,
+          massKg: 5.683e26,
+          radiusKm: 58232,
+          densityGcm3: 0.687,
+          surfaceGravityMs2: 10.44,
+          escapeVelocityKms: 35.5,
+          orbitalPeriodDays: 10759.22,
+          rotationPeriodDays: 0.444,
+          distanceAU: 9.537,
+          eccentricity: 0.057,
+          axialTiltDeg: 26.73,
+          moons: 146,
+          rings: true,
+          surfaceTempK: 134,
+          desc: "土星以其壮观的光环系统著称，光环主要由冰块和岩石碎片组成，宽度可达 27 万 km 但厚度仅约 10~100 m。土星是太阳系密度最低的行星，密度低于水，理论上可以漂浮在水上。"
+        },
+        {
+          id: "uranus",
+          name: "天王星",
+          en: "Uranus",
+          type: "冰巨行星",
+          emoji: "🔵",
+          order: 7,
+          massKg: 8.681e25,
+          radiusKm: 25362,
+          densityGcm3: 1.27,
+          surfaceGravityMs2: 8.87,
+          escapeVelocityKms: 21.3,
+          orbitalPeriodDays: 30688.5,
+          rotationPeriodDays: -0.718,
+          distanceAU: 19.19,
+          eccentricity: 0.046,
+          axialTiltDeg: 97.77,
+          moons: 27,
+          rings: true,
+          surfaceTempK: 76,
+          desc: '天王星最显著的特征是其极端的轴倾角（97.77°），近乎"躺着"公转，可能由早期与大型天体碰撞引起。天王星是冰巨行星，内部富含水、甲烷、氨等冰质物质，大气中的甲烷使其呈现蓝绿色。'
+        },
+        {
+          id: "neptune",
+          name: "海王星",
+          en: "Neptune",
+          type: "冰巨行星",
+          emoji: "🟦",
+          order: 8,
+          massKg: 1.024e26,
+          radiusKm: 24622,
+          densityGcm3: 1.638,
+          surfaceGravityMs2: 11.15,
+          escapeVelocityKms: 23.5,
+          orbitalPeriodDays: 60182,
+          rotationPeriodDays: 0.671,
+          distanceAU: 30.07,
+          eccentricity: 0.01,
+          axialTiltDeg: 28.32,
+          moons: 16,
+          rings: true,
+          surfaceTempK: 72,
+          desc: "海王星是太阳系中最遥远的行星，距太阳约 30 AU。它拥有太阳系中最强的风暴，风速可达 2100 km/h。海王星最大卫星海卫一（Triton）以逆行轨道运行，可能是被俘获的柯伊伯带天体。"
+        },
+        {
+          id: "pluto",
+          name: "冥王星",
+          en: "Pluto",
+          type: "矮行星",
+          emoji: "🟫",
+          order: 9,
+          massKg: 1.303e22,
+          radiusKm: 1188.3,
+          densityGcm3: 1.854,
+          surfaceGravityMs2: 0.62,
+          escapeVelocityKms: 1.21,
+          orbitalPeriodDays: 90560,
+          rotationPeriodDays: -6.387,
+          distanceAU: 39.48,
+          eccentricity: 0.249,
+          axialTiltDeg: 122.53,
+          moons: 5,
+          rings: false,
+          surfaceTempK: 44,
+          desc: '冥王星于 2006 年被国际天文联合会重新划分为矮行星，位于柯伊伯带，由岩石和冰组成。2015 年新视野号探测器飞越冥王星，揭示其表面有心形氮冰平原"汤博区"，地貌异常复杂。'
+        }
+      ];
+
+      var UNITS = [
+        { id: "km", name: "千米 (km)", factor: 1, group: "distance" },
+        { id: "AU", name: "天文单位 (AU)", factor: 1.496e8, group: "distance" },
+        { id: "ly", name: "光年 (ly)", factor: 9.461e12, group: "distance" },
+        { id: "pc", name: "秒差距 (pc)", factor: 3.086e13, group: "distance" },
+        { id: "Rsun", name: "太阳半径 (R☉)", factor: 696340, group: "distance" },
+        { id: "Rearth", name: "地球半径 (R⊕)", factor: 6371, group: "distance" },
+        { id: "kg", name: "千克 (kg)", factor: 1, group: "mass" },
+        { id: "Msun", name: "太阳质量 (M☉)", factor: 1.989e30, group: "mass" },
+        { id: "Mearth", name: "地球质量 (M⊕)", factor: 5.972e24, group: "mass" },
+        { id: "Mjup", name: "木星质量 (M♃)", factor: 1.898e27, group: "mass" },
+        { id: "days", name: "地球日 (d)", factor: 1, group: "time" },
+        { id: "years", name: "地球年 (yr)", factor: 365.25, group: "time" },
+        { id: "hours", name: "小时 (h)", factor: 1 / 24, group: "time" },
+        { id: "Myr", name: "百万年 (Myr)", factor: 365.25e6, group: "time" }
+      ];
+
+      var currentBody = BODIES[3];
+      var currentMode = "detail";
+
+      function fmtNum(n) {
+        if (n === null || n === undefined) return "—";
+        if (Math.abs(n) >= 1e18 || (Math.abs(n) < 0.001 && n !== 0)) {
+          return n.toExponential(3);
+        }
+        if (Number.isInteger(n)) return n.toLocaleString("zh-CN");
+        return parseFloat(n.toPrecision(5)).toLocaleString("zh-CN");
+      }
+
+      function fmtMass(kg) {
+        if (kg === null) return "—";
+        var earthMasses = kg / 5.972e24;
+        var sunMasses = kg / 1.989e30;
+        if (sunMasses >= 0.01) return sunMasses.toFixed(4) + " M☉";
+        if (earthMasses >= 1) return earthMasses.toFixed(4) + " M⊕";
+        return (kg / 1e22).toFixed(3) + " × 10²² kg";
+      }
+
+      function fmtPeriod(days) {
+        if (days === null) return "—";
+        var absDays = Math.abs(days);
+        if (absDays >= 365.25) return (days / 365.25).toFixed(2) + " 年";
+        if (absDays < 1) return (days * 24).toFixed(2) + " 小时";
+        return absDays.toFixed(2) + " 天" + (days < 0 ? "（逆转）" : "");
+      }
+
+      function fmtTemp(K) {
+        if (K === null) return "—";
+        return K + " K（" + (K - 273.15).toFixed(0) + " °C）";
+      }
+
+      function buildSidebar() {
+        var list = document.getElementById("sidebarList");
+        list.innerHTML = "";
+        BODIES.forEach(function (b) {
+          var btn = document.createElement("button");
+          btn.className = "sse-body-btn" + (b.id === currentBody.id ? " active" : "");
+          btn.dataset.id = b.id;
+          btn.innerHTML =
+            '<span class="sse-body-emoji">' +
+            b.emoji +
+            "</span>" +
+            '<div class="sse-body-meta">' +
+            '<div class="sse-body-name">' +
+            b.name +
+            "</div>" +
+            '<div class="sse-body-type">' +
+            b.type +
+            "</div>" +
+            "</div>";
+          btn.addEventListener("click", function () {
+            var btnId = btn.dataset.id;
+            currentBody = BODIES.find(function (x) {
+              return x.id === btnId;
+            });
+            buildSidebar();
+            renderDetail();
+          });
+          list.appendChild(btn);
+        });
+      }
+
+      function renderDetail() {
+        var b = currentBody;
+        var panel = document.getElementById("detailPanel");
+        var maxR = BODIES[0].radiusKm;
+        var pct = Math.max(0.5, (b.radiusKm / maxR) * 100).toFixed(1);
+
+        var params = [
+          { label: "质量", value: fmtMass(b.massKg), unit: "" },
+          { label: "赤道半径", value: fmtNum(b.radiusKm), unit: "km" },
+          { label: "平均密度", value: fmtNum(b.densityGcm3), unit: "g/cm³" },
+          { label: "表面重力", value: fmtNum(b.surfaceGravityMs2), unit: "m/s²" },
+          { label: "逃逸速度", value: fmtNum(b.escapeVelocityKms), unit: "km/s" },
+          {
+            label: "公转周期",
+            value: b.orbitalPeriodDays !== null ? fmtPeriod(b.orbitalPeriodDays) : "—",
+            unit: ""
+          },
+          { label: "自转周期", value: fmtPeriod(b.rotationPeriodDays), unit: "" },
+          { label: "距太阳", value: b.distanceAU > 0 ? fmtNum(b.distanceAU) : "—", unit: "AU" },
+          {
+            label: "轨道离心率",
+            value: b.eccentricity !== null ? fmtNum(b.eccentricity) : "—",
+            unit: ""
+          },
+          { label: "轴倾角", value: fmtNum(b.axialTiltDeg), unit: "°" },
+          { label: "已知卫星", value: String(b.moons), unit: "颗" },
+          { label: "环系统", value: b.rings ? "有" : "无", unit: "" },
+          { label: "表面温度", value: fmtTemp(b.surfaceTempK), unit: "" }
+        ];
+
+        var cardsHtml = params
+          .map(function (p) {
+            return (
+              '<div class="sse-param-card">' +
+              '<div class="sse-param-label">' +
+              p.label +
+              "</div>" +
+              '<div class="sse-param-value">' +
+              p.value +
+              "</div>" +
+              (p.unit ? '<div class="sse-param-unit">' + p.unit + "</div>" : "") +
+              "</div>"
+            );
+          })
+          .join("");
+
+        panel.innerHTML =
+          '<div class="sse-hero">' +
+          '<div class="sse-hero-emoji">' +
+          b.emoji +
+          "</div>" +
+          '<div class="sse-hero-info">' +
+          "<h2>" +
+          b.name +
+          "</h2>" +
+          '<div class="sse-hero-en">' +
+          b.en +
+          " · " +
+          b.type +
+          "</div>" +
+          "<p>" +
+          b.desc +
+          "</p>" +
+          "</div>" +
+          "</div>" +
+          '<div class="sse-size-bar-wrap">' +
+          '<div class="sse-size-bar-label"><span>相对半径（对比太阳）</span><span>' +
+          b.radiusKm.toLocaleString("zh-CN") +
+          " km</span></div>" +
+          '<div class="sse-size-bar-track">' +
+          '<div class="sse-size-bar-fill" style="width:' +
+          pct +
+          '%"></div>' +
+          "</div>" +
+          "</div>" +
+          '<p class="sse-section-title">物理参数</p>' +
+          '<div class="sse-params-grid">' +
+          cardsHtml +
+          "</div>";
+
+        document.getElementById("statusMsg").textContent =
+          "当前查看：" + b.name + "（" + b.en + "）";
+      }
+
+      function buildCompareRow(lbl, val) {
+        return (
+          '<div class="sse-compare-row"><span class="sse-compare-lbl">' +
+          lbl +
+          '</span><span class="sse-compare-val">' +
+          val +
+          "</span></div>"
+        );
+      }
+
+      function renderCompare() {
+        var sort = document.getElementById("compareSort").value;
+        var bodies = BODIES.slice();
+        if (sort === "mass") {
+          bodies.sort(function (a, b) {
+            return b.massKg - a.massKg;
+          });
+        } else if (sort === "radius") {
+          bodies.sort(function (a, b) {
+            return b.radiusKm - a.radiusKm;
+          });
+        } else if (sort === "period") {
+          bodies.sort(function (a, b) {
+            var pa = a.orbitalPeriodDays !== null ? Math.abs(a.orbitalPeriodDays) : 0;
+            var pb = b.orbitalPeriodDays !== null ? Math.abs(b.orbitalPeriodDays) : 0;
+            return pa - pb;
+          });
+        } else if (sort === "moons") {
+          bodies.sort(function (a, b) {
+            return b.moons - a.moons;
+          });
+        }
+        var grid = document.getElementById("compareGrid");
+        grid.innerHTML = bodies
+          .map(function (b) {
+            return (
+              '<div class="sse-compare-card">' +
+              '<div class="sse-compare-head">' +
+              '<span class="sse-compare-emoji">' +
+              b.emoji +
+              "</span>" +
+              '<div><div class="sse-compare-name">' +
+              b.name +
+              '</div><div style="font-size:0.75rem;color:var(--text-muted);font-family:var(--font-mono)">' +
+              b.type +
+              "</div></div>" +
+              "</div>" +
+              buildCompareRow("质量", fmtMass(b.massKg)) +
+              buildCompareRow("半径", fmtNum(b.radiusKm) + " km") +
+              buildCompareRow("密度", fmtNum(b.densityGcm3) + " g/cm³") +
+              buildCompareRow("表面重力", fmtNum(b.surfaceGravityMs2) + " m/s²") +
+              buildCompareRow(
+                "公转周期",
+                b.orbitalPeriodDays !== null ? fmtPeriod(b.orbitalPeriodDays) : "—"
+              ) +
+              buildCompareRow("卫星数", b.moons + " 颗") +
+              buildCompareRow("距太阳", b.distanceAU > 0 ? b.distanceAU + " AU" : "—") +
+              buildCompareRow("表面温度", fmtTemp(b.surfaceTempK)) +
+              "</div>"
+            );
+          })
+          .join("");
+      }
+
+      function buildConvertSelects() {
+        var fromEl = document.getElementById("convFrom");
+        var toEl = document.getElementById("convTo");
+        var groups = { distance: "距离", mass: "质量", time: "时间" };
+        ["distance", "mass", "time"].forEach(function (g) {
+          var og1 = document.createElement("optgroup");
+          og1.label = groups[g];
+          var og2 = document.createElement("optgroup");
+          og2.label = groups[g];
+          UNITS.filter(function (u) {
+            return u.group === g;
+          }).forEach(function (u) {
+            var o1 = document.createElement("option");
+            o1.value = u.id;
+            o1.textContent = u.name;
+            og1.appendChild(o1);
+            var o2 = document.createElement("option");
+            o2.value = u.id;
+            o2.textContent = u.name;
+            og2.appendChild(o2);
+          });
+          fromEl.appendChild(og1);
+          toEl.appendChild(og2);
+        });
+        fromEl.value = "AU";
+        toEl.value = "km";
+        doConvert();
+      }
+
+      function doConvert() {
+        var val = parseFloat(document.getElementById("convInput").value);
+        var fromId = document.getElementById("convFrom").value;
+        var toId = document.getElementById("convTo").value;
+        var fromU = UNITS.find(function (u) {
+          return u.id === fromId;
+        });
+        var toU = UNITS.find(function (u) {
+          return u.id === toId;
+        });
+        var resEl = document.getElementById("convResult");
+        var extraEl = document.getElementById("convExtra");
+        extraEl.innerHTML = "";
+
+        if (!fromU || !toU || fromU.group !== toU.group) {
+          resEl.textContent = "单位类型不匹配";
+          return;
+        }
+        if (isNaN(val)) {
+          resEl.textContent = "请输入数值";
+          return;
+        }
+        var siVal = val * fromU.factor;
+        var result = siVal / toU.factor;
+        resEl.textContent = fmtNum(result) + " " + toU.id;
+
+        if (fromU.group === "distance") {
+          var km = siVal;
+          var refs = [
+            { label: "月球轨道半径", km: 384400 },
+            { label: "地球-太阳 (1 AU)", km: 1.496e8 },
+            { label: "最近恒星 (比邻星)", km: 4.013e13 }
+          ];
+          var html = '<p class="sse-section-title" style="margin-top:var(--space-4)">距离参考</p>';
+          refs.forEach(function (r) {
+            var ratio = km / r.km;
+            html +=
+              '<div class="sse-compare-row" style="padding:6px 0;border-bottom:1px solid var(--color-border-subtle)">' +
+              '<span class="sse-compare-lbl">' +
+              r.label +
+              "</span>" +
+              '<span class="sse-compare-val">' +
+              (ratio >= 1 ? fmtNum(ratio) + " 倍" : "约 1/" + fmtNum(1 / ratio) + " 倍") +
+              "</span></div>";
+          });
+          extraEl.innerHTML = html;
+        }
+      }
+
+      function buildTh(t) {
+        return (
+          '<th style="text-align:left;padding:8px 12px;border-bottom:1px solid var(--color-border-subtle);color:var(--text-muted);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em">' +
+          t +
+          "</th>"
+        );
+      }
+
+      function buildTd(t) {
+        return (
+          '<td style="padding:8px 12px;border-bottom:1px solid var(--color-border-subtle);color:var(--color-text-primary)">' +
+          t +
+          "</td>"
+        );
+      }
+
+      function buildDistanceTable() {
+        var planets = BODIES.filter(function (b) {
+          return b.distanceAU > 0;
+        });
+        var html =
+          '<table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.8125rem">' +
+          "<thead><tr>" +
+          buildTh("天体") +
+          buildTh("距太阳 (AU)") +
+          buildTh("距太阳 (km)") +
+          buildTh("光到达时间") +
+          buildTh("类型") +
+          "</tr></thead><tbody>";
+        planets.forEach(function (b) {
+          var au = b.distanceAU;
+          var km = au * 1.496e8;
+          var lightMinutes = (km / 299792.458 / 60).toFixed(1);
+          html +=
+            "<tr>" +
+            buildTd(b.emoji + " " + b.name) +
+            buildTd(au.toFixed(3)) +
+            buildTd(km.toExponential(3)) +
+            buildTd(lightMinutes + " 分钟") +
+            buildTd(b.type) +
+            "</tr>";
+        });
+        html += "</tbody></table>";
+        document.getElementById("distanceTable").innerHTML = html;
+      }
+
+      function setMode(mode) {
+        currentMode = mode;
+        document.getElementById("modeDetail").style.display = mode === "detail" ? "" : "none";
+        document.getElementById("modeCompare").style.display = mode === "compare" ? "" : "none";
+        document.getElementById("modeConvert").style.display = mode === "convert" ? "" : "none";
+        document.getElementById("tabDetail").classList.toggle("active", mode === "detail");
+        document.getElementById("tabCompare").classList.toggle("active", mode === "compare");
+        document.getElementById("tabConvert").classList.toggle("active", mode === "convert");
+
+        if (mode === "compare") renderCompare();
+        if (mode === "convert") buildDistanceTable();
+
+        var msgMap = {
+          detail: "点击左侧天体查看详情",
+          compare: "所有太阳系天体对比一览",
+          convert: "输入数值并选择单位进行换算"
+        };
+        document.getElementById("statusMsg").textContent = msgMap[mode];
+      }
+
+      document.getElementById("tabDetail").addEventListener("click", function () {
+        setMode("detail");
+      });
+      document.getElementById("tabCompare").addEventListener("click", function () {
+        setMode("compare");
+      });
+      document.getElementById("tabConvert").addEventListener("click", function () {
+        setMode("convert");
+      });
+      document.getElementById("compareSort").addEventListener("change", renderCompare);
+      document.getElementById("convInput").addEventListener("input", doConvert);
+      document.getElementById("convFrom").addEventListener("change", doConvert);
+      document.getElementById("convTo").addEventListener("change", doConvert);
+
+      buildSidebar();
+      renderDetail();
+      buildConvertSelects();
+
+      window.toggleTheme = function () {
+        var html = document.documentElement;
+        var currentTheme = html.getAttribute("data-theme") || "dark";
+        var newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      };
+      function initTheme() {
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme"))
+          document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+      });
+
+      initTheme();
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

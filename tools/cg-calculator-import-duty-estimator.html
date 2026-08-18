@@ -1,0 +1,994 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>import-duty-estimator - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - import-duty-estimator">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <main class="main-content">
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🛃</div>
+            <div class="tool-info">
+              <h1>进口关税估算器</h1>
+              <p class="desc">根据 HS 分类、货值和目的国，估算进口关税、增值税和综合税率</p>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="btn-group">
+              <button id="btnCalculate" class="btn btn-primary">计算关税</button>
+              <button id="btnReset" class="btn">重置</button>
+            </div>
+            <div class="btn-group">
+              <button id="btnCopyResult" class="btn">复制结果</button>
+            </div>
+          </div>
+
+          <div class="duty-layout">
+            <!-- 输入表单 -->
+            <div class="form-section">
+              <div class="field-group">
+                <label class="field-label" for="destCountry">目的国 / 地区</label>
+                <select id="destCountry" class="field-input">
+                  <option value="CN">中国大陆</option>
+                  <option value="US">美国</option>
+                  <option value="EU">欧盟</option>
+                  <option value="UK">英国</option>
+                  <option value="JP">日本</option>
+                  <option value="KR">韩国</option>
+                  <option value="AU">澳大利亚</option>
+                  <option value="CA">加拿大</option>
+                  <option value="SG">新加坡</option>
+                  <option value="IN">印度</option>
+                  <option value="BR">巴西</option>
+                  <option value="MX">墨西哥</option>
+                  <option value="HK">香港</option>
+                  <option value="TW">台湾</option>
+                  <option value="TH">泰国</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="hsCategory">商品类别（简化 HS 分类）</label>
+                <select id="hsCategory" class="field-input">
+                  <option value="electronics">电子产品（手机、电脑、家电）</option>
+                  <option value="clothing">服装、鞋帽、纺织品</option>
+                  <option value="cosmetics">化妆品、护肤品</option>
+                  <option value="food">食品、饮料</option>
+                  <option value="alcohol">酒类</option>
+                  <option value="tobacco">烟草制品</option>
+                  <option value="auto">汽车及零部件</option>
+                  <option value="machinery">机械设备</option>
+                  <option value="furniture">家具、家居用品</option>
+                  <option value="toys">玩具、体育用品</option>
+                  <option value="jewelry">珠宝、首饰、手表</option>
+                  <option value="books">图书、纸张</option>
+                  <option value="medicine">医药品、医疗器械</option>
+                  <option value="chemicals">化工原料</option>
+                  <option value="other">其他商品</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="goodsValue">商品货值（CIF 价）</label>
+                <input
+                  id="goodsValue"
+                  type="number"
+                  class="field-input"
+                  placeholder="例如：500"
+                  min="0"
+                  step="0.01"
+                />
+                <span class="field-hint">含商品价格 + 运费 + 保险费（到岸价）</span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="currency">货值币种</label>
+                <select id="currency" class="field-input">
+                  <option value="CNY">CNY — 人民币</option>
+                  <option value="USD">USD — 美元</option>
+                  <option value="EUR">EUR — 欧元</option>
+                  <option value="GBP">GBP — 英镑</option>
+                  <option value="JPY">JPY — 日元</option>
+                  <option value="KRW">KRW — 韩元</option>
+                  <option value="AUD">AUD — 澳元</option>
+                  <option value="CAD">CAD — 加元</option>
+                  <option value="HKD">HKD — 港元</option>
+                  <option value="SGD">SGD — 新元</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="quantity">数量（件）</label>
+                <input id="quantity" type="number" class="field-input" value="1" min="1" step="1" />
+              </div>
+
+              <div class="disclaimer">
+                <strong>免责声明</strong>
+                本工具仅供参考估算，实际税率以海关认定为准。税率可能因贸易政策、原产地规则、特殊贸易协定而有所不同。跨境进口前请咨询专业报关行。
+              </div>
+            </div>
+
+            <!-- 结果区 -->
+            <div class="result-section" id="resultSection">
+              <div class="placeholder-result" id="placeholderResult">
+                <div class="placeholder-icon">🧮</div>
+                <div>填写左侧表单，点击「计算关税」查看估算结果</div>
+              </div>
+
+              <div id="calcResult" style="display: none">
+                <div class="result-card">
+                  <div class="result-title">税率构成</div>
+                  <div class="result-rows">
+                    <div class="result-row">
+                      <span class="result-row-label">商品关税率</span>
+                      <span class="result-row-value" id="rDutyRate">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">增值税 / GST</span>
+                      <span class="result-row-value" id="rVatRate">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">消费税 / 特别税</span>
+                      <span class="result-row-value" id="rExciseRate">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">综合税率（估）</span>
+                      <span class="result-row-value highlight" id="rTotalRate">—</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <div class="result-title">费用明细</div>
+                  <div class="result-rows">
+                    <div class="result-row">
+                      <span class="result-row-label">货值（CIF）</span>
+                      <span class="result-row-value" id="rCifValue">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">关税金额</span>
+                      <span class="result-row-value" id="rDutyAmt">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">增值税金额</span>
+                      <span class="result-row-value" id="rVatAmt">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">消费税金额</span>
+                      <span class="result-row-value" id="rExciseAmt">—</span>
+                    </div>
+                  </div>
+                  <div class="result-total">
+                    <span class="result-total-label">估算总税费</span>
+                    <span class="result-total-value" id="rTotalTax">—</span>
+                  </div>
+                </div>
+
+                <div class="result-card">
+                  <div class="result-title">到手总成本（估）</div>
+                  <div class="result-rows">
+                    <div class="result-row">
+                      <span class="result-row-label">商品货值</span>
+                      <span class="result-row-value" id="rGoodsVal2">—</span>
+                    </div>
+                    <div class="result-row">
+                      <span class="result-row-label">税费合计</span>
+                      <span class="result-row-value warning" id="rTaxTotal2">—</span>
+                    </div>
+                  </div>
+                  <div class="result-total">
+                    <span class="result-total-label">总到手成本</span>
+                    <span class="result-total-value" id="rLandedCost">—</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 税率参考表 -->
+          <div class="ref-table-wrap">
+            <div class="ref-table-title">常见国家商品类别税率参考</div>
+            <div style="overflow-x: auto">
+              <table class="ref-table" id="refTable">
+                <thead>
+                  <tr>
+                    <th>国家 / 地区</th>
+                    <th>商品类别</th>
+                    <th>关税率</th>
+                    <th>增值税 / GST</th>
+                    <th>消费税</th>
+                    <th>备注</th>
+                  </tr>
+                </thead>
+                <tbody id="refTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="status-bar">
+            <div id="status" class="status"></div>
+            <div id="stats" class="stats">
+              <div class="stat-item">
+                <span class="stat-value" id="statDuty">0%</span>
+                <span class="stat-label">关税率</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" id="statVat">0%</span>
+                <span class="stat-label">增值税</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" id="statTotal">0%</span>
+                <span class="stat-label">综合税率</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <p>
+            <a href="https://github.com/xllgreen/xllgreen.github.io" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <span>·</span>
+            <span>纯前端 · 无服务器</span>
+            <span>·</span>
+            <a href="../../index.html">WebUtils</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "https://tools.realtime-ai.chat/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "计算器",
+            "item": "https://tools.realtime-ai.chat/#calculator"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "进口关税估算器",
+            "item": "https://tools.realtime-ai.chat/tools/calculator/import-duty-estimator.html"
+          }
+        ]
+      }
+    </script>
+    <script>
+      // 税率数据库：[dutyRate, vatRate, exciseRate, note]
+      var TAX_DB = {
+        CN: {
+          electronics: [0.08, 0.13, 0, "部分商品享有最惠国税率，低值免税 <= 50 CNY"],
+          clothing: [0.14, 0.13, 0, "最惠国税率，棉质约 12%，合纤约 14%"],
+          cosmetics: [0.1, 0.13, 0.15, "高档化妆品含消费税 15%"],
+          food: [0.1, 0.09, 0, "部分食品进口关税 10%，增值税 9%"],
+          alcohol: [0.1, 0.13, 0.1, "葡萄酒关税 14%，白酒消费税 10%（此处取均值）"],
+          tobacco: [0.2, 0.13, 0.45, "烟草消费税高，具体由海关认定"],
+          auto: [0.15, 0.13, 0.1, "乘用车关税 15%，排量 > 4.0L 消费税 40%（简化）"],
+          machinery: [0.05, 0.13, 0, "机械设备较低，部分零部件免税"],
+          furniture: [0.1, 0.13, 0, "一般家具关税 10%"],
+          toys: [0.1, 0.13, 0, "玩具一般关税约 10%"],
+          jewelry: [0.1, 0.13, 0, "珠宝首饰关税 10%，黄金 0%"],
+          books: [0, 0.09, 0, "图书进口免关税，增值税 9%（部分品类免税）"],
+          medicine: [0.03, 0.09, 0, "药品关税较低，增值税 9%"],
+          chemicals: [0.05, 0.13, 0, "化工品关税视 HS 章节，5% 为均值"],
+          other: [0.1, 0.13, 0, "其他商品适用综合平均税率"]
+        },
+        US: {
+          electronics: [0.0, 0.0, 0, "大多数电子品关税 0%，无联邦增值税"],
+          clothing: [0.12, 0.0, 0, "服装平均关税约 12%，无联邦增值税"],
+          cosmetics: [0.0, 0.0, 0, "多数化妆品关税 0%"],
+          food: [0.05, 0.0, 0, "食品关税约 5%，无联邦增值税"],
+          alcohol: [0.04, 0.0, 0.12, "酒类含联邦消费税（简化为 12%）"],
+          tobacco: [0.1, 0.0, 0.5, "烟草联邦消费税高"],
+          auto: [0.025, 0.0, 0, "乘用车关税 2.5%，皮卡 25%（取均值）"],
+          machinery: [0.02, 0.0, 0, "机械设备关税较低"],
+          furniture: [0.03, 0.0, 0, "家具关税约 3%"],
+          toys: [0.0, 0.0, 0, "玩具大多关税 0%"],
+          jewelry: [0.065, 0.0, 0, "珠宝关税约 6.5%"],
+          books: [0.0, 0.0, 0, "图书免关税"],
+          medicine: [0.0, 0.0, 0, "药品通常免关税"],
+          chemicals: [0.03, 0.0, 0, "化工品约 3%"],
+          other: [0.05, 0.0, 0, "综合均值，无联邦增值税"]
+        },
+        EU: {
+          electronics: [0.0, 0.2, 0, "多数电子品 MFN 关税 0%，增值税约 20%"],
+          clothing: [0.12, 0.2, 0, "服装关税 12%，增值税 20%"],
+          cosmetics: [0.065, 0.2, 0, "化妆品关税 6.5%，增值税 20%"],
+          food: [0.1, 0.1, 0, "食品关税约 10%，增值税较低"],
+          alcohol: [0.1, 0.2, 0.15, "酒类消费税因国家而异"],
+          tobacco: [0.24, 0.2, 0.5, "烟草税重"],
+          auto: [0.1, 0.2, 0, "乘用车关税约 6.5%（含杂项约 10%）"],
+          machinery: [0.02, 0.2, 0, "机械较低"],
+          furniture: [0.06, 0.2, 0, "家具关税约 5.7%"],
+          toys: [0.045, 0.2, 0, "玩具约 4.5%"],
+          jewelry: [0.025, 0.2, 0, "珠宝约 2.5%"],
+          books: [0.0, 0.05, 0, "图书增值税率多国 5-7%"],
+          medicine: [0.0, 0.1, 0, "药品免关税，增值税约 10%"],
+          chemicals: [0.065, 0.2, 0, "化工品约 6.5%"],
+          other: [0.07, 0.2, 0, "综合均值"]
+        },
+        UK: {
+          electronics: [0.0, 0.2, 0, "脱欧后多数电子品关税 0%，增值税 20%"],
+          clothing: [0.12, 0.2, 0, "服装关税约 12%"],
+          cosmetics: [0.065, 0.2, 0, "化妆品约 6.5%"],
+          food: [0.05, 0.0, 0, "基本食品增值税 0%，进口关税约 5%"],
+          alcohol: [0.1, 0.2, 0.2, "酒类含 Alcohol Duty"],
+          tobacco: [0.24, 0.2, 0.5, "烟草税重"],
+          auto: [0.065, 0.2, 0, "乘用车关税 6.5%"],
+          machinery: [0.02, 0.2, 0, "机械较低"],
+          furniture: [0.06, 0.2, 0, "家具约 6%"],
+          toys: [0.045, 0.2, 0, "玩具约 4.5%"],
+          jewelry: [0.025, 0.2, 0, "珠宝约 2.5%"],
+          books: [0.0, 0.0, 0, "图书免关税、免增值税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.065, 0.2, 0, "化工品约 6.5%"],
+          other: [0.07, 0.2, 0, "综合均值"]
+        },
+        JP: {
+          electronics: [0.0, 0.1, 0, "消費税 10%，多数电子品关税 0%"],
+          clothing: [0.1, 0.1, 0, "服装关税约 10%"],
+          cosmetics: [0.03, 0.1, 0, "化妆品约 3%"],
+          food: [0.1, 0.08, 0, "食品消費税 8%（轻减税率）"],
+          alcohol: [0.15, 0.1, 0.1, "酒税（酒税法）"],
+          tobacco: [0.3, 0.1, 0.5, "烟草税重"],
+          auto: [0.0, 0.1, 0, "汽车关税 0%（EPA 协定后）"],
+          machinery: [0.0, 0.1, 0, "机械多数免税"],
+          furniture: [0.03, 0.1, 0, "家具约 3%"],
+          toys: [0.0, 0.1, 0, "玩具免关税"],
+          jewelry: [0.055, 0.1, 0, "珠宝约 5.5%"],
+          books: [0.0, 0.1, 0, "图书免关税"],
+          medicine: [0.0, 0.1, 0, "药品免关税"],
+          chemicals: [0.03, 0.1, 0, "化工品约 3%"],
+          other: [0.05, 0.1, 0, "综合均值"]
+        },
+        KR: {
+          electronics: [0.08, 0.1, 0, "增值税 10%，电子品约 8%（部分 0%）"],
+          clothing: [0.13, 0.1, 0, "服装约 13%"],
+          cosmetics: [0.08, 0.1, 0, "化妆品约 8%"],
+          food: [0.1, 0.1, 0, "食品关税约 10%（农产品更高）"],
+          alcohol: [0.15, 0.1, 0.1, "酒税"],
+          tobacco: [0.3, 0.1, 0.5, "烟草税"],
+          auto: [0.08, 0.1, 0, "乘用车 8%"],
+          machinery: [0.05, 0.1, 0, "机械约 5%"],
+          furniture: [0.08, 0.1, 0, "家具约 8%"],
+          toys: [0.08, 0.1, 0, "玩具约 8%"],
+          jewelry: [0.08, 0.1, 0, "珠宝约 8%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.065, 0.1, 0, "化工约 6.5%"],
+          other: [0.08, 0.1, 0, "综合均值"]
+        },
+        AU: {
+          electronics: [0.0, 0.1, 0, "GST 10%，多数电子品关税 0%"],
+          clothing: [0.1, 0.1, 0, "服装关税约 10%"],
+          cosmetics: [0.0, 0.1, 0, "化妆品免关税"],
+          food: [0.0, 0.0, 0, "基本食品 GST 免税，关税 0%"],
+          alcohol: [0.05, 0.1, 0.15, "WET（酒税）约 15% + GST"],
+          tobacco: [0.0, 0.1, 0.6, "烟税极重（按支计费）"],
+          auto: [0.0, 0.1, 0, "汽车关税 0%（FTA 后）"],
+          machinery: [0.0, 0.1, 0, "机械关税 0%"],
+          furniture: [0.05, 0.1, 0, "家具约 5%"],
+          toys: [0.0, 0.1, 0, "玩具 0%"],
+          jewelry: [0.05, 0.1, 0, "珠宝约 5%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.0, 0.1, 0, "化工品 0%"],
+          other: [0.03, 0.1, 0, "综合均值"]
+        },
+        CA: {
+          electronics: [0.0, 0.05, 0, "GST 5%，多数电子品关税 0%（+各省 PST）"],
+          clothing: [0.18, 0.05, 0, "服装关税约 18%，纺织品较高"],
+          cosmetics: [0.0, 0.05, 0, "化妆品 0% 关税"],
+          food: [0.0, 0.0, 0, "基本食品零关税、免 GST"],
+          alcohol: [0.06, 0.05, 0.1, "酒精制品含联邦消费税"],
+          tobacco: [0.3, 0.05, 0.5, "烟草税重"],
+          auto: [0.0, 0.05, 0, "汽车多数 0%（CUSMA）"],
+          machinery: [0.0, 0.05, 0, "机械 0%"],
+          furniture: [0.07, 0.05, 0, "家具约 7%"],
+          toys: [0.0, 0.05, 0, "玩具 0%"],
+          jewelry: [0.0, 0.05, 0, "珠宝 0%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.04, 0.05, 0, "化工品约 4%"],
+          other: [0.05, 0.05, 0, "综合均值"]
+        },
+        SG: {
+          electronics: [0.0, 0.09, 0, "GST 9%，关税 0%（自由港）"],
+          clothing: [0.0, 0.09, 0, "服装 0% 关税"],
+          cosmetics: [0.0, 0.09, 0, "化妆品 0% 关税"],
+          food: [0.0, 0.09, 0, "一般食品 0%，GST 9%"],
+          alcohol: [0.0, 0.09, 0.1, "含新加坡酒精消费税（按容量）"],
+          tobacco: [0.0, 0.09, 0.5, "烟草消费税极重"],
+          auto: [0.0, 0.09, 0, "汽车关税 0%，但有附加费（COE 等）"],
+          machinery: [0.0, 0.09, 0, "机械 0%"],
+          furniture: [0.0, 0.09, 0, "家具 0%"],
+          toys: [0.0, 0.09, 0, "玩具 0%"],
+          jewelry: [0.0, 0.09, 0, "珠宝 0%"],
+          books: [0.0, 0.09, 0, "图书 GST 9%"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.0, 0.09, 0, "化工 0%"],
+          other: [0.0, 0.09, 0, "自由贸易港，关税 0%"]
+        },
+        IN: {
+          electronics: [0.15, 0.18, 0, "GST 18%，进口关税约 15%"],
+          clothing: [0.2, 0.12, 0, "服装 GST 12%，关税约 20%"],
+          cosmetics: [0.2, 0.28, 0, "化妆品 GST 28%（奢侈品）"],
+          food: [0.3, 0.12, 0, "食品关税较高，部分农产品 30%+"],
+          alcohol: [0.15, 0.18, 0.15, "酒精关税 15%，各邦增值税差异大"],
+          tobacco: [0.3, 0.28, 0.5, "烟草税极重"],
+          auto: [0.125, 0.28, 0.12, "汽车关税 125%（进口车），GST 28%"],
+          machinery: [0.075, 0.18, 0, "机械约 7.5%"],
+          furniture: [0.2, 0.18, 0, "家具约 20%"],
+          toys: [0.6, 0.18, 0, "玩具关税 60%（保护本国市场）"],
+          jewelry: [0.15, 0.03, 0, "黄金 15%，钻石 0%，GST 3%"],
+          books: [0.0, 0.05, 0, "教材免税，其他图书 GST 5%"],
+          medicine: [0.0, 0.05, 0, "药品免关税，部分 GST 5%"],
+          chemicals: [0.075, 0.18, 0, "化工品约 7.5%"],
+          other: [0.15, 0.18, 0, "综合均值"]
+        },
+        BR: {
+          electronics: [0.12, 0.17, 0.05, "巴西进口税高，II + IPI + ICMS 叠加（简化）"],
+          clothing: [0.35, 0.17, 0.05, "服装 II 35%"],
+          cosmetics: [0.18, 0.17, 0.05, "化妆品约 18%"],
+          food: [0.1, 0.17, 0, "食品关税约 10%"],
+          alcohol: [0.2, 0.17, 0.15, "酒类税重"],
+          tobacco: [0.3, 0.17, 0.5, "烟草税重"],
+          auto: [0.35, 0.17, 0.1, "汽车关税 35%"],
+          machinery: [0.1, 0.17, 0.05, "机械约 10%"],
+          furniture: [0.2, 0.17, 0, "家具约 20%"],
+          toys: [0.2, 0.17, 0, "玩具约 20%"],
+          jewelry: [0.18, 0.17, 0, "珠宝约 18%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.1, 0.17, 0, "化工约 10%"],
+          other: [0.2, 0.17, 0.05, "综合均值（叠加税率高）"]
+        },
+        MX: {
+          electronics: [0.05, 0.16, 0, "IVA 16%，电子品约 5%"],
+          clothing: [0.25, 0.16, 0, "服装约 25%"],
+          cosmetics: [0.1, 0.16, 0, "化妆品约 10%"],
+          food: [0.2, 0.0, 0, "食品 IVA 0%（基本食品）"],
+          alcohol: [0.2, 0.16, 0.26, "酒类 IEPS 约 26%"],
+          tobacco: [0.2, 0.16, 0.6, "烟草 IEPS 60%"],
+          auto: [0.0, 0.16, 0, "CUSMA 成员国 0% 关税"],
+          machinery: [0.05, 0.16, 0, "机械约 5%"],
+          furniture: [0.15, 0.16, 0, "家具约 15%"],
+          toys: [0.2, 0.16, 0, "玩具约 20%"],
+          jewelry: [0.15, 0.16, 0, "珠宝约 15%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.05, 0.16, 0, "化工约 5%"],
+          other: [0.15, 0.16, 0, "综合均值"]
+        },
+        HK: {
+          electronics: [0.0, 0.0, 0, "香港自由港，绝大多数商品零关税、无增值税"],
+          clothing: [0.0, 0.0, 0, "零关税"],
+          cosmetics: [0.0, 0.0, 0, "零关税"],
+          food: [0.0, 0.0, 0, "零关税"],
+          alcohol: [0.0, 0.0, 0.1, "葡萄酒 0%，烈酒 100%（酒精度 > 30%，简化为 10%）"],
+          tobacco: [0.0, 0.0, 0.5, "烟草消费税按支"],
+          auto: [0.0, 0.0, 0, "零关税，但首次登记税约 40-100%（未计）"],
+          machinery: [0.0, 0.0, 0, "零关税"],
+          furniture: [0.0, 0.0, 0, "零关税"],
+          toys: [0.0, 0.0, 0, "零关税"],
+          jewelry: [0.0, 0.0, 0, "零关税"],
+          books: [0.0, 0.0, 0, "零关税"],
+          medicine: [0.0, 0.0, 0, "零关税"],
+          chemicals: [0.0, 0.0, 0, "零关税"],
+          other: [0.0, 0.0, 0, "自由港，零关税"]
+        },
+        TW: {
+          electronics: [0.0, 0.05, 0, "货物税 5%，关税多数 0%"],
+          clothing: [0.125, 0.05, 0, "服装约 12.5%"],
+          cosmetics: [0.08, 0.05, 0, "化妆品约 8%"],
+          food: [0.1, 0.05, 0, "食品约 10%"],
+          alcohol: [0.15, 0.05, 0.1, "含酒税"],
+          tobacco: [0.2, 0.05, 0.5, "烟草税重"],
+          auto: [0.175, 0.05, 0.25, "汽车关税 17.5%，货物税约 25%"],
+          machinery: [0.0, 0.05, 0, "机械 0%"],
+          furniture: [0.05, 0.05, 0, "家具约 5%"],
+          toys: [0.0, 0.05, 0, "玩具 0%"],
+          jewelry: [0.055, 0.05, 0, "珠宝约 5.5%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.05, 0.05, 0, "化工约 5%"],
+          other: [0.07, 0.05, 0, "综合均值"]
+        },
+        TH: {
+          electronics: [0.1, 0.07, 0, "VAT 7%，电子品约 10%"],
+          clothing: [0.3, 0.07, 0, "服装约 30%"],
+          cosmetics: [0.2, 0.07, 0, "化妆品约 20%"],
+          food: [0.3, 0.07, 0, "食品约 30%（农产品更高）"],
+          alcohol: [0.4, 0.07, 0.2, "酒税重"],
+          tobacco: [0.3, 0.07, 0.5, "烟草税重"],
+          auto: [0.8, 0.07, 0.3, "汽车关税极高（保护本国 ASEAN 生产）"],
+          machinery: [0.1, 0.07, 0, "机械约 10%"],
+          furniture: [0.2, 0.07, 0, "家具约 20%"],
+          toys: [0.3, 0.07, 0, "玩具约 30%"],
+          jewelry: [0.05, 0.07, 0, "珠宝约 5%"],
+          books: [0.0, 0.0, 0, "图书免税"],
+          medicine: [0.0, 0.0, 0, "药品免税"],
+          chemicals: [0.1, 0.07, 0, "化工约 10%"],
+          other: [0.2, 0.07, 0, "综合均值"]
+        }
+      };
+
+      // 参考表格精选条目
+      var REF_ROWS = [
+        {
+          country: "中国大陆",
+          cat: "电子产品",
+          duty: "8%",
+          vat: "13%",
+          excise: "0%",
+          note: "低值 <=50 CNY 免税"
+        },
+        {
+          country: "中国大陆",
+          cat: "服装",
+          duty: "14%",
+          vat: "13%",
+          excise: "0%",
+          note: "MFN 税率"
+        },
+        {
+          country: "中国大陆",
+          cat: "化妆品",
+          duty: "10%",
+          vat: "13%",
+          excise: "15%",
+          note: "高档化妆品含消费税"
+        },
+        {
+          country: "美国",
+          cat: "电子产品",
+          duty: "0%",
+          vat: "0%",
+          excise: "0%",
+          note: "无联邦增值税"
+        },
+        {
+          country: "美国",
+          cat: "服装",
+          duty: "12%",
+          vat: "0%",
+          excise: "0%",
+          note: "各州另有销售税"
+        },
+        {
+          country: "欧盟",
+          cat: "电子产品",
+          duty: "0%",
+          vat: "20%",
+          excise: "0%",
+          note: "增值税因国家略有差异"
+        },
+        { country: "欧盟", cat: "服装", duty: "12%", vat: "20%", excise: "0%", note: "" },
+        {
+          country: "英国",
+          cat: "图书",
+          duty: "0%",
+          vat: "0%",
+          excise: "0%",
+          note: "免关税免增值税"
+        },
+        {
+          country: "日本",
+          cat: "电子产品",
+          duty: "0%",
+          vat: "10%",
+          excise: "0%",
+          note: "消費税 10%"
+        },
+        {
+          country: "新加坡",
+          cat: "全类别",
+          duty: "0%",
+          vat: "9%",
+          excise: "0%",
+          note: "自由港，烟酒例外"
+        },
+        {
+          country: "香港",
+          cat: "全类别",
+          duty: "0%",
+          vat: "0%",
+          excise: "0%",
+          note: "自由港，烈酒除外"
+        },
+        {
+          country: "印度",
+          cat: "玩具",
+          duty: "60%",
+          vat: "18%",
+          excise: "0%",
+          note: "保护本国制造业"
+        },
+        {
+          country: "巴西",
+          cat: "电子产品",
+          duty: "12%",
+          vat: "17%",
+          excise: "5%",
+          note: "II+IPI+ICMS 叠加"
+        },
+        {
+          country: "泰国",
+          cat: "汽车",
+          duty: "80%",
+          vat: "7%",
+          excise: "30%",
+          note: "进口整车税率极高"
+        }
+      ];
+
+      var statusEl = document.getElementById("status");
+      var statsEl = document.getElementById("stats");
+
+      function fmtCurrency(n, currency) {
+        var sym = {
+          CNY: "CNY ",
+          USD: "USD ",
+          EUR: "EUR ",
+          GBP: "GBP ",
+          JPY: "JPY ",
+          KRW: "KRW ",
+          AUD: "AUD ",
+          CAD: "CAD ",
+          HKD: "HKD ",
+          SGD: "SGD "
+        };
+        var s = sym[currency] || "";
+        if (currency === "JPY" || currency === "KRW") {
+          return s + Math.round(n).toLocaleString();
+        }
+        return s + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      function fmtPct(n) {
+        return (n * 100).toFixed(1) + "%";
+      }
+
+      function showStatus(msg, type) {
+        statusEl.textContent = msg;
+        statusEl.className = "status " + (type || "");
+      }
+
+      function calculate() {
+        var country = document.getElementById("destCountry").value;
+        var category = document.getElementById("hsCategory").value;
+        var valueStr = document.getElementById("goodsValue").value;
+        var currency = document.getElementById("currency").value;
+        var qty = parseInt(document.getElementById("quantity").value, 10) || 1;
+
+        if (!valueStr || parseFloat(valueStr) <= 0) {
+          document.getElementById("goodsValue").classList.add("has-error");
+          showStatus("请输入有效的商品货值", "error");
+          return;
+        }
+        document.getElementById("goodsValue").classList.remove("has-error");
+
+        var cifPerUnit = parseFloat(valueStr);
+        var cif = cifPerUnit * qty;
+
+        var countryData = TAX_DB[country] || TAX_DB.CN;
+        var rates = countryData[category] || [0.1, 0.13, 0];
+        var dutyRate = rates[0];
+        var vatRate = rates[1];
+        var exciseRate = rates[2];
+
+        // 关税 = CIF * dutyRate
+        // 增值税 = (CIF + 关税) * vatRate
+        // 消费税 = CIF * exciseRate（简化计算）
+        var dutyAmt = cif * dutyRate;
+        var vatBase = cif + dutyAmt;
+        var vatAmt = vatBase * vatRate;
+        var exciseAmt = cif * exciseRate;
+        var totalTax = dutyAmt + vatAmt + exciseAmt;
+        var landedCost = cif + totalTax;
+        var effectiveRate = cif > 0 ? totalTax / cif : 0;
+
+        document.getElementById("rDutyRate").textContent = fmtPct(dutyRate);
+        document.getElementById("rVatRate").textContent = vatRate > 0 ? fmtPct(vatRate) : "—";
+        document.getElementById("rExciseRate").textContent =
+          exciseRate > 0 ? fmtPct(exciseRate) : "—";
+        document.getElementById("rTotalRate").textContent = fmtPct(effectiveRate);
+        document.getElementById("rCifValue").textContent = fmtCurrency(cif, currency);
+        document.getElementById("rDutyAmt").textContent = fmtCurrency(dutyAmt, currency);
+        document.getElementById("rVatAmt").textContent =
+          vatAmt > 0 ? fmtCurrency(vatAmt, currency) : "—";
+        document.getElementById("rExciseAmt").textContent =
+          exciseAmt > 0 ? fmtCurrency(exciseAmt, currency) : "—";
+        document.getElementById("rTotalTax").textContent = fmtCurrency(totalTax, currency);
+        document.getElementById("rGoodsVal2").textContent = fmtCurrency(cif, currency);
+        document.getElementById("rTaxTotal2").textContent = fmtCurrency(totalTax, currency);
+        document.getElementById("rLandedCost").textContent = fmtCurrency(landedCost, currency);
+
+        document.getElementById("placeholderResult").style.display = "none";
+        document.getElementById("calcResult").style.display = "";
+
+        document.getElementById("statDuty").textContent = fmtPct(dutyRate);
+        document.getElementById("statVat").textContent = vatRate > 0 ? fmtPct(vatRate) : "0%";
+        document.getElementById("statTotal").textContent = fmtPct(effectiveRate);
+        statsEl.classList.add("show");
+
+        showStatus("计算完成（综合税率 " + fmtPct(effectiveRate) + "）", "success");
+      }
+
+      function resetForm() {
+        document.getElementById("goodsValue").value = "";
+        document.getElementById("quantity").value = "1";
+        document.getElementById("goodsValue").classList.remove("has-error");
+        document.getElementById("placeholderResult").style.display = "";
+        document.getElementById("calcResult").style.display = "none";
+        statsEl.classList.remove("show");
+        statusEl.textContent = "";
+        statusEl.className = "status";
+      }
+
+      function buildRefTable() {
+        var tbody = document.getElementById("refTableBody");
+        REF_ROWS.forEach(function (row) {
+          var tr = document.createElement("tr");
+          var cols = [row.country, row.cat, row.duty, row.vat, row.excise, row.note];
+          cols.forEach(function (col, i) {
+            var td = document.createElement("td");
+            td.textContent = col;
+            if (i >= 2 && i <= 4) {
+              td.className = "rate-cell";
+            }
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      }
+
+      document.getElementById("btnCalculate").onclick = calculate;
+
+      document.getElementById("btnReset").onclick = resetForm;
+
+      document.getElementById("btnCopyResult").onclick = async function () {
+        var calcResult = document.getElementById("calcResult");
+        if (calcResult.style.display === "none") {
+          showStatus("请先计算关税", "error");
+          return;
+        }
+        var destSel = document.getElementById("destCountry");
+        var catSel = document.getElementById("hsCategory");
+        var lines = [
+          "进口关税估算结果",
+          "目的国：" + destSel.options[destSel.selectedIndex].text,
+          "商品类别：" + catSel.options[catSel.selectedIndex].text,
+          "货值：" + document.getElementById("rCifValue").textContent,
+          "关税率：" + document.getElementById("rDutyRate").textContent,
+          "增值税率：" + document.getElementById("rVatRate").textContent,
+          "消费税率：" + document.getElementById("rExciseRate").textContent,
+          "综合税率：" + document.getElementById("rTotalRate").textContent,
+          "关税金额：" + document.getElementById("rDutyAmt").textContent,
+          "增值税金额：" + document.getElementById("rVatAmt").textContent,
+          "消费税金额：" + document.getElementById("rExciseAmt").textContent,
+          "税费合计：" + document.getElementById("rTotalTax").textContent,
+          "到手总成本：" + document.getElementById("rLandedCost").textContent
+        ];
+        try {
+          await navigator.clipboard.writeText(lines.join("\n"));
+          showStatus("结果已复制", "success");
+        } catch (e) {
+          showStatus("复制失败", "error");
+        }
+      };
+
+      document.addEventListener("keydown", function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+          e.preventDefault();
+          calculate();
+        }
+      });
+
+      buildRefTable();
+
+      window.toggleTheme = function () {
+        var html = document.documentElement;
+        var currentTheme = html.getAttribute("data-theme") || "dark";
+        var newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      };
+      function initTheme() {
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme"))
+          document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+      });
+
+      initTheme();
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

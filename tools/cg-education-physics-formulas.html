@@ -1,0 +1,873 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>physics-formulas - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - physics-formulas">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <div class="container">
+        <a href="../../index.html" class="back-link">← 返回</a>
+        <h1>⚛️ 物理公式速查</h1>
+        <p class="subtitle">高中物理常用公式大全</p>
+
+        <div class="card">
+          <div class="search-box">
+            <input
+              type="search"
+              id="search"
+              placeholder="搜索公式（如：牛顿、动能、电场...）"
+              oninput="searchFormulas(this.value)"
+            />
+          </div>
+
+          <div class="tabs">
+            <button class="tab active" data-cat="all">全部</button>
+            <button class="tab" data-cat="mechanics">力学</button>
+            <button class="tab" data-cat="kinematics">运动学</button>
+            <button class="tab" data-cat="energy">功与能</button>
+            <button class="tab" data-cat="electricity">电学</button>
+            <button class="tab" data-cat="magnetism">磁学</button>
+            <button class="tab" data-cat="waves">波动与光</button>
+            <button class="tab" data-cat="thermal">热学</button>
+            <button class="tab" data-cat="modern">近代物理</button>
+          </div>
+        </div>
+
+        <div id="formulaList"></div>
+      </div>
+    </div>
+
+    <script>
+      const formulas = [
+        // 力学
+        {
+          cat: "mechanics",
+          name: "牛顿第二定律",
+          eq: "F = ma",
+          desc: "物体加速度与合外力成正比，与质量成反比",
+          vars: "F:力(N), m:质量(kg), a:加速度(m/s²)"
+        },
+        {
+          cat: "mechanics",
+          name: "万有引力定律",
+          eq: "F = G·m₁m₂/r²",
+          desc: "两物体间的引力与质量乘积成正比，与距离平方成反比",
+          vars: "G=6.67×10⁻¹¹ N·m²/kg², r:距离(m)"
+        },
+        {
+          cat: "mechanics",
+          name: "重力",
+          eq: "G = mg",
+          desc: "物体所受重力等于质量乘以重力加速度",
+          vars: "g≈9.8m/s²(地表), G:重力(N)"
+        },
+        {
+          cat: "mechanics",
+          name: "弹簧弹力",
+          eq: "F = kx",
+          desc: "胡克定律：弹簧弹力与形变量成正比",
+          vars: "k:劲度系数(N/m), x:形变量(m)"
+        },
+        {
+          cat: "mechanics",
+          name: "滑动摩擦力",
+          eq: "f = μN",
+          desc: "滑动摩擦力等于动摩擦因数乘以正压力",
+          vars: "μ:动摩擦因数, N:正压力(N)"
+        },
+        {
+          cat: "mechanics",
+          name: "压强",
+          eq: "p = F/S",
+          desc: "压强等于压力除以受力面积",
+          vars: "p:压强(Pa), F:压力(N), S:面积(m²)"
+        },
+        {
+          cat: "mechanics",
+          name: "液体压强",
+          eq: "p = ρgh",
+          desc: "液体内部压强与深度成正比",
+          vars: "ρ:液体密度(kg/m³), h:深度(m)"
+        },
+
+        // 运动学
+        {
+          cat: "kinematics",
+          name: "匀速直线运动",
+          eq: "s = vt",
+          desc: "位移等于速度乘以时间",
+          vars: "s:位移(m), v:速度(m/s), t:时间(s)"
+        },
+        {
+          cat: "kinematics",
+          name: "匀变速直线运动速度",
+          eq: "v = v₀ + at",
+          desc: "末速度等于初速度加上加速度乘以时间",
+          vars: "v₀:初速度, v:末速度, a:加速度"
+        },
+        {
+          cat: "kinematics",
+          name: "匀变速直线运动位移",
+          eq: "s = v₀t + ½at²",
+          desc: "位移公式",
+          vars: "s:位移, v₀:初速度, a:加速度, t:时间"
+        },
+        {
+          cat: "kinematics",
+          name: "速度位移关系",
+          eq: "v² - v₀² = 2as",
+          desc: "速度平方差等于2倍加速度乘位移",
+          vars: "不含时间t的公式"
+        },
+        {
+          cat: "kinematics",
+          name: "平均速度",
+          eq: "v̄ = (v₀+v)/2",
+          desc: "匀变速运动的平均速度等于初末速度的算术平均",
+          vars: "仅适用于匀变速运动"
+        },
+        {
+          cat: "kinematics",
+          name: "自由落体",
+          eq: "h = ½gt²",
+          desc: "自由落体运动的下落高度",
+          vars: "g≈9.8m/s², 初速度为0"
+        },
+        {
+          cat: "kinematics",
+          name: "平抛运动",
+          eq: "x=v₀t, y=½gt²",
+          desc: "水平方向匀速，竖直方向自由落体",
+          vars: "v₀:水平初速度"
+        },
+        {
+          cat: "kinematics",
+          name: "向心加速度",
+          eq: "a = v²/r = ω²r",
+          desc: "圆周运动的向心加速度",
+          vars: "v:线速度, ω:角速度, r:半径"
+        },
+        {
+          cat: "kinematics",
+          name: "向心力",
+          eq: "F = mv²/r = mω²r",
+          desc: "圆周运动所需的向心力",
+          vars: "使物体做圆周运动的合外力"
+        },
+        {
+          cat: "kinematics",
+          name: "周期与频率",
+          eq: "T = 2π/ω = 1/f",
+          desc: "周期、角速度、频率的关系",
+          vars: "T:周期(s), f:频率(Hz), ω:角速度(rad/s)"
+        },
+
+        // 功与能
+        {
+          cat: "energy",
+          name: "功",
+          eq: "W = Fs·cosθ",
+          desc: "功等于力乘位移乘力与位移夹角的余弦",
+          vars: "θ:力与位移的夹角"
+        },
+        {
+          cat: "energy",
+          name: "功率",
+          eq: "P = W/t = Fv",
+          desc: "功率等于功除以时间，或力乘速度",
+          vars: "P:功率(W), W:功(J)"
+        },
+        {
+          cat: "energy",
+          name: "动能",
+          eq: "Eₖ = ½mv²",
+          desc: "物体因运动而具有的能量",
+          vars: "m:质量(kg), v:速度(m/s)"
+        },
+        {
+          cat: "energy",
+          name: "重力势能",
+          eq: "Eₚ = mgh",
+          desc: "物体因位置而具有的重力势能",
+          vars: "h:相对参考面的高度"
+        },
+        {
+          cat: "energy",
+          name: "弹性势能",
+          eq: "Eₚ = ½kx²",
+          desc: "弹簧因形变而储存的能量",
+          vars: "k:劲度系数, x:形变量"
+        },
+        {
+          cat: "energy",
+          name: "动能定理",
+          eq: "W = ΔEₖ = ½mv² - ½mv₀²",
+          desc: "合外力做的功等于动能的变化",
+          vars: "适用于任何运动过程"
+        },
+        {
+          cat: "energy",
+          name: "机械能守恒",
+          eq: "Eₖ₁ + Eₚ₁ = Eₖ₂ + Eₚ₂",
+          desc: "只有重力或弹力做功时，机械能守恒",
+          vars: "条件：无其他力做功"
+        },
+        {
+          cat: "energy",
+          name: "动量",
+          eq: "p = mv",
+          desc: "动量等于质量乘以速度",
+          vars: "p:动量(kg·m/s), 矢量"
+        },
+        {
+          cat: "energy",
+          name: "冲量",
+          eq: "I = Ft",
+          desc: "冲量等于力乘以作用时间",
+          vars: "I:冲量(N·s), 矢量"
+        },
+        {
+          cat: "energy",
+          name: "动量定理",
+          eq: "Ft = mv - mv₀",
+          desc: "冲量等于动量的变化量",
+          vars: "矢量形式"
+        },
+        {
+          cat: "energy",
+          name: "动量守恒",
+          eq: "m₁v₁ + m₂v₂ = m₁v₁' + m₂v₂'",
+          desc: "系统不受外力或外力为零时，总动量守恒",
+          vars: "适用于碰撞、爆炸等"
+        },
+
+        // 电学
+        {
+          cat: "electricity",
+          name: "库仑定律",
+          eq: "F = k·q₁q₂/r²",
+          desc: "点电荷间的静电力",
+          vars: "k=9×10⁹ N·m²/C²"
+        },
+        {
+          cat: "electricity",
+          name: "电场强度定义",
+          eq: "E = F/q",
+          desc: "电场强度等于电场力除以电荷量",
+          vars: "E:电场强度(N/C或V/m)"
+        },
+        {
+          cat: "electricity",
+          name: "点电荷电场",
+          eq: "E = kQ/r²",
+          desc: "点电荷产生的电场强度",
+          vars: "Q:源电荷, r:到电荷的距离"
+        },
+        {
+          cat: "electricity",
+          name: "匀强电场电势差",
+          eq: "U = Ed",
+          desc: "匀强电场中电势差与场强和距离的关系",
+          vars: "d:沿电场方向的距离"
+        },
+        {
+          cat: "electricity",
+          name: "电势能",
+          eq: "Eₚ = qU",
+          desc: "电荷在电场中的电势能",
+          vars: "U:电势, q:电荷量"
+        },
+        {
+          cat: "electricity",
+          name: "电容",
+          eq: "C = Q/U",
+          desc: "电容器储存电荷的能力",
+          vars: "C:电容(F), Q:电荷量(C)"
+        },
+        {
+          cat: "electricity",
+          name: "平行板电容",
+          eq: "C = εS/4πkd",
+          desc: "平行板电容器的电容",
+          vars: "ε:介电常数, S:极板面积, d:间距"
+        },
+        {
+          cat: "electricity",
+          name: "欧姆定律",
+          eq: "I = U/R",
+          desc: "电流等于电压除以电阻",
+          vars: "I:电流(A), U:电压(V), R:电阻(Ω)"
+        },
+        {
+          cat: "electricity",
+          name: "电阻定律",
+          eq: "R = ρL/S",
+          desc: "导体电阻与材料、长度、截面积有关",
+          vars: "ρ:电阻率, L:长度, S:截面积"
+        },
+        {
+          cat: "electricity",
+          name: "电功",
+          eq: "W = UIt = I²Rt",
+          desc: "电流做的功",
+          vars: "W:电功(J)"
+        },
+        {
+          cat: "electricity",
+          name: "电功率",
+          eq: "P = UI = I²R = U²/R",
+          desc: "电流做功的功率",
+          vars: "P:电功率(W)"
+        },
+        {
+          cat: "electricity",
+          name: "焦耳定律",
+          eq: "Q = I²Rt",
+          desc: "电流产生的热量",
+          vars: "Q:热量(J)"
+        },
+        {
+          cat: "electricity",
+          name: "电动势",
+          eq: "ε = W/q = U + Ir",
+          desc: "电源将其他能转化为电能的能力",
+          vars: "ε:电动势(V), r:内阻"
+        },
+        {
+          cat: "electricity",
+          name: "串联电阻",
+          eq: "R = R₁ + R₂ + ...",
+          desc: "串联电阻的总电阻等于各电阻之和",
+          vars: "电流相等，电压分配"
+        },
+        {
+          cat: "electricity",
+          name: "并联电阻",
+          eq: "1/R = 1/R₁ + 1/R₂ + ...",
+          desc: "并联电阻的总电阻的倒数等于各电阻倒数之和",
+          vars: "电压相等，电流分配"
+        },
+
+        // 磁学
+        {
+          cat: "magnetism",
+          name: "安培力",
+          eq: "F = BIL",
+          desc: "通电导线在磁场中受到的力",
+          vars: "B:磁感应强度(T), I:电流, L:导线长度"
+        },
+        {
+          cat: "magnetism",
+          name: "洛伦兹力",
+          eq: "F = qvB",
+          desc: "运动电荷在磁场中受到的力",
+          vars: "v⊥B时取等号, 力垂直于v和B"
+        },
+        {
+          cat: "magnetism",
+          name: "带电粒子圆周运动",
+          eq: "r = mv/qB",
+          desc: "带电粒子在匀强磁场中做圆周运动的半径",
+          vars: "洛伦兹力提供向心力"
+        },
+        {
+          cat: "magnetism",
+          name: "带电粒子周期",
+          eq: "T = 2πm/qB",
+          desc: "带电粒子在磁场中运动的周期",
+          vars: "周期与速度无关"
+        },
+        {
+          cat: "magnetism",
+          name: "磁通量",
+          eq: "Φ = BS·cosθ",
+          desc: "穿过某一面积的磁通量",
+          vars: "Φ:磁通量(Wb), θ:B与面法向量夹角"
+        },
+        {
+          cat: "magnetism",
+          name: "法拉第电磁感应",
+          eq: "ε = -dΦ/dt = BLv",
+          desc: "感应电动势与磁通量变化率成正比",
+          vars: "ε:感应电动势(V)"
+        },
+        {
+          cat: "magnetism",
+          name: "自感电动势",
+          eq: "ε = -L·dI/dt",
+          desc: "线圈中电流变化产生的自感电动势",
+          vars: "L:自感系数(H)"
+        },
+        {
+          cat: "magnetism",
+          name: "变压器",
+          eq: "U₁/U₂ = n₁/n₂",
+          desc: "变压器原副线圈电压与匝数成正比",
+          vars: "理想变压器功率守恒"
+        },
+
+        // 波动与光
+        {
+          cat: "waves",
+          name: "波速公式",
+          eq: "v = λf = λ/T",
+          desc: "波速等于波长乘以频率",
+          vars: "λ:波长(m), f:频率(Hz), T:周期(s)"
+        },
+        {
+          cat: "waves",
+          name: "折射定律",
+          eq: "n₁sinθ₁ = n₂sinθ₂",
+          desc: "光从介质1进入介质2的折射定律",
+          vars: "n:折射率, θ:角度"
+        },
+        {
+          cat: "waves",
+          name: "折射率",
+          eq: "n = c/v = sinθ₁/sinθ₂",
+          desc: "折射率等于光速比或角度正弦比",
+          vars: "c:真空中光速"
+        },
+        {
+          cat: "waves",
+          name: "全反射临界角",
+          eq: "sinC = 1/n",
+          desc: "发生全反射的临界角",
+          vars: "光从光密介质射向光疏介质"
+        },
+        {
+          cat: "waves",
+          name: "双缝干涉",
+          eq: "Δx = L·λ/d",
+          desc: "双缝干涉条纹间距",
+          vars: "L:到屏距离, d:缝间距"
+        },
+        {
+          cat: "waves",
+          name: "光电效应方程",
+          eq: "hν = W + Eₖ",
+          desc: "光子能量等于逸出功加最大初动能",
+          vars: "h:普朗克常量, ν:光频率, W:逸出功"
+        },
+        {
+          cat: "waves",
+          name: "多普勒效应",
+          eq: "f' = f(v±v₀)/(v∓vₛ)",
+          desc: "声源或观察者运动时频率变化",
+          vars: "靠近频率增大，远离频率减小"
+        },
+
+        // 热学
+        {
+          cat: "thermal",
+          name: "热力学第一定律",
+          eq: "ΔU = Q + W",
+          desc: "内能变化等于吸热加外界做功",
+          vars: "Q:吸热为正, W:外界做功为正"
+        },
+        {
+          cat: "thermal",
+          name: "理想气体状态方程",
+          eq: "pV = nRT",
+          desc: "理想气体的压强、体积、温度关系",
+          vars: "R=8.314 J/(mol·K)"
+        },
+        {
+          cat: "thermal",
+          name: "气体压强微观",
+          eq: "p = ⅓nmv̄²",
+          desc: "气体压强的微观解释",
+          vars: "n:单位体积分子数, m:分子质量"
+        },
+        {
+          cat: "thermal",
+          name: "平均动能",
+          eq: "Ēₖ = 3kT/2",
+          desc: "气体分子平均平动动能",
+          vars: "k:玻尔兹曼常量=1.38×10⁻²³ J/K"
+        },
+        {
+          cat: "thermal",
+          name: "热量计算",
+          eq: "Q = cmΔT",
+          desc: "物体吸收或放出的热量",
+          vars: "c:比热容, m:质量, ΔT:温度变化"
+        },
+
+        // 近代物理
+        {
+          cat: "modern",
+          name: "质能方程",
+          eq: "E = mc²",
+          desc: "质量与能量的关系",
+          vars: "c=3×10⁸ m/s"
+        },
+        {
+          cat: "modern",
+          name: "光子能量",
+          eq: "E = hν = hc/λ",
+          desc: "光子的能量与频率成正比",
+          vars: "h=6.63×10⁻³⁴ J·s"
+        },
+        {
+          cat: "modern",
+          name: "光子动量",
+          eq: "p = h/λ",
+          desc: "光子的动量与波长成反比",
+          vars: "德布罗意波长"
+        },
+        {
+          cat: "modern",
+          name: "动量-能量关系",
+          eq: "E² = (pc)² + (m₀c²)²",
+          desc: "相对论能量-动量关系",
+          vars: "m₀:静止质量"
+        },
+        {
+          cat: "modern",
+          name: "氢原子能级",
+          eq: "Eₙ = -13.6/n² eV",
+          desc: "氢原子第n能级的能量",
+          vars: "n=1,2,3..., 基态n=1"
+        },
+        {
+          cat: "modern",
+          name: "玻尔频率条件",
+          eq: "hν = Eₘ - Eₙ",
+          desc: "原子跃迁发射或吸收光子",
+          vars: "从高能级到低能级发射光子"
+        },
+        {
+          cat: "modern",
+          name: "半衰期",
+          eq: "N = N₀(1/2)^(t/T)",
+          desc: "放射性衰变规律",
+          vars: "T:半衰期, N₀:初始数量"
+        },
+        {
+          cat: "modern",
+          name: "核反应质量亏损",
+          eq: "ΔE = Δmc²",
+          desc: "质量亏损释放的能量",
+          vars: "Δm:质量亏损(kg)"
+        }
+      ];
+
+      const categoryNames = {
+        all: "全部",
+        mechanics: "力学",
+        kinematics: "运动学",
+        energy: "功与能",
+        electricity: "电学",
+        magnetism: "磁学",
+        waves: "波动与光",
+        thermal: "热学",
+        modern: "近代物理"
+      };
+
+      let currentCategory = "all";
+
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          document.querySelectorAll(".tab").forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          currentCategory = tab.dataset.cat;
+          renderFormulas();
+        });
+      });
+
+      function renderFormulas(filter = "") {
+        const container = document.getElementById("formulaList");
+        container.textContent = "";
+
+        const filteredFormulas = formulas.filter((f) => {
+          const catMatch = currentCategory === "all" || f.cat === currentCategory;
+          const searchMatch =
+            !filter ||
+            f.name.toLowerCase().includes(filter.toLowerCase()) ||
+            f.desc.toLowerCase().includes(filter.toLowerCase()) ||
+            f.eq.toLowerCase().includes(filter.toLowerCase());
+          return catMatch && searchMatch;
+        });
+
+        // Group by category
+        const grouped = {};
+        filteredFormulas.forEach((f) => {
+          if (!grouped[f.cat]) grouped[f.cat] = [];
+          grouped[f.cat].push(f);
+        });
+
+        Object.keys(grouped).forEach((cat) => {
+          const section = document.createElement("div");
+          section.className = "category-section";
+
+          if (currentCategory === "all") {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const title = document.createElement("div");
+            title.className = "card-title";
+            title.textContent = categoryNames[cat];
+            card.appendChild(title);
+
+            const grid = document.createElement("div");
+            grid.className = "formula-grid";
+
+            grouped[cat].forEach((f) => {
+              grid.appendChild(createFormulaItem(f, filter));
+            });
+
+            card.appendChild(grid);
+            section.appendChild(card);
+          } else {
+            const grid = document.createElement("div");
+            grid.className = "card";
+
+            const innerGrid = document.createElement("div");
+            innerGrid.className = "formula-grid";
+
+            grouped[cat].forEach((f) => {
+              innerGrid.appendChild(createFormulaItem(f, filter));
+            });
+
+            grid.appendChild(innerGrid);
+            section.appendChild(grid);
+          }
+
+          container.appendChild(section);
+        });
+
+        if (filteredFormulas.length === 0) {
+          const empty = document.createElement("div");
+          empty.className = "card";
+          empty.style.textAlign = "center";
+          empty.style.color = "var(--text-secondary)";
+          empty.textContent = "未找到匹配的公式";
+          container.appendChild(empty);
+        }
+      }
+
+      function createFormulaItem(f, filter) {
+        const item = document.createElement("div");
+        item.className = "formula-item";
+
+        const name = document.createElement("div");
+        name.className = "formula-name";
+        name.textContent = f.name;
+
+        const eq = document.createElement("div");
+        eq.className = "formula-eq";
+        eq.textContent = f.eq;
+
+        const desc = document.createElement("div");
+        desc.className = "formula-desc";
+        desc.textContent = f.desc;
+
+        const vars = document.createElement("div");
+        vars.className = "formula-vars";
+        vars.textContent = f.vars;
+
+        item.appendChild(name);
+        item.appendChild(eq);
+        item.appendChild(desc);
+        item.appendChild(vars);
+
+        return item;
+      }
+
+      function searchFormulas(query) {
+        renderFormulas(query);
+      }
+
+      renderFormulas();
+
+      // Theme toggle
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        document.getElementById("theme-icon").textContent = newTheme === "light" ? "☀️" : "🌙";
+        localStorage.setItem("theme", newTheme);
+      }
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        document.getElementById("theme-icon").textContent = "☀️";
+      }
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

@@ -1,0 +1,1272 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>http-status - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - http-status">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <div class="container">
+        <div class="header">
+          <h1>📡 HTTP 状态码查询</h1>
+          <p>完整的HTTP状态码参考手册</p>
+          <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </div>
+
+        <div class="search-section">
+          <div class="search-box">
+            <input
+              type="search"
+              class="search-input"
+              id="searchInput"
+              placeholder="搜索状态码或描述，如 404、Not Found、重定向..."
+              oninput="filterCodes()"
+            />
+          </div>
+        </div>
+
+        <div class="quick-ref">
+          <h3>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            常用状态码
+          </h3>
+          <div class="quick-ref-grid">
+            <div class="quick-ref-item" onclick="jumpToCode(200)">
+              <span class="code" style="color: #81c784">200</span>
+              <span class="name">OK</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(201)">
+              <span class="code" style="color: #81c784">201</span>
+              <span class="name">Created</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(301)">
+              <span class="code" style="color: #ffb74d">301</span>
+              <span class="name">Moved</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(302)">
+              <span class="code" style="color: #ffb74d">302</span>
+              <span class="name">Found</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(400)">
+              <span class="code" style="color: #e57373">400</span>
+              <span class="name">Bad Request</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(401)">
+              <span class="code" style="color: #e57373">401</span>
+              <span class="name">Unauthorized</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(403)">
+              <span class="code" style="color: #e57373">403</span>
+              <span class="name">Forbidden</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(404)">
+              <span class="code" style="color: #e57373">404</span>
+              <span class="name">Not Found</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(500)">
+              <span class="code" style="color: #ba68c8">500</span>
+              <span class="name">Server Error</span>
+            </div>
+            <div class="quick-ref-item" onclick="jumpToCode(502)">
+              <span class="code" style="color: #ba68c8">502</span>
+              <span class="name">Bad Gateway</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-tabs" id="categoryTabs">
+          <button class="category-tab active" data-category="all" onclick="filterByCategory('all')">
+            全部
+            <span class="count" id="countAll">0</span>
+          </button>
+          <button class="category-tab" data-category="1xx" onclick="filterByCategory('1xx')">
+            1xx 信息
+            <span class="count" id="count1xx">0</span>
+          </button>
+          <button class="category-tab" data-category="2xx" onclick="filterByCategory('2xx')">
+            2xx 成功
+            <span class="count" id="count2xx">0</span>
+          </button>
+          <button class="category-tab" data-category="3xx" onclick="filterByCategory('3xx')">
+            3xx 重定向
+            <span class="count" id="count3xx">0</span>
+          </button>
+          <button class="category-tab" data-category="4xx" onclick="filterByCategory('4xx')">
+            4xx 客户端错误
+            <span class="count" id="count4xx">0</span>
+          </button>
+          <button class="category-tab" data-category="5xx" onclick="filterByCategory('5xx')">
+            5xx 服务器错误
+            <span class="count" id="count5xx">0</span>
+          </button>
+        </div>
+
+        <div class="status-grid" id="statusGrid"></div>
+
+        <div class="no-results" id="noResults" style="display: none">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <p>没有找到匹配的状态码</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // HTTP Status Codes Database
+      const statusCodes = [
+        // 1xx Informational
+        {
+          code: 100,
+          name: "Continue",
+          nameCn: "继续",
+          brief: "服务器已收到请求头，客户端应继续发送请求体",
+          description:
+            "表示目前为止一切正常，客户端应该继续请求，如果已完成请求则忽略。这通常用于客户端发送带有Expect: 100-continue头的POST请求。",
+          usage: "用于分块上传大文件前的预检",
+          tags: ["上传", "预检"],
+          example: `// 发送带有 Expect 头的请求
+fetch('/upload', {
+  method: 'POST',
+  headers: {
+    'Expect': '100-continue',
+    'Content-Type': 'application/octet-stream'
+  },
+  body: largeFile
+});`
+        },
+        {
+          code: 101,
+          name: "Switching Protocols",
+          nameCn: "切换协议",
+          brief: "服务器正在根据客户端的请求切换协议",
+          description:
+            "服务器理解并同意客户端的协议升级请求。最常见的用途是将HTTP连接升级为WebSocket连接。",
+          usage: "WebSocket握手、HTTP/2升级",
+          tags: ["WebSocket", "协议升级"],
+          example: `// WebSocket 握手
+const ws = new WebSocket('wss://example.com/socket');
+// 服务器响应 101 Switching Protocols
+// Upgrade: websocket
+// Connection: Upgrade`
+        },
+        {
+          code: 102,
+          name: "Processing",
+          nameCn: "处理中",
+          brief: "服务器正在处理请求，但尚未完成（WebDAV）",
+          description:
+            "此代码表示服务器已收到并正在处理请求，但尚无响应可用。这可以防止客户端在等待响应时超时。",
+          usage: "WebDAV长时间操作",
+          tags: ["WebDAV", "长操作"]
+        },
+        {
+          code: 103,
+          name: "Early Hints",
+          nameCn: "预提示",
+          brief: "用于在最终响应之前返回一些响应头",
+          description:
+            "允许服务器在准备响应时发送一些响应头，让浏览器提前开始预加载资源，提升页面加载速度。",
+          usage: "预加载关键资源",
+          tags: ["性能优化", "Link预加载"],
+          example: `// 服务器响应
+HTTP/1.1 103 Early Hints
+Link: </style.css>; rel=preload; as=style
+Link: </script.js>; rel=preload; as=script`
+        },
+
+        // 2xx Success
+        {
+          code: 200,
+          name: "OK",
+          nameCn: "成功",
+          brief: "请求成功，返回了请求的数据",
+          description:
+            "标准的成功响应。对于GET请求，响应将包含请求的资源。对于POST请求，响应将包含描述或包含操作结果的实体。",
+          usage: "所有成功的GET、POST等请求",
+          tags: ["GET", "POST", "常用"],
+          example: `// API 成功响应
+{
+  "status": 200,
+  "data": {
+    "id": 1,
+    "name": "示例数据"
+  }
+}`
+        },
+        {
+          code: 201,
+          name: "Created",
+          nameCn: "已创建",
+          brief: "请求成功，服务器创建了新资源",
+          description:
+            "请求已成功且服务器创建了一个新资源。通常用于POST或PUT请求后的响应。响应的Location头应该包含新创建资源的URI。",
+          usage: "POST创建新资源成功",
+          tags: ["POST", "REST API", "常用"],
+          example: `// 创建用户成功
+HTTP/1.1 201 Created
+Location: /api/users/123
+
+{
+  "id": 123,
+  "name": "新用户",
+  "created_at": "2024-01-01T00:00:00Z"
+}`
+        },
+        {
+          code: 202,
+          name: "Accepted",
+          nameCn: "已接受",
+          brief: "请求已接受处理，但处理尚未完成",
+          description:
+            "请求已被接受进行处理，但处理尚未完成。请求可能会也可能不会最终执行。适用于异步任务或批处理操作。",
+          usage: "异步任务、队列处理",
+          tags: ["异步", "队列"],
+          example: `// 异步任务接受
+{
+  "status": "accepted",
+  "task_id": "abc123",
+  "check_status_url": "/api/tasks/abc123"
+}`
+        },
+        {
+          code: 203,
+          name: "Non-Authoritative Information",
+          nameCn: "非权威信息",
+          brief: "返回的元数据可能来自本地或第三方副本",
+          description:
+            "服务器成功处理了请求，但返回的信息可能来自另一源。通常用于代理服务器或镜像站点。",
+          usage: "代理服务器、CDN缓存",
+          tags: ["代理", "缓存"]
+        },
+        {
+          code: 204,
+          name: "No Content",
+          nameCn: "无内容",
+          brief: "请求成功，但没有返回内容",
+          description:
+            "服务器成功处理了请求，但不需要返回任何实体内容。常用于DELETE请求成功后，或更新操作不需要返回更新后的数据时。",
+          usage: "DELETE成功、更新操作",
+          tags: ["DELETE", "PUT", "常用"],
+          example: `// DELETE 请求成功
+DELETE /api/users/123 HTTP/1.1
+
+HTTP/1.1 204 No Content`
+        },
+        {
+          code: 205,
+          name: "Reset Content",
+          nameCn: "重置内容",
+          brief: "请求成功，客户端应重置文档视图",
+          description: "服务器成功处理了请求，告诉客户端重置文档视图，如清空表单以便再次输入。",
+          usage: "表单提交后重置",
+          tags: ["表单"]
+        },
+        {
+          code: 206,
+          name: "Partial Content",
+          nameCn: "部分内容",
+          brief: "服务器成功处理了部分GET请求",
+          description:
+            "服务器已成功处理了部分GET请求。用于支持断点续传的资源下载，客户端通过Range头指定请求的字节范围。",
+          usage: "断点续传、视频流媒体",
+          tags: ["下载", "流媒体", "Range"],
+          example: `// 请求部分内容
+GET /video.mp4 HTTP/1.1
+Range: bytes=0-1023
+
+HTTP/1.1 206 Partial Content
+Content-Range: bytes 0-1023/10240
+Content-Length: 1024`
+        },
+        {
+          code: 207,
+          name: "Multi-Status",
+          nameCn: "多状态",
+          brief: "响应体包含多个状态码（WebDAV）",
+          description: "响应体是一个XML文档，包含多个独立操作的状态码。用于WebDAV批量操作。",
+          usage: "WebDAV批量操作",
+          tags: ["WebDAV", "批量"]
+        },
+        {
+          code: 208,
+          name: "Already Reported",
+          nameCn: "已报告",
+          brief: "成员已在之前的响应中列出（WebDAV）",
+          description: "用于WebDAV绑定的成员，避免重复枚举。",
+          usage: "WebDAV",
+          tags: ["WebDAV"]
+        },
+        {
+          code: 226,
+          name: "IM Used",
+          nameCn: "使用了IM",
+          brief: "服务器已完成对资源的GET请求，响应是对当前实例应用的一个或多个实例操作的结果表示",
+          description:
+            "服务器已经完成了对资源的请求，并且响应是应用于当前实例的一个或多个实例操作的结果。",
+          usage: "Delta编码",
+          tags: ["Delta"]
+        },
+
+        // 3xx Redirection
+        {
+          code: 300,
+          name: "Multiple Choices",
+          nameCn: "多种选择",
+          brief: "请求的资源有多种表示形式",
+          description: "表示请求的资源有多种可选择的回应。用户或用户代理可以选择其中一个。",
+          usage: "内容协商",
+          tags: ["协商"]
+        },
+        {
+          code: 301,
+          name: "Moved Permanently",
+          nameCn: "永久移动",
+          brief: "资源已永久移动到新位置",
+          description:
+            "请求的资源已被永久移动到新URI。以后所有请求都应使用新URI。搜索引擎会更新链接。",
+          usage: "网站迁移、URL规范化",
+          tags: ["SEO", "重定向", "常用"],
+          example: `// 永久重定向
+HTTP/1.1 301 Moved Permanently
+Location: https://new-domain.com/page
+
+// Nginx 配置
+server {
+    return 301 https://new-domain.com$request_uri;
+}`
+        },
+        {
+          code: 302,
+          name: "Found",
+          nameCn: "临时移动",
+          brief: "资源临时移动到其他位置",
+          description:
+            "请求的资源临时位于另一个URI。由于重定向可能会不时更改，客户端应继续使用原URI。",
+          usage: "临时重定向、登录跳转",
+          tags: ["重定向", "常用"],
+          example: `// 临时重定向
+HTTP/1.1 302 Found
+Location: /login?redirect=/dashboard`
+        },
+        {
+          code: 303,
+          name: "See Other",
+          nameCn: "查看其他",
+          brief: "应使用GET请求另一个URI来获取资源",
+          description:
+            "服务器发送此响应，指示客户端应使用GET请求在另一个URI获取请求的资源。常用于POST处理后重定向到结果页面。",
+          usage: "POST后重定向（PRG模式）",
+          tags: ["PRG", "POST"],
+          example: `// POST-Redirect-Get 模式
+POST /order HTTP/1.1
+// 处理订单...
+
+HTTP/1.1 303 See Other
+Location: /order/123/confirmation`
+        },
+        {
+          code: 304,
+          name: "Not Modified",
+          nameCn: "未修改",
+          brief: "资源未修改，可使用缓存版本",
+          description:
+            "表示资源自上次请求后未被修改，客户端可以使用缓存的版本。这是条件请求的结果。",
+          usage: "浏览器缓存、CDN缓存验证",
+          tags: ["缓存", "ETag", "常用"],
+          example: `// 条件请求
+GET /style.css HTTP/1.1
+If-None-Match: "abc123"
+
+HTTP/1.1 304 Not Modified
+ETag: "abc123"`
+        },
+        {
+          code: 305,
+          name: "Use Proxy",
+          nameCn: "使用代理",
+          brief: "请求必须通过代理访问（已废弃）",
+          description: "被请求的资源必须通过指定的代理才能被访问。由于安全原因，此状态码已被废弃。",
+          usage: "已废弃",
+          tags: ["已废弃"]
+        },
+        {
+          code: 307,
+          name: "Temporary Redirect",
+          nameCn: "临时重定向",
+          brief: "临时重定向，保持请求方法不变",
+          description: "与302类似，但明确要求客户端保持请求方法不变。POST请求重定向后仍使用POST。",
+          usage: "HTTPS升级、API版本迁移",
+          tags: ["重定向", "HTTPS"],
+          example: `// HTTP 到 HTTPS 重定向
+HTTP/1.1 307 Temporary Redirect
+Location: ../index.html/api/users`
+        },
+        {
+          code: 308,
+          name: "Permanent Redirect",
+          nameCn: "永久重定向",
+          brief: "永久重定向，保持请求方法不变",
+          description: "与301类似，但明确要求客户端保持请求方法不变。这是301的严格版本。",
+          usage: "永久迁移，保持POST方法",
+          tags: ["重定向", "SEO"]
+        },
+
+        // 4xx Client Errors
+        {
+          code: 400,
+          name: "Bad Request",
+          nameCn: "错误请求",
+          brief: "服务器无法理解请求的语法",
+          description:
+            "服务器无法处理请求，因为客户端错误（如语法错误、无效的请求消息框架或欺骗性请求路由）。",
+          usage: "参数验证失败、格式错误",
+          tags: ["验证", "常用"],
+          example: `// 验证错误响应
+{
+  "error": "Bad Request",
+  "message": "Invalid email format",
+  "field": "email"
+}`
+        },
+        {
+          code: 401,
+          name: "Unauthorized",
+          nameCn: "未授权",
+          brief: "请求需要身份验证",
+          description:
+            "请求需要用户身份验证。响应必须包含WWW-Authenticate头字段，包含适用于请求资源的质询信息。",
+          usage: "未登录、Token过期",
+          tags: ["认证", "常用"],
+          example: `// 未认证响应
+HTTP/1.1 401 Unauthorized
+WWW-Authenticate: Bearer realm="api"
+
+{
+  "error": "Unauthorized",
+  "message": "Invalid or expired token"
+}`
+        },
+        {
+          code: 402,
+          name: "Payment Required",
+          nameCn: "需要付款",
+          brief: "保留供将来使用，最初用于数字支付系统",
+          description:
+            "此代码保留供将来使用。最初的意图是用于数字现金或微支付系统，但目前未被广泛使用。",
+          usage: "付费功能、订阅服务",
+          tags: ["支付"]
+        },
+        {
+          code: 403,
+          name: "Forbidden",
+          nameCn: "禁止",
+          brief: "服务器拒绝执行请求",
+          description: "服务器理解请求但拒绝授权。与401不同，重新进行身份验证不会有任何帮助。",
+          usage: "权限不足、IP被封",
+          tags: ["权限", "常用"],
+          example: `// 权限不足响应
+{
+  "error": "Forbidden",
+  "message": "You don't have permission to access this resource"
+}`
+        },
+        {
+          code: 404,
+          name: "Not Found",
+          nameCn: "未找到",
+          brief: "服务器找不到请求的资源",
+          description:
+            "服务器找不到请求的资源。这是最常见的错误状态码之一。也可能用于隐藏资源存在与否的信息。",
+          usage: "资源不存在、URL错误",
+          tags: ["常用"],
+          example: `// 资源未找到
+{
+  "error": "Not Found",
+  "message": "User with ID 123 not found"
+}`
+        },
+        {
+          code: 405,
+          name: "Method Not Allowed",
+          nameCn: "方法不允许",
+          brief: "请求方法不被目标资源支持",
+          description:
+            "请求中使用的HTTP方法不被目标资源支持。响应必须包含Allow头，列出支持的方法。",
+          usage: "REST API方法限制",
+          tags: ["REST API"],
+          example: `// 方法不允许
+HTTP/1.1 405 Method Not Allowed
+Allow: GET, POST
+
+{
+  "error": "Method Not Allowed",
+  "allowed": ["GET", "POST"]
+}`
+        },
+        {
+          code: 406,
+          name: "Not Acceptable",
+          nameCn: "不可接受",
+          brief: "服务器无法生成客户端可接受的响应",
+          description: "服务器无法根据请求中的Accept头生成客户端可接受的内容。",
+          usage: "内容协商失败",
+          tags: ["协商", "Accept"]
+        },
+        {
+          code: 407,
+          name: "Proxy Authentication Required",
+          nameCn: "需要代理认证",
+          brief: "客户端必须首先与代理服务器进行身份验证",
+          description: "类似于401，但表示客户端必须首先使用代理进行身份验证。",
+          usage: "代理服务器认证",
+          tags: ["代理", "认证"]
+        },
+        {
+          code: 408,
+          name: "Request Timeout",
+          nameCn: "请求超时",
+          brief: "服务器等待请求超时",
+          description: "服务器在准备等待的时间内未收到完整的请求。客户端可以重新发送请求。",
+          usage: "慢速客户端、大文件上传",
+          tags: ["超时"]
+        },
+        {
+          code: 409,
+          name: "Conflict",
+          nameCn: "冲突",
+          brief: "请求与服务器当前状态冲突",
+          description: "请求与资源的当前状态冲突。通常用于并发更新或重复创建资源。",
+          usage: "并发冲突、重复资源",
+          tags: ["并发", "常用"],
+          example: `// 冲突响应
+{
+  "error": "Conflict",
+  "message": "Email already exists",
+  "conflicting_field": "email"
+}`
+        },
+        {
+          code: 410,
+          name: "Gone",
+          nameCn: "已删除",
+          brief: "资源已永久删除",
+          description: "请求的资源在服务器上已不再可用，且没有转发地址。与404不同，这是永久性的。",
+          usage: "已下架内容、已删除账户",
+          tags: ["删除", "SEO"]
+        },
+        {
+          code: 411,
+          name: "Length Required",
+          nameCn: "需要内容长度",
+          brief: "请求未指定Content-Length头",
+          description: "服务器拒绝接受不带Content-Length头字段的请求。",
+          usage: "强制要求Content-Length",
+          tags: ["请求头"]
+        },
+        {
+          code: 412,
+          name: "Precondition Failed",
+          nameCn: "前提条件失败",
+          brief: "请求头中的前提条件评估为false",
+          description: "请求头中的一个或多个条件在服务器上评估为false。用于条件请求。",
+          usage: "ETag验证、乐观锁",
+          tags: ["条件请求", "ETag"],
+          example: `// 条件更新失败
+PUT /api/article/1 HTTP/1.1
+If-Match: "old-etag"
+
+HTTP/1.1 412 Precondition Failed`
+        },
+        {
+          code: 413,
+          name: "Payload Too Large",
+          nameCn: "请求体过大",
+          brief: "请求体超过服务器限制",
+          description: "请求实体大于服务器愿意或能够处理的大小。",
+          usage: "文件上传限制",
+          tags: ["上传", "限制"]
+        },
+        {
+          code: 414,
+          name: "URI Too Long",
+          nameCn: "URI过长",
+          brief: "请求的URI超过服务器限制",
+          description: "客户端请求的URI长度超过服务器愿意解释的长度。",
+          usage: "GET参数过长",
+          tags: ["URL", "限制"]
+        },
+        {
+          code: 415,
+          name: "Unsupported Media Type",
+          nameCn: "不支持的媒体类型",
+          brief: "服务器不支持请求的媒体格式",
+          description: "服务器不支持请求中提交的媒体格式，因此拒绝请求。",
+          usage: "Content-Type验证",
+          tags: ["Content-Type"],
+          example: `// 不支持的格式
+POST /api/data HTTP/1.1
+Content-Type: application/xml
+
+HTTP/1.1 415 Unsupported Media Type
+// 服务器只接受 application/json`
+        },
+        {
+          code: 416,
+          name: "Range Not Satisfiable",
+          nameCn: "范围无法满足",
+          brief: "请求的范围超出资源大小",
+          description: "客户端请求的Range头字段中的范围无法满足，可能是因为超出了资源的大小。",
+          usage: "断点续传失败",
+          tags: ["Range", "下载"]
+        },
+        {
+          code: 417,
+          name: "Expectation Failed",
+          nameCn: "期望失败",
+          brief: "服务器无法满足Expect请求头的期望",
+          description: "服务器无法满足Expect请求头字段中指定的期望。",
+          usage: "Expect头验证",
+          tags: ["Expect"]
+        },
+        {
+          code: 418,
+          name: "I'm a teapot",
+          nameCn: "我是茶壶",
+          brief: "服务器拒绝尝试用茶壶煮咖啡（愚人节玩笑）",
+          description:
+            "这是1998年愚人节玩笑中的超文本咖啡壶控制协议的一部分。某些网站用它来表示不想处理请求。",
+          usage: "彩蛋、拒绝自动化请求",
+          tags: ["彩蛋", "趣味"]
+        },
+        {
+          code: 421,
+          name: "Misdirected Request",
+          nameCn: "误导请求",
+          brief: "请求被定向到无法产生响应的服务器",
+          description: "请求被定向到一个无法为该请求生成响应的服务器。",
+          usage: "HTTP/2连接复用问题",
+          tags: ["HTTP/2"]
+        },
+        {
+          code: 422,
+          name: "Unprocessable Entity",
+          nameCn: "无法处理的实体",
+          brief: "请求格式正确但语义错误",
+          description: "请求格式良好，但由于语义错误而无法遵循。常用于验证错误。",
+          usage: "业务验证失败",
+          tags: ["验证", "REST API", "常用"],
+          example: `// 验证错误详情
+{
+  "error": "Unprocessable Entity",
+  "errors": [
+    {"field": "age", "message": "必须大于0"},
+    {"field": "email", "message": "格式无效"}
+  ]
+}`
+        },
+        {
+          code: 423,
+          name: "Locked",
+          nameCn: "已锁定",
+          brief: "资源已被锁定（WebDAV）",
+          description: "正在访问的资源被锁定。用于WebDAV。",
+          usage: "WebDAV文件锁定",
+          tags: ["WebDAV", "锁定"]
+        },
+        {
+          code: 424,
+          name: "Failed Dependency",
+          nameCn: "依赖失败",
+          brief: "由于之前的请求失败，请求也失败了（WebDAV）",
+          description: "由于依赖于另一个请求，而该请求失败，所以此请求也失败。",
+          usage: "WebDAV批量操作",
+          tags: ["WebDAV", "依赖"]
+        },
+        {
+          code: 425,
+          name: "Too Early",
+          nameCn: "太早",
+          brief: "服务器不愿意处理可能被重放的请求",
+          description: "服务器不愿意冒险处理可能被重放的请求。",
+          usage: "TLS早期数据",
+          tags: ["TLS", "安全"]
+        },
+        {
+          code: 426,
+          name: "Upgrade Required",
+          nameCn: "需要升级",
+          brief: "客户端应切换到不同的协议",
+          description: "服务器拒绝使用当前协议执行请求，但可能在客户端升级到不同协议后愿意这样做。",
+          usage: "强制HTTPS、协议升级",
+          tags: ["协议", "升级"]
+        },
+        {
+          code: 428,
+          name: "Precondition Required",
+          nameCn: "需要前提条件",
+          brief: "服务器要求请求是有条件的",
+          description: '服务器要求请求是有条件的。旨在防止"丢失更新"问题。',
+          usage: "防止丢失更新",
+          tags: ["条件请求", "并发"]
+        },
+        {
+          code: 429,
+          name: "Too Many Requests",
+          nameCn: "请求过多",
+          brief: "用户在给定时间内发送了太多请求",
+          description: '用户在给定的时间内发送了太多请求（"速率限制"）。响应应包含Retry-After头。',
+          usage: "API限流",
+          tags: ["限流", "常用"],
+          example: `// 限流响应
+HTTP/1.1 429 Too Many Requests
+Retry-After: 60
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 0
+
+{
+  "error": "Too Many Requests",
+  "retry_after": 60
+}`
+        },
+        {
+          code: 431,
+          name: "Request Header Fields Too Large",
+          nameCn: "请求头字段过大",
+          brief: "请求头字段过大",
+          description: "服务器不愿意处理请求，因为其头字段太大。",
+          usage: "Cookie过大、请求头限制",
+          tags: ["请求头", "限制"]
+        },
+        {
+          code: 451,
+          name: "Unavailable For Legal Reasons",
+          nameCn: "因法律原因不可用",
+          brief: "由于法律原因资源不可用",
+          description:
+            "用户代理请求了一个因法律原因而无法合法提供的资源。源自雷·布拉德伯里的小说《华氏451》。",
+          usage: "内容审查、版权限制",
+          tags: ["法律", "审查"]
+        },
+
+        // 5xx Server Errors
+        {
+          code: 500,
+          name: "Internal Server Error",
+          nameCn: "服务器内部错误",
+          brief: "服务器遇到意外情况，无法完成请求",
+          description: '服务器遇到意外情况，阻止其完成请求。这是一个通用的"兜底"响应。',
+          usage: "未捕获的异常、服务器崩溃",
+          tags: ["常用", "错误"],
+          example: `// 服务器错误响应
+{
+  "error": "Internal Server Error",
+  "message": "An unexpected error occurred",
+  "request_id": "abc123"
+}`
+        },
+        {
+          code: 501,
+          name: "Not Implemented",
+          nameCn: "未实现",
+          brief: "服务器不支持完成请求所需的功能",
+          description:
+            "服务器不支持完成请求所需的功能。当服务器不识别请求方法且无法对任何资源支持该方法时使用。",
+          usage: "未实现的API端点",
+          tags: ["开发中"]
+        },
+        {
+          code: 502,
+          name: "Bad Gateway",
+          nameCn: "错误网关",
+          brief: "网关或代理从上游服务器收到无效响应",
+          description: "服务器作为网关或代理，从上游服务器收到了无效的响应。",
+          usage: "上游服务不可用、负载均衡问题",
+          tags: ["代理", "网关", "常用"],
+          example: `// Nginx 返回502
+// 通常表示后端服务无响应
+upstream backend {
+    server 127.0.0.1:3000;
+}
+// 后端服务崩溃或无法连接时返回502`
+        },
+        {
+          code: 503,
+          name: "Service Unavailable",
+          nameCn: "服务不可用",
+          brief: "服务器暂时无法处理请求",
+          description:
+            "服务器目前无法使用（由于过载或停机维护）。通常是暂时状态。响应应包含Retry-After头。",
+          usage: "维护模式、服务过载",
+          tags: ["维护", "过载", "常用"],
+          example: `// 维护模式响应
+HTTP/1.1 503 Service Unavailable
+Retry-After: 3600
+
+{
+  "error": "Service Unavailable",
+  "message": "系统维护中，预计1小时后恢复"
+}`
+        },
+        {
+          code: 504,
+          name: "Gateway Timeout",
+          nameCn: "网关超时",
+          brief: "网关或代理服务器未及时收到上游响应",
+          description: "服务器作为网关或代理，未能及时从上游服务器收到响应。",
+          usage: "上游服务响应慢",
+          tags: ["代理", "超时", "常用"]
+        },
+        {
+          code: 505,
+          name: "HTTP Version Not Supported",
+          nameCn: "不支持的HTTP版本",
+          brief: "服务器不支持请求中使用的HTTP版本",
+          description: "服务器不支持请求消息中使用的HTTP协议版本。",
+          usage: "HTTP版本兼容性",
+          tags: ["HTTP版本"]
+        },
+        {
+          code: 506,
+          name: "Variant Also Negotiates",
+          nameCn: "变体也在协商",
+          brief: "服务器存在内部配置错误",
+          description: "服务器存在内部配置错误：透明内容协商导致循环引用。",
+          usage: "配置错误",
+          tags: ["配置"]
+        },
+        {
+          code: 507,
+          name: "Insufficient Storage",
+          nameCn: "存储空间不足",
+          brief: "服务器无法存储完成请求所需的表示（WebDAV）",
+          description: "服务器无法存储完成请求所需的表示。",
+          usage: "磁盘空间不足",
+          tags: ["WebDAV", "存储"]
+        },
+        {
+          code: 508,
+          name: "Loop Detected",
+          nameCn: "检测到循环",
+          brief: "服务器检测到处理请求时的无限循环（WebDAV）",
+          description: "服务器在处理请求时检测到无限循环。",
+          usage: "WebDAV循环引用",
+          tags: ["WebDAV", "循环"]
+        },
+        {
+          code: 510,
+          name: "Not Extended",
+          nameCn: "未扩展",
+          brief: "需要进一步扩展请求才能完成",
+          description: "服务器需要进一步扩展请求才能完成请求。",
+          usage: "HTTP扩展框架",
+          tags: ["扩展"]
+        },
+        {
+          code: 511,
+          name: "Network Authentication Required",
+          nameCn: "需要网络认证",
+          brief: "客户端需要认证以获得网络访问权限",
+          description:
+            "客户端需要进行身份验证才能获得网络访问权限。用于强制门户（如WiFi登录页面）。",
+          usage: "WiFi登录门户",
+          tags: ["网络", "认证"]
+        }
+      ];
+
+      let currentCategory = "all";
+      let searchQuery = "";
+
+      // Theme
+      window.toggleTheme = function () {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      };
+
+      function loadTheme() {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      }
+
+      // Get category class
+      function getCategoryClass(code) {
+        if (code >= 100 && code < 200) return "status-1xx";
+        if (code >= 200 && code < 300) return "status-2xx";
+        if (code >= 300 && code < 400) return "status-3xx";
+        if (code >= 400 && code < 500) return "status-4xx";
+        if (code >= 500 && code < 600) return "status-5xx";
+        return "";
+      }
+
+      // Get category name
+      function getCategoryName(code) {
+        if (code >= 100 && code < 200) return "信息响应";
+        if (code >= 200 && code < 300) return "成功";
+        if (code >= 300 && code < 400) return "重定向";
+        if (code >= 400 && code < 500) return "客户端错误";
+        if (code >= 500 && code < 600) return "服务器错误";
+        return "";
+      }
+
+      // Filter functions
+      window.filterCodes = function () {
+        searchQuery = document.getElementById("searchInput").value.toLowerCase();
+        renderStatusCodes();
+      };
+
+      window.filterByCategory = function (category) {
+        currentCategory = category;
+
+        // Update active tab
+        document.querySelectorAll(".category-tab").forEach((tab) => {
+          tab.classList.toggle("active", tab.dataset.category === category);
+        });
+
+        renderStatusCodes();
+      };
+
+      window.jumpToCode = function (code) {
+        document.getElementById("searchInput").value = code.toString();
+        searchQuery = code.toString();
+        currentCategory = "all";
+
+        document.querySelectorAll(".category-tab").forEach((tab) => {
+          tab.classList.toggle("active", tab.dataset.category === "all");
+        });
+
+        renderStatusCodes();
+
+        // Expand the card
+        setTimeout(() => {
+          const card = document.querySelector(`[data-code="${code}"]`);
+          if (card) {
+            card.classList.add("expanded");
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }, 100);
+      };
+
+      // Toggle card expansion
+      window.toggleCard = function (card) {
+        card.classList.toggle("expanded");
+      };
+
+      // Render status codes
+      function renderStatusCodes() {
+        const grid = document.getElementById("statusGrid");
+        const noResults = document.getElementById("noResults");
+
+        // Filter codes
+        let filteredCodes = statusCodes.filter((status) => {
+          // Category filter
+          if (currentCategory !== "all") {
+            const catPrefix = currentCategory.replace("xx", "");
+            if (!status.code.toString().startsWith(catPrefix)) {
+              return false;
+            }
+          }
+
+          // Search filter
+          if (searchQuery) {
+            const searchLower = searchQuery.toLowerCase();
+            return (
+              status.code.toString().includes(searchQuery) ||
+              status.name.toLowerCase().includes(searchLower) ||
+              status.nameCn.includes(searchQuery) ||
+              status.brief.toLowerCase().includes(searchLower) ||
+              (status.tags && status.tags.some((tag) => tag.toLowerCase().includes(searchLower)))
+            );
+          }
+
+          return true;
+        });
+
+        // Update counts
+        updateCounts();
+
+        if (filteredCodes.length === 0) {
+          grid.innerHTML = "";
+          noResults.style.display = "block";
+          return;
+        }
+
+        noResults.style.display = "none";
+
+        grid.innerHTML = filteredCodes
+          .map((status) => {
+            const categoryClass = getCategoryClass(status.code);
+            const categoryName = getCategoryName(status.code);
+
+            return `
+                    <div class="status-card ${categoryClass}" data-code="${status.code}" onclick="toggleCard(this)">
+                        <div class="status-card-header">
+                            <span class="status-code">${status.code}</span>
+                            <div class="status-info">
+                                <div class="status-name">${status.name}</div>
+                                <div class="status-brief">${status.nameCn} - ${status.brief}</div>
+                            </div>
+                            <span class="status-category-badge">${categoryName}</span>
+                            <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                        <div class="status-card-body">
+                            <div class="detail-section">
+                                <h4>详细说明</h4>
+                                <p>${status.description}</p>
+                            </div>
+                            ${
+                              status.usage
+                                ? `
+                            <div class="detail-section">
+                                <h4>使用场景</h4>
+                                <p>${status.usage}</p>
+                            </div>
+                            `
+                                : ""
+                            }
+                            ${
+                              status.tags
+                                ? `
+                            <div class="detail-section">
+                                <h4>标签</h4>
+                                <div class="tags">
+                                    ${status.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+                                </div>
+                            </div>
+                            `
+                                : ""
+                            }
+                            ${
+                              status.example
+                                ? `
+                            <div class="detail-section">
+                                <h4>示例</h4>
+                                <div class="code-block"><pre>${escapeHtml(status.example)}</pre></div>
+                            </div>
+                            `
+                                : ""
+                            }
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function updateCounts() {
+        document.getElementById("countAll").textContent = statusCodes.length;
+        document.getElementById("count1xx").textContent = statusCodes.filter(
+          (s) => s.code >= 100 && s.code < 200
+        ).length;
+        document.getElementById("count2xx").textContent = statusCodes.filter(
+          (s) => s.code >= 200 && s.code < 300
+        ).length;
+        document.getElementById("count3xx").textContent = statusCodes.filter(
+          (s) => s.code >= 300 && s.code < 400
+        ).length;
+        document.getElementById("count4xx").textContent = statusCodes.filter(
+          (s) => s.code >= 400 && s.code < 500
+        ).length;
+        document.getElementById("count5xx").textContent = statusCodes.filter(
+          (s) => s.code >= 500 && s.code < 600
+        ).length;
+      }
+
+      window.escapeHtml = function (text) {
+        const div = document.createElement("div");
+        div.textContent = text;
+        return div.innerHTML;
+      };
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        loadTheme();
+        renderStatusCodes();
+      });
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

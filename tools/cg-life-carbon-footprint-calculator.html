@@ -1,0 +1,821 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>carbon-footprint-calculator - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - carbon-footprint-calculator">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <main class="main-content">
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🌍</div>
+            <div class="tool-info">
+              <h1>个人碳排放计算器</h1>
+              <p class="desc">估算年度 CO₂e 排放，对比全国 / 世界人均，获取减排建议</p>
+            </div>
+          </div>
+
+          <div class="toolbar">
+            <div class="btn-group">
+              <button id="btnCalc" class="btn btn-primary">计算碳排放</button>
+              <button id="btnReset" class="btn">重置</button>
+            </div>
+          </div>
+
+          <div class="cf-layout">
+            <!-- 左侧：输入区 -->
+            <div id="inputPanel">
+              <!-- 交通出行 -->
+              <div class="cf-section">
+                <div class="cf-section-title">交通出行</div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="carKm">
+                    私家车年行驶里程
+                    <span class="unit">km</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="carKm"
+                    class="cf-input"
+                    placeholder="0"
+                    min="0"
+                    step="100"
+                  />
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="carType">燃料类型</label>
+                  <select id="carType" class="cf-select">
+                    <option value="petrol">汽油</option>
+                    <option value="diesel">柴油</option>
+                    <option value="hybrid">混合动力</option>
+                    <option value="ev">纯电动</option>
+                  </select>
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="flightShort">
+                    短途航班次数（&lt;3h）
+                    <span class="unit">次/年</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="flightShort"
+                    class="cf-input"
+                    placeholder="0"
+                    min="0"
+                    step="1"
+                  />
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="flightLong">
+                    长途航班次数（≥3h）
+                    <span class="unit">次/年</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="flightLong"
+                    class="cf-input"
+                    placeholder="0"
+                    min="0"
+                    step="1"
+                  />
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="publicKm">
+                    地铁/公交年乘坐里程
+                    <span class="unit">km</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="publicKm"
+                    class="cf-input"
+                    placeholder="0"
+                    min="0"
+                    step="100"
+                  />
+                </div>
+              </div>
+
+              <!-- 家庭能源 -->
+              <div class="cf-section">
+                <div class="cf-section-title">家庭能源</div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="electricity">
+                    月均用电量
+                    <span class="unit">kWh</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="electricity"
+                    class="cf-input"
+                    placeholder="200"
+                    min="0"
+                    step="10"
+                  />
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="naturalGas">
+                    月均天然气用量
+                    <span class="unit">m³</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="naturalGas"
+                    class="cf-input"
+                    placeholder="0"
+                    min="0"
+                    step="1"
+                  />
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="householdSize">同住人数（分摊能耗）</label>
+                  <select id="householdSize" class="cf-select">
+                    <option value="1">1 人</option>
+                    <option value="2" selected="">2 人</option>
+                    <option value="3">3 人</option>
+                    <option value="4">4 人</option>
+                    <option value="5">5 人及以上</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 饮食习惯 -->
+              <div class="cf-section">
+                <div class="cf-section-title">饮食习惯</div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="dietType">饮食类型</label>
+                  <select id="dietType" class="cf-select">
+                    <option value="vegan">纯素食</option>
+                    <option value="vegetarian">蛋奶素</option>
+                    <option value="fish">海鲜为主</option>
+                    <option value="low_meat" selected="">低肉量（每周 1-3 次）</option>
+                    <option value="medium_meat">中等肉量（每周 4-5 次）</option>
+                    <option value="high_meat">高肉量（几乎每日）</option>
+                  </select>
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="foodWaste">食物浪费程度</label>
+                  <select id="foodWaste" class="cf-select">
+                    <option value="low">很少浪费</option>
+                    <option value="medium" selected="">偶尔浪费</option>
+                    <option value="high">经常浪费</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 消费购物 -->
+              <div class="cf-section">
+                <div class="cf-section-title">消费购物</div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="clothingBuy">
+                    年购买新衣数量
+                    <span class="unit">件</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="clothingBuy"
+                    class="cf-input"
+                    placeholder="20"
+                    min="0"
+                    step="1"
+                  />
+                </div>
+
+                <div class="cf-field">
+                  <label class="cf-label" for="electronicsNew">
+                    年购买新电子产品
+                    <span class="unit">件</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="electronicsNew"
+                    class="cf-input"
+                    placeholder="1"
+                    min="0"
+                    step="1"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧：结果区 -->
+            <div id="resultPanel">
+              <div class="cf-placeholder" id="cfPlaceholder">
+                <div class="cf-placeholder-icon">🌿</div>
+                <div class="cf-placeholder-text">
+                  填写左侧信息后，点击「计算碳排放」
+                  <br />
+                  即可查看您的年度碳排放估算与减排建议
+                </div>
+              </div>
+
+              <div class="cf-result-panel" id="cfResult" style="display: none">
+                <!-- 总量 -->
+                <div class="cf-total">
+                  <div class="cf-total-label">您的年度碳排放量</div>
+                  <div class="cf-total-value" id="totalValue">0</div>
+                  <div class="cf-total-unit">吨 CO₂e / 年</div>
+                </div>
+
+                <!-- 分项明细 -->
+                <div class="cf-breakdown">
+                  <div class="cf-breakdown-title">分项明细</div>
+
+                  <div class="cf-breakdown-item">
+                    <div class="cf-breakdown-row">
+                      <span class="cf-breakdown-name">🚗 交通出行</span>
+                      <span class="cf-breakdown-val" id="valTransport">-</span>
+                    </div>
+                    <div class="cf-bar-wrap">
+                      <div
+                        class="cf-bar cf-bar-transport"
+                        id="barTransport"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="cf-breakdown-item">
+                    <div class="cf-breakdown-row">
+                      <span class="cf-breakdown-name">⚡ 家庭能源</span>
+                      <span class="cf-breakdown-val" id="valEnergy">-</span>
+                    </div>
+                    <div class="cf-bar-wrap">
+                      <div class="cf-bar cf-bar-energy" id="barEnergy" style="width: 0%"></div>
+                    </div>
+                  </div>
+
+                  <div class="cf-breakdown-item">
+                    <div class="cf-breakdown-row">
+                      <span class="cf-breakdown-name">🥩 饮食</span>
+                      <span class="cf-breakdown-val" id="valDiet">-</span>
+                    </div>
+                    <div class="cf-bar-wrap">
+                      <div class="cf-bar cf-bar-diet" id="barDiet" style="width: 0%"></div>
+                    </div>
+                  </div>
+
+                  <div class="cf-breakdown-item">
+                    <div class="cf-breakdown-row">
+                      <span class="cf-breakdown-name">🛍️ 消费购物</span>
+                      <span class="cf-breakdown-val" id="valGoods">-</span>
+                    </div>
+                    <div class="cf-bar-wrap">
+                      <div class="cf-bar cf-bar-goods" id="barGoods" style="width: 0%"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 横向对比 -->
+                <div class="cf-compare">
+                  <div class="cf-compare-title">与人均对比</div>
+
+                  <div class="cf-compare-item">
+                    <div
+                      class="cf-compare-dot"
+                      style="background: var(--color-accent-primary)"
+                    ></div>
+                    <span class="cf-compare-label">您的排放</span>
+                    <span
+                      class="cf-compare-val"
+                      id="cmpYou"
+                      style="color: var(--color-accent-primary)"
+                    >
+                      -
+                    </span>
+                  </div>
+
+                  <div class="cf-compare-item">
+                    <div class="cf-compare-dot" style="background: #f72585"></div>
+                    <span class="cf-compare-label">中国人均（约 8.4 t）</span>
+                    <span class="cf-compare-val" style="color: #f72585">8.4 t</span>
+                    <span class="cf-compare-diff" id="diffChina">-</span>
+                  </div>
+
+                  <div class="cf-compare-item">
+                    <div class="cf-compare-dot" style="background: #fbbf24"></div>
+                    <span class="cf-compare-label">全球人均（约 4.7 t）</span>
+                    <span class="cf-compare-val" style="color: #fbbf24">4.7 t</span>
+                    <span class="cf-compare-diff" id="diffWorld">-</span>
+                  </div>
+
+                  <div class="cf-compare-item">
+                    <div class="cf-compare-dot" style="background: #10b981"></div>
+                    <span class="cf-compare-label">2050 可持续目标（约 2 t）</span>
+                    <span class="cf-compare-val" style="color: #10b981">2.0 t</span>
+                    <span class="cf-compare-diff" id="diffTarget">-</span>
+                  </div>
+                </div>
+
+                <!-- 减排建议 -->
+                <div class="cf-suggestions" id="cfSuggestions">
+                  <div class="cf-suggestions-title">减排建议</div>
+                  <div id="tipsContainer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="status-bar">
+            <div id="status" class="status"></div>
+            <div id="stats" class="stats">
+              <div class="stat-item">
+                <span class="stat-value" id="statTotal">-</span>
+                <span class="stat-label">吨 CO₂e / 年</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" id="statVsWorld">-</span>
+                <span class="stat-label">vs 全球人均</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <p>
+            <a href="https://github.com/xllgreen/xllgreen.github.io" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <span>·</span>
+            <span>纯前端 · 无服务器</span>
+            <span>·</span>
+            <a href="../../index.html">WebUtils</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "https://tools.realtime-ai.chat/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "生活工具",
+            "item": "https://tools.realtime-ai.chat/#life"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "个人碳排放计算器",
+            "item": "https://tools.realtime-ai.chat/tools/life/carbon-footprint-calculator.html"
+          }
+        ]
+      }
+    </script>
+    <script>
+      // ===== 排放因子（单位：kg CO₂e） =====
+      // 数据来源：IPCC、IEA、中国生态环境部等公开报告
+      var EF = {
+        // 交通：每公里 kg CO₂e
+        car: { petrol: 0.21, diesel: 0.17, hybrid: 0.11, ev: 0.07 },
+        flightShort: 255, // 每次短途航班（含辐射强迫系数）
+        flightLong: 1100, // 每次长途航班
+        publicTransport: 0.04, // 地铁/公交 每公里
+
+        // 家庭能源：中国电网平均排放因子
+        electricity: 0.581, // kg CO₂e / kWh（中国均值）
+        naturalGas: 2.0, // kg CO₂e / m³
+
+        // 饮食：年均 kg CO₂e
+        diet: {
+          vegan: 1000,
+          vegetarian: 1400,
+          fish: 1700,
+          low_meat: 2100,
+          medium_meat: 2700,
+          high_meat: 3300
+        },
+        foodWaste: { low: 1.0, medium: 1.12, high: 1.25 },
+
+        // 消费：每件 kg CO₂e
+        clothing: 10,
+        electronics: 200
+      };
+
+      // 基准对比（吨 CO₂e）
+      var BENCHMARKS = { china: 8.4, world: 4.7, target: 2.0 };
+
+      var statusEl = document.getElementById("status");
+      var statsEl = document.getElementById("stats");
+      var statTotalEl = document.getElementById("statTotal");
+      var statVsWorldEl = document.getElementById("statVsWorld");
+
+      function getNum(id, def) {
+        var v = parseFloat(document.getElementById(id).value);
+        return isNaN(v) || v < 0 ? def : v;
+      }
+      function getStr(id) {
+        return document.getElementById(id).value;
+      }
+
+      function calcCarbon() {
+        var carKm = getNum("carKm", 0);
+        var carType = getStr("carType");
+        var flightShort = getNum("flightShort", 0);
+        var flightLong = getNum("flightLong", 0);
+        var publicKm = getNum("publicKm", 0);
+        var electricity = getNum("electricity", 0);
+        var naturalGas = getNum("naturalGas", 0);
+        var householdSize = parseInt(getStr("householdSize"), 10) || 1;
+        var dietType = getStr("dietType");
+        var foodWaste = getStr("foodWaste");
+        var clothingBuy = getNum("clothingBuy", 0);
+        var electronicsNew = getNum("electronicsNew", 0);
+
+        // 交通（kg）
+        var tCar = carKm * EF.car[carType];
+        var tFlightS = flightShort * EF.flightShort;
+        var tFlightL = flightLong * EF.flightLong;
+        var tPublic = publicKm * EF.publicTransport;
+        var transport = tCar + tFlightS + tFlightL + tPublic;
+
+        // 家庭能源（分摊后，kg）
+        var eElec = electricity * 12 * EF.electricity;
+        var eGas = naturalGas * 12 * EF.naturalGas;
+        var energy = (eElec + eGas) / householdSize;
+
+        // 饮食（kg）
+        var diet = EF.diet[dietType] * EF.foodWaste[foodWaste];
+
+        // 消费（kg）
+        var goods = clothingBuy * EF.clothing + electronicsNew * EF.electronics;
+
+        var totalKg = transport + energy + diet + goods;
+        var totalT = totalKg / 1000;
+
+        return {
+          transport: transport / 1000,
+          energy: energy / 1000,
+          diet: diet / 1000,
+          goods: goods / 1000,
+          total: totalT
+        };
+      }
+
+      function pct(part, maxVal) {
+        if (maxVal === 0) return 0;
+        return Math.min(100, (part / maxVal) * 100).toFixed(1);
+      }
+
+      function diffBadge(userVal, ref) {
+        var diff = userVal - ref;
+        var sign = diff >= 0 ? "+" : "";
+        var cls = diff >= 0 ? "cf-diff-above" : "cf-diff-below";
+        return '<span class="cf-compare-diff ' + cls + '">' + sign + diff.toFixed(1) + " t</span>";
+      }
+
+      function buildTips(res) {
+        var tips = [];
+        if (res.transport > 2) {
+          if (getNum("carKm", 0) > 10000) {
+            tips.push({
+              icon: "🚌",
+              text: "您的驾车里程较高，尝试将部分短途出行换成公共交通或骑行，可显著减少交通碳排。"
+            });
+          }
+          if (getNum("flightLong", 0) > 2) {
+            tips.push({
+              icon: "✈️",
+              text: "长途飞行是碳排的大头，考虑减少不必要的长途飞行，或选择直飞（中转更耗油）。"
+            });
+          }
+          if (getStr("carType") === "petrol" || getStr("carType") === "diesel") {
+            tips.push({
+              icon: "⚡",
+              text: "换购混合动力或纯电动车可将行驶碳排降低 40%–70%。"
+            });
+          }
+        }
+        if (res.energy > 1.5) {
+          tips.push({
+            icon: "💡",
+            text: "减少家庭能耗：使用 LED 灯、提高空调温度设定（夏天 26°C 以上）、购买高能效家电。"
+          });
+        }
+        if (res.diet > 2) {
+          tips.push({
+            icon: "🥗",
+            text: "饮食碳排偏高，减少红肉（尤其是牛肉）摄入，增加蔬菜、豆类比例，可减少 20%–50% 饮食排放。"
+          });
+        }
+        if (getStr("foodWaste") === "high") {
+          tips.push({
+            icon: "🗑️",
+            text: "减少食物浪费是简单有效的减排方式，按需采购、合理规划膳食。"
+          });
+        }
+        if (res.goods > 0.5) {
+          tips.push({
+            icon: "♻️",
+            text: "购买二手衣物或选择可持续品牌，延长电子产品使用寿命，可大幅降低消费碳排。"
+          });
+        }
+        if (tips.length === 0) {
+          tips.push({ icon: "🌟", text: "您的碳排放已较低，继续保持绿色生活方式，为地球减负！" });
+        }
+        return tips;
+      }
+
+      function renderResult(res) {
+        document.getElementById("cfPlaceholder").style.display = "none";
+        var cfResult = document.getElementById("cfResult");
+        cfResult.style.display = "flex";
+
+        document.getElementById("totalValue").textContent = res.total.toFixed(2);
+        document.getElementById("valTransport").textContent = res.transport.toFixed(2) + " t";
+        document.getElementById("valEnergy").textContent = res.energy.toFixed(2) + " t";
+        document.getElementById("valDiet").textContent = res.diet.toFixed(2) + " t";
+        document.getElementById("valGoods").textContent = res.goods.toFixed(2) + " t";
+
+        // 进度条（以各分项最大值为基准）
+        var maxSection = Math.max(res.transport, res.energy, res.diet, res.goods, 0.001);
+        document.getElementById("barTransport").style.width = pct(res.transport, maxSection) + "%";
+        document.getElementById("barEnergy").style.width = pct(res.energy, maxSection) + "%";
+        document.getElementById("barDiet").style.width = pct(res.diet, maxSection) + "%";
+        document.getElementById("barGoods").style.width = pct(res.goods, maxSection) + "%";
+
+        // 对比徽章（outerHTML 替换）
+        document.getElementById("cmpYou").textContent = res.total.toFixed(2) + " t";
+        document.getElementById("diffChina").outerHTML = diffBadge(res.total, BENCHMARKS.china);
+        document.getElementById("diffWorld").outerHTML = diffBadge(res.total, BENCHMARKS.world);
+        document.getElementById("diffTarget").outerHTML = diffBadge(res.total, BENCHMARKS.target);
+
+        // 减排建议
+        var tips = buildTips(res);
+        var container = document.getElementById("tipsContainer");
+        container.innerHTML = "";
+        tips.forEach(function (tip) {
+          var div = document.createElement("div");
+          div.className = "cf-tip";
+          var iconSpan = document.createElement("span");
+          iconSpan.className = "cf-tip-icon";
+          iconSpan.textContent = tip.icon;
+          var textSpan = document.createElement("span");
+          textSpan.textContent = tip.text;
+          div.appendChild(iconSpan);
+          div.appendChild(textSpan);
+          container.appendChild(div);
+        });
+
+        // 状态栏
+        var vsWorld = res.total - BENCHMARKS.world;
+        statTotalEl.textContent = res.total.toFixed(2);
+        statVsWorldEl.textContent = (vsWorld >= 0 ? "+" : "") + vsWorld.toFixed(2) + " t";
+        statsEl.classList.add("show");
+
+        if (res.total <= BENCHMARKS.target) {
+          statusEl.textContent = "低于可持续目标，优秀！";
+          statusEl.className = "status success";
+        } else if (res.total <= BENCHMARKS.world) {
+          statusEl.textContent = "低于全球人均，保持下去！";
+          statusEl.className = "status success";
+        } else if (res.total <= BENCHMARKS.china) {
+          statusEl.textContent = "接近中国人均水平，还有减排空间。";
+          statusEl.className = "status";
+        } else {
+          statusEl.textContent = "高于中国人均，建议参考减排建议。";
+          statusEl.className = "status error";
+        }
+      }
+
+      document.getElementById("btnCalc").onclick = function () {
+        var res = calcCarbon();
+        renderResult(res);
+      };
+
+      document.getElementById("btnReset").onclick = function () {
+        [
+          "carKm",
+          "flightShort",
+          "flightLong",
+          "publicKm",
+          "electricity",
+          "naturalGas",
+          "clothingBuy",
+          "electronicsNew"
+        ].forEach(function (id) {
+          document.getElementById(id).value = "";
+        });
+        document.getElementById("carType").value = "petrol";
+        document.getElementById("householdSize").value = "2";
+        document.getElementById("dietType").value = "low_meat";
+        document.getElementById("foodWaste").value = "medium";
+
+        document.getElementById("cfPlaceholder").style.display = "flex";
+        document.getElementById("cfResult").style.display = "none";
+        statsEl.classList.remove("show");
+        statusEl.textContent = "";
+        statusEl.className = "status";
+      };
+
+      window.toggleTheme = function () {
+        var html = document.documentElement;
+        var currentTheme = html.getAttribute("data-theme") || "dark";
+        var newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      };
+      function initTheme() {
+        var savedTheme = localStorage.getItem("theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme"))
+          document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+      });
+
+      initTheme();
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

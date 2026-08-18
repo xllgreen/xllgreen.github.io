@@ -1,0 +1,668 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>couplet-generator - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - couplet-generator">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <div class="container">
+        <a href="../../index.html" class="back-link">← 返回</a>
+        <h1>对联生成器</h1>
+        <p class="subtitle">生成各种主题的中国传统对联</p>
+
+        <div class="card">
+          <div class="card-title">选择对联主题</div>
+          <div class="theme-tags">
+            <span class="theme-tag active" data-theme="spring" onclick="setTheme('spring')">
+              春节
+            </span>
+            <span class="theme-tag" data-theme="wedding" onclick="setTheme('wedding')">婚庆</span>
+            <span class="theme-tag" data-theme="birthday" onclick="setTheme('birthday')">寿庆</span>
+            <span class="theme-tag" data-theme="business" onclick="setTheme('business')">开业</span>
+            <span class="theme-tag" data-theme="study" onclick="setTheme('study')">励志</span>
+            <span class="theme-tag" data-theme="home" onclick="setTheme('home')">乔迁</span>
+            <span class="theme-tag" data-theme="classic" onclick="setTheme('classic')">经典</span>
+            <span class="theme-tag" data-theme="nature" onclick="setTheme('nature')">自然</span>
+          </div>
+
+          <button class="btn btn-primary" onclick="generate()">生成对联</button>
+
+          <div class="custom-input">
+            <label>或输入上联，自动匹配下联：</label>
+            <input type="text" id="upperInput" placeholder="请输入上联（5-11字）" maxlength="11" />
+            <button class="btn btn-primary" onclick="matchLower()">匹配下联</button>
+          </div>
+        </div>
+
+        <div class="card" id="resultCard">
+          <div class="couplet-display">
+            <div class="couplet-scroll">
+              <div class="scroll-text" id="upperText">天增岁月人增寿</div>
+            </div>
+            <div class="couplet-scroll horizontal">
+              <div class="scroll-text horizontal" id="horizontalText">福</div>
+            </div>
+            <div class="couplet-scroll">
+              <div class="scroll-text" id="lowerText">春满乾坤福满门</div>
+            </div>
+          </div>
+
+          <div class="couplet-info">
+            <div class="theme" id="coupletTheme">春节对联</div>
+            <div class="meaning" id="coupletMeaning">
+              寓意：岁月增长，人也增添寿命；春天充满天地，福气充满家门。表达对新年的美好祝愿。
+            </div>
+          </div>
+
+          <div style="text-align: center">
+            <button class="copy-btn" onclick="copyCouplet()">复制对联</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="history-section">
+            <div class="history-title">最近生成</div>
+            <div class="history-list" id="historyList">
+              <div style="color: var(--text-secondary); text-align: center; padding: 20px">
+                暂无历史记录
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="tips">
+            <h4>对联小知识</h4>
+            <ul>
+              <li>
+                <strong>上联</strong>
+                ：贴在门右边（面对门时的右手边），最后一个字为仄声（三声、四声）
+              </li>
+              <li>
+                <strong>下联</strong>
+                ：贴在门左边（面对门时的左手边），最后一个字为平声（一声、二声）
+              </li>
+              <li>
+                <strong>横批</strong>
+                ：贴在门楣上方，一般为四个字
+              </li>
+              <li>
+                <strong>对仗</strong>
+                ：上下联字数相等，词性相同，平仄相对
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 对联数据库
+      const coupletDatabase = {
+        spring: [
+          {
+            upper: "天增岁月人增寿",
+            lower: "春满乾坤福满门",
+            horizontal: "福星高照",
+            meaning: "岁月增长人也增寿，春天充满天地福气充满家门。"
+          },
+          {
+            upper: "爆竹声声辞旧岁",
+            lower: "梅花点点迎新春",
+            horizontal: "辞旧迎新",
+            meaning: "爆竹声声送走旧的一年，梅花朵朵迎来新的春天。"
+          },
+          {
+            upper: "一帆风顺年年好",
+            lower: "万事如意步步高",
+            horizontal: "吉祥如意",
+            meaning: "祝愿事业顺利年年好运，万事如愿步步高升。"
+          },
+          {
+            upper: "金鸡报晓迎春来",
+            lower: "喜鹊登梅报喜讯",
+            horizontal: "春回大地",
+            meaning: "金鸡报晓迎接春天到来，喜鹊登上梅枝报告喜讯。"
+          },
+          {
+            upper: "红梅含苞傲冬雪",
+            lower: "绿柳吐絮迎春风",
+            horizontal: "春意盎然",
+            meaning: "红梅含苞傲立冬雪中，绿柳吐出柳絮迎春风。"
+          },
+          {
+            upper: "春风送暖入屠苏",
+            lower: "瑞雪兆丰迎吉年",
+            horizontal: "新春大吉",
+            meaning: "春风带来温暖，畅饮屠苏酒；瑞雪预示丰年，迎来吉祥年。"
+          },
+          {
+            upper: "和顺一门有百福",
+            lower: "平安二字值千金",
+            horizontal: "万象更新",
+            meaning: "家庭和顺就有百种福气，平安二字价值千金。"
+          },
+          {
+            upper: "四季平安好运来",
+            lower: "八方财宝进门庭",
+            horizontal: "招财进宝",
+            meaning: "四季平安好运降临，八方财宝进入家门。"
+          }
+        ],
+        wedding: [
+          {
+            upper: "百年恩爱双心结",
+            lower: "千里姻缘一线牵",
+            horizontal: "天作之合",
+            meaning: "百年恩爱两颗心相连，千里姻缘一条红线牵。"
+          },
+          {
+            upper: "龙凤呈祥添喜气",
+            lower: "鸳鸯比翼共翱翔",
+            horizontal: "永结同心",
+            meaning: "龙凤呈祥增添喜庆气氛，鸳鸯比翼共同飞翔。"
+          },
+          {
+            upper: "花好月圆人团聚",
+            lower: "琴瑟和鸣永相随",
+            horizontal: "百年好合",
+            meaning: "花好月圆人团聚，琴瑟和谐永相伴。"
+          },
+          {
+            upper: "才子佳人天设地造",
+            lower: "郎情妾意地久天长",
+            horizontal: "佳偶天成",
+            meaning: "才子佳人是天造地设的一对，郎情妾意地久天长。"
+          },
+          {
+            upper: "红烛昏罗帐洞房春暖",
+            lower: "彩灯结绮窗新人喜临",
+            horizontal: "喜结良缘",
+            meaning: "红烛映照罗帐洞房春暖，彩灯装饰窗户新人喜临。"
+          }
+        ],
+        birthday: [
+          {
+            upper: "福如东海长流水",
+            lower: "寿比南山不老松",
+            horizontal: "福寿双全",
+            meaning: "福气如东海水长流不息，寿命如南山松长青不老。"
+          },
+          {
+            upper: "春秋不老常青树",
+            lower: "岁月留香满庭芳",
+            horizontal: "寿比南山",
+            meaning: "岁月不老如常青树，时光留香满庭芬芳。"
+          },
+          {
+            upper: "日月同辉增福寿",
+            lower: "山河并秀祝长春",
+            horizontal: "松鹤延年",
+            meaning: "日月同辉增添福寿，山河并秀祝愿长寿。"
+          },
+          {
+            upper: "仁者静寿德者康",
+            lower: "智者乐水福者宁",
+            horizontal: "仁寿双全",
+            meaning: "仁德之人静享长寿，智慧之人福寿安宁。"
+          }
+        ],
+        business: [
+          {
+            upper: "生意兴隆通四海",
+            lower: "财源茂盛达三江",
+            horizontal: "招财进宝",
+            meaning: "生意兴隆通达四海，财源茂盛遍及三江。"
+          },
+          {
+            upper: "门迎百福福临门",
+            lower: "户纳千祥祥满户",
+            horizontal: "开业大吉",
+            meaning: "门前迎来百福福气临门，户中纳入千祥祥瑞满户。"
+          },
+          {
+            upper: "鸿图大展添锦绣",
+            lower: "事业辉煌耀日月",
+            horizontal: "财源广进",
+            meaning: "宏图大展前程锦绣，事业辉煌光耀日月。"
+          },
+          {
+            upper: "诚信为本誉满天下",
+            lower: "品质第一客似云来",
+            horizontal: "日进斗金",
+            meaning: "以诚信为本美誉满天下，以品质为先顾客如云来。"
+          }
+        ],
+        study: [
+          {
+            upper: "书山有路勤为径",
+            lower: "学海无涯苦作舟",
+            horizontal: "天道酬勤",
+            meaning: "读书攀登要以勤奋为路，学海无边要以刻苦为舟。"
+          },
+          {
+            upper: "宝剑锋从磨砺出",
+            lower: "梅花香自苦寒来",
+            horizontal: "自强不息",
+            meaning: "宝剑锋利来自磨砺，梅花芬芳源于苦寒。"
+          },
+          {
+            upper: "博学多才铸栋梁",
+            lower: "勤奋好学成大器",
+            horizontal: "学海无涯",
+            meaning: "博学多才能成为栋梁之材，勤奋好学能成就大器。"
+          },
+          {
+            upper: "千淘万漉虽辛苦",
+            lower: "吹尽狂沙始到金",
+            horizontal: "持之以恒",
+            meaning: "千淘万漉虽然辛苦，吹尽狂沙才能得到真金。"
+          }
+        ],
+        home: [
+          {
+            upper: "乔迁喜天地人共喜",
+            lower: "新居荣富贵福来临",
+            horizontal: "乔迁之喜",
+            meaning: "乔迁之喜天地人共同欢喜，新居荣耀富贵福气来临。"
+          },
+          {
+            upper: "华堂焕彩迎春到",
+            lower: "新居增辉沐喜来",
+            horizontal: "吉宅纳福",
+            meaning: "华美厅堂焕发光彩迎接春天，新居增添光辉沐浴喜气。"
+          },
+          {
+            upper: "门庭若市财源广",
+            lower: "家道兴隆福满堂",
+            horizontal: "紫气东来",
+            meaning: "门庭如市财源广进，家道兴隆福满堂。"
+          }
+        ],
+        classic: [
+          {
+            upper: "风声雨声读书声声声入耳",
+            lower: "家事国事天下事事事关心",
+            horizontal: "心系天下",
+            meaning: "风声雨声读书声声声都听入耳中，家事国事天下事事事都要关心。"
+          },
+          {
+            upper: "有志者事竟成",
+            lower: "苦心人天不负",
+            horizontal: "天道酬勤",
+            meaning: "有志向的人事情终究能成功，有苦心的人老天不会辜负。"
+          },
+          {
+            upper: "海纳百川有容乃大",
+            lower: "壁立千仞无欲则刚",
+            horizontal: "大海无疆",
+            meaning: "大海容纳百川是因为有容量才能广大，峭壁直立千仞是因为无欲望才能刚强。"
+          },
+          {
+            upper: "欲穷千里目",
+            lower: "更上一层楼",
+            horizontal: "登高望远",
+            meaning: "想要看到千里之外的景色，就要再登上一层楼。"
+          }
+        ],
+        nature: [
+          {
+            upper: "山清水秀风光好",
+            lower: "鸟语花香春意浓",
+            horizontal: "春色满园",
+            meaning: "山清水秀风光美好，鸟语花香春意浓郁。"
+          },
+          {
+            upper: "云淡风轻近午天",
+            lower: "傍花随柳过前川",
+            horizontal: "心旷神怡",
+            meaning: "云淡风轻接近中午时分，傍着花丛随着柳树走过前面的河川。"
+          },
+          {
+            upper: "碧水青山映日月",
+            lower: "金风玉露润人间",
+            horizontal: "天地和谐",
+            meaning: "碧水青山映照日月，金风玉露滋润人间。"
+          }
+        ]
+      };
+
+      let currentTheme = "spring";
+      let currentCouplet = null;
+      let history = [];
+
+      function setTheme(theme) {
+        currentTheme = theme;
+        document.querySelectorAll(".theme-tag").forEach((tag) => {
+          tag.classList.toggle("active", tag.dataset.theme === theme);
+        });
+      }
+
+      function generate() {
+        const couplets = coupletDatabase[currentTheme];
+        const randomIndex = Math.floor(Math.random() * couplets.length);
+        currentCouplet = couplets[randomIndex];
+
+        displayCouplet(currentCouplet);
+        addToHistory(currentCouplet);
+      }
+
+      function displayCouplet(couplet) {
+        document.getElementById("upperText").textContent = couplet.upper;
+        document.getElementById("lowerText").textContent = couplet.lower;
+        document.getElementById("horizontalText").textContent = couplet.horizontal;
+
+        const themeNames = {
+          spring: "春节对联",
+          wedding: "婚庆对联",
+          birthday: "寿庆对联",
+          business: "开业对联",
+          study: "励志对联",
+          home: "乔迁对联",
+          classic: "经典对联",
+          nature: "自然对联"
+        };
+        document.getElementById("coupletTheme").textContent = themeNames[currentTheme] || "对联";
+        document.getElementById("coupletMeaning").textContent = "寓意：" + couplet.meaning;
+      }
+
+      function matchLower() {
+        const upperInput = document.getElementById("upperInput").value.trim();
+        if (!upperInput) {
+          alert("请输入上联");
+          return;
+        }
+
+        if (upperInput.length < 5 || upperInput.length > 11) {
+          alert("上联长度应在5-11字之间");
+          return;
+        }
+
+        // 简单的下联匹配逻辑
+        const lowerResponses = {
+          天增岁月人增寿: "春满乾坤福满门",
+          爆竹声声辞旧岁: "梅花点点迎新春",
+          书山有路勤为径: "学海无涯苦作舟",
+          福如东海长流水: "寿比南山不老松",
+          生意兴隆通四海: "财源茂盛达三江",
+          海纳百川有容乃大: "壁立千仞无欲则刚"
+        };
+
+        let matchedLower = lowerResponses[upperInput];
+
+        if (!matchedLower) {
+          // 生成一个随机下联
+          const genericLowers = [
+            "福满人间喜盈门",
+            "春回大地景色新",
+            "乐享人生步步高",
+            "财源广进年年旺",
+            "鹏程万里展宏图",
+            "心想事成皆如意"
+          ];
+          // 根据字数选择
+          const sameLength = genericLowers.filter((l) => l.length === upperInput.length);
+          if (sameLength.length > 0) {
+            matchedLower = sameLength[Math.floor(Math.random() * sameLength.length)];
+          } else {
+            matchedLower = genericLowers[Math.floor(Math.random() * genericLowers.length)];
+          }
+        }
+
+        currentCouplet = {
+          upper: upperInput,
+          lower: matchedLower,
+          horizontal: "吉祥如意",
+          meaning: "根据您输入的上联匹配的下联。"
+        };
+
+        displayCouplet(currentCouplet);
+        addToHistory(currentCouplet);
+      }
+
+      function addToHistory(couplet) {
+        // 避免重复
+        const exists = history.some((h) => h.upper === couplet.upper && h.lower === couplet.lower);
+        if (!exists) {
+          history.unshift(couplet);
+          if (history.length > 5) history.pop();
+          renderHistory();
+        }
+      }
+
+      function renderHistory() {
+        const list = document.getElementById("historyList");
+        list.textContent = "";
+
+        if (history.length === 0) {
+          const empty = document.createElement("div");
+          empty.style.cssText = "color: var(--text-secondary); text-align: center; padding: 20px;";
+          empty.textContent = "暂无历史记录";
+          list.appendChild(empty);
+          return;
+        }
+
+        history.forEach((couplet) => {
+          const item = document.createElement("div");
+          item.className = "history-item";
+          item.onclick = () => {
+            currentCouplet = couplet;
+            displayCouplet(couplet);
+          };
+
+          const upper = document.createElement("div");
+          upper.className = "upper";
+          upper.textContent = "上：" + couplet.upper;
+
+          const lower = document.createElement("div");
+          lower.className = "lower";
+          lower.textContent = "下：" + couplet.lower;
+
+          item.appendChild(upper);
+          item.appendChild(lower);
+          list.appendChild(item);
+        });
+      }
+
+      function copyCouplet() {
+        if (!currentCouplet) return;
+
+        const text = `上联：${currentCouplet.upper}\n下联：${currentCouplet.lower}\n横批：${currentCouplet.horizontal}`;
+        navigator.clipboard.writeText(text).then(() => {
+          alert("对联已复制到剪贴板");
+        });
+      }
+
+      // 初始生成一副对联
+      generate();
+
+      // Theme toggle
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        document.getElementById("theme-icon").textContent = newTheme === "light" ? "☀️" : "🌙";
+        localStorage.setItem("theme", newTheme);
+      }
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      if (savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+        document.getElementById("theme-icon").textContent = "☀️";
+      }
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

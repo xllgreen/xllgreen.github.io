@@ -1,0 +1,1026 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>og-image-generator - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - og-image-generator">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <main class="main-content">
+        <div class="tool-card">
+          <div class="tool-header">
+            <div class="tool-icon">🖼️</div>
+            <div class="tool-info">
+              <h1>社交媒体 OG 图生成器</h1>
+              <p class="desc">
+                设计 Open Graph / Twitter Card 分享预览图，支持多模板与多平台尺寸，纯本地生成
+              </p>
+            </div>
+          </div>
+
+          <!-- 工具栏 -->
+          <div class="toolbar">
+            <div class="btn-group">
+              <button id="btnRender" class="btn btn-primary">渲染预览</button>
+            </div>
+            <div class="btn-group">
+              <button id="btnDownloadPng" class="btn">下载 PNG</button>
+              <button id="btnCopyDataUrl" class="btn">复制 Data URL</button>
+              <button id="btnReset" class="btn">重置</button>
+            </div>
+          </div>
+
+          <!-- 平台尺寸选项卡 -->
+          <div class="platform-tabs" role="tablist" aria-label="目标平台">
+            <button class="platform-tab active" data-platform="og" role="tab" id="tabOg">
+              OG / Facebook (1200×630)
+            </button>
+            <button class="platform-tab" data-platform="twitter" role="tab" id="tabTwitter">
+              Twitter Card (1200×600)
+            </button>
+            <button class="platform-tab" data-platform="linkedin" role="tab" id="tabLinkedIn">
+              LinkedIn (1200×627)
+            </button>
+          </div>
+
+          <!-- 主体布局 -->
+          <div class="og-layout">
+            <!-- 左侧控件 -->
+            <div class="og-controls">
+              <!-- 模板 -->
+              <div class="control-group">
+                <span class="control-label">模板</span>
+                <div class="template-grid">
+                  <button class="tpl-btn active" data-tpl="gradient">渐变色块</button>
+                  <button class="tpl-btn" data-tpl="dark">暗色极简</button>
+                  <button class="tpl-btn" data-tpl="light">浅色简洁</button>
+                  <button class="tpl-btn" data-tpl="split">分栏布局</button>
+                  <button class="tpl-btn" data-tpl="centered">居中大字</button>
+                  <button class="tpl-btn" data-tpl="branded">品牌横幅</button>
+                </div>
+              </div>
+
+              <!-- 标题 -->
+              <div class="control-group">
+                <label class="control-label" for="inputTitle">标题</label>
+                <input
+                  id="inputTitle"
+                  class="control-input"
+                  type="text"
+                  placeholder="在这里输入分享标题…"
+                  maxlength="120"
+                />
+              </div>
+
+              <!-- 描述 -->
+              <div class="control-group">
+                <label class="control-label" for="inputDesc">描述（可选）</label>
+                <textarea
+                  id="inputDesc"
+                  class="control-input"
+                  placeholder="简短说明，Twitter Card / LinkedIn 将展示此文字…"
+                  maxlength="200"
+                ></textarea>
+              </div>
+
+              <!-- 站点名称 / 标语 -->
+              <div class="control-group">
+                <label class="control-label" for="inputSite">站点名称 / 标语</label>
+                <input
+                  id="inputSite"
+                  class="control-input"
+                  type="text"
+                  placeholder="example.com"
+                  maxlength="60"
+                />
+              </div>
+
+              <!-- Emoji / 图标 -->
+              <div class="control-group">
+                <label class="control-label" for="inputEmoji">图标 Emoji（可选）</label>
+                <input
+                  id="inputEmoji"
+                  class="control-input"
+                  type="text"
+                  placeholder="🚀"
+                  maxlength="4"
+                />
+              </div>
+
+              <!-- 字号 -->
+              <div class="control-group">
+                <span class="control-label">字号</span>
+                <div class="font-size-row">
+                  <div class="control-group">
+                    <span class="control-label" style="font-size: 0.65rem">标题</span>
+                    <div class="range-wrap">
+                      <input
+                        id="titleSize"
+                        type="range"
+                        min="32"
+                        max="96"
+                        value="60"
+                        aria-label="标题字号"
+                      />
+                      <span class="range-val" id="titleSizeVal">60</span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <span class="control-label" style="font-size: 0.65rem">描述</span>
+                    <div class="range-wrap">
+                      <input
+                        id="descSize"
+                        type="range"
+                        min="16"
+                        max="48"
+                        value="28"
+                        aria-label="描述字号"
+                      />
+                      <span class="range-val" id="descSizeVal">28</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 颜色 -->
+              <div class="control-group">
+                <span class="control-label">颜色</span>
+                <div class="color-row">
+                  <div class="color-group">
+                    <span class="control-label" style="font-size: 0.65rem">背景色 1</span>
+                    <div class="color-input-wrap">
+                      <input
+                        id="colorBg1"
+                        class="color-swatch"
+                        type="color"
+                        value="#0a0a0f"
+                        aria-label="背景色 1"
+                      />
+                      <input
+                        id="colorBg1Hex"
+                        class="color-hex"
+                        type="text"
+                        value="#0a0a0f"
+                        maxlength="7"
+                        aria-label="背景色 1 十六进制"
+                      />
+                    </div>
+                  </div>
+                  <div class="color-group">
+                    <span class="control-label" style="font-size: 0.65rem">背景色 2 / 渐变</span>
+                    <div class="color-input-wrap">
+                      <input
+                        id="colorBg2"
+                        class="color-swatch"
+                        type="color"
+                        value="#1a1a2e"
+                        aria-label="背景色 2"
+                      />
+                      <input
+                        id="colorBg2Hex"
+                        class="color-hex"
+                        type="text"
+                        value="#1a1a2e"
+                        maxlength="7"
+                        aria-label="背景色 2 十六进制"
+                      />
+                    </div>
+                  </div>
+                  <div class="color-group">
+                    <span class="control-label" style="font-size: 0.65rem">强调色</span>
+                    <div class="color-input-wrap">
+                      <input
+                        id="colorAccent"
+                        class="color-swatch"
+                        type="color"
+                        value="#00f5d4"
+                        aria-label="强调色"
+                      />
+                      <input
+                        id="colorAccentHex"
+                        class="color-hex"
+                        type="text"
+                        value="#00f5d4"
+                        maxlength="7"
+                        aria-label="强调色十六进制"
+                      />
+                    </div>
+                  </div>
+                  <div class="color-group">
+                    <span class="control-label" style="font-size: 0.65rem">文字色</span>
+                    <div class="color-input-wrap">
+                      <input
+                        id="colorText"
+                        class="color-swatch"
+                        type="color"
+                        value="#e8e8ed"
+                        aria-label="文字色"
+                      />
+                      <input
+                        id="colorTextHex"
+                        class="color-hex"
+                        type="text"
+                        value="#e8e8ed"
+                        maxlength="7"
+                        aria-label="文字色十六进制"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧预览 -->
+            <div class="og-preview-area">
+              <div class="preview-wrapper">
+                <div class="preview-scale-wrap">
+                  <canvas id="ogCanvas" width="1200" height="630" aria-label="OG 图预览"></canvas>
+                </div>
+                <div class="size-label" id="sizeLabel">1200 × 630 px — OG / Facebook</div>
+              </div>
+              <div class="status-bar">
+                <div id="status" class="status"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <p>
+            <a href="https://github.com/xllgreen/xllgreen.github.io" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+            <span>·</span>
+            <span>纯前端 · 无服务器</span>
+            <span>·</span>
+            <a href="../../index.html">WebUtils</a>
+          </p>
+        </footer>
+      </main>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "首页",
+            "item": "https://tools.realtime-ai.chat/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "社交媒体",
+            "item": "https://tools.realtime-ai.chat/#social-media"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "社交媒体 OG 图生成器",
+            "item": "https://tools.realtime-ai.chat/tools/social-media/og-image-generator.html"
+          }
+        ]
+      }
+    </script>
+    <script>
+      /* ===== OG Image Generator Logic ===== */
+
+      const canvas = document.getElementById("ogCanvas");
+      const ctx = canvas.getContext("2d");
+      const statusEl = document.getElementById("status");
+      const sizeLabel = document.getElementById("sizeLabel");
+
+      // Platform sizes
+      const PLATFORMS = {
+        og: { w: 1200, h: 630, label: "1200 × 630 px — OG / Facebook" },
+        twitter: { w: 1200, h: 600, label: "1200 × 600 px — Twitter Card" },
+        linkedin: { w: 1200, h: 627, label: "1200 × 627 px — LinkedIn" }
+      };
+
+      let currentPlatform = "og";
+      let currentTemplate = "gradient";
+
+      // State
+      function getState() {
+        return {
+          title: document.getElementById("inputTitle").value || "Your Amazing Title Here",
+          desc: document.getElementById("inputDesc").value,
+          site: document.getElementById("inputSite").value,
+          emoji: document.getElementById("inputEmoji").value,
+          titleSize: parseInt(document.getElementById("titleSize").value, 10),
+          descSize: parseInt(document.getElementById("descSize").value, 10),
+          bg1: document.getElementById("colorBg1").value,
+          bg2: document.getElementById("colorBg2").value,
+          accent: document.getElementById("colorAccent").value,
+          textColor: document.getElementById("colorText").value
+        };
+      }
+
+      // Wrap text for canvas
+      function wrapText(context, text, x, y, maxWidth, lineHeight, maxLines) {
+        var words = text.split(" ");
+        var line = "";
+        var lines = [];
+        for (var i = 0; i < words.length; i++) {
+          var testLine = line + (line ? " " : "") + words[i];
+          var metrics = context.measureText(testLine);
+          if (metrics.width > maxWidth && i > 0) {
+            lines.push(line);
+            line = words[i];
+          } else {
+            line = testLine;
+          }
+        }
+        lines.push(line);
+        if (maxLines && lines.length > maxLines) {
+          lines = lines.slice(0, maxLines);
+          lines[maxLines - 1] += "…";
+        }
+        for (var j = 0; j < lines.length; j++) {
+          context.fillText(lines[j], x, y + j * lineHeight);
+        }
+        return lines.length;
+      }
+
+      // Draw helper: rounded rect
+      function roundRect(context, x, y, w, h, r) {
+        context.beginPath();
+        context.moveTo(x + r, y);
+        context.lineTo(x + w - r, y);
+        context.quadraticCurveTo(x + w, y, x + w, y + r);
+        context.lineTo(x + w, y + h - r);
+        context.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        context.lineTo(x + r, y + h);
+        context.quadraticCurveTo(x, y + h, x, y + h - r);
+        context.lineTo(x, y + r);
+        context.quadraticCurveTo(x, y, x + r, y);
+        context.closePath();
+      }
+
+      // Templates
+      var templates = {
+        gradient: function (cw, ch, st) {
+          var grad = ctx.createLinearGradient(0, 0, cw, ch);
+          grad.addColorStop(0, st.bg1);
+          grad.addColorStop(1, st.bg2);
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, cw, ch);
+
+          // Decorative circles
+          ctx.globalAlpha = 0.15;
+          ctx.fillStyle = st.accent;
+          ctx.beginPath();
+          ctx.arc(cw * 0.85, ch * 0.15, ch * 0.45, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(cw * 0.1, ch * 0.9, ch * 0.3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+
+          // Accent line
+          ctx.fillStyle = st.accent;
+          ctx.fillRect(60, ch - 80, 120, 5);
+
+          var pad = 70;
+          var titleY = ch * 0.35;
+          if (st.emoji) {
+            ctx.font = st.titleSize * 1.1 + "px sans-serif";
+            ctx.fillText(st.emoji, pad, titleY - st.titleSize * 0.3);
+            titleY += st.titleSize * 0.6;
+          }
+          ctx.font = "bold " + st.titleSize + "px 'Inter', sans-serif";
+          ctx.fillStyle = st.textColor;
+          ctx.textBaseline = "top";
+          var titleLines = wrapText(
+            ctx,
+            st.title,
+            pad,
+            titleY,
+            cw - pad * 2,
+            st.titleSize * 1.25,
+            3
+          );
+          if (st.desc) {
+            var descY = titleY + titleLines * st.titleSize * 1.25 + 24;
+            ctx.font = st.descSize + "px 'Inter', sans-serif";
+            ctx.fillStyle = hexAlpha(st.textColor, 0.7);
+            wrapText(ctx, st.desc, pad, descY, cw - pad * 2, st.descSize * 1.5, 2);
+          }
+          if (st.site) {
+            ctx.font = "500 " + st.descSize * 0.85 + "px 'Inter', sans-serif";
+            ctx.fillStyle = st.accent;
+            ctx.textBaseline = "bottom";
+            ctx.fillText(st.site, pad, ch - 50);
+          }
+        },
+
+        dark: function (cw, ch, st) {
+          ctx.fillStyle = "#0d0d14";
+          ctx.fillRect(0, 0, cw, ch);
+          // Grid lines
+          ctx.strokeStyle = "rgba(255,255,255,0.04)";
+          ctx.lineWidth = 1;
+          for (var xi = 0; xi < cw; xi += 80) {
+            ctx.beginPath();
+            ctx.moveTo(xi, 0);
+            ctx.lineTo(xi, ch);
+            ctx.stroke();
+          }
+          for (var yi = 0; yi < ch; yi += 80) {
+            ctx.beginPath();
+            ctx.moveTo(0, yi);
+            ctx.lineTo(cw, yi);
+            ctx.stroke();
+          }
+          // Side accent bar
+          ctx.fillStyle = st.accent;
+          ctx.fillRect(0, 0, 8, ch);
+
+          var pad = 90;
+          var cy = ch / 2;
+          var titleLines2 = 1;
+          if (st.emoji) {
+            ctx.font = st.titleSize * 1.1 + "px sans-serif";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = st.textColor;
+            ctx.fillText(st.emoji, pad, cy - st.titleSize * 0.9);
+          }
+          ctx.font = "bold " + st.titleSize + "px 'Inter', sans-serif";
+          ctx.fillStyle = st.textColor;
+          ctx.textBaseline = "middle";
+          titleLines2 = wrapText(
+            ctx,
+            st.title,
+            pad,
+            cy - st.titleSize * 0.5,
+            cw - pad * 2,
+            st.titleSize * 1.3,
+            2
+          );
+          if (st.desc) {
+            ctx.font = st.descSize + "px 'Inter', sans-serif";
+            ctx.fillStyle = hexAlpha(st.textColor, 0.6);
+            ctx.textBaseline = "top";
+            var descY2 = cy + titleLines2 * st.titleSize * 0.8 + 20;
+            wrapText(ctx, st.desc, pad, descY2, cw - pad * 2, st.descSize * 1.5, 2);
+          }
+          if (st.site) {
+            ctx.font = "500 " + st.descSize * 0.85 + "px 'Inter', sans-serif";
+            ctx.fillStyle = st.accent;
+            ctx.textBaseline = "bottom";
+            ctx.fillText(st.site, pad, ch - 44);
+          }
+        },
+
+        light: function (cw, ch, st) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, cw, ch);
+          // Thin top bar
+          ctx.fillStyle = st.accent;
+          ctx.fillRect(0, 0, cw, 10);
+          // Bottom stripe
+          ctx.fillStyle = "#f4f4f8";
+          ctx.fillRect(0, ch - 90, cw, 90);
+
+          var pad = 80;
+          var titleY2 = ch * 0.2;
+          if (st.emoji) {
+            ctx.font = st.titleSize * 1.1 + "px sans-serif";
+            ctx.textBaseline = "top";
+            ctx.fillText(st.emoji, pad, titleY2);
+            titleY2 += st.titleSize * 1.2;
+          }
+          ctx.font = "bold " + st.titleSize + "px 'Inter', sans-serif";
+          ctx.fillStyle = "#111118";
+          ctx.textBaseline = "top";
+          var tLines = wrapText(ctx, st.title, pad, titleY2, cw - pad * 2, st.titleSize * 1.3, 3);
+          if (st.desc) {
+            var dY = titleY2 + tLines * st.titleSize * 1.3 + 24;
+            ctx.font = st.descSize + "px 'Inter', sans-serif";
+            ctx.fillStyle = "#555560";
+            wrapText(ctx, st.desc, pad, dY, cw - pad * 2, st.descSize * 1.5, 2);
+          }
+          if (st.site) {
+            ctx.font = "500 " + st.descSize * 0.85 + "px 'Inter', sans-serif";
+            ctx.fillStyle = st.accent;
+            ctx.textBaseline = "bottom";
+            ctx.fillText(st.site, pad, ch - 28);
+          }
+        },
+
+        split: function (cw, ch, st) {
+          var splitX = cw * 0.42;
+          // Left panel gradient
+          var gL = ctx.createLinearGradient(0, 0, splitX, ch);
+          gL.addColorStop(0, st.bg1);
+          gL.addColorStop(1, st.bg2);
+          ctx.fillStyle = gL;
+          ctx.fillRect(0, 0, splitX, ch);
+          // Right panel
+          ctx.fillStyle = "#0e0e18";
+          ctx.fillRect(splitX, 0, cw - splitX, ch);
+          // Divider accent
+          ctx.fillStyle = st.accent;
+          ctx.fillRect(splitX - 3, 0, 6, ch);
+          // Emoji / icon on left
+          if (st.emoji) {
+            ctx.font = ch * 0.35 + "px sans-serif";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            ctx.fillText(st.emoji, splitX / 2, ch / 2);
+            ctx.textAlign = "left";
+          } else {
+            // Decorative circle
+            ctx.globalAlpha = 0.25;
+            ctx.fillStyle = st.accent;
+            ctx.beginPath();
+            ctx.arc(splitX / 2, ch / 2, ch * 0.28, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.globalAlpha = 1;
+          }
+          // Right content
+          var rPad = splitX + 60;
+          var rMax = cw - rPad - 40;
+          var rY = ch * 0.25;
+          ctx.font = "bold " + st.titleSize * 0.9 + "px 'Inter', sans-serif";
+          ctx.fillStyle = st.textColor;
+          ctx.textBaseline = "top";
+          var tl = wrapText(ctx, st.title, rPad, rY, rMax, st.titleSize * 1.25 * 0.9, 3);
+          if (st.desc) {
+            var dYs = rY + tl * st.titleSize * 1.15 + 20;
+            ctx.font = st.descSize * 0.9 + "px 'Inter', sans-serif";
+            ctx.fillStyle = hexAlpha(st.textColor, 0.65);
+            wrapText(ctx, st.desc, rPad, dYs, rMax, st.descSize * 1.5, 2);
+          }
+          if (st.site) {
+            ctx.font = "500 " + st.descSize * 0.8 + "px 'Inter', sans-serif";
+            ctx.fillStyle = st.accent;
+            ctx.textBaseline = "bottom";
+            ctx.fillText(st.site, rPad, ch - 44);
+          }
+        },
+
+        centered: function (cw, ch, st) {
+          var grad2 = ctx.createRadialGradient(cw / 2, ch / 2, 0, cw / 2, ch / 2, cw * 0.7);
+          grad2.addColorStop(0, st.bg2);
+          grad2.addColorStop(1, st.bg1);
+          ctx.fillStyle = grad2;
+          ctx.fillRect(0, 0, cw, ch);
+          // Glow orb
+          ctx.globalAlpha = 0.2;
+          var gO = ctx.createRadialGradient(cw / 2, ch / 2, 0, cw / 2, ch / 2, ch * 0.55);
+          gO.addColorStop(0, st.accent);
+          gO.addColorStop(1, "transparent");
+          ctx.fillStyle = gO;
+          ctx.fillRect(0, 0, cw, ch);
+          ctx.globalAlpha = 1;
+          // Center text
+          ctx.textAlign = "center";
+          var cy2 = ch / 2;
+          if (st.emoji) {
+            ctx.font = st.titleSize * 1.2 + "px sans-serif";
+            ctx.textBaseline = "bottom";
+            ctx.fillText(st.emoji, cw / 2, cy2 - 10);
+          }
+          ctx.font = "bold " + st.titleSize + "px 'Inter', sans-serif";
+          ctx.fillStyle = st.textColor;
+          ctx.textBaseline = "top";
+          wrapText(
+            ctx,
+            st.title,
+            80,
+            cy2 - (st.emoji ? 20 : st.titleSize * 0.5),
+            cw - 160,
+            st.titleSize * 1.3,
+            2
+          );
+          if (st.desc) {
+            ctx.font = st.descSize + "px 'Inter', sans-serif";
+            ctx.fillStyle = hexAlpha(st.textColor, 0.65);
+            ctx.textBaseline = "bottom";
+            ctx.fillText(
+              st.desc.length > 80 ? st.desc.slice(0, 77) + "…" : st.desc,
+              cw / 2,
+              ch - 70
+            );
+          }
+          if (st.site) {
+            ctx.font = "500 " + st.descSize * 0.85 + "px 'Inter', sans-serif";
+            ctx.fillStyle = st.accent;
+            ctx.textBaseline = "bottom";
+            ctx.fillText(st.site, cw / 2, ch - 30);
+          }
+          ctx.textAlign = "left";
+        },
+
+        branded: function (cw, ch, st) {
+          ctx.fillStyle = st.bg1;
+          ctx.fillRect(0, 0, cw, ch);
+          // Brand bar at top
+          ctx.fillStyle = st.accent;
+          ctx.fillRect(0, 0, cw, 14);
+          // Accent rectangle top-right decorative
+          ctx.globalAlpha = 0.12;
+          ctx.fillStyle = st.accent;
+          roundRect(ctx, cw - 220, -40, 240, 240, 120);
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          // Site/brand name pill
+          if (st.site) {
+            ctx.font = "600 " + st.descSize * 0.9 + "px 'Inter', sans-serif";
+            var siteMetrics = ctx.measureText(st.site);
+            var pillW = siteMetrics.width + 40;
+            var pillH = st.descSize * 1.6;
+            var pillX = 60;
+            var pillY = 60;
+            ctx.fillStyle = st.accent;
+            roundRect(ctx, pillX, pillY, pillW, pillH, pillH / 2);
+            ctx.fill();
+            ctx.fillStyle = "#000000";
+            ctx.textBaseline = "middle";
+            ctx.fillText(st.site, pillX + 20, pillY + pillH / 2);
+          }
+          var pad3 = 70;
+          var titleY3 = ch * 0.32;
+          if (st.emoji) {
+            ctx.font = st.titleSize * 1.1 + "px sans-serif";
+            ctx.textBaseline = "top";
+            ctx.fillText(st.emoji, pad3, titleY3);
+            titleY3 += st.titleSize * 1.25;
+          }
+          ctx.font = "bold " + st.titleSize + "px 'Inter', sans-serif";
+          ctx.fillStyle = st.textColor;
+          ctx.textBaseline = "top";
+          var tl3 = wrapText(ctx, st.title, pad3, titleY3, cw - pad3 * 2, st.titleSize * 1.3, 2);
+          if (st.desc) {
+            var dY3 = titleY3 + tl3 * st.titleSize * 1.3 + 20;
+            ctx.font = st.descSize + "px 'Inter', sans-serif";
+            ctx.fillStyle = hexAlpha(st.textColor, 0.65);
+            wrapText(ctx, st.desc, pad3, dY3, cw - pad3 * 2, st.descSize * 1.5, 2);
+          }
+          // Bottom bar
+          ctx.fillStyle = hexAlpha(st.accent, 0.08);
+          ctx.fillRect(0, ch - 70, cw, 70);
+          ctx.fillStyle = st.accent;
+          ctx.fillRect(0, ch - 4, cw, 4);
+        }
+      };
+
+      function hexAlpha(hex, alpha) {
+        var r = parseInt(hex.slice(1, 3), 16);
+        var g = parseInt(hex.slice(3, 5), 16);
+        var b = parseInt(hex.slice(5, 7), 16);
+        return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+      }
+
+      function render() {
+        var p = PLATFORMS[currentPlatform];
+        canvas.width = p.w;
+        canvas.height = p.h;
+        ctx.clearRect(0, 0, p.w, p.h);
+        var st = getState();
+        ctx.save();
+        templates[currentTemplate](p.w, p.h, st);
+        ctx.restore();
+
+        // Scale canvas for display
+        var wrapper = canvas.parentElement;
+        var availW = wrapper.offsetWidth - 0;
+        var scale = Math.min(1, availW / p.w);
+        canvas.style.width = Math.round(p.w * scale) + "px";
+        canvas.style.height = Math.round(p.h * scale) + "px";
+
+        sizeLabel.textContent = p.label;
+        showStatus("渲染完成", "success");
+      }
+
+      function showStatus(msg, type) {
+        statusEl.textContent = msg;
+        statusEl.className = "status " + (type || "");
+      }
+
+      // Platform tabs
+      document.querySelectorAll(".platform-tab").forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          document.querySelectorAll(".platform-tab").forEach(function (t) {
+            t.classList.remove("active");
+          });
+          tab.classList.add("active");
+          currentPlatform = tab.dataset.platform;
+          render();
+        });
+      });
+
+      // Template buttons
+      document.querySelectorAll(".tpl-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".tpl-btn").forEach(function (b) {
+            b.classList.remove("active");
+          });
+          btn.classList.add("active");
+          currentTemplate = btn.dataset.tpl;
+          applyTemplateDefaults(currentTemplate);
+          render();
+        });
+      });
+
+      function applyTemplateDefaults(tpl) {
+        var defaults = {
+          gradient: { bg1: "#0a0a0f", bg2: "#1a1a2e", accent: "#00f5d4", text: "#e8e8ed" },
+          dark: { bg1: "#0d0d14", bg2: "#0d0d14", accent: "#f72585", text: "#e8e8ed" },
+          light: { bg1: "#ffffff", bg2: "#f4f4f8", accent: "#00d4b8", text: "#111118" },
+          split: { bg1: "#12121a", bg2: "#2a1a3e", accent: "#8b5cf6", text: "#e8e8ed" },
+          centered: { bg1: "#0a0a0f", bg2: "#151530", accent: "#4cc9f0", text: "#e8e8ed" },
+          branded: { bg1: "#0e0e18", bg2: "#0e0e18", accent: "#fbbf24", text: "#e8e8ed" }
+        };
+        var d = defaults[tpl];
+        if (!d) return;
+        setColor("colorBg1", d.bg1);
+        setColor("colorBg2", d.bg2);
+        setColor("colorAccent", d.accent);
+        setColor("colorText", d.text);
+      }
+
+      function setColor(id, hex) {
+        document.getElementById(id).value = hex;
+        document.getElementById(id + "Hex").value = hex;
+      }
+
+      // Color sync: swatch ↔ hex
+      ["colorBg1", "colorBg2", "colorAccent", "colorText"].forEach(function (id) {
+        var swatch = document.getElementById(id);
+        var hexInput = document.getElementById(id + "Hex");
+        swatch.addEventListener("input", function () {
+          hexInput.value = swatch.value;
+          render();
+        });
+        hexInput.addEventListener("input", function () {
+          var val = hexInput.value.trim();
+          if (/^#[0-9a-fA-F]{6}$/.test(val)) {
+            swatch.value = val;
+            render();
+          }
+        });
+      });
+
+      // Range sliders
+      document.getElementById("titleSize").addEventListener("input", function () {
+        document.getElementById("titleSizeVal").textContent = this.value;
+        render();
+      });
+      document.getElementById("descSize").addEventListener("input", function () {
+        document.getElementById("descSizeVal").textContent = this.value;
+        render();
+      });
+
+      // Text inputs
+      ["inputTitle", "inputDesc", "inputSite", "inputEmoji"].forEach(function (id) {
+        document.getElementById(id).addEventListener("input", render);
+      });
+
+      // Render button
+      document.getElementById("btnRender").onclick = render;
+
+      // Download PNG
+      document.getElementById("btnDownloadPng").onclick = function () {
+        render();
+        var p = PLATFORMS[currentPlatform];
+        var link = document.createElement("a");
+        link.download = "og-image-" + currentPlatform + "-" + p.w + "x" + p.h + ".png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        showStatus("已下载 PNG", "success");
+      };
+
+      // Copy Data URL
+      document.getElementById("btnCopyDataUrl").onclick = async function () {
+        render();
+        var dataUrl = canvas.toDataURL("image/png");
+        try {
+          await navigator.clipboard.writeText(dataUrl);
+          showStatus("Data URL 已复制到剪贴板", "success");
+        } catch (e) {
+          showStatus("复制失败，请手动复制", "error");
+        }
+      };
+
+      // Reset
+      document.getElementById("btnReset").onclick = function () {
+        document.getElementById("inputTitle").value = "";
+        document.getElementById("inputDesc").value = "";
+        document.getElementById("inputSite").value = "";
+        document.getElementById("inputEmoji").value = "";
+        document.getElementById("titleSize").value = 60;
+        document.getElementById("titleSizeVal").textContent = "60";
+        document.getElementById("descSize").value = 28;
+        document.getElementById("descSizeVal").textContent = "28";
+        currentTemplate = "gradient";
+        currentPlatform = "og";
+        document.querySelectorAll(".tpl-btn").forEach(function (b) {
+          b.classList.toggle("active", b.dataset.tpl === "gradient");
+        });
+        document.querySelectorAll(".platform-tab").forEach(function (t) {
+          t.classList.toggle("active", t.dataset.platform === "og");
+        });
+        applyTemplateDefaults("gradient");
+        render();
+        showStatus("已重置", "success");
+      };
+
+      // Initial render
+      render();
+
+      window.toggleTheme = function () {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme") || "dark";
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      };
+      function initTheme() {
+        const savedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = savedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      }
+      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme"))
+          document.documentElement.setAttribute("data-theme", e.matches ? "dark" : "light");
+      });
+
+      initTheme();
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>

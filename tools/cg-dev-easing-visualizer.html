@@ -1,0 +1,1422 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>easing-visualizer - Medicalstu's Blog</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="description" content="Client-side tool - easing-visualizer">
+    <meta name="keywords" content="Medicalstu's Blog, 工具箱, Tools">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/style.css?v=1.23">
+    <link rel="stylesheet" href="/static/enhance.css?v=1.1">
+    <link rel="stylesheet" href="/static/chicogong-base.css?v=1.0">
+    <style>
+    .tool-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        /* 视觉主题由工具自带 style 提供 */
+    }
+    /* 内联工具样式 */
+    
+    </style>
+</head>
+
+
+<div class="main">
+
+
+
+    <header> <!-- 头部开始 -->
+        <div class="welcome"><span data-zh="你好，我是" data-en="Hello, I'm">Hello, I'm</span> <span class="gradientText">Medicalstu's Blog</span></div>
+        <div class="description"><span data-zh="👦 " data-en="👦 ">👦 </span><span class="purpleText" data-zh="全栈开发者" data-en="Half Stack">Half Stack</span><span data-zh=" / " data-en=" Developer / Studying at"> Developer / Studying at</span><span class="purpleText" data-zh="医学在读" data-en=" Medicine"> Medicine</span></div>
+        <div class="description"><span data-zh="📝 把事情做好的唯一途径，是" data-en="📝 The only way to do ">The only way to do </span><span class="purpleText textBackground" data-zh="热爱" data-en="great">great</span><span data-zh="" data-en=" is to "> is to </span><span class="purpleText textBackground" data-zh="你所做的事" data-en="love">love</span><span data-zh="。" data-en=" what you do."> what you do.</span></div>
+        <div class="iconContainer"> <!-- 图标容器开始 -->
+
+            <a class="iconItem" data-tip="Homepage" data-zh-tip="主页" data-en-tip="Homepage" target="_blank" href="../index.html">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+            </a>
+            <a class="iconItem" data-tip="Github" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704870335945" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="2487" width="22px" height="22px">
+                    <path
+                        d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"
+                        fill="#000000" p-id="2488"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="Mail" target="_blank" href="mailto:3496646936@qq.com">
+                <svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="3174" width="22px" height="22px">
+                    <path
+                        d="M926.47619 355.644952V780.190476a73.142857 73.142857 0 0 1-73.142857 73.142857H170.666667a73.142857 73.142857 0 0 1-73.142857-73.142857V355.644952l304.103619 257.828572a170.666667 170.666667 0 0 0 220.745142 0L926.47619 355.644952zM853.333333 170.666667a74.044952 74.044952 0 0 1 26.087619 4.778666 72.704 72.704 0 0 1 30.622477 22.186667 73.508571 73.508571 0 0 1 10.678857 17.67619c3.169524 7.509333 5.12 15.652571 5.607619 24.210286L926.47619 243.809524v24.380952L559.469714 581.241905a73.142857 73.142857 0 0 1-91.306666 2.901333l-3.632762-2.925714L97.52381 268.190476v-24.380952a72.899048 72.899048 0 0 1 40.155428-65.292191A72.97219 72.97219 0 0 1 170.666667 170.666667h682.666666z"
+                        fill="#000000" p-id="3175"></path>
+                </svg>
+
+            </a>
+             <a class="iconItem" data-tip="捐赠Donate" data-zh-tip="捐赠" data-en-tip="Donate" onclick="wx('/static/img/wxzsm.jpg')" href="javascript:void(0)">
+                <svg t="1705247464964" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="4987" width="22px" height="22px">
+                    <path
+                        d="M995.575172 725.451034c-12.358621-26.835862-38.488276-64.794483-92.689655-94.27862-62.146207-33.721379-136.297931-40.96-208.860689-20.303448l-99.928276 28.424827-279.304828-126.057931H22.775172v489.401379h509.704828l432.375172-195.266207c15.006897-6.708966 26.835862-19.42069 32.662069-34.957241 5.649655-15.36 4.943448-31.955862-1.942069-46.962759z m-482.162758 188.910345H111.051034V601.688276h184.673104l166.664828 75.387586-3.354483 0.882759h-170.372414v88.275862H471.393103l246.819311-70.267586c49.434483-14.124138 101.517241-9.357241 142.653793 12.888275 18.184828 9.886897 30.72 20.833103 39.371034 30.896552l-386.824827 174.609655z"
+                        fill="000000" p-id="4988"></path>
+                    <path
+                        d="M695.437241 163.486897l58.615173-142.30069h-397.24138l66.736552 143.36c-121.82069 53.142069-207.095172 174.433103-207.095172 315.674483 0 28.601379 3.531034 57.202759 10.593103 84.744827l85.627586-21.715862c-5.12-20.48-7.768276-41.666207-7.768275-63.028965 0-141.241379 114.758621-256 256-256s256 114.758621 256 256c0 51.023448-14.830345 100.104828-43.078621 142.300689l73.268965 49.08138c37.958621-56.673103 58.085517-122.88 58.085518-191.382069-0.176552-141.947586-86.686897-264.121379-209.743449-316.733793zM467.508966 91.983448h180.965517l-21.009655 50.846897a348.16 348.16 0 0 0-66.913104-6.708966c-23.834483 0-46.962759 2.471724-69.384827 7.062069l-23.657931-51.2z"
+                        fill="000000" p-id="4989"></path>
+                    <path
+                        d="M683.431724 427.431724v-70.62069h-38.311724l30.190345-30.190344-49.964138-49.964138-62.49931 62.49931h-6.002759L494.344828 276.656552l-49.787587 49.964138 30.013793 30.190344h-38.311724v70.62069h88.275862v35.310345h-88.275862v70.62069h88.275862v52.965517h70.62069v-52.965517h88.275862v-70.62069h-88.275862v-35.310345z"
+                        fill="#000000" p-id="4990"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="微信WeChat" data-zh-tip="微信" data-en-tip="WeChat" href="javascript:void(0)" onclick="wx('/static/img/wx.jpg')">
+             <svg t="1705322844467" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2925" width="22px" height="22px"><path d="M816.551274 248.167103C697.80273 131.500986 553.294498 97.66946 394.437467 140.52757 114.716718 215.994356 28.163433 506.98887 169.479973 696.646394c6.853082 9.198499 8.147564 26.164916 5.545296 38.09769-7.601118 34.868135-18.714224 68.958558-28.000728 103.474676-4.965082 18.455327-7.90504 37.21253 8.632611 52.019771 17.777899 15.921621 36.82572 12.654204 56.258305 2.777253 31.879058-16.200984 64.335261-31.314193 95.763041-48.336892 20.469194-11.086499 38.847773-11.658528 61.942771-5.240351 46.063105 12.799514 93.717452 19.872606 117.992321 24.74866 144.317896-2.603291 249.610988-41.736567 333.958024-129.489166C955.8826 594.966597 954.903296 384.090818 816.551274 248.167103zM763.498988 681.878039C658.864906 785.728268 531.49603 810.562886 393.782551 764.371868c-45.408189-15.229866-82.686211-19.207457-122.088616 7.493671-3.576455 2.423189-8.448416 2.934842-26.51284 8.852622 36.271088-62.917982 9.41851-102.273315-21.181415-146.894581-67.886133-98.989525-54.03773-226.624461 26.78197-318.740438 132.026966-150.480246 390.603139-150.382009 522.634198 0.196475C869.144096 424.455131 867.098507 579.054185 763.498988 681.878039z" p-id="2926"></path><path d="M640.32976 377.432165c-26.245757-0.961908-47.457872 18.594497-48.955992 45.13906-1.532913 27.1565 16.636912 48.230468 43.304272 50.227961 26.571169 1.989307 48.850591-16.263405 51.568493-42.247196C689.112814 403.14478 667.75846 378.439098 640.32976 377.432165z" p-id="2927"></path><path d="M385.221572 377.38714c-27.757181 0.205685-48.88743 23.684422-46.821375 52.023864 1.940189 26.610054 23.154349 44.910862 50.212612 43.317575 26.505677-1.560542 46.149063-22.886243 45.152363-49.02046C432.798147 398.345474 410.636405 377.198851 385.221572 377.38714z" p-id="2928"></path></svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="B站Bilibili" target="_blank" href="https://github.com/xllgreen/xllgreen.github.io">
+                <svg t="1704900728948" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" p-id="28587" width="22px" height="22px">
+                    <path
+                        d="M306.005333 117.632L444.330667 256h135.296l138.368-138.325333a42.666667 42.666667 0 0 1 60.373333 60.373333L700.330667 256H789.333333A149.333333 149.333333 0 0 1 938.666667 405.333333v341.333334a149.333333 149.333333 0 0 1-149.333334 149.333333h-554.666666A149.333333 149.333333 0 0 1 85.333333 746.666667v-341.333334A149.333333 149.333333 0 0 1 234.666667 256h88.96L245.632 177.962667a42.666667 42.666667 0 0 1 60.373333-60.373334zM789.333333 341.333333h-554.666666a64 64 0 0 0-63.701334 57.856L170.666667 405.333333v341.333334a64 64 0 0 0 57.856 63.701333L234.666667 810.666667h554.666666a64 64 0 0 0 63.701334-57.856L853.333333 746.666667v-341.333334A64 64 0 0 0 789.333333 341.333333zM341.333333 469.333333a42.666667 42.666667 0 0 1 42.666667 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666666-42.666667z m341.333334 0a42.666667 42.666667 0 0 1 42.666666 42.666667v85.333333a42.666667 42.666667 0 0 1-85.333333 0v-85.333333a42.666667 42.666667 0 0 1 42.666667-42.666667z"
+                        fill="#000000" p-id="28588"></path>
+                </svg>
+            </a>
+            <!---->
+            <a class="iconItem" data-tip="主题切换" data-zh-tip="主题切换" data-en-tip="Theme" href="javascript:void(0)">
+                <div class="onoffswitch">
+                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <a class="iconItem" data-tip="语言切换" data-zh-tip="语言切换" data-en-tip="Language" href="javascript:void(0)">
+                <div class="langswitch">
+                    <input type="checkbox" name="langswitch" class="langswitch-checkbox" id="langswitch" checked>
+                    <label class="langswitch-label" for="langswitch">
+                        <span class="langswitch-inner"></span>
+                        <span class="langswitch-switch"></span>
+                    </label>
+                </div>
+            </a>
+            <!---->
+            <div class="searchBox" role="search">
+                <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"><path d="M448 64a384 384 0 0 1 301.3 622.7l223.7 223.7a42.7 42.7 0 0 1-60.4 60.4l-223.7-223.7A384 384 0 1 1 448 64z m0 85.3a298.7 298.7 0 1 0 0 597.4 298.7 298.7 0 0 0 0-597.4z" fill="#7e7e7e" p-id="1"></path></svg>
+                <input id="siteSearch" type="text" placeholder="搜索…" data-zh="搜索…" data-en="Search…">
+            </div>
+        </div> <!-- 图标容器结束 -->
+
+        <div class="tanChiShe">
+            <img id="tanChiShe" src="/static/svg/snake-Light.svg" alt="">
+        </div>
+    </header> <!-- 头部结束 -->
+<div class="tool-wrap">
+<div class="tool-main" role="main">
+      <div class="container">
+        <button class="theme-toggle" onclick="toggleTheme()" title="切换主题" aria-label="🌙">
+          🌙
+        </button>
+
+        
+
+        <div class="main-layout">
+          <!-- Sidebar: Categories & Presets -->
+          <div class="sidebar">
+            <div class="card">
+              <div class="card-title">分类</div>
+              <div class="category-tabs" id="categoryTabs">
+                <button class="category-tab active" data-category="all">全部</button>
+                <button class="category-tab" data-category="css">CSS</button>
+                <button class="category-tab" data-category="sine">Sine</button>
+                <button class="category-tab" data-category="quad">Quad</button>
+                <button class="category-tab" data-category="cubic">Cubic</button>
+                <button class="category-tab" data-category="quart">Quart</button>
+                <button class="category-tab" data-category="quint">Quint</button>
+                <button class="category-tab" data-category="expo">Expo</button>
+                <button class="category-tab" data-category="circ">Circ</button>
+                <button class="category-tab" data-category="back">Back</button>
+                <button class="category-tab" data-category="elastic">Elastic</button>
+                <button class="category-tab" data-category="bounce">Bounce</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">
+                预设 (
+                <span id="presetCount">0</span>
+                )
+              </div>
+              <div class="preset-list" id="presetList"></div>
+
+              <div class="custom-inputs">
+                <div class="input-group">
+                  <label for="input-x1">x1</label>
+                  <input
+                    type="number"
+                    id="inputX1"
+                    value="0.25"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    aria-label="数字输入框"
+                    placeholder="请输入数字输入框"
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="input-y1">y1</label>
+                  <input
+                    type="number"
+                    id="inputY1"
+                    value="0.1"
+                    min="-2"
+                    max="2"
+                    step="0.01"
+                    aria-label="数字输入框"
+                    placeholder="请输入数字输入框"
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="input-x2">x2</label>
+                  <input
+                    type="number"
+                    id="inputX2"
+                    value="0.25"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    aria-label="数字输入框"
+                    placeholder="请输入数字输入框"
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="input-y2">y2</label>
+                  <input
+                    type="number"
+                    id="inputY2"
+                    value="1"
+                    min="-2"
+                    max="2"
+                    step="0.01"
+                    aria-label="数字输入框"
+                    placeholder="请输入数字输入框"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview Area -->
+          <div class="preview-area">
+            <div class="card">
+              <div class="canvas-section">
+                <div class="canvas-wrapper">
+                  <canvas id="easingCanvas" width="260" height="260"></canvas>
+                  <div class="canvas-info" id="canvasInfo">cubic-bezier(0.25, 0.1, 0.25, 1)</div>
+                </div>
+
+                <div class="animation-section">
+                  <div class="card-title">动画预览</div>
+                  <div class="preview-track">
+                    <div class="preview-ball" id="previewBall"></div>
+                  </div>
+
+                  <div class="controls-row">
+                    <button class="btn primary" id="btnPlay">▶ 播放</button>
+                    <button class="btn" id="btnLoop">🔄 循环</button>
+
+                    <div class="duration-control">
+                      <label for="input---">时长</label>
+                      <input
+                        type="range"
+                        id="durationRange"
+                        min="0.2"
+                        max="3"
+                        step="0.1"
+                        value="1"
+                      />
+                      <span class="duration-value" id="durationValue">1s</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card export-section">
+              <div class="card-title">导出代码</div>
+
+              <div class="export-tabs" id="exportTabs">
+                <button class="export-tab active" data-format="css">CSS</button>
+                <button class="export-tab" data-format="cssVar">CSS 变量</button>
+                <button class="export-tab" data-format="js">JavaScript</button>
+                <button class="export-tab" data-format="animejs">Anime.js</button>
+                <button class="export-tab" data-format="gsap">GSAP</button>
+              </div>
+
+              <div class="code-output" id="codeOutput"></div>
+
+              <div class="export-actions">
+                <button class="btn" id="btnCopy">📋 复制</button>
+                <button class="btn" id="btnShare">🔗 分享</button>
+              </div>
+
+              <div class="status" id="status"></div>
+            </div>
+
+            <div class="card comparison-section">
+              <div class="comparison-header">
+                <div class="card-title" style="margin-bottom: 0">对比模式</div>
+                <div class="comparison-toggle">
+                  <input type="checkbox" id="comparisonToggle" checked="" />
+                  <label for="comparisonToggle">启用对比</label>
+                </div>
+              </div>
+
+              <div class="comparison-grid" id="comparisonGrid">
+                <div class="comparison-item">
+                  <div class="comparison-label">当前</div>
+                  <div class="comparison-track">
+                    <div class="comparison-ball current" id="compCurrent"></div>
+                  </div>
+                </div>
+                <div class="comparison-item">
+                  <div class="comparison-label">linear</div>
+                  <div class="comparison-track">
+                    <div
+                      class="comparison-ball"
+                      data-easing="linear"
+                      style="transition-timing-function: linear"
+                    ></div>
+                  </div>
+                </div>
+                <div class="comparison-item">
+                  <div class="comparison-label">ease</div>
+                  <div class="comparison-track">
+                    <div
+                      class="comparison-ball"
+                      data-easing="ease"
+                      style="transition-timing-function: ease"
+                    ></div>
+                  </div>
+                </div>
+                <div class="comparison-item">
+                  <div class="comparison-label">ease-in-out</div>
+                  <div class="comparison-track">
+                    <div
+                      class="comparison-ball"
+                      data-easing="ease-in-out"
+                      style="transition-timing-function: ease-in-out"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <a href="https://github.com/xllgreen/xllgreen.github.io" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          · 纯前端工具 · 无服务器 ·
+          <a href="../../index.html">WebUtils</a>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      // ==================== EASING PRESETS ====================
+      var EASING_PRESETS = [
+        // CSS Native (5)
+        { id: "linear", name: "linear", category: "css", bezier: [0, 0, 1, 1] },
+        { id: "ease", name: "ease", category: "css", bezier: [0.25, 0.1, 0.25, 1] },
+        { id: "ease-in", name: "ease-in", category: "css", bezier: [0.42, 0, 1, 1] },
+        { id: "ease-out", name: "ease-out", category: "css", bezier: [0, 0, 0.58, 1] },
+        { id: "ease-in-out", name: "ease-in-out", category: "css", bezier: [0.42, 0, 0.58, 1] },
+
+        // Sine (3)
+        { id: "easeInSine", name: "easeInSine", category: "sine", bezier: [0.47, 0, 0.745, 0.715] },
+        {
+          id: "easeOutSine",
+          name: "easeOutSine",
+          category: "sine",
+          bezier: [0.39, 0.575, 0.565, 1]
+        },
+        {
+          id: "easeInOutSine",
+          name: "easeInOutSine",
+          category: "sine",
+          bezier: [0.445, 0.05, 0.55, 0.95]
+        },
+
+        // Quad (3)
+        {
+          id: "easeInQuad",
+          name: "easeInQuad",
+          category: "quad",
+          bezier: [0.55, 0.085, 0.68, 0.53]
+        },
+        {
+          id: "easeOutQuad",
+          name: "easeOutQuad",
+          category: "quad",
+          bezier: [0.25, 0.46, 0.45, 0.94]
+        },
+        {
+          id: "easeInOutQuad",
+          name: "easeInOutQuad",
+          category: "quad",
+          bezier: [0.455, 0.03, 0.515, 0.955]
+        },
+
+        // Cubic (3)
+        {
+          id: "easeInCubic",
+          name: "easeInCubic",
+          category: "cubic",
+          bezier: [0.55, 0.055, 0.675, 0.19]
+        },
+        {
+          id: "easeOutCubic",
+          name: "easeOutCubic",
+          category: "cubic",
+          bezier: [0.215, 0.61, 0.355, 1]
+        },
+        {
+          id: "easeInOutCubic",
+          name: "easeInOutCubic",
+          category: "cubic",
+          bezier: [0.645, 0.045, 0.355, 1]
+        },
+
+        // Quart (3)
+        {
+          id: "easeInQuart",
+          name: "easeInQuart",
+          category: "quart",
+          bezier: [0.895, 0.03, 0.685, 0.22]
+        },
+        {
+          id: "easeOutQuart",
+          name: "easeOutQuart",
+          category: "quart",
+          bezier: [0.165, 0.84, 0.44, 1]
+        },
+        {
+          id: "easeInOutQuart",
+          name: "easeInOutQuart",
+          category: "quart",
+          bezier: [0.77, 0, 0.175, 1]
+        },
+
+        // Quint (3)
+        {
+          id: "easeInQuint",
+          name: "easeInQuint",
+          category: "quint",
+          bezier: [0.755, 0.05, 0.855, 0.06]
+        },
+        { id: "easeOutQuint", name: "easeOutQuint", category: "quint", bezier: [0.23, 1, 0.32, 1] },
+        {
+          id: "easeInOutQuint",
+          name: "easeInOutQuint",
+          category: "quint",
+          bezier: [0.86, 0, 0.07, 1]
+        },
+
+        // Expo (3)
+        {
+          id: "easeInExpo",
+          name: "easeInExpo",
+          category: "expo",
+          bezier: [0.95, 0.05, 0.795, 0.035]
+        },
+        { id: "easeOutExpo", name: "easeOutExpo", category: "expo", bezier: [0.19, 1, 0.22, 1] },
+        { id: "easeInOutExpo", name: "easeInOutExpo", category: "expo", bezier: [1, 0, 0, 1] },
+
+        // Circ (3)
+        {
+          id: "easeInCirc",
+          name: "easeInCirc",
+          category: "circ",
+          bezier: [0.6, 0.04, 0.98, 0.335]
+        },
+        {
+          id: "easeOutCirc",
+          name: "easeOutCirc",
+          category: "circ",
+          bezier: [0.075, 0.82, 0.165, 1]
+        },
+        {
+          id: "easeInOutCirc",
+          name: "easeInOutCirc",
+          category: "circ",
+          bezier: [0.785, 0.135, 0.15, 0.86]
+        },
+
+        // Back (3)
+        {
+          id: "easeInBack",
+          name: "easeInBack",
+          category: "back",
+          bezier: [0.6, -0.28, 0.735, 0.045]
+        },
+        {
+          id: "easeOutBack",
+          name: "easeOutBack",
+          category: "back",
+          bezier: [0.175, 0.885, 0.32, 1.275]
+        },
+        {
+          id: "easeInOutBack",
+          name: "easeInOutBack",
+          category: "back",
+          bezier: [0.68, -0.55, 0.265, 1.55]
+        },
+
+        // Elastic (3)
+        {
+          id: "easeInElastic",
+          name: "easeInElastic",
+          category: "elastic",
+          bezier: [0.5, -0.5, 0.75, -0.5],
+          jsOnly: true
+        },
+        {
+          id: "easeOutElastic",
+          name: "easeOutElastic",
+          category: "elastic",
+          bezier: [0.25, 1.5, 0.5, 1.5],
+          jsOnly: true
+        },
+        {
+          id: "easeInOutElastic",
+          name: "easeInOutElastic",
+          category: "elastic",
+          bezier: [0.5, -0.25, 0.5, 1.25],
+          jsOnly: true
+        },
+
+        // Bounce (3)
+        {
+          id: "easeInBounce",
+          name: "easeInBounce",
+          category: "bounce",
+          bezier: [0.6, -0.28, 0.74, 0.05],
+          jsOnly: true
+        },
+        {
+          id: "easeOutBounce",
+          name: "easeOutBounce",
+          category: "bounce",
+          bezier: [0.28, 0.84, 0.42, 1],
+          jsOnly: true
+        },
+        {
+          id: "easeInOutBounce",
+          name: "easeInOutBounce",
+          category: "bounce",
+          bezier: [0.68, -0.55, 0.27, 1.55],
+          jsOnly: true
+        }
+      ];
+
+      // ==================== STATE ====================
+      var state = {
+        bezier: [0.25, 0.1, 0.25, 1],
+        currentPreset: "ease",
+        duration: 1,
+        activeCategory: "all",
+        activeExportFormat: "css",
+        isLooping: false,
+        loopInterval: null
+      };
+
+      // ==================== DOM ELEMENTS ====================
+      var canvas = document.getElementById("easingCanvas");
+      var ctx = canvas.getContext("2d");
+      var presetList = document.getElementById("presetList");
+      var presetCount = document.getElementById("presetCount");
+      var canvasInfo = document.getElementById("canvasInfo");
+      var previewBall = document.getElementById("previewBall");
+      var compCurrent = document.getElementById("compCurrent");
+      var codeOutput = document.getElementById("codeOutput");
+      var statusEl = document.getElementById("status");
+      var durationRange = document.getElementById("durationRange");
+      var durationValue = document.getElementById("durationValue");
+      var inputX1 = document.getElementById("inputX1");
+      var inputY1 = document.getElementById("inputY1");
+      var inputX2 = document.getElementById("inputX2");
+      var inputY2 = document.getElementById("inputY2");
+
+      // ==================== CANVAS RENDERING ====================
+      var padding = 30;
+      var size = 200;
+      var dragging = null;
+
+      function toCanvasX(x) {
+        return padding + x * size;
+      }
+      function toCanvasY(y) {
+        return padding + (1 - y) * size;
+      }
+      function fromCanvasX(cx) {
+        return (cx - padding) / size;
+      }
+      function fromCanvasY(cy) {
+        return 1 - (cy - padding) / size;
+      }
+
+      function drawCurve() {
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        var x1 = state.bezier[0],
+          y1 = state.bezier[1],
+          x2 = state.bezier[2],
+          y2 = state.bezier[3];
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Grid
+        ctx.strokeStyle = isDark ? "#2a2a3a" : "#e0e0e8";
+        ctx.lineWidth = 1;
+        for (var i = 0; i <= 4; i++) {
+          var pos = padding + (size / 4) * i;
+          ctx.beginPath();
+          ctx.moveTo(pos, padding);
+          ctx.lineTo(pos, padding + size);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(padding, pos);
+          ctx.lineTo(padding + size, pos);
+          ctx.stroke();
+        }
+
+        // Border
+        ctx.strokeStyle = isDark ? "#4a4a5a" : "#b0b0c0";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(padding, padding, size, size);
+
+        // Linear reference (diagonal)
+        ctx.strokeStyle = isDark ? "#4a4a5a" : "#c0c0d0";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(0), toCanvasY(0));
+        ctx.lineTo(toCanvasX(1), toCanvasY(1));
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Control lines
+        ctx.strokeStyle = isDark ? "#6a6a7a" : "#a0a0b0";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(0), toCanvasY(0));
+        ctx.lineTo(toCanvasX(x1), toCanvasY(y1));
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(1), toCanvasY(1));
+        ctx.lineTo(toCanvasX(x2), toCanvasY(y2));
+        ctx.stroke();
+
+        // Bezier curve
+        ctx.strokeStyle = "#00f5d4";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(0), toCanvasY(0));
+        ctx.bezierCurveTo(
+          toCanvasX(x1),
+          toCanvasY(y1),
+          toCanvasX(x2),
+          toCanvasY(y2),
+          toCanvasX(1),
+          toCanvasY(1)
+        );
+        ctx.stroke();
+
+        // Start/End points
+        ctx.fillStyle = isDark ? "#5a5a6a" : "#8080a0";
+        ctx.beginPath();
+        ctx.arc(toCanvasX(0), toCanvasY(0), 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(toCanvasX(1), toCanvasY(1), 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Control points
+        ctx.fillStyle = "#f72585";
+        ctx.beginPath();
+        ctx.arc(toCanvasX(x1), toCanvasY(y1), 8, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = "#00f5d4";
+        ctx.beginPath();
+        ctx.arc(toCanvasX(x2), toCanvasY(y2), 8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      function drawMiniCurve(miniCanvas, bezier) {
+        var mctx = miniCanvas.getContext("2d");
+        var x1 = bezier[0],
+          y1 = bezier[1],
+          x2 = bezier[2],
+          y2 = bezier[3];
+        var w = miniCanvas.width;
+        var h = miniCanvas.height;
+        var p = 2;
+        var s = w - p * 2;
+
+        mctx.clearRect(0, 0, w, h);
+
+        var isDark = document.documentElement.getAttribute("data-theme") !== "light";
+        mctx.strokeStyle = isDark ? "#00f5d4" : "#00c4a8";
+        mctx.lineWidth = 1.5;
+        mctx.beginPath();
+        mctx.moveTo(p, h - p);
+        mctx.bezierCurveTo(
+          p + x1 * s,
+          h - p - y1 * (h - p * 2),
+          p + x2 * s,
+          h - p - y2 * (h - p * 2),
+          w - p,
+          p
+        );
+        mctx.stroke();
+      }
+
+      // ==================== PRESET RENDERING ====================
+      function renderPresets() {
+        var category = state.activeCategory;
+        var filtered =
+          category === "all"
+            ? EASING_PRESETS
+            : EASING_PRESETS.filter(function (p) {
+                return p.category === category;
+              });
+
+        presetCount.textContent = filtered.length;
+
+        // Clear list safely
+        while (presetList.firstChild) {
+          presetList.removeChild(presetList.firstChild);
+        }
+
+        filtered.forEach(function (preset) {
+          var btn = document.createElement("button");
+          btn.className = "preset-item" + (state.currentPreset === preset.id ? " active" : "");
+          btn.dataset.id = preset.id;
+
+          var miniCanvas = document.createElement("canvas");
+          miniCanvas.className = "preset-mini-curve";
+          miniCanvas.width = 32;
+          miniCanvas.height = 20;
+
+          var nameSpan = document.createElement("span");
+          nameSpan.textContent = preset.name;
+
+          btn.appendChild(miniCanvas);
+          btn.appendChild(nameSpan);
+
+          btn.addEventListener("click", function () {
+            selectPreset(preset.id);
+          });
+          presetList.appendChild(btn);
+
+          drawMiniCurve(miniCanvas, preset.bezier);
+        });
+      }
+
+      function selectPreset(presetId) {
+        var preset = EASING_PRESETS.find(function (p) {
+          return p.id === presetId;
+        });
+        if (!preset) return;
+
+        state.currentPreset = presetId;
+        state.bezier = preset.bezier.slice();
+
+        updateInputs();
+        drawCurve();
+        updateCanvasInfo();
+        updateExport();
+        updatePresetButtons();
+        updateAnimationTiming();
+        saveToUrl();
+      }
+
+      function updatePresetButtons() {
+        document.querySelectorAll(".preset-item").forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.id === state.currentPreset);
+        });
+      }
+
+      // ==================== INPUT HANDLING ====================
+      function updateInputs() {
+        inputX1.value = state.bezier[0].toFixed(2);
+        inputY1.value = state.bezier[1].toFixed(2);
+        inputX2.value = state.bezier[2].toFixed(2);
+        inputY2.value = state.bezier[3].toFixed(2);
+      }
+
+      function handleInputChange() {
+        var x1 = Math.max(0, Math.min(1, parseFloat(inputX1.value) || 0));
+        var y1 = Math.max(-2, Math.min(2, parseFloat(inputY1.value) || 0));
+        var x2 = Math.max(0, Math.min(1, parseFloat(inputX2.value) || 0));
+        var y2 = Math.max(-2, Math.min(2, parseFloat(inputY2.value) || 0));
+
+        state.bezier = [x1, y1, x2, y2];
+        state.currentPreset = findMatchingPreset() || "custom";
+
+        drawCurve();
+        updateCanvasInfo();
+        updateExport();
+        updatePresetButtons();
+        updateAnimationTiming();
+        saveToUrl();
+      }
+
+      function findMatchingPreset() {
+        var b = state.bezier;
+        var found = EASING_PRESETS.find(function (p) {
+          return (
+            Math.abs(p.bezier[0] - b[0]) < 0.01 &&
+            Math.abs(p.bezier[1] - b[1]) < 0.01 &&
+            Math.abs(p.bezier[2] - b[2]) < 0.01 &&
+            Math.abs(p.bezier[3] - b[3]) < 0.01
+          );
+        });
+        return found ? found.id : null;
+      }
+
+      [inputX1, inputY1, inputX2, inputY2].forEach(function (input) {
+        input.addEventListener("input", handleInputChange);
+      });
+
+      // ==================== CANVAS DRAG ====================
+      function getMousePos(e) {
+        var rect = canvas.getBoundingClientRect();
+        return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      }
+
+      function hitTest(pos, pointX, pointY) {
+        var px = toCanvasX(pointX);
+        var py = toCanvasY(pointY);
+        var dx = pos.x - px;
+        var dy = pos.y - py;
+        return Math.sqrt(dx * dx + dy * dy) < 15;
+      }
+
+      canvas.addEventListener("mousedown", function (e) {
+        var pos = getMousePos(e);
+        if (hitTest(pos, state.bezier[0], state.bezier[1])) dragging = "p1";
+        else if (hitTest(pos, state.bezier[2], state.bezier[3])) dragging = "p2";
+      });
+
+      canvas.addEventListener("mousemove", function (e) {
+        if (!dragging) return;
+        var pos = getMousePos(e);
+        var x = Math.max(0, Math.min(1, fromCanvasX(pos.x)));
+        var y = Math.max(-0.5, Math.min(1.5, fromCanvasY(pos.y)));
+
+        if (dragging === "p1") {
+          state.bezier[0] = x;
+          state.bezier[1] = y;
+        } else {
+          state.bezier[2] = x;
+          state.bezier[3] = y;
+        }
+
+        state.currentPreset = findMatchingPreset() || "custom";
+        drawCurve();
+        updateInputs();
+        updateCanvasInfo();
+        updateExport();
+        updatePresetButtons();
+        updateAnimationTiming();
+      });
+
+      canvas.addEventListener("mouseup", function () {
+        dragging = null;
+        saveToUrl();
+      });
+      canvas.addEventListener("mouseleave", function () {
+        dragging = null;
+        saveToUrl();
+      });
+
+      // Touch support
+      canvas.addEventListener("touchstart", function (e) {
+        e.preventDefault();
+        var touch = e.touches[0];
+        var pos = {
+          x: touch.clientX - canvas.getBoundingClientRect().left,
+          y: touch.clientY - canvas.getBoundingClientRect().top
+        };
+        if (hitTest(pos, state.bezier[0], state.bezier[1])) dragging = "p1";
+        else if (hitTest(pos, state.bezier[2], state.bezier[3])) dragging = "p2";
+      });
+
+      canvas.addEventListener("touchmove", function (e) {
+        e.preventDefault();
+        if (!dragging) return;
+        var touch = e.touches[0];
+        var pos = {
+          x: touch.clientX - canvas.getBoundingClientRect().left,
+          y: touch.clientY - canvas.getBoundingClientRect().top
+        };
+        var x = Math.max(0, Math.min(1, fromCanvasX(pos.x)));
+        var y = Math.max(-0.5, Math.min(1.5, fromCanvasY(pos.y)));
+        if (dragging === "p1") {
+          state.bezier[0] = x;
+          state.bezier[1] = y;
+        } else {
+          state.bezier[2] = x;
+          state.bezier[3] = y;
+        }
+        state.currentPreset = findMatchingPreset() || "custom";
+        drawCurve();
+        updateInputs();
+        updateCanvasInfo();
+        updateExport();
+        updatePresetButtons();
+        updateAnimationTiming();
+      });
+
+      canvas.addEventListener("touchend", function () {
+        dragging = null;
+        saveToUrl();
+      });
+
+      // ==================== ANIMATION ====================
+      function updateCanvasInfo() {
+        var b = state.bezier;
+        canvasInfo.textContent =
+          "cubic-bezier(" +
+          b[0].toFixed(2) +
+          ", " +
+          b[1].toFixed(2) +
+          ", " +
+          b[2].toFixed(2) +
+          ", " +
+          b[3].toFixed(2) +
+          ")";
+      }
+
+      function updateAnimationTiming() {
+        var b = state.bezier;
+        var timing = "cubic-bezier(" + b[0] + ", " + b[1] + ", " + b[2] + ", " + b[3] + ")";
+        previewBall.style.transitionTimingFunction = timing;
+        previewBall.style.transitionDuration = state.duration + "s";
+        compCurrent.style.transitionTimingFunction = timing;
+        compCurrent.style.transitionDuration = state.duration + "s";
+      }
+
+      function playAnimation() {
+        var balls = [previewBall, compCurrent].concat(
+          Array.from(document.querySelectorAll(".comparison-ball[data-easing]"))
+        );
+
+        balls.forEach(function (ball) {
+          ball.classList.remove("animate");
+          ball.style.transitionDuration = state.duration + "s";
+        });
+
+        void previewBall.offsetWidth; // Force reflow
+
+        balls.forEach(function (ball) {
+          ball.classList.add("animate");
+        });
+
+        setTimeout(
+          function () {
+            balls.forEach(function (ball) {
+              ball.classList.remove("animate");
+            });
+          },
+          state.duration * 1000 + 100
+        );
+      }
+
+      document.getElementById("btnPlay").addEventListener("click", function () {
+        if (state.isLooping) stopLoop();
+        playAnimation();
+      });
+
+      document.getElementById("btnLoop").addEventListener("click", function () {
+        if (state.isLooping) {
+          stopLoop();
+          this.textContent = "🔄 循环";
+        } else {
+          startLoop();
+          this.textContent = "⏹ 停止";
+        }
+      });
+
+      function startLoop() {
+        state.isLooping = true;
+        playAnimation();
+        state.loopInterval = setInterval(playAnimation, state.duration * 1000 + 500);
+      }
+
+      function stopLoop() {
+        state.isLooping = false;
+        clearInterval(state.loopInterval);
+      }
+
+      durationRange.addEventListener("input", function () {
+        state.duration = parseFloat(durationRange.value);
+        durationValue.textContent = state.duration + "s";
+        updateAnimationTiming();
+
+        document.querySelectorAll(".comparison-ball[data-easing]").forEach(function (ball) {
+          ball.style.transitionDuration = state.duration + "s";
+        });
+
+        // 如果正在循环，重启 interval 以使用新时长
+        if (state.isLooping) {
+          clearInterval(state.loopInterval);
+          state.loopInterval = setInterval(playAnimation, state.duration * 1000 + 500);
+        }
+      });
+
+      // ==================== EXPORT FORMATS ====================
+      var EXPORT_FORMATTERS = {
+        css: function (bezier, name) {
+          var value =
+            "cubic-bezier(" +
+            bezier[0] +
+            ", " +
+            bezier[1] +
+            ", " +
+            bezier[2] +
+            ", " +
+            bezier[3] +
+            ")";
+          return (
+            "/* " +
+            (name || "Custom Easing") +
+            " */\n" +
+            "transition-timing-function: " +
+            value +
+            ";\n" +
+            "animation-timing-function: " +
+            value +
+            ";\n\n" +
+            "/* 使用示例 */\n" +
+            ".element {\n" +
+            "  transition: all " +
+            state.duration +
+            "s " +
+            value +
+            ";\n" +
+            "}"
+          );
+        },
+
+        cssVar: function (bezier, name) {
+          var varName = (name || "custom").replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
+          return (
+            ":root {\n" +
+            "  --easing-" +
+            varName +
+            ": cubic-bezier(" +
+            bezier[0] +
+            ", " +
+            bezier[1] +
+            ", " +
+            bezier[2] +
+            ", " +
+            bezier[3] +
+            ");\n" +
+            "  --duration: " +
+            state.duration +
+            "s;\n" +
+            "}\n\n" +
+            ".element {\n" +
+            "  transition: all var(--duration) var(--easing-" +
+            varName +
+            ");\n" +
+            "}"
+          );
+        },
+
+        js: function (bezier, name) {
+          var fnName = (name || "customEasing").replace(/[^a-zA-Z0-9]/g, "");
+          return (
+            "// " +
+            (name || "Custom Easing") +
+            " - Cubic Bezier\n" +
+            "// 控制点: (" +
+            bezier[0] +
+            ", " +
+            bezier[1] +
+            "), (" +
+            bezier[2] +
+            ", " +
+            bezier[3] +
+            ")\n\n" +
+            "function " +
+            fnName +
+            "(t) {\n" +
+            "  // 简化的 cubic-bezier 实现\n" +
+            "  var x1 = " +
+            bezier[0] +
+            ", y1 = " +
+            bezier[1] +
+            ", x2 = " +
+            bezier[2] +
+            ", y2 = " +
+            bezier[3] +
+            ";\n\n" +
+            "  // 牛顿迭代法求解 t -> x\n" +
+            "  var t2 = t;\n" +
+            "  for (var i = 0; i < 8; i++) {\n" +
+            "    var x = bezierX(t2) - t;\n" +
+            "    if (Math.abs(x) < 0.001) break;\n" +
+            "    t2 -= x / bezierXDerivative(t2);\n" +
+            "  }\n" +
+            "  return bezierY(t2);\n\n" +
+            "  function bezierX(t) {\n" +
+            "    return 3 * (1-t) * (1-t) * t * x1 + 3 * (1-t) * t * t * x2 + t * t * t;\n" +
+            "  }\n" +
+            "  function bezierY(t) {\n" +
+            "    return 3 * (1-t) * (1-t) * t * y1 + 3 * (1-t) * t * t * y2 + t * t * t;\n" +
+            "  }\n" +
+            "  function bezierXDerivative(t) {\n" +
+            "    return 3 * (1-t) * (1-t) * x1 + 6 * (1-t) * t * (x2 - x1) + 3 * t * t * (1 - x2);\n" +
+            "  }\n" +
+            "}\n\n" +
+            "// 使用示例: requestAnimationFrame 动画\n" +
+            "function animate(element, duration) {\n" +
+            "  duration = duration || " +
+            state.duration * 1000 +
+            ";\n" +
+            "  var start = performance.now();\n" +
+            "  function frame(now) {\n" +
+            "    var t = Math.min((now - start) / duration, 1);\n" +
+            "    var progress = " +
+            fnName +
+            "(t);\n" +
+            '    element.style.transform = "translateX(" + (progress * 100) + "%)";\n' +
+            "    if (t < 1) requestAnimationFrame(frame);\n" +
+            "  }\n" +
+            "  requestAnimationFrame(frame);\n" +
+            "}"
+          );
+        },
+
+        animejs: function (bezier, name) {
+          return (
+            "// Anime.js 配置\n" +
+            "// " +
+            (name || "Custom Easing") +
+            "\n\n" +
+            "import anime from 'animejs';\n\n" +
+            "anime({\n" +
+            "  targets: '.element',\n" +
+            "  translateX: 250,\n" +
+            "  duration: " +
+            state.duration * 1000 +
+            ",\n" +
+            "  easing: 'cubicBezier(" +
+            bezier[0] +
+            ", " +
+            bezier[1] +
+            ", " +
+            bezier[2] +
+            ", " +
+            bezier[3] +
+            ")'\n" +
+            "});\n\n" +
+            "// 或使用内置缓动名称 (如果匹配)\n" +
+            "// easing: '" +
+            (name || "easeOutQuad") +
+            "'\n\n" +
+            "// 批量动画\n" +
+            "anime({\n" +
+            "  targets: '.elements',\n" +
+            "  translateX: 250,\n" +
+            "  duration: " +
+            state.duration * 1000 +
+            ",\n" +
+            "  delay: anime.stagger(100),\n" +
+            "  easing: 'cubicBezier(" +
+            bezier[0] +
+            ", " +
+            bezier[1] +
+            ", " +
+            bezier[2] +
+            ", " +
+            bezier[3] +
+            ")'\n" +
+            "});"
+          );
+        },
+
+        gsap: function (bezier, name) {
+          var easeName = (name || "customEase").replace(/[^a-zA-Z0-9]/g, "");
+          return (
+            "// GSAP 配置\n" +
+            "// " +
+            (name || "Custom Easing") +
+            "\n\n" +
+            "import { gsap } from 'gsap';\n" +
+            "import { CustomEase } from 'gsap/CustomEase';\n\n" +
+            "gsap.registerPlugin(CustomEase);\n\n" +
+            "// 创建自定义缓动\n" +
+            "CustomEase.create('" +
+            easeName +
+            "', \n" +
+            "  'M0,0 C" +
+            bezier[0] +
+            "," +
+            bezier[1] +
+            " " +
+            bezier[2] +
+            "," +
+            bezier[3] +
+            " 1,1');\n\n" +
+            "// 使用自定义缓动\n" +
+            "gsap.to('.element', {\n" +
+            "  x: 250,\n" +
+            "  duration: " +
+            state.duration +
+            ",\n" +
+            "  ease: '" +
+            easeName +
+            "'\n" +
+            "});\n\n" +
+            "// 或直接使用 cubic-bezier 字符串 (需要 CustomEase 插件)\n" +
+            "gsap.to('.element', {\n" +
+            "  x: 250,\n" +
+            "  duration: " +
+            state.duration +
+            ",\n" +
+            "  ease: 'M0,0 C" +
+            bezier[0] +
+            "," +
+            bezier[1] +
+            " " +
+            bezier[2] +
+            "," +
+            bezier[3] +
+            " 1,1'\n" +
+            "});"
+          );
+        }
+      };
+
+      function updateExport() {
+        var formatter = EXPORT_FORMATTERS[state.activeExportFormat];
+        var preset = EASING_PRESETS.find(function (p) {
+          return p.id === state.currentPreset;
+        });
+        var name = preset ? preset.name : null;
+        codeOutput.textContent = formatter(state.bezier, name);
+      }
+
+      document.getElementById("exportTabs").addEventListener("click", function (e) {
+        if (!e.target.classList.contains("export-tab")) return;
+
+        document.querySelectorAll(".export-tab").forEach(function (t) {
+          t.classList.remove("active");
+        });
+        e.target.classList.add("active");
+
+        state.activeExportFormat = e.target.dataset.format;
+        updateExport();
+      });
+
+      // ==================== ACTIONS ====================
+      document.getElementById("btnCopy").addEventListener("click", async function () {
+        try {
+          await navigator.clipboard.writeText(codeOutput.textContent);
+          showStatus("已复制到剪贴板", "success");
+        } catch (e) {
+          showStatus("复制失败", "error");
+        }
+      });
+
+      document.getElementById("btnShare").addEventListener("click", async function () {
+        saveToUrl();
+        try {
+          await navigator.clipboard.writeText(location.href);
+          showStatus("分享链接已复制", "success");
+        } catch (e) {
+          showStatus("复制失败", "error");
+        }
+      });
+
+      function showStatus(msg, type) {
+        statusEl.textContent = msg;
+        statusEl.className = "status " + (type || "");
+        setTimeout(function () {
+          statusEl.textContent = "";
+        }, 2000);
+      }
+
+      // ==================== CATEGORY TABS ====================
+      document.getElementById("categoryTabs").addEventListener("click", function (e) {
+        if (!e.target.classList.contains("category-tab")) return;
+
+        document.querySelectorAll(".category-tab").forEach(function (t) {
+          t.classList.remove("active");
+        });
+        e.target.classList.add("active");
+
+        state.activeCategory = e.target.dataset.category;
+        renderPresets();
+      });
+
+      // ==================== COMPARISON ====================
+      document.getElementById("comparisonToggle").addEventListener("change", function (e) {
+        document.getElementById("comparisonGrid").style.display = e.target.checked
+          ? "grid"
+          : "none";
+      });
+
+      // ==================== URL STATE ====================
+      function saveToUrl() {
+        var data = {
+          b: state.bezier,
+          p: state.currentPreset,
+          d: state.duration
+        };
+        try {
+          history.replaceState(null, "", "#" + btoa(JSON.stringify(data)));
+        } catch (e) {}
+      }
+
+      function loadFromUrl() {
+        var hash = location.hash.slice(1);
+        if (!hash) return false;
+        try {
+          var data = JSON.parse(atob(hash));
+          if (data.b && Array.isArray(data.b) && data.b.length === 4) {
+            // 验证所有值都是有效数字
+            var isValid = data.b.every(function (v) {
+              return typeof v === "number" && isFinite(v);
+            });
+            if (!isValid) return false;
+
+            // 限制范围: x 值 [0,1], y 值 [-2,2] (与输入框和拖拽一致)
+            state.bezier = [
+              Math.max(0, Math.min(1, data.b[0])),
+              Math.max(-2, Math.min(2, data.b[1])),
+              Math.max(0, Math.min(1, data.b[2])),
+              Math.max(-2, Math.min(2, data.b[3]))
+            ];
+            state.currentPreset = data.p || findMatchingPreset() || "custom";
+            state.duration =
+              typeof data.d === "number" && isFinite(data.d) && data.d > 0 ? data.d : 1;
+            return true;
+          }
+        } catch (e) {}
+        return false;
+      }
+
+      // ==================== THEME ====================
+      window.toggleTheme = function () {
+        var html = document.documentElement;
+        var btn = document.querySelector(".theme-toggle");
+        var next = html.getAttribute("data-theme") === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", next);
+        btn.textContent = next === "light" ? "☀️" : "🌙";
+        localStorage.setItem("theme", next);
+        drawCurve();
+        renderPresets();
+      };
+
+      // ==================== INIT ====================
+      (function init() {
+        // Load theme
+        var savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+          document.documentElement.setAttribute("data-theme", savedTheme);
+          document.querySelector(".theme-toggle").textContent =
+            savedTheme === "light" ? "☀️" : "🌙";
+        }
+
+        // Load state from URL or use default
+        if (!loadFromUrl()) {
+          state.bezier = [0.25, 0.1, 0.25, 1];
+          state.currentPreset = "ease";
+        }
+
+        // Set duration
+        durationRange.value = state.duration;
+        durationValue.textContent = state.duration + "s";
+
+        // Render
+        renderPresets();
+        updateInputs();
+        drawCurve();
+        updateCanvasInfo();
+        updateExport();
+        updateAnimationTiming();
+      })();
+    </script>
+
+    <!-- 全局 UI 注入 -->
+</div>
+    <div class="title">
+            <svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" width="26px" height="26px"><path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z" fill="#000000" p-id="7834"></path></svg>
+        <span data-zh="创造能力" data-en="Creator">Creator</span></div>
+        <div class="skill">
+            <!-- 技能开始 -->
+            <!-- 前往https://skillicons.dev/
+            生成，一个pc端，一个移动端，区别是一行的个数 -->
+            <img id="skillPc" src="/static/svg/skillPc.svg" alt="" srcset="">
+            <img id="skillWap" src="/static/svg/skillWap.svg" alt="" srcset="">
+        </div>
+        <!-- 技能结束 -->
+    </content> <!-- 内容结束 -->
+
+    <footer class="copyright-footer">
+        <span data-zh="Lin Wang©2026 |" data-en="Lin Wang©2026 |">Lin Wang©2026 |</span>
+        <a href="../index.html" data-zh="版权所有 ©Lin Wang" data-en="版权所有 ©Lin Wang">版权所有 ©Lin Wang</a>
+        <span> | 访问量 <span id="busuanzi_value_site_pv"><i style="color:var(--purple-text-color)">?</i></span></span>
+    </footer>
+     <footer class="source-footer">
+       <span data-zh="源码" data-en="source">source</span>
+        <a href="../index.html" data-zh="由Lin Wang制作" data-en="由Lin Wang制作">由Lin Wang制作</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlPrivacyPolicy.html" data-zh="隐私政策" data-en="Privacy Policy">隐私政策</a>
+        <span data-zh=" | " data-en=" | "> | </span>
+        <a href="../index.htmlTermsOfUse.html" data-zh="使用条款" data-en="Terms of Use">使用条款</a>
+    </footer>
+</div> <!-- main结束 -->
+
+<!--弹窗-->
+
+<div class="tc">
+    <div class="tc-main">
+        <img class="tc-img" src="" alt="" srcset="">
+    </div>
+    <div onclick="wx()" class="tc-close"><svg t="1700047644371" class="icon" viewBox="0 0 1024 1024" version="1.1"
+            xmlns="http://www.w3.org/2000/svg" p-id="950" width="22px" height="22px">
+            <path
+                d="M610.616405 512.423878l391.647127 391.939565a68.722849 68.722849 0 0 1 0 98.332161 72.012772 72.012772 0 0 1-100.306115 0l-390.404267-391.354689-392.012675 391.28158a69.74638 69.74638 0 0 1-98.551489-98.551489l391.793346-391.720237L20.988986 119.533891A69.74638 69.74638 0 0 1 119.540475 20.982402l392.158893 392.451331L901.957417 23.248793a72.012772 72.012772 0 0 1 100.306115 0 68.722849 68.722849 0 0 1 0 98.332161L610.616405 512.423878z"
+                p-id="951"></path>
+        </svg></div>
+</div>
+
+
+
+</body>
+
+<script src="/static/script.js?v=1.21"> </script>
+<script src="/static/enhance.js?v=1.0"> </script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div id="searchEmpty" class="search-empty" data-zh="没有找到匹配的项目 🥲" data-en="No matching projects found 🥲">No matching projects found 🥲</div>
+<div id="backToTop" title="回到顶部">
+    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="22px" height="22px"><path d="M512 192l320 320h-192v320h-256v-320H192z" fill="#7e7e7e" p-id="1"></path></svg>
+</div>
+
+</html>
