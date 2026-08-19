@@ -1,0 +1,2174 @@
+{
+  "date": "2026-08-15",
+  "updated_at": "2026-08-15T01:11:47.057414Z",
+  "total_plans": 70,
+  "category_counts": {
+    "personal": 26,
+    "coding": 35,
+    "enterprise": 9
+  },
+  "plans": [
+    {
+      "plan_name": "ChatGPT Free",
+      "vendor": "OpenAI",
+      "vendor_id": "openai",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5.3",
+        "GPT-5.4",
+        "GPT-4o",
+        "o1",
+        "o3",
+        "Sora"
+      ],
+      "usage_quota": {
+        "note": "Limited use of flagship models",
+        "messages": "limited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis"
+      ],
+      "target_audience": "Individual users / Daily AI assistance",
+      "affiliate_url": "https://chatgpt.com/pricing/",
+      "sort_order": 1
+    },
+    {
+      "plan_name": "ChatGPT Go",
+      "vendor": "OpenAI",
+      "vendor_id": "openai",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5.3",
+        "GPT-5.4",
+        "GPT-4o",
+        "o1",
+        "o3",
+        "Sora"
+      ],
+      "usage_quota": {
+        "note": "Limited use of flagship models",
+        "messages": "limited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis"
+      ],
+      "target_audience": "Individual users / Daily AI assistance",
+      "affiliate_url": "https://chatgpt.com/pricing/",
+      "sort_order": 2
+    },
+    {
+      "plan_name": "ChatGPT Plus",
+      "vendor": "OpenAI",
+      "vendor_id": "openai",
+      "category": "personal",
+      "price_monthly": 20.0,
+      "price_yearly": 200.0,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5.3",
+        "GPT-5.4",
+        "GPT-4o",
+        "o1",
+        "o3",
+        "Sora"
+      ],
+      "usage_quota": {
+        "note": "Higher usage limits",
+        "messages": "unlimited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis",
+        "priority_access"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://chatgpt.com/pricing/",
+      "sort_order": 3
+    },
+    {
+      "plan_name": "ChatGPT Pro",
+      "vendor": "OpenAI",
+      "vendor_id": "openai",
+      "category": "personal",
+      "price_monthly": 200.0,
+      "price_yearly": 2000.0,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5.3",
+        "GPT-5.4 Pro",
+        "GPT-4o",
+        "o1",
+        "o3",
+        "Sora"
+      ],
+      "usage_quota": {
+        "note": "Maximum usage",
+        "compute": "5x_or_20x_pro",
+        "messages": "unlimited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis",
+        "priority_access",
+        "sora_video"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://chatgpt.com/pricing/",
+      "sort_order": 4
+    },
+    {
+      "plan_name": "ChatGPT Business",
+      "vendor": "OpenAI",
+      "vendor_id": "openai",
+      "category": "enterprise",
+      "price_monthly": 24.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5.3",
+        "GPT-5.4",
+        "GPT-5.4 Pro",
+        "GPT-4o",
+        "o1",
+        "o3",
+        "Sora"
+      ],
+      "usage_quota": {
+        "note": "Full business access",
+        "compute": "highest_tier",
+        "messages": "unlimited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "team_collaboration",
+        "security",
+        "sso",
+        "mfa",
+        "integrations"
+      ],
+      "target_audience": "Enterprise users / Team collaboration",
+      "affiliate_url": "https://chatgpt.com/pricing/",
+      "sort_order": 6
+    },
+    {
+      "plan_name": "Claude Free",
+      "vendor": "Anthropic",
+      "vendor_id": "anthropic",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "Claude Opus 4.6",
+        "Claude Haiku 4.5"
+      ],
+      "usage_quota": {
+        "note": "Free for everyone",
+        "messages": "limited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis",
+        "memory"
+      ],
+      "target_audience": "Individual users / Daily AI assistance",
+      "affiliate_url": "https://claude.com/pricing",
+      "sort_order": 8
+    },
+    {
+      "plan_name": "Claude Pro",
+      "vendor": "Anthropic",
+      "vendor_id": "anthropic",
+      "category": "personal",
+      "price_monthly": 17.0,
+      "price_yearly": 200.0,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "Claude Opus 4.6",
+        "Claude Haiku 4.5"
+      ],
+      "usage_quota": {
+        "note": "More usage, includes Claude Cowork",
+        "messages": "unlimited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis",
+        "memory",
+        "projects",
+        "research"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://claude.com/pricing",
+      "sort_order": 9
+    },
+    {
+      "plan_name": "Claude Max",
+      "vendor": "Anthropic",
+      "vendor_id": "anthropic",
+      "category": "personal",
+      "price_monthly": 100.0,
+      "price_yearly": 1000.0,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "Claude Opus 4.6",
+        "Claude Haiku 4.5"
+      ],
+      "usage_quota": {
+        "note": "Maximum usage",
+        "compute": "5x_or_20x_pro",
+        "messages": "unlimited"
+      },
+      "features": [
+        "multimodal",
+        "web_search",
+        "code_execution",
+        "file_upload",
+        "data_analysis",
+        "memory",
+        "projects",
+        "research",
+        "priority_access",
+        "early_access"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://claude.com/pricing",
+      "sort_order": 10
+    },
+    {
+      "plan_name": "GLM Coding Lite",
+      "vendor": "Zhipu AI",
+      "vendor_id": "zhipuai",
+      "category": "coding",
+      "price_monthly": 49.0,
+      "price_yearly": 132.3,
+      "currency": "CNY",
+      "included_models": [
+        "GLM-5",
+        "GLM-4"
+      ],
+      "usage_quota": {
+        "note": "适合小型Repo轻量级迭代",
+        "messages": "3x Claude Pro用量"
+      },
+      "features": [
+        "glm_5_model",
+        "3x_usage",
+        "tool_compatibility",
+        "20_plus_tools"
+      ],
+      "target_audience": "Small project developers",
+      "affiliate_url": "https://www.bigmodel.cn/glm-coding?ic=JZTUC7CZRC",
+      "sort_order": 11
+    },
+    {
+      "plan_name": "Cursor Hobby",
+      "vendor": "Cursor",
+      "vendor_id": "cursor",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "GPT-4o",
+        "Cursor Fast"
+      ],
+      "usage_quota": {
+        "note": "Limited smart agent requests",
+        "agent_requests": "limited",
+        "tab_completions": "limited"
+      },
+      "features": [
+        "tab_completions",
+        "chat",
+        "code_preview",
+        "mcp",
+        "skills",
+        "hooks"
+      ],
+      "target_audience": "Developers / Programming enthusiasts",
+      "affiliate_url": "https://cursor.com/pricing",
+      "sort_order": 11
+    },
+    {
+      "plan_name": "GLM Coding Pro",
+      "vendor": "Zhipu AI",
+      "vendor_id": "zhipuai",
+      "category": "coding",
+      "price_monthly": 149.0,
+      "price_yearly": 402.3,
+      "currency": "CNY",
+      "included_models": [
+        "GLM-5",
+        "GLM-4"
+      ],
+      "usage_quota": {
+        "note": "适合中型Repo日常开发",
+        "messages": "5x Lite用量"
+      },
+      "features": [
+        "glm_5_model",
+        "5x_usage",
+        "mcp_tools",
+        "faster_generation",
+        "priority_access"
+      ],
+      "target_audience": "Medium project developers",
+      "affiliate_url": "https://www.bigmodel.cn/glm-coding?ic=JZTUC7CZRC",
+      "sort_order": 12
+    },
+    {
+      "plan_name": "Cursor Pro",
+      "vendor": "Cursor",
+      "vendor_id": "cursor",
+      "category": "personal",
+      "price_monthly": 20.0,
+      "price_yearly": 200.0,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "GPT-4o",
+        "Cursor Fast"
+      ],
+      "usage_quota": {
+        "note": "Extended agent requests",
+        "agent_requests": "extended",
+        "tab_completions": "unlimited"
+      },
+      "features": [
+        "tab_completions",
+        "chat",
+        "code_preview",
+        "mcp",
+        "skills",
+        "hooks",
+        "cloud_agents",
+        "all_models"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://cursor.com/pricing",
+      "sort_order": 12
+    },
+    {
+      "plan_name": "GLM Coding Max",
+      "vendor": "Zhipu AI",
+      "vendor_id": "zhipuai",
+      "category": "coding",
+      "price_monthly": 469.0,
+      "price_yearly": 1266.3,
+      "currency": "CNY",
+      "included_models": [
+        "GLM-5",
+        "GLM-4"
+      ],
+      "usage_quota": {
+        "note": "Suitable for advanced users中大型Repo深度开发",
+        "messages": "20x Lite用量"
+      },
+      "features": [
+        "glm_5_model",
+        "20x_usage",
+        "priority_access",
+        "mcp_tools",
+        "faster_generation",
+        "peak_guarantee"
+      ],
+      "target_audience": "Advanced users / Large project developers",
+      "affiliate_url": "https://www.bigmodel.cn/glm-coding?ic=JZTUC7CZRC",
+      "sort_order": 13
+    },
+    {
+      "plan_name": "Cursor Pro+",
+      "vendor": "Cursor",
+      "vendor_id": "cursor",
+      "category": "personal",
+      "price_monthly": 60.0,
+      "price_yearly": 600.0,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "GPT-4o",
+        "Gemini",
+        "Cursor Fast"
+      ],
+      "usage_quota": {
+        "note": "3x Pro usage",
+        "agent_requests": "3x_pro",
+        "tab_completions": "unlimited"
+      },
+      "features": [
+        "tab_completions",
+        "chat",
+        "code_preview",
+        "mcp",
+        "skills",
+        "hooks",
+        "cloud_agents",
+        "all_models",
+        "3x_usage"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://cursor.com/pricing",
+      "sort_order": 13
+    },
+    {
+      "plan_name": "Cursor Ultra",
+      "vendor": "Cursor",
+      "vendor_id": "cursor",
+      "category": "personal",
+      "price_monthly": 200.0,
+      "price_yearly": 2000.0,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "GPT-4o",
+        "Gemini",
+        "Cursor Fast"
+      ],
+      "usage_quota": {
+        "note": "20x Pro usage",
+        "agent_requests": "20x_pro",
+        "tab_completions": "unlimited"
+      },
+      "features": [
+        "tab_completions",
+        "chat",
+        "code_preview",
+        "mcp",
+        "skills",
+        "hooks",
+        "cloud_agents",
+        "all_models",
+        "20x_usage",
+        "priority_features"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://cursor.com/pricing",
+      "sort_order": 14
+    },
+    {
+      "plan_name": "Ark Coding Plan Lite",
+      "vendor": "ByteDance",
+      "vendor_id": "volcengine",
+      "category": "coding",
+      "price_monthly": 40.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Doubao-Seed-2.0-pro",
+        "Doubao-Seed-2.0-lite",
+        "Doubao-Seed-Code",
+        "MiniMax-M2.5",
+        "Kimi-K2.5",
+        "GLM-4.7",
+        "Deepseek-V3.2"
+      ],
+      "usage_quota": {
+        "note": "Supports free multi-model switching",
+        "messages": "数倍于Claude Pro用量"
+      },
+      "features": [
+        "multi_model",
+        "auto_mode",
+        "claude_code_compatible",
+        "cursor_support",
+        "arkclaw_ready"
+      ],
+      "target_audience": "Moderate-intensity developers",
+      "affiliate_url": "https://www.volcengine.com/activity/codingplan?ac=MMAP8JTTCAQ2&rc=C2BWMW2J",
+      "sort_order": 14
+    },
+    {
+      "plan_name": "Ark Coding Plan Pro",
+      "vendor": "ByteDance",
+      "vendor_id": "volcengine",
+      "category": "coding",
+      "price_monthly": 200.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Doubao-Seed-2.0-pro",
+        "Doubao-Seed-2.0-lite",
+        "Doubao-Seed-Code",
+        "MiniMax-M2.5",
+        "Kimi-K2.5",
+        "GLM-4.7",
+        "Deepseek-V3.2"
+      ],
+      "usage_quota": {
+        "note": "usage为Claude Max数x",
+        "messages": "5倍Lite用量"
+      },
+      "features": [
+        "multi_model",
+        "auto_mode",
+        "claude_code_compatible",
+        "cursor_support",
+        "arkclaw_lite_free"
+      ],
+      "target_audience": "Advanced programming users",
+      "affiliate_url": "https://www.volcengine.com/activity/codingplan?ac=MMAP8JTTCAQ2&rc=C2BWMW2J",
+      "sort_order": 15
+    },
+    {
+      "plan_name": "Cursor Business",
+      "vendor": "Cursor",
+      "vendor_id": "cursor",
+      "category": "enterprise",
+      "price_monthly": 40.0,
+      "price_yearly": 400.0,
+      "currency": "USD",
+      "included_models": [
+        "Claude Sonnet 4.6",
+        "GPT-4o",
+        "Gemini",
+        "Cursor Fast"
+      ],
+      "usage_quota": {
+        "note": "Team usage pool",
+        "agent_requests": "shared",
+        "tab_completions": "unlimited"
+      },
+      "features": [
+        "tab_completions",
+        "chat",
+        "code_preview",
+        "mcp",
+        "skills",
+        "hooks",
+        "cloud_agents",
+        "all_models",
+        "team_billing",
+        "analytics",
+        "sso",
+        "privacy_controls"
+      ],
+      "target_audience": "Enterprise users / Team collaboration",
+      "affiliate_url": "https://cursor.com/pricing",
+      "sort_order": 15
+    },
+    {
+      "plan_name": "GitHub Copilot Free",
+      "vendor": "GitHub",
+      "vendor_id": "github",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5 mini",
+        "GPT-4o"
+      ],
+      "usage_quota": {
+        "note": "50 premium requests/month",
+        "premium_requests": 50
+      },
+      "features": [
+        "chat",
+        "agent_mode",
+        "code_review",
+        "copilot_cli",
+        "mcp",
+        "custom_instructions"
+      ],
+      "target_audience": "Developers / Programming enthusiasts",
+      "affiliate_url": "https://github.com/features/copilot/plans",
+      "sort_order": 16
+    },
+    {
+      "plan_name": "GitHub Copilot Pro",
+      "vendor": "GitHub",
+      "vendor_id": "github",
+      "category": "personal",
+      "price_monthly": 10.0,
+      "price_yearly": 100.0,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5 mini",
+        "GPT-4o"
+      ],
+      "usage_quota": {
+        "note": "300 premium requests/month",
+        "premium_requests": 300
+      },
+      "features": [
+        "chat",
+        "agent_mode",
+        "code_review",
+        "cloud_agent",
+        "copilot_cli",
+        "mcp",
+        "custom_instructions",
+        "pull_request_reviews",
+        "app_modernization"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://github.com/features/copilot/plans",
+      "sort_order": 17
+    },
+    {
+      "plan_name": "GitHub Copilot Pro+",
+      "vendor": "GitHub",
+      "vendor_id": "github",
+      "category": "personal",
+      "price_monthly": 39.0,
+      "price_yearly": 390.0,
+      "currency": "USD",
+      "included_models": [
+        "GPT-5 mini",
+        "GPT-4o",
+        "Claude",
+        "Gemini"
+      ],
+      "usage_quota": {
+        "note": "1500 premium requests/month",
+        "premium_requests": 1500
+      },
+      "features": [
+        "chat",
+        "agent_mode",
+        "code_review",
+        "cloud_agent",
+        "copilot_cli",
+        "mcp",
+        "custom_instructions",
+        "pull_request_reviews",
+        "app_modernization",
+        "third_party_agents",
+        "copilot_spaces"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://github.com/features/copilot/plans",
+      "sort_order": 18
+    },
+    {
+      "plan_name": "Windsurf Free",
+      "vendor": "Windsurf",
+      "vendor_id": "windsurf",
+      "category": "coding",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Cascade",
+        "SWE-1.5",
+        "frontier models"
+      ],
+      "usage_quota": {
+        "note": "Unlimited Tab completions",
+        "usage_tier": "light"
+      },
+      "features": [
+        "tab_completions",
+        "cascade",
+        "previews",
+        "deploys"
+      ],
+      "target_audience": "Developers / Programming enthusiasts",
+      "affiliate_url": "https://windsurf.com/pricing",
+      "sort_order": 19
+    },
+    {
+      "plan_name": "GLM Coding Plan Lite",
+      "vendor": "Z.AI",
+      "vendor_id": "zai",
+      "category": "coding",
+      "price_monthly": 18.0,
+      "price_yearly": 144.0,
+      "currency": "USD",
+      "included_models": [
+        "GLM-5.1",
+        "GLM-5-Turbo",
+        "GLM-4.7",
+        "GLM-4.6",
+        "GLM-4.5-Air"
+      ],
+      "usage_quota": {
+        "note": "Managing lightweight workloads",
+        "messages": "3x Claude Pro用量"
+      },
+      "features": [
+        "glm_5_1_model",
+        "glm_5_turbo",
+        "3x_usage",
+        "20_plus_tools",
+        "openclaw_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Individual developers / Lightweight tasks",
+      "affiliate_url": "https://z.ai/subscribe?ic=AQML6BNVWT",
+      "sort_order": 20
+    },
+    {
+      "plan_name": "Windsurf Pro",
+      "vendor": "Windsurf",
+      "vendor_id": "windsurf",
+      "category": "coding",
+      "price_monthly": 20.0,
+      "price_yearly": 200.0,
+      "currency": "USD",
+      "included_models": [
+        "Cascade",
+        "SWE-1.5",
+        "frontier models"
+      ],
+      "usage_quota": {
+        "note": "At API price",
+        "usage_tier": "standard"
+      },
+      "features": [
+        "tab_completions",
+        "cascade",
+        "previews",
+        "deploys",
+        "all_premium_models"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://windsurf.com/pricing",
+      "sort_order": 20
+    },
+    {
+      "plan_name": "GLM Coding Plan Pro",
+      "vendor": "Z.AI",
+      "vendor_id": "zai",
+      "category": "coding",
+      "price_monthly": 72.0,
+      "price_yearly": 576.0,
+      "currency": "USD",
+      "included_models": [
+        "GLM-5.1",
+        "GLM-5-Turbo",
+        "GLM-4.7",
+        "GLM-4.6",
+        "GLM-4.5-Air",
+        "GLM-5"
+      ],
+      "usage_quota": {
+        "note": "Managing complex workloads, 40-60% faster than Lite",
+        "messages": "5x Lite用量"
+      },
+      "features": [
+        "glm_5_model",
+        "glm_5_1_model",
+        "5x_usage",
+        "mcp_tools",
+        "priority_access",
+        "vision_analyze",
+        "web_search",
+        "faster_generation"
+      ],
+      "target_audience": "Professional developers / Complex tasks",
+      "affiliate_url": "https://z.ai/subscribe?ic=AQML6BNVWT",
+      "sort_order": 21
+    },
+    {
+      "plan_name": "Windsurf Max",
+      "vendor": "Windsurf",
+      "vendor_id": "windsurf",
+      "category": "coding",
+      "price_monthly": 200.0,
+      "price_yearly": 2000.0,
+      "currency": "USD",
+      "included_models": [
+        "Cascade",
+        "SWE-1.5",
+        "frontier models"
+      ],
+      "usage_quota": {
+        "note": "At API price",
+        "usage_tier": "heavy"
+      },
+      "features": [
+        "tab_completions",
+        "cascade",
+        "previews",
+        "deploys",
+        "all_premium_models",
+        "fast_context"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://windsurf.com/pricing",
+      "sort_order": 21
+    },
+    {
+      "plan_name": "GLM Coding Plan Max",
+      "vendor": "Z.AI",
+      "vendor_id": "zai",
+      "category": "coding",
+      "price_monthly": 160.0,
+      "price_yearly": 1280.0,
+      "currency": "USD",
+      "included_models": [
+        "GLM-5.1",
+        "GLM-5-Turbo",
+        "GLM-4.7",
+        "GLM-4.6",
+        "GLM-4.5-Air",
+        "GLM-5"
+      ],
+      "usage_quota": {
+        "note": "Managing high-volume workloads, guaranteed peak-hour performance",
+        "messages": "4x Pro用量"
+      },
+      "features": [
+        "glm_5_model",
+        "glm_5_1_model",
+        "4x_pro_usage",
+        "mcp_tools",
+        "first_access",
+        "peak_guarantee",
+        "vision_analyze",
+        "web_search"
+      ],
+      "target_audience": "Advanced developers / High-volume usage",
+      "affiliate_url": "https://z.ai/subscribe?ic=AQML6BNVWT",
+      "sort_order": 22
+    },
+    {
+      "plan_name": "Windsurf Teams",
+      "vendor": "Windsurf",
+      "vendor_id": "windsurf",
+      "category": "enterprise",
+      "price_monthly": 40.0,
+      "price_yearly": 400.0,
+      "currency": "USD",
+      "included_models": [
+        "Cascade",
+        "SWE-1.5",
+        "frontier models"
+      ],
+      "usage_quota": {
+        "note": "At API price",
+        "usage_tier": "standard"
+      },
+      "features": [
+        "tab_completions",
+        "cascade",
+        "previews",
+        "deploys",
+        "all_premium_models",
+        "centralized_billing",
+        "admin_dashboard",
+        "priority_support"
+      ],
+      "target_audience": "Enterprise users / Team collaboration",
+      "affiliate_url": "https://windsurf.com/pricing",
+      "sort_order": 22
+    },
+    {
+      "plan_name": "Kiro Free",
+      "vendor": "Kiro (AWS)",
+      "vendor_id": "kiro",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Auto",
+        "Sonnet 4.5",
+        "Haiku 4.5",
+        "Opus 4.5",
+        "Opus 4.6",
+        "Opus 4.7"
+      ],
+      "usage_quota": {
+        "note": "50 credits, expires in 30 days",
+        "credits": 50
+      },
+      "features": [
+        "cli",
+        "powers",
+        "autonomous_agent"
+      ],
+      "target_audience": "Developers / Programming enthusiasts",
+      "affiliate_url": "https://kiro.dev/pricing/",
+      "sort_order": 23
+    },
+    {
+      "plan_name": "Kiro Pro",
+      "vendor": "Kiro (AWS)",
+      "vendor_id": "kiro",
+      "category": "personal",
+      "price_monthly": 20.0,
+      "price_yearly": 200.0,
+      "currency": "USD",
+      "included_models": [
+        "Auto",
+        "Sonnet 4.5",
+        "Haiku 4.5",
+        "Opus 4.5",
+        "Opus 4.6",
+        "Opus 4.7"
+      ],
+      "usage_quota": {
+        "credits": 1000,
+        "overage": "$0.04/credit"
+      },
+      "features": [
+        "cli",
+        "powers",
+        "autonomous_agent",
+        "overage"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://kiro.dev/pricing/",
+      "sort_order": 24
+    },
+    {
+      "plan_name": "Kiro Pro+",
+      "vendor": "Kiro (AWS)",
+      "vendor_id": "kiro",
+      "category": "personal",
+      "price_monthly": 40.0,
+      "price_yearly": 400.0,
+      "currency": "USD",
+      "included_models": [
+        "Auto",
+        "Sonnet 4.5",
+        "Haiku 4.5",
+        "Opus 4.5",
+        "Opus 4.6",
+        "Opus 4.7"
+      ],
+      "usage_quota": {
+        "credits": 2000,
+        "overage": "$0.04/credit"
+      },
+      "features": [
+        "cli",
+        "powers",
+        "autonomous_agent",
+        "overage"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://kiro.dev/pricing/",
+      "sort_order": 25
+    },
+    {
+      "plan_name": "Kiro Power",
+      "vendor": "Kiro (AWS)",
+      "vendor_id": "kiro",
+      "category": "personal",
+      "price_monthly": 200.0,
+      "price_yearly": 2000.0,
+      "currency": "USD",
+      "included_models": [
+        "Auto",
+        "Sonnet 4.5",
+        "Haiku 4.5",
+        "Opus 4.5",
+        "Opus 4.6",
+        "Opus 4.7"
+      ],
+      "usage_quota": {
+        "credits": 10000,
+        "overage": "$0.04/credit"
+      },
+      "features": [
+        "cli",
+        "powers",
+        "autonomous_agent",
+        "overage"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://kiro.dev/pricing/",
+      "sort_order": 26
+    },
+    {
+      "plan_name": "Kimi Adagio",
+      "vendor": "Kimi",
+      "vendor_id": "kimi",
+      "category": "personal",
+      "price_monthly": 0.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Kimi models",
+        "Agent models"
+      ],
+      "usage_quota": {
+        "note": "基础额度",
+        "agent_usage": "base"
+      },
+      "features": [
+        "agent",
+        "office_files",
+        "deep_research",
+        "web_deploy"
+      ],
+      "target_audience": "Individual users / Daily AI assistance",
+      "affiliate_url": "https://www.kimi.com/membership/pricing",
+      "sort_order": 27
+    },
+    {
+      "plan_name": "Kimi Andante",
+      "vendor": "Kimi",
+      "vendor_id": "kimi",
+      "category": "personal",
+      "price_monthly": 39.0,
+      "price_yearly": 468.0,
+      "currency": "CNY",
+      "included_models": [
+        "Kimi models",
+        "Agent models"
+      ],
+      "usage_quota": {
+        "note": "更多 Agent quota",
+        "agent_usage": "more"
+      },
+      "features": [
+        "agent",
+        "office_files",
+        "deep_research",
+        "web_deploy",
+        "kimi_code"
+      ],
+      "target_audience": "Individual users / Daily AI assistance",
+      "affiliate_url": "https://www.kimi.com/membership/pricing",
+      "sort_order": 28
+    },
+    {
+      "plan_name": "Kimi Moderato",
+      "vendor": "Kimi",
+      "vendor_id": "kimi",
+      "category": "personal",
+      "price_monthly": 79.0,
+      "price_yearly": 948.0,
+      "currency": "CNY",
+      "included_models": [
+        "Kimi models",
+        "Agent models"
+      ],
+      "usage_quota": {
+        "note": "2 x Agent quota",
+        "agent_usage": "2x"
+      },
+      "features": [
+        "agent",
+        "office_files",
+        "deep_research",
+        "web_deploy",
+        "kimi_code_4x"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://www.kimi.com/membership/pricing",
+      "sort_order": 29
+    },
+    {
+      "plan_name": "Token Plan Starter",
+      "vendor": "MiniMax",
+      "vendor_id": "minimax",
+      "category": "coding",
+      "price_monthly": 29.0,
+      "price_yearly": 290.0,
+      "currency": "CNY",
+      "included_models": [
+        "MiniMax-M2.7",
+        "MiniMax-M2.7-highspeed"
+      ],
+      "usage_quota": {
+        "note": "Approximately支持1OpenClaw agent",
+        "messages": "600次/5小时"
+      },
+      "features": [
+        "m2_7_model",
+        "image_understanding",
+        "web_search",
+        "code_execution",
+        "openclaw_support"
+      ],
+      "target_audience": "Developers / Entry-level users",
+      "affiliate_url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "sort_order": 30
+    },
+    {
+      "plan_name": "Kimi Allegretto",
+      "vendor": "Kimi",
+      "vendor_id": "kimi",
+      "category": "personal",
+      "price_monthly": 159.0,
+      "price_yearly": 1908.0,
+      "currency": "CNY",
+      "included_models": [
+        "Kimi models",
+        "Agent models"
+      ],
+      "usage_quota": {
+        "note": "4 x Agent quota",
+        "agent_usage": "4x"
+      },
+      "features": [
+        "agent",
+        "office_files",
+        "deep_research",
+        "web_deploy",
+        "kimi_code_20x",
+        "multi_task",
+        "database"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://www.kimi.com/membership/pricing",
+      "sort_order": 30
+    },
+    {
+      "plan_name": "Token Plan Plus",
+      "vendor": "MiniMax",
+      "vendor_id": "minimax",
+      "category": "coding",
+      "price_monthly": 49.0,
+      "price_yearly": 490.0,
+      "currency": "CNY",
+      "included_models": [
+        "MiniMax-M2.7",
+        "MiniMax-M2.7-highspeed"
+      ],
+      "usage_quota": {
+        "note": "2.5xStarterusage,Approximately支持1-2OpenClaw agent",
+        "messages": "1500次/5小时"
+      },
+      "features": [
+        "m2_7_model",
+        "image_understanding",
+        "web_search",
+        "code_execution",
+        "image_generation",
+        "voice_generation",
+        "openclaw_support"
+      ],
+      "target_audience": "Professional developers",
+      "affiliate_url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "sort_order": 31
+    },
+    {
+      "plan_name": "Kimi Allegro",
+      "vendor": "Kimi",
+      "vendor_id": "kimi",
+      "category": "personal",
+      "price_monthly": 559.0,
+      "price_yearly": 6708.0,
+      "currency": "CNY",
+      "included_models": [
+        "Kimi models",
+        "Agent models"
+      ],
+      "usage_quota": {
+        "note": "10 x Agent quota",
+        "agent_usage": "10x"
+      },
+      "features": [
+        "agent",
+        "office_files",
+        "deep_research",
+        "web_deploy",
+        "kimi_code_60x",
+        "multi_task",
+        "database",
+        "cluster"
+      ],
+      "target_audience": "Heavy AI users / Professional creators",
+      "affiliate_url": "https://www.kimi.com/membership/pricing",
+      "sort_order": 31
+    },
+    {
+      "plan_name": "Token Plan Max",
+      "vendor": "MiniMax",
+      "vendor_id": "minimax",
+      "category": "coding",
+      "price_monthly": 119.0,
+      "price_yearly": 1190.0,
+      "currency": "CNY",
+      "included_models": [
+        "MiniMax-M2.7",
+        "MiniMax-M2.7-highspeed"
+      ],
+      "usage_quota": {
+        "note": "7.5xStarterusage,Approximately支持2-3OpenClaw agent",
+        "messages": "4500次/5小时"
+      },
+      "features": [
+        "m2_7_model",
+        "image_understanding",
+        "web_search",
+        "code_execution",
+        "image_generation",
+        "voice_generation",
+        "music_generation",
+        "video_generation",
+        "openclaw_support"
+      ],
+      "target_audience": "Advanced developers / Heavy users",
+      "affiliate_url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "sort_order": 32
+    },
+    {
+      "plan_name": "Google AI Plus",
+      "vendor": "Google",
+      "vendor_id": "google",
+      "category": "personal",
+      "price_monthly": 7.99,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Gemini",
+        "Imagen",
+        "Veo",
+        "Lyria"
+      ],
+      "usage_quota": {
+        "note": "Basic AI features",
+        "ai_features": "basic"
+      },
+      "features": [
+        "ai_features",
+        "google_one_integration"
+      ],
+      "target_audience": "Individual users / Daily AI assistance",
+      "affiliate_url": "https://one.google.com/ai",
+      "sort_order": 32
+    },
+    {
+      "plan_name": "Google AI Ultra",
+      "vendor": "Google",
+      "vendor_id": "google",
+      "category": "personal",
+      "price_monthly": 249.99,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Gemini",
+        "Imagen",
+        "Veo",
+        "Lyria"
+      ],
+      "usage_quota": {
+        "note": "Via Google One AI Pro or Ultra",
+        "ai_features": "premium"
+      },
+      "features": [
+        "ai_features",
+        "google_one_integration",
+        "premium_models"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://one.google.com/ai",
+      "sort_order": 33
+    },
+    {
+      "plan_name": "Token Plan Plus",
+      "vendor": "MiniMax",
+      "vendor_id": "minimax",
+      "category": "coding",
+      "price_monthly": 98.0,
+      "price_yearly": 980.0,
+      "currency": "CNY",
+      "included_models": [
+        "MiniMax-M2.7-highspeed"
+      ],
+      "usage_quota": {
+        "note": "100TPSFast inference,Similar products3xGeneration speed",
+        "messages": "1500次/5小时"
+      },
+      "features": [
+        "m2_7_highspeed",
+        "100_tps",
+        "image_understanding",
+        "web_search",
+        "code_execution",
+        "image_generation",
+        "voice_generation",
+        "openclaw_support"
+      ],
+      "target_audience": "Fast coding developers",
+      "affiliate_url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "sort_order": 33
+    },
+    {
+      "plan_name": "Google AI Pro",
+      "vendor": "Google",
+      "vendor_id": "google",
+      "category": "personal",
+      "price_monthly": 19.99,
+      "price_yearly": null,
+      "currency": "USD",
+      "included_models": [
+        "Gemini",
+        "Imagen",
+        "Veo",
+        "Lyria"
+      ],
+      "usage_quota": {
+        "note": "Via Google One AI Pro or Ultra",
+        "ai_features": "premium"
+      },
+      "features": [
+        "ai_features",
+        "google_one_integration",
+        "premium_models"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://one.google.com/ai",
+      "sort_order": 33
+    },
+    {
+      "plan_name": "Kimi K2 Starter",
+      "vendor": "Kimi K2 (Moonshot AI)",
+      "vendor_id": "kimi-k2",
+      "category": "coding",
+      "price_monthly": 9.0,
+      "price_yearly": 80.0,
+      "currency": "USD",
+      "included_models": [
+        "Kimi K2 model"
+      ],
+      "usage_quota": {
+        "tokens": "10M",
+        "overage": "$0.70 per 1M"
+      },
+      "features": [
+        "token_dashboard",
+        "add_tokens",
+        "no_x_premium_required"
+      ],
+      "target_audience": "Developers / Programmers",
+      "affiliate_url": "https://kimi-k2.com/pricing",
+      "sort_order": 34
+    },
+    {
+      "plan_name": "Token Plan Max",
+      "vendor": "MiniMax",
+      "vendor_id": "minimax",
+      "category": "coding",
+      "price_monthly": 199.0,
+      "price_yearly": 1990.0,
+      "currency": "CNY",
+      "included_models": [
+        "MiniMax-M2.7-highspeed"
+      ],
+      "usage_quota": {
+        "note": "100TPSFast inference,Similar products3xGeneration speed",
+        "messages": "4500次/5小时"
+      },
+      "features": [
+        "m2_7_highspeed",
+        "100_tps",
+        "image_understanding",
+        "web_search",
+        "code_execution",
+        "image_generation",
+        "voice_generation",
+        "music_generation",
+        "video_generation",
+        "openclaw_support"
+      ],
+      "target_audience": "High-performance coding developers",
+      "affiliate_url": "https://platform.minimaxi.com/subscribe/token-plan",
+      "sort_order": 34
+    },
+    {
+      "plan_name": "Kimi K2 Ultra",
+      "vendor": "Kimi K2 (Moonshot AI)",
+      "vendor_id": "kimi-k2",
+      "category": "coding",
+      "price_monthly": 49.0,
+      "price_yearly": 399.0,
+      "currency": "USD",
+      "included_models": [
+        "Kimi K2 model"
+      ],
+      "usage_quota": {
+        "tokens": "70M",
+        "overage": "$0.50 per 1M"
+      },
+      "features": [
+        "token_dashboard",
+        "add_tokens",
+        "no_x_premium_required",
+        "dev_api_support",
+        "priority_support"
+      ],
+      "target_audience": "Heavy AI users / Professional developers",
+      "affiliate_url": "https://kimi-k2.com/pricing",
+      "sort_order": 35
+    },
+    {
+      "plan_name": "Trae.cn 企业基础版",
+      "vendor": "Trae (ByteDance)",
+      "vendor_id": "trae",
+      "category": "enterprise",
+      "price_monthly": 49.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Doubao-Seed-Code",
+        "custom models"
+      ],
+      "usage_quota": {
+        "session_tokens": "30M",
+        "completion_tokens": "10M"
+      },
+      "features": [
+        "chat",
+        "builder",
+        "agent",
+        "mcp",
+        "rules",
+        "ide",
+        "max_mode",
+        "member_management",
+        "enterprise_inference"
+      ],
+      "target_audience": "Enterprise users / Team collaboration",
+      "affiliate_url": "https://www.trae.cn/pricing",
+      "sort_order": 36
+    },
+    {
+      "plan_name": "Trae.cn 企业团队版",
+      "vendor": "Trae (ByteDance)",
+      "vendor_id": "trae",
+      "category": "enterprise",
+      "price_monthly": 99.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "All models",
+        "custom models"
+      ],
+      "usage_quota": {
+        "session_tokens": "40M",
+        "completion_tokens": "20M"
+      },
+      "features": [
+        "chat",
+        "builder",
+        "agent",
+        "mcp",
+        "rules",
+        "ide",
+        "plugin",
+        "max_mode",
+        "member_management",
+        "enterprise_inference",
+        "data_dashboard",
+        "audit_logs",
+        "knowledge_base",
+        "custom_agent",
+        "security"
+      ],
+      "target_audience": "Enterprise users / Team collaboration",
+      "affiliate_url": "https://www.trae.cn/pricing",
+      "sort_order": 37
+    },
+    {
+      "plan_name": "Trae.cn 企业旗舰版",
+      "vendor": "Trae (ByteDance)",
+      "vendor_id": "trae",
+      "category": "enterprise",
+      "price_monthly": 199.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "All models",
+        "custom models"
+      ],
+      "usage_quota": {
+        "session_tokens": "50M",
+        "completion_tokens": "40M"
+      },
+      "features": [
+        "chat",
+        "builder",
+        "agent",
+        "mcp",
+        "rules",
+        "ide",
+        "plugin",
+        "cli",
+        "max_mode",
+        "solo_mode",
+        "member_management",
+        "enterprise_inference",
+        "data_dashboard",
+        "audit_logs",
+        "knowledge_base",
+        "custom_model",
+        "custom_agent",
+        "security",
+        "usage_control",
+        "ip_whitelist",
+        "network_control",
+        "priority_features"
+      ],
+      "target_audience": "Enterprise users / Large organizations",
+      "affiliate_url": "https://www.trae.cn/pricing",
+      "sort_order": 38
+    },
+    {
+      "plan_name": "MiMo Token Plan Lite",
+      "vendor": "Xiaomi Mimo",
+      "vendor_id": "xiaomi",
+      "category": "coding",
+      "price_monthly": 39.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "MiMo-V2-Pro",
+        "MiMo-V2-Omni",
+        "MiMo-V2-TTS"
+      ],
+      "usage_quota": {
+        "note": "60000KCredits/month",
+        "credits": 60000000
+      },
+      "features": [
+        "mimo_v2_pro",
+        "mimo_v2_omni",
+        "mimo_v2_tts",
+        "openclaw_support",
+        "claude_code_compatible",
+        "opencode_support",
+        "kilocode_support"
+      ],
+      "target_audience": "Entry-level developers",
+      "affiliate_url": "https://platform.xiaomimimo.com/#/token-plan",
+      "sort_order": 40
+    },
+    {
+      "plan_name": "MiMo Token Plan Standard",
+      "vendor": "Xiaomi Mimo",
+      "vendor_id": "xiaomi",
+      "category": "coding",
+      "price_monthly": 99.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "MiMo-V2-Pro",
+        "MiMo-V2-Omni",
+        "MiMo-V2-TTS"
+      ],
+      "usage_quota": {
+        "note": "200MCredits/month,3.3xLiteusage",
+        "credits": 200000000
+      },
+      "features": [
+        "mimo_v2_pro",
+        "mimo_v2_omni",
+        "mimo_v2_tts",
+        "openclaw_support",
+        "claude_code_compatible",
+        "opencode_support",
+        "kilocode_support"
+      ],
+      "target_audience": "Advanced developers",
+      "affiliate_url": "https://platform.xiaomimimo.com/#/token-plan",
+      "sort_order": 41
+    },
+    {
+      "plan_name": "MiMo Token Plan Pro",
+      "vendor": "Xiaomi Mimo",
+      "vendor_id": "xiaomi",
+      "category": "coding",
+      "price_monthly": 329.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "MiMo-V2-Pro",
+        "MiMo-V2-Omni",
+        "MiMo-V2-TTS"
+      ],
+      "usage_quota": {
+        "note": "700MCredits/month,11.7xLiteusage",
+        "credits": 700000000
+      },
+      "features": [
+        "mimo_v2_pro",
+        "mimo_v2_omni",
+        "mimo_v2_tts",
+        "openclaw_support",
+        "claude_code_compatible",
+        "opencode_support",
+        "kilocode_support"
+      ],
+      "target_audience": "Professional developers",
+      "affiliate_url": "https://platform.xiaomimimo.com/#/token-plan",
+      "sort_order": 42
+    },
+    {
+      "plan_name": "MiMo Token Plan Max",
+      "vendor": "Xiaomi Mimo",
+      "vendor_id": "xiaomi",
+      "category": "coding",
+      "price_monthly": 659.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "MiMo-V2-Pro",
+        "MiMo-V2-Omni",
+        "MiMo-V2-TTS"
+      ],
+      "usage_quota": {
+        "note": "1600MCredits/month,26.7xLiteusage",
+        "credits": 1600000000
+      },
+      "features": [
+        "mimo_v2_pro",
+        "mimo_v2_omni",
+        "mimo_v2_tts",
+        "openclaw_support",
+        "claude_code_compatible",
+        "opencode_support",
+        "kilocode_support"
+      ],
+      "target_audience": "Programming enthusiasts",
+      "affiliate_url": "https://platform.xiaomimimo.com/#/token-plan",
+      "sort_order": 43
+    },
+    {
+      "plan_name": "Token Plan Lite",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 39.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "35000KTokens,Approximately70Q&A sessions",
+        "tokens": 35000000
+      },
+      "features": [
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Individual developers / Experience users",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan",
+      "sort_order": 50
+    },
+    {
+      "plan_name": "Hy Lite",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 28.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Hy3 preview",
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "35M Tokens, Approximately 70 Q&A sessions",
+        "tokens": 35000000
+      },
+      "features": [
+        "hy3_preview",
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Individual developers / First-time users",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan?utm_source=tokendealhub&utm_medium=affiliate&utm_campaign=tencent",
+      "sort_order": 50
+    },
+    {
+      "plan_name": "Token Plan Standard",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 99.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "100MTokens,Approximately200Q&A sessions",
+        "tokens": 100000000
+      },
+      "features": [
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Individual developers / Basic usage",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan",
+      "sort_order": 51
+    },
+    {
+      "plan_name": "Hy Standard",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 78.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Hy3 preview",
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "100M Tokens, Approximately 200 Q&A sessions",
+        "tokens": 100000000
+      },
+      "features": [
+        "hy3_preview",
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Individual developers / Basic usage",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan?utm_source=tokendealhub&utm_medium=affiliate&utm_campaign=tencent",
+      "sort_order": 51
+    },
+    {
+      "plan_name": "Hy Pro",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 238.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Hy3 preview",
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "320M Tokens",
+        "tokens": 320000000
+      },
+      "features": [
+        "hy3_preview",
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "High-frequency developers / Efficiency experts",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan?utm_source=tokendealhub&utm_medium=affiliate&utm_campaign=tencent",
+      "sort_order": 52
+    },
+    {
+      "plan_name": "Token Plan Pro",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 299.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "3.200MTokens",
+        "tokens": 320000000
+      },
+      "features": [
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "High-frequency developers / Efficiency experts",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan",
+      "sort_order": 52
+    },
+    {
+      "plan_name": "Hy Max",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 468.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Hy3 preview",
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "650M Tokens",
+        "tokens": 650000000
+      },
+      "features": [
+        "hy3_preview",
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Heavy AI users / Productivity users",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan?utm_source=tokendealhub&utm_medium=affiliate&utm_campaign=tencent",
+      "sort_order": 53
+    },
+    {
+      "plan_name": "Token Plan Max",
+      "vendor": "Tencent",
+      "vendor_id": "tencent",
+      "category": "coding",
+      "price_monthly": 599.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Tencent Hunyuan",
+        "GLM-5",
+        "Kimi-K2.5",
+        "MiniMax-M2.5"
+      ],
+      "usage_quota": {
+        "note": "6.500MTokens",
+        "tokens": 650000000
+      },
+      "features": [
+        "hunyuan_model",
+        "glm_model",
+        "kimi_model",
+        "minimax_model",
+        "openclaw_support",
+        "claude_code_compatible",
+        "cursor_support"
+      ],
+      "target_audience": "Heavy AI users / Productivity users",
+      "affiliate_url": "https://cloud.tencent.com/act/pro/tokenplan",
+      "sort_order": 53
+    },
+    {
+      "plan_name": "Qianfan Coding Plan Lite",
+      "vendor": "Baidu",
+      "vendor_id": "baidu",
+      "category": "coding",
+      "price_monthly": 49.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "ERNIE 5.0",
+        "ERNIE 4.5 Turbo",
+        "DeepSeek V3.2",
+        "Kimi-K2.5",
+        "MiniMax-M2.1"
+      ],
+      "usage_quota": {
+        "note": "Supports multi-model invocation",
+        "messages": "基础用量"
+      },
+      "features": [
+        "ernie_model",
+        "deepseek_model",
+        "kimi_model",
+        "minimax_model",
+        "mcp_support",
+        "duclaw_support"
+      ],
+      "target_audience": "Individual developers / Entry-level users",
+      "affiliate_url": "https://cloud.baidu.com/product/codingplan.html",
+      "sort_order": 60
+    },
+    {
+      "plan_name": "Qianfan Coding Plan Pro",
+      "vendor": "Baidu",
+      "vendor_id": "baidu",
+      "category": "coding",
+      "price_monthly": 149.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "ERNIE 5.0",
+        "ERNIE 4.5 Turbo",
+        "DeepSeek V3.2",
+        "Kimi-K2.5",
+        "MiniMax-M2.1"
+      ],
+      "usage_quota": {
+        "note": "Supports high-frequency multi-model invocation",
+        "messages": "高级用量"
+      },
+      "features": [
+        "ernie_model",
+        "deepseek_model",
+        "kimi_model",
+        "minimax_model",
+        "mcp_support",
+        "duclaw_support",
+        "priority_access"
+      ],
+      "target_audience": "Professional developers",
+      "affiliate_url": "https://cloud.baidu.com/product/codingplan.html",
+      "sort_order": 61
+    },
+    {
+      "plan_name": "Token Plan Standard Seat",
+      "vendor": "Alibaba",
+      "vendor_id": "alibaba",
+      "category": "enterprise",
+      "price_monthly": 198.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Qwen",
+        "Qwen-Max",
+        "Qwen-Plus",
+        "Qwen-Turbo"
+      ],
+      "usage_quota": {
+        "note": "25,000 Credits/month/Seat",
+        "credits": 25000
+      },
+      "features": [
+        "multi_model",
+        "text_generation",
+        "vision_understanding",
+        "image_generation",
+        "agent_tools",
+        "data_security"
+      ],
+      "target_audience": "Team members with light AI assistance usage",
+      "affiliate_url": "https://common-buy.aliyun.com/token-plan",
+      "sort_order": 70
+    },
+    {
+      "plan_name": "Token Plan Premium Seat",
+      "vendor": "Alibaba",
+      "vendor_id": "alibaba",
+      "category": "enterprise",
+      "price_monthly": 698.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Qwen",
+        "Qwen-Max",
+        "Qwen-Plus",
+        "Qwen-Turbo"
+      ],
+      "usage_quota": {
+        "note": "100,000 Credits/month/Seat,4x Standard Seat usage",
+        "credits": 100000
+      },
+      "features": [
+        "multi_model",
+        "text_generation",
+        "vision_understanding",
+        "image_generation",
+        "agent_tools",
+        "data_security",
+        "4x_usage"
+      ],
+      "target_audience": "Team members who frequently use AI coding daily",
+      "affiliate_url": "https://common-buy.aliyun.com/token-plan",
+      "sort_order": 71
+    },
+    {
+      "plan_name": "Token Plan Deluxe Seat",
+      "vendor": "Alibaba",
+      "vendor_id": "alibaba",
+      "category": "enterprise",
+      "price_monthly": 1398.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Qwen",
+        "Qwen-Max",
+        "Qwen-Plus",
+        "Qwen-Turbo"
+      ],
+      "usage_quota": {
+        "note": "250,000 Credits/month/Seat,10x Standard Seat usage",
+        "credits": 250000
+      },
+      "features": [
+        "multi_model",
+        "text_generation",
+        "vision_understanding",
+        "image_generation",
+        "agent_tools",
+        "data_security",
+        "10x_usage"
+      ],
+      "target_audience": "Core developers heavily relying on AI coding",
+      "affiliate_url": "https://common-buy.aliyun.com/token-plan",
+      "sort_order": 72
+    },
+    {
+      "plan_name": "Coding Plan Worry-Free Edition",
+      "vendor": "Xunfei",
+      "vendor_id": "xfyun",
+      "category": "coding",
+      "price_monthly": 19.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Qwen3.5-35B-A3B",
+        "Qwen3-Coder-Next-FP8",
+        "GLM-4.7-Flash"
+      ],
+      "usage_quota": {
+        "note": "Unlimited usage",
+        "messages": "unlimited"
+      },
+      "features": [
+        "unlimited_usage",
+        "multi_model",
+        "cost_effective"
+      ],
+      "target_audience": "Entry-level developers / Light usage",
+      "affiliate_url": "https://maas.xfyun.cn/packageSubscription",
+      "sort_order": 80
+    },
+    {
+      "plan_name": "Coding Plan Professional Edition",
+      "vendor": "Xunfei",
+      "vendor_id": "xfyun",
+      "category": "coding",
+      "price_monthly": 39.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Spark X2",
+        "GLM-5",
+        "MiniMax-M2.5",
+        "Kimi-K2.5",
+        "DeepSeek-V3.2",
+        "GLM-4.7-Flash",
+        "Qwen3.5-35B-A3B",
+        "Qwen3-Coder-Next-FP8",
+        "Qwen3.5-397B-A17B"
+      ],
+      "usage_quota": {
+        "note": "1200requests/5hours,9000requests/week,18000requests/month",
+        "requests_per_5h": 1200,
+        "requests_per_week": 9000,
+        "requests_per_month": 18000
+      },
+      "features": [
+        "spark_x2",
+        "glm_5_model",
+        "minimax_model",
+        "kimi_model",
+        "deepseek_model",
+        "qwen_model",
+        "multi_model"
+      ],
+      "target_audience": "Professional developers / Daily programming",
+      "affiliate_url": "https://maas.xfyun.cn/packageSubscription",
+      "sort_order": 81
+    },
+    {
+      "plan_name": "Coding Plan Premium Edition",
+      "vendor": "Xunfei",
+      "vendor_id": "xfyun",
+      "category": "coding",
+      "price_monthly": 199.0,
+      "price_yearly": null,
+      "currency": "CNY",
+      "included_models": [
+        "Spark X2",
+        "GLM-5",
+        "GLM-5.1",
+        "MiniMax-M2.5",
+        "Kimi-K2.5",
+        "DeepSeek-V3.2",
+        "GLM-4.7-Flash",
+        "Qwen3.5-35B-A3B",
+        "Qwen3-Coder-Next-FP8",
+        "Qwen3.5-397B-A17B"
+      ],
+      "usage_quota": {
+        "note": "6000requests/5hours,45000requests/week,90000requests/month",
+        "requests_per_5h": 6000,
+        "requests_per_week": 45000,
+        "requests_per_month": 90000
+      },
+      "features": [
+        "spark_x2",
+        "glm_5_model",
+        "glm_5_1_model",
+        "minimax_model",
+        "kimi_model",
+        "deepseek_model",
+        "qwen_model",
+        "multi_model",
+        "priority_performance"
+      ],
+      "target_audience": "Advanced developers / Heavy usage",
+      "affiliate_url": "https://maas.xfyun.cn/packageSubscription",
+      "sort_order": 82
+    }
+  ]
+}

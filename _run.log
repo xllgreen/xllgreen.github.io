@@ -1,0 +1,6 @@
+[gen] prices: 529 条
+[gen] plans: 70 条
+[gen] 拉取 active_deals.json 第 1 次失败：<urlopen error [WinError 10054] 远程主机强迫关闭了一个现有的连接。>
+[gen] 拉取 active_deals.json 第 2 次失败：[WinError 10054] 远程主机强迫关闭了一个现有的连接。
+[gen] 拉取 active_deals.json 第 3 次失败：[WinError 10054] 远程主机强迫关闭了一个现有的连接。
+[gen] 拉取 deals 失败：[WinError 10054] 远程主机强迫关闭了一个现有的连接。
