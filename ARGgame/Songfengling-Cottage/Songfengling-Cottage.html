@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>松峰岭小屋</title>
+  <meta name="description" content="网页解谜游戏《松峰岭小屋》：整理一间老护林员小屋，找回一位志愿军通信兵守了一生的承诺。" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="paywall.css" />
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <main id="app" class="game-shell">
+    <section id="startScreen" class="start-screen">
+      <div class="title-card">
+        <p class="eyebrow">2025 · 松峰岭烈士纪念馆志愿整理档案</p>
+        <h1>松峰岭小屋</h1>
+        <p class="subtitle">一间山中木屋，一只旧木箱，一盏六十年未熄的信号灯。</p>
+        <div class="start-copy">
+          <p>你受李念军委托，上山清点她爷爷李长根留下的遗物。</p>
+          <p>村里人只知道他是护林员；屋里那些发黄的纸、缺角的照片和一只搪瓷杯，却把你带回了 1951 年的松峰岭阵地。</p>
+        </div>
+        <div class="start-actions">
+          <button id="startBtn" class="primary-btn">推开山门</button>
+          <button id="continueBtn" class="ghost-btn">继续上次整理</button>
+        </div>
+        <p class="notice">温馨提示：本作无恐怖跳吓，核心为历史记忆、承诺与传承。</p>
+        <p class="notice">结尾历史图片均采用可再分发来源，完整出处与许可见同目录 README.md。</p>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="game-screen hidden" aria-live="polite">
+      <header class="topbar">
+        <div>
+          <p class="kicker">松涛、旧纸、军号很远</p>
+          <h2 id="sceneTitle">小屋门前</h2>
+        </div>
+        <div class="status-cluster">
+          <span id="progressBadge" class="badge">遗物 0 / 12</span>
+          <button id="supportBtn" class="small-btn">1元支持</button>
+          <button id="resetBtn" class="small-btn muted">重新整理</button>
+        </div>
+      </header>
+
+      <section id="focusGuide" class="focus-guide">
+        <span class="focus-label">当前只做一件事</span>
+        <strong id="focusText">先看门口线索，补全下联。</strong>
+      </section>
+
+      <div class="layout">
+        <section class="scene-card">
+          <figure class="scene-figure">
+            <img id="sceneImage" src="scene-door.svg" alt="松峰岭小屋场景" />
+            <figcaption id="sceneCaption">山风从松林里下来，吹得门口半副春联轻轻发响。</figcaption>
+          </figure>
+          <div id="hotspots" class="hotspots"></div>
+        </section>
+
+        <aside class="side-panel">
+          <section class="puzzle-box">
+            <h3 id="puzzleTitle">当前线索</h3>
+            <div id="puzzlePanel" class="puzzle-panel"></div>
+          </section>
+
+          <details class="story-box">
+            <summary>整理记录 <span>点击展开</span></summary>
+            <div id="storyLog" class="story-log"></div>
+          </details>
+
+          <details class="inventory-box">
+            <summary>已确认遗物 <span id="inventorySummary">0 / 12</span></summary>
+            <div id="inventory" class="inventory"></div>
+          </details>
+        </aside>
+      </div>
+    </section>
+
+    <section id="endingScreen" class="ending-screen hidden">
+      <div id="endingCard" class="ending-card"></div>
+      <section id="tributeCredits" class="tribute-credits hidden">
+        <div class="film-grain"></div>
+        <div class="credits-roll">
+          <h2>谨以此作献给伟大的战士们</h2>
+          <p class="credits-lead">献给那些把名字留在风雪、山河、泥土与人民记忆里的战士。</p>
+
+          <article class="history-card optional-history" data-required-image="history-nanchang.png">
+            <img src="history-nanchang.png" alt="南昌起义时期公开历史照片" />
+            <div>
+              <h3>1927 · 南昌</h3>
+              <p>危难之时，人民军队在枪声中诞生。从那一天起，“为人民而战”不再只是誓言，而成为一代代军人的生命方向。</p>
+            </div>
+          </article>
+
+          <article class="history-card optional-history" data-required-image="history-longmarch.png">
+            <img src="history-longmarch.png" alt="红军长征公开历史照片" />
+            <div>
+              <h3>1934—1936 · 长征</h3>
+              <p>雪山、草地、急流与封锁线，没有挡住队伍向前。很多人没能走到终点，却把后来者推向了更远的路。</p>
+            </div>
+          </article>
+
+          <article class="history-card">
+            <img src="history-anti-japanese.jpg" alt="八路军抗战历史照片" />
+            <div>
+              <h3>1937—1945 · 全民族抗战</h3>
+              <p>敌后战场、村庄、山口与交通线，无数战士以简陋装备对抗侵略，把最艰难的岁月扛在肩上。</p>
+            </div>
+          </article>
+
+          <article class="history-card">
+            <img src="history-liberation.jpg" alt="解放战争历史照片" />
+            <div>
+              <h3>1946—1949 · 解放战争</h3>
+              <p>炮火穿过城市与原野，许多人没等来胜利后的黎明，却用牺牲换来了人民重新书写生活的可能。</p>
+            </div>
+          </article>
+
+          <article class="history-card optional-history" data-required-image="history-korea.jpg">
+            <img src="history-korea.jpg" alt="中国人民志愿军抗美援朝历史照片" />
+            <div>
+              <h3>1950—1953 · 抗美援朝</h3>
+              <p>在异国严寒和连天炮火里，志愿军将士以血肉守住阵地，也守住身后万家灯火的安宁。</p>
+            </div>
+          </article>
+
+          <article class="history-card optional-history" data-required-image="history-rescue.jpg">
+            <img src="history-rescue.jpg" alt="人民军队和平年代救援场景" />
+            <div>
+              <h3>和平年代 · 依然向险而行</h3>
+              <p>洪水、地震、边防、海防、维和与救援，人民子弟兵常常出现在最危险处，也常常默默离开掌声。</p>
+            </div>
+          </article>
+
+          <p class="credits-final">山河记得，人民记得。信号永远长明。</p>
+          <p class="credits-source">历史图片来源与许可信息见游戏包 README.md。</p>
+          <button id="backToGameBtn" class="ghost-btn credits-btn">回到小屋</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="paywall.js"></script>
+  <script src="core.js"></script>
+</body>
+</html>

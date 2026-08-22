@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">镇史合影原始底片</title>
+  <desc id="desc">旧戏院室内、窗框、桌角与左半枚确认手印</desc>
+  <defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#80694e"/><stop offset="1" stop-color="#2e2a27"/></linearGradient><filter id="grain"><feTurbulence baseFrequency=".7" numOctaves="2" seed="12"/><feColorMatrix values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 .13 0"/></filter></defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <rect x="74" y="58" width="326" height="292" fill="#1d2b32" stroke="#d5b477" stroke-width="14"/>
+  <path d="M237 64v280M80 201h314" stroke="#d5b477" stroke-width="13"/>
+  <path d="M0 383h960v157H0z" fill="#352c25"/>
+  <path d="M504 330h314l80 105H438z" fill="#9a744d" stroke="#d2ad73" stroke-width="9"/>
+  <path d="M484 354l335 1M463 389l390 2" stroke="#5a4030" stroke-width="8" opacity=".72"/>
+  <g fill="#211c1b" opacity=".83"><circle cx="492" cy="239" r="43"/><path d="M438 346q4-106 54-106t54 106z"/><circle cx="680" cy="245" r="39"/><path d="M629 347q9-101 51-101t53 101z"/></g>
+  <g fill="none" stroke="#873f36" stroke-width="13" stroke-linecap="round" opacity=".72">
+    <path d="M739 384q-20-58 6-95"/><path d="M744 328l-34-38M746 320l-7-52M750 326l29-43"/>
+  </g>
+  <rect width="960" height="540" filter="url(#grain)"/>
+  <path d="M16 16h928v508H16z" fill="none" stroke="#ead5a8" stroke-opacity=".42" stroke-width="10"/>
+</svg>

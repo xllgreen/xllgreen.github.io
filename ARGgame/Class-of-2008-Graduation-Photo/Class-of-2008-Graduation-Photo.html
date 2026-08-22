@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#11130f" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>2008届毕业照</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="titleScreen" class="screen active">
+      <div class="title-bg"></div>
+      <div class="film-grain"></div>
+      <div class="title-card">
+        <div class="eyebrow">育川二中 · 老校区拆除前夜</div>
+        <h1>2008届毕业照</h1>
+        <p class="hook">毕业名册里只有40个人。<br>可旧合影上，多出了一张没人能对应姓名的脸。</p>
+        <div class="title-actions">
+          <button id="startBtn" class="primary">进入旧校舍</button>
+          <button id="continueBtn" class="secondary hidden">继续调查</button>
+          <button id="resetBtnTitle" class="ghost">重置案件</button>
+        </div>
+        <p class="micro">建议佩戴耳机。游戏没有跳脸恐怖，核心是场景观察、照片对照与证词判断。</p>
+      </div>
+    </section>
+
+    <section id="gameScreen" class="screen">
+      <header class="topbar">
+        <div class="brand"><strong>2008届毕业照</strong><span id="chapterLabel">第一章 · 照片里的人</span></div>
+        <div class="top-actions">
+          <button data-tool="photo">毕业照</button>
+          <button data-tool="notebook">线索册 <span id="clueCount">0</span></button>
+          <button data-tool="map">地图</button>
+          <button data-tool="hint">提示</button>
+          <button data-tool="settings">菜单</button>
+        </div>
+      </header>
+
+      <main id="stage" class="stage" aria-live="polite">
+        <img id="sceneImage" class="scene-image" src="assets/img/gate.jpg" alt="当前场景" draggable="false" />
+        <div id="sceneShade" class="scene-shade"></div>
+        <div id="hotspots" class="hotspots"></div>
+        <div class="scene-caption">
+          <span id="sceneName">旧校门</span>
+          <span id="sceneTime">19:43</span>
+        </div>
+        <div id="toast" class="toast"></div>
+        <div id="objective" class="objective"></div>
+      </main>
+
+      <aside id="tabletPanel" class="tablet-panel">
+        <div><span class="panel-label">当前位置</span><strong id="tabletSceneName">旧校门</strong><p id="tabletChapter">第一章 · 照片里的人</p></div>
+        <div><span class="panel-label">当前调查</span><p id="tabletObjective">检查门边旧报箱。</p><span class="panel-label" style="margin-top:14px">环境</span><p id="tabletAmbient">远处传来拆除工地的金属碰撞声。</p></div>
+      </aside>
+
+      <footer class="bottombar">
+        <button id="backBtn">← 返回上一处</button>
+        <div id="ambientText">远处传来拆除工地的金属碰撞声。</div>
+        <button id="phoneBtn" class="hidden">来电</button>
+      </footer>
+    </section>
+
+    <div id="modalLayer" class="modal-layer hidden" aria-hidden="true">
+      <div id="modal" class="modal"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

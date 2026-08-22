@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#dbe1dc">
+  <meta name="description" content="《晚舟堂：青溪旧事》民国乡土多结局网页解谜游戏">
+  <title>晚舟堂：青溪旧事</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="paywall.css">
+  <link rel="stylesheet" href="ink-style.css">
+</head>
+<body class="theme-cover">
+  <div id="weatherLayer" class="weather-layer" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <section id="coverScreen" class="cover-screen" aria-labelledby="gameTitle">
+    <div class="cover-art" role="img" aria-label="烟雨中的青溪水巷、石桥与乌篷船，远处可见晚舟堂所在的白墙黛瓦"></div>
+    <div class="cover-shade"></div>
+    <div class="cover-copy">
+      <p class="eyebrow">烟雨江南 · 民国乡土 · 叙事解谜</p>
+      <h1 id="gameTitle">晚舟堂</h1>
+      <p class="subtitle">青溪旧事</p>
+      <p class="cover-intro">民国二十一年，修桥善款失踪，百年药铺一夜关门。二十年后，你回到青溪镇收拾祖宅，却发现那桩“卷款潜逃”的旧案，从来没有真正结束。</p>
+      <div class="cover-actions">
+        <button id="newGameBtn" class="primary-btn">入堂启卷</button>
+        <button id="continueBtn" class="secondary-btn" hidden>续读旧案</button>
+      </div>
+      <button id="coverSettingsBtn" class="text-btn" aria-haspopup="dialog">案卷与设置</button>
+      <p class="cover-note">建议佩戴耳机，在雨声、橹声与钟音中慢慢翻阅旧事。</p>
+    </div>
+  </section>
+
+  <div id="gameShell" class="game-shell" hidden>
+    <header class="topbar">
+      <div class="brand-block">
+        <button id="homeBtn" class="icon-button brand-button" aria-label="返回封面">舟</button>
+        <div>
+          <div class="brand-title">晚舟堂</div>
+          <div id="chapterLabel" class="chapter-label">第一章 · 归乡</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="audioBtn" class="top-action" aria-pressed="true"><span aria-hidden="true">♫</span><span class="action-text">雨声开</span></button>
+        <button id="hintBtn" class="top-action" aria-label="打开免费分级提示"><span aria-hidden="true">灯</span><span class="action-text">免费提示</span></button>
+        <button id="supportBtn" class="top-action" aria-label="支持作者 1 元"><span aria-hidden="true">赏</span><span class="action-text">支持作者 1元</span></button>
+        <button id="notesBtn" class="top-action"><span aria-hidden="true">笺</span><span class="action-text">便笺</span></button>
+        <button id="saveBtn" class="top-action"><span aria-hidden="true">存</span><span class="action-text">手动存档</span></button>
+        <button id="settingsBtn" class="top-action"><span aria-hidden="true">设</span><span class="action-text">设置</span></button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="chapter-rail" aria-label="章节导航">
+        <div class="rail-heading">旧案卷宗</div>
+        <nav id="chapterNav"></nav>
+        <div class="rail-progress">
+          <div class="progress-label"><span>调查进度</span><strong id="progressText">0%</strong></div>
+          <div class="progress-track"><span id="progressBar"></span></div>
+        </div>
+      </aside>
+
+      <section class="main-stage" aria-live="polite">
+        <div id="sceneFrame" class="scene-frame">
+          <img id="sceneImage" src="assets/ink_shop_hd.webp" alt="晚舟堂旧药铺内景">
+          <div id="sceneCaption" class="scene-caption">青溪镇 · 晚舟堂檐下</div>
+          <div id="sceneMood" class="scene-mood">淡墨暖纸 · 檐雨初歇</div>
+        </div>
+
+        <section class="story-panel">
+          <div class="story-header">
+            <div>
+              <p id="sectionKicker" class="section-kicker">第一章</p>
+              <h2 id="sectionTitle">归乡 · 晚舟旧堂</h2>
+            </div>
+            <button id="clueBoardBtn" class="compact-btn">线索板 <span id="clueCount">0</span></button>
+          </div>
+          <div id="storyContent" class="story-content"></div>
+          <div id="objectiveCard" class="objective-card">
+            <div class="objective-icon" aria-hidden="true">◎</div>
+            <div>
+              <div class="objective-label">当前目标</div>
+              <div id="objectiveText">进入药铺，查看祖父留下的旧物。</div>
+            </div>
+          </div>
+          <div id="puzzleArea" class="puzzle-area"></div>
+          <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+        </section>
+      </section>
+
+      <aside class="evidence-panel" aria-label="线索摘要">
+        <div class="panel-title-row">
+          <h2>随身线索</h2>
+          <button id="mobileCloseEvidence" class="icon-button mobile-only" aria-label="关闭线索栏">×</button>
+        </div>
+        <div id="evidenceList" class="evidence-list"></div>
+        <div class="character-card">
+          <div id="portrait" class="portrait portrait-linyan" role="img" aria-label="林砚的民国旧照式肖像"></div>
+          <div>
+            <div id="speakerName" class="speaker-name">林砚</div>
+            <p id="speakerThought">“我只是回来收屋，不打算替一个逃犯辩解。”</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="hintDialog" class="paper-dialog">
+    <form method="dialog" class="dialog-shell">
+      <header>
+        <div>
+          <p class="dialog-eyebrow">完全免费 · 不影响结局</p>
+          <h2>分级提示</h2>
+        </div>
+        <button class="dialog-close" value="close" aria-label="关闭">×</button>
+      </header>
+      <p class="dialog-note">提示只针对当前谜题。前两级尽量不剧透，第三等级会接近完整答案。</p>
+      <div id="hintLevels" class="hint-levels"></div>
+      <div id="hintResult" class="hint-result">选择一个等级查看。</div>
+    </form>
+  </dialog>
+
+  <dialog id="notesDialog" class="paper-dialog">
+    <form method="dialog" class="dialog-shell notes-shell">
+      <header>
+        <div><p class="dialog-eyebrow">自动保存在本机</p><h2>林砚的便笺</h2></div>
+        <button class="dialog-close" value="close" aria-label="关闭">×</button>
+      </header>
+      <textarea id="notesArea" rows="14" placeholder="可以记录日期、摩斯字母、人物关系和你的推断……"></textarea>
+      <div class="dialog-actions"><button id="clearNotesBtn" type="button" class="danger-link">清空便笺</button><button value="close" class="primary-btn small">收起便笺</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="clueDialog" class="paper-dialog wide-dialog">
+    <form method="dialog" class="dialog-shell">
+      <header>
+        <div><p class="dialog-eyebrow">物证、证词与推断</p><h2>线索板</h2></div>
+        <button class="dialog-close" value="close" aria-label="关闭">×</button>
+      </header>
+      <div id="clueBoard" class="clue-board"></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="paper-dialog">
+    <form method="dialog" class="dialog-shell">
+      <header>
+        <div><p class="dialog-eyebrow">显示、声音与进度</p><h2>设置与存档</h2></div>
+        <button class="dialog-close" value="close" aria-label="关闭">×</button>
+      </header>
+      <div class="settings-grid">
+        <label class="setting-row"><span>背景音乐与环境声</span><input id="settingAudio" type="checkbox" checked></label>
+        <label class="setting-row"><span>减少动态效果</span><input id="settingMotion" type="checkbox"></label>
+        <label class="setting-row"><span>加大正文字号</span><input id="settingLargeText" type="checkbox"></label>
+      </div>
+      <div class="save-tools">
+        <button id="manualSaveBtn" type="button" class="secondary-btn">立即保存</button>
+        <button id="exportSaveBtn" type="button" class="secondary-btn">导出存档</button>
+        <label class="secondary-btn file-label">导入存档<input id="importSaveInput" type="file" accept="application/json"></label>
+        <button id="resetGameBtn" type="button" class="danger-btn">重新开始</button>
+      </div>
+      <p id="saveStatus" class="dialog-note">进度会在每次解谜后自动保存，并保留一个本机备份槽。</p>
+    </form>
+  </dialog>
+
+  <dialog id="resetDialog" class="paper-dialog small-dialog">
+    <form method="dialog" class="dialog-shell">
+      <header><div><p class="dialog-eyebrow">此操作不可撤销</p><h2>重新开始调查</h2></div><button class="dialog-close" value="close" aria-label="关闭">×</button></header>
+      <p>输入“重新归乡”后才会清除当前进度与便笺。</p>
+      <input id="resetConfirmInput" class="text-input" autocomplete="off" placeholder="重新归乡">
+      <div class="dialog-actions"><button value="close" class="secondary-btn">取消</button><button id="confirmResetBtn" type="button" class="danger-btn" disabled>清除并重开</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="endingDialog" class="ending-dialog">
+    <div id="endingContent" class="ending-content"></div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="paywall.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

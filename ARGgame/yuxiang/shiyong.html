@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玉祥文学社</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", SimSun, sans-serif;
+        }
+        body {
+            background-color: #e6f7e9; /* 淡绿色底色 */
+            color: #2d5a32;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: #f2fbf4;
+            width: 100%;
+            max-width: 600px;
+            padding: 60px 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(80, 160, 100, 0.18);
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            color: #24702c;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+        }
+        .btn-box {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        .jump-btn {
+            display: block;
+            text-decoration: none;
+            padding: 18px;
+            font-size: 20px;
+            border-radius: 12px;
+            transition: all 0.25s ease;
+        }
+        .btn-official {
+            background-color: #72c880;
+            color: #0f3614;
+        }
+        .btn-official:hover {
+            background-color: #5bb96b;
+        }
+        .btn-web {
+            background-color: #b1e4b9;
+            color: #1a4d20;
+        }
+        .btn-web:hover {
+            background-color: #99d8a4;
+        }
+        .tips-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #386e3e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>玉祥文学社欢迎您</h1>
+        <div class="btn-box">
+            <!-- 公众号游玩跳转 -->
+            <a href="https://mp.weixin.qq.com/s/ThhRqdh7V78yp-JGvKBsZA" target="_blank" class="jump-btn btn-official">
+                公众号游玩
+            </a>
+            <!-- 网站游玩跳转 -->
+            <a href="/ARGgame/yuxiang/yuxiang.html" target="_blank" class="jump-btn btn-web">
+                网站游玩
+            </a>
+        </div>
+        <div class="tips-text">
+            推荐公众号游玩，网页游玩信息会较为分散。<br>
+            虚拟演绎，请勿当真。
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 240">
+<rect width="1200" height="240" fill="#091616"/>
+<path d="M0 120h40l8-18 8 36 8-18h28m12 0h22l12-50 12 100 12-50h28m20 0h40l8-18 8 36 8-18h28m36 0h22l12-50 12 100 12-50h28m20 0h22l12-50 12 100 12-50h28m42 0h40l8-18 8 36 8-18h28m12 0h40l8-18 8 36 8-18h28m36 0h22l12-50 12 100 12-50h28m20 0h22l12-50 12 100 12-50h28m20 0h22l12-50 12 100 12-50h28m42 0h40l8-18 8 36 8-18h28" stroke="#61ffbd" stroke-width="5" fill="none"/>
+<text x="28" y="40" fill="#91c9b7" font-family="monospace" font-size="22">CHANNEL: CALL-LINE / FILTERED</text>
+</svg>

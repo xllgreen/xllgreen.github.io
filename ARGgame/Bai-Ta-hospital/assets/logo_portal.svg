@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-label="白塔医院 零点交班">
+  <rect width="720" height="180" fill="none"/>
+  <g transform="translate(22 35)">
+    <circle cx="52" cy="52" r="48" fill="#0b766c"/>
+    <path d="M52 21v62M21 52h62" stroke="#fff" stroke-width="15" stroke-linecap="round"/>
+  </g>
+  <text x="135" y="102" fill="#17433d" font-family="'Microsoft YaHei',sans-serif" font-size="70" font-weight="700" letter-spacing="5">白塔医院</text>
+  <text x="139" y="148" fill="#5e7772" font-family="'Microsoft YaHei',sans-serif" font-size="25" letter-spacing="9">零点交班 · 历史档案</text>
+</svg>

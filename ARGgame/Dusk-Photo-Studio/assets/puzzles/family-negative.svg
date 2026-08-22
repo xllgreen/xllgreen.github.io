@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">白棠家的家庭负片</title>
+  <desc id="desc">窗边两位绵羊姐妹，一位递出面包袋，围巾和提绳跨越四段画面</desc>
+  <defs>
+    <linearGradient id="paper" x2="0" y2="1"><stop stop-color="#d9a35b"/><stop offset="1" stop-color="#5b3c2c"/></linearGradient>
+    <filter id="grain"><feTurbulence baseFrequency=".8" numOctaves="2" seed="7" type="fractalNoise"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .16 0"/></filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#paper)"/>
+  <rect x="34" y="35" width="732" height="530" rx="18" fill="#372820" stroke="#e2b66d" stroke-width="12"/>
+  <path d="M63 68h258v244H63zM87 92h210v196H87z" fill="#9d7547" stroke="#e8c27d" stroke-width="8"/>
+  <path d="M192 93v194M88 191h208" stroke="#e2bd77" stroke-width="9"/>
+  <g transform="translate(170 150)">
+    <path d="M56 176c-47 14-71 74-63 184h210c6-111-28-165-78-184z" fill="#9e673f"/>
+    <circle cx="94" cy="107" r="77" fill="#ead0a0"/>
+    <g fill="#ead0a0"><circle cx="31" cy="71" r="31"/><circle cx="52" cy="39" r="31"/><circle cx="89" cy="27" r="30"/><circle cx="127" cy="36" r="31"/><circle cx="154" cy="66" r="30"/></g>
+    <ellipse cx="66" cy="106" rx="8" ry="11" fill="#2d241f"/><ellipse cx="120" cy="106" rx="8" ry="11" fill="#2d241f"/>
+    <path d="M84 133q11 12 23 0" fill="none" stroke="#5b3e2c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M12 199c63 45 129 45 191 0" fill="none" stroke="#d28b57" stroke-width="24"/>
+  </g>
+  <g transform="translate(425 135)">
+    <path d="M56 186c-46 18-68 81-58 177h211c2-109-31-164-83-181z" fill="#6f7d72"/>
+    <circle cx="98" cy="112" r="79" fill="#f0d8ad"/>
+    <g fill="#f0d8ad"><circle cx="35" cy="73" r="31"/><circle cx="58" cy="42" r="31"/><circle cx="96" cy="30" r="31"/><circle cx="136" cy="40" r="31"/><circle cx="162" cy="72" r="31"/></g>
+    <ellipse cx="70" cy="110" rx="8" ry="11" fill="#2d241f"/><ellipse cx="126" cy="110" rx="8" ry="11" fill="#2d241f"/>
+    <path d="M87 137q12 9 24 0" fill="none" stroke="#5b3e2c" stroke-width="6" stroke-linecap="round"/>
+    <path d="M10 211c67 35 135 31 199-8" fill="none" stroke="#d28b57" stroke-width="24"/>
+    <path d="M5 250c-59 14-96 35-138 63" stroke="#f0d8ad" stroke-width="31" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(304 401)">
+    <path d="M0 35l60-35h112l59 35-19 132H20z" fill="#b8874d" stroke="#e3b86d" stroke-width="7"/>
+    <path d="M60 0c0-50 112-50 112 0" fill="none" stroke="#e3b86d" stroke-width="10"/>
+    <path d="M64 61h104M75 93h83M83 124h64" stroke="#6f462e" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <rect width="800" height="600" filter="url(#grain)" opacity=".8"/>
+  <g fill="#251c18"><rect x="0" y="0" width="800" height="22"/><rect x="0" y="578" width="800" height="22"/></g>
+  <g fill="#d7a65c"><path d="M20 4h38v14H20zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38z"/><path d="M20 582h38v14H20zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38zm82 0h38v14h-38z"/></g>
+</svg>

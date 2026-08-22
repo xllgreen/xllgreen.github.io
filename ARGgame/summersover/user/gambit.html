@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gambit的个人主页 - 夜航论坛</title>
+  <link rel="stylesheet" href="/src/pages/user/gambit.css" />
+</head>
+<body>
+
+<div id="container">
+  <!-- ====== 顶栏 ====== -->
+  <div id="header">
+    <div id="header-top">
+      <div id="logo">
+        <span class="logo-night">夜航</span>
+        <span class="logo-sub">—— 飞行员的夜航手册</span>
+      </div>
+      <div id="header-search">
+        <input type="text" id="search-input" placeholder="搜索帖子、用户…" maxlength="50" />
+        <button id="search-btn">搜索</button>
+        <div id="search-panel" class="hidden">
+          <div id="search-history">
+            <div class="panel-header">搜索历史 <a href="#" id="clear-history">清空</a></div>
+            <ul id="history-list"></ul>
+          </div>
+          <div id="search-result" class="hidden">
+            <div class="panel-header">搜索结果</div>
+            <div id="result-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li><a href="/board/tower">塔台</a></li>
+        <li><a href="/board/lounge">候机室</a></li>
+        <li><a href="/board/deepspace">深空</a></li>
+        <li><a href="/board/blindzone">盲区</a></li>
+      </ul>
+      <span id="nav-welcome">欢迎您，<strong>访客</strong></span>
+    </div>
+  </div>
+
+  <!-- ====== 面包屑 ====== -->
+  <div id="breadcrumb">
+    <a href="/board/deepspace">深空——怪谈区</a>
+    <span class="sep">›</span>
+    <span class="current">用户中心</span>
+    <span class="sep">›</span>
+    <span class="current">Gambit</span>
+  </div>
+
+  <!-- ====== 锁屏状态（密码C未解锁时显示） ====== -->
+  <div id="lock-screen" class="lock-visible">
+    <div id="lock-box">
+      <div id="lock-icon">🔒</div>
+      <p class="lock-title">此页面已上锁</p>
+      <p class="lock-hint">请输入站点管理员密码以查看该用户主页</p>
+      <div class="lock-input-row">
+        <input type="password" id="lock-password" placeholder="请输入密码" maxlength="50" />
+        <button id="lock-submit">确认</button>
+      </div>
+      <p id="lock-error" class="hidden">密码错误。提示：站长的生日，yyyymmdd</p>
+    </div>
+  </div>
+
+  <!-- ====== 用户主页内容（密码C解锁后显示） ====== -->
+  <div id="profile-content" class="content-hidden">
+
+    <!-- 用户信息卡 -->
+    <div id="profile-card">
+      <div id="profile-avatar">
+        <div id="avatar-default">G</div>
+      </div>
+      <div id="profile-info">
+        <h2 id="profile-username">Gambit</h2>
+        <p class="profile-group">用户组：注册用户</p>
+        <table id="profile-stats">
+          <tr>
+            <td class="stat-label">注册时间</td>
+            <td class="stat-value">2015-07-14</td>
+          </tr>
+          <tr>
+            <td class="stat-label">最后活跃</td>
+            <td class="stat-value">2016-09-22</td>
+          </tr>
+          <tr>
+            <td class="stat-label">主题数</td>
+            <td class="stat-value">0</td>
+          </tr>
+          <tr>
+            <td class="stat-label">回复数</td>
+            <td class="stat-value">3</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 档案按钮 -->
+      <div id="archive-area">
+        <a href="/user/gambit/archive" id="archive-link">档案 ›</a>
+      </div>
+    </div>
+
+    <!-- 空内容提示 -->
+    <div id="empty-notice">
+      <p>该用户暂无公开主页内容。</p>
+    </div>
+
+  </div>
+
+  <!-- ====== 页脚 ====== -->
+  <div id="footer">
+    <div class="footer-links">
+      <a href="/board/tower">塔台</a> · <a href="/board/lounge">候机室</a> ·
+      <a href="/board/deepspace">深空</a> · <a href="/board/blindzone">盲区</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2014-2016 夜航. All rights reserved. 「 第三航次 」
+    </div>
+  </div>
+</div>
+
+<!-- ====== 全局页面进度标签 ====== -->
+<div id="page-counter-fixed">15/30</div>
+
+<script type="module" src="/src/pages/user/gambit.ts"></script>
+</body>
+</html>

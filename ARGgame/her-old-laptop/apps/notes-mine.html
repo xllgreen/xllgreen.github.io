@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的整理</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .mine-wrap { padding: 20px 18px 60px; max-width: 680px; margin: 0 auto; }
+    .mine-wrap .intro {
+      font-size: 12px; color: #999; line-height: 1.8;
+      margin-bottom: 16px; border-bottom: 1px dashed #ddd; padding-bottom: 12px;
+    }
+    .mine-wrap h3 {
+      font-size: 14px; color: #555; margin: 18px 0 10px;
+      border-left: 3px solid #d9707e; padding-left: 10px;
+    }
+    .mine-item {
+      background: #faf9f5; border: 1px solid #eee; border-radius: 8px;
+      padding: 12px 14px; margin-bottom: 10px;
+      font-size: 13px; color: #444; line-height: 1.8;
+    }
+    .mine-item .t { font-weight: 600; color: #333; margin-bottom: 4px; }
+    .mine-item.locked { color: #bbb; background: #f8f8f8; }
+    .mine-next {
+      background: #fffbe0; border: 1px dashed #e0d5a0; border-radius: 8px;
+      padding: 12px 14px; font-size: 13px; color: #8a7d5a; line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    .mine-note {
+      font-size: 11px; color: #bbb; margin-top: 14px; line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">我的整理</span>
+    </div>
+    <div class="window-body">
+      <div class="mine-wrap">
+        <div class="intro">接手她的工位之后，我随手把发现的东西记在这里。<br>看到什么，就记下什么——不保证都是对的。</div>
+
+        <h3>已找到的线索</h3>
+        <div id="clueList"></div>
+
+        <h3>下一步</h3>
+        <div id="nextList"></div>
+
+        <div class="mine-note">整理会自动更新。密码类线索我尽量记"从哪来的"——除非她本来就没藏。</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    Game.renderProgress();
+
+    const clues = [
+      { gate: () => true, t: '电脑锁屏', d: '开机时右下角贴着一张便签：「生日快乐 · 0307」。她常用这个当密码。' },
+      { gate: () => Game.unlocked('lw_photo_exif_seen') || Game.unlocked('WECHAT_LOGIN'), t: '微信', d: '备忘录第4条写着「L + W + 4位数字（年份）」。相册第5张的 EXIF 备注里有个 LW??24。' },
+      { gate: () => Game.unlocked('MOM_CHAT') || Game.unlocked('MAIL_LOGIN'), t: '邮箱', d: '备忘录第2条：密码是答辩日期，4位数字。日历里 6月14日 答辩——妈妈聊天里说那天也是她的生日。' },
+      { gate: () => Game.unlocked('ZHOU_CHAT'), t: '加密文件夹', d: '周明聊天里给了结构：3个字母 + 3个数字 + 1个英文单词。三个来源：周明的习惯、论文批注、6月14日的纸条。' },
+      { gate: () => Game.unlocked('FILES_UNLOCK'), t: '最终触发码', d: '加密文件夹里的频谱图——频率轴上的峰值排成了字母。' },
+    ];
+
+    const nextSteps = [
+      { gate: () => !Game.unlocked('WECHAT_LOGIN'), d: '先解开微信——备忘录第4条 + 相册第5张的 EXIF，能拼出来。' },
+      { gate: () => Game.unlocked('WECHAT_LOGIN') && !Game.unlocked('MAIL_LOGIN'), d: '打开邮箱——备忘录第2条说密码是答辩日期，日历和妈妈的聊天里有线索。' },
+      { gate: () => !Game.unlocked('FILES_UNLOCK') && Game.unlocked('ZHOU_CHAT'), d: '访达「文稿」里有个加密的 zip——按周明说的三段拼起来。' },
+      { gate: () => !Game.unlocked('FILES_UNLOCK') && !Game.unlocked('ZHOU_CHAT'), d: '先看看微信里周明学长的聊天，他提过密码的结构。' },
+      { gate: () => Game.unlocked('FILES_UNLOCK') && !Game.unlocked('FINAL'), d: '加密文件夹里的频谱图，藏着最终触发码。' },
+      { gate: () => Game.unlocked('FINAL') || Game.unlocked('ENDING'), d: '材料已经齐了。剩下的，是你自己的选择。' },
+    ];
+
+    const clueList = document.getElementById('clueList');
+    clueList.innerHTML = clues.map(c => {
+      const open = c.gate();
+      return `<div class="mine-item ${open ? '' : 'locked'}">
+        <div class="t">${open ? '🔑' : '🔒'} ${c.t}</div>
+        <div>${open ? c.d : '（还没找到相关线索）'}</div>
+      </div>`;
+    }).join('');
+
+    const nextList = document.getElementById('nextList');
+    const first = nextSteps.find(s => s.gate());
+    if (first) {
+      nextList.innerHTML = `<div class="mine-next">${first.d}</div>`;
+    }
+  </script>
+</body>
+</html>

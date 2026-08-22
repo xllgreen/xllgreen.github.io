@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>周明学长</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/apps/wechat.html">‹</a>
+      <span class="title">周明学长</span>
+    </div>
+    <div class="window-body">
+      <div class="chat-window">
+        <div class="chat-header">周明学长</div>
+        <div class="chat-messages">
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            学妹，材料我帮你整理好了，放在那个加密文件夹里
+          </div>
+          <div class="msg from-me">谢谢学长！密码我设了新的，怕被陈老师发现</div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            行，密码你自己记着就行。但万一你自己都忘了——
+          </div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            <span class="key-info">我给你个提示结构：先是我的姓，然后是你论文里那条被改过的文献号，最后加那件事的本质</span>
+          </div>
+          <div class="msg from-me">懂了，三段拼起来</div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            对。<span class="key-info">三个字母 + 三个数字 + 一个英文单词</span>，全部连在一起，区分大小写
+          </div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            那个文件夹别删，绝对别删。等答辩完，我们一起把它发出去
+          </div>
+          <div class="msg from-me">好。等答辩那天</div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            <span class="key-info">最后那件事的本质，用一个词总结——这件事到底是什么</span><br>
+            陈老师改的不只是数据，他改的是——
+          </div>
+          <div class="msg from-me" style="color:#888;">（林晚未发送）</div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            学妹？还在吗
+          </div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            你最近怎么样？回个话
+          </div>
+          <div class="msg from-them">
+            <div class="sender">周明</div>
+            ……
+          </div>
+          <div style="text-align:center;font-size:11px;color:#bbb;padding:8px 0;">以上是 2024年5月 的对话</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    if (!Game.unlocked('WECHAT_LOGIN')) location.href = '/ARGgame/her-old-laptop/puzzles/login-wechat.html';
+    setTimeout(() => Game.mark('ZHOU_CHAT'), 1200);
+    // 阶段性引导：他说"那个文件夹别删"——如果玩家还没碰过加密文件夹，给一条独白
+    if (!Game.unlocked('FILES_UNLOCK') && !sessionStorage.getItem('lw_zhou_nudge')) {
+      sessionStorage.setItem('lw_zhou_nudge', '1');
+      setTimeout(() => Game.monologue('他说「那个文件夹别删」……她的电脑里，有什么文件夹？', 6000), 2600);
+    }
+    Game.renderProgress();
+  </script>
+</body>
+</html>

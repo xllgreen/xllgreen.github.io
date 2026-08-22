@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>波利比奥斯方阵：一种古老而巧妙的加密方式 - 夜航论坛</title>
+  <link rel="stylesheet" href="/src/pages/post/polybius.css" />
+</head>
+<body>
+
+<div id="container">
+  <!-- ====== 顶栏 ====== -->
+  <div id="header">
+    <div id="header-top">
+      <div id="logo">
+        <span class="logo-night">夜航</span>
+        <span class="logo-sub">—— 飞行员的夜航手册</span>
+      </div>
+      <div id="header-search">
+        <input type="text" id="search-input" placeholder="搜索帖子、用户…" maxlength="50" />
+        <button id="search-btn">搜索</button>
+        <div id="search-panel" class="hidden">
+          <div id="search-history">
+            <div class="panel-header">搜索历史 <a href="#" id="clear-history">清空</a></div>
+            <ul id="history-list"></ul>
+          </div>
+          <div id="search-result" class="hidden">
+            <div class="panel-header">搜索结果</div>
+            <div id="result-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li><a href="/board/tower">塔台</a></li>
+        <li class="current"><a href="/board/lounge">候机室</a></li>
+        <li><a href="/board/deepspace">深空</a></li>
+        <li><a href="/board/blindzone">盲区</a></li>
+      </ul>
+      <span id="nav-welcome">欢迎您，<strong>访客</strong></span>
+    </div>
+  </div>
+
+  <!-- ====== 面包屑 ====== -->
+  <div id="breadcrumb">
+    <a href="/board/lounge">候机室——水区</a>
+    <span class="sep">›</span>
+    <span class="current">波利比奥斯方阵：一种古老而巧妙的加密方式</span>
+  </div>
+
+  <!-- ====== 帖子正文 ====== -->
+  <div id="main">
+    <div id="post-area">
+
+      <!-- 帖子标题 -->
+      <div id="post-header">
+        <h1 id="post-title">波利比奥斯方阵：一种古老而巧妙的加密方式</h1>
+        <div id="post-meta">
+          <span><a href="/board/lounge" class="meta-board">候机室——水区</a></span>
+          <span class="meta-sep">|</span>
+          <span>由 <a href="javascript:void(0)" class="meta-author-link">数字幽灵</a> 发布于 2015-4-12</span>
+          <span class="meta-sep">|</span>
+          <span>回复: 8</span>
+          <span class="meta-sep">|</span>
+          <span>查看: 1432</span>
+        </div>
+      </div>
+
+      <!-- 主题工具条 -->
+      <div class="thread-toolbar">
+        <a href="javascript:void(0)">☆ 收藏</a>
+        <a href="javascript:void(0)">📋 订阅</a>
+        <a href="javascript:void(0)">🔗 分享</a>
+        <a href="javascript:void(0)">⚑ 举报</a>
+        <span class="toolbar-spacer"></span>
+      </div>
+
+      <!-- ======== 楼主帖子 ======== -->
+      <div class="post" id="post-op">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A3848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">数字幽灵</div>
+            <div class="pui-usertitle">金牌会员</div>
+            <div class="pui-level">Lv.5</div>
+            <div class="pui-stats">
+              <div>帖子: <span>89</span></div>
+              <div>积分: <span>672</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#1</span>
+              <span class="postdate">发表于 2015-4-12 16:30</span>
+            </div>
+            <div class="post-body">
+              <p>最近在看一些密码学的东西，发现一个很有意思的古老加密方法——波利比奥斯方阵（Polybius Square）。</p>
+
+              <p>这个东西是古希腊历史学家波利比奥斯（Polybius）最早描述的，但据说在更早的时候就已经被使用了。它的原理非常简单，但应用范围非常广——从古希腊的烽火传信到二战盟军的情报通讯，都有它的影子。</p>
+
+              <h3>基本原理</h3>
+
+              <p>把字母放进一个5×5的方格里（希腊字母是5×5，拉丁字母因为26个，通常把I和J合并或者把某个字母去掉）：</p>
+
+              <div class="poly-grid">
+                <table class="grid-table">
+                  <tr><td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+                  <tr><td>1</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
+                  <tr><td>2</td><td>F</td><td>G</td><td>H</td><td>I/J</td><td>K</td></tr>
+                  <tr><td>3</td><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td></tr>
+                  <tr><td>4</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td></tr>
+                  <tr><td>5</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr>
+                </table>
+              </div>
+
+              <p>每个字母对应一组两位数字——行号和列号。比如A是11，B是12，F是21，Z是55。这样，一句话就变成了一串数字。</p>
+
+              <p>比如"HELLO"会变成：23 15 31 31 34。</p>
+
+              <p>反过来，收到一串数字，按两位一组拆开，查表就能还原回字母。</p>
+
+              <h3>历史应用</h3>
+
+              <p>古希腊人用这个原理来传递烽火信号——火把的数量代表数字，数字对应字母。二战期间，盟军情报员也用过改进版的波利比奥斯方阵来加密短消息。因为它的操作不需要任何工具，一支笔一张纸就能完成，在战场环境中非常实用。</p>
+
+              <p>当然，从现代密码学的角度看，这种加密方式非常简单——频率分析就能破解。但它在历史上的地位不可忽视，可以说是所有"字母→数字"替换加密的始祖之一。</p>
+
+              <p>我自己写了一个小工具，可以在线加密解密，有兴趣的可以试试：</p>
+
+              <div class="tool-link-box">
+                <a href="javascript:void(0)" id="polybius-tool-link">→ 波利比奥斯方阵加解密工具 ←</a>
+              </div>
+
+              <p class="post-ps">PS：用字母做密码的朋友，可以试试把一句话转成数字存着，看起来比明文安全一点😄</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <a href="javascript:void(0)" class="btn btn-like">♥ 赞 <span class="like-count">7</span></a>
+              <span class="rep-count">#1</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          数字是宇宙的语言
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ====== 回复区 ====== -->
+    <div id="comments-area">
+      <div class="reply-header">回复 <span class="reply-count">(8)</span></div>
+
+      <!-- 回复 1 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%23303A48'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">寒山</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>34</span></div>
+              <div>积分: <span>208</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#2</span>
+              <span class="postdate">发表于 2015-4-12 17:15</span>
+            </div>
+            <div class="post-body">
+              <p>有意思。以前只知道有凯撒密码，这种用坐标代替字母的思路第一次见。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#2</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature post-signature-empty">
+          <div class="sig-line">—————————————————————</div>
+          山不见我，我自去见山
+        </div>
+      </div>
+
+      <!-- 回复 2 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A4048'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">渡鸦</div>
+            <div class="pui-usertitle">金牌会员</div>
+            <div class="pui-level">Lv.5</div>
+            <div class="pui-stats">
+              <div>帖子: <span>132</span></div>
+              <div>积分: <span>1020</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#3</span>
+              <span class="postdate">发表于 2015-4-12 18:40</span>
+            </div>
+            <div class="post-body">
+              <p>我记得二战时盟军确实用过类似的，好像叫"双轨密码"什么的？不过原理差不多。在战场上手头没有密码本的时候，记住一个5×5表格就能通信，确实实用。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#3</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          黑夜给了我黑色的眼睛
+        </div>
+      </div>
+
+      <!-- 回复 3 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%233A3848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">二进制梦</div>
+            <div class="pui-usertitle">新手上路</div>
+            <div class="pui-level">Lv.2</div>
+            <div class="pui-stats">
+              <div>帖子: <span>14</span></div>
+              <div>积分: <span>56</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#4</span>
+              <span class="postdate">发表于 2015-4-12 20:10</span>
+            </div>
+            <div class="post-body">
+              <p>"HELLO→23 15 31 31 34" 这个例子让我看了半天哈哈，才发现L是31。</p>
+              <p>不过好奇问一下，为什么I和J要放在同一格？</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature post-signature-empty">
+          <span class="sig-empty">这家伙很懒，什么也没留下……</span>
+        </div>
+      </div>
+
+      <!-- 回复 4 — OP回复 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A3848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">数字幽灵</div>
+            <div class="pui-usertitle">金牌会员</div>
+            <div class="pui-level">Lv.5</div>
+            <div class="pui-badges">
+              <span class="badge-op">LZ</span>
+            </div>
+            <div class="pui-stats">
+              <div>帖子: <span>89</span></div>
+              <div>积分: <span>672</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#5</span>
+              <span class="postdate">发表于 2015-4-12 21:05</span>
+            </div>
+            <div class="post-body">
+              <p>回楼上：因为5×5的格子只能放25个字母，但拉丁字母有26个，所以通常把I和J合并，或者把使用频率最低的字母（比如X）去掉。用哪套方案看具体约定，解密的时候根据上下文一般都能判断出来。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#5</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          数字是宇宙的语言
+        </div>
+      </div>
+
+      <!-- 回复 5 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%233A4848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">冬日暖阳</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>56</span></div>
+              <div>积分: <span>312</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#6</span>
+              <span class="postdate">发表于 2015-4-13 09:20</span>
+            </div>
+            <div class="post-body">
+              <p>这么说的话，如果把坐标的顺序反过来（先列后行），或者用不同的字母排列顺序，就能衍生出很多变体了。有意思。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#6</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          冬天来了，春天还会远吗
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ====== 快速回复 ====== -->
+    <div class="quick-reply">
+      <h3>快速回复</h3>
+      <textarea placeholder="输入回复内容……（支持 BBcode: [b]粗体[/b]  [url]链接[/url]）" rows="3"></textarea>
+      <div class="qr-toolbar">
+        <div class="qr-smilies">
+          <a href="javascript:void(0)">😊</a>
+          <a href="javascript:void(0)">😂</a>
+          <a href="javascript:void(0)">😎</a>
+          <a href="javascript:void(0)">👍</a>
+          <a href="javascript:void(0)">❤️</a>
+          <a href="javascript:void(0)">🤔</a>
+        </div>
+        <div class="qr-actions">
+          <a href="javascript:void(0)" class="btn btn-primary">发表回复</a>
+          <a href="javascript:void(0)" class="btn">高级模式</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====== 页脚 ====== -->
+  <div id="footer">
+    <div class="footer-links">
+      <a href="/board/tower">塔台</a> · <a href="/board/lounge">候机室</a> ·
+      <a href="/board/deepspace">深空</a> · <a href="/board/blindzone">盲区</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2014-2016 夜航. All rights reserved. 「 第三航次 」
+    </div>
+  </div>
+</div>
+
+<!-- ====== 全局页面进度标签 ====== -->
+<div id="page-counter">21/30</div>
+
+<script type="module" src="/src/pages/post/polybius.ts"></script>
+</body>
+</html>

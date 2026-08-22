@@ -1,0 +1,163 @@
+
+:root{
+  --bg:#090b0c;--panel:#111516;--panel2:#171b1c;--paper:#d8d2c5;--paper2:#ebe5d9;
+  --ink:#20211f;--muted:#8d918d;--white:#eeece5;--red:#8e443e;--line:#3c4240;--green:#5f7468;
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#090b0c;color:var(--white);font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif}
+button,select,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+button{border:1px solid #59605d;background:#1b2021;color:#e6e5df;padding:9px 13px}.primary{background:#7d3f39;border-color:#91514a}.ghost{background:transparent}
+.mono{font:11px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.12em;color:#7b7d78}
+
+/* 开场：一张真实卷宗桌面，不显示正确推理方向 */
+.boot{position:fixed;inset:0;z-index:50;background:#07090a;overflow:auto}
+.boot-bg{position:absolute;inset:0;background:url("assets/images/film_records_wide.jpg") center/cover;filter:brightness(.32) saturate(.55);transform:scale(1.04)}
+.boot-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 0 34%,#0008 75%,#000d 100%)}
+.boot-desk{position:relative;z-index:2;min-height:100vh;max-width:1220px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:34px;align-items:center;padding:40px}
+.boot-file{filter:drop-shadow(0 28px 60px #000a)}
+.file-edge{width:46%;background:#8a3f38;color:#eee1d3;padding:7px 12px;font:10px ui-monospace,monospace;letter-spacing:.08em}
+.file-sheet{position:relative;background:linear-gradient(90deg,#cfc8b8,#e2dccf 3%,#ddd6c8 96%,#c6bead);color:#292925;padding:48px 64px 52px;border:1px solid #a59d8d;min-height:520px}
+.file-sheet:before{content:"";position:absolute;left:21px;top:18px;bottom:18px;border-left:1px solid #9f9889}
+.file-sheet h1{font:700 clamp(42px,6vw,82px) SimSun,serif;letter-spacing:.08em;margin:23px 0 4px}
+.file-sheet>p{color:#737068}.file-rule{height:1px;background:#aaa291;margin:30px 0}
+.file-sheet dl{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid #b4ad9f;border-bottom:1px solid #b4ad9f;padding:14px 0}
+.file-sheet dl div{display:grid;grid-template-columns:92px 1fr;padding:7px 0}.file-sheet dt{color:#777168}.file-sheet dd{margin:0;font-weight:700}
+.file-note{font:18px/1.8 KaiTi,STKaiti,serif!important;color:#59564f!important;max-width:760px;margin:28px 0}
+.boot-actions{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.file-sheet small{color:#777168}
+.boot-side{display:flex;flex-direction:column;gap:22px}
+.envelope{background:#bdb6a7;color:#2d2c28;padding:28px 22px 34px;border:1px solid #8b8478;box-shadow:0 18px 45px #0008;transform:rotate(-1deg)}
+.envelope:nth-child(2){transform:rotate(1.4deg)}.envelope span,.envelope small{display:block;font:10px ui-monospace,monospace;color:#716c64}.envelope b{display:block;font:700 18px SimSun,serif;margin:20px 0 8px}
+
+/* 最小HUD，场景中不出现后台式侧栏 */
+.app{min-height:100vh;background:#0a0c0d}.hud{position:fixed;z-index:20;left:0;right:0;top:0;height:58px;display:grid;grid-template-columns:150px 1fr auto;align-items:center;padding:0 18px;background:linear-gradient(#0c0f10ef,#0c0f10d9);border-bottom:1px solid #272c2c;backdrop-filter:blur(8px)}
+.hud button{background:transparent;border-color:#353b39;font-size:12px}.hud-title{min-width:0}.hud-title b{display:block;font-size:13px}.hud-title span{font:9px ui-monospace,monospace;color:#747a76}.hud-actions{display:flex;gap:7px}
+.view{padding-top:58px;min-height:100vh}.scene-screen{position:relative;min-height:calc(100vh - 58px);overflow:hidden;background:#0a0c0d}
+.scene-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.52) saturate(.67) contrast(1.08);transform:scale(1.01)}
+.scene-shade{position:absolute;inset:0;background:linear-gradient(90deg,#000b 0,#0003 38%,#0005 62%,#000d 100%),linear-gradient(0deg,#000c,transparent 42%)}
+.scene-copy{position:relative;z-index:3;max-width:680px;padding:56px 0 70px 6vw}.scene-copy .kicker{font:10px ui-monospace,monospace;letter-spacing:.14em;color:#9b9f9a}.scene-copy h1{font:700 clamp(34px,5vw,68px) SimSun,serif;margin:10px 0 13px}.scene-copy p{font:16px/1.9 KaiTi,serif;color:#cbc8bf;max-width:620px}
+.location-grid{position:relative;z-index:4;display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:12px;max-width:900px;margin-top:30px}
+.location-card{min-height:124px;text-align:left;padding:18px;background:#15191ad9;border:1px solid #474d4a;backdrop-filter:blur(6px)}.location-card:hover{transform:translateY(-2px);border-color:#8a8072}.location-card b{display:block;font:700 18px SimSun,serif;margin-bottom:6px}.location-card small{font:9px ui-monospace,monospace;color:#7d837f}.location-card p{font:12px/1.6 Arial,sans-serif;color:#aaa;margin:8px 0 0}.location-card.locked{opacity:.34;pointer-events:none}
+.procedure-slip{margin-top:28px;background:#d3ccbd;color:#282722;max-width:620px;padding:17px 20px;transform:rotate(-.5deg);box-shadow:0 12px 30px #0007}.procedure-slip b{font:700 13px SimSun,serif}.procedure-slip ul{margin:10px 0 0;padding-left:18px;font:12px/1.8 KaiTi,serif}.procedure-slip .done{text-decoration:line-through;color:#79746b}
+
+/* 讯问室 */
+.interrogation-room{min-height:calc(100vh - 58px);position:relative;background:#090b0c;overflow:hidden}.interrogation-room .scene-bg{filter:brightness(.34) saturate(.45)}
+.cam-time{position:absolute;top:24px;right:28px;z-index:4;font:10px ui-monospace,monospace;color:#d5d3cc}.cam-time .rec{color:#bd4f47;margin-right:16px}
+.interrogation-console{position:absolute;z-index:4;left:4vw;bottom:5vh;width:min(780px,72vw);background:#0d1010dc;border:1px solid #39403d;backdrop-filter:blur(8px);padding:18px}
+.interrogation-console h2{font:700 23px SimSun,serif;margin:0 0 4px}.question-list{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.question-list button{background:#171b1b}.question-list button.asked{border-color:#6f746e;color:#9ba09b}
+.transcript{border-left:3px solid #7d403a;padding:12px 16px;background:#111515;margin-top:12px}.transcript .q{font-size:11px;color:#848a86}.transcript .a{font:18px/1.75 KaiTi,serif;margin-top:8px}.behaviour{font:10px/1.6 ui-monospace,monospace;color:#777e79;margin-top:8px}
+.confront-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+
+/* 现场：热点隐约，不高亮 */
+.hotspot{position:absolute;z-index:5;background:transparent;border:0!important;outline:0;color:transparent;padding:0}.hotspot:hover:after,.hotspot:focus:after{content:attr(data-label);position:absolute;left:50%;bottom:100%;transform:translate(-50%,-8px);white-space:nowrap;background:#0a0c0ddd;color:#ddd;padding:5px 8px;border:1px solid #535955;font-size:10px}.hotspot:hover{box-shadow:inset 0 0 0 1px #ffffff38}
+.scene-tip{position:absolute;z-index:4;left:28px;bottom:25px;font:10px ui-monospace,monospace;color:#8e938f;background:#090b0bc9;padding:7px 9px}
+.field-panel{position:absolute;right:28px;bottom:28px;z-index:4;width:min(390px,36vw);background:#111515df;border:1px solid #414745;padding:16px}.field-panel h3{font:700 18px SimSun,serif;margin:0 0 8px}.field-panel p{font:12px/1.75 KaiTi,serif;color:#b8b6ae}.field-panel button{margin-top:8px}
+
+/* 物证室 */
+.evidence-room{min-height:calc(100vh - 58px);background:#111415;padding:38px max(24px,5vw) 70px}.room-head{display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid #3f4542;padding-bottom:13px}.room-head h1{font:700 30px SimSun,serif;margin:0}.room-head p{margin:0;color:#777f7a;font:10px ui-monospace,monospace}
+.evidence-grid{display:grid;grid-template-columns:repeat(4,minmax(190px,1fr));gap:14px;margin-top:22px}.ev-card{text-align:left;background:#d8d1c2;color:#272520;border:1px solid #8e8779;padding:0!important;overflow:hidden;min-height:250px}.ev-card img{width:100%;height:150px;object-fit:cover;display:block;filter:saturate(.72) contrast(1.04)}.ev-card .ev-body{padding:11px}.ev-card strong{display:block;font:700 13px SimSun,serif}.ev-card small{display:block;color:#736e65;margin-top:5px}.ev-card.locked{display:none}
+
+/* 视频复核室 */
+.video-room{min-height:calc(100vh - 58px);background:#0b0d0e;padding:32px max(20px,4vw) 70px}.monitor-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:1180px;margin:22px auto}.monitor{background:#080a0a;border:1px solid #333937;padding:10px;position:relative}.monitor img{width:100%;height:190px;object-fit:cover;filter:saturate(.55) contrast(1.08) brightness(.83)}.monitor .monitor-id{position:absolute;top:15px;left:16px;font:9px ui-monospace,monospace;background:#000a;padding:4px 6px;color:#aeb5b0}.monitor p{font-size:11px;color:#9aa09c}.tag-row{display:flex;gap:4px;flex-wrap:wrap}.tag-row button{font-size:9px;padding:5px 7px}.tag-row button.active{background:#62443d}.video-question{max-width:780px;margin:30px auto 0;background:#171b1c;border-left:3px solid #7a403a;padding:16px}.video-question h3{margin:0 0 10px;font:700 16px SimSun,serif}
+
+/* 书店/物业/法医 */
+.diegetic-screen{min-height:calc(100vh - 58px);position:relative;overflow:hidden}.diegetic-screen .scene-bg{filter:brightness(.42) saturate(.66)}
+.prop-stack{position:relative;z-index:4;padding:55px max(24px,6vw);max-width:760px}.prop-stack h1{font:700 38px SimSun,serif}.phone-card,.terminal-card,.medical-file{background:#111515e8;border:1px solid #434947;padding:18px;margin:15px 0;backdrop-filter:blur(7px)}.phone-card img,.terminal-card img,.medical-file img{width:100%;max-height:350px;object-fit:contain;background:#0b0d0e}.phone-card button,.terminal-card button,.medical-file button{margin-top:10px}
+.sequence-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.sequence-row select{width:100%;background:#151919;color:#ddd;border:1px solid #4b514f;padding:9px}
+
+/* 终局：桌面式责任链，不用下拉考试页 */
+.review-room{min-height:calc(100vh - 58px);background:radial-gradient(circle at 50% 5%,#222827,#111414 55%,#080a0a 100%);padding:35px max(18px,4vw) 80px}.review-table{max-width:1180px;margin:auto}.review-table h1{font:700 32px SimSun,serif}.responsibility-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.responsibility-card{background:#d8d1c2;color:#282620;border:1px solid #938b7d;padding:18px;min-height:235px;box-shadow:0 12px 30px #0006}.responsibility-card h3{font:700 19px SimSun,serif;margin:0 0 10px}.person-stamps,.evidence-picks{display:flex;gap:6px;flex-wrap:wrap}.responsibility-card button{background:#e5dfd3;color:#35322d;border-color:#aaa194;font-size:10px}.responsibility-card button.active{background:#75423d;color:#fff;border-color:#75423d}.review-submit{margin-top:20px;background:#1a1f20;border:1px solid #454b49;padding:18px}.model-options{display:flex;gap:7px;flex-wrap:wrap}.model-options button.active{background:#74423d}
+
+/* 卷宗袋 */
+.folder-overlay{position:fixed;inset:0;z-index:70;background:#050607dd;padding:4vh 4vw}.folder-shell{height:92vh;max-width:1160px;margin:auto;background:#d7d0c2;color:#292720;border:1px solid #958d80;box-shadow:0 30px 80px #000c;padding:24px;overflow:auto}.folder-close{float:right;background:#3c403e}.folder-tabs{display:flex;gap:6px;border-bottom:1px solid #aaa296;padding-bottom:9px}.folder-tabs button{background:#e1dacd;color:#3b3934;border-color:#aaa296}.folder-tabs .active{background:#67625a;color:#fff}.folder-ev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.folder-ev{background:#ece6da;border:1px solid #b0a89a;padding:9px;text-align:left;color:#302e29}.folder-ev img{width:100%;height:110px;object-fit:cover}.folder-fact{border-bottom:1px solid #b6aea0;padding:11px 3px;font:13px/1.7 KaiTi,serif}.people-file{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.person-file{border:1px solid #b1a99b;padding:14px;background:#e7e0d4}.person-file b{font:700 16px SimSun,serif}.person-file p{font:12px/1.7 KaiTi,serif}
+
+/* 资料弹窗 */
+.modal{position:fixed;inset:0;z-index:80;background:#030404e8;display:flex;align-items:center;justify-content:center;padding:4vh 4vw}.modal-card{position:relative;width:min(1100px,94vw);max-height:90vh;overflow:auto;background:#d8d1c2;color:#292720;border:1px solid #989083;padding:24px;box-shadow:0 25px 80px #000d}.modal-close{position:absolute;right:13px;top:12px;background:#343936}.document-view{display:grid;grid-template-columns:minmax(320px,1.35fr) minmax(250px,.65fr);gap:20px}.document-view img{width:100%;max-height:72vh;object-fit:contain;background:#111}.doc-meta h2{font:700 24px SimSun,serif;margin-top:34px}.doc-meta p{font:13px/1.8 KaiTi,serif}.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.compare-grid img{width:100%;background:#111}.compare-actions{display:flex;gap:8px;margin-top:15px}
+
+/* 提示 */
+.hint-panel{position:fixed;z-index:90;inset:0;background:#050607cc;display:flex;align-items:center;justify-content:center}.hint-card{width:min(540px,90vw);background:#d8d1c2;color:#292720;padding:28px;box-shadow:0 20px 65px #000c}.hint-card>button:first-child{float:right;background:#373b39}.hint-card h2{font:700 25px SimSun,serif}.hint-card p{font:15px/1.8 KaiTi,serif}.hint-actions{display:flex;gap:8px}
+
+/* 真正电影层：后台UI完全退出 */
+.theatre{position:fixed;z-index:200;inset:0;background:#000;overflow:hidden}.theatre img{width:100%;height:100%;object-fit:cover;animation:filmPush 7s ease-out both;filter:brightness(.78) contrast(1.05)}@keyframes filmPush{from{transform:scale(1.015)}to{transform:scale(1.075)}}
+.film-grain{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:.12;background-image:repeating-radial-gradient(circle at 20% 30%,#fff0 0 2px,#fff1 3px,#0000 4px);mix-blend-mode:soft-light;animation:grain .28s steps(2) infinite}@keyframes grain{0%{transform:translate(0)}25%{transform:translate(-1%,1%)}50%{transform:translate(1%,-1%)}75%{transform:translate(1%,1%)}100%{transform:translate(0)}}
+.letterbox{position:absolute;left:0;right:0;height:8vh;background:#000;z-index:5}.letterbox.top{top:0}.letterbox.bottom{bottom:0}.film-hud{position:absolute;z-index:7;right:5vw;top:10vh;font:10px ui-monospace,monospace;color:#d2d0ca;text-shadow:0 1px 4px #000}.film-caption{position:absolute;z-index:7;left:5vw;top:11vh;font:12px ui-monospace,monospace;color:#d4d1c9;letter-spacing:.08em;text-shadow:0 2px 5px #000}.subtitle-wrap{position:absolute;z-index:7;left:10vw;right:10vw;bottom:12vh;text-align:center;text-shadow:0 2px 6px #000}.film-speaker{font:11px ui-monospace,monospace;color:#aaa;margin-bottom:7px}.film-line{font:500 clamp(20px,2.5vw,34px)/1.6 KaiTi,STKaiti,serif}.film-stamp{position:absolute;z-index:8;left:50%;top:48%;transform:translate(-50%,-50%) rotate(-8deg);border:4px double #a74e46;color:#ba5c52;padding:14px 22px;font:700 clamp(28px,5vw,64px) SimSun,serif;letter-spacing:.1em;animation:stampIn .3s ease-out}@keyframes stampIn{from{transform:translate(-50%,-50%) rotate(-8deg) scale(1.8);opacity:0}to{transform:translate(-50%,-50%) rotate(-8deg) scale(1);opacity:1}}
+.film-advance{position:absolute;z-index:9;right:4vw;bottom:4vh;background:transparent;border:0;color:#777;font-size:11px}
+
+/* 结局 */
+.ending-page{min-height:calc(100vh - 58px);background:#101313;padding:45px max(20px,6vw) 80px}.ending-sheet{max-width:920px;margin:auto;background:#d8d1c2;color:#292720;padding:46px 55px;box-shadow:0 20px 60px #0009}.ending-sheet h1{font:700 40px SimSun,serif}.ending-sheet p{font:15px/1.9 KaiTi,serif}.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:10px}.outcome{border-top:1px solid #aaa296;padding:12px}.outcome b{font-family:SimSun,serif}.outcome small{display:block;color:#706b62;margin:4px 0}.ending-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+
+/* toast */
+.toast{position:fixed;z-index:300;left:50%;bottom:28px;transform:translateX(-50%);background:#111616e9;border:1px solid #464c49;padding:9px 14px;font-size:11px;color:#ddd}
+
+@media(max-width:900px){
+  .boot-desk{grid-template-columns:1fr;padding:22px}.boot-side{display:none}.file-sheet{padding:35px 35px 40px}.hud{grid-template-columns:110px 1fr auto;padding:0 9px}.hud-actions button{padding:7px 8px;font-size:10px}.hud-title span{display:none}
+  .location-grid{grid-template-columns:1fr 1fr}.evidence-grid{grid-template-columns:repeat(2,1fr)}.monitor-wall{grid-template-columns:1fr 1fr}.folder-ev-grid{grid-template-columns:repeat(2,1fr)}.responsibility-grid{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .file-sheet{padding:30px 23px 34px}.file-sheet dl{grid-template-columns:1fr}.file-sheet h1{font-size:45px}.hud{height:56px;grid-template-columns:86px 1fr auto}.back-location{font-size:0}.back-location:after{content:"← 走廊";font-size:11px}.hud-actions button:last-child{display:none}.hud-title b{font-size:12px}.hud-actions{gap:3px}.hud-actions button{padding:7px 6px}
+  .view{padding-top:56px}.scene-screen,.interrogation-room,.diegetic-screen{min-height:calc(100vh - 56px)}.scene-copy{padding:42px 18px 65px}.location-grid{grid-template-columns:1fr}.interrogation-console{left:12px;right:12px;bottom:15px;width:auto}.question-list{max-height:110px;overflow:auto}.evidence-room,.video-room,.review-room{padding-left:12px;padding-right:12px}.evidence-grid{grid-template-columns:1fr 1fr;gap:7px}.ev-card img{height:105px}.ev-card{min-height:190px}.monitor-wall{grid-template-columns:1fr}.folder-overlay{padding:0}.folder-shell{height:100vh}.folder-ev-grid,.people-file{grid-template-columns:1fr 1fr}.document-view,.compare-grid{grid-template-columns:1fr}.sequence-row{grid-template-columns:1fr}.film-line{font-size:21px}.letterbox{height:7vh}.outcomes{grid-template-columns:1fr}
+}
+
+/* ===== V5：人物、复核会议、现场匹配增强 ===== */
+.person-file{display:grid;grid-template-columns:132px 1fr;gap:14px;align-items:start;min-height:175px}
+.person-portrait{width:132px;height:155px;object-fit:cover;filter:saturate(.72) contrast(1.05);border:1px solid #a69e90;background:#222}
+.person-copy small{display:block;color:#6d685f;margin:3px 0 8px}
+.person-copy .relation{color:#6a665e;border-top:1px dashed #b6aea0;padding-top:8px}
+.person-copy .mid-note{background:#d2cab9;padding:8px 10px;border-left:3px solid #7a6d59}
+.person-copy .later-note{background:#c8c0b0;padding:8px 10px;border-left:3px solid #7d403a}
+.review-hero{max-width:1180px;margin:0 auto 20px;display:grid;grid-template-columns:minmax(320px,.9fr) 1.1fr;gap:20px;align-items:end;border-bottom:1px solid #3f4542;padding-bottom:18px}
+.review-hero img{width:100%;height:235px;object-fit:cover;filter:saturate(.62) contrast(1.06);border:1px solid #4a504e}
+.review-hero h1{font:700 34px SimSun,serif;margin:8px 0}
+.review-hero p{color:#b8bbb6;line-height:1.8}
+.interrogation-room .scene-bg{filter:brightness(.44) saturate(.58) contrast(1.09)}
+.interrogation-console{box-shadow:0 18px 45px #0009}
+.interrogation-console:before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;background:linear-gradient(90deg,#7d403a,transparent 55%)}
+.scene-screen .scene-bg{transition:filter .35s ease,transform .9s ease}
+.scene-screen:has(.hotspot:hover) .scene-bg{filter:brightness(.58) saturate(.72) contrast(1.08)}
+.hotspot{cursor:crosshair}
+.hotspot:focus-visible{box-shadow:inset 0 0 0 2px #ddd6}
+.video-room .monitor{transition:transform .18s ease,border-color .18s ease}
+.video-room .monitor:hover{transform:translateY(-2px);border-color:#6e7772}
+.review-room{background:
+  linear-gradient(#0c0f10cc,#0c0f10e8),
+  url("assets/images/film_review_room_v7.jpg") center/cover fixed}
+.theatre .film-line,.theatre .film-caption,.theatre .film-speaker{transition:opacity .25s ease,transform .25s ease}
+.theatre.shot-enter .film-line,.theatre.shot-enter .film-caption,.theatre.shot-enter .film-speaker{animation:subtitleIn .45s ease both}
+@keyframes subtitleIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:620px){
+ .person-file{grid-template-columns:92px 1fr;gap:10px}
+ .person-portrait{width:92px;height:120px}
+ .review-hero{grid-template-columns:1fr}
+ .review-hero img{height:180px}
+}
+
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #c7b998;outline-offset:2px}
+
+.theatre img.motion-push{animation:filmPush 7.5s ease-out both}
+.theatre img.motion-still{animation:filmFade 1.1s ease-out both}
+.theatre img.motion-pan-left{animation:filmPanLeft 7.5s ease-out both}
+.theatre img.motion-pan-right{animation:filmPanRight 7.5s ease-out both}
+@keyframes filmFade{from{opacity:.2;transform:scale(1.025)}to{opacity:1;transform:scale(1.025)}}
+@keyframes filmPanLeft{from{transform:scale(1.07) translateX(1.5%)}to{transform:scale(1.1) translateX(-1.5%)}}
+@keyframes filmPanRight{from{transform:scale(1.07) translateX(-1.5%)}to{transform:scale(1.1) translateX(1.5%)}}
+.expert-submit{margin-top:22px}
+.replay-note{border-top:1px solid #aaa296;padding-top:14px;color:#625e56}
+
+/* ===== V6：8.5+ 深度交互与电影化 ===== */
+.scene-shade-soft{background:linear-gradient(90deg,#0007 0,#0000 38%,#0002 70%,#0008 100%),linear-gradient(0deg,#0008,transparent 34%)}
+.scene-detail{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:20px;align-items:start}.scene-detail>img{width:100%;max-height:72vh;object-fit:contain;background:#0b0d0e;border:1px solid #6b655b}.scene-detail .doc-meta{padding-right:10px}
+.scene-compare img{min-height:280px;object-fit:cover}
+.interrogation-shot{transition:opacity .22s ease,transform .8s ease;filter:brightness(.48) saturate(.58) contrast(1.1)!important}.interrogation-console{width:min(860px,76vw)}
+.interrogation-evidence{margin-top:14px;border-top:1px solid #313735;padding-top:12px}.interrogation-evidence-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:8px}.interrogation-evidence-row button{display:grid;grid-template-columns:72px 1fr;gap:9px;align-items:center;min-width:220px;text-align:left;background:#151919}.interrogation-evidence-row img{width:72px;height:54px;object-fit:cover;filter:saturate(.65)}.interrogation-evidence-row span{font-size:11px}
+.record-question{border-top:1px solid #2f3532;margin-top:9px;padding-top:8px}.record-question p{min-height:34px;color:#c8cbc6;font:12px/1.55 KaiTi,serif}.record-question .tag-row button{font-size:10px;line-height:1.25}.record-question .tag-row button.active{background:#6f443d;border-color:#9d7168}
+.timeline-builder{border-left:3px solid #7a403a}.timeline-source{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.timeline-source button{background:#1a1f20}.timeline-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.timeline-slot{min-height:92px;border:1px dashed #59605d;background:#0e1212;padding:10px;display:flex;flex-direction:column;gap:8px;justify-content:center}.timeline-slot small{font:10px ui-monospace,monospace;color:#787e7a}.timeline-slot b{font:13px SimSun,serif;color:#e6e2d9}.timeline-slot span{color:#6e736f;font-size:11px}
+.op-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:12px 0}.op-grid button{font:11px ui-monospace,monospace;padding:10px 6px}.op-grid button.active{background:#6c4d42;border-color:#9f7668}
+.forensic-board{border-left:3px solid #7b403a}.forensic-board .compare-actions{margin-bottom:14px}.forensic-board button.active{background:#70453f;border-color:#a57c73}
+.source-replay{display:grid;gap:10px;margin:18px 0}.source-row{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;align-items:center;border-top:1px solid #aaa296;padding-top:10px}.source-row blockquote{margin:0;font:18px/1.65 KaiTi,serif}.source-row select{background:#eee7da;color:#292720;border:1px solid #a29a8d;padding:9px}
+.folder-group-title{font:700 18px SimSun,serif;margin:22px 0 8px;border-bottom:1px solid #aaa296;padding-bottom:7px}.witness-file .person-file{min-height:145px;opacity:.92}
+.ending-sheet .review-metrics{display:flex;gap:14px;flex-wrap:wrap;border-top:1px solid #aaa296;padding-top:12px;margin-top:18px}.review-metrics span{font:11px ui-monospace,monospace;color:#68635b}
+
+@media(max-width:760px){
+ .scene-detail{grid-template-columns:1fr}.interrogation-console{width:auto;left:10px;right:10px}.interrogation-evidence-row button{min-width:0;flex:1 1 190px}.op-grid{grid-template-columns:repeat(3,1fr)}.timeline-slots{grid-template-columns:1fr}.source-row{grid-template-columns:1fr}.scene-compare img{min-height:180px}
+}
+
+/* v7: people depth, free-form evidence reading, final review polish */
+.record-write{display:flex;gap:8px;align-items:center;margin-top:10px}.record-write input{flex:1;min-width:0;background:#0d1113;border:1px solid #475057;color:#e9e6dc;padding:10px 11px;border-radius:4px;font:inherit}.record-write input:focus{outline:1px solid #8f7761;border-color:#8f7761}.record-locked{margin-top:10px;padding:9px 10px;border-left:3px solid #748c72;background:#141b18;color:#cad7c8;font-size:13px}.witness-room{max-width:1220px;margin:0 auto;padding:26px}.witness-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:20px}.witness-card{display:grid;grid-template-columns:210px 1fr;background:#15191b;border:1px solid #30383c;min-height:300px;overflow:hidden}.witness-card img{width:100%;height:100%;object-fit:cover;filter:saturate(.78) contrast(1.05)}.witness-card>div{padding:22px}.witness-card h2{font-size:28px;margin:6px 0 18px}.witness-card blockquote{margin:14px 0;padding:14px 16px;border-left:3px solid #8b4f46;background:#0d1011;color:#eee9de;line-height:1.8}.witness-q{color:#b9b4a7;font-size:15px}.witness-summary{margin-top:18px;padding:16px 18px;background:#191d1d;border:1px solid #39403d}.moment-note{margin-top:10px;padding:10px 12px;background:#111718;border-left:3px solid #6d7980;color:#cfd2cf;line-height:1.65}.moment-note b{color:#e6e0d2}.review-hero img{object-position:center 52%}.review-metrics{display:flex;flex-wrap:wrap;gap:8px}.review-metrics span{background:#15191b;border:1px solid #30383c;padding:7px 10px}.ending-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}@media(max-width:760px){.witness-grid{grid-template-columns:1fr}.witness-card{grid-template-columns:120px 1fr;min-height:230px}.witness-card>div{padding:15px}.record-write{flex-direction:column;align-items:stretch}}

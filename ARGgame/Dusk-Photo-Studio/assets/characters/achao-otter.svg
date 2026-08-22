@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img">
+<defs><filter id="p"><feTurbulence baseFrequency=".7" numOctaves="2" result="n"/><feBlend in="SourceGraphic" in2="n" mode="multiply"/></filter></defs>
+<rect width="320" height="320" rx="42" fill="#efe0c4"/><circle cx="98" cy="82" r="38" fill="#b98b68" stroke="#4c392f" stroke-width="7"/><circle cx="222" cy="82" r="38" fill="#b98b68" stroke="#4c392f" stroke-width="7"/>
+<ellipse cx="160" cy="168" rx="112" ry="106" fill="#b98b68" stroke="#4c392f" stroke-width="8"/>
+<circle cx="120" cy="160" r="12" fill="#2f2724"/><circle cx="200" cy="160" r="12" fill="#2f2724"/>
+<ellipse cx="160" cy="184" rx="12" ry="9" fill="#3c2d28"/><path d="M145 199 Q160 216 175 199" fill="none" stroke="#3c2d28" stroke-width="7" stroke-linecap="round"/>
+<circle cx="91" cy="192" r="18" fill="#e69a8b" opacity=".6"/><circle cx="229" cy="192" r="18" fill="#e69a8b" opacity=".6"/>
+<path d="M84 242 Q160 218 236 242 L224 310 H96Z" fill="#4f7887" stroke="#4c392f" stroke-width="7"/><path d="M115 225 Q160 242 205 225" fill="none" stroke="#f0d5aa" stroke-width="13"/>
+</svg>

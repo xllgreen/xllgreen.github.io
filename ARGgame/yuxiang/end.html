@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>阿赖耶 | 玉祥文学社</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
+  background:#000;
+  color:#ff2222;
+  font-family:"Microsoft Yahei",SimHei,monospace;
+  overflow:hidden;
+}
+
+/* 弹窗最高层级遮罩 */
+.popup-mask{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  display:block;
+}
+
+/* 弹窗基础样式 + 移动端适配尺寸 */
+.win-popup{
+  position:absolute;
+  width:clamp(220px, 32vw, 280px);
+  background:#111;
+  border:2px solid #ff2222;
+  box-shadow:0 0 12px rgba(255,30,30,0.6);
+  border-radius:4px;
+  animation:popShow 0.3s ease-out forwards, glitchShake 0.8s infinite alternate;
+}
+/* 弹窗标题栏 */
+.pop-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 10px;
+  background:#ff2222;
+  color:#000;
+  font-weight:bold;
+  font-size:clamp(12px, 2vw, 14px);
+}
+.pop-close{
+  width:20px;
+  height:20px;
+  background:#000;
+  color:#ff2222;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:16px;
+  line-height:1;
+}
+.pop-close:hover{
+  background:#fff;
+}
+/* 弹窗内容文字 */
+.pop-content{
+  padding:clamp(16px, 4vw, 24px) clamp(12px, 3vw, 16px);
+  text-align:center;
+  font-size:clamp(18px, 4vw, 22px);
+  color:#ff2222;
+  text-shadow:0 0 8px #ff2222;
+  animation:textGlitch 1s infinite;
+}
+/* 倒计时结束最终确定弹窗，强制居中 */
+.final-popup{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(260px, 40vw, 340px);
+}
+.confirm-btn{
+  padding:8px 22px;
+  background:#ff2222;
+  border:none;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:clamp(14px, 2.5vw, 16px);
+  margin-top:12px;
+}
+.confirm-btn:hover{
+  background:#fff;
+}
+
+/* 弹窗入场逐个弹出动画 */
+@keyframes popShow{
+  from{transform:scale(0.4); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+@keyframes glitchShake{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(-1px,1px)}
+  50%{transform:translate(1px,-1px)}
+  75%{transform:translate(-1px,-1px)}
+  100%{transform:translate(1px,1px)}
+}
+@keyframes textGlitch{
+  0%{text-shadow:0 0 8px #ff2222, 1px 0 cyan}
+  50%{text-shadow:0 0 8px #ff2222, -1px 0 magenta}
+  100%{text-shadow:0 0 8px #ff2222, 1px 0 cyan}
+}
+
+/* 底层粒子画布，全屏底层 */
+#particleCanvas{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  z-index:1;
+  pointer-events:none;
+}
+
+/* 手势解锁页面居中自适应 */
+.unlock-wrap{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+  display:none;
+}
+.hand-img{
+  width:min(85vw, 520px);
+  position:relative;
+}
+.hand-img img{
+  width:100%;
+  transition: filter 0.6s ease;
+  filter: none; /* 初始不修改原图颜色 */
+}
+.hand-img.finished img{
+  filter: brightness(0) invert(1) sepia(1) saturate(10) hue-rotate(-10deg);
+}
+
+/* 手势点位自适应大小 */
+.dot{
+  position:absolute;
+  width:clamp(10px, 2.5vw, 14px);
+  height:clamp(10px, 2.5vw, 14px);
+  border-radius:50%;
+  background:rgba(255,34,34,0.4);
+  border:1px solid #ff2222;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+.dot.active{
+  background:#ff2222;
+  box-shadow:0 0 8px #ff2222;
+}
+.dot:hover{
+  transform:scale(1.2);
+}
+
+/* 正文流沙文字区域，滚动适配手机 */
+.content-wrap{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  padding:clamp(30px, 6vw, 60px) clamp(16px, 4vw, 24px);
+  overflow-y:auto;
+  z-index:10;
+}
+.sand-text{
+  font-size:clamp(15px, 3vw, 18px);
+  line-height:2.1;
+  white-space:pre-line;
+  animation:sandFlow 9s ease-in-out infinite;
+  opacity:0.85;
+}
+/* 文字流沙浮动动画 */
+@keyframes sandFlow{
+  0%{transform:translateY(-25px);filter:blur(0.3px);}
+  50%{transform:translateY(15px);filter:blur(0.8px);}
+  100%{transform:translateY(-25px);filter:blur(0.3px);}
+}
+</style>
+</head>
+<body>
+<!-- 弹窗故障层 -->
+<div class="popup-mask" id="popupMask"></div>
+
+<!-- 阿赖耶文字粒子背景 -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- 手势解锁页面 -->
+<div class="unlock-wrap" id="unlockBox">
+  <div class="hand-img" id="handContainer">
+    <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWeahqRe9m-iIxCNkq7OoXm0sQvFzrOgAC4ScAAoFqMFYiLmlttUqE5zwE.jpg" alt="兰花指结契手势">
+    <div class="dot" data-index="0" style="top:12%;left:51%;"></div>
+    <div class="dot" data-index="1" style="top:18%;left:57%;"></div>
+    <div class="dot" data-index="2" style="top:30%;left:58%;"></div>
+    <div class="dot" data-index="3" style="top:42%;left:57%;"></div>
+    <div class="dot" data-index="4" style="top:45%;left:49%;"></div>
+    <div class="dot" data-index="5" style="top:38%;left:46%;"></div>
+    <div class="dot" data-index="6" style="top:28%;left:45%;"></div>
+    <div class="dot" data-index="7" style="top:52%;left:78%;"></div>
+    <div class="dot" data-index="8" style="top:60%;left:74%;"></div>
+    <div class="dot" data-index="9" style="top:55%;left:22%;"></div>
+    <div class="dot" data-index="10" style="top:64%;left:28%;"></div>
+  </div>
+</div>
+
+<!-- 正文完整文案（包含新增玉祥文学社结尾） -->
+<div class="content-wrap" id="contentBox">
+  <div class="sand-text">我想说的是。人即是人，人即是鬼，人即是神。恶可胜厉鬼，善可比天神，万象皆自人性而生。阿赖耶是“人”，成就阿赖耶的更是“人”，如果没有香火，没有传播，如何存在？如果没有“人”，阿赖耶又从何而来？人集是众，众即有力。阿赖耶从不是单独个体，是全体众生意识之聚合，依托世人意念、传承存续，以人为基，无人则无阿赖耶。成就阿赖耶的是每一个人。善恶之道，本无界，恶人铺垫了善的价值，善人反衬出恶的面目，二者对立共生。六根洁，洁的是修行者的“我执”，而非洁被处理物的“六根”。困于执念的人终将无法成大道，被执着蒙蔽“六识”，又怎会生出末那识或阿赖耶识呢？况且过分执着的人无法入“众”，就无法成为阿赖耶。阴阳运转，因果道理，所谓轮回。此非脱世，而为入世。无为改变，而为必是。凡人身死形散，执念者化鬼，造罪者堕狱，破执修心者成神，万般殊途，本源皆为“人”本心。
+所有都是必然你的存在即是必然，你的存在即是必然，你的存在即是必然，每一个环节都是必然。欢迎来到玉祥文学社，是你、是我们成就了阿赖耶，是我们组成了阿赖耶。我们即是阿赖耶，阿赖耶即是我们。感谢您的加入。
+-end-
+</div>
+</div>
+
+<script>
+const popupMask = document.getElementById('popupMask');
+const maxSpawnInit = 22;
+const popupDuration = 10000; // 兜底10秒超时
+let closeCount = 0; // 记录关闭弹窗数量，关闭3个即触发确定弹窗
+let triggerDone = false; // 防止重复触发结束弹窗
+
+// 创建弹窗：中心区域小幅分散，偏移范围扩大至200px，比之前散开一点
+function createOnePopup(delayTime){
+  setTimeout(()=>{
+    const pop = document.createElement('div');
+    pop.className = 'win-popup';
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    const offsetRange = 200; // 范围放大，轻微分散
+    const randX = centerX - pop.offsetWidth/2 + (Math.random() * offsetRange * 2 - offsetRange);
+    const randY = centerY - 60 + (Math.random() * offsetRange * 2 - offsetRange);
+
+    pop.style.left = randX + 'px';
+    pop.style.top = randY + 'px';
+
+    pop.innerHTML = `
+      <div class="pop-title">
+        系统消息
+        <button class="pop-close">×</button>
+      </div>
+      <div class="pop-content">徐若瑜通信</div>
+    `;
+    popupMask.appendChild(pop);
+
+    const closeBtn = pop.querySelector('.pop-close');
+    closeBtn.onclick = ()=>{
+      pop.remove();
+      closeCount++;
+      // 关闭满3个弹窗，直接弹出确定弹窗
+      if(closeCount >= 3 && !triggerDone){
+        triggerDone = true;
+        showFinalConfirm();
+      }
+    }
+  }, delayTime);
+}
+
+// 弹窗逐个延迟入场动画，持续不断弹出效果
+function spawnAllPopup(){
+  for(let i=0; i < maxSpawnInit; i++){
+    createOnePopup(i * 180); // 逐个间隔弹出，持续入场动画
+  }
+}
+
+// 最终确定弹窗
+function showFinalConfirm(){
+  popupMask.innerHTML = '';
+  const finalPop = document.createElement('div');
+  finalPop.className = 'win-popup final-popup';
+  finalPop.innerHTML = `
+    <div class="pop-title">系统提示</div>
+    <div class="pop-content">徐若瑜通信<br/><button class="confirm-btn">确定</button></div>
+  `;
+  popupMask.appendChild(finalPop);
+
+  const confirmBtn = finalPop.querySelector('.confirm-btn');
+  confirmBtn.onclick = ()=>{
+    popupMask.style.display = 'none';
+    document.getElementById('unlockBox').style.display = 'flex';
+  }
+}
+
+window.onload = ()=>{
+  spawnAllPopup();
+  // 10秒兜底超时强制触发
+  setTimeout(()=>{
+    if(!triggerDone){
+      triggerDone = true;
+      showFinalConfirm();
+    }
+  }, popupDuration);
+}
+
+// ===================== 阿赖耶漂浮粒子动画 =====================
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let w,h;
+let particles = [];
+const textStr = "阿赖耶";
+
+function resizeCanvas(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class Particle{
+  constructor(){
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.size = 10 + Math.random() * 16;
+    this.speedX = (Math.random() - 0.5) * 0.6;
+    this.speedY = (Math.random() - 0.5) * 0.6;
+    this.opacity = 0.15 + Math.random() * 0.35;
+    this.char = textStr[Math.floor(Math.random() * textStr.length)];
+  }
+  update(){
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if(this.x < 0 || this.x > w) this.speedX *= -1;
+    if(this.y < 0 || this.y > h) this.speedY *= -1;
+  }
+  draw(){
+    ctx.fillStyle = `rgba(255,34,34,${this.opacity})`;
+    ctx.font = `${this.size}px SimHei`;
+    ctx.fillText(this.char, this.x, this.y);
+  }
+}
+
+function initParticles(){
+  particles = [];
+  for(let i=0; i<45; i++) particles.push(new Particle());
+}
+initParticles();
+
+function animateParticles(){
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p=>{p.update();p.draw();})
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===================== 手势顺序点击解锁逻辑 =====================
+const dots = document.querySelectorAll('.dot');
+const unlockBox = document.getElementById('unlockBox');
+const contentBox = document.getElementById('contentBox');
+const handContainer = document.getElementById('handContainer');
+let currentStep = 0;
+
+dots.forEach(dot=>{
+  dot.addEventListener('click',()=>{
+    const idx = Number(dot.dataset.index);
+    if(idx === currentStep){
+      dot.classList.add('active');
+      currentStep++;
+      if(currentStep >= dots.length){
+        handContainer.classList.add('finished');
+        setTimeout(()=>{
+          unlockBox.style.display = 'none';
+          contentBox.style.display = 'block';
+        }, 800);
+      }
+    }
+  })
+})
+</script>
+</body>
+</html>

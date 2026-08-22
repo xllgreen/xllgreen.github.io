@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>盲区存档Ⅰ - 夜航论坛</title>
+  <link rel="stylesheet" href="/src/pages/blindzone/entry1.css" />
+</head>
+<body>
+
+<div id="container">
+  <!-- ====== 顶栏 ====== -->
+  <div id="header">
+    <div id="header-top">
+      <div id="logo">
+        <span class="logo-night">夜航</span>
+        <span class="logo-sub">—— 飞行员的夜航手册</span>
+      </div>
+      <div id="header-search">
+        <input type="text" id="search-input" placeholder="搜索帖子、用户…" maxlength="50" />
+        <button id="search-btn">搜索</button>
+        <div id="search-panel" class="hidden">
+          <div id="search-history">
+            <div class="panel-header">搜索历史 <a href="#" id="clear-history">清空</a></div>
+            <ul id="history-list"></ul>
+          </div>
+          <div id="search-result" class="hidden">
+            <div class="panel-header">搜索结果</div>
+            <div id="result-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li><a href="/board/tower">塔台</a></li>
+        <li><a href="/board/lounge">候机室</a></li>
+        <li><a href="/board/deepspace">深空</a></li>
+        <li class="current"><a href="/board/blindzone">盲区</a></li>
+      </ul>
+      <span id="nav-welcome">欢迎您，<strong>访客</strong></span>
+    </div>
+  </div>
+
+  <!-- ====== 面包屑 ====== -->
+  <div id="breadcrumb">
+    <a href="/board/blindzone">盲区——归档</a>
+    <span class="sep">›</span>
+    <span class="current">盲区存档Ⅰ</span>
+  </div>
+
+  <!-- ====== 标题 ====== -->
+  <div id="archive-header">
+    <h1 id="archive-title">盲区存档Ⅰ</h1>
+    <p id="archive-meta">霄汉 · 写于 2016-9-29 · 盲区入口</p>
+  </div>
+
+  <!-- ====== 正文 ====== -->
+  <div id="main-content">
+
+    <!-- 访问控制：未解锁时显示 -->
+    <div id="access-denied" class="hidden">
+      <div class="denied-box">
+        <p class="denied-icon">🔒</p>
+        <p class="denied-text">你没有权限访问此页面</p>
+        <p class="denied-hint">请先解锁盲区版块</p>
+      </div>
+    </div>
+
+    <!-- 正文内容（解锁后显示） -->
+    <div id="log-content">
+
+      <!-- 日志正文 -->
+      <div class="log-entry">
+        <p class="log-paragraph">我不知道这份记录会被谁看到。如果你正在读它，说明你已经走完了相当远的路：</p>
+
+        <p class="log-paragraph">我确认了一件事，那就是beacon_holder和正造之间存在某种关联。我查过他的注册信息，时间、IP段、注册邮箱，所有痕迹都指向同一个方向。直觉上我觉得他一定跟隼的死脱不了干系，但这些线索却不能成为证据。</p>
+
+        <p class="log-paragraph">我不想让Vega再继续牵扯进来了。原本还想着以后有机会，她能带着真相开启夜航的「 第二航次 」。但现在我改变主意了，所有关于她的记录都删干净。如果有一天这个论坛被人重新打开，她不会被卷进来。这是我唯一能做的事。</p>
+
+        <p class="log-paragraph">已经没有多少时间了。从我发现那个账号开始，论坛后台的访问日志每隔几天就会少几行，不是系统自动清理的，一定有人黑进来过。</p>
+
+        <p class="log-paragraph">我知道有人在看着，所以这个存档并没有多少东西。</p>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="log-divider">—— —— ——</div>
+
+      <!-- 极隐蔽的触发点 -->
+      <div id="hidden-trigger" title="点击探索">
+        <span id="hidden-trigger-text">· · ·</span>
+      </div>
+
+      <!-- 隐藏弹窗（仿 beacon_holder 主页样式） -->
+      <div id="secret-modal" class="hidden">
+        <div id="secret-modal-content">
+          <p id="secret-message">存档Ⅱ有另一把锁，密码还是我最爱的书，但没这么简单。从前读他的书时，我总体会不到那种惊心动魄，毕竟是二战战场上的凶险，现在我突然能感到一些了。哪怕局势再险恶，盟军还是咬牙挺过。就算手里只剩小方格纸，他们仍然要用<strong class="clue-highlight">波利比奥斯</strong>式的办法来传递情报。我也要像他一样，我们绝不能放弃。</p>
+          <p class="secret-signoff"><a href="javascript:void(0)" id="flight-path-link" class="underline-link">希望我们不会像他一样遗憾。</a></p>
+          <button id="secret-close">知道了</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====== 页脚 ====== -->
+  <div id="footer">
+    <div class="footer-links">
+      <a href="/board/tower">塔台</a> · <a href="/board/lounge">候机室</a> ·
+      <a href="/board/deepspace">深空</a> · <a href="/board/blindzone">盲区</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2014-2016 夜航. All rights reserved. 「 第三航次 」
+    </div>
+  </div>
+</div>
+
+<!-- ====== 全局页面进度标签 ====== -->
+<div id="page-counter-fixed">20/30</div>
+
+<script type="module" src="/src/pages/blindzone/entry1.ts"></script>
+</body>
+</html>

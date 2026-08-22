@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《嫁》完整故事线与玩家操作</title>
+  <style>
+    :root {
+      --ink: #e8e4dc;
+      --muted: #99978f;
+      --paper: #171817;
+      --panel: #222321;
+      --line: #3a3c38;
+      --gold: #c6a66a;
+      --red: #9f5b55;
+      --green: #7f9b82;
+      --blue: #7e929d;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+    }
+    a { color: #d6bd87; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 9vh max(6vw, 24px);
+      background:
+        linear-gradient(90deg, #111 0%, #111d 42%, #1114 75%, #111b 100%),
+        url("/paintings/xiangyangchu.png") center / cover;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-copy { max-width: 720px; }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font: 700 clamp(52px, 10vw, 112px) "Songti SC", "STSong", serif;
+      letter-spacing: .12em;
+    }
+    .hero h2 {
+      margin: 0 0 18px;
+      font: 400 clamp(20px, 3vw, 34px) "Songti SC", "STSong", serif;
+    }
+    .hero p { max-width: 620px; color: #c9c5bd; }
+    .spoiler {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 12px;
+      border: 1px solid #9f5b55aa;
+      background: #4a2926aa;
+      color: #f0cbc6;
+      font-size: 12px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 940px);
+      gap: 42px;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 42px 24px 100px;
+    }
+    nav {
+      position: sticky;
+      top: 20px;
+      align-self: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: #1c1d1b;
+    }
+    nav b { display: block; margin-bottom: 10px; color: var(--gold); }
+    nav a {
+      display: block;
+      padding: 7px 8px;
+      border-left: 2px solid transparent;
+      color: #aaa8a1;
+      font-size: 13px;
+    }
+    nav a:hover { border-left-color: var(--gold); color: #fff; text-decoration: none; }
+    main { min-width: 0; }
+    section { scroll-margin-top: 24px; }
+    .section-head {
+      margin: 76px 0 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    main > section:first-child .section-head { margin-top: 0; }
+    .section-head small {
+      color: var(--gold);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .section-head h2 {
+      margin: 5px 0 0;
+      font: 500 34px "Songti SC", "STSong", serif;
+    }
+    .summary {
+      padding: 26px;
+      border-left: 4px solid var(--gold);
+      background: var(--panel);
+      font-family: "Songti SC", "STSong", serif;
+      font-size: 18px;
+    }
+    .truth-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .truth-grid article,
+    .step,
+    .ending,
+    .note {
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+    .truth-grid h3,
+    .step h3,
+    .ending h3 { margin: 0 0 10px; }
+    .truth-grid p,
+    .step p,
+    .ending p { margin: 8px 0; color: #bbb8b0; }
+    .timeline { display: grid; gap: 16px; }
+    .step {
+      position: relative;
+      padding-left: 82px;
+    }
+    .step-num {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      color: var(--gold);
+      font: 15px Georgia, serif;
+    }
+    .route {
+      margin: 14px 0;
+      padding: 12px 14px;
+      border: 1px solid #45504a;
+      background: #18201b;
+      color: #b9c9bc;
+      font-size: 13px;
+    }
+    .route b { color: #d9e6db; }
+    ol, ul { padding-left: 22px; }
+    li { margin: 6px 0; color: #c4c1ba; }
+    code {
+      padding: 2px 6px;
+      border: 1px solid #4d4b46;
+      border-radius: 3px;
+      background: #111210;
+      color: #f0d79f;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: .92em;
+      word-break: break-all;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--gold); font-size: 12px; letter-spacing: .08em; }
+    td { color: #c6c3bc; font-size: 13px; }
+    .branch {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .ending.first { border-top: 3px solid var(--red); }
+    .ending.second { border-top: 3px solid var(--gold); }
+    .ending.third { border-top: 3px solid var(--green); }
+    .ending.hidden { border-top: 3px solid var(--blue); }
+    .ending-code {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--gold);
+      font: 11px Georgia, serif;
+      letter-spacing: .18em;
+    }
+    .warning {
+      margin: 14px 0;
+      padding: 16px;
+      border: 1px solid #765e3e;
+      background: #2c251b;
+      color: #d4c2a4;
+    }
+    .gap-list article {
+      margin-bottom: 10px;
+      padding: 15px 18px;
+      border-left: 3px solid var(--red);
+      background: #231e1d;
+    }
+    .gap-list b { color: #e1aaa4; }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .links a {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      text-align: center;
+      font-size: 13px;
+    }
+    footer {
+      padding: 30px;
+      border-top: 1px solid var(--line);
+      color: #74736e;
+      text-align: center;
+      font-size: 12px;
+    }
+    @media (max-width: 850px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { position: static; columns: 2; }
+      nav b { column-span: all; }
+      .truth-grid, .branch, .links { grid-template-columns: 1fr; }
+    }
+    @media print {
+      body { color: #222; background: #fff; }
+      .hero { min-height: 360px; }
+      nav { display: none; }
+      .layout { display: block; max-width: none; }
+      .truth-grid article, .step, .ending, .note, table { background: #fff; }
+      p, li, td { color: #333 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Narrative & Player Walkthrough</p>
+      <h1>嫁</h1>
+      <h2>全案故事线与完整推理流程</h2>
+      <p>同步当前游戏版本，汇总案件真相、证据闭环、必要操作、关键答案与结局条件。</p>
+      <span class="spoiler">完整剧透 · 仅供创作与测试</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav>
+      <b>目录</b>
+      <a href="#truth">01 故事真相</a>
+      <a href="#opening">02 开场与寄存仓</a>
+      <a href="#gupan">03 顾盼旧电脑</a>
+      <a href="#medical">04 医疗与远帆</a>
+      <a href="#identity">05 身份渗透</a>
+      <a href="#sealed">06 老司机与封存证据</a>
+      <a href="#liuhan">07 刘涵国内线</a>
+      <a href="#qzone">08 情侣空间谜题</a>
+      <a href="#hengmu">09 恒慕与警方</a>
+      <a href="#endings">10 四个结局</a>
+      <a href="#passwords">11 答案速查</a>
+    </nav>
+
+    <main>
+      <section id="truth">
+        <header class="section-head"><small>01 · Full Plot</small><h2>完整故事真相</h2></header>
+        <p class="summary">顾盼并不是为了结婚而离开沈望。她曾救助遭到药物控制的郝倩，因此被韩铎和远帆内部的犯罪链盯上。远帆利用郝倩泄露的住址、备用钥匙和聚会邀请侵害顾盼，并留下偷拍视频、转账与补偿本票。顾盼求助失败后独自调查，最终与沈望分手并回国；2025年，她又遭父母控制和拘禁，在晴川公寓非正常死亡。家属随后通过恒慕转移遗体，企图以“圆满方案”完成冥婚交易。</p>
+        <div class="note">
+          <h3>案件时间线</h3>
+          <p><b>2018年10月21日：</b>沈望与顾盼在画展确认关系。<b>2021年：</b>顾盼前往海外北港留学，两人开始十三小时时差的异地恋。</p>
+          <p><b>2022年2月14日：</b>顾盼将状态异常的郝倩带离远帆活动并送往港湾康复中心，承担治疗费用。远帆由此确认顾盼的身份及其与郝倩的关系。</p>
+          <p><b>2022年9月19日：</b>远帆以照片、视频和病历胁迫郝倩，取得顾盼的住址与备用钥匙信息，并将顾盼标记为 <code>HM-2217</code>。</p>
+          <p><b>2022年10月27日至11月2日：</b>顾盼被诱骗至所谓留学生结业聚会并遭侵害；10月28日03:57，远帆胁迫郝倩共同将她送回住处；10月30日，郝倩关联账户收到 <code>USD 12,000</code> 封口费；11月2日，组织准备了一张未兑现的两万美元补偿本票。顾盼随后保存医疗记录和调查草稿，并于11月18日与沈望分手后回国。</p>
+          <p><b>2025年11月29日：</b>被家人限制自由的顾盼向旧情侣空间留下残缺求救信息。警方随后在晴川公寓确认她死亡，并登记为非正常死亡；家属隐瞒外锁和持续拘禁情况，又经恒慕安排转移遗体。</p>
+          <p><b>2025年12月2日：</b>沈望在北港调查远帆，刘涵在临川追查顾盼现住址。两条时间线最终由医疗记录、秘密档案、QQ求救、IP节点、现场物证、恒慕方案和警方警情档案闭环。</p>
+          <p><b>北港：</b>国外城市，包含大学、医院、康复中心、远帆与B-17寄存仓。<b>临川：</b>国内城市，包含晴川公寓、恒慕与警方线。</p>
+        </div>
+        <div class="route"><b>核心推理链：</b>顾盼救助郝倩 → 远帆建立关联编号 → 住址和钥匙被泄露 → 10月27日聚会侵害 → 医疗记录、封口费与本票相互印证 → 郝倩提供远帆入口 → 老司机群与隐藏站证明系统性犯罪 → QQ残缺求救与IP节点定位晴川公寓 → 现场外锁、警情档案和恒慕转运记录证明国内拘禁、死亡与遗体交易。</div>
+      </section>
+
+      <section id="opening">
+        <header class="section-head"><small>02 · Opening</small><h2>开场：片头、刘涵消息与B-17寄存仓</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">01</span>
+            <h3>观看片头并选择游戏模式</h3>
+            <div class="route"><b>点击路径：</b>启动画面“嫁” → 点击进入 → 片头（可跳过）→ 主选单 → 开始游戏 → 通灵模式 / 真实模式</div>
+            <p>两种模式剧情相同；通灵模式额外显示便签和调查档案。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">02</span>
+            <h3>完成刘涵开场聊天</h3>
+            <div class="route"><b>点击路径：</b>沈望电脑 → 双击“微信” → 刘涵 → 连续点击底部8条回复</div>
+            <p>刘涵告诉沈望：顾盼已经回国，家里却突然传出她要结婚的消息。他建议沈望去取回两人留学时存放的旧物。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">03</span>
+            <h3>读取到期邮件</h3>
+            <div class="route"><b>点击路径：</b>双击“Outlook” → 第二封“B-17号寄存仓最终到期通知”</div>
+            <p>记录地址：<code>17 Harborfront Avenue, Seabreeze District, North Harbor</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">04</span>
+            <h3>前往海外北港寄存中心</h3>
+            <div class="route"><b>点击路径：</b>双击“地图” → 搜索“North Harbor Storage Center”“17 Harborfront Avenue”“北港寄存中心”或“临港大道17号” → 前往这里</div>
+            <p>身份核验完成后，Outlook会弹出“B-17现场物品清单.zip”。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">05</span>
+            <h3>解压现场资料并打开旧电脑</h3>
+            <div class="route"><b>点击路径：</b>新邮件 → 解压到桌面 → 文件资源管理器 → 顾盼的旧电脑</div>
+            <p>寄存仓有破损信和合照；合照背面写着“我的秘密”。旧电脑同时出现在桌面。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gupan">
+        <header class="section-head"><small>03 · GP Laptop</small><h2>顾盼旧电脑调查</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">06</span>
+            <h3>登录旧电脑</h3>
+            <div class="route"><b>线索：</b>沈望电脑 → 我的日记 → 2018年10月21日“一周年”</div>
+            <p>在顾盼登录界面输入恋爱纪念日数字：<code>20181021</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">07</span>
+            <h3>检查个人文件</h3>
+            <div class="route"><b>点击路径：</b>顾盼电脑 → 双击“个人文件”</div>
+            <ul>
+              <li><b>暂停学业申请：</b>学校 <code>Northbridge University</code>，学号 <code>2021-VC-GP-047913</code>。</li>
+              <li><b>医院回执：</b><code>GU PAN / GP-221109 / 20221109 / 7304</code>。</li>
+              <li><b>康复账单：</b>只提供病历号 <code>HQ-220214</code>、服务日期 <code>20220214</code> 和访问码 <code>0214</code>；患者姓名需要另行确认。</li>
+              <li><b>HM-2217：</b>汇款单号 <code>SD-8845127</code>，备注 <code>HM-2217</code>。</li>
+              <li><b>向阳处：</b>顾盼的油画。</li>
+            </ul>
+          </article>
+          <article class="step">
+            <span class="step-num">08</span>
+            <h3>恢复微博未发送草稿</h3>
+            <div class="route"><b>点击路径：</b>顾盼电脑 → 双击“微博” → 在新标签页打开顾盼微博 → 页面底部加密草稿</div>
+            <p>密码为共同暗号的完整拼音：<code>zuowangyoupan</code>。</p>
+            <p>草稿记录了酒吧后的记忆断片、住址泄露、医院筛查和求助失败。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">09</span>
+            <h3>顾盼微信暂时无法解密</h3>
+            <div class="route"><b>点击路径：</b>顾盼电脑 → 双击“微信”</div>
+            <p>密码需要在刘涵线取得顾盼手机后发现。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="medical">
+        <header class="section-head"><small>04 · Medical</small><h2>医疗记录、真实身份与远帆转介</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">10</span>
+            <h3>查询顾盼医疗记录</h3>
+            <div class="route"><b>点击路径：</b>返回沈望电脑 → Microsoft Edge → 搜索 <code>North Harbor Medical Center</code> → 打开 MyNorthHarbor Medical Network</div>
+            <div class="route"><b>输入：</b><code>GU PAN</code> / <code>GP-221109</code> / <code>20221109</code> / <code>7304</code></div>
+            <p>记录证明顾盼曾失去意识、记忆缺失并接受相关取证。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">11</span>
+            <h3>从H.Q.微博确认真实姓名</h3>
+            <div class="route"><b>点击路径：</b>顾盼微博 → 可能认识的人 → H.Q. → H_Qian17的微博 → 个人资料</div>
+            <p>在个人资料中第一次确认H.Q.的真实姓名是“郝倩”；她2022年12月的微博同时公开了新微信号 <code>hqian_17</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">12</span>
+            <h3>查询郝倩康复记录</h3>
+            <div class="route"><b>点击路径：</b>确认真实姓名后，返回 MyNorthHarbor 门户 → 查询另一份记录</div>
+            <div class="route"><b>输入：</b><code>HAO QIAN</code> / <code>HQ-220214</code> / <code>20220214</code> / <code>0214</code></div>
+            <p>确认顾盼支付费用，转介机构为远帆，编号 <code>YF-HQ-0214</code>。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="identity">
+        <header class="section-head"><small>05 · Infiltration</small><h2>先对峙郝倩，再进入远帆</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">13</span>
+            <h3>对质郝倩</h3>
+            <div class="route"><b>点击路径：</b>沈望微信 → 添加 → 搜索 <code>hqian_17</code> → 添加到通讯录 → 好友验证 → 郝倩</div>
+            <p>好友验证填 <code>郝倩</code>，事件日期填 <code>2022/10/27</code>。选择“H.Q.的医疗记录”才能推进并取得远帆官网；误选破损信可撤回重选。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">14</span>
+            <h3>搜索韩铎的微信</h3>
+            <div class="route"><b>点击路径：</b>郝倩发送远帆链接 → 远帆主页 → 顶部“联系我们”（新标签页） → 取得微信号 <code>hd_047_abroad</code> → 沈望微信 → 添加 → 搜索</div>
+            <p>好友验证填写 <code>Northbridge University</code> 或“北桥大学”。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">15</span>
+            <h3>推导Northbridge学生身份</h3>
+            <div class="route"><b>点击路径：</b>大学官网 → Academics → Campus Directory → Student Hub</div>
+            <p>激活资料：<code>Lin Chuan / 2025 / DS / 2025-DS-LC-184206</code>，然后原样提交给韩铎。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">16</span>
+            <h3>取得远帆网站权限</h3>
+            <div class="route"><b>点击路径：</b>沈望微信 → 韩铎 → 填写身份 → 发送身份资料</div>
+            <p>核验成功后解锁成员公告、活动日历、新生指南和站内搜索；随后查看韩铎朋友圈。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="sealed">
+        <header class="section-head"><small>06 · Sealed Evidence</small><h2>老司机群与系统性侵害证据</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">17</span>
+            <h3>从韩铎的九宫格解出群入口</h3>
+            <div class="route"><b>点击路径：</b>沈望微信 → 韩铎 → 个人资料 → 朋友圈 → 置顶九宫格 → 查看图片与评论区</div>
+            <p>按评论顺序 <code>2 7 5 1 9 4 8 3 6</code> 读取九张图字母，得到微信入口 <code>olddriver</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">18</span>
+            <h3>加入老司机夜航群</h3>
+            <p>远帆“成员公告”中四个异常字组成入群口令 <code>孤独帅哥</code>。</p>
+            <div class="route"><b>点击路径：</b>远帆官网 → “成员公告” → 阅读规范；再到沈望微信 → 添加 → 搜索 <code>olddriver</code> → 申请加入 → 输入“孤独帅哥”</div>
+          </article>
+          <article class="step">
+            <span class="step-num">19</span>
+            <h3>从活动日历推导网站搜索词</h3>
+            <p>右键远帆“新生指南”下载黑话词典。再按活动编号1—11读取日历圈选日期：</p>
+            <div class="route"><code>23 / 15 / 13 / 1 / 14 / 4 / 18 / 9 / 22 / 5 / 18</code> → <code>WOMANDRIVER</code></div>
+          </article>
+          <article class="step">
+            <span class="step-num">20</span>
+            <h3>进入隐藏网站并查询郝倩、顾盼</h3>
+            <div class="route"><b>点击路径：</b>返回远帆官网 → 站内搜索 → 输入 <code>womandriver</code></div>
+            <div class="route"><b>隐藏站操作：</b>搜索转介编号 <code>YF-HQ-0214</code>；再搜索汇款单编号 <code>SD-8845127</code> 或备注编号 <code>HM-2217</code>。打开结果后会自动记录。</div>
+            <p>两组记录都打开后返回郝倩微信。以封口费、住址导出、偷拍视频备份和聚会经过完成第二轮对质。</p>
+            <div class="route"><b>结局分支：</b>郝倩表示害怕丈夫知道过去时，选择“否”进入第一结局《终于放手》；选择“是”则从“他今天不会知道”继续劝说。郝倩正式答应出庭后，刘涵会发来顾盼失联的新消息，由此进入第二结局《明日黄花》。在郝倩正式答应以前，可以返回这一选择。</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="liuhan">
+        <header class="section-head"><small>07 · Liu Han</small><h2>刘涵国内线：住址、手机与分手信</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">21</span>
+            <h3>完成第二结局《明日黄花》</h3>
+            <div class="route"><b>点击路径：</b>郝倩同意出庭 → 查看刘涵的新消息 → 完成两次回复 → 前往临川</div>
+            <p>刘涵只告诉沈望“事情不对”，要求他尽快返回临川；沈望表示自己已经查清海外发生的一切，并搭乘当晚的红眼航班。原有的刘涵聊天不会被替换，新消息会追加在寄存仓与北港聊天之后。</p>
+            <p>沈望连夜返回临川，与刘涵一同赶到顾盼最后出现的住处。门外已经拉起警方警戒线，刘涵只能确认顾盼已经失联，可能已经不在了。此时两人尚不知道公寓的真实名称与完整地址，仍需从顾盼留下的线索中继续确认。</p>
+            <div class="route"><b>继续调查：</b>第二结局结束后，玩家可以改为扮演刘涵，故事回到“三天前”——顾盼失联前的三天。沈望与刘涵此前的聊天记录都会保留，国内调查线由此开始。</div>
+          </article>
+          <article class="step">
+            <span class="step-num">22</span>
+            <h3>取得匿名留言与IP节点一览</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → QQ → 空间 → “您的好友有新动态” → 在新标签页打开左望右盼情侣空间 → 在封存页输入日期 <code>2022/11/18</code> → 留言板</div>
+            <p>记录匿名留言的时间、残缺地址和异常IP <code>183.214.76.119</code>。可通过陈放聊天中的公安官网链接进入，也可在刘涵电脑的浏览器搜索“临川公安 档案查询”。公共网络节点页面会直接展示完整列表，不提供输入框、结果提示或目标行高亮；警情档案需要后续取得档案编号才能查询。</p>
+            <div class="route"><b>比对方法：</b>在18条节点记录中找到相同IP与时段，得到 <code>青槐区长宁路117号 · 晴川公寓</code>；再与留言中的“……4栋 一单...402室”合并。</div>
+          </article>
+          <article class="step">
+            <span class="step-num">23</span>
+            <h3>前往晴川公寓并接收现场资料</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 临川地图 → 搜索 <code>青槐区长宁路117号</code> 或 <code>晴川公寓</code> → 前往这里 → 补充 <code>4栋 / 1单元 / 402室</code></div>
+            <p>抵达后，现场已经拉起警方警戒线。刘涵的Outlook会收到《晴川公寓现场资料.zip》；打开邮件并点击“解压到桌面”，桌面会出现“晴川公寓_现场证据”文件夹。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">24</span>
+            <h3>检查现场证据包</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 晴川公寓_现场证据</div>
+            <p>现场证据仅有6项：<code>03_室内全景.jpg</code>、<code>04_碎屏旧手机.jpg</code>、<code>05_请柬.jpg</code>、<code>06_婚庆合同.jpg</code>、<code>07_现场物品登记表.pdf</code>、<code>旧手机备忘录.jpg</code>。</p>
+            <p>室内全景呈现经过整理的房间与悬挂点附近的浅色长围巾；旧手机备忘录以图片形式显示，图中提供顾盼旧电脑微信密码 <code>gp2022wxpass</code>，页面不附加解释文字。</p>
+            <p>现场物品登记表提供“下载附件”按钮。下载得到的TXT内容为空，真正线索是文件名 <code>LC-QH-1129-402.txt</code>；去掉扩展名后得到档案编号 <code>LC-QH-1129-402</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">25</span>
+            <h3>解锁顾盼微信</h3>
+            <div class="route"><b>点击路径：</b>返回顾盼电脑 → 微信 → 输入 <code>gp2022wxpass</code> → 解锁聊天记录 → 查看本机记录</div>
+            <p>重点查看“一家人”“郝倩”“沈望”三组记录，确认家人拒绝帮助、住址泄露和分手信时间。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="qzone">
+        <header class="section-head"><small>08 · Qzone</small><h2>情侣空间日期验证</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">26</span>
+            <h3>进入情侣空间</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → QQ → 左侧“QQ空间” → “您的好友有新动态” → 查看动态 → 在新标签页打开左望右盼情侣空间</div>
+            <p>进入后首先看到空间封存页。根据沈望日记中收到分手消息的日期，输入 <code>2022/11/18</code>；解锁后页面只保留“日常”和“留言板”两个栏目。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">27</span>
+            <h3>读取残缺求救信息</h3>
+            <p>留言只保留“临川……17号”“……4栋 一单...402室”，异常记录中保留完整IP。玩家必须将两部分与警方网站的节点一览交叉比对，网页不会直接恢复完整地址。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="hengmu">
+        <header class="section-head"><small>09 · HengMu</small><h2>婚约、恒慕与警方记录</h2></header>
+        <div class="timeline">
+          <article class="step">
+            <span class="step-num">28</span>
+            <h3>调查旧请柬</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 晴川公寓_现场证据 → <code>05_请柬.jpg</code></div>
+            <p>婚宴原定2025年12月6日。请柬不再承载合同编号；打开请柬大图后，只有鼠标悬停在二维码区域时才会出现醒目的手型和金色高亮，点击二维码直接在新标签页打开恒慕官网，不显示额外入口说明。合同编号需要从下一份婚庆合同中取得。</p>
+            <p>此时可在刘涵电脑的浏览器搜索“邵明辉”。公开资料显示，他是邵氏实业创始人独子，2019年事故后长期接受康复照护；旧采访形容他性格安静，喜欢园艺和老电影，近年的生活与婚姻安排多由父母代为处理。这条结果让他与顾盼形成另一种被家庭代替做决定的对照，而非单纯的反派新郎。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">29</span>
+            <h3>解开恒慕服务码</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 晴川公寓_现场证据 → <code>06_婚庆合同.jpg</code></div>
+            <p>合同抬头给出编号 <code>HM-W-251206-117</code>；底部窄封边的摩斯电码 <code>-.-- --.- --... ...-- ----- ....- .---- ----.</code> 解为 <code>YQ-730419</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">30</span>
+            <h3>打开圆满方案</h3>
+            <div class="route"><b>点击路径：</b>恒慕官网 → 服务进度查询</div>
+            <ul>
+              <li>合同号：<code>HM-W-251206-117</code></li>
+              <li>服务码：<code>YQ-730419</code> 或 <code>YQ730419</code>，横杠不参与校验</li>
+            </ul>
+            <p>记录证明顾家把顾盼遗体转往永安仪式园，并参与60万元结算。恒慕记录从警方于11:42完成现场处置、家属接管后开始：11:48提交变更，12:06在晴川公寓接收，12:26安排转运。</p>
+            <p>点击页面底部的“添加企业微信”即可直接添加并打开机构对话，不需要搜索或输入账号。联系人以“恒慕特别委托组”的机构名义出现，不对应韩铎或其他具体员工。此时可以进入聊天；取得两份警方档案后即可开始套取请柬，不需要先阅读顾盼未寄出的信。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">31</span>
+            <h3>取得警情档案编号</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 浏览器 → 搜索“临川公安 档案查询” → 警情档案检索</div>
+            <p>公共网络节点可以直接查看。打开现场物品登记表并下载附件，从空TXT的文件名取得档案编号 <code>LC-QH-1129-402</code>。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">32</span>
+            <h3>查询警方档案</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 浏览器 → 搜索“临川公安 档案查询” → 警情档案检索</div>
+            <p>在“警情档案检索”中直接输入 <code>LC-QH-1129-402</code>，系统返回两份关联记录，不再要求姓名、地址或日期二次查询。</p>
+            <p>正确编号会直接返回两份档案，不检查现场编号附件、顾盼微信或恒慕方案的取得状态。两份档案证明非法拘禁、顾盼死亡及恒慕接走遗体。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">33</span>
+            <h3>恢复顾盼未寄出的信</h3>
+            <div class="route"><b>点击路径：</b>顾盼的旧电脑 → 接收“文件恢复”弹窗 → 回收站 → <code>希望_未寄出.txt</code></div>
+            <p>信补全了顾盼回国后遭家人控制、仍在回望沈望，以及她无法说出口的告别。读到信末后点击“进入隐藏结局 · 镜花水月”，直接进入隐藏结局。隐藏结局只能从这封信的底部进入，与恒慕请柬分支互不锁定。</p>
+          </article>
+          <article class="step">
+            <span class="step-num">34</span>
+            <h3>伪装家属，套取电子请柬</h3>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 微信 → 恒慕特别委托组</div>
+            <p>查看完两份关联警情记录后，刘涵不暴露警方资料，而是冒充女方家属，使用方案编号 <code>HM-W-251206-117</code> 和服务码 <code>YQ-730419</code> 完成验证。</p>
+            <ol>
+              <li>仪式性质选择“特殊流程”；选择“正常婚礼”会中断验证，可撤回后重选。</li>
+              <li>输入八位服务码，横杠与字母大小写不参与校验。</li>
+              <li>请求补发电子请柬，并确认“我会独自前往”；声称携带朋友会被拒绝，可撤回后重选。</li>
+            </ol>
+            <p>验证通过后，企业账号发来阴婚请柬。请柬以“新郎 梁昱 / 新娘 顾盼”为主体，并写明仪式地点为“永安仪式园 · 东区静安厅”。刘涵全程没有暴露真实调查目的。</p>
+            <p>取得请柬后，可在刘涵电脑的浏览器搜索“梁昱”。一则2025年11月27日的死亡简讯显示：梁昱是梁家独子，生前经营小型摄影工作室，寡言、喜欢拍摄旧建筑；他于11月26日因突发心源性疾病去世，终年31岁，生前未婚，治丧事宜同样由永安仪式园承办。</p>
+            <div class="route"><b>点击路径：</b>刘涵电脑 → 临川地图 → 搜索“永安仪式园” → 勇闯永安仪式园 - 第三结局</div>
+            <p>只有收到请柬后，“永安仪式园”才会成为可前往的任务地点。点击地图结果中的“勇闯永安仪式园 - 第三结局”，进入第三结局《嫁》；完成后按钮变为“重返永安仪式园 - 第三结局”，玩家可以随时重看。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="endings">
+        <header class="section-head"><small>10 · Endings</small><h2>调查接力与四个结局</h2></header>
+        <div class="warning">
+          <b>当前结局结构：</b>郝倩是否出庭产生第一、第二结局；第二结局同时把叙事视角交给刘涵，开启国内倒叙调查线。刘涵线完成后，从恒慕套取请柬通往第三结局，顾盼未寄出的信则独立通往隐藏结局。四个结局均可在同一存档中依次体验。
+        </div>
+        <div class="branch">
+          <article class="ending first">
+            <small class="ending-code">01/04</small>
+            <h3>第一结局：终于放手</h3>
+            <p><b>触发：</b>取得郝倩与顾盼的两组隐藏记录后，返回郝倩微信完成第二轮对质。郝倩害怕丈夫知道过去时，选择不再要求她出庭。</p>
+            <p><b>故事：</b>沈望意识到，继续追问也许会再次撕开郝倩的伤口，也可能惊扰顾盼看似已经开始的新生活。他停止追问，却没有选择原谅。</p>
+            <p><b>结局：</b>沈望保留所有证据，决定以自己的方式追究伤害过顾盼的人。那张2018年的合影，成为两人曾经相爱、也曾真心相信未来的最后证明。玩家仍可返回出庭选择，进入另一条分支。</p>
+          </article>
+          <article class="ending second">
+            <small class="ending-code">02/04</small>
+            <h3>第二结局：明日黄花</h3>
+            <p><b>触发：</b>继续要求郝倩出庭并取得她的承诺后，完成刘涵发来的新对话，选择返回临川。</p>
+            <p><b>故事：</b>沈望搭乘当晚的航班返回临川。刘涵带他来到顾盼最后出现的住处，门外却只剩警方警戒线。沈望原本想与顾盼告别，最终连该把花放在哪里都不知道。</p>
+            <p><b>结局后：</b>玩家可以选择扮演刘涵，回到顾盼失联前的三天，继续追查她回国后的经历。沈望与刘涵此前的聊天记录都会保留。</p>
+          </article>
+          <article class="ending third">
+            <small class="ending-code">03/04 · REGULAR ENDING</small>
+            <h3>第三结局：嫁</h3>
+            <p><b>触发：</b>刘涵取得两份警方档案后，冒充女方家属，通过圆满方案编号、服务码和两轮身份问答，从“恒慕特别委托组”套取写有“永安仪式园”的阴婚请柬；玩家在临川地图搜索该地点，并点击“勇闯永安仪式园 - 第三结局”。</p>
+            <p><b>故事：</b>顾盼回国后，父母收走她的护照和手机，将她反锁在住处并强迫她接受婚姻安排。她死后，家属与恒慕仍以“圆满方案”为名，将遗体送往永安仪式园，准备完成一场非法冥婚。</p>
+            <p><b>结局：</b>沈望与刘涵循着请柬赶到现场，阻止仪式并协助警方封存合同、账本、硬盘与转运记录。父母、恒慕人员及交易中间人被带离。顾盼不再是婚约中的商品或编号，而是以自己的名字重新进入案卷。</p>
+          </article>
+          <article class="ending hidden">
+            <small class="ending-code">04/04 · HIDDEN ENDING</small>
+            <h3>隐藏结局：镜花水月</h3>
+            <p><b>触发：</b>完成刘涵调查线后，返回顾盼旧电脑，在回收站中读完 <code>希望_未寄出.txt</code>，只能从信件末尾的“进入隐藏结局 · 镜花水月”进入；不要求先取得恒慕请柬。</p>
+            <p><b>故事：</b>在一个没有发生过的未来里，沈望于2022年意外抵达北港，在顾盼最需要他的时候走到她身边。两人重新开始，共同填满未走完的地图，经历争吵、和解与平凡生活，最终在海岸线上交换戒指。</p>
+            <p><b>结局：</b>现实没有因此改变，但在这场无人能够夺走的梦里，顾盼拥有选择人生的自由，也与沈望拥有了完整的一生。左望，右盼，而右边的人终于回过了头。</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="passwords">
+        <header class="section-head"><small>All Answers</small><h2>密码与线索来源速查</h2></header>
+        <table>
+          <thead><tr><th>位置</th><th>答案</th><th>发现来源</th></tr></thead>
+          <tbody>
+            <tr><td>顾盼旧电脑登录</td><td><code>20181021</code></td><td>沈望日记中的恋爱纪念日</td></tr>
+            <tr><td>顾盼微博草稿</td><td><code>zuowangyoupan</code></td><td>“左望右盼”的完整拼音</td></tr>
+            <tr><td>顾盼微信备份</td><td><code>gp2022wxpass</code></td><td>现场证据包中的《旧手机备忘录.jpg》</td></tr>
+            <tr><td>顾盼医疗记录</td><td><code>GU PAN</code><br><code>GP-221109</code><br><code>20221109</code><br><code>7304</code></td><td>顾盼旧电脑个人文件中的医院回执单</td></tr>
+            <tr><td>郝倩医疗记录</td><td><code>HAO QIAN</code><br><code>HQ-220214</code><br><code>20220214</code><br><code>0214</code></td><td>顾盼旧电脑个人文件中的港湾康复账单</td></tr>
+            <tr><td>情侣空间留言板</td><td><code>2022/11/18</code></td><td>沈望日记中的分手消息日期</td></tr>
+            <tr><td>郝倩微信</td><td><code>hqian_17</code></td><td>郝倩微博2022年12月动态</td></tr>
+            <tr><td>郝倩好友验证</td><td><code>郝倩</code></td><td>郝倩微博个人资料中的真实姓名</td></tr>
+            <tr><td>郝倩对质日期</td><td><code>2022/10/27</code></td><td>顾盼微博草稿中记录的聚会日期</td></tr>
+            <tr><td>韩铎微信</td><td><code>hd_047_abroad</code></td><td>远帆官网“联系我们”页面</td></tr>
+            <tr><td>韩铎好友验证</td><td><code>Northbridge University</code><br>或 <code>北桥大学</code></td><td>顾盼暂停学业申请 / 大学官网</td></tr>
+            <tr><td>虚构学生身份</td><td><code>Lin Chuan</code><br><code>2025</code><br><code>DS</code><br><code>2025-DS-LC-184206</code></td><td>大学专业目录、公开名单、待处理交换生档案</td></tr>
+            <tr><td>远帆网站权限</td><td>韩铎核验后自动开通</td><td>提交玩家新激活的学生账号资料</td></tr>
+            <tr><td>老司机群入口</td><td><code>olddriver</code></td><td>韩铎朋友圈置顶九宫格</td></tr>
+            <tr><td>老司机群验证</td><td><code>孤独帅哥</code></td><td>远帆“成员公告”的异常排版</td></tr>
+            <tr><td>司机黑话</td><td>新车 / 路书 / 路线 / 验货 / 开车 / 加油 / 发动机熄火 / 记录仪 / 原片 / 车库 / 修理费</td><td>右键远帆“新生指南”下载文档</td></tr>
+            <tr><td>秘密档案网站入口</td><td><code>womandriver</code></td><td>活动日历圈选日期按A1Z26换算；填入远帆站内搜索框</td></tr>
+            <tr><td>郝倩秘密档案查询</td><td><code>YF-HQ-0214</code></td><td>港湾康复项目摘要中的远帆转介编号</td></tr>
+            <tr><td>顾盼秘密档案查询</td><td><code>SD-8845127</code><br>或 <code>HM-2217</code></td><td>未兑现本票的编号或备注；两种写法均可查询</td></tr>
+            <tr><td>恒慕服务查询</td><td><code>HM-W-251206-117</code><br><code>YQ-730419</code></td><td>婚介合同抬头 / 合同底部摩斯封边</td></tr>
+            <tr><td>警方网络节点查询</td><td><code>183.214.76.119</code></td><td>情侣空间匿名留言的异常IP</td></tr>
+            <tr><td>晴川公寓门牌</td><td><code>4栋</code><br><code>1单元</code><br><code>402室</code></td><td>匿名求救留言中的残缺楼栋、单元与房号</td></tr>
+            <tr><td>警情档案检索</td><td><code>LC-QH-1129-402</code></td><td>现场物品登记表下载的空TXT文件名</td></tr>
+            <tr><td>旧文字原型迁移密码<br><small>非正式主线</small></td><td><code>1021</code></td><td>旧版“左望右盼”交替阅读谜题；当前正式主线不需要使用</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>《嫁》内部创作与测试文档 · 当前三电脑版本</footer>
+</body>
+</html>

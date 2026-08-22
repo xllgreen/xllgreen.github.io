@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>妈妈</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/apps/wechat.html">‹</a>
+      <span class="title">妈妈</span>
+    </div>
+    <div class="window-body">
+      <div class="chat-window">
+        <div class="chat-header">妈妈</div>
+        <div class="chat-messages">
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            晚晚，吃饭了吗
+          </div>
+          <div class="msg from-me">吃了妈</div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            <span class="key-info">6月14号答辩是吧？妈记得清清楚楚</span>
+          </div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            那天也是妈的生日 妈一辈子都忘不了
+          </div>
+          <div class="msg from-me">嗯，我知道</div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            答辩那天妈给你炖汤，你最爱喝的那个
+          </div>
+          <div class="msg from-me">好</div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            晚晚最近怎么不回消息了
+          </div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            你陈老师打电话说你走公派联培去瑞士了？妈怎么不知道这事
+          </div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            晚晚你回妈一个
+          </div>
+          <div class="msg from-them">
+            <div class="sender">妈妈</div>
+            你到底去哪了
+          </div>
+          <div style="text-align:center;font-size:11px;color:#bbb;padding:8px 0;">5月20日 之后无新消息</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    if (!Game.unlocked('WECHAT_LOGIN')) location.href = '/ARGgame/her-old-laptop/puzzles/login-wechat.html';
+    setTimeout(() => Game.mark('MOM_CHAT'), 1200);
+    Game.renderProgress();
+  </script>
+</body>
+</html>

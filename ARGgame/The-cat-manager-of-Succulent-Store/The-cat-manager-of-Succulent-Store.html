@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5ead5">
+  <meta name="description" content="轻治愈网页解谜养成游戏《窗台多肉铺的猫店长》：接手外婆留下的多肉铺，与三花猫店长一起整理铺面、接待客人、修复花房，并拼回二十八年的记忆。">
+  <title>窗台多肉铺的猫店长</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="paywall.css">
+</head>
+<body>
+  <a class="skip-link" href="#mainPanel">跳到当前任务</a>
+  <div class="warm-particles" id="warmParticles" aria-hidden="true"></div>
+  <div class="meteor-layer" id="meteorLayer" aria-hidden="true"></div>
+
+  <main class="shell">
+    <section class="start-screen" id="startScreen" aria-labelledby="gameTitle">
+      <div class="cover-card">
+        <div class="cover-shade"></div>
+        <div class="start-menu-panel">
+          <p class="eyebrow">轻治愈 · 网页解谜 · 猫咪养成</p>
+          <h1 id="gameTitle">窗台多肉铺的猫店长</h1>
+          <p class="cover-copy">辞掉疲惫的工作后，你回到外婆空置三年的多肉铺。玻璃门后，一只左耳缺角的三花猫正守着没有寄出的便签。</p>
+          <div class="start-actions">
+            <button class="primary" id="startBtn">开始新游戏</button>
+            <button class="ghost" id="continueBtn">继续上次进度</button>
+            <button class="ghost" id="settingsBtnStart">设置与存档</button>
+            <button class="support-soft" id="supportBtnStart">自愿支持作者 ¥1</button>
+          </div>
+          <p class="notice">全部章节与提示永久免费 · 自动本地存档 · 支持键盘操作</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="game-screen hidden" id="gameScreen" aria-live="polite">
+      <header class="topbar">
+        <div class="title-group">
+          <p class="eyebrow">暖色窗台 · 多肉铺营业中</p>
+          <h2 id="chapterTitle">空铺初遇</h2>
+          <p class="save-status" id="saveStatus" role="status">进度已载入</p>
+        </div>
+        <div class="top-actions" aria-label="游戏工具">
+          <span class="badge" id="chapterBadge">第 1 / 12 章</span>
+          <button class="small hint-button" id="hintBtn">免费提示</button>
+          <button class="small" id="manualSaveBtn">手动存档</button>
+          <button class="small" id="settingsBtn">设置</button>
+          <button class="small support-soft" id="supportBtn">自愿支持 ¥1</button>
+          <button class="small danger-soft" id="resetBtn">重新开店</button>
+        </div>
+      </header>
+
+      <section class="focus-bar" aria-label="当前目标">
+        <span>当前目标</span>
+        <strong id="focusText">先让躲在花盆后的三花猫愿意靠近。</strong>
+        <div class="step-dots" id="stepDots" aria-label="章节步骤"></div>
+      </section>
+
+      <nav class="chapter-roadmap" id="chapterRoadmap" aria-label="章节路线"></nav>
+
+      <div class="layout">
+        <section class="scene-card">
+          <div class="scene-stage" id="sceneStage" aria-label="多肉铺场景"></div>
+          <div class="main-panel" id="mainPanel" tabindex="-1"></div>
+        </section>
+
+        <aside class="side">
+          <section class="cat-card">
+            <div class="side-heading">
+              <h3>猫店长状态</h3>
+              <span class="affection" id="affectionText">亲近度 0</span>
+            </div>
+            <button class="cat-button" id="catButton" aria-label="摸摸猫店长">
+              <img src="cat_sprite.png" alt="左耳缺角的三花猫店长">
+            </button>
+            <div class="cat-name" id="catName">左耳缺角的小三花</div>
+            <div class="cat-stage" id="catStage">炸毛怕生，但会偷偷观察你</div>
+            <div class="cat-actions" aria-label="照顾猫店长">
+              <button data-care="pet">摸摸</button>
+              <button data-care="feed">喂猫粮</button>
+              <button data-care="groom">梳毛</button>
+              <button data-care="play">逗猫棒</button>
+            </div>
+          </section>
+
+          <details class="side-box" open>
+            <summary>营业进度 <span id="progressText">0%</span></summary>
+            <div class="meter" aria-hidden="true"><i id="progressBar"></i></div>
+            <div class="mini-grid">
+              <div>植物图鉴 <b id="plantCount">0 / 32</b></div>
+              <div>成就 <b id="achievementCount">0 / 24</b></div>
+              <div>彩蛋 <b id="eggCount">0 / 12</b></div>
+            </div>
+            <button class="text-button" id="collectionBtn">查看图鉴与成就</button>
+          </details>
+
+          <details class="side-box">
+            <summary>外婆便签与剧情记录</summary>
+            <div class="log" id="storyLog"></div>
+          </details>
+
+          <details class="side-box">
+            <summary>道具与线索</summary>
+            <div class="inventory" id="inventory"></div>
+          </details>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="关闭弹窗">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast-host" id="toastHost" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="paywall.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

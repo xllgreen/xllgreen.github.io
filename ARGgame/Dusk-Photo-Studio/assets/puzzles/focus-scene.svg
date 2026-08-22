@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">景深校准卡</title>
+  <desc id="desc">远处街灯、中景柜台相机和近处花瓶沿画面纵深排列</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#293c55"/><stop offset=".62" stop-color="#7f675d"/><stop offset="1" stop-color="#241e1d"/></linearGradient>
+    <linearGradient id="road" x2="0" y2="1"><stop stop-color="#5f5146"/><stop offset="1" stop-color="#221b19"/></linearGradient>
+    <radialGradient id="lamp"><stop stop-color="#fff3b0"/><stop offset=".25" stop-color="#f2bd64"/><stop offset="1" stop-color="#e29a3c" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="1.8"/></filter>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <path d="M0 335L415 262l545 43v235H0z" fill="url(#road)"/>
+  <path d="M405 274L520 540H260z" fill="#8c7560" opacity=".22"/>
+  <g opacity=".82" fill="#262425">
+    <path d="M0 185h180v202H0zM180 235h92v126h-92z"/>
+    <path d="M690 183h270v190H690zM620 228h70v128h-70z"/>
+  </g>
+  <g filter="url(#soft)">
+    <rect x="202" y="201" width="7" height="126" rx="3" fill="#1b2026"/>
+    <path d="M180 208h51l-9-16h-33z" fill="#25292d"/>
+    <circle cx="205" cy="211" r="66" fill="url(#lamp)"/>
+    <circle cx="205" cy="211" r="11" fill="#ffe79a"/>
+  </g>
+  <g transform="translate(390 240)">
+    <ellipse cx="105" cy="175" rx="135" ry="28" fill="#151213" opacity=".45"/>
+    <rect x="10" y="72" width="206" height="112" rx="14" fill="#241c18" stroke="#c29b69" stroke-width="7"/>
+    <rect x="34" y="90" width="158" height="74" rx="9" fill="#6c5b4b"/>
+    <circle cx="113" cy="127" r="47" fill="#17191d" stroke="#d0b17d" stroke-width="10"/>
+    <circle cx="113" cy="127" r="25" fill="#263b4d" stroke="#090b0e" stroke-width="9"/>
+    <circle cx="102" cy="116" r="8" fill="#a9d5df" opacity=".8"/>
+    <rect x="56" y="46" width="112" height="34" rx="8" fill="#332722" stroke="#a98861" stroke-width="5"/>
+    <rect x="78" y="25" width="64" height="26" rx="7" fill="#403129"/>
+  </g>
+  <g transform="translate(735 300)">
+    <ellipse cx="105" cy="206" rx="116" ry="24" fill="#100e0e" opacity=".48"/>
+    <path d="M48 99h116l-16 118H64z" fill="#b47d55" stroke="#e1b57f" stroke-width="6"/>
+    <path d="M65 99h82" stroke="#edd1a7" stroke-width="8"/>
+    <g fill="#d9a45e" stroke="#775640" stroke-width="4">
+      <path d="M100 102C57 54 82 20 119 78c9-60 48-63 35 6 34-38 65-5 21 28z"/>
+      <path d="M85 116C41 89 44 54 94 91z"/>
+    </g>
+    <g fill="#d88977"><circle cx="74" cy="83" r="15"/><circle cx="147" cy="69" r="17"/><circle cx="172" cy="105" r="13"/></g>
+  </g>
+  <g fill="#f3dfb5" opacity=".42"><circle cx="119" cy="302" r="2"/><circle cx="302" cy="180" r="2"/><circle cx="573" cy="215" r="2"/><circle cx="801" cy="181" r="2"/></g>
+  <rect x="12" y="12" width="936" height="516" rx="18" fill="none" stroke="#e4c58d" stroke-opacity=".5" stroke-width="8"/>
+</svg>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>星河调查笔记</title>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/notebook.css">
+</head>
+<body class="notebook-page">
+  <header class="notebook-header">
+    <div>
+      <p>PERSONAL CASE NOTES · LJ/GP</p>
+      <h1>星河调查笔记</h1>
+    </div>
+    <nav aria-label="调查记录操作">
+      <a href="/ARGgame/galaxy-park-arg/park/index.html">返回星河乐园</a>
+      <button type="button" data-reset-records>清空记录</button>
+    </nav>
+  </header>
+  <main class="notebook-main">
+    <section class="notebook-summary" aria-labelledby="notebook-summary-title">
+      <div>
+        <p class="notebook-label">CURRENT STATUS</p>
+        <h2 id="notebook-summary-title">现在查到哪里了</h2>
+      </div>
+      <div class="notebook-progress-copy"><strong data-solved-count>0</strong><span> 条已解决</span></div>
+      <div class="notebook-progress-track" aria-hidden="true"><span data-progress-bar></span></div>
+      <p data-progress-message>尚未形成调查记录。</p>
+      <div class="notebook-direction">
+        <span class="notebook-direction-label">卡住了吗？</span>
+        <button type="button" data-direction-hint>给我一点提示</button>
+        <p data-direction-result aria-live="polite" hidden></p>
+      </div>
+    </section>
+
+    <div class="notebook-columns">
+      <section aria-labelledby="case-list-title">
+        <div class="notebook-section-heading">
+          <p>OPEN QUESTIONS</p>
+          <h2 id="case-list-title">正在调查</h2>
+        </div>
+        <div class="case-list" data-case-list></div>
+      </section>
+
+      <aside aria-labelledby="evidence-list-title">
+        <div class="notebook-section-heading">
+          <p>COLLECTED RECORDS</p>
+          <h2 id="evidence-list-title">已经找到的证据</h2>
+        </div>
+        <ol class="evidence-list" data-evidence-list></ol>
+      </aside>
+    </div>
+  </main>
+  <script src="assets/js/notebook.js?v=20260801-2"></script>
+</body>
+</html>

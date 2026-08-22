@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山河谍影 · 第三幕 · 宪兵司令部 · 地下档案室</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1410;color:#c8b89a;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow-y:auto;min-height:100vh;padding-bottom:80px}
+
+/* 民国旧纸质感 */
+.paper-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#1a1410 0%,#1e1612 30%,#161210 100%)}
+.paper-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(160,140,110,0.02) 3px,rgba(160,140,110,0.02) 6px);pointer-events:none}
+
+/* 昏暗灯光 */
+.desk-light{position:fixed;top:-10%;left:50%;transform:translateX(-50%);width:50%;height:40%;background:radial-gradient(ellipse,rgba(200,170,120,0.06) 0%,transparent 70%);pointer-events:none;z-index:1}
+
+.container{position:relative;z-index:10;width:92%;max-width:900px;margin:0 auto;padding:30px 0 40px;display:flex;flex-direction:column;align-items:center}
+
+/* 场景标题 */
+.scene-header{text-align:center;margin-bottom:10px}
+.scene-chapter{font-size:12px;color:#6a5a40;letter-spacing:6px;margin-bottom:6px}
+.scene-title{font-size:30px;letter-spacing:10px;color:#c8a868;text-shadow:0 2px 10px rgba(200,168,104,0.3);font-weight:bold}
+.scene-location{font-size:11px;color:#6a5a40;letter-spacing:4px;margin-top:4px}
+
+/* 场景描述 */
+.scene-desc{color:#a09080;font-size:13px;line-height:2.2;margin:15px 0 25px;letter-spacing:1px;text-align:left;max-width:750px;text-indent:2em}
+
+/* 进度指示器 */
+.progress-bar{width:100%;max-width:750px;margin:0 auto 15px;display:flex;gap:4px;align-items:center}
+.progress-dot{width:10px;height:10px;border:1px solid #4a4030;border-radius:50%;background:transparent;transition:all 0.3s}
+.progress-dot.filled{background:#8b4040;border-color:#8b4040}
+.progress-line{flex:1;height:1px;background:#4a4030}
+.progress-label{font-size:10px;color:#6a5a40;letter-spacing:2px;white-space:nowrap;margin-left:8px}
+
+/* 物品网格 */
+.items-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0;max-width:750px;width:100%}
+.item-card{background:rgba(40,35,25,0.8);border:1px solid #4a4030;padding:20px 10px;text-align:center;cursor:pointer;transition:all 0.3s;border-radius:4px;position:relative}
+.item-card:hover{border-color:#8a7a5a;background:rgba(50,45,30,0.9);box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.item-icon{font-size:30px;margin-bottom:6px;display:block}
+.item-name{font-size:12px;color:#a09070;letter-spacing:2px}
+.item-status{font-size:10px;color:#6a5a40;margin-top:4px;letter-spacing:1px}
+.item-card.checked .item-status{color:#8a7a5a}
+.item-card.important::after{content:"●";position:absolute;top:6px;right:8px;color:#8b4040;font-size:8px}
+
+/* 弹窗 */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(20,16,12,0.92);display:none;justify-content:center;align-items:center;padding:20px}
+.overlay.show{display:flex}
+.modal{background:linear-gradient(180deg,#f5f0e5,#ebe5d5);color:#3a3020;max-width:660px;width:100%;padding:35px;border-radius:2px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.5);border:1px solid #c8b898;max-height:82vh;overflow-y:auto}
+.modal-close{position:absolute;top:10px;right:14px;color:#8a7a5a;font-size:20px;cursor:pointer;background:none;border:none;font-family:inherit}
+.modal-close:hover{color:#5a3a2a}
+.modal-title{font-size:17px;color:#2a2010;letter-spacing:5px;margin-bottom:18px;text-align:center;border-bottom:1px solid #d8c8a8;padding-bottom:12px}
+.modal-content{font-size:13.5px;color:#4a3a25;line-height:2.1;letter-spacing:1px}
+.modal-content .highlight{color:#8b2020;font-weight:bold}
+.modal-content .clue{color:#2a5080;font-weight:bold}
+.modal-content .note{color:#8a7a5a;font-size:12px;font-style:italic;margin-top:10px;padding:8px;border-left:2px solid #d8c8a8}
+.modal-content .clickable{color:#2a5080;cursor:pointer;border-bottom:1px dashed #2a5080;transition:color 0.2s}
+.modal-content .clickable:hover{color:#4a70a0}
+.modal-content .useful-header{background:#f0ead8;padding:8px 12px;margin:12px 0;border-left:3px solid #8b2020;font-size:12px;color:#8b2020;letter-spacing:2px}
+
+/* 信件样式 */
+.letter-content{background:#faf6ec;border:1px solid #d8c8a8;padding:20px;margin:10px 0;line-height:2.2;font-size:13px}
+.letter-content .bold-clue{color:#8b2020;font-weight:bold;font-size:14px}
+.letter-signature{text-align:right;margin-top:15px;color:#4a3a25;font-style:italic}
+
+/* 档案文件夹样式 */
+.file-tabs{display:flex;gap:6px;margin:15px 0;flex-wrap:wrap}
+.file-tab{padding:6px 14px;background:#ece8d8;border:1px solid #c8c0a8;color:#4a3a25;font-family:inherit;font-size:11.5px;cursor:pointer;border-radius:2px;transition:all 0.2s;letter-spacing:2px}
+.file-tab:hover{background:#e0d8c0}
+.file-tab.active{background:#d0c8b0;border-color:#8a7a5a;color:#2a2010;font-weight:bold}
+.file-content-area{min-height:80px}
+
+/* 档案文件内部 */
+.file-document{background:#faf8f0;border:1px solid #d8c8a8;padding:18px;margin:10px 0;font-size:13px;line-height:2.1;color:#3a3020}
+.file-document .stamp{display:inline-block;border:2px solid #8b2020;padding:2px 8px;color:#8b2020;font-size:11px;letter-spacing:2px;transform:rotate(-5deg);margin:8px 0}
+.file-document .classified{background:#8b2020;color:#fff;padding:3px 12px;font-size:11px;letter-spacing:3px;display:inline-block;margin:8px 0}
+
+/* 保险箱面板 */
+.safe-panel{background:linear-gradient(180deg,#2a2520,#1e1a16);border:2px solid #5a4a30;border-radius:8px;padding:30px;text-align:center;margin:15px 0}
+.safe-door{width:180px;height:200px;background:linear-gradient(135deg,#3a3530,#4a4540);border:3px solid #6a5a40;border-radius:4px;margin:15px auto;position:relative;box-shadow:inset 0 0 30px rgba(0,0,0,0.5)}
+.safe-handle{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:16px;height:50px;background:#8a7a5a;border-radius:3px}
+.safe-lock{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;border-radius:50%;border:3px solid #8a7a5a;background:#2a2520}
+.safe-lock-text{color:#6a5a40;font-size:11px;letter-spacing:2px;margin-top:25px}
+.safe-input-area{margin-top:15px}
+.safe-hint{font-size:12px;color:#8a7a5a;margin-bottom:12px;line-height:1.8;letter-spacing:1px}
+.safe-code-row{display:flex;gap:8px;justify-content:center;margin-bottom:15px}
+.safe-digit{width:48px;height:52px;background:rgba(250,248,240,0.95);border:2px solid #8a7a5a;color:#2a2010;font-size:22px;text-align:center;font-family:inherit;border-radius:2px;outline:none;transition:border-color 0.3s;text-transform:uppercase}
+.safe-digit:focus{border-color:#c8a868;box-shadow:0 0 10px rgba(200,168,104,0.3)}
+.safe-btn{display:block;margin:0 auto;padding:8px 28px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:13px;letter-spacing:4px;cursor:pointer;border-radius:4px;transition:all 0.3s}
+.safe-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+.safe-error{color:#8b4040;font-size:12px;text-align:center;height:20px;letter-spacing:2px;margin-top:8px}
+.safe-success{color:#2a6040;font-size:13px;text-align:center;margin-top:8px;line-height:1.8;letter-spacing:1px}
+
+/* 收音机面板 */
+.radio-panel{background:linear-gradient(180deg,#3a3530,#2a2520);border:2px solid #5a4a30;border-radius:8px;padding:25px;text-align:center;margin:15px 0}
+.radio-dial{width:220px;height:100px;background:#1a1510;border:2px solid #4a3a20;border-radius:4px;margin:15px auto;position:relative;overflow:hidden}
+.radio-dial::before{content:"";position:absolute;top:10px;left:10%;right:10%;height:1px;background:repeating-linear-gradient(90deg,#4a3a20 0px,#4a3a20 3px,transparent 3px,transparent 6px)}
+.radio-freq{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:#c8a868;font-size:16px;letter-spacing:3px;font-weight:bold}
+.radio-noise{font-size:11px;color:#8a7a5a;margin:10px 0;line-height:1.8}
+.radio-btn{padding:8px 20px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:12px;letter-spacing:3px;cursor:pointer;border-radius:4px;transition:all 0.3s;margin:5px}
+.radio-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+.radio-input-area{margin-top:15px;padding:15px;background:rgba(200,168,104,0.08);border:1px solid #5a4a30;border-radius:4px}
+.radio-label{font-size:12px;color:#c8a868;letter-spacing:3px;margin-bottom:10px}
+.radio-text-input{width:200px;padding:10px 15px;background:rgba(250,248,240,0.95);border:2px solid #8a7a5a;color:#2a2010;font-size:16px;text-align:center;font-family:inherit;border-radius:2px;outline:none;letter-spacing:6px;transition:border-color 0.3s}
+.radio-text-input:focus{border-color:#c8a868;box-shadow:0 0 10px rgba(200,168,104,0.3)}
+.radio-submit-btn{display:block;margin:12px auto 0;padding:8px 28px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:13px;letter-spacing:4px;cursor:pointer;border-radius:4px;transition:all 0.3s}
+.radio-submit-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+.radio-error{color:#8b4040;font-size:12px;text-align:center;height:20px;letter-spacing:2px;margin-top:8px}
+
+/* 广播文字样式 */
+.broadcast-text{background:#1a1510;border:1px solid #4a3a20;padding:20px;margin:15px 0;font-size:13px;line-height:2.2;color:#a09080;letter-spacing:1px}
+.broadcast-text .signal{color:#c8a868;font-weight:bold}
+.broadcast-text .important-msg{color:#c8a868;font-size:14px;font-weight:bold;display:block;margin-top:8px}
+
+/* 真相揭示区域 */
+.truth-section{max-width:750px;width:100%;margin:30px 0}
+.truth-title{text-align:center;font-size:22px;letter-spacing:8px;color:#c8a868;margin-bottom:25px;text-shadow:0 2px 10px rgba(200,168,104,0.3);display:none}
+.truth-title.show{display:block;animation:fadeIn 1.5s}
+.truth-block{background:rgba(40,35,25,0.8);border:1px solid #4a4030;padding:20px 25px;margin:12px 0;border-radius:4px;opacity:0;transition:opacity 1.2s ease;border-left:3px solid #8b2020}
+.truth-block.show{opacity:1}
+.truth-block .truth-num{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;background:#8b2020;color:#f5f0e5;font-size:11px;border-radius:50%;margin-right:10px;vertical-align:middle}
+.truth-block p{font-size:13.5px;line-height:2.2;color:#c8b89a;letter-spacing:1px}
+.truth-block .truth-highlight{color:#c8a868;font-weight:bold}
+
+/* 最终按钮 */
+.final-btn-area{text-align:center;margin:25px 0;display:none}
+.final-btn-area.show{display:block;animation:fadeIn 1.5s}
+.truth-btn{padding:12px 40px;background:rgba(139,32,32,0.2);border:2px solid #8b4040;color:#c8a868;font-family:inherit;font-size:15px;letter-spacing:6px;cursor:pointer;border-radius:4px;transition:all 0.4s}
+.truth-btn:hover{background:rgba(139,32,32,0.4);border-color:#c8a868;box-shadow:0 0 20px rgba(139,64,64,0.3)}
+
+/* 结尾叙述 */
+.ending-narrative{max-width:700px;width:100%;margin:20px auto;padding:30px;background:rgba(40,35,25,0.9);border:2px solid #8b4040;display:none}
+.ending-narrative.show{display:block;animation:fadeIn 2s}
+.ending-narrative p{font-size:14px;line-height:2.3;color:#c8b89a;letter-spacing:1px;text-indent:2em;margin-bottom:12px}
+.ending-narrative .narrative-highlight{color:#c8a868;font-weight:bold;font-size:15px}
+
+/* 导航 */
+.nav-links{display:flex;gap:15px;justify-content:center;margin-top:20px}
+.nav-link{padding:10px 25px;background:rgba(40,35,25,0.6);border:1px solid #4a4030;color:#a09070;font-family:inherit;font-size:13px;letter-spacing:3px;cursor:pointer;text-decoration:none;transition:all 0.3s;border-radius:4px;display:none}
+.nav-link.show{display:block;animation:fadeIn 1s}
+.nav-link:hover{border-color:#8a7a5a;color:#c8a868}
+.nav-link.important-link{border-color:#8b4040;color:#c8a868}
+.nav-link.important-link:hover{border-color:#c8a868;background:rgba(139,64,64,0.15)}
+
+/* 线索栏 */
+.clue-bar{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(20,16,12,0.92);border-top:1px solid #4a4030;padding:8px 20px;display:flex;align-items:center;gap:15px}
+.clue-bar-label{font-size:11px;color:#6a5a40;letter-spacing:2px;white-space:nowrap}
+.clue-bar-items{display:flex;gap:8px;overflow-x:auto;flex:1}
+.clue-tag{padding:4px 12px;background:rgba(200,168,104,0.1);border:1px solid #4a4030;color:#8a7a5a;font-size:11px;letter-spacing:1px;white-space:nowrap;border-radius:2px;cursor:pointer;transition:all 0.2s}
+.clue-tag:hover{border-color:#8a7a5a;color:#c8a868}
+.clue-tag.found{border-color:#8b4040;color:#c8a868;background:rgba(139,64,64,0.1)}
+
+/* Toast */
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(30,25,18,0.95);border:1px solid #5a4a30;padding:18px 40px;color:#c8a868;font-size:14px;letter-spacing:4px;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.5s;border-radius:4px;box-shadow:0 4px 25px rgba(0,0,0,0.4)}
+.toast.show{opacity:1}
+
+/* 动画 */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 5px rgba(200,168,104,0.2)}50%{box-shadow:0 0 20px rgba(200,168,104,0.4)}}
+
+.scene-enter{animation:fadeIn 1.5s ease}
+
+/* 滚动条美化 */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:rgba(200,180,140,0.1)}
+::-webkit-scrollbar-thumb{background:rgba(200,168,104,0.3);border-radius:2px}
+
+/* 响应式 */
+@media(max-width:600px){
+.items-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+.item-card{padding:15px 6px}
+.item-icon{font-size:24px}
+.item-name{font-size:11px}
+.modal{padding:20px;max-height:85vh}
+.scene-title{font-size:22px;letter-spacing:6px}
+.safe-code-row{gap:4px}
+.safe-digit{width:40px;height:44px;font-size:18px}
+.file-tabs{gap:4px}
+.file-tab{padding:4px 10px;font-size:10.5px}
+}
+</style>
+</head>
+<body>
+<div class="paper-bg"></div>
+<div class="desk-light"></div>
+
+<div class="container">
+<div class="scene-enter">
+<!-- 场景标题 -->
+<div class="scene-header">
+<p class="scene-chapter">第 三 幕</p>
+<h1 class="scene-title">宪兵司令部 · 地下档案室</h1>
+<p class="scene-location">南京 · 首都宪兵司令部 · 地下一层</p>
+</div>
+
+<!-- 进度指示 -->
+<div class="progress-bar">
+<div class="progress-dot filled"></div>
+<div class="progress-line"></div>
+<div class="progress-dot filled"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog-safe"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog-radio"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog-truth"></div>
+<div class="progress-label" id="progress-text">完成度：0%</div>
+</div>
+
+<!-- 场景描述 -->
+<p class="scene-desc">
+沈逸趁夜色潜入宪兵司令部，穿过两道岗哨，沿着阴暗的走廊来到地下档案室。铁门没有锁——像是有人故意留下的。室内弥漫着陈旧纸张和铁锈的味道，一盏昏暗的灯泡在头顶摇晃，将他的影子投射在墙壁上。铁皮档案柜排成一行，角落里放着一台老式收音机和一台密码保险箱。他知道，真相就在这里。
+</p>
+
+<!-- 物品网格 -->
+<div class="items-grid">
+<div class="item-card important" onclick="openModal('archive')">
+<span class="item-icon">📁</span>
+<span class="item-name">档案柜</span>
+<span class="item-status" id="status-archive">未查阅</span>
+</div>
+<div class="item-card important" onclick="openModal('safe')">
+<span class="item-icon">🔐</span>
+<span class="item-name">密码保险箱</span>
+<span class="item-status" id="status-safe">已锁定</span>
+</div>
+<div class="item-card important" onclick="openModal('letter')">
+<span class="item-icon">✉️</span>
+<span class="item-name">未寄出的信</span>
+<span class="item-status" id="status-letter">未查阅</span>
+</div>
+<div class="item-card important" onclick="openModal('radio')">
+<span class="item-icon">📻</span>
+<span class="item-name">收音机</span>
+<span class="item-status" id="status-radio">待调试</span>
+</div>
+<div class="item-card" onclick="openModal('logbook')">
+<span class="item-icon">🗂️</span>
+<span class="item-name">值班日志</span>
+<span class="item-status" id="status-logbook">未查阅</span>
+</div>
+</div>
+
+<!-- 真相揭示区域 -->
+<div class="truth-section" id="truth-section">
+<h2 class="truth-title" id="truth-title">真 相 揭 示</h2>
+
+<div class="truth-block" id="truth-1">
+<p><span class="truth-num">一</span> 匿名委托人就是 <span class="truth-highlight">陈望舒</span>——他并非被逮捕的请愿学者，而是故意暴露身份，以"被捕"为名深入宪兵司令部内部获取情报。那封匿名信，是他从牢房中秘密传递出去的。</p>
+</div>
+
+<div class="truth-block" id="truth-2">
+<p><span class="truth-num">二</span> 五名学者 <span class="truth-highlight">没有失踪，更没有死亡</span>——陈望舒通过地下渠道将他们全部秘密转移至安全地点。他们的"失踪"，实际上是陈望舒精心策划的保护行动。</p>
+</div>
+
+<div class="truth-block" id="truth-3">
+<p><span class="truth-num">三</span> 李书恒实验室的"爆炸"是一次 <span class="truth-highlight">掩护行动</span>——他故意引爆实验室，销毁所有研究资料和实验数据，防止"天工合金"的配方落入日本人手中。爆炸当天，李书恒本人早已安全撤离。</p>
+</div>
+
+<div class="truth-block" id="truth-4">
+<p><span class="truth-num">四</span> "天工合金" <span class="truth-highlight">确实存在</span>——它是一种能大幅提升武器性能的特殊合金材料，日本特务机关"梅机关"为此策划了整个绑架阴谋。一旦成功，将改变战争走向。</p>
+</div>
+
+<div class="truth-block" id="truth-5">
+<p><span class="truth-num">五</span> 张鹤年 <span class="truth-highlight">没有死</span>——他是另一名情报员，代号"H.W.S."，负责在外围策应。墨香阁收音机1050kHz的信号就是他发出的，那是他与后方的联络频道。他在城外设有一处秘密电台站。</p>
+</div>
+
+<div class="truth-block" id="truth-6">
+<p><span class="truth-num">六</span> 方掌柜——也就是方先生——是 <span class="truth-highlight">金陵地下交通站的负责人</span>。墨香阁旧书坊是地下党的重要据点，所有撤离行动都经由那里协调。方掌柜冒着生命危险，掩护了这一切。</p>
+</div>
+</div>
+
+<!-- 最终按钮 -->
+<div class="final-btn-area" id="final-btn-area">
+<button class="truth-btn" onclick="showFullTruth()">真 相 已 明</button>
+</div>
+
+<!-- 结尾完整叙述 -->
+<div class="ending-narrative" id="ending-narrative">
+<p>沈逸站在昏暗的档案室中，手中攥着那封未寄出的信，久久无言。</p>
+<p>所有的拼图终于完整了。<span class="narrative-highlight">陈望舒</span>，这个他一直在寻找的"匿名委托人"，从一开始就在棋局之中。他以自身为饵，深入虎穴，用被捕为代价换来了宪兵司令部最核心的情报。</p>
+<p>那五名失踪的学者——王明远、赵德清、钱伯衡、孙志文、周启华——全部活着。他们在陈望舒的安排下，经由地下交通线秘密转移，此刻正在安全的土地上继续他们的研究。<span class="narrative-highlight">天工合金</span>的配方没有落入敌人手中，因为李书恒宁可炸毁自己毕生的心血，也不让日本人得到。</p>
+<p>张鹤年的"死讯"是伪造的。他在城外的秘密电台里，一遍又一遍地向延安发送着情报。方掌柜的墨香阁里，每一个书架后面都藏着一段不为人知的故事。</p>
+<p>沈逸深吸一口气，将信件折好放入怀中。他知道，自己的使命还没有结束。这份情报必须安全送出去——<span class="narrative-highlight">"天工计划"的全貌、梅机关的部署、以及所有同志的安全。</span></p>
+<p>但此刻，他终于可以松一口气了。那些他以为已经牺牲的同志们，都在。那些他以为已经断裂的线索，原来从一开始就紧紧相连。</p>
+<p>他走出档案室，将铁门轻轻带上。夜色依旧深沉，但他心中的迷雾终于散去。</p>
+</div>
+
+<!-- 导航 -->
+<div class="nav-links">
+<a href="ending.html" class="nav-link important-link" id="endingLink">前往最终抉择 →</a>
+</div>
+</div>
+</div>
+
+<!-- 线索栏 -->
+<div class="clue-bar">
+<span class="clue-bar-label">已获线索：</span>
+<div class="clue-bar-items" id="clue-bar-items">
+<span class="clue-tag found">匿名信委托</span>
+<span class="clue-tag found">五名失踪学者</span>
+<span class="clue-tag found">东亚文化保护协会</span>
+<span class="clue-tag found">李书恒实验室爆炸</span>
+<span class="clue-tag found">宪兵司令部审讯</span>
+<span class="clue-tag found">陈望舒请愿</span>
+<span class="clue-tag found">1050kHz信号</span>
+</div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ==================== 弹窗1：档案柜 ==================== -->
+<div class="overlay" id="modal-archive">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">铁 皮 档 案 柜</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">档案柜的铁门吱呀一声打开，里面整齐排列着五个文件夹，每个文件夹上贴有标签。锈迹斑斑的柜体散发着陈年的铁锈气息。</p>
+<p class="useful-header">请选择文件夹查看</p>
+
+<div class="file-tabs">
+<button class="file-tab active" onclick="switchFile('A',this)">文件夹A</button>
+<button class="file-tab" onclick="switchFile('B',this)">文件夹B</button>
+<button class="file-tab" onclick="switchFile('C',this)">文件夹C</button>
+<button class="file-tab" onclick="switchFile('D',this)">文件夹D</button>
+<button class="file-tab" onclick="switchFile('E',this)">文件夹E</button>
+</div>
+
+<!-- 文件夹A：东亚文化保护协会 -->
+<div class="file-content-area" id="file-A">
+<div class="file-document">
+<span class="classified">内部档案 · 秘密</span>
+<div style="margin-top:15px">
+<p><strong>东亚文化保护协会——背景调查报告</strong></p>
+<p style="margin-top:8px">立案日期：民国二十六年一月</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p>该协会成立于民国二十五年冬，对外宣称宗旨为"保护东亚传统文化遗产，促进中日文化交流"。注册地址位于上海公共租界，在南京秦淮河畔夫子庙附近设有驻金陵办事处。</p>
+<p style="margin-top:10px">经本部情报科核实，该协会与日本驻华大使馆及日本陆军特务机关存在密切关联。其核心人物如下：</p>
+<p style="margin-top:10px"><span class="highlight">会长：山田诚一</span>（日籍，表面身份为"东亚文化学者"，实际身份为日本陆军特务机关<span class="highlight">"梅机关"少佐</span>，在华活动代号"梅花"）</p>
+<p>副会长：松本一郎（日籍，上海商会代表）</p>
+<p>中方理事：若干名（均经审查，部分与日本方面有秘密往来）</p>
+<p style="margin-top:10px"><span class="clue">【重要】梅机关为日本陆军直属特务机关，专门负责在华情报搜集与颠覆活动。山田诚一以文化协会为掩护，实际执行对华情报渗透及人才策反任务。</span></p>
+<div class="stamp">机密·阅后即焚</div>
+</div>
+</div>
+</div>
+
+<!-- 文件夹B：失踪人员 -->
+<div class="file-content-area" id="file-B" style="display:none">
+<div class="file-document">
+<span class="classified">失踪人员档案</span>
+<div style="margin-top:15px">
+<p><strong>失踪学者详细档案</strong></p>
+<p style="margin-top:8px;color:#8a7a5a;font-size:12px">以下五人于民国二十六年二月至三月间先后失踪</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p><span class="highlight">1. 王明远</span>，男，45岁，中央大学冶金系教授。专长：稀有金属提炼。</p>
+<p><span class="highlight">2. 赵德清</span>，男，52岁，兵工署高级工程师。专长：合金钢配比。</p>
+<p><span class="highlight">3. 钱伯衡</span>，男，38岁，中央研究院物理研究所研究员。专长：高温合金。</p>
+<p><span class="highlight">4. 孙志文</span>，男，41岁，金陵兵工厂技术顾问。专长：弹道金属材料。</p>
+<p><span class="highlight">5. 周启华</span>，男，49岁，北京大学化学系教授（客座）。专长：特殊合金催化剂。</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p><span class="clue">【关键发现】上述五人研究领域虽各有侧重，但全部集中在同一核心领域——冶金与特殊合金。此绝非巧合。经分析，日本特务机关极有可能试图绑架上述人员，迫使其从事某种高度机密的武器研发项目。</span></p>
+<p class="note">批注（手写）：此五人务必找到。上峰极重视。——丁</p>
+</div>
+</div>
+</div>
+
+<!-- 文件夹C：化学实验室 -->
+<div class="file-content-area" id="file-C" style="display:none">
+<div class="file-document">
+<span class="classified">缴获研究笔记（副本）</span>
+<div style="margin-top:15px">
+<p><strong>李书恒研究笔记——摘录</strong></p>
+<p style="margin-top:8px;color:#8a7a5a;font-size:12px">以下为李书恒实验室爆炸后，从废墟中残存碎片中整理的笔记副本</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p><em>民国二十六年二月十五日</em></p>
+<p>实验编号TC-037。本次试验在钨钢基体中添加了微量稀土元素镧与铈，淬火后硬度和韧性同时提升了约15%。这个方向是对的。</p>
+<p style="margin-top:10px"><em>民国二十六年二月二十八日</em></p>
+<p>我将其命名为<span class="highlight">"天工合金"</span>。以钨为骨，以钼为筋，辅以稀土催化，其性能可超越目前已知的一切枪管用钢。若用于制造新型火炮，射程和精度都将有质的飞跃。</p>
+<p style="margin-top:10px"><em>民国二十六年三月十日</em></p>
+<p>有人试图接近我的实验室助手，打听配方细节。我已提高警惕。若消息泄露，后果不堪设想。这种合金一旦被用于侵略武器，将是一场灾难。</p>
+<p style="margin-top:10px"><em>民国二十六年三月十二日</em></p>
+<p>我决定销毁所有实验数据。配方只能记在脑子里。这是我能为国家做的最后一件事。</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p class="note">注：三月十三日凌晨，李书恒实验室发生爆炸。李书恒本人下落不明，推定死亡。全部研究资料在爆炸中销毁。</p>
+</div>
+</div>
+</div>
+
+<!-- 文件夹D：请愿书 -->
+<div class="file-content-area" id="file-D" style="display:none">
+<div class="file-document">
+<span class="classified">缴获文件</span>
+<div style="margin-top:15px">
+<p><strong>请愿书原文</strong></p>
+<p style="margin-top:8px;color:#8a7a5a;font-size:12px">陈望舒致国民政府请愿书（原件）</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<div class="letter-content">
+<p>呈 国民政府教育部 钧鉴：</p>
+<p>窃以为近来金陵城中，多名学者接连失踪，人心惶惶。学界同仁对此深感忧虑，疑有非常之事发生。望钧座重视此事，速派专员调查失踪学者之下落，以安学界之心，以保国之栋梁。</p>
+<p>本人陈望舒，金陵大学文学系讲师，虽人微言轻，然家国之事，不敢不言。恳请钧座明察。</p>
+<p>此致</p>
+<p>敬礼</p>
+<p class="letter-signature">陈望舒 谨呈<br>民国二十六年三月八日</p>
+</div>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p style="margin-top:15px"><strong>宪兵司令部批注（红色手写）：</strong></p>
+<p style="margin-top:8px"><span class="highlight">"此等人不可留。三月十日执行。密令已下达。——谷"</span></p>
+<p class="note">此"谷"字经比对，为宪兵司令部某高级军官的签名字迹。</p>
+</div>
+</div>
+</div>
+
+<!-- 文件夹E：机密通信 -->
+<div class="file-content-area" id="file-E" style="display:none">
+<div class="file-document">
+<span class="classified">绝密·梅机关通信</span>
+<div style="margin-top:15px">
+<p><strong>日本商会与梅机关之间密电译文（截获）</strong></p>
+<p style="margin-top:8px;color:#8a7a5a;font-size:12px">以下密电由军统截获并破译</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+
+<p><strong>电报一</strong>（三月一日）</p>
+<p>东京→南京梅机关</p>
+<p>"代号'<span class="highlight">梅</span>'行动第二阶段启动。目标：金陵地区冶金领域专家五名。接应人代号'<span class="highlight">H.W.S.</span>'。务必于三月二十日前完成。行动代号：D。"</p>
+
+<p style="margin-top:15px"><strong>电报二</strong>（三月五日）</p>
+<p>南京梅机关→东京</p>
+<p>"第一阶段进展顺利。东亚文化保护协会已作为掩护机构运作。山田少佐已与接应人建立联络。学者陈望舒已成重点关注对象，其请愿行为可能危及行动安全。"</p>
+
+<p style="margin-top:15px"><strong>电报三</strong>（三月十五日）</p>
+<p>南京梅机关→东京</p>
+<p>"情况有变。中方似乎已察觉我方意图。陈望舒已被宪兵司令部扣押，但其请愿行为引起了社会各界关注。<span class="clue">保险箱密码为行动代号首字母+接应人代号首字母+代号'D'确认行动代号首字母</span>。紧急情报已转移至保险箱。"</p>
+
+<p style="margin-top:15px"><strong>电报四</strong>（三月二十日）</p>
+<p>东京→南京梅机关</p>
+<p>"五名目标人员全部失踪，疑已被转移。行动失败。山田少佐须立即销毁所有相关文件。保险箱内容不得泄露。启动备用方案：直接渗透研究机构。"</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗2：密码保险箱 ==================== -->
+<div class="overlay" id="modal-safe">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">密 码 保 险 箱</h2>
+<div class="modal-content">
+
+<!-- 保险箱外观 -->
+<div class="safe-panel">
+<div class="safe-door">
+<div class="safe-handle"></div>
+<div class="safe-lock">
+<div class="safe-lock-text" id="safe-lock-text">已锁定</div>
+</div>
+</div>
+
+<div class="safe-input-area" id="safe-input-area">
+<p class="safe-hint">保险箱上有一组四位字母密码锁。你需要根据搜集到的线索推断密码。</p>
+<div class="safe-code-row">
+<input class="safe-digit" type="text" maxlength="1" id="safe-d1" oninput="safeNext(this,2)" autocomplete="off">
+<input class="safe-digit" type="text" maxlength="1" id="safe-d2" oninput="safeNext(this,3)" autocomplete="off">
+<input class="safe-digit" type="text" maxlength="1" id="safe-d3" oninput="safeNext(this,4)" autocomplete="off">
+<input class="safe-digit" type="text" maxlength="1" id="safe-d4" autocomplete="off">
+</div>
+<button class="safe-btn" onclick="checkSafeCode()">解锁</button>
+<div class="safe-error" id="safe-error"></div>
+</div>
+
+<!-- 保险箱打开后的内容 -->
+<div id="safe-opened" style="display:none">
+<div class="broadcast-text" style="background:#faf6ec;border-color:#d8c8a8;color:#3a3020">
+<span class="classified">绝密计划书</span>
+<div style="margin-top:15px">
+<p><strong>天工计划——总体方案</strong></p>
+<p style="margin-top:8px;color:#8a7a5a;font-size:12px">日本陆军特务机关梅机关</p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+<p><strong>一、目标</strong></p>
+<p>绑架中国境内五名顶尖冶金专家，将其秘密转移至满洲国某研究设施，迫使其研发代号为<span class="highlight">"天工合金"</span>的特殊材料。</p>
+
+<p style="margin-top:12px"><strong>二、天工合金</strong></p>
+<p>据我方情报，中国学者李书恒已成功研发出一种新型合金，性能远超现有武器用钢。该合金代号"天工合金"，以钨-钼-稀土体系为基础，可大幅提升火炮射程与穿甲能力。若日本率先掌握此技术，将获得 decisive 的军事优势。</p>
+
+<p style="margin-top:12px"><strong>三、行动步骤</strong></p>
+<p>第一阶段：通过东亚文化保护协会建立情报网络，锁定目标人员。</p>
+<p>第二阶段：逐一绑架五名学者，经上海转运至大连。</p>
+<p>第三阶段：在大连设立秘密实验室，强迫学者进行天工合金的量产研发。</p>
+
+<p style="margin-top:12px"><strong>四、接应人</strong></p>
+<p>代号：<span class="highlight">H.W.S.</span>（身份待进一步核实，疑为中方内部人员）</p>
+<p>联络方式：收音机 1050kHz 频段，每日 22:00。</p>
+</div>
+</div>
+<div style="margin-top:12px">
+<p class="clue" style="font-size:13px">【重要线索】保险箱文件揭示了整个阴谋的全貌。接应人代号H.W.S.，联络频段1050kHz。李书恒的天工合金配方并未落入敌手——但日本人仍在寻找其他途径获取它。</p>
+<p class="clue" style="font-size:13px">【关键】保险箱文件中反复提及"天工计划"这个代号。收音机可能还藏着更多信息……</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗3：未寄出的信 ==================== -->
+<div class="overlay" id="modal-letter">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">未 寄 出 的 信</h2>
+<div class="modal-content">
+<p style="margin-bottom:15px;color:#8a7a5a;font-size:12px">在保险箱旁边的铁桌上，压着一封信。信封上写着"沈逸 亲启"，但没有贴邮票，也没有封口——这封信从未被寄出。</p>
+
+<div class="letter-content">
+<p>逸兄如晤：</p>
+<p>当你读到这封信的时候，我大概已经不在金陵了。或许你正在为我的"失踪"而四处奔走——如果是这样，那么请允许我先向你道歉。</p>
+<p>是的，<span class="bold-clue">我就是那个给你写匿名信的人</span>。从始至终，都是我。</p>
+<p>我知道你在想什么。陈望舒——一个教文学的穷书生，怎么会有胆量做这些事？我也曾这样问过自己。但后来我想明白了，国难当头，读书人也该做读书人该做的事。</p>
+<p>五名学者的"失踪"，是我一手安排的。他们此刻都很安全。我无法告诉你他们在哪里，但我可以告诉你：<span class="bold-clue">他们正在做比在日本人的实验室里更重要的事情</span>。</p>
+<p>李书恒的实验室爆炸，是我帮他筹划的。他是个真正的爱国者——宁愿炸毁毕生心血，也不让敌人得到天工合金的配方。爆炸那天晚上，他就坐在我的房间里，喝着茶，听着远处的爆炸声，一言不发。那个夜晚，我第一次看见一个大男人流下眼泪。</p>
+<p>张鹤年没有死。他是我们的人。1050kHz的信号是他发的。如果你听到了，那说明一切尚在掌控之中。</p>
+<p>方掌柜——方先生——是我们这条线上的交通站负责人。墨香阁的暗号是他教我的，那本《芥子园画谱》第三卷第七页，也是他放进去的。</p>
+<p>我留下这封信，是因为我知道总有一天你会找到这里。你是我认识的唯一一个有本事、有胆量、又有正义感的人。这些文件，这些真相——请替我交给该看到的人。</p>
+<p>关于那个保险箱，密码是四个字母。我留下的线索应该足够了：<span class="bold-clue">想想行动代号、接应人和确认代号</span>。把首字母拼在一起就是答案。</p>
+<p>收音机里还有最后一条消息。输入计划的名字，你就会知道一切。</p>
+<p>逸兄，我们或许后会无期。但请相信，在这个黑暗的时代，仍有人在暗处守护着光明。</p>
+<p>望绝笔。<br>民国二十六年三月十八日</p>
+<p class="letter-signature">—— <span class="highlight">陈望舒</span>（W.S.）</p>
+</div>
+
+<p class="note" style="margin-top:15px">信纸背面，用铅笔轻轻写着一行小字，几乎看不清："对不起，利用了你。但我不后悔。"</p>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗4：收音机 ==================== -->
+<div class="overlay" id="modal-radio">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">收 音 机</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">档案室角落里放着一台老式收音机，外壳覆着灰尘，但指示灯还微微亮着。看来最近有人使用过。</p>
+
+<div class="radio-panel">
+<div class="radio-dial">
+<div class="radio-freq" id="radio-freq-display">---- kHz</div>
+</div>
+<div class="radio-noise">
+<span id="radio-static-text">沙沙……沙沙……</span>
+</div>
+
+<div class="radio-input-area">
+<p class="radio-label">请输入代号以获取情报</p>
+<p style="font-size:11px;color:#6a5a40;margin-bottom:12px;line-height:1.8">这台收音机似乎需要输入一个特定的代号才能接收加密广播。从保险箱文件和陈望舒的信中，你推断代号可能与某个"计划"有关……</p>
+<div style="display:flex;justify-content:center;margin-bottom:12px">
+<input class="radio-text-input" type="text" id="radio-code-input" placeholder="输入代号" maxlength="4" autocomplete="off">
+</div>
+<button class="radio-submit-btn" onclick="checkRadioCode()">接 收</button>
+<div class="radio-error" id="radio-error"></div>
+</div>
+
+<!-- 广播内容 -->
+<div id="radio-broadcast" style="display:none">
+<div class="broadcast-text">
+<p class="signal">—— 滋——滋——信号已锁定 ——</p>
+<p style="margin-top:10px">"呼叫金陵。呼叫金陵。这里是<span class="signal">北方</span>。呼叫代号天工，请回复。"</p>
+<p style="margin-top:10px">"……收到。这里是天工。报告情况。"</p>
+<p style="margin-top:10px">"天工同志，经组织研究确认：<span class="important-msg">你已完成全部转移任务。五名学者及其家属共计二十三人已全部安全抵达目的地。目前状态良好，研究工作将在新的条件下继续开展。</span>"</p>
+<p style="margin-top:10px">"……明白。那陈望舒同志本人呢？"</p>
+<p style="margin-top:10px">"陈望舒同志身份尚未暴露。他将继续潜伏。宪兵司令部的情报已全部获取，具有重要战略价值。总部对他的工作给予高度评价。"</p>
+<p style="margin-top:10px">"……收到。感谢组织。天工完毕。"</p>
+<p style="margin-top:10px">"北方完毕。各电台注意，天工计划执行圆满成功。重复：<span class="important-msg">天工计划执行圆满成功。所有人员安全。</span>全体同志，再会。"</p>
+<p class="signal">—— 滋——滋——信号中断 ——</p>
+</div>
+
+<div style="margin-top:15px">
+<p class="clue" style="font-size:13px">【重大发现】延安方面确认：<span class="highlight">陈望舒是己方情报员</span>！五名学者全部安全！他们是被保护起来，而非被绑架！"天工计划"不仅是日本人的阴谋代号，也是陈望舒的行动代号——以彼之道，还施彼身。</p>
+<p class="clue" style="font-size:13px">【真相】陈望舒用"被捕"作为掩护，深入宪兵司令部获取了全部情报。张鹤年在城外策应。方掌柜负责交通线。这是一场由地下党精心策划的情报与反情报行动。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗5：值班日志 ==================== -->
+<div class="overlay" id="modal-logbook">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">值 班 日 志</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">档案桌上放着一本值班日志，翻开在最近几页。字迹潦草，有的地方有涂改痕迹。</p>
+
+<div class="file-document">
+<p><strong>宪兵司令部 · 地下档案室 · 值班日志</strong></p>
+<hr style="border-color:#d8c8a8;margin:10px 0">
+
+<p><strong>二月二十日</strong></p>
+<p>今日收到梅机关来件一批，共计七份文件，已归档至保险箱。档案室加强警戒。</p>
+
+<p style="margin-top:12px"><strong>三月一日</strong></p>
+<p>上级命令：对"东亚文化保护协会"相关人员进行全天候监视。代号'<span class="clue">M</span>'行动第一阶段启动。</p>
+
+<p style="margin-top:12px"><strong>三月八日</strong></p>
+<p>陈望舒到教育部递交请愿书，被我们的人跟踪。此人较敏感，需密切关注。谷长官批示：严密监视，必要时可采取强制措施。</p>
+
+<p style="margin-top:12px"><strong>三月十日</strong></p>
+<p>陈望舒在住所被"逮捕"，押送至审讯室。实际为保护性羁押，防止其继续活动干扰梅机关行动。此人对我们的内部部署了解颇多，令人不安。</p>
+
+<p style="margin-top:12px"><strong>三月十二日</strong></p>
+<p>李书恒实验室爆炸。经现场勘察，确认为人为引爆。李书恒下落不明。其研究资料全部销毁。损失重大——<span class="highlight">天工合金的配方已无法获取</span>。</p>
+
+<p style="margin-top:12px"><strong>三月十五日</strong></p>
+<p><span class="highlight">代号'D'行动确认。</span>发现五名目标学者全部失踪！初步判断为有组织转移。怀疑内部有内应。谷长官大发雷霆，下令彻查。</p>
+
+<p style="margin-top:12px"><strong>三月十八日</strong></p>
+<p>陈望舒从审讯室"逃脱"。追捕未果。档案室铁门发现被打开过，保险箱附近桌上有新近活动痕迹。谷长官下令封锁消息，并更换保险箱密码。</p>
+</div>
+
+<p class="note" style="margin-top:10px">日志最后一页被人撕去了。你注意到撕痕处还残留着几个字的边缘——隐约能辨认出"代号'T'……天工……"。</p>
+</div>
+</div>
+</div>
+
+<script>
+// ==================== 状态管理 ====================
+var gameState = {
+    archiveOpened: false,
+    filesOpened: [],
+    safeOpened: false,
+    safeAttempts: 0,
+    safeHintGiven: false,
+    letterRead: false,
+    radioSolved: false,
+    logbookRead: false,
+    truthRevealed: false,
+    fullTruthShown: false,
+    clues: []
+};
+
+// ==================== 弹窗管理 ====================
+function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('show');
+    // 标记已查阅
+    if (id === 'archive' && !gameState.archiveOpened) {
+        gameState.archiveOpened = true;
+        document.getElementById('status-archive').textContent = '已查阅';
+        document.getElementById('archive').querySelector('.item-card, .item-card') || null;
+        var card = document.querySelector('[onclick="openModal(\'archive\')"]');
+        if (card) card.classList.add('checked');
+    }
+    if (id === 'letter' && !gameState.letterRead) {
+        gameState.letterRead = true;
+        document.getElementById('status-letter').textContent = '已查阅';
+        var card = document.querySelector('[onclick="openModal(\'letter\')"]');
+        if (card) card.classList.add('checked');
+        addClue('陈望舒未寄出的信');
+        showToast('信件内容令人震惊……');
+    }
+    if (id === 'logbook' && !gameState.logbookRead) {
+        gameState.logbookRead = true;
+        document.getElementById('status-logbook').textContent = '已查阅';
+        var card = document.querySelector('[onclick="openModal(\'logbook\')"]');
+        if (card) card.classList.add('checked');
+        addClue('值班日志：代号D行动');
+        addClue('三月十八日陈望舒逃脱');
+    }
+    updateProgress();
+}
+
+function closeModal() {
+    var overlays = document.querySelectorAll('.overlay.show');
+    overlays.forEach(function(o) { o.classList.remove('show'); });
+}
+
+// 点击遮罩关闭
+document.querySelectorAll('.overlay').forEach(function(o) {
+    o.addEventListener('click', function(e) {
+        if (e.target === o) closeModal();
+    });
+});
+
+// ==================== 档案柜文件夹切换 ====================
+function switchFile(id, btn) {
+    // 切换tab样式
+    document.querySelectorAll('.file-tab').forEach(function(t) { t.classList.remove('active'); });
+    btn.classList.add('active');
+    // 切换内容
+    document.querySelectorAll('.file-content-area').forEach(function(a) { a.style.display = 'none'; });
+    document.getElementById('file-' + id).style.display = 'block';
+    // 记录已打开
+    if (gameState.filesOpened.indexOf(id) === -1) {
+        gameState.filesOpened.push(id);
+        // 添加线索
+        if (id === 'A') {
+            addClue('山田诚一=梅机关少佐');
+            showToast('发现东亚文化保护协会的真正背景');
+        } else if (id === 'B') {
+            addClue('五人全部是冶金专家');
+            showToast('五名失踪学者身份查明');
+        } else if (id === 'C') {
+            addClue('天工合金研究笔记');
+            showToast('李书恒的研究笔记——天工合金');
+        } else if (id === 'D') {
+            addClue('陈望舒请愿书原文');
+            addClue('宪兵批注：此等人不可留');
+            showToast('请愿书上的批注触目惊心');
+        } else if (id === 'E') {
+            addClue('梅机关密电：行动代号M');
+            addClue('接应人代号H.W.S.');
+            addClue('保险箱密码线索');
+            showToast('截获的密电暴露了惊天阴谋');
+        }
+        updateProgress();
+    }
+}
+
+// ==================== 保险箱密码 ====================
+function safeNext(current, next) {
+    current.value = current.value.toUpperCase();
+    if (current.value.length === 1 && next <= 4) {
+        document.getElementById('safe-d' + next).focus();
+    }
+}
+
+function checkSafeCode() {
+    var d1 = document.getElementById('safe-d1').value.toUpperCase();
+    var d2 = document.getElementById('safe-d2').value.toUpperCase();
+    var d3 = document.getElementById('safe-d3').value.toUpperCase();
+    var d4 = document.getElementById('safe-d4').value.toUpperCase();
+    var code = d1 + d2 + d3 + d4;
+    var errorEl = document.getElementById('safe-error');
+
+    if (gameState.safeOpened) return;
+
+    if (code === 'MWSD') {
+        // 密码正确
+        gameState.safeOpened = true;
+        document.getElementById('safe-lock-text').textContent = '已解锁';
+        document.getElementById('safe-lock-text').style.color = '#2a8040';
+        document.getElementById('safe-input-area').style.display = 'none';
+        document.getElementById('safe-opened').style.display = 'block';
+        document.getElementById('status-safe').textContent = '已解锁';
+        var card = document.querySelector('[onclick="openModal(\'safe\')"]');
+        if (card) card.classList.add('checked');
+        addClue('天工计划全貌');
+        addClue('H.W.S.=接应人代号');
+        addClue('收音机1050kHz');
+        showToast('保险箱已打开——天工计划的真相');
+        errorEl.textContent = '';
+        document.getElementById('prog-safe').classList.add('filled');
+        updateProgress();
+        checkTruthCondition();
+    } else {
+        gameState.safeAttempts++;
+        if (gameState.safeAttempts >= 3 && !gameState.safeHintGiven) {
+            gameState.safeHintGiven = true;
+            errorEl.textContent = '试试把所有代号的首字母拼在一起';
+            errorEl.style.color = '#c8a868';
+        } else if (gameState.safeAttempts < 3) {
+            errorEl.textContent = '密码错误（' + gameState.safeAttempts + '/3）';
+            errorEl.style.color = '#8b4040';
+            // 抖动效果
+            document.querySelectorAll('.safe-digit').forEach(function(d) {
+                d.style.animation = 'shake 0.3s';
+                setTimeout(function() { d.style.animation = ''; }, 300);
+            });
+        } else {
+            errorEl.textContent = '密码错误，请仔细回顾收集到的代号';
+            errorEl.style.color = '#8b4040';
+        }
+    }
+}
+
+// ==================== 收音机代号 ====================
+function checkRadioCode() {
+    var input = document.getElementById('radio-code-input').value.trim();
+    var errorEl = document.getElementById('radio-error');
+
+    if (gameState.radioSolved) return;
+
+    if (input === '天工') {
+        gameState.radioSolved = true;
+        document.getElementById('radio-freq-display').textContent = '1050 kHz';
+        document.getElementById('radio-static-text').textContent = '信号锁定——接收加密广播中……';
+        document.getElementById('radio-error').textContent = '';
+        document.getElementById('radio-broadcast').style.display = 'block';
+        document.querySelector('.radio-input-area').style.display = 'none';
+        document.getElementById('status-radio').textContent = '已接收';
+        var card = document.querySelector('[onclick="openModal(\'radio\')"]');
+        if (card) card.classList.add('checked');
+        addClue('延安确认：天工计划成功');
+        addClue('五名学者全部安全');
+        addClue('陈望舒是己方情报员');
+        showToast('广播揭示最终真相——所有人都活着');
+        document.getElementById('prog-radio').classList.add('filled');
+        updateProgress();
+        checkTruthCondition();
+    } else {
+        errorEl.textContent = '代号错误，请重试';
+        errorEl.style.color = '#8b4040';
+    }
+}
+
+// ==================== 真相揭示 ====================
+function checkTruthCondition() {
+    if (gameState.safeOpened && gameState.radioSolved) {
+        // 显示真相区域
+        setTimeout(function() {
+            showTruthSection();
+        }, 2000);
+    }
+}
+
+function showTruthSection() {
+    document.getElementById('truth-title').classList.add('show');
+    var blocks = ['truth-1','truth-2','truth-3','truth-4','truth-5','truth-6'];
+    blocks.forEach(function(id, i) {
+        setTimeout(function() {
+            document.getElementById(id).classList.add('show');
+        }, 800 + i * 1200);
+    });
+    // 最后显示按钮
+    setTimeout(function() {
+        document.getElementById('final-btn-area').classList.add('show');
+        document.getElementById('prog-truth').classList.add('filled');
+        updateProgress();
+        showToast('真相大白');
+    }, 800 + blocks.length * 1200 + 500);
+}
+
+function showFullTruth() {
+    if (gameState.fullTruthShown) return;
+    gameState.fullTruthShown = true;
+    var narrative = document.getElementById('ending-narrative');
+    narrative.classList.add('show');
+    // 显示前往结局链接
+    setTimeout(function() {
+        document.getElementById('endingLink').classList.add('show');
+    }, 3000);
+    updateProgress();
+}
+
+// ==================== 线索管理 ====================
+function addClue(text) {
+    if (gameState.clues.indexOf(text) !== -1) return;
+    gameState.clues.push(text);
+    var container = document.getElementById('clue-bar-items');
+    var tag = document.createElement('span');
+    tag.className = 'clue-tag found';
+    tag.textContent = text;
+    container.appendChild(tag);
+    // 滚动到最右
+    container.scrollLeft = container.scrollWidth;
+}
+
+// ==================== 进度更新 ====================
+function updateProgress() {
+    var total = 10; // 总任务数
+    var done = 0;
+    if (gameState.archiveOpened) done++;
+    if (gameState.filesOpened.length >= 3) done++; // 至少查看3个文件夹
+    if (gameState.safeOpened) done++;
+    if (gameState.letterRead) done++;
+    if (gameState.radioSolved) done++;
+    if (gameState.logbookRead) done++;
+    if (gameState.truthRevealed) done++;
+    if (gameState.fullTruthShown) done++;
+    // 线索数额外加分
+    if (gameState.clues.length >= 10) done++;
+    if (gameState.filesOpened.length >= 5) done++;
+
+    var pct = Math.min(100, Math.round((done / total) * 100));
+    document.getElementById('progress-text').textContent = '完成度：' + pct + '%';
+}
+
+// ==================== Toast ====================
+function showToast(msg) {
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(function() {
+        toast.classList.remove('show');
+    }, 2500);
+}
+
+// ==================== 初始化 ====================
+document.addEventListener('DOMContentLoaded', function() {
+    updateProgress();
+});
+</script>
+</body>
+</html>

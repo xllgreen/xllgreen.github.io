@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>备忘录</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .note-detail .deleted-notice {
+      background: #f9f9f9;
+      border: 1px dashed #ddd;
+      border-radius: 8px;
+      padding: 28px 24px;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      line-height: 2;
+    }
+    .note-detail .deleted-notice .icon {
+      font-size: 40px;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .note-detail .deleted-notice .trace {
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 12px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">备忘录</span>
+    </div>
+    <div class="window-body">
+      <div class="notes-list" id="notesList">
+        <div class="note-item" data-note="1">
+          <div class="note-title">📋 待办事项</div>
+          <div class="note-preview">1. 修改论文 2. 准备答辩PPT 3. 联系导师…</div>
+          <div class="note-date">2024/5/15</div>
+        </div>
+        <div class="note-item" data-note="2">
+          <div class="note-title">🔑 账号密码备忘</div>
+          <div class="note-preview">几个常用账号的记录…</div>
+          <div class="note-date">2024/3/20</div>
+        </div>
+        <div class="note-item" data-note="3">
+          <div class="note-title">📝 答辩注意事项</div>
+          <div class="note-preview">6月14日答辩，需要准备的材料…</div>
+          <div class="note-date">2024/5/18</div>
+        </div>
+        <div class="note-item" data-note="4">
+          <div class="note-title">🔒 关于微信</div>
+          <div class="note-preview">L + W + 4位数字（年份），开微信…</div>
+          <div class="note-date">2024/4/10</div>
+        </div>
+        <div class="note-item" data-note="5">
+          <div class="note-title">💭 随手记</div>
+          <div class="note-preview">也许该找个人聊聊…</div>
+          <div class="note-date">2024/5/16</div>
+        </div>
+        <div class="note-item deleted" data-note="6">
+          <div class="note-title">🛒 购物清单（已删除）</div>
+          <div class="note-preview">删除时间：2024年5月20日…</div>
+          <div class="note-date">已删除</div>
+        </div>
+        <div class="note-item" data-note="7">
+          <div class="note-title">📌 学长的小习惯</div>
+          <div class="note-preview">周明记密码的方式…</div>
+          <div class="note-date">2024/4/22</div>
+        </div>
+      </div>
+
+      <!-- 备忘录详情 -->
+      <div class="note-detail" id="noteDetail" style="display:none;">
+        <div id="detailContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 文件错误弹窗替换 -->
+  <div class="file-error-overlay" id="fileErrorOverlay"></div>
+  <div class="file-error-toast" id="fileErrorToast">
+    <div class="icon" id="fileErrorIcon">📁</div>
+    <div class="msg" id="fileErrorMsg"></div>
+    <button class="ok-btn" onclick="closeFileError()">确定</button>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    const notes = {
+      1: {
+        title: '📋 待办事项',
+        date: '2024年5月15日',
+        content: `1. 修改论文第三章数据
+2. 准备答辩PPT（6月14日答辩）
+3. 联系导师确认答辩时间
+4. 整理实验数据备份
+5. 寄快递给妈妈`
+      },
+      2: {
+        title: '🔑 账号密码备忘',
+        date: '2024年3月20日',
+        content: `校园网账号：LW2024
+邮箱密码：<span class="hint-text">答辩日期</span>，4位数字
+教务系统：同邮箱
+实验室门禁：0307`
+      },
+      3: {
+        title: '📝 答辩注意事项',
+        date: '2024年5月18日',
+        content: `答辩时间：6月14日 下午2:00
+地点：物理楼302
+需要准备：PPT、论文打印稿5份、实验数据原始记录
+
+1. PPT控制在20分钟以内，留10分钟提问
+2. 把原始数据的Excel拷到U盘里，再传一份到邮箱
+3. 答辩前一天记得去打印店装订
+4. 穿件衬衫，别穿拖鞋`
+      },
+      4: {
+        title: '🔒 关于微信',
+        date: '2024年4月10日',
+        content: `微信密码改掉了，备忘一下：
+<span class="hint-text">L + W + 4位数字（年份）</span>
+
+如果我不在，有人需要看聊天记录的话，就用这个密码。`
+      },
+      5: {
+        title: '💭 随手记',
+        date: '2024年5月16日',
+        content: `最近压力很大。
+导师说要补几组对照实验，说论文结论不够稳。我感觉数据已经够了。
+周明说他那边最近事很多，让我别太往心里去。
+
+有些事想问清楚，但又怕不是我想的那样。`
+      },
+      6: {
+        title: '🛒 购物清单（已删除）',
+        date: '删除时间：2024年5月20日',
+        content: null,
+        deleted: true
+      },
+      7: {
+        title: '📌 学长的小习惯',
+        date: '2024年4月22日',
+        content: `周明说他记东西的方式有点怪——
+自己姓拼音的前 3 个字母开头，后面接他选的一串东西。
+他姓"周"，就是 <span class="hint-text">Z-H-O</span>。
+
+"别人猜不到，我自己也好记。"
+
+我们有些只有两个人知道的备份，就用这个开头。`
+      }
+    };
+
+    document.getElementById('notesList').addEventListener('click', (e) => {
+      const item = e.target.closest('.note-item');
+      if (!item || item.classList.contains('deleted')) return;
+      const id = item.dataset.note;
+      showNote(id);
+    });
+
+    // 第6条已删除的购物清单
+    document.querySelector('.note-item.deleted').addEventListener('click', function() {
+      const id = this.dataset.note;
+      showNote(id);
+    });
+
+    function showNote(id) {
+      const note = notes[id];
+      if (!note) return;
+
+      const list = document.getElementById('notesList');
+      const detail = document.getElementById('noteDetail');
+      const content = document.getElementById('detailContent');
+
+      list.style.display = 'none';
+      detail.style.display = 'block';
+
+      if (note.deleted) {
+        content.innerHTML = `
+          <h2>${note.title}</h2>
+          <div class="meta">${note.date}</div>
+          <div class="deleted-notice">
+            <span class="icon">🗑️</span>
+            此条备忘录已被删除。
+          </div>
+          <button class="back" onclick="backToList()" style="margin-top:16px;padding:8px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#666;cursor:pointer;">返回列表</button>
+        `;
+        // 删除时间正是她失联那天 —— 加重这条"被删掉的痕迹"
+        if (!sessionStorage.getItem('lw_deleted_note_seen')) {
+          sessionStorage.setItem('lw_deleted_note_seen', '1');
+          setTimeout(() => Game.monologue('这条备忘录是5月20号删的……她消失的那天。', 5500), 900);
+        }
+      } else {
+        content.innerHTML = `
+          <h2>${note.title}</h2>
+          <div class="meta">${note.date}</div>
+          <div class="content">${note.content}</div>
+          <button class="back" onclick="backToList()" style="margin-top:24px;padding:8px 16px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#666;cursor:pointer;">返回列表</button>
+        `;
+      }
+
+      Game.log('▶ [备忘录] 查看: ' + note.title);
+      if (id === '2') Game.mark('lw_notes_pwd');
+      if (id === '4') Game.mark('lw_notes_wechat');
+    }
+
+    function backToList() {
+      document.getElementById('notesList').style.display = '';
+      document.getElementById('noteDetail').style.display = 'none';
+    }
+
+    function closeFileError() {
+      document.getElementById('fileErrorOverlay').classList.remove('visible');
+      document.getElementById('fileErrorToast').classList.remove('visible');
+    }
+
+    window.backToList = backToList;
+    window.closeFileError = closeFileError;
+
+    Game.renderProgress();
+  </script>
+</body>
+</html>

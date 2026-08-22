@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>雾落村·槐香引</title>
+<style>
+/* ========== 全局重置与基础 ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-deep:#1e2a35;--bg-mid:#283744;--bg-soft:#324554;
+  --fog:rgba(190,205,220,0.18);
+  --text:#d8d0c4;--text-dim:#9a9488;--text-bright:#ede5d5;
+  --amber:#c4a062;--amber-soft:#d4b87a;--amber-glow:rgba(196,160,98,0.3);
+  --danger:#a05050;--warm:#c9885a;--green-soft:#6a8a6a;
+  --border:rgba(196,160,98,0.2);
+  --card-bg:rgba(40,55,68,0.85);
+  --serif:'Georgia','Noto Serif SC','Source Han Serif SC',serif;
+  --sans:'Helvetica Neue','Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg-deep);font-family:var(--sans);color:var(--text);user-select:none;-webkit-tap-highlight-color:transparent}
+button{font-family:inherit;cursor:pointer;border:none;outline:none;background:none;color:inherit}
+input{font-family:inherit;outline:none}
+
+/* ========== 雾效层 ========== */
+.fog-layer{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.fog-layer::before,.fog-layer::after{content:'';position:absolute;width:200%;height:200%;background:radial-gradient(ellipse at 30% 40%,var(--fog) 0%,transparent 50%),radial-gradient(ellipse at 70% 60%,var(--fog) 0%,transparent 50%);animation:fogDrift 40s linear infinite}
+.fog-layer::after{animation-duration:60s;animation-direction:reverse;opacity:0.7}
+.fog-layer .fog-extra{position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 80%,rgba(200,210,220,0.12) 0%,transparent 60%),radial-gradient(ellipse 50% 35% at 20% 30%,rgba(180,195,210,0.1) 0%,transparent 50%);animation:fogDrift2 50s ease-in-out infinite}
+@keyframes fogDrift{0%{transform:translate(-25%,-25%)}100%{transform:translate(-10%,-15%)}}
+@keyframes fogDrift2{0%,100%{opacity:0.8;transform:translateX(0)}50%{opacity:1;transform:translateX(2%)}}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:3;background:radial-gradient(ellipse at center,transparent 50%,rgba(10,15,20,0.5) 100%)}
+
+/* ========== 主容器 ========== */
+#game{position:relative;width:100%;height:100vh;max-width:860px;margin:0 auto;z-index:2;overflow:hidden}
+#stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 16px}
+
+/* ========== 场景通用 ========== */
+.scene{width:100%;max-width:760px;max-height:calc(100vh - 24px);display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(10px);transition:opacity 0.8s,transform 0.8s;overflow-y:auto;padding-bottom:80px}
+.scene.active{opacity:1;transform:translateY(0)}
+.scene::-webkit-scrollbar{width:4px}
+.scene::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+.act-tag{font-size:13px;color:var(--amber);letter-spacing:6px;margin-bottom:4px;text-transform:uppercase}
+.scene-title{font-family:var(--serif);font-size:26px;color:var(--text-bright);margin-bottom:10px;text-align:center;letter-spacing:2px}
+
+/* ========== 场景图片 ========== */
+.scene-img-wrap{width:100%;max-width:620px;border-radius:10px;overflow:hidden;margin:0 auto 12px;position:relative;border:1px solid var(--border);flex-shrink:0;background:rgba(20,28,36,0.5)}
+.scene-img{display:block;margin:0 auto;border-radius:10px;max-width:100%;max-height:300px;width:auto;height:auto;object-fit:contain;object-position:center;transition:opacity 0.6s}
+.scene-img-caption{position:absolute;bottom:0;left:0;right:0;padding:8px 14px;background:linear-gradient(transparent,rgba(0,0,0,0.75));font-size:12px;color:var(--text-dim);letter-spacing:1px;text-align:center}
+
+.narrative{font-family:var(--serif);font-size:17px;line-height:2.0;color:var(--text);text-align:justify;width:100%;max-width:620px;margin-top:4px}
+.narrative p{margin-bottom:12px;opacity:0;animation:textFade 0.6s forwards}
+.narrative p:nth-child(1){animation-delay:0.4s}
+.narrative p:nth-child(2){animation-delay:1.2s}
+.narrative p:nth-child(3){animation-delay:2.0s}
+.narrative p:nth-child(4){animation-delay:2.8s}
+.narrative p:nth-child(5){animation-delay:3.6s}
+.narrative p:nth-child(6){animation-delay:4.4s}
+.narrative p:nth-child(7){animation-delay:5.2s}
+.narrative p:nth-child(8){animation-delay:6.0s}
+.narrative p:nth-child(9){animation-delay:6.8s}
+@keyframes textFade{to{opacity:1}}
+.narrative .em{color:var(--amber-soft)}
+.narrative .danger{color:var(--danger)}
+.narrative .warm{color:var(--warm)}
+.narrative .ghost{color:#7a8a9a;font-style:italic}
+
+/* ========== 按钮 ========== */
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.btn{padding:10px 28px;font-size:15px;color:var(--amber);border:1px solid var(--amber);border-radius:4px;background:rgba(196,160,98,0.05);transition:all 0.3s;letter-spacing:1px;white-space:nowrap}
+.btn:hover{background:rgba(196,160,98,0.15);color:var(--text-bright)}
+.btn.sm{font-size:13px;padding:6px 16px}
+.btn.warm{color:var(--warm);border-color:var(--warm)}
+.btn.warm:hover{background:rgba(201,136,90,0.15)}
+.btn.danger{color:var(--danger);border-color:var(--danger)}
+.btn.danger:hover{background:rgba(160,80,80,0.15)}
+.btn:disabled{opacity:0.3;cursor:not-allowed}
+
+/* ========== 封面 ========== */
+#cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10}
+.cover-bg{position:absolute;inset:0;background:linear-gradient(180deg,#0f1820 0%,#1a2530 40%,#1e2a35 70%,#152028 100%);opacity:0.4;transition:opacity 0.5s}
+.cover-img-wrap{position:absolute;inset:0;overflow:hidden}
+.cover-img-wrap img{width:100%;height:100%;object-fit:cover;opacity:0.55;filter:blur(0.5px) brightness(0.8)}
+.cover-title-wrap{position:relative;z-index:2;text-align:center}
+.cover-sub{font-size:13px;color:var(--amber-soft);letter-spacing:8px;margin-bottom:16px;opacity:0;animation:textFade 1.2s forwards;animation-delay:0.3s}
+.cover-title{font-family:var(--serif);font-size:52px;color:var(--text-bright);letter-spacing:10px;text-shadow:0 0 40px rgba(196,160,98,0.4),0 4px 20px rgba(0,0,0,0.6);margin-bottom:6px;opacity:0;animation:textFade 1.5s forwards;animation-delay:0.6s}
+.cover-subtitle{font-size:14px;color:var(--amber);letter-spacing:4px;margin-bottom:40px;opacity:0;animation:textFade 1.2s forwards;animation-delay:1.2s}
+.cover-btn{padding:14px 48px;font-size:17px;color:var(--amber);border:1px solid var(--amber);border-radius:4px;background:rgba(196,160,98,0.08);letter-spacing:4px;transition:all 0.4s;opacity:0;animation:textFade 1s forwards;animation-delay:1.5s}
+.cover-btn:hover{background:rgba(196,160,98,0.2);color:var(--text-bright);box-shadow:0 0 20px var(--amber-glow)}
+.cover-credit{position:absolute;bottom:24px;font-size:12px;color:var(--text-dim);letter-spacing:2px;opacity:0;animation:textFade 1s forwards;animation-delay:2.5s}
+
+/* ========== 进度条 ========== */
+#progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--amber);z-index:100;transition:width 0.6s;width:0%}
+#act-indicator{position:fixed;top:10px;right:16px;font-size:12px;color:var(--text-dim);z-index:100;letter-spacing:2px}
+
+/* ========== 谜题：物品搜索 ========== */
+.room-view{width:100%;max-width:580px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px;margin:12px 0}
+.room-desc{font-family:var(--serif);font-size:15px;color:var(--text-dim);text-align:center;margin-bottom:14px;line-height:1.8}
+.items-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.item-slot{aspect-ratio:1;background:rgba(50,69,84,0.6);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;transition:all 0.3s;position:relative}
+.item-slot:hover{background:rgba(196,160,98,0.1);border-color:var(--amber)}
+.item-slot.found{background:rgba(106,138,106,0.15);border-color:var(--green-soft)}
+.item-slot.found::after{content:'✓';position:absolute;top:4px;right:6px;font-size:12px;color:var(--green-soft)}
+.puzzle-feedback{font-size:14px;text-align:center;margin:8px 0;min-height:20px;transition:opacity 0.3s}
+
+/* ========== 谜题：物品详情弹窗 ========== */
+.item-modal{position:fixed;inset:0;z-index:300;background:rgba(10,15,20,0.85);display:none;align-items:center;justify-content:center;padding:20px}
+.item-modal.show{display:flex}
+.item-modal-content{max-width:420px;width:100%;background:var(--card-bg);border:1px solid var(--amber);border-radius:12px;padding:24px;text-align:center}
+.item-modal-icon{font-size:48px;margin-bottom:12px}
+.item-modal-title{font-family:var(--serif);font-size:20px;color:var(--text-bright);margin-bottom:10px}
+.item-modal-desc{font-size:15px;color:var(--text-dim);line-height:1.8;margin-bottom:16px}
+.item-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* ========== 谜题：步骤进度 ========== */
+.puzzle-steps{display:flex;gap:6px;justify-content:center;margin:10px 0 14px}
+.puzzle-step{width:28px;height:4px;border-radius:2px;background:var(--border);transition:all 0.3s}
+.puzzle-step.done{background:var(--amber)}
+.puzzle-step.current{background:var(--amber-soft);box-shadow:0 0 8px var(--amber-glow)}
+
+/* ========== 谜题：方向旋转 ========== */
+.twist-puzzle{text-align:center;margin:16px 0}
+.twist-dial{width:120px;height:120px;border-radius:50%;border:3px solid var(--border);margin:0 auto 12px;position:relative;background:radial-gradient(circle,rgba(50,69,84,0.8),rgba(30,42,53,0.9));cursor:pointer;transition:transform 0.3s}
+.twist-pointer{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:16px solid var(--amber)}
+.twist-arrow{position:absolute;font-size:20px;color:var(--text-dim);transition:all 0.3s}
+.twist-arrow.active{color:var(--amber);transform:scale(1.2)}
+.twist-label{font-size:13px;color:var(--text-dim);margin-top:6px}
+
+/* ========== 谜题：暗号翻译 ========== */
+.cipher-area{max-width:480px;margin:12px auto}
+.cipher-row{display:flex;gap:8px;align-items:center;margin-bottom:10px;justify-content:center}
+.cipher-cell{width:40px;height:40px;border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--amber);font-family:var(--serif);background:rgba(50,69,84,0.4)}
+.cipher-input{width:40px;height:40px;text-align:center;font-size:18px;color:var(--text-bright);background:rgba(50,69,84,0.6);border:1px solid var(--border);border-radius:6px;font-family:var(--serif)}
+.cipher-input:focus{border-color:var(--amber)}
+.cipher-arrow{color:var(--text-dim);font-size:14px}
+
+/* ========== 谜题：密码输入 ========== */
+.code-display{display:flex;gap:10px;justify-content:center;margin:16px 0}
+.code-box{width:40px;height:48px;border:2px solid var(--border);border-radius:6px;background:rgba(50,69,84,0.6);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text-bright);font-family:var(--serif);transition:all 0.3s}
+.code-box.filled{border-color:var(--amber)}
+.code-box.error{border-color:var(--danger);animation:shake 0.4s}
+.code-box.ok{border-color:var(--green-soft)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:240px;margin:16px auto 0}
+.numpad button{aspect-ratio:1.4;font-size:20px;color:var(--text);background:rgba(50,69,84,0.6);border:1px solid var(--border);border-radius:8px;transition:all 0.2s}
+.numpad button:hover{background:rgba(196,160,98,0.15);color:var(--amber-soft)}
+
+/* ========== 谜题：石阵 ========== */
+.stone-array{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:420px;margin:16px auto}
+.stone{aspect-ratio:1;background:radial-gradient(circle at 40% 35%,#4a5a6a,#2a3a4a);border-radius:50% 50% 45% 55%;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text-dim);position:relative;border:2px solid transparent}
+.stone:hover{border-color:var(--amber);transform:scale(1.05)}
+.stone.selected{border-color:var(--amber);background:radial-gradient(circle at 40% 35%,#5a6a7a,#3a4a5a);color:var(--amber)}
+.stone.selected .stone-num{display:block}
+.stone-num{display:none;position:absolute;font-size:14px;color:var(--amber);font-weight:bold}
+.stone.wrong{border-color:var(--danger);animation:shake 0.4s}
+.stone-correct{border-color:var(--green-soft)!important}
+
+/* ========== 谜题：刻痕 ========== */
+.carving-area{display:flex;gap:20px;justify-content:center;margin:20px 0}
+.carving{width:80px;height:100px;background:rgba(60,50,40,0.6);border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.carving:hover{border-color:var(--amber);background:rgba(196,160,98,0.1)}
+.carving.touched{border-color:var(--amber);background:rgba(196,160,98,0.15)}
+.carving .icon{font-size:28px}
+.carving .label{font-size:12px;color:var(--text-dim)}
+.carving .order{font-size:16px;color:var(--amber);font-weight:bold;margin-top:4px}
+
+/* ========== 谜题：档案排列 ========== */
+.doc-slot{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(50,69,84,0.3);border:1px dashed var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;min-height:44px}
+.doc-slot:hover{border-color:var(--amber);background:rgba(196,160,98,0.05)}
+.doc-slot.filled{border-style:solid;border-color:var(--green-soft);background:rgba(106,138,106,0.08);cursor:default}
+.doc-slot .slot-num{font-size:14px;color:var(--amber);font-weight:bold;min-width:20px}
+.doc-slot .slot-content{font-size:13px;color:var(--text-dim);flex:1}
+.doc-card{padding:8px 12px;background:rgba(50,69,84,0.6);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;text-align:center;min-width:90px}
+.doc-card:hover{border-color:var(--amber);background:rgba(196,160,98,0.1)}
+.doc-card.selected{border-color:var(--amber);background:rgba(196,160,98,0.15);box-shadow:0 0 12px var(--amber-glow)}
+.doc-card-year{font-size:13px;color:var(--amber);font-weight:bold;margin-bottom:2px}
+.doc-card-title{font-size:12px;color:var(--text-dim)}
+
+/* ========== 谜题：亡魂问答 ========== */
+.spirit-question{padding:16px 20px;background:rgba(40,50,60,0.7);border:1px solid var(--border);border-radius:10px;margin:12px 0;font-family:var(--serif);font-size:16px;color:var(--text-bright);line-height:1.8;text-align:center}
+.spirit-name{font-size:13px;color:var(--amber-soft);margin-bottom:8px;letter-spacing:2px}
+.spirit-options{display:flex;flex-direction:column;gap:8px;max-width:420px;margin:12px auto}
+.spirit-option{padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;font-size:14px;color:var(--text);line-height:1.6}
+.spirit-option:hover{border-color:var(--amber);background:rgba(196,160,98,0.1)}
+.spirit-option.correct{border-color:var(--green-soft);background:rgba(106,138,106,0.15)}
+.spirit-option.wrong{border-color:var(--danger);background:rgba(160,80,80,0.15);animation:shake 0.4s}
+
+/* ========== 谜题：时间线 ========== */
+.timeline-area{display:flex;flex-direction:column;gap:10px;max-width:480px;margin:12px auto}
+.timeline-event{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:rgba(50,69,84,0.4);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s}
+.timeline-event:hover{border-color:var(--amber);background:rgba(196,160,98,0.08)}
+.timeline-event.placed{border-color:var(--green-soft);background:rgba(106,138,106,0.1);cursor:default}
+.timeline-event .tl-marker{width:28px;height:28px;border-radius:50%;background:var(--bg-soft);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--amber);font-weight:bold;flex-shrink:0}
+.timeline-event.placed .tl-marker{border-color:var(--green-soft);color:var(--green-soft)}
+.timeline-event .tl-content{flex:1}
+.timeline-event .tl-year{font-size:14px;color:var(--amber);font-weight:bold;margin-bottom:2px}
+.timeline-event .tl-desc{font-size:13px;color:var(--text-dim);line-height:1.6}
+.timeline-slot{padding:10px 16px;background:rgba(50,69,84,0.2);border:1px dashed var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;min-height:48px;display:flex;align-items:center;gap:10px}
+.timeline-slot:hover{border-color:var(--amber)}
+.timeline-slot.filled{border-style:solid;border-color:var(--green-soft);background:rgba(106,138,106,0.08)}
+.timeline-slot .ts-num{font-size:14px;color:var(--amber);font-weight:bold;min-width:20px}
+.timeline-slot .ts-content{font-size:13px;color:var(--text);flex:1}
+
+/* ========== 谜题：线索配对 ========== */
+.clue-item{padding:10px 12px;background:rgba(50,69,84,0.5);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;min-height:48px;display:flex;align-items:center}
+.clue-item:hover{border-color:var(--amber);background:rgba(196,160,98,0.08)}
+.clue-item.selected{border-color:var(--amber);background:rgba(196,160,98,0.15);box-shadow:0 0 10px var(--amber-glow)}
+.clue-item.matched{border-color:var(--green-soft);background:rgba(106,138,106,0.12);cursor:default;opacity:0.6}
+.meaning-item{padding:10px 12px;background:rgba(50,69,84,0.3);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.3s;min-height:48px;display:flex;align-items:center}
+.meaning-item:hover{border-color:var(--amber);background:rgba(196,160,98,0.08)}
+.meaning-item.matched{border-color:var(--green-soft);background:rgba(106,138,106,0.12);cursor:default;opacity:0.6}
+.meaning-item.wrong{border-color:var(--danger);animation:shake 0.4s}
+
+/* ========== 选择卡片 ========== */
+.choice-list{display:flex;flex-direction:column;gap:12px;width:100%;max-width:480px;margin-top:16px}
+.choice-card{padding:16px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.3s;font-size:16px;color:var(--text);line-height:1.6}
+.choice-card:hover{border-color:var(--amber);background:rgba(196,160,98,0.1);color:var(--text-bright)}
+.choice-card .choice-hint{font-size:13px;color:var(--text-dim);margin-top:4px}
+
+/* ========== 结局 ========== */
+.ending-screen{text-align:center;padding:10px 16px 60px}
+.ending-title{font-family:var(--serif);font-size:30px;color:var(--text-bright);margin-bottom:14px;letter-spacing:4px}
+.ending-text{font-family:var(--serif);font-size:17px;line-height:2.2;color:var(--text);max-width:560px;margin:0 auto;text-align:justify}
+.ending-text p{margin-bottom:12px;opacity:0;animation:textFade 0.8s forwards}
+.ending-text p:nth-child(1){animation-delay:0.5s}
+.ending-text p:nth-child(2){animation-delay:1.5s}
+.ending-text p:nth-child(3){animation-delay:2.5s}
+.ending-text p:nth-child(4){animation-delay:3.5s}
+.ending-text p:nth-child(5){animation-delay:4.5s}
+.ending-text p:nth-child(6){animation-delay:5.5s}
+.easter-egg{margin-top:20px;padding:14px 20px;background:rgba(196,160,98,0.08);border:1px dashed var(--amber);border-radius:8px;font-size:14px;color:var(--amber-soft);line-height:1.8;text-align:center;max-width:520px;margin-left:auto;margin-right:auto;opacity:0;animation:textFade 1s forwards;animation-delay:7s}
+
+/* ========== 物品栏 ========== */
+#inventory{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:50;padding:8px 14px;background:rgba(30,42,53,0.9);border:1px solid var(--border);border-radius:10px}
+.inv-slot{width:36px;height:36px;border-radius:6px;background:rgba(50,69,84,0.5);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:default;position:relative}
+.inv-slot.has-item{border-color:var(--amber);background:rgba(196,160,98,0.1)}
+.inv-slot .inv-tip{display:none;position:absolute;bottom:44px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;color:var(--text);background:rgba(30,42,53,0.95);padding:4px 10px;border-radius:4px;border:1px solid var(--border)}
+.inv-slot:hover .inv-tip{display:block}
+
+/* ========== 场景背景变化 ========== */
+.bg-act1{background:linear-gradient(180deg,#1e2a35 0%,#2a3a48 100%)}
+.bg-act2{background:linear-gradient(180deg,#1a2530 0%,#26323e 100%)}
+.bg-act3{background:linear-gradient(180deg,#151820 0%,#1e2230 100%)}
+.bg-act4{background:linear-gradient(180deg,#1a2018 0%,#252e20 100%)}
+.bg-act5{background:linear-gradient(180deg,#1c1820 0%,#2a2030 100%)}
+.bg-act6{background:linear-gradient(180deg,#222018 0%,#2e2a1e 100%)}
+.bg-end{background:linear-gradient(180deg,#1e2a35 0%,#2a3540 100%)}
+
+/* ========== 日记/书信展示 ========== */
+.doc-view{width:100%;max-width:560px;background:rgba(220,210,190,0.06);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:12px 0;font-family:var(--serif);font-size:15px;line-height:1.9;color:var(--text-dim)}
+.doc-view .doc-title{font-size:14px;color:var(--amber);margin-bottom:10px;letter-spacing:2px}
+.doc-line{margin-bottom:6px}
+
+/* ========== 提示按钮 ========== */
+.hint-btn{position:fixed;top:10px;left:16px;font-size:13px;color:var(--text-dim);z-index:100;padding:4px 12px;border:1px solid var(--border);border-radius:4px;background:rgba(30,42,53,0.8);transition:all 0.3s}
+.hint-btn:hover{color:var(--amber);border-color:var(--amber)}
+.hint-panel{position:fixed;top:40px;left:16px;max-width:300px;padding:14px 18px;background:rgba(30,42,53,0.95);border:1px solid var(--amber);border-radius:8px;font-size:14px;color:var(--text);line-height:1.7;z-index:101;display:none}
+.hint-panel.show{display:block}
+
+/* ========== 回顾按钮 ========== */
+#reviewBtn{position:fixed;bottom:60px;left:10px;font-size:12px;color:var(--text-dim);z-index:100;padding:4px 10px;border:1px solid var(--border);border-radius:4px;background:rgba(30,42,53,0.8);transition:all 0.3s;display:none}
+#reviewBtn:hover{color:var(--amber);border-color:var(--amber)}
+#reviewPanel{position:fixed;bottom:94px;left:10px;max-width:340px;padding:14px 18px;background:rgba(30,42,53,0.97);border:1px solid var(--amber);border-radius:8px;font-size:14px;color:var(--text);line-height:1.7;z-index:101;display:none;max-height:50vh;overflow-y:auto}
+#reviewPanel.show{display:block}
+#reviewPanel::-webkit-scrollbar{width:4px}
+#reviewPanel::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+#reviewPanel .review-item{padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer}
+#reviewPanel .review-item:last-child{border-bottom:none}
+#reviewPanel .review-item:hover{color:var(--amber-soft)}
+#reviewPanel .review-ri{font-size:11px;color:var(--text-dim);margin-top:2px}
+
+.fade-overlay{position:fixed;inset:0;background:var(--bg-deep);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.6s}
+.fade-overlay.show{opacity:1;pointer-events:all}
+</style>
+</head>
+<body>
+
+<div class="fog-layer"><div class="fog-extra"></div></div>
+<div class="vignette"></div>
+<div id="progress-bar"></div>
+<div id="act-indicator"></div>
+<button class="hint-btn" id="hintBtn" onclick="toggleHint()" style="display:none">提示</button>
+<div class="hint-panel" id="hintPanel"></div>
+<button class="hint-btn" id="reviewBtn" onclick="toggleReview()" style="display:none">📖 回顾</button>
+<div id="reviewPanel"></div>
+
+<div id="game">
+<div id="stage"></div>
+</div>
+
+<div id="inventory" style="display:none"></div>
+<div class="fade-overlay" id="fadeOverlay"></div>
+<div class="item-modal" id="itemModal" onclick="if(event.target===this)closeItemModal()"><div class="item-modal-content" id="itemModalContent"></div></div>
+
+<script>
+// ============================================================
+// 游戏数据
+// ============================================================
+var inventory = [];
+var gameState = {
+  currentScene: 'cover',
+  act: 0, progress: 0,
+  foundItems: [], puzzleSolved: {},
+  diaryUnlocked: false, // 日记可回顾
+  ending: null
+};
+
+// 可回顾的线索资料
+var reviewData = {
+  diary: {
+    title: '奶奶的日记',
+    content: '"……月圆夜雾最重，结界又裂了……我快撑不住了……"<br>"……傻根今天又跑到后山入口坐着了，我得去把他领回来……"<br>"……树儿该进城了，越远越好，别回来……"<br>——日记第十二页还记载了槐树林石阵的线索和一首童谣。'
+  },
+  diaryPage12: {
+    title: '日记第十二页',
+    content: '"槐树开花，接人回家，<br>七块乱石挡住路，<br>年画在前头，货架上留痕，<br>傻根嘴里有口诀。<br>排对了进，排错了回。"<br><span style="color:var(--amber)">——后山槐树林入口有石阵，须按顺序排列方可通过。</span>'
+  },
+  photo: {
+    title: '老照片',
+    content: '一张褪色的集体照，十几个人站在一棵大槐树下，表情严肃。照片背面写着："1953年秋，雾落村。"'
+  },
+  letters: {
+    title: '铁皮盒中的书信',
+    content: '泛黄的信纸，字迹工整，是当年被救的孤儿长大后写给守槐人的感谢信。其中一封写道："我如今也有了孩子，会告诉他，是雾落村17个无名英雄救了我们。"'
+  },
+  sachet: {
+    title: '香囊线索',
+    content: '两块香囊拼合后，内侧绣着"翻至十二"字样。这是指向日记第十二页的关键线索。'
+  }
+};
+
+// ============================================================
+// 渲染引擎
+// ============================================================
+function renderScene(sceneId) {
+  var stage = document.getElementById('stage');
+  var old = stage.querySelector('.scene.active, #cover');
+  if(old) { old.style.opacity = '0'; old.style.transform = 'translateY(-10px)'; }
+
+  setTimeout(function(){
+    stage.innerHTML = '';
+    var scene = scenes[sceneId];
+    if(!scene) return;
+    gameState.currentScene = sceneId;
+    document.body.className = scene.bg || '';
+    if(scene.progress) {
+      gameState.progress = scene.progress;
+      document.getElementById('progress-bar').style.width = scene.progress + '%';
+    }
+    document.getElementById('act-indicator').textContent = scene.actLabel || '';
+
+    var hintBtn = document.getElementById('hintBtn');
+    if(scene.hint) { hintBtn.style.display = 'block'; document.getElementById('hintPanel').textContent = scene.hint; }
+    else { hintBtn.style.display = 'none'; document.getElementById('hintPanel').classList.remove('show'); }
+
+    // 回顾按钮
+    var rBtn = document.getElementById('reviewBtn');
+    if(gameState.diaryUnlocked && sceneId !== 'cover') { rBtn.style.display = 'block'; }
+    else { rBtn.style.display = 'none'; document.getElementById('reviewPanel').classList.remove('show'); }
+
+    updateInventory();
+
+    var div = document.createElement('div');
+    div.className = 'scene';
+    div.id = 'scene-' + sceneId;
+    if(scene.type === 'cover') div.innerHTML = renderCover(scene);
+    else if(scene.type === 'narrative') div.innerHTML = renderNarrative(scene);
+    else if(scene.type === 'puzzle') div.innerHTML = renderPuzzle(scene);
+    else if(scene.type === 'choice') div.innerHTML = renderChoice(scene);
+    else if(scene.type === 'ending') div.innerHTML = renderEnding(scene);
+    stage.appendChild(div);
+    setTimeout(function(){ div.classList.add('active'); }, 50);
+    if(scene.onRender) scene.onRender();
+  }, old ? 600 : 0);
+}
+
+function renderCover(s) {
+  return '<div id="cover" style="opacity:1;transform:none;position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center">'
+    + '<div class="cover-bg"></div>'
+    + '<div class="cover-img-wrap"><img src="cover-art.jpg" alt="雾落村" onerror="this.style.display=\'none\';document.querySelector(\'.cover-bg\').style.opacity=\'1\'"></div>'
+    + '<div class="cover-title-wrap">'
+    + '<div class="cover-sub">山村微恐系列 · 第一部</div>'
+    + '<div class="cover-title">雾落村</div>'
+    + '<div style="font-family:var(--serif);font-size:28px;color:var(--amber);letter-spacing:12px;margin-bottom:8px">槐 香 引</div>'
+    + '<div class="cover-subtitle">那些浓雾深处的秘密，等一个敢回头的人</div>'
+    + '<button class="cover-btn" onclick="renderScene(\'act1_1\')">进 山</button>'
+    + '<div style="margin-top:24px;font-size:12px;color:var(--text-dim);letter-spacing:3px;opacity:0;animation:textFade 1s forwards;animation-delay:2s">第二部 · 敬请期待</div>'
+    + '</div>'
+    + '<div class="cover-credit">建议在桌面端体验 · 时长约40-50分钟</div>'
+    + '</div>';
+}
+
+function renderNarrative(s) {
+  var html = '';
+  if(s.actTag) html += '<div class="act-tag">' + s.actTag + '</div>';
+  if(s.title) html += '<div class="scene-title">' + s.title + '</div>';
+  if(s.img) html += '<div class="scene-img-wrap"><img class="scene-img" src="' + s.img + '" alt="场景" onerror="this.style.display=\'none\'"><div class="scene-img-caption">' + (s.imgCap||'') + '</div></div>';
+  html += '<div class="narrative">';
+  if(s.text) s.text.forEach(function(p){ html += '<p>' + p + '</p>'; });
+  html += '</div>';
+  if(s.choices) {
+    html += '<div class="btn-row">';
+    s.choices.forEach(function(c){ html += '<button class="btn ' + (c.style||'') + '" onclick="renderScene(\'' + c.next + '\')">' + c.text + '</button>'; });
+    html += '</div>';
+  }
+  if(s.next) {
+    html += '<div class="btn-row"><button class="btn" onclick="renderScene(\'' + s.next + '\')">' + (s.nextText||'继 续') + '</button></div>';
+  }
+  return html;
+}
+
+function renderPuzzle(s) {
+  var html = '';
+  if(s.actTag) html += '<div class="act-tag">' + s.actTag + '</div>';
+  if(s.title) html += '<div class="scene-title">' + s.title + '</div>';
+  if(s.img) html += '<div class="scene-img-wrap"><img class="scene-img" src="' + s.img + '" alt="场景" onerror="this.style.display=\'none\'"><div class="scene-img-caption">' + (s.imgCap||'') + '</div></div>';
+  html += '<div class="narrative"><p>' + s.desc + '</p></div>';
+  if(s.puzzleHtml) html += s.puzzleHtml();
+  if(s.next) {
+    html += '<div class="btn-row" id="puzzle-next" style="display:none"><button class="btn" onclick="renderScene(\'' + s.next + '\')">' + (s.nextText||'继 续') + '</button></div>';
+  }
+  return html;
+}
+
+function renderChoice(s) {
+  var html = '';
+  if(s.actTag) html += '<div class="act-tag">' + s.actTag + '</div>';
+  if(s.title) html += '<div class="scene-title">' + s.title + '</div>';
+  if(s.img) html += '<div class="scene-img-wrap"><img class="scene-img" src="' + s.img + '" alt="场景" onerror="this.style.display=\'none\'"><div class="scene-img-caption">' + (s.imgCap||'') + '</div></div>';
+  html += '<div class="narrative"><p>' + s.desc + '</p></div>';
+  html += '<div class="choice-list">';
+  s.choices.forEach(function(c){ html += '<div class="choice-card" onclick="renderScene(\'' + c.next + '\')"><div>' + c.text + '</div>' + (c.hint?'<div class="choice-hint">'+c.hint+'</div>':'') + '</div>'; });
+  html += '</div>';
+  return html;
+}
+
+function renderEnding(s) {
+  var html = '<div class="ending-screen">';
+  if(s.img) html += '<div class="scene-img-wrap" style="margin-bottom:14px"><img class="scene-img" src="' + s.img + '" alt="结局" onerror="this.style.display=\'none\'"></div>';
+  html += '<div class="ending-title">' + s.title + '</div>';
+  html += '<div class="ending-text">';
+  s.text.forEach(function(p){ html += '<p>' + p + '</p>'; });
+  html += '</div>';
+  if(s.egg) html += '<div class="easter-egg">' + s.egg + '</div>';
+  html += '<div class="btn-row" style="margin-top:30px;opacity:0;animation:textFade 1s forwards;animation-delay:8s"><button class="btn" onclick="location.reload()">重新开始</button></div>';
+  html += '</div>';
+  return html;
+}
+
+// ============================================================
+// 物品栏
+// ============================================================
+function addItem(id, icon, name) { if(inventory.find(function(i){return i.id===id})) return; inventory.push({id:id,icon:icon,name:name}); updateInventory(); }
+function removeItem(id) { inventory = inventory.filter(function(i){return i.id!==id}); updateInventory(); }
+function hasItem(id) { return inventory.some(function(i){return i.id===id}); }
+function updateInventory() {
+  var inv = document.getElementById('inventory');
+  if(inventory.length === 0) { inv.style.display = 'none'; return; }
+  inv.style.display = 'flex';
+  var html = '';
+  for(var i=0; i<5; i++) {
+    var item = inventory[i];
+    if(item) html += '<div class="inv-slot has-item"><span>' + item.icon + '</span><span class="inv-tip">' + item.name + '</span></div>';
+    else html += '<div class="inv-slot"></div>';
+  }
+  inv.innerHTML = html;
+}
+
+// ============================================================
+// 提示 & 回顾
+// ============================================================
+function toggleHint() { document.getElementById('hintPanel').classList.toggle('show'); }
+function toggleReview() { document.getElementById('reviewPanel').classList.toggle('show'); }
+function showReviewItem(key) {
+  var item = reviewData[key];
+  if(!item) return;
+  document.getElementById('reviewPanel').innerHTML = '<div style="font-size:14px;font-weight:bold;color:var(--amber);margin-bottom:8px">' + item.title + '</div>'
+    + '<div style="font-size:13px;line-height:1.8">' + item.content + '</div>'
+    + '<div style="text-align:right;margin-top:6px"><button class="btn sm" onclick="document.getElementById(\'reviewPanel\').classList.remove(\'show\')">关 闭</button></div>';
+}
+
+// ============================================================
+// 物品详情弹窗
+// ============================================================
+function openItemModal(icon, title, desc, actions) {
+  var modal = document.getElementById('itemModal');
+  var content = document.getElementById('itemModalContent');
+  var html = '<div class="item-modal-icon">' + icon + '</div>'
+    + '<div class="item-modal-title">' + title + '</div>'
+    + '<div class="item-modal-desc">' + desc + '</div>';
+  if(actions) {
+    html += '<div class="item-modal-actions">';
+    actions.forEach(function(a){
+      html += '<button class="btn ' + (a.style||'') + '" onclick="' + a.onclick + '">' + a.text + '</button>';
+    });
+    html += '</div>';
+  } else {
+    html += '<div class="item-modal-actions"><button class="btn sm" onclick="closeItemModal()">关 闭</button></div>';
+  }
+  content.innerHTML = html;
+  modal.classList.add('show');
+}
+function closeItemModal() { document.getElementById('itemModal').classList.remove('show'); }
+
+// ============================================================
+// 场景数据
+// ============================================================
+var scenes = {};
+
+// ========== 封面 ==========
+scenes['cover'] = {
+  type:'cover', bg:'bg-act1',
+  onRender: function() {
+    document.getElementById('progress-bar').style.width = '0%';
+    document.getElementById('act-indicator').textContent = '';
+    document.getElementById('inventory').style.display = 'none';
+    document.getElementById('reviewBtn').style.display = 'none';
+  }
+};
+
+// ========== 第一幕：归乡·雾起 ==========
+scenes['act1_1'] = {
+  type:'narrative', bg:'bg-act1', actTag:'第 一 幕', actLabel:'第一幕 · 归乡',
+  title:'归乡·雾起', progress:3,
+  img:'scene-cover.jpg', imgCap:'村口石碑隐没在浓雾中',
+  hint:'点击"继续"推进剧情',
+  text:[
+    '大巴在盘山公路上颠了四个小时，你——<span class="em">陈树</span>，26岁，快递站分拣员，终于看见了"雾落村"三个字。',
+    '车窗外面的世界越来越安静。柏油路变成了碎石路，电线杆越来越稀，最后一根上还挂着个断了线的喇叭。',
+    '村口石碑上的字被青苔啃了一半，碑身有几道<span class="em">深深的划痕</span>，像是被什么利器反复刻过。浓雾把整个村子裹在里头，手机信号一格都没有。',
+    '你站在碑前，深深吸了一口气。空气里有湿土的味道，还有一丝说不清的甜香——像是什么花。'
+  ],
+  next:'act1_1b', nextText:'往村里走'
+};
+
+scenes['act1_1b'] = {
+  type:'narrative', bg:'bg-act1', actTag:'第 一 幕', actLabel:'第一幕 · 归乡',
+  title:'进村路上', progress:6,
+  img:'scene-cover.jpg', imgCap:'进村的小路，雾气从两侧漫上来',
+  hint:'老支书在等你，他的话要放在心上。',
+  text:[
+    '沿着石板路往里走，两边的土坯房大多关着门。偶尔有窗帘掀开一条缝，露出半张脸，看见你又迅速拉上了。',
+    '一个瘸了左腿的老人站在路中间等你。老支书<span class="em">周建国</span>，68岁，脸上没有一丝笑容，裤腿上还沾着泥。',
+    '"来了。"他的声音像砂纸磨过木头，"三句话记好：<span class="danger">办完丧事就走，晚上别出门，绝对别去后山槐树林。</span>"',
+    '你想问为什么，他已经转过身，一瘸一拐地往村尾走了。背影融进雾里，很快就看不见了。',
+    '你没吭声，低着头往奶奶的老房子走。路两旁的槐花开得正盛，花落了一地，像铺了层雪。'
+  ],
+  next:'act1_1c', nextText:'推开家门'
+};
+
+scenes['act1_1c'] = {
+  type:'narrative', bg:'bg-act1', actTag:'第 一 幕', actLabel:'第一幕 · 归乡',
+  title:'老屋', progress:9,
+  img:'scene-oldhouse.jpg', imgCap:'老房子里，槐花香依然弥漫',
+  hint:'屋里有很多东西可以看看。',
+  text:[
+    '推开木门，吱呀一声。屋里还留着<span class="warm">槐花的香味</span>，和记忆里一模一样。',
+    '堂屋正中摆着奶奶的遗像，黑白照片上，她笑得很慈祥。供桌上放着一碗干了的槐花饭，还有半杯凉茶。',
+    '你在遗像前站了很久。上次回来还是三年前，奶奶攥着你的手说，城里好就别回来了。',
+    '墙角放着一个<span class="em">上了锁的旧木箱</span>，铜锁已经发绿了。你记得这个箱子——小时候奶奶不让你碰，说等她走了再打开。',
+    '现在，是时候了。'
+  ],
+  next:'act1_2', nextText:'找找钥匙'
+};
+
+scenes['act1_2'] = {
+  type:'puzzle', bg:'bg-act1', actTag:'第 一 幕', actLabel:'第一幕 · 归乡',
+  title:'奶奶的老房子', progress:8,
+  img:'scene-oldhouse.jpg', imgCap:'老房子里，槐花香依然弥漫',
+  hint:'先找到剪纸仔细看——它指向针线笸箩里的东西。找到顶针后，按剪纸上的箭头方向旋转顶针，才能取出钥匙。',
+  desc:'屋里陈设简朴，东西不多但都有些年头了。你需要找到打开木箱的方法。<br><br><span style="color:var(--amber-soft);font-size:14px">提示：仔细检查每件物品，有些线索藏在细节里。找到的物品可以再次点击查看。</span>',
+  puzzleHtml: function(){
+    return '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step" id="step1"></div>'
+      + '<div class="puzzle-step" id="step2"></div>'
+      + '<div class="puzzle-step" id="step3"></div>'
+      + '<div class="puzzle-step" id="step4"></div>'
+      + '</div>'
+      + '<div class="room-desc">在屋里搜寻线索（共4步，按顺序完成）</div>'
+      + '<div class="items-grid">'
+      + '<div class="item-slot" onclick="examineItem(\'photo\')" style="font-size:22px">🖼</div>'
+      + '<div class="item-slot" onclick="examineItem(\'papercut\')" style="font-size:22px">✂</div>'
+      + '<div class="item-slot" onclick="examineItem(\'basket\')" style="font-size:22px">🧵</div>'
+      + '<div class="item-slot" onclick="examineItem(\'thimble\')" style="font-size:22px">⭕</div>'
+      + '<div class="item-slot" onclick="examineItem(\'box\')" style="font-size:22px">📦</div>'
+      + '<div class="item-slot" onclick="examineItem(\'calendar\')" style="font-size:22px">📅</div>'
+      + '<div class="item-slot" onclick="examineItem(\'window\')" style="font-size:22px">🪟</div>'
+      + '<div class="item-slot" onclick="examineItem(\'door\')" style="font-size:22px">🚪</div>'
+      + '<div class="item-slot" onclick="examineItem(\'drawer\')" style="font-size:22px">🗄</div>'
+      + '<div class="item-slot" onclick="examineItem(\'lamp\')" style="font-size:22px">🪔</div>'
+      + '<div class="item-slot" onclick="examineItem(\'shelf\')" style="font-size:22px">📚</div>'
+      + '<div class="item-slot" onclick="examineItem(\'mirror\')" style="font-size:22px">🪞</div>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="search-feedback"></div>'
+      + '</div>';
+  },
+  onRender: function() {
+    var stepDone = {s1:false, s2:false, s3:false, s4:false};
+    var foundItems = {};
+
+    function updateSteps() {
+      var steps = ['s1','s2','s3','s4'];
+      steps.forEach(function(s, i){
+        var el = document.getElementById('step'+(i+1));
+        if(!el) return;
+        el.className = 'puzzle-step';
+        if(stepDone[s]) el.classList.add('done');
+        else if(i === steps.filter(function(x){return stepDone[x]}).length) el.classList.add('current');
+      });
+    }
+    updateSteps();
+
+    function fb(msg, color) {
+      var el = document.getElementById('search-feedback');
+      el.innerHTML = msg;
+      el.style.color = color || 'var(--text-dim)';
+    }
+
+    window.examineItem = function(id) {
+      var slot = event.currentTarget;
+      var descriptions = {
+        photo: {icon:'🖼', title:'奶奶的遗像', desc:'黑白照片上，奶奶笑得很慈祥。相框背面刻着一行小字：<span style="color:var(--amber-soft)">"做人要对得起良心。"</span><br><br>你突然想起小时候奶奶总在缝东西——她手指上总戴着个铜顶针。', found:true},
+        papercut: {icon:'✂', title:'半张剪纸', desc:'一张红色剪纸，图案精细。剪的是一个<span style="color:var(--amber-soft)">顶针</span>的形状，顶针旁边剪了一个<span style="color:var(--amber-soft)">顺时针旋转的箭头↻</span>。<br><br>剪纸背面写着："转三圈，开口现。"', found:true, key:'papercut'},
+        basket: {icon:'🧵', title:'针线笸箩', desc:'里面堆着线团、剪刀、纽扣、旧布头……<br><br>你翻了翻，发现最底下有一个发绿的<span style="color:var(--amber-soft)">铜顶针</span>。', found:true, key:'basket'},
+        thimble: {icon:'⭕', title:'铜顶针', desc:'一个发绿的铜顶针，比普通顶针重一些。底部似乎可以转动。', found:true, key:'thimble'},
+        box: {icon:'📦', title:'旧木箱', desc:'上了铜锁的木箱，锁已经发绿了。没有钥匙打不开。<br><br>你记得奶奶说过："等她走了再打开。"', found:true},
+        calendar: {icon:'📅', title:'老黄历', desc:'停在七月十五。旁边用铅笔写着一行小字：<span style="color:var(--amber-soft)">"月圆夜雾最重。"</span><br><br>今天是七月十四。', found:true},
+        window: {icon:'🪟', title:'窗户', desc:'窗外雾气翻涌，什么都看不见。<br><br>窗台上落了一层灰，灰里有一串小小的脚印——不像人的。', found:true},
+        door: {icon:'🚪', title:'房门', desc:'门栓完好。但门槛上不知何时多了一颗干瘪的<span style="color:var(--warm)">槐花果</span>。', found:true},
+        drawer: {icon:'🗄', title:'旧抽屉', desc:'抽屉拉不开，被钉子钉死了。你用力掰了几下，发现抽屉板上刻着一个<span style="color:var(--amber-soft)">"七"</span>字。', found:true},
+        lamp: {icon:'🪔', title:'煤油灯', desc:'灯里没油了。灯座底部刻着一行字：<span style="color:var(--text-dim)">"槐树开花，接人回家。"</span>和日记里的童谣一模一样。', found:true},
+        shelf: {icon:'📚', title:'旧书架', desc:'几本发黄的旧书。最下面压着一张<span style="color:var(--amber-soft)">年画</span>，画上七盏灯笼排成一排，每盏上面写着一个数字：三·一·五·七·二·六·四。', found:true, key:'shelf'},
+        mirror: {icon:'🪞', title:'老镜子', desc:'镜面氧化发黑了。你照了照，镜中的自己身后似乎站着一个<span style="color:var(--danger)">模糊的人影</span>——回头一看，什么都没有。', found:true}
+      };
+
+      var item = descriptions[id];
+      if(!item) return;
+
+      if(!slot.classList.contains('found')) {
+        slot.classList.add('found');
+      }
+
+      // 特殊处理：剪纸
+      if(id === 'papercut') {
+        if(!stepDone.s1) {
+          stepDone.s1 = true;
+          updateSteps();
+          fb('找到剪纸了！上面的箭头和文字是重要线索。', 'var(--amber-soft)');
+        }
+        openItemModal(item.icon, item.title, item.desc + '<br><br><span style="color:var(--amber)">记住：顺时针旋转↻，转三圈。</span>', [
+          {text:'记住了', onclick:'closeItemModal()'}
+        ]);
+        foundItems.papercut = true;
+        return;
+      }
+
+      // 特殊处理：针线笸箩
+      if(id === 'basket') {
+        if(!foundItems.papercut) {
+          openItemModal('🧵', '针线笸箩', '里面堆着线团、剪刀、纽扣……你翻了翻，没什么特别的。<br><br><span style="color:var(--text-dim)">也许先看看剪纸上的线索，知道要找什么？</span>');
+          return;
+        }
+        if(!stepDone.s2) {
+          stepDone.s2 = true;
+          updateSteps();
+          fb('在笸箩底部找到了一个铜顶针！', 'var(--amber-soft)');
+        }
+        openItemModal(item.icon, item.title, '你按照剪纸的提示寻找，在最底下找到了一个发绿的<span style="color:var(--amber-soft)">铜顶针</span>。它比普通顶针重，底部似乎可以转动。', [
+          {text:'拿起顶针', onclick:'closeItemModal(); examineItem("thimble");'}
+        ]);
+        foundItems.basket = true;
+        // 解锁顶针格子
+        var ts = document.querySelectorAll('.item-slot')[3];
+        if(ts) ts.style.opacity = '1';
+        return;
+      }
+
+      // 特殊处理：铜顶针 - 旋转谜题
+      if(id === 'thimble') {
+        if(!foundItems.basket) {
+          openItemModal('⭕', '铜顶针', '你还没找到铜顶针。也许该先检查针线笸箩？');
+          return;
+        }
+        if(stepDone.s3) {
+          openItemModal('🔑', '铜顶针（已打开）', '顶针底部已经打开，里面的小铜钥匙已经取出。');
+          return;
+        }
+        // 开始旋转谜题
+        openTwistPuzzle();
+        return;
+      }
+
+      // 书架 - 年画线索
+      if(id === 'shelf') {
+        openItemModal(item.icon, item.title, item.desc);
+        foundItems.shelf = true;
+        return;
+      }
+
+      // 其他物品
+      openItemModal(item.icon, item.title, item.desc);
+    };
+
+    function openTwistPuzzle() {
+      var modal = document.getElementById('itemModal');
+      var content = document.getElementById('itemModalContent');
+      var twistCount = 0;
+      var twistDir = null;
+
+      content.innerHTML = '<div class="item-modal-icon">⭕</div>'
+        + '<div class="item-modal-title">铜顶针</div>'
+        + '<div class="item-modal-desc">顶针底部可以转动。剪纸上的箭头是<span style="color:var(--amber)">顺时针↻</span>，背面写着"转三圈，开口现"。<br><br>选择旋转方向，然后旋转：</div>'
+        + '<div class="twist-puzzle">'
+        + '<div class="twist-dial" id="twistDial" style="transform:rotate(0deg)">'
+        + '<div class="twist-pointer"></div>'
+        + '</div>'
+        + '<div style="display:flex;gap:12px;justify-content:center;margin-top:10px">'
+        + '<button class="btn sm" id="dirCW" onclick="selectTwistDir(\'cw\')">↻ 顺时针</button>'
+        + '<button class="btn sm" id="dirCCW" onclick="selectTwistDir(\'ccw\')">↺ 逆时针</button>'
+        + '</div>'
+        + '<div style="text-align:center;margin-top:10px"><button class="btn" id="twistBtn" onclick="doTwist()" disabled>旋 转</button></div>'
+        + '<div style="text-align:center;margin-top:6px;font-size:13px;color:var(--text-dim)" id="twistStatus">已旋转 0/3 圈</div>'
+        + '</div>'
+        + '<div class="item-modal-actions"><button class="btn sm" onclick="closeItemModal()">放 下</button></div>';
+      modal.classList.add('show');
+
+      window.selectTwistDir = function(dir) {
+        twistDir = dir;
+        document.getElementById('dirCW').style.opacity = dir==='cw' ? '1' : '0.4';
+        document.getElementById('dirCCW').style.opacity = dir==='ccw' ? '1' : '0.4';
+        document.getElementById('twistBtn').disabled = false;
+      };
+
+      window.doTwist = function() {
+        if(!twistDir) return;
+        var dial = document.getElementById('twistDial');
+        var currentRot = parseFloat(dial.style.transform.replace(/[^\d-]/g,'')) || 0;
+        if(twistDir === 'cw') {
+          currentRot += 360;
+          dial.style.transform = 'rotate(' + currentRot + 'deg)';
+        } else {
+          currentRot -= 360;
+          dial.style.transform = 'rotate(' + currentRot + 'deg)';
+        }
+
+        if(twistDir === 'cw') {
+          twistCount++;
+          document.getElementById('twistStatus').textContent = '已旋转 ' + twistCount + '/3 圈';
+          if(twistCount >= 3) {
+            document.getElementById('twistStatus').innerHTML = '<span style="color:var(--green-soft)">咔哒！顶针底部弹开了！</span>';
+            setTimeout(function() {
+              content.innerHTML = '<div class="item-modal-icon">🔑</div>'
+                + '<div class="item-modal-title">找到钥匙了！</div>'
+                + '<div class="item-modal-desc">顶针底部弹开，里面藏着一把<span style="color:var(--amber)">小铜钥匙</span>！<br><br>这把钥匙应该能打开墙角的旧木箱。</div>'
+                + '<div class="item-modal-actions"><button class="btn" onclick="closeItemModal(); gotKey();">拿走钥匙</button></div>';
+            }, 800);
+          }
+        } else {
+          twistCount = 0;
+          document.getElementById('twistStatus').innerHTML = '<span style="color:var(--danger)">方向不对，顶针纹丝不动。重试。</span>';
+          dial.style.transform = 'rotate(0deg)';
+        }
+      };
+    }
+
+    window.gotKey = function() {
+      stepDone.s3 = true;
+      updateSteps();
+      addItem('key','🔑','铜钥匙');
+      fb('<span style="color:var(--amber)">找到铜钥匙了！可以打开木箱。</span>', 'var(--amber)');
+      // 标记顶针格子
+      var ts = document.querySelectorAll('.item-slot')[3];
+      if(ts) ts.classList.add('found');
+      // 显示继续按钮
+      setTimeout(function() {
+        stepDone.s4 = true;
+        updateSteps();
+        document.getElementById('puzzle-next').style.display = 'flex';
+      }, 1000);
+    };
+
+    // 允许已找到的物品重复点击
+    var slots = document.querySelectorAll('.item-slot');
+    slots.forEach(function(s){
+      s.addEventListener('click', function(){
+        if(s.classList.contains('found')) {
+          // 已经处理过了，examineItem会再次显示
+        }
+      });
+    });
+  },
+  next:'act1_3', nextText:'打开木箱'
+};
+
+scenes['act1_3'] = {
+  type:'narrative', bg:'bg-act1', actTag:'第 一 幕', actLabel:'第一幕 · 归乡',
+  title:'木箱之中', progress:14,
+  img:'scene-oldhouse.jpg', imgCap:'木箱里的秘密，是奶奶一生的守候',
+  hint:'记住日记中的关键信息，后面会用到。点击左下角"📖 回顾"可随时查看已获得线索。',
+  text:[
+    '铜钥匙插进锁孔，咔哒一声，木箱打开了。',
+    '里面只有几件叠得整整齐齐的旧衣服、<span class="em">半本没写完的日记</span>、和一张褪色的集体照。照片上十几个人站在一棵大槐树下，表情都很严肃。',
+    '你拿起照片翻过来，背面用铅笔写着："1953年秋，雾落村。"字迹已经模糊了。',
+    '你翻开日记，字迹是奶奶的，断断续续：',
+    '<span class="ghost">"……月圆夜雾最重，结界又裂了……我快撑不住了……"</span>',
+    '<span class="ghost">"……傻根今天又跑到后山入口坐着了，我得去把他领回来……"</span>',
+    '<span class="ghost">"……树儿该进城了，越远越好，别回来……"</span>',
+    '你坐在木箱旁边，一页一页往后翻。大部分页面都是空白的，只有最后几页写了字，字迹越来越潦草。',
+    '天色暗了下来。你正想关窗，窗外闪过一个<span class="danger">佝偻的人影</span>。推门出去，空无一人——门槛上多了一颗干瘪的<span class="warm">槐花果</span>。',
+    '你捡起来，放在手心。果皮皱巴巴的，却还带着一丝若有若无的香气。'
+  ],
+  onRender: function() {
+    gameState.diaryUnlocked = true;
+    // 更新回顾面板内容
+    var rp = document.getElementById('reviewPanel');
+    rp.innerHTML = ''
+      + '<div style="font-size:13px;color:var(--amber);margin-bottom:8px;letter-spacing:1px">线索回顾</div>'
+      + '<div class="review-item" onclick="showReviewItem(\'diary\')">📖 奶奶的日记<span class="review-ri">点击查看</span></div>'
+      + '<div class="review-item" onclick="showReviewItem(\'photo\')">🖼 老照片<span class="review-ri">点击查看</span></div>'
+      + '<div style="margin-top:6px;font-size:11px;color:var(--text-dim);text-align:center">后续线索会自动加入</div>';
+  },
+  next:'act2_1', nextText:'第二天'
+};
+
+// ========== 第二幕：疑云·影动 ==========
+scenes['act2_1'] = {
+  type:'narrative', bg:'bg-act2', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'次日清晨', progress:17,
+  img:'scene-oldhouse.jpg', imgCap:'清晨的老房子，阳光穿过雾气照进来',
+  hint:'先去找老支书问问情况。',
+  text:[
+    '一夜没睡好。',
+    '窗外的雾比昨天更重了。你坐在堂屋的板凳上，手里攥着那本日记，翻来覆去地看。',
+    '"结界"是什么？"后山"为什么不能去？奶奶守了一辈子的，到底是什么秘密？',
+    '你决定去找老支书问个清楚。不管他愿不愿意说，你总得弄明白奶奶是怎么死的。'
+  ],
+  next:'act2_1b', nextText:'去找老支书'
+};
+
+scenes['act2_1b'] = {
+  type:'narrative', bg:'bg-act2', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'闭门羹', progress:20,
+  img:'scene-shop.jpg', imgCap:'村头的小路，雾气从后山方向漫过来',
+  hint:'老支书不肯说，去小卖部找哑巴婶子试试。',
+  text:[
+    '老支书家的门虚掩着。你敲了三下，里面传来他的声音："滚。"',
+    '你又敲了一下。门猛地拉开，老支书站在门口，眼睛通红，像是一夜没睡。',
+    '"我再说一遍，<span class="danger">村里的事你别管，办完丧事赶紧走。</span>"他的声音很低，像是在怕什么人听见。',
+    '你还想再问，他已经把门摔上了。门栓咔哒一声，上了锁。',
+    '你站在门口，有些茫然。这时，远处传来铃铛声——是小卖部的方向。'
+  ],
+  next:'act2_1c', nextText:'去小卖部'
+};
+
+scenes['act2_1c'] = {
+  type:'narrative', bg:'bg-act2', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'哑巴婶子', progress:23,
+  img:'scene-shop.jpg', imgCap:'哑巴婶子的小卖部，藏着不为人知的秘密',
+  hint:'哑巴婶子在比划什么，仔细观察她的动作。',
+  text:[
+    '小卖部在村口，木头门脸，挂着个掉漆的牌子。',
+    '老板是<span class="em">林秀</span>，54岁，村里人都叫她哑巴婶子。她不能说话，但耳朵很灵，听见脚步声就抬起头来。',
+    '她看见你，先是愣了一下，然后从柜台下面摸出两个煮鸡蛋，塞到你手里。鸡蛋还是热的。',
+    '你道了谢，问她知不知道奶奶的事。她张了张嘴，发不出声音，却开始用力比划——',
+    '她指了指你胸口（你想起木箱里的半块香囊），又指了指货架后面的方向，然后做了个"拼合"的手势。',
+    '最后她竖起一根手指，又做了个翻书的动作。',
+    '你不太明白，但她似乎在告诉你：货架后面有东西，和你身上的半块香囊有关。'
+  ],
+  next:'act2_1d', nextText:'搜查小卖部'
+};
+
+scenes['act2_1d'] = {
+  type:'puzzle', bg:'bg-act2', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'小卖部搜索', progress:25,
+  img:'scene-shop.jpg', imgCap:'小卖部里堆满了旧货，灯光昏暗',
+  hint:'哑巴婶子指了货架后面。仔细搜搜每样东西。',
+  desc:'小卖部不大，但东西堆得到处都是。哑巴婶子坐在柜台后面看着你，偶尔点头或摇头。<br><br><span style="color:var(--amber-soft);font-size:14px">提示：她指了货架方向。找到的物品可以再次点击查看。</span>',
+  puzzleHtml: function(){
+    return '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="sstep1"></div>'
+      + '<div class="puzzle-step" id="sstep2"></div>'
+      + '<div class="puzzle-step" id="sstep3"></div>'
+      + '</div>'
+      + '<div class="room-desc">搜索小卖部，找到哑巴婶子暗示的东西</div>'
+      + '<div class="items-grid">'
+      + '<div class="item-slot" onclick="shopSearch(\'counter\')" style="font-size:22px">🗄</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'shelf1\')" style="font-size:22px">🥫</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'shelf2\')" style="font-size:22px">🧂</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'shelf3\')" style="font-size:22px">🍶</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'backroom\')" style="font-size:22px">🚪</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'floor\')" style="font-size:22px">📦</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'wall\')" style="font-size:22px">🖼</div>'
+      + '<div class="item-slot" onclick="shopSearch(\'crack\')" style="font-size:22px">🕳</div>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="shop-feedback"></div>'
+      + '</div>';
+  },
+  onRender: function() {
+    var foundSachet = false;
+    var examinedCount = 0;
+
+    function sfb(msg, color) {
+      var el = document.getElementById('shop-feedback');
+      el.innerHTML = msg;
+      el.style.color = color || 'var(--text-dim)';
+    }
+
+    window.shopSearch = function(id) {
+      var slot = event.currentTarget;
+      var items = {
+        counter: {icon:'🗄', title:'柜台', desc:'柜台下面放着账本和零钱。账本上记着村里人赊的账——傻根的名字出现了好几次，后面都画了个圈，写着"免"。'},
+        shelf1: {icon:'🥫', title:'第一层货架', desc:'罐头、腊肉、挂面。你翻了翻，没什么特别的。'},
+        shelf2: {icon:'🧂', title:'第二层货架', desc:'盐、酱油、醋。酱油瓶后面藏着一个铁盒子，打开一看——是几封旧信，寄给"林秀"的。字迹和木箱里照片背面的不一样。'},
+        shelf3: {icon:'🍶', title:'第三层货架', desc:'酒、糖、火柴。货架木板上有几道<span style="color:var(--amber-soft)">刻痕</span>，像人为刻上去的，写着"三在首，四殿后"。', key:'shelf3'},
+        backroom: {icon:'🚪', title:'后门', desc:'门栓锈死了。门缝里能看到后院，院里种着一棵小槐树。'},
+        floor: {icon:'📦', title:'地上的纸箱', desc:'装着旧衣服和破鞋。你翻了翻，在最底下发现一块<span style="color:var(--amber-soft)">绣着槐花的半块香囊</span>！', key:'sachet'},
+        wall: {icon:'🖼', title:'墙上的年画', desc:'一张旧年画，画的是七盏灯笼。和书架上那张一样，数字排列是：三·一·五·七·二·六·四。'},
+        crack: {icon:'🕳', title:'墙缝', desc:'墙缝里塞着一团纸。抽出来一看，是张旧报纸的残页，标题依稀可见："山区……十七人……就义……"。'}
+      };
+
+      var item = items[id];
+      if(!item) return;
+
+      if(!slot.classList.contains('found')) {
+        slot.classList.add('found');
+        examinedCount++;
+      }
+
+      if(item.key === 'sachet' && !foundSachet) {
+        foundSachet = true;
+        addItem('sachet2','🌸','半块香囊(店)');
+        document.getElementById('sstep1').classList.add('done');
+        document.getElementById('sstep1').classList.remove('current');
+        document.getElementById('sstep2').classList.add('current');
+        sfb('找到半块香囊了！和木箱里的那半块切口吻合。', 'var(--amber-soft)');
+        openItemModal('🌸', '半块香囊', '纸箱最底下，藏着一块绣着槐花的半块香囊。切口和木箱里那半块正好吻合。<br><br>哑巴婶子看见你找到了，点了点头，又做了个"拼合"的手势。', [
+          {text:'收起来', onclick:'closeItemModal()'}
+        ]);
+        return;
+      }
+
+      if(item.key === 'shelf3') {
+        openItemModal(item.icon, item.title, item.desc + '<br><br><span style="color:var(--amber)">记住这个线索："三在首，四殿后"</span>');
+        return;
+      }
+
+      openItemModal(item.icon, item.title, item.desc);
+    };
+
+    // 检查是否可以继续
+    var checkInterval = setInterval(function(){
+      if(foundSachet) {
+        clearInterval(checkInterval);
+        document.getElementById('sstep2').classList.add('done');
+        document.getElementById('sstep2').classList.remove('current');
+        document.getElementById('sstep3').classList.add('current');
+        sfb('<span style="color:var(--amber)">香囊找到了。回去把两半拼在一起看看。</span>', 'var(--amber)');
+        setTimeout(function(){
+          document.getElementById('sstep3').classList.add('done');
+          document.getElementById('puzzle-next').style.display = 'flex';
+        }, 2000);
+      }
+    }, 1000);
+  },
+  next:'act2_2', nextText:'拼合香囊'
+};
+
+scenes['act2_2'] = {
+  type:'puzzle', bg:'bg-act2', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'两半香囊', progress:28,
+  img:'scene-shop.jpg', imgCap:'两半香囊，拼合后露出内侧的秘密',
+  hint:'先选对方向（正面朝上），再选对位置（切口对齐），最后点击拼合。',
+  desc:'你回到老房子，把两半香囊放在桌上。木箱里的半块和哑巴婶子小卖部找到的半块。<br><br>切口吻合，但内侧绣着字，需要正确拼合才能看清。<br><br><span style="color:var(--amber-soft);font-size:14px">三步拼合：1.选方向 2.对切口 3.拼合</span>',
+  puzzleHtml: function(){
+    return '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="cstep1"></div>'
+      + '<div class="puzzle-step" id="cstep2"></div>'
+      + '<div class="puzzle-step" id="cstep3"></div>'
+      + '</div>'
+      + '<div class="room-desc">正确拼合两半香囊</div>'
+      + '<div style="display:flex;gap:30px;justify-content:center;margin:16px 0">'
+      + '<div class="item-slot found" style="width:80px;height:80px;font-size:30px" id="sachet1">🌸</div>'
+      + '<div class="item-slot found" style="width:80px;height:80px;font-size:30px" id="sachet2">🌸</div>'
+      + '</div>'
+      + '<div id="combine-step1" style="text-align:center;margin:10px 0">'
+      + '<div style="font-size:14px;color:var(--text-dim);margin-bottom:8px">第一步：哪面朝上？</div>'
+      + '<button class="btn sm" onclick="combineStep1(\'front\')">绣花面朝上</button> '
+      + '<button class="btn sm" onclick="combineStep1(\'back\')">背面朝上</button>'
+      + '</div>'
+      + '<div id="combine-step2" style="display:none;text-align:center;margin:10px 0">'
+      + '<div style="font-size:14px;color:var(--text-dim);margin-bottom:8px">第二步：怎么对齐切口？</div>'
+      + '<button class="btn sm" onclick="combineStep2(\'left\')">左半边在左</button> '
+      + '<button class="btn sm" onclick="combineStep2(\'right\')">左半边在右</button>'
+      + '</div>'
+      + '<div id="combine-step3" style="display:none;text-align:center;margin:10px 0">'
+      + '<div style="font-size:14px;color:var(--text-dim);margin-bottom:8px">第三步：拼合！</div>'
+      + '<button class="btn" onclick="combineStep3()">🌸 拼合香囊</button>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="sachet-feedback"></div>'
+      + '</div>';
+  },
+  onRender: function() {
+    addItem('sachet1','🌸','半块香囊(箱)');
+    var step1Done = false, step2Done = false;
+    var fb = document.getElementById('sachet-feedback');
+
+    window.combineStep1 = function(choice) {
+      if(choice === 'front') {
+        step1Done = true;
+        document.getElementById('cstep1').classList.add('done');
+        document.getElementById('cstep1').classList.remove('current');
+        document.getElementById('cstep2').classList.add('current');
+        document.getElementById('combine-step1').style.display = 'none';
+        document.getElementById('combine-step2').style.display = 'block';
+        fb.innerHTML = '<span style="color:var(--amber-soft)">对，绣花面朝上才能看到内侧的字。</span>';
+      } else {
+        fb.innerHTML = '<span style="color:var(--danger)">翻过来看，背面什么也没有。再想想。</span>';
+      }
+    };
+
+    window.combineStep2 = function(choice) {
+      if(!step1Done) return;
+      if(choice === 'right') {
+        step2Done = true;
+        document.getElementById('cstep2').classList.add('done');
+        document.getElementById('cstep2').classList.remove('current');
+        document.getElementById('cstep3').classList.add('current');
+        document.getElementById('combine-step2').style.display = 'none';
+        document.getElementById('combine-step3').style.display = 'block';
+        fb.innerHTML = '<span style="color:var(--amber-soft)">切口对齐了！两半完美吻合。</span>';
+      } else {
+        fb.innerHTML = '<span style="color:var(--danger)">切口对不上。换个方向试试。</span>';
+      }
+    };
+
+    window.combineStep3 = function() {
+      if(!step2Done) return;
+      document.getElementById('cstep3').classList.add('done');
+      document.getElementById('combine-step3').style.display = 'none';
+      document.getElementById('sachet1').textContent = '🌺';
+      document.getElementById('sachet2').style.display = 'none';
+      fb.innerHTML = '<span style="color:var(--amber)">两块香囊拼合成功！内侧绣着四个字："翻至十二"。</span>';
+      addItem('sachet_full','🌺','完整香囊');
+      removeItem('sachet1');
+      var rp = document.getElementById('reviewPanel');
+      rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'sachet\')">🌺 香囊线索<span class="review-ri">点击查看</span></div>';
+      setTimeout(function(){
+        document.getElementById('puzzle-next').style.display = 'flex';
+      }, 1500);
+    };
+  },
+  next:'act2_3', nextText:'翻日记第十二页'
+};
+
+scenes['act2_3'] = {
+  type:'narrative', bg:'bg-act2', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'日记第十二页', progress:30,
+  img:'scene-oldhouse.jpg', imgCap:'日记的字迹越来越潦草，像在和时间赛跑',
+  hint:'童谣和石阵信息是后续解谜的关键线索，可用"📖 回顾"随时查看。',
+  text:[
+    '你回到老房子，坐在门槛上，把日记翻到第十二页。',
+    '字迹很潦草，像是在极度疲惫时写的，墨水洇开了好几处：',
+    '<div class="doc-view"><div class="doc-title">日记 · 第十二页</div>'
+    + '<div class="doc-line"><span class="ghost">槐树开花，接人回家，</span></div>'
+    + '<div class="doc-line"><span class="ghost">七块乱石挡住路，</span></div>'
+    + '<div class="doc-line"><span class="ghost">年画在前头，货架上留痕，</span></div>'
+    + '<div class="doc-line"><span class="ghost">傻根嘴里有口诀。</span></div>'
+    + '<div class="doc-line"><span class="ghost">排对了进，排错了回。</span></div>'
+    + '<div class="doc-line" style="margin-top:10px;color:var(--amber)">——后山槐树林入口有石阵，须按顺序排列方可通过。</div>'
+    + '</div>',
+    '你反复读了好几遍。年画？货架？傻根？这三样东西之间有什么联系？',
+    '天色渐渐暗了。你把日记收好，决定明天再去查个清楚。',
+    '夜里，你被敲门声吵醒。开门——没人。窗台上多了一串沾着泥的脚印，<span class="danger">形状偏小，不像成年人的脚</span>。',
+    '你转头看镜子，镜中自己的身后站着一个穿粗布短衫的<span class="danger">人影</span>——瞬间又消失了。',
+    '你攥紧被子，一夜无眠。'
+  ],
+  onRender: function() {
+    var rp = document.getElementById('reviewPanel');
+    rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'diaryPage12\')">📖 日记第十二页<span class="review-ri">点击查看</span></div>';
+  },
+  next:'act2_4', nextText:'追踪脚印'
+};
+
+// ========== 第二幕补充：夜间追踪 ==========
+scenes['act2_4'] = {
+  type:'puzzle', bg:'bg-act3', actTag:'第 二 幕', actLabel:'第二幕 · 疑云',
+  title:'追踪脚印', progress:32,
+  img:'scene-night.jpg', imgCap:'夜里的小脚印，延伸向村尾方向',
+  hint:'脚印经过三个地点，按正确顺序追踪。每个地点都有线索。',
+  desc:'你决定跟踪窗台上那串小脚印。月光下，脚印若隐若现，弯弯绕绕地穿过村子。<br><br><span style="color:var(--amber-soft);font-size:14px">提示：脚印经过水井、磨坊、村尾老槐树。按脚印走向的顺序点击。</span>',
+  puzzleHtml: function(){
+    return '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="trk1"></div>'
+      + '<div class="puzzle-step" id="trk2"></div>'
+      + '<div class="puzzle-step" id="trk3"></div>'
+      + '</div>'
+      + '<div class="room-desc">按脚印走向顺序，点击三个地点</div>'
+      + '<div class="items-grid" style="grid-template-columns:repeat(3,1fr);max-width:360px;margin:0 auto">'
+      + '<div class="item-slot" onclick="trackFoot(\'well\')" style="font-size:26px;aspect-ratio:1.2">💧</div>'
+      + '<div class="item-slot" onclick="trackFoot(\'mill\')" style="font-size:26px;aspect-ratio:1.2">⚙</div>'
+      + '<div class="item-slot" onclick="trackFoot(\'tree\')" style="font-size:26px;aspect-ratio:1.2">🌳</div>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="track-feedback"></div>'
+      + '</div>';
+  },
+  onRender: function() {
+    var seq = [];
+    var correct = ['well','mill','tree'];
+    var step = 0;
+
+    window.trackFoot = function(id) {
+      var slot = event.currentTarget;
+      var fb = document.getElementById('track-feedback');
+      var descs = {
+        well: '水井边。脚印在水洼旁清晰可见，然后拐向磨坊方向。井沿上刻着一个小小的槐花图案。',
+        mill: '磨坊门口。脚印在磨盘旁绕了一圈，地上散落几颗干瘪的槐花果。脚印继续延伸向村尾。',
+        tree: '村尾老槐树下。脚印到这里就消失了。树干上刻着一行小字：\'守者无名，槐花为证。\'旁边还刻着17个歪歪扭扭的名字。'
+      };
+
+      if(seq.includes(id)) {
+        fb.innerHTML = '<span style="color:var(--text-dim)">已经查过了：' + descs[id] + '</span>';
+        return;
+      }
+
+      if(id === correct[step]) {
+        seq.push(id);
+        slot.classList.add('found');
+        document.getElementById('trk'+(step+1)).classList.add('done');
+        if(step < 2) document.getElementById('trk'+(step+2)).classList.add('current');
+        step++;
+
+        if(id === 'tree') {
+          fb.innerHTML = '<span style="color:var(--amber)">' + descs[id] + '</span><br><span style="color:var(--amber-soft)">17个名字……和照片上的人数一样。</span>';
+          var rp = document.getElementById('reviewPanel');
+          rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'treeNames\')">🌳 槐树上的名字<span class="review-ri">点击查看</span></div>';
+          reviewData.treeNames = {title:'老槐树上的刻名', content:'村尾老槐树干上刻着"守者无名，槐花为证"，下面有17个歪歪扭扭的名字。和木箱里老照片上的人数一致——1953年秋，雾落村。'};
+          setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 2000);
+        } else {
+          fb.innerHTML = '<span style="color:var(--amber-soft)">' + descs[id] + '</span>';
+        }
+      } else {
+        fb.innerHTML = '<span style="color:var(--danger)">脚印不是往这个方向走的。顺着脚印的方向走。</span>';
+        slot.classList.add('wrong');
+        setTimeout(function(){ slot.classList.remove('wrong'); }, 600);
+      }
+    };
+  },
+  next:'act3_1', nextText:'第三天'
+};
+
+// ========== 第三幕：夜惊·错路 ==========
+scenes['act3_1'] = {
+  type:'narrative', bg:'bg-act3', actTag:'第 三 幕', actLabel:'第三幕 · 夜惊',
+  title:'第三天', progress:33,
+  img:'scene-shop.jpg', imgCap:'白天的村子，浓雾稍稍散去了一些',
+  hint:'去村子里转转，收集更多线索。',
+  text:[
+    '第三天，雾还是没有散。',
+    '你在村子里转了一上午。老房子的年画上有七盏灯笼，小卖部的货架木板上有刻痕，村口傻子傻根嘴里总念叨着什么童谣。',
+    '你把三条线索都记在心里——年画上的顺序、货架上的刻字、傻根嘴里的调调。它们都指向同一个地方：后山槐树林。',
+    '可是奶奶的死因呢？老支书为什么那么忌讳后山？',
+    '你越想越觉得不对劲。你认定奶奶的死和"结界"有关，甚至怀疑是老支书逼死了奶奶。',
+    '天黑之后，你决定去村委会看看。也许那里藏着什么秘密。'
+  ],
+  next:'act3_1b', nextText:'夜探村委会'
+};
+
+scenes['act3_1b'] = {
+  type:'narrative', bg:'bg-act3', actTag:'第 三 幕', actLabel:'第三幕 · 夜惊',
+  title:'夜探', progress:36,
+  img:'scene-night.jpg', imgCap:'村委会的煤油灯，在浓雾中摇摇欲灭',
+  hint:'老奖状上的年份是开锁密码，按时间先后排列。',
+  text:[
+    '夜很深了。月亮被雾遮着，只能看见一团昏黄的光晕。',
+    '你蹑手蹑脚地摸到村委会。门居然没锁，吱呀一声就推开了。',
+    '屋里点着一盏<span class="em">昏黄的煤油灯</span>，灯芯结了厚厚的灯花，火苗摇摇晃晃的。',
+    '角落里有一个上锁的铁皮柜，柜门贴着封条，写着<span class="danger">"后山禁地"</span>四个字。封条上的红泥印章已经褪色了。',
+    '墙上挂着四张泛黄的老奖状，分别写着不同年份——那是四代守槐人接任的时间。',
+    '你盯着铁皮柜看了很久。里面到底藏着什么？'
+  ],
+  next:'act3_2', nextText:'试试开锁'
+};
+
+scenes['act3_2'] = {
+  type:'puzzle', bg:'bg-act3', actTag:'第 三 幕', actLabel:'第三幕 · 夜惊',
+  title:'铁皮柜密码', progress:40,
+  img:'scene-night.jpg', imgCap:'铁皮柜贴着封条，里面的东西出乎意料',
+  hint:'四张奖状的年份分别是：1953年、1978年、2001年、1976年。按从早到晚排列为1953-1976-1978-2001，取年份后两位组成8位密码。',
+  desc:'铁皮柜上有一把八位密码锁（每位对应一个数字）。墙上四张奖状依稀可见：<br>第一任守槐人——<span class="em">1953年</span>接任<br>第二任——<span class="em">1976年</span>接任<br>第三任（奶奶）——<span class="em">1978年</span>接任<br>第四任（预备）——<span class="em">2001年</span>接任<br><br>按接任先后顺序，取每个年份后两位，组成八位密码：',
+  puzzleHtml: function(){
+    var boxes = '';
+    for(var i=1; i<=8; i++) boxes += '<div class="code-box" id="cd'+i+'"></div>';
+    return '<div class="code-display" style="gap:6px;flex-wrap:wrap;justify-content:center">' + boxes + '</div>'
+      + '<div class="puzzle-feedback" id="code-feedback"></div>'
+      + '<div class="numpad">'
+      + '<button onclick="codeInput(1)">1</button><button onclick="codeInput(2)">2</button><button onclick="codeInput(3)">3</button>'
+      + '<button onclick="codeInput(4)">4</button><button onclick="codeInput(5)">5</button><button onclick="codeInput(6)">6</button>'
+      + '<button onclick="codeInput(7)">7</button><button onclick="codeInput(8)">8</button><button onclick="codeInput(9)">9</button>'
+      + '<button onclick="codeClear()">清</button><button onclick="codeInput(0)">0</button><button onclick="codeDel()">⌫</button>'
+      + '</div>';
+  },
+  onRender: function() {
+    window.codeInput = function(d) {
+      for(var i=1; i<=8; i++) {
+        var box = document.getElementById('cd'+i);
+        if(!box.textContent) { box.textContent = d; box.classList.add('filled'); if(i===8) setTimeout(checkCode, 400); return; }
+      }
+    };
+    window.codeDel = function() {
+      for(var i=8; i>=1; i--) {
+        var box = document.getElementById('cd'+i);
+        if(box.textContent) { box.textContent = ''; box.classList.remove('filled','error','ok'); return; }
+      }
+    };
+    window.codeClear = function() {
+      for(var i=1; i<=8; i++) { var box = document.getElementById('cd'+i); box.textContent = ''; box.classList.remove('filled','error','ok'); }
+    };
+    window.checkCode = function() {
+      var code = '';
+      for(var i=1; i<=8; i++) code += document.getElementById('cd'+i).textContent;
+      if(code === '53767801') {
+        for(var i=1; i<=8; i++) document.getElementById('cd'+i).classList.add('ok');
+        document.getElementById('code-feedback').innerHTML = '<span style="color:var(--green-soft)">咔哒——锁开了。</span>';
+        setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 1200);
+      } else {
+        for(var i=1; i<=8; i++) document.getElementById('cd'+i).classList.add('error');
+        document.getElementById('code-feedback').innerHTML = '<span style="color:var(--danger)">密码不对。再想想奖状上的年份顺序——从最早到最晚。</span>';
+        setTimeout(function(){ for(var i=1; i<=8; i++) document.getElementById('cd'+i).classList.remove('error'); }, 600);
+      }
+    };
+  },
+  next:'act3_2b', nextText:'翻看柜中文件'
+};
+
+// ========== 第三幕补充：档案整理 ==========
+scenes['act3_2b'] = {
+  type:'puzzle', bg:'bg-act3', actTag:'第 三 幕', actLabel:'第三幕 · 夜惊',
+  title:'柜中密档', progress:42,
+  img:'scene-night.jpg', imgCap:'铁皮柜里的档案，记录着村子七十年的秘密',
+  hint:'按时间从早到晚排列五份档案。每份档案上有年份，仔细看。',
+  desc:'铁皮柜里除了医疗单，还有五份发黄的档案，散落一地。每份档案封面上都有年份和关键词。<br><br>你需要按时间从早到晚的顺序，把它们排列好，才能理清村子的历史脉络。<br><br><span style="color:var(--amber-soft);font-size:14px">提示：点击档案选择，再点击目标位置放入。排错会自动归位。</span>',
+  puzzleHtml: function(){
+    var docs = [
+      {id:'d1', year:'1953年', title:'烈士证明', desc:'十七名村民在抗战中英勇就义'},
+      {id:'d2', year:'1955年', title:'守槐人制', desc:'幸存孤儿立誓守护，第一任守槐人接任'},
+      {id:'d3', year:'1976年', title:'交接记录', desc:'第二任守槐人接任，雾气渐重'},
+      {id:'d4', year:'1978年', title:'奶奶接任', desc:'陈桂英成为第三任守槐人'},
+      {id:'d5', year:'2001年', title:'预备空缺', desc:'第四任守槐人未找到接任者'}
+    ];
+    // 打乱顺序
+    var shuffled = [docs[3], docs[0], docs[4], docs[2], docs[1]];
+
+    var html = '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="doc1"></div>'
+      + '<div class="puzzle-step" id="doc2"></div>'
+      + '<div class="puzzle-step" id="doc3"></div>'
+      + '<div class="puzzle-step" id="doc4"></div>'
+      + '<div class="puzzle-step" id="doc5"></div>'
+      + '</div>'
+      + '<div class="room-desc">将五份档案按年份从早到晚排列</div>'
+      + '<div style="display:flex;flex-direction:column;gap:8px;max-width:420px;margin:0 auto">';
+
+    // 目标排列槽
+    for(var i=1; i<=5; i++) {
+      html += '<div class="doc-slot" id="slot'+i+'" onclick="placeDoc('+i+')" data-pos="'+i+'">'
+        + '<span class="slot-num">'+i+'</span>'
+        + '<span class="slot-content" id="slot-content'+i+'">空 位</span>'
+        + '</div>';
+    }
+
+    html += '</div>'
+      + '<div style="font-size:13px;color:var(--text-dim);text-align:center;margin:10px 0">待排列档案（点击选择）</div>'
+      + '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:420px;margin:0 auto">';
+
+    shuffled.forEach(function(d) {
+      html += '<div class="doc-card" id="'+d.id+'" onclick="selectDoc(\''+d.id+'\','+JSON.stringify(d).replace(/"/g,'&quot;')+')" data-year="'+d.year+'" data-title="'+d.title+'">'
+        + '<div class="doc-card-year">'+d.year+'</div>'
+        + '<div class="doc-card-title">'+d.title+'</div>'
+        + '</div>';
+    });
+
+    html += '</div>'
+      + '<div class="puzzle-feedback" id="doc-feedback"></div>'
+      + '</div>';
+    return html;
+  },
+  onRender: function() {
+    var selectedDoc = null;
+    var placedDocs = {};
+    var correctOrder = ['d1','d2','d3','d4','d5'];
+    var placedCount = 0;
+
+    window.selectDoc = function(id, doc) {
+      // 如果已经放置过，不允许再选
+      if(placedDocs[id]) return;
+      selectedDoc = {id:id, doc:doc};
+      document.querySelectorAll('.doc-card').forEach(function(c){
+        c.classList.remove('selected');
+      });
+      var card = document.getElementById(id);
+      if(card) card.classList.add('selected');
+      document.getElementById('doc-feedback').innerHTML = '<span style="color:var(--amber-soft)">已选中：'+doc.year+' '+doc.title+'。点击上方的空位放入。</span>';
+    };
+
+    window.placeDoc = function(pos) {
+      if(!selectedDoc) {
+        document.getElementById('doc-feedback').innerHTML = '<span style="color:var(--text-dim)">先点击下方档案选中，再点击上方空位放入。</span>';
+        return;
+      }
+      if(placedDocs['pos'+pos]) {
+        document.getElementById('doc-feedback').innerHTML = '<span style="color:var(--text-dim)">这个位置已经有档案了。</span>';
+        return;
+      }
+
+      // 检查是否正确
+      var expectedDoc = correctOrder[pos-1];
+      if(selectedDoc.id === expectedDoc) {
+        // 正确
+        placedDocs[selectedDoc.id] = true;
+        placedDocs['pos'+pos] = selectedDoc.id;
+        var slotContent = document.getElementById('slot-content'+pos);
+        slotContent.innerHTML = '<span style="color:var(--amber)">'+selectedDoc.doc.year+'</span> · '+selectedDoc.doc.desc;
+        document.getElementById('slot'+pos).classList.add('filled');
+        var card = document.getElementById(selectedDoc.id);
+        if(card) { card.style.opacity = '0.3'; card.style.pointerEvents = 'none'; card.classList.remove('selected'); }
+        document.getElementById('doc'+(pos)).classList.add('done');
+        if(pos < 5) document.getElementById('doc'+(pos+1)).classList.add('current');
+        placedCount++;
+
+        var stories = [
+          '1953年秋，日寇扫荡。17名村民为掩护伤员和孤儿牺牲，葬于老槐树下。',
+          '1955年，幸存孤儿中立誓守护。第一任守槐人以生机维系结界，安抚亡魂。',
+          '1976年，第二任守槐人接任。雾气逐年加重，结界开始不稳。',
+          '1978年，陈桂英（奶奶）成为第三任守槐人。她守了整整五十年。',
+          '2001年，本应有人接任第四任守槐人，但……档案上写着"空缺"。'
+        ];
+
+        document.getElementById('doc-feedback').innerHTML = '<span style="color:var(--green-soft)">'+stories[pos-1]+'</span>';
+
+        if(placedCount === 5) {
+          setTimeout(function() {
+            document.getElementById('doc-feedback').innerHTML = '<span style="color:var(--amber)">五份档案排列完毕。村子的历史脉络清晰了——守槐人代代相传，但第四任一直空缺。奶奶是在硬撑。</span>';
+            var rp = document.getElementById('reviewPanel');
+            rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'archive\')">📂 柜中密档<span class="review-ri">点击查看</span></div>';
+            reviewData.archive = {title:'铁皮柜密档', content:'五份档案按时间排列：1953年17人牺牲→1955年第一任守槐人→1976年第二任→1978年奶奶接任→2001年第四任空缺。奶奶独自支撑了近二十年。'};
+            setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 2000);
+          }, 1500);
+        }
+        selectedDoc = null;
+      } else {
+        // 错误
+        document.getElementById('doc-feedback').innerHTML = '<span style="color:var(--danger)">这个位置不应该放这份档案。再想想时间顺序。</span>';
+        var card = document.getElementById(selectedDoc.id);
+        if(card) card.classList.remove('selected');
+        selectedDoc = null;
+      }
+    };
+  },
+  next:'act3_3', nextText:'继续'
+};
+
+scenes['act3_3'] = {
+  type:'narrative', bg:'bg-act3', actTag:'第 三 幕', actLabel:'第三幕 · 夜惊',
+  title:'雾进村', progress:44,
+  img:'scene-night.jpg', imgCap:'柴房的门缝里，能看见人影的脚来回走过',
+  hint:'老支书并非反派，他一直在默默守护村子。',
+  text:[
+    '柜子打开了——里面没有"害人的证据"，只有一沓厚厚的<span class="em">医疗单、低保申请单</span>，全是老支书帮傻根、哑巴婶子和村里孤寡老人跑的手续。',
+    '你愣住了。难道……你猜错了？',
+    '正想细看，窗外突然刮进一阵<span class="danger">冷风</span>，煤油灯直接熄灭。',
+    '浓雾涌进院子。耳边传来密密麻麻的脚步声，像有很多人从后山往村里走。你躲在柜子后面，看见院门被推开——一排模糊的人影慢悠悠地走过去，都穿着几十年前的旧衣服，<span class="danger">脚下不沾尘土</span>。',
+    '你的心脏砰砰直跳，几乎要跳出嗓子眼。',
+    '老支书瘸着腿冲了进来，一把拽住你往后屋柴房躲："<span class="danger">你个小兔崽子找死！月圆夜雾进村，你开了柜子引它们过来！</span>"',
+    '两人在柴房里缩了十几分钟。你发现老支书的左腿在发抖，裤脚渗出血——他为了赶过来，摔在了石头上。',
+    '你想说什么，又不知道该说什么。',
+    '天快亮时雾散了。院子里留下一串小小的脚印，一直延伸到村尾。',
+    '紧接着传来女人的哭喊声：<span class="danger">五岁的虎子丢了。</span>'
+  ],
+  next:'act4_1', nextText:'虎子失踪'
+};
+
+// ========== 第四幕：破禁·石阵 ==========
+scenes['act4_1'] = {
+  type:'narrative', bg:'bg-act4', actTag:'第 四 幕', actLabel:'第四幕 · 破禁',
+  title:'抉择', progress:47,
+  img:'scene-oldhouse.jpg', imgCap:'老房子的门槛上，坐着一个犹豫不决的年轻人',
+  hint:'虎子丢了，你要去救他吗？',
+  text:[
+    '虎子妈挨家挨户敲门求人，村民们都关着门不敢应声。',
+    '"进了槐树林就回不来了。"门后面的声音在发抖。',
+    '你站在老房子门口，心里很乱。',
+    '第一反应是"不关我的事，明天就走"。你只是回来办丧事的，犯不着把命搭进去。',
+    '但转头看见奶奶的遗像，想起小时候落水被奶奶跳河救起，又想起柴房里老支书渗血的裤腿。',
+    '奶奶守了一辈子的村子，你不能就这么看着它出事。',
+    '你咬咬牙，转身往后山的方向走。'
+  ],
+  next:'act4_1b', nextText:'去找傻根'
+};
+
+scenes['act4_1b'] = {
+  type:'narrative', bg:'bg-act4', actTag:'第 四 幕', actLabel:'第四幕 · 破禁',
+  title:'进山', progress:50,
+  img:'scene-stone.jpg', imgCap:'后山入口，雾气从树林里漫出来',
+  hint:'村口的人都在用自己的方式帮你。',
+  text:[
+    '你拽上傻根。傻根好像知道要去哪儿，牵着那头老牛走在前面，牛铃声叮铃叮铃的。',
+    '路过村口时，张阿婆隔着门缝塞给你一把<span class="warm">艾草和干粮</span>，手都是抖的。',
+    '哑巴婶子追上来，把一个装满槐花的布包挂在你脖子上，又指了指树林深处，摇了摇头，又点了点头。',
+    '没人敢陪你进山，但所有人都在用自己的方式帮你。',
+    '你心里暖暖的，又沉沉的。',
+    '走了大约半个时辰，槐树林入口到了。七块乱石矗立在雾中，像是七个沉默的守卫。',
+    '必须按正确顺序排列，才能穿过雾气结界。'
+  ],
+  next:'act4_2', nextText:'破解石阵'
+};
+
+scenes['act4_2'] = {
+  type:'puzzle', bg:'bg-act4', actTag:'第 四 幕', actLabel:'第四幕 · 破禁',
+  title:'七石之阵', progress:55,
+  img:'scene-stone.jpg', imgCap:'石阵散发着微光，等待正确的排列',
+  hint:'三条线索拼合：年画顺序"3-1-5-7-2-6-4"，货架刻痕确认"3在首位，4在末位"，傻根童谣"先三后一，五七相连，二六成对，四殿后"。正确顺序：3→1→5→7→2→6→4。',
+  desc:'三处线索拼合如下：<br>'
+    + '<div class="doc-view" style="margin-top:10px">'
+    + '<div class="doc-title">线索一 · 老房子年画</div>'
+    + '<div class="doc-line">年画上七只灯笼的排列顺序：<span class="em">三·一·五·七·二·六·四</span></div>'
+    + '<div class="doc-title" style="margin-top:8px">线索二 · 小卖部货架刻痕</div>'
+    + '<div class="doc-line">货架木板上有刻痕：<span class="em">"三在首，四殿后"</span></div>'
+    + '<div class="doc-title" style="margin-top:8px">线索三 · 傻根的童谣</div>'
+    + '<div class="doc-line"><span class="ghost">先三后一，五七相连，</span></div>'
+    + '<div class="doc-line"><span class="ghost">二六成对，四殿后。</span></div>'
+    + '</div>'
+    + '<br>按顺序点击七块石头（标号1-7）：',
+  puzzleHtml: function(){
+    return '<div class="stone-array" id="stone-array">'
+      + '<div class="stone" data-num="1" onclick="stoneClick(1)">1</div>'
+      + '<div class="stone" data-num="2" onclick="stoneClick(2)">2</div>'
+      + '<div class="stone" data-num="3" onclick="stoneClick(3)">3</div>'
+      + '<div class="stone" data-num="4" onclick="stoneClick(4)">4</div>'
+      + '<div class="stone" data-num="5" onclick="stoneClick(5)">5</div>'
+      + '<div class="stone" data-num="6" onclick="stoneClick(6)">6</div>'
+      + '<div class="stone" data-num="7" onclick="stoneClick(7)">7</div>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="stone-feedback" style="text-align:center;margin-top:10px"></div>'
+      + '<div style="text-align:center;margin-top:8px"><button class="btn" style="font-size:14px;padding:6px 16px" onclick="stoneReset()">重 置</button></div>';
+  },
+  onRender: function() {
+    window.stoneSeq = []; window.stoneCorrect = [3,1,5,7,2,6,4];
+    window.stoneClick = function(n) {
+      var stones = document.querySelectorAll('.stone');
+      var stone = stones[n-1];
+      if(stone.classList.contains('selected')) return;
+      stoneSeq.push(n); stone.classList.add('selected');
+      stone.innerHTML = n + '<span class="stone-num">' + stoneSeq.length + '</span>';
+      var idx = stoneSeq.length - 1;
+      if(stoneSeq[idx] !== stoneCorrect[idx]) {
+        stone.classList.add('wrong');
+        document.getElementById('stone-feedback').innerHTML = '<span style="color:var(--danger)">顺序不对，雾气把你推回了原地……</span>';
+        setTimeout(stoneReset, 1200); return;
+      }
+      if(stoneSeq.length === 7) {
+        stones.forEach(function(s){ s.classList.add('stone-correct'); });
+        document.getElementById('stone-feedback').innerHTML = '<span style="color:var(--green-soft)">石阵亮起微光，雾气向两侧退开，一条小路出现了。</span>';
+        setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 1500);
+      }
+    };
+    window.stoneReset = function() {
+      stoneSeq = [];
+      document.querySelectorAll('.stone').forEach(function(s,i){ s.className = 'stone'; s.innerHTML = (i+1); });
+      document.getElementById('stone-feedback').textContent = '';
+    };
+  },
+  next:'act4_3', nextText:'进入槐树林'
+};
+
+scenes['act4_3'] = {
+  type:'narrative', bg:'bg-act4', actTag:'第 四 幕', actLabel:'第四幕 · 破禁',
+  title:'雾中行', progress:60,
+  img:'scene-stone.jpg', imgCap:'槐树林中的能见度不足一米，脚步声在四周回荡',
+  hint:'',
+  text:[
+    '石阵亮起微光，雾气向两侧退开，一条蜿蜒的小路出现在眼前。',
+    '你深吸一口气，迈步走了进去。傻根牵着牛跟在后面，牛铃声在雾里回荡。',
+    '刚踏入槐树林，能见度不足一米。耳边全是<span class="ghost">细碎的说话声</span>——有老人、有小孩、有男人，像集市一样热闹。',
+    '肩膀时不时被人碰一下，回头只有晃动的树影。',
+    '远处能看见一排模糊的人影排着队往前走，方向是村子深处。他们走得很慢，像是在等什么人。',
+    '你攥紧手里的槐花香囊，硬着头皮往前走。',
+    '也不知道走了多久，傻根突然停了下来，指着前面说："到了。"'
+  ],
+  next:'act4_4', nextText:'辨别方向'
+};
+
+// ========== 第四幕补充：雾中辨向 ==========
+scenes['act4_4'] = {
+  type:'puzzle', bg:'bg-act4', actTag:'第 四 幕', actLabel:'第四幕 · 破禁',
+  title:'雾中辨向', progress:62,
+  img:'scene-stone.jpg', imgCap:'浓雾中，三个方向若隐若现',
+  hint:'根据感官线索判断方向：槐花香=正确，腐土味=死路，水声=回头路。',
+  desc:'走到一个岔路口，三个方向都浸在浓雾里。傻根不见了，牛铃声也听不见了。<br><br>你必须靠感官判断走哪条路。<br><br><span style="color:var(--amber-soft);font-size:14px">提示：闻气味、听声音。槐花香是正确的路。</span>',
+  puzzleHtml: function(){
+    return '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="nav1"></div>'
+      + '<div class="puzzle-step" id="nav2"></div>'
+      + '<div class="puzzle-step" id="nav3"></div>'
+      + '</div>'
+      + '<div class="room-desc">选择正确的方向前进（共3次选择）</div>'
+      + '<div style="display:flex;flex-direction:column;gap:12px;max-width:400px;margin:12px auto">'
+      + '<div class="choice-card" onclick="navigate(\'left\')" style="cursor:pointer"><div>👈 左边的小路</div><div class="choice-hint">空气里有淡淡的腐土味……</div></div>'
+      + '<div class="choice-card" onclick="navigate(\'center\')" style="cursor:pointer"><div>⬆ 正前方</div><div class="choice-hint">槐花的香气从这边飘来</div></div>'
+      + '<div class="choice-card" onclick="navigate(\'right\')" style="cursor:pointer"><div>👉 右边的窄道</div><div class="choice-hint">隐约听见流水声……</div></div>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="nav-feedback"></div>'
+      + '</div>';
+  },
+  onRender: function() {
+    var navCount = 0;
+    var maxNav = 3;
+    var correct = ['center','center','center'];
+
+    window.navigate = function(dir) {
+      var fb = document.getElementById('nav-feedback');
+      if(dir === correct[navCount]) {
+        navCount++;
+        document.getElementById('nav'+navCount).classList.add('done');
+        if(navCount < maxNav) {
+          document.getElementById('nav'+(navCount+1)).classList.add('current');
+          var descs = [
+            '你顺着槐花香走了几十步。雾里隐约看见前方有棵大树的轮廓。',
+            '继续往前，槐花香越来越浓。你感觉离目的地很近了。',
+            '你穿过了最后一片浓雾，眼前豁然开朗。前方就是树林深处。'
+          ];
+          fb.innerHTML = '<span style="color:var(--amber-soft)">' + descs[navCount-1] + '</span>';
+        } else {
+          fb.innerHTML = '<span style="color:var(--green-soft)">你成功穿过了迷雾！前方隐约可见一棵巨大的老槐树。</span>';
+          setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 1500);
+        }
+      } else {
+        if(dir === 'left') {
+          fb.innerHTML = '<span style="color:var(--danger)">你走进了一条死路。腐土味越来越重，脚下开始发软。你赶紧退了回来。</span>';
+        } else {
+          fb.innerHTML = '<span style="color:var(--danger)">你顺着水声走了一段，却发现回到了岔路口。这条路是回头路。</span>';
+        }
+      }
+    };
+  },
+  next:'act5_1', nextText:'继续深入'
+};
+
+// ========== 第五幕：林深·旧影 ==========
+scenes['act5_1'] = {
+  type:'narrative', bg:'bg-act5', actTag:'第 五 幕', actLabel:'第五幕 · 林深',
+  title:'迷路', progress:63,
+  img:'scene-tree.jpg', imgCap:'槐树林深处，雾气在树间缭绕',
+  hint:'傻根不见了，你得自己找出路。',
+  text:[
+    '穿过石阵后，雾气反而淡了些，但路越来越乱。',
+    '明明一直往前走，走了十分钟又回到了原地。',
+    '你回头一看——傻根不见了。牛铃声也听不见了。',
+    '四周静得可怕，只有风吹树叶的沙沙声。地上落满了槐花，踩上去软软的。',
+    '你喊了几声傻根的名字，没有人应。只有回声从树林深处传回来。',
+    '你心里有点发毛，但还是硬着头皮继续往前走。'
+  ],
+  next:'act5_1b', nextText:'继续走'
+};
+
+scenes['act5_1b'] = {
+  type:'narrative', bg:'bg-act5', actTag:'第 五 幕', actLabel:'第五幕 · 林深',
+  title:'旧影', progress:66,
+  img:'scene-tree.jpg', imgCap:'幻觉中的老槐树，每一道刻痕都是一段往事',
+  hint:'三段幻觉对应三道刻痕，按出现的顺序记住它们。',
+  text:[
+    '走着走着，你看见路边坐着一个穿粗布褂子的年轻女人，低头缝槐花香囊。',
+    '她抬起头冲你笑——眉眼和奶奶年轻时一模一样。',
+    '你揉揉眼睛，人消失了，地上只留下一根生锈的缝衣针。',
+    '刚捡起针，耳边突然传来一声大喊："快跑！"',
+    '紧接着是枪声、脚步声、孩子的哭声。十几个人影往树林深处跑，后面跟着穿黄衣服的人影。画面一闪就没了。',
+    '你喘着粗气，靠在一棵老槐树上。指尖碰到树皮——树干上刻着很多歪歪扭扭的名字。',
+    '指尖碰到名字的瞬间，脑子里闪过碎片：有人把干粮塞给孩子，有人故意往反方向跑，有人站在路口挡着追兵……',
+    '你猛地收回手。这些画面……是真的吗？'
+  ],
+  next:'act5_2', nextText:'查看老槐树'
+};
+
+scenes['act5_2'] = {
+  type:'puzzle', bg:'bg-act5', actTag:'第 五 幕', actLabel:'第五幕 · 林深',
+  title:'三道刻痕', progress:70,
+  img:'scene-tree.jpg', imgCap:'老槐树上的三道刻痕，记录着不同时代的记忆',
+  hint:'按幻觉出现的顺序触摸：先缝香囊，再枪声，最后刻名字。',
+  desc:'老槐树上有三道不同的刻痕，按幻觉出现的顺序触摸它们，才能打破循环迷路。<br><br>'
+    + '<span style="color:var(--text-dim);font-size:14px">提示：第一次幻觉是缝香囊，第二次是枪声与奔跑，第三次是刻名字</span>',
+  puzzleHtml: function(){
+    return '<div class="carving-area">'
+      + '<div class="carving" id="cv-needle" onclick="carvingClick(\'needle\')"><div class="icon">🪡</div><div class="label">缝衣针痕</div><div class="order" id="o-needle"></div></div>'
+      + '<div class="carving" id="cv-gun" onclick="carvingClick(\'gun\')"><div class="icon">🔫</div><div class="label">弹孔刀痕</div><div class="order" id="o-gun"></div></div>'
+      + '<div class="carving" id="cv-name" onclick="carvingClick(\'name\')"><div class="icon">✍</div><div class="label">名字刻痕</div><div class="order" id="o-name"></div></div>'
+      + '</div>'
+      + '<div class="puzzle-feedback" id="carving-feedback" style="text-align:center;margin-top:10px"></div>'
+      + '<div style="text-align:center;margin-top:8px"><button class="btn" style="font-size:14px;padding:6px 16px" onclick="carvingReset()">重 置</button></div>';
+  },
+  onRender: function() {
+    window.carvingSeq = []; window.carvingCorrect = ['needle','gun','name'];
+    window.carvingClick = function(id) {
+      var el = document.getElementById('cv-'+id);
+      if(el.classList.contains('touched')) return;
+      var idx = carvingSeq.length;
+      if(id === carvingCorrect[idx]) {
+        carvingSeq.push(id); el.classList.add('touched');
+        document.getElementById('o-'+id).textContent = carvingSeq.length;
+        document.getElementById('carving-feedback').innerHTML = '<span style="color:var(--amber)">第' + ['一','二','三'][idx] + '道刻痕亮起微光。</span>';
+        if(carvingSeq.length === 3) {
+          document.getElementById('carving-feedback').innerHTML = '<span style="color:var(--green-soft)">三道刻痕依次亮起，迷雾散开，前方的路清晰了。</span>';
+          setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 1500);
+        }
+      } else {
+        document.getElementById('carving-feedback').innerHTML = '<span style="color:var(--danger)">顺序不对，画面扭曲，你又回到了原地……</span>';
+        setTimeout(carvingReset, 1200);
+      }
+    };
+    window.carvingReset = function() { carvingSeq = []; ['needle','gun','name'].forEach(function(id){ document.getElementById('cv-'+id).classList.remove('touched'); document.getElementById('o-'+id).textContent = ''; }); document.getElementById('carving-feedback').textContent = ''; };
+  },
+  next:'act5_2b', nextText:'继续前行'
+};
+
+// ========== 第五幕补充：亡魂问答 ==========
+scenes['act5_2b'] = {
+  type:'puzzle', bg:'bg-act5', actTag:'第 五 幕', actLabel:'第五幕 · 林深',
+  title:'亡魂三问', progress:73,
+  img:'scene-tree.jpg', imgCap:'雾中的人影围成一圈，等着你的回答',
+  hint:'三个问题都和你在村子里收集的线索有关。答错不会重来，但会消耗时间。',
+  desc:'三道刻痕亮起后，周围的雾突然浓了。你看见十几个模糊的人影从树后走出来，围成半圈。<br><br>他们没有恶意，只是静静地看着你。其中一个穿粗布短衫的男人开口了——声音像是从很远的地方传来：<br><br><span style="color:var(--amber-soft)">"后生，你要从这里过去，得回答我们三个问题。答对了，路自己会开。"</span><br><br><span style="color:var(--text-dim);font-size:14px">提示：答案都藏在你一路收集的线索里。可以点击左下角"📖 回顾"查看。</span>',
+  puzzleHtml: function(){
+    return '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="sp1"></div>'
+      + '<div class="puzzle-step" id="sp2"></div>'
+      + '<div class="puzzle-step" id="sp3"></div>'
+      + '</div>'
+      + '<div id="spirit-content"></div>'
+      + '<div class="puzzle-feedback" id="spirit-feedback"></div>'
+      + '</div>';
+  },
+  onRender: function() {
+    var qIndex = 0;
+    var correctCount = 0;
+
+    var questions = [
+      {
+        spirit: '穿粗布短衫的男人',
+        question: '"我们这些人，七十年前死在这片林子里。你可知——我们为何而死？"',
+        options: [
+          {text: '为了争夺山林资源，和邻村起了冲突', correct: false},
+          {text: '为了掩护八路军伤员和孤儿转移，主动引开日寇', correct: true},
+          {text: '因为得罪了山神，被雾困死在林中', correct: false},
+          {text: '为了守卫村里的宝藏，与土匪同归于尽', correct: false}
+        ],
+        answer: '男人点了点头："是了。我们不是英雄，只是不想让孩子们死。"'
+      },
+      {
+        spirit: '头发花白的老妇人',
+        question: '"守槐人一代代传下来，守的不是什么宝贝。你可知——她守的是什么？"',
+        options: [
+          {text: '守的是槐树下的金银财宝，怕被人盗走', correct: false},
+          {text: '守的是村里的风水龙脉，不能断绝', correct: false},
+          {text: '守的是我们这些回不了家的人的执念，不让我们害人', correct: true},
+          {text: '守的是一份秘方，只有守槐人知道', correct: false}
+        ],
+        answer: '老妇人笑了，皱纹里淌着泪："你奶奶是个好孩子。替我们谢谢她。"'
+      },
+      {
+        spirit: '身材瘦小的少年',
+        question: '"最后一个问题。你不像村里人，也不是守槐人。你为何来这里？"',
+        options: [
+          {text:'我是来寻宝的，听说后山有值钱的东西', correct: false},
+          {text:'我是被村里人骗来的，不知道会这么危险', correct: false},
+          {text:'我是来给奶奶办丧事的，想弄清她到底守了一辈子的什么', correct: false},
+          {text:'我是来给奶奶办丧事的，想弄清她守了一辈子的秘密', correct: true}
+        ],
+        answer: '少年沉默了一会儿，轻声说："那你回去吧。替我们看看村子，看看家里好不好。"'
+      }
+    ];
+
+    function renderQuestion() {
+      var q = questions[qIndex];
+      var html = '<div class="spirit-question">'
+        + '<div class="spirit-name">' + q.spirit + '</div>'
+        + '<div>' + q.question + '</div>'
+        + '</div>'
+        + '<div class="spirit-options">';
+      q.options.forEach(function(opt, i) {
+        html += '<div class="spirit-option" onclick="spiritAnswer('+i+')" data-correct="'+opt.correct+'">' + opt.text + '</div>';
+      });
+      html += '</div>';
+      document.getElementById('spirit-content').innerHTML = html;
+    }
+
+    renderQuestion();
+
+    window.spiritAnswer = function(idx) {
+      var q = questions[qIndex];
+      var opt = q.options[idx];
+      var optEl = document.querySelectorAll('.spirit-option')[idx];
+
+      if(opt.correct) {
+        optEl.classList.add('correct');
+        document.querySelectorAll('.spirit-option').forEach(function(e){ e.style.pointerEvents = 'none'; });
+        document.getElementById('sp'+(qIndex+1)).classList.add('done');
+        if(qIndex < 2) document.getElementById('sp'+(qIndex+2)).classList.add('current');
+        correctCount++;
+        document.getElementById('spirit-feedback').innerHTML = '<span style="color:var(--green-soft)">' + q.answer + '</span>';
+
+        qIndex++;
+        if(qIndex < questions.length) {
+          setTimeout(function() {
+            document.getElementById('spirit-feedback').innerHTML = '';
+            renderQuestion();
+          }, 2500);
+        } else {
+          setTimeout(function() {
+            document.getElementById('spirit-content').innerHTML = '<div class="spirit-question" style="border-color:var(--amber)"><div style="color:var(--amber-soft);margin-bottom:10px">众亡魂齐声</div><div>路已开。去吧，后生。<br><br>记住——槐树开花，接人回家。<br>但回家的，从来不只是活人。</div></div>';
+            document.getElementById('spirit-feedback').innerHTML = '<span style="color:var(--amber)">人影缓缓散去，雾气向两侧退开，一条小路出现在前方。</span>';
+            var rp = document.getElementById('reviewPanel');
+            rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'spirit\')">👻 亡魂三问<span class="review-ri">点击查看</span></div>';
+            reviewData.spirit = {title:'亡魂三问', content:'17名亡魂问了三个问题：1.为何而死——为掩护伤员和孤儿；2.守槐人守什么——守亡魂的执念不害人；3.为何而来——为奶奶守了一辈子的秘密。答完后，亡魂散去，路开了。'};
+            setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 3000);
+          }, 2500);
+        }
+      } else {
+        optEl.classList.add('wrong');
+        document.getElementById('spirit-feedback').innerHTML = '<span style="color:var(--danger)">亡魂摇了摇头。再想想你一路上看到的线索。</span>';
+        setTimeout(function(){ optEl.classList.remove('wrong'); }, 800);
+      }
+    };
+  },
+  next:'act5_3', nextText:'沿着路走'
+};
+
+scenes['act5_3'] = {
+  type:'narrative', bg:'bg-act5', actTag:'第 五 幕', actLabel:'第五幕 · 林深',
+  title:'傻根归来', progress:75,
+  img:'scene-tree.jpg', imgCap:'老槐树下，残破的石碑静静矗立',
+  hint:'',
+  text:[
+    '三道刻痕依次亮起，迷雾散开，前方的路清晰了。',
+    '你沿着小路往前走，没走多远，就听见了牛铃声。',
+    '回过神来，傻根牵着牛站在你旁边，牛绳上系着一只<span class="warm">小孩的布鞋</span>。',
+    '"虎子的。"傻根指着鞋说，然后又指着前面，嘴里念叨："到了，到家了。"',
+    '你顺着他指的方向看去——前面不远处，就是那棵最粗的老槐树。',
+    '树下靠着一块残破的石碑。碑前好像放着什么东西，在雾里隐隐发着光。'
+  ],
+  next:'act6_1', nextText:'走近老槐树'
+};
+
+// ========== 第六幕：碑下·真相 ==========
+scenes['act6_1'] = {
+  type:'narrative', bg:'bg-act6', actTag:'第 六 幕', actLabel:'第六幕 · 碑下',
+  title:'老槐树下', progress:78,
+  img:'scene-monument.jpg', imgCap:'老槐树下，一个孩子睡得安稳',
+  hint:'虎子在这里，他很安全。',
+  text:[
+    '你和傻根走到老槐树下。',
+    '五岁的虎子蜷缩在树根旁，睡得安稳。他身上盖着一件旧布衫，嘴角还带着笑，像是被什么东西<span class="warm">护着</span>。',
+    '你蹲下来，摸了摸他的额头——不烫，呼吸也平稳。',
+    '树身上靠着一块残破的<span class="em">石碑</span>，大半截都埋在土里，露出的部分刻着"烈士"两个字，其余的都看不清了。',
+    '碑前放着奶奶常用的铜烟斗，旁边还有一个锈迹斑斑的铁皮盒。',
+    '你看着那个铁皮盒，心跳突然快了起来。里面装的，会不会就是所有问题的答案？'
+  ],
+  next:'act6_1b', nextText:'打开铁皮盒'
+};
+
+scenes['act6_1b'] = {
+  type:'narrative', bg:'bg-act6', actTag:'第 六 幕', actLabel:'第六幕 · 碑下',
+  title:'铁皮盒', progress:82,
+  img:'scene-monument.jpg', imgCap:'烈士纪念碑前，奶奶的铜烟斗静静放着',
+  hint:'',
+  text:[
+    '你蹲下来，拿起铁皮盒。铁锁已经锈死了，轻轻一掰就开了。',
+    '里面是一沓泛黄的书信、半张旧报纸，和十几张<span class="em">烈士证明</span>。',
+    '你随手拿起最上面的一封信，信纸脆得一碰就要碎。字迹工整，是一个女人写的。',
+    '信里说："我如今也有了孩子，会告诉他，是雾落村17个无名英雄救了我们。"',
+    '你越看越觉得不对。这些信……全是感谢信？',
+    '那半张旧报纸上，印着一行模糊的标题："日寇扫荡山区，十七村民英勇就义"。',
+    '你心里咯噔一下。'
+  ],
+  onRender: function() {
+    var rp = document.getElementById('reviewPanel');
+    rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'letters\')">📜 铁皮盒中的书信<span class="review-ri">点击查看</span></div>';
+  },
+  next:'act6_1c', nextText:'梳理真相'
+};
+
+// ========== 第六幕补充：线索串联 ==========
+scenes['act6_1c'] = {
+  type:'puzzle', bg:'bg-act6', actTag:'第 六 幕', actLabel:'第六幕 · 碑下',
+  title:'真相拼图', progress:85,
+  img:'scene-monument.jpg', imgCap:'所有的线索汇聚在一起，真相浮出水面',
+  hint:'将每条线索与它对应的含义配对。线索都来自你一路收集的信息。',
+  desc:'你坐在石碑旁，把一路收集的线索在脑海中串联起来。每一条线索都指向真相的一部分。<br><br>将左侧的线索与右侧的含义正确配对，才能看清完整的画面。<br><br><span style="color:var(--amber-soft);font-size:14px">提示：点击一条线索，再点击对应的含义。配对错误会高亮提示。</span>',
+  puzzleHtml: function(){
+    var clues = [
+      {id:'c1', text:'槐树开花，接人回家', meaning:'m1'},
+      {id:'c2', text:'月圆夜雾最重', meaning:'m2'},
+      {id:'c3', text:'守者无名，槐花为证', meaning:'m3'},
+      {id:'c4', text:'三在首，四殿后', meaning:'m4'},
+      {id:'c5', text:'做人要对得起良心', meaning:'m5'}
+    ];
+    var meanings = [
+      {id:'m1', text:'亡魂在月圆夜会无意识地"拉"活人进雾里陪伴'},
+      {id:'m2', text:'七月十五是结界最薄弱、雾气最浓的时候'},
+      {id:'m3', text:'17名烈士没有留下姓名，只有槐花作为守护的凭证'},
+      {id:'m4', text:'石阵的正确排列顺序，是进入槐树林的钥匙'},
+      {id:'m5', text:'奶奶选择留下守护，而不是逃避的原因'}
+    ];
+    // 打乱含义顺序
+    var shuffledM = [meanings[2], meanings[4], meanings[0], meanings[3], meanings[1]];
+
+    var html = '<div class="room-view">'
+      + '<div class="puzzle-steps">'
+      + '<div class="puzzle-step current" id="cl1"></div>'
+      + '<div class="puzzle-step" id="cl2"></div>'
+      + '<div class="puzzle-step" id="cl3"></div>'
+      + '<div class="puzzle-step" id="cl4"></div>'
+      + '<div class="puzzle-step" id="cl5"></div>'
+      + '</div>'
+      + '<div class="room-desc">将线索与含义配对（共5对）</div>'
+      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:520px;margin:0 auto">';
+
+    // 左侧线索
+    html += '<div style="display:flex;flex-direction:column;gap:8px">';
+    clues.forEach(function(c) {
+      html += '<div class="clue-item" id="'+c.id+'" onclick="selectClue(\''+c.id+'\')" data-meaning="'+c.meaning+'">'
+        + '<div style="font-family:var(--serif);font-size:14px;color:var(--amber-soft)">'+c.text+'</div>'
+        + '</div>';
+    });
+    html += '</div>';
+
+    // 右侧含义
+    html += '<div style="display:flex;flex-direction:column;gap:8px">';
+    shuffledM.forEach(function(m) {
+      html += '<div class="meaning-item" id="'+m.id+'" onclick="selectMeaning(\''+m.id+'\')" data-id="'+m.id+'">'
+        + '<div style="font-size:13px;color:var(--text-dim);line-height:1.5">'+m.text+'</div>'
+        + '</div>';
+    });
+    html += '</div>';
+
+    html += '</div>'
+      + '<div class="puzzle-feedback" id="clue-feedback"></div>'
+      + '</div>';
+    return html;
+  },
+  onRender: function() {
+    var selectedClue = null;
+    var matchedCount = 0;
+    var correctPairs = {
+      'c1':'m1', 'c2':'m2', 'c3':'m3', 'c4':'m4', 'c5':'m5'
+    };
+
+    window.selectClue = function(id) {
+      var el = document.getElementById(id);
+      if(el.classList.contains('matched')) return;
+      document.querySelectorAll('.clue-item').forEach(function(e){ e.classList.remove('selected'); });
+      el.classList.add('selected');
+      selectedClue = id;
+      document.getElementById('clue-feedback').innerHTML = '<span style="color:var(--amber-soft)">已选中线索，请点击右侧对应的含义。</span>';
+    };
+
+    window.selectMeaning = function(id) {
+      if(!selectedClue) {
+        document.getElementById('clue-feedback').innerHTML = '<span style="color:var(--text-dim)">先点击左侧的线索，再点击右侧的含义。</span>';
+        return;
+      }
+      var mEl = document.getElementById(id);
+      if(mEl.classList.contains('matched')) return;
+
+      if(correctPairs[selectedClue] === id) {
+        // 正确配对
+        var clueEl = document.getElementById(selectedClue);
+        clueEl.classList.add('matched');
+        clueEl.classList.remove('selected');
+        mEl.classList.add('matched');
+        matchedCount++;
+        document.getElementById('cl'+matchedCount).classList.add('done');
+        if(matchedCount < 5) document.getElementById('cl'+(matchedCount+1)).classList.add('current');
+
+        var insights = [
+          '对。"槐树开花，接人回家"——不是迎接活人，是亡魂想家了。',
+          '对。七月十五月圆夜，结界最薄，雾气最浓，亡魂的力量最强。',
+          '对。17人牺牲，连名字都没留下。只有槐花年年开，替他们守着这份记忆。',
+          '对。石阵是亡魂设的考验，排对了才放行——排错了，雾会把你推回来。',
+          '对。奶奶不是不怕死，是她觉得"做人要对得起良心"。她守了五十年。'
+        ];
+        document.getElementById('clue-feedback').innerHTML = '<span style="color:var(--green-soft)">'+insights[matchedCount-1]+'</span>';
+
+        if(matchedCount === 5) {
+          setTimeout(function() {
+            document.getElementById('clue-feedback').innerHTML = '<span style="color:var(--amber)">所有线索串联起来了。真相——就写在这棵老槐树的年轮里。</span>';
+            var rp = document.getElementById('reviewPanel');
+            rp.innerHTML += '<div class="review-item" onclick="showReviewItem(\'truth\')">🧩 真相拼图<span class="review-ri">点击查看</span></div>';
+            reviewData.truth = {title:'真相拼图', content:'五条线索串联：槐花=亡魂想家；月圆夜=结界最薄；守者无名=17烈士无碑；石阵=亡魂的考验；良心=奶奶守了50年的原因。'};
+            setTimeout(function(){ document.getElementById('puzzle-next').style.display = 'flex'; }, 2000);
+          }, 1500);
+        }
+        selectedClue = null;
+      } else {
+        // 错误配对
+        mEl.classList.add('wrong');
+        document.getElementById('clue-feedback').innerHTML = '<span style="color:var(--danger)">配对不对。这条线索对应的是另一层含义。</span>';
+        setTimeout(function(){ mEl.classList.remove('wrong'); }, 800);
+      }
+    };
+  },
+  next:'act6_2', nextText:'真相大白'
+};
+
+scenes['act6_2'] = {
+  type:'narrative', bg:'bg-act6', actTag:'第 六 幕', actLabel:'第六幕 · 碑下',
+  title:'浓雾之源', progress:87,
+  img:'scene-monument.jpg', imgCap:'七十多年前的牺牲，化作了日夜不散的浓雾',
+  hint:'',
+  text:[
+    '你坐在石碑旁，把那些信和报纸一张一张看完。',
+    '七十多年前，日寇扫荡进山。雾落村<span class="em">17个普通村民</span>为了掩护3名八路军伤员和12个孤儿转移，主动把日寇引向后山槐树林，最后全部被杀害，尸体就地埋在槐树下。',
+    '他们的执念与不甘凝结成了不散的浓雾，会无意识地"拉"活人进去陪伴——<span class="warm">不是想害人，只是太想家了。</span>',
+    '当年幸存的孤儿里，有一个女孩主动留了下来，成为第一任<span class="em">守槐人</span>——用自己的生机维系结界，安抚亡魂，不让雾气进村害人。',
+    '奶奶陈桂英，是第三任。',
+    '老支书的腿、哑巴婶子的丈夫、傻根的病，全都是因为守着这个秘密、护着这个村子落下的。',
+    '你终于明白——那些半夜的敲门声、窗外的人影、耳边的说话声，都不是恶鬼索命。',
+    '是埋在槐树下的先辈们，在好奇地看着你这个后辈，在想：<span class="warm">"家里现在好不好？"</span>',
+    '奶奶守了五十年。一边护着村民，一边陪着这些没能回家的人。',
+    '你坐在石碑前，眼泪不知道什么时候流了下来。'
+  ],
+  next:'finale_1', nextText:'终局'
+};
+
+// ========== 终局：抉择·余响 ==========
+scenes['finale_1'] = {
+  type:'choice', bg:'bg-end', actTag:'终 局', actLabel:'终局 · 抉择',
+  title:'抉择·余响', progress:93,
+  img:'scene-ending.jpg', imgCap:'槐花飘落的季节，该做选择了',
+  hint:'',
+  desc:'不知过了多久，身后传来脚步声。老支书追进了槐树林，站在你身后，喘着粗气。<br><br>他看着你手里的铁皮盒，沉默了很久，终于说了实话：<br><br>奶奶死前耗尽了生机，结界裂了缺口。要么你现在就走，这辈子再也不回来；要么你接过守槐人的香囊，接下这副担子。',
+  choices: [
+    {text:'接过香囊，留守雾落村', hint:'一瞬间，雾气淡了大半', next:'ending_a'},
+    {text:'拎起行李，回城里的生活', hint:'从后视镜里，看见一个佝偻的身影', next:'ending_b'}
+  ]
+};
+
+scenes['ending_a'] = {
+  type:'ending', bg:'bg-end', title:'结局 · 留守', progress:100,
+  img:'scene-ending.jpg',
+  text:[
+    '你接过槐花香囊。一瞬间，身边的雾气淡了大半。',
+    '你隐约看见槐树下站着十几个穿旧衣服的人，朝你<span class="warm">轻轻鞠了一躬</span>，慢慢融进了雾里。',
+    '傻根牵着牛站在你身后，嘴里念叨着："槐树开花，接人回家……"',
+    '老支书沉默了很久，拍了拍你的肩膀，什么也没说。',
+    '你知道自己会短寿，会失去记忆，会慢慢融进这片雾里。但你想起了奶奶的话：<span class="warm">"做人要对得起良心。"</span>',
+    '雾落村的雾，还在轻轻地飘着。'
+  ],
+  egg:'【伏笔彩蛋】整理奶奶遗物时，你在木箱最底层摸到一张泛黄的羊皮地图。山的另一侧标着另一个村子的名字，旁边写着两个小字：<span style="color:var(--amber)">同根</span>。'
+};
+
+scenes['ending_b'] = {
+  type:'ending', bg:'bg-end', title:'结局 · 离开', progress:100,
+  img:'scene-ending.jpg',
+  text:[
+    '你说自己没那么伟大。拎着行李，头也不回地走了。',
+    '大巴开出很远。你从后视镜里看见浓雾里站着一个佝偻的老太太身影——<span class="warm">像奶奶</span>。',
+    '回到出租屋，你翻开背包，发现包里多了一个<span class="warm">槐花香囊</span>。',
+    '手机突然弹出一条短信——没有号码，没有来源。',
+    '屏幕上只有一行字：<span class="danger">"下一个月圆，雾会去找你。"</span>',
+    '你攥紧香囊，窗外城市的霓虹灯闪烁不停，远不如记忆里那片槐花香真实。'
+  ],
+  egg:'【伏笔彩蛋】你以为离开了雾落村就能回到从前的生活，但那些浓雾深处的目光，从未真正移开过。守槐人的传承，不会因为一个人的逃离而中断——它只是换了另一种方式，找到了你。'
+};
+
+// ============================================================
+// 启动
+// ============================================================
+renderScene('cover');
+</script>
+</body>
+</html>

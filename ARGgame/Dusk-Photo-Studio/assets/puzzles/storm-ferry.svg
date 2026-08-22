@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">暴雨渡口底片</title>
+  <desc id="desc">照相馆楼顶的投影光穿过暴雨，照向靠岸渡船，水面留下三段反光</desc>
+  <defs>
+    <linearGradient id="night" x2="0" y2="1"><stop stop-color="#172439"/><stop offset=".58" stop-color="#293847"/><stop offset="1" stop-color="#101a24"/></linearGradient>
+    <linearGradient id="beam" x1="0" x2="1"><stop stop-color="#ffd477" stop-opacity=".9"/><stop offset="1" stop-color="#f7d98f" stop-opacity=".15"/></linearGradient>
+    <linearGradient id="water" x2="0" y2="1"><stop stop-color="#273d4c"/><stop offset="1" stop-color="#0a151e"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#fff4b7"/><stop offset=".18" stop-color="#ffd36d"/><stop offset="1" stop-color="#e9a64e" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="5"/></filter>
+    <pattern id="rain" width="42" height="52" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><path d="M4 0v26M26 20v31" stroke="#d8e7ee" stroke-width="3" stroke-linecap="round" opacity=".55"/></pattern>
+  </defs>
+  <rect width="960" height="540" fill="url(#night)"/>
+  <path d="M0 284L170 246l146 25 114-19 112 37 172-34 246 37v100H0z" fill="#111923"/>
+  <g fill="#0b1118" stroke="#4b5b65" stroke-width="3">
+    <path d="M20 116h188v190H20z"/><path d="M51 79h112v50H51z"/><path d="M52 73h110l-19-25H71z"/>
+    <rect x="78" y="150" width="43" height="72"/><rect x="139" y="150" width="43" height="72"/>
+  </g>
+  <g transform="translate(101 54)">
+    <rect x="0" y="0" width="46" height="40" rx="6" fill="#a87a43"/>
+    <circle cx="23" cy="20" r="10" fill="#ffe28f"/>
+    <path d="M30 20L640 264 92 74z" fill="url(#beam)" opacity=".63"/>
+  </g>
+  <path d="M0 351c140-23 271-13 399 10 142 25 275-12 561-3v182H0z" fill="url(#water)"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M38 393c104 13 190-18 291-2s202-4 304 4 179-9 280 7" stroke="#7593a3" stroke-width="5" opacity=".44"/>
+    <path d="M5 449c118-16 217 20 347 1 124-18 234 12 354-4 91-12 164 8 246-3" stroke="#516f82" stroke-width="6" opacity=".36"/>
+    <path d="M78 509c84-13 145 10 226-3M371 498c94 14 165-12 254 2M694 510c76-11 139 7 218-5" stroke="#9a8156" stroke-width="8" opacity=".62"/>
+  </g>
+  <g transform="translate(560 270)">
+    <path d="M5 101h277l-48 89H54z" fill="#25333b" stroke="#b7a575" stroke-width="7"/>
+    <path d="M52 101l31-75h113l40 75" fill="#19242c" stroke="#9d9a7a" stroke-width="7"/>
+    <rect x="103" y="45" width="57" height="42" fill="#5d6e74" stroke="#d0bf91" stroke-width="5"/>
+    <path d="M178 28v-40" stroke="#8e9aa0" stroke-width="7"/>
+    <path d="M178-12l64 26h-64z" fill="#a05847"/>
+    <path d="M54 143h192" stroke="#d3bd83" stroke-width="8"/>
+  </g>
+  <g transform="translate(810 244)">
+    <path d="M0 101h150v22H0zM41 0h9v105h-9z" fill="#191c20"/>
+    <path d="M19 18h52L60 3H31z" fill="#22262b"/>
+    <circle cx="45" cy="20" r="78" fill="url(#glow)" filter="url(#blur)"/>
+    <circle cx="45" cy="20" r="13" fill="#ffe9a2"/>
+  </g>
+  <g filter="url(#blur)" opacity=".78">
+    <ellipse cx="855" cy="415" rx="21" ry="83" fill="#d7b66d"/>
+    <ellipse cx="706" cy="423" rx="16" ry="65" fill="#c8a35d"/>
+    <ellipse cx="132" cy="407" rx="12" ry="48" fill="#bf8e4f"/>
+  </g>
+  <rect width="960" height="540" fill="url(#rain)"/>
+  <g fill="#f6d284"><circle cx="132" cy="119" r="9"/><circle cx="706" cy="316" r="8"/><circle cx="855" cy="264" r="10"/></g>
+  <rect x="10" y="10" width="940" height="520" rx="14" fill="none" stroke="#a8b4b6" stroke-opacity=".34" stroke-width="7"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="mbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6dd0fc"/>
+      <stop offset="100%" stop-color="#2196f3"/>
+    </linearGradient>
+    <linearGradient id="mfold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e3f2fd"/>
+    </linearGradient>
+    <filter id="mds" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="26" fill="url(#mbg)" filter="url(#mds)"/>
+  <!-- Envelope body -->
+  <g transform="translate(64, 64)">
+    <rect x="-38" y="-24" width="76" height="48" rx="6" fill="#fff"/>
+    <rect x="-38" y="-24" width="76" height="48" rx="6" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+    <!-- Envelope flap -->
+    <path d="M-38 -24 L0 4 L38 -24" fill="url(#mfold)" stroke="#2196f3" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Side folds for 3D effect -->
+    <path d="M-38 -24 L-38 20 L-10 -6 Z" fill="#e3f2fd" opacity="0.7"/>
+    <path d="M38 -24 L38 20 L10 -6 Z" fill="#bbdefb" opacity="0.6"/>
+  </g>
+</svg>

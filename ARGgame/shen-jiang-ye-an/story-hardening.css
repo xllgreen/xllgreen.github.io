@@ -1,0 +1,21 @@
+/* 2026-08-16 剧情/流程严谨性加固 */
+.midnight-divider-note{
+  margin:12px 0 14px;
+  padding:9px 12px;
+  border:1px dashed rgba(92,70,48,.45);
+  text-align:center;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.story-hardened-timeline .timeline-choice{
+  text-align:left;
+  line-height:1.45;
+}
+.final-gate-warning strong{
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+@media (max-width:720px){
+  .midnight-divider-note{font-size:.9rem}
+  .story-hardened-timeline .timeline-choice{font-size:.92rem}
+}

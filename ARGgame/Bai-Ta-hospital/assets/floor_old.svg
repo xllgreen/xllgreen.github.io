@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650">
+<rect width="1000" height="650" fill="#e9dfc8"/><g stroke="#4c4a43" fill="none" stroke-width="7"><rect x="80" y="80" width="830" height="490"/><path d="M80 250h830M80 430h830M280 80v490M545 80v490M760 80v490"/><path d="M545 250h215v180H545z" stroke-dasharray="13 9"/></g>
+<g font-family="serif" font-size="34" fill="#45423d"><text x="115" y="180">病房区</text><text x="340" y="180">护士站</text><text x="605" y="180">器械储藏</text><text x="790" y="180">楼梯</text><text x="115" y="350">病房区</text><text x="340" y="350">治疗室</text><text x="585" y="350">设备夹层</text><text x="785" y="350">电梯</text><text x="115" y="525">旧手术室</text><text x="355" y="525">氧气间</text><text x="615" y="525">洗衣通道</text></g>
+<text x="75" y="45" fill="#7d6b4e" font-family="serif" font-size="30">白塔医院七楼平面图（2010）</text>
+</svg>

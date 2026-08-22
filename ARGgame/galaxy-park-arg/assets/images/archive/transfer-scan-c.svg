@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280">
+  <defs>
+    <pattern id="p" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#eee9db"/><circle cx="2" cy="2" r=".45" fill="#c8c0ae"/></pattern>
+  </defs>
+  <rect width="420" height="280" fill="url(#p)"/>
+  <circle cx="16" cy="70" r="7" fill="#b7b0a2"/><circle cx="16" cy="208" r="7" fill="#b7b0a2"/>
+  <circle cx="420" cy="0" r="78" fill="none" stroke="#9a332f" stroke-width="7" opacity=".62"/>
+  <path d="M348 28 C370 51 393 62 420 64" fill="none" stroke="#9a332f" stroke-width="3" opacity=".55"/>
+  <line x1="42" y1="0" x2="420" y2="0" stroke="#8b877c"/>
+  <text x="46" y="55" font-family="SimSun,serif" font-size="13" fill="#47453f">移交说明：未形成公开文本，</text>
+  <text x="46" y="83" font-family="SimSun,serif" font-size="13" fill="#47453f">不列入对外附件目录。</text>
+  <line x1="42" y1="108" x2="420" y2="108" stroke="#8b877c"/>
+  <text x="46" y="142" font-family="SimSun,serif" font-size="13" fill="#47453f">目录接收：政务资料室</text>
+  <text x="46" y="174" font-family="SimSun,serif" font-size="13" fill="#47453f">页数：6　图像块：4</text>
+  <line x1="42" y1="204" x2="420" y2="204" stroke="#8b877c"/>
+  <text x="46" y="242" font-family="SimSun,serif" font-size="12" fill="#5d5a52">移交人：许盛　2018-10-31</text>
+</svg>

@@ -1,0 +1,11 @@
+/* 《今晚不要填写事故报告》剧情/逻辑修复层：浅色办公系统版 */
+.logic-note{margin:10px 0;padding:9px 11px;border:1px solid #bfc6c6;background:#f0f2ef;color:#5f6e73;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;border-radius:1px}
+.logic-note strong{color:#324044;font-weight:700}
+.logic-redacted{color:#879194!important;letter-spacing:.03em}.logic-redacted::selection{background:transparent}
+.logic-disabled-card{opacity:.66;background:#f2f3f0!important}.logic-disabled-card small{color:#7f898c!important}
+.logic-transition{padding:8px 10px;margin:4px 0;border-left:3px solid #7c929a;color:#617379;font:11px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;background:#eef1f0}
+.logic-maint-token{border-left:4px solid #54765f!important;background:#eef4ef!important}
+.logic-safety-warning{margin-top:10px;padding:10px 12px;border:1px solid #b39a6f;background:#f1e5cc;color:#735729;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;border-radius:1px}
+.overlay-card{scrollbar-gutter:stable;overflow-x:hidden}.overlay-card textarea{box-sizing:border-box;max-width:100%;resize:vertical}
+#auditText{color:#5d696d!important}
+@media (max-width:760px){.logic-note,.logic-safety-warning{font-size:12px}.overlay-card{max-width:calc(100vw - 20px)}}

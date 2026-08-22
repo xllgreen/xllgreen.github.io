@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b6f69">
+<meta name="description" content="《白塔医院：零点交班》——伪医院网站与院内系统叙事悬疑网页解谜游戏">
+<title>白塔医院：零点交班</title>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css?v=20260807-2">
+<link rel="stylesheet" href="css/paywall.css?v=20260807-2">
+<link rel="stylesheet" href="css/story-clarity-fix.css?v=20260817a">
+</head>
+<body>
+<noscript>本游戏需要启用 JavaScript。</noscript>
+<section id="cover" class="cover-screen" aria-label="游戏封面">
+<div class="cover-noise"></div><div class="cover-shade"></div>
+<div class="cover-content">
+<img class="cover-logo" src="assets/logo.svg" alt="白塔医院：零点交班">
+<p class="cover-tagline">一场被封存十三年的夜班事故。记录从未真正对齐。</p>
+<div class="cover-actions">
+<button id="newGameBtn" class="btn btn-primary">开始游戏</button>
+<button id="continueBtn" class="btn" disabled>继续游戏</button>
+<button id="coverSettingsBtn" class="btn btn-ghost">设置</button>
+<button id="coverAudioBtn" class="btn btn-ghost" aria-pressed="false">音效：关</button>
+<button id="contentBtn" class="btn btn-ghost">内容说明</button>
+</div>
+<div class="cover-meta"><span>预计游玩 75—100 分钟</span><span>自动存档</span><span>伪医院网站调查</span></div>
+</div>
+<div class="cover-call" aria-hidden="true"><span></span><b>7F</b><em>--:--</em></div>
+</section>
+<main id="gameApp" class="game-app hidden" aria-live="polite">
+<header class="topbar">
+<div class="brand-mini"><img src="assets/logo_portal.svg" alt="白塔医院"><span id="chapterLabel">序章</span></div>
+<div class="browser-address-wrap">
+<button id="browserBackBtn" class="browser-nav-btn" type="button" title="返回上一页" aria-label="返回上一页">‹</button>
+<button id="browserHomeBtn" class="browser-nav-btn" type="button" title="白塔医院首页" aria-label="白塔医院首页">⌂</button>
+<div class="fake-address"><span class="lock-dot"></span><span id="fakeUrl">mail.baita.local/inbox</span></div>
+</div>
+<div class="top-actions">
+<button id="evidenceBtn" class="utility-btn" title="证据板">证据 <span id="evidenceCount">0</span></button>
+<button id="noteBtn" class="utility-btn" title="调查便签">便签</button>
+<button id="hintBtn" class="utility-btn hint-utility" title="动态三级提示">三级提示</button>
+<button id="moreBtn" class="icon-btn" title="更多功能" aria-label="打开更多功能" aria-expanded="false">⋯</button>
+<div id="moreMenu" class="more-menu hidden" role="menu">
+<button id="supportBtn" class="menu-action support-utility" role="menuitem">1元自愿支持</button>
+<button id="saveBtn" class="menu-action" role="menuitem">手动存档</button>
+<button id="audioBtn" class="menu-action" role="menuitem">切换音效</button>
+<button id="settingsBtn" class="menu-action" role="menuitem">设置</button>
+</div>
+</div>
+</header>
+<div class="progress-wrap"><div id="progressBar" class="progress-bar"></div></div>
+<div class="app-layout">
+<section class="browser-window">
+<div class="browser-tabs"><span class="tab-dot"></span><span id="pageTitle">工作邮箱</span><span class="browser-tab-note">白塔医院网络服务</span></div>
+<div id="pageView" class="page-view" tabindex="-1"></div>
+</section>
+<aside id="sidePanel" class="side-panel" aria-label="调查记录">
+<div class="side-heading"><span>调查记录</span><button id="closeSideBtn" aria-label="关闭侧栏">×</button></div>
+<div class="side-tabs"><button data-side="evidence" class="active">证据</button><button data-side="notes">便签</button><button data-side="history">浏览历史</button></div>
+<div id="sideContent" class="side-content"></div>
+</aside>
+</div>
+<footer class="statusbar"><span id="statusText">已连接至白塔医院网络服务</span><span id="saveState">尚未存档</span></footer>
+</main>
+<dialog id="settingsDialog" class="game-dialog"><form method="dialog"><header><h2>设置</h2><button value="cancel" aria-label="关闭">×</button></header>
+<label>恐怖强度<select id="intensitySelect"><option value="standard">标准：完整氛围与轻度闪烁</option><option value="mild">温和：减少突然变化</option><option value="ambient">仅氛围：关闭突然画面</option></select></label>
+<label>音量 <input id="volumeRange" type="range" min="0" max="100" value="45"></label>
+<label class="check-row"><input id="reduceMotion" type="checkbox"> 减少动态效果</label>
+<p class="dialog-note">恐怖强度只影响表现，不改变谜题、剧情或结局。</p><button id="applySettingsBtn" value="default" class="btn btn-primary">保存设置</button>
+</form></dialog>
+<dialog id="infoDialog" class="game-dialog"><form method="dialog"><header><h2>内容说明</h2><button value="cancel" aria-label="关闭">×</button></header>
+<p>本作包含医院、死亡记录、医疗事故、轻度惊吓、低频音效和身份错置等内容，不含写实血腥画面。</p>
+<p>游戏内所有网站、医院、人物及医疗项目均为虚构。涉及医学判断的谜题均提供游戏内规则，不要求现实医学知识。</p>
+<p>音频谜题提供可视波形与文字替代。任何页面都不会读取真实位置、锁定鼠标或阻止关闭浏览器。</p><button value="default" class="btn btn-primary">我知道了</button>
+</form></dialog>
+<dialog id="hintDialog" class="game-dialog hint-dialog"><form method="dialog"><header><h2>动态三级提示</h2><button value="cancel" aria-label="关闭">×</button></header><p class="dialog-note">提示只在这里主动查看；第三级会给出当前谜题的完整答案，不影响结局。</p><div id="hintContent"></div><div class="hint-actions"><button id="getHintBtn" type="button" class="btn btn-primary">获取下一级提示</button><button value="cancel" class="btn">关闭</button></div></form></dialog>
+<dialog id="endingDialog" class="ending-dialog"><div id="endingContent"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="assertive"></div>
+<script src="js/data.js?v=20260807-2"></script>
+<script src="js/paywall.js?v=20260807-2"></script>
+<script src="js/game.js?v=20260807-2"></script>
+<script src="js/story-clarity-fix.js?v=20260817a"></script>
+</body>
+</html>

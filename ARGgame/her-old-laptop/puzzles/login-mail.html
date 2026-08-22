@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>邮箱登录</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">邮箱</span>
+    </div>
+    <div class="window-body">
+      <div class="login-page">
+        <div class="login-logo" style="background:linear-gradient(135deg,#5ac8fa,#007aff);">✉️</div>
+        <div class="login-title">163 邮箱</div>
+        <div class="login-sub">账号：linwan2024@163.com<br>请输入密码</div>
+
+        <div class="login-form">
+          <input type="password" class="login-input" id="pwd"
+                 placeholder="密码" maxlength="10" autocomplete="off">
+          <button class="login-btn" id="btn" style="background:#007aff;">登 录</button>
+          <div class="login-err" id="err"></div>
+        </div>
+
+        <div class="login-tip">
+          提示：林晚的密码都很简单<br>
+          去问问日历 / 问问妈妈
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    function submit() {
+      const v = document.getElementById('pwd').value;
+      Game.log('▶ 进入邮箱登录校验流程');
+      Game.verify(v, 'mail', '邮箱登录', () => {
+        Game.mark('MAIL_LOGIN');
+        Game.toast('登录成功');
+        setTimeout(() => location.href = '/ARGgame/her-old-laptop/apps/mail-key.html', 600);
+      }, (failN) => {
+        if (failN === 3) Game.monologue('备忘录第二条说密码是答辩日期。日历里 6月14日 答辩……妈妈聊天里也说那天是她的生日。', 5500);
+        document.getElementById('err').textContent = failN >= 3
+          ? '密码错误（已错 ' + failN + ' 次）'
+          : '密码错误';
+        document.getElementById('pwd').value = '';
+      });
+    }
+    document.getElementById('btn').addEventListener('click', submit);
+    document.getElementById('pwd').addEventListener('keydown', e => {
+      if (e.key === 'Enter') submit();
+    });
+    Game.renderProgress();
+  </script>
+</body>
+</html>

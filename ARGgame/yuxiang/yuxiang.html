@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玉祥文学社 | 公众号全文归档站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SimSun", "Microsoft YaHei", serif;
+        }
+        body {
+            background-color: #e8f5e9; /* 淡绿色背景 */
+            color: #1a4030;
+            line-height: 1.9;
+        }
+        /* 顶部导航 横向一排布局 */
+        header {
+            background: #2e7d32;
+            color: #fff;
+            padding: 16px 4%;
+            box-shadow: 0 3px 10px rgba(0,60,0,0.12);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        .header-wrap {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .site-logo {
+            font-size: 28px;
+            letter-spacing: 4px;
+            font-weight: bold;
+        }
+        nav a {
+            color: #f1f8e9;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: 0.25s;
+        }
+        nav a:hover {
+            background: #4caf50;
+        }
+        .login-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #login-btn {
+            background: #81c784;
+            border: none;
+            color: #004d25;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        #login-btn:hover {
+            background: #66bb6a;
+        }
+        .search-area {
+            display: flex;
+            gap: 8px;
+        }
+        #search-input {
+            width: 240px;
+            padding: 8px 14px;
+            border-radius: 22px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            /* 无提示文字 */
+            placeholder: "";
+        }
+        #search-btn {
+            padding: 8px 16px;
+            border-radius: 22px;
+            border: none;
+            background: #81c784;
+            color: #003818;
+            cursor: pointer;
+        }
+        /* 主容器统一布局 */
+        .container {
+            max-width: 1360px;
+            margin: 36px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 960px 330px;
+            gap: 32px;
+        }
+        .top-banner {
+            grid-column: 1 / -1;
+            background: #c8e6c9;
+            padding: 40px 26px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #a5d6a7;
+            margin-bottom: 10px;
+        }
+        .top-banner h2 {
+            font-size: 32px;
+            color: #1b5e20;
+            margin-bottom: 10px;
+        }
+        .top-banner p {
+            font-size: 17px;
+            color: #2e7d32;
+        }
+        /* 文章卡片通用 */
+        .article-card {
+            background: #f1f8e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 26px;
+            box-shadow: 0 2px 6px rgba(35,90,35,0.06);
+        }
+        .article-card h3 {
+            font-size: 22px;
+            border-left: 5px solid #4caf50;
+            padding-left: 12px;
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+        .meta-line {
+            font-size: 14px;
+            color: #3d6b3f;
+            margin-bottom: 14px;
+        }
+        .article-text {
+            white-space: pre-line;
+            font-size: 16px;
+        }
+        .article-text img {
+            max-width: 100%;
+            border-radius: 6px;
+            margin: 12px 0;
+        }
+        /* 页面内链接全部隐藏，仅搜索区显示 */
+        .article-text a {
+            display: none;
+        }
+        /* 搜索结果区块：固定高度纵向滚动 */
+        #search-result {
+            display: none;
+            max-height: 70vh;
+            overflow-y: auto; /* 完整上下滑动 */
+            padding: 24px;
+        }
+        #search-result a {
+            color: #00695c;
+            font-size: 16px;
+            word-break: break-all;
+            text-decoration: underline;
+        }
+        /* 分类标题 */
+        .category-title {
+            margin: 40px 0 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #a5d6a7;
+            font-size: 24px;
+            color: #1b5e20;
+        }
+        /* 侧边栏 */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        .sidebar-card h4 {
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+        .nav-list a {
+            display: block;
+            padding: 8px 0;
+            border-bottom: 1px dashed #b2d8b3;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+        .nav-list a:hover {
+            padding-left: 6px;
+        }
+        .sidebar-desc {
+            margin-top: 14px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        /* 投稿面板 */
+        .publish-box input,
+        .publish-box select,
+        .publish-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #a5d6a7;
+            border-radius: 6px;
+            background: #fff;
+            font-size: 15px;
+        }
+        #submit-publish {
+            width: 100%;
+            padding: 12px;
+            background: #4caf50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        /* 页脚 */
+        footer {
+            margin-top: 68px;
+            padding: 30px;
+            background: #2e7d32;
+            color: #e8f5e9;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-wrap">
+        <div class="site-logo">玉祥文学社</div>
+        <nav>
+            <a href="#literature">文学专栏篇</a>
+            <a href="#graduate">毕业专栏篇</a>
+            <a href="#notice">通知公告</a>
+            <a href="#publish">文章投稿</a>
+        </nav>
+        <div class="login-group">
+            <span>游客模式</span>
+            <button id="login-btn">登录入口</button>
+        </div>
+        <div class="search-area">
+            <input id="search-input" placeholder="">
+            <button id="search-btn">检索</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="top-banner">
+        <h2>以笔墨为光，照亮少年心事；以文字为翼，奔赴诗意远方</h2>
+        <p>玉祥文学社公众号全文归档站 </p>
+    </div>
+
+    <main>
+        <!-- 搜索结果（可完整上下滚动，已移除返回首页按钮） -->
+        <div id="search-result" class="article-card">
+            <div id="search-content"></div>
+        </div>
+
+        <!-- ========== 文学专栏篇 ========== -->
+        <h2 id="literature" class="category-title">文学专栏篇  / 第1-4期</h2>
+
+        <!-- 创刊招募 -->
+        <div class="article-card" data-keywords="陈朦 文学社成立 征稿">
+            <h3>玉祥中学文学社正式成立啦！</h3>
+            <div class="meta-line">发帖人：陈朦  | 分类：文学专栏</div>
+            <div class="article-text">
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY1hqQ9wTYr6C2CahWUjbIw_-FJp2xgACUSIAAgNwIVYhQHEiBz7OaTwE.jpg">
+现面向全体同学征集稿件，读后感、议论文、小说、诗歌等体裁全都欢迎。
+
+以文字为友，以笔墨抒怀，愿文学陪伴大家度过充实的课余时光，期待各位的精彩来稿！
+
+            </div>
+        </div>
+
+        <!-- 第1期诗歌专栏 -->
+        <div class="article-card" data-keywords="苏曼 李沁 张鹏 晚风 书香 暖阳 第1期">
+            <h3>玉祥文学社 第1期 诗歌专栏</h3>
+            <div class="meta-line">玉祥文学社 |  分类：文学专栏</div>
+            <div class="article-text">
+以笔墨为光，照亮少年心事；以文字为翼，奔赴诗意远方。<span style="color:red;">搜索人生的方向。</span>
+
+青春本就是一行行灵动的文字。在老师们的悉心指引下，同学们执起纸笔，将校园日常、心中感悟凝于笔尖，一字一句，皆是少年最真挚的心声与独有的青春情怀。
+
+作品展示
+
+《晚风》
+作者：苏曼
+傍晚的风掠过教学楼
+拂过窗边堆叠的书本
+捎来操场的喧闹，也带走片刻疲惫
+温柔晚风里
+藏着我们滚烫又纯粹的青春
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY19qQ9zysDRT7x8yk7pd8ySjWxecPwACWSIAAgNwIVb8Gd62bWKseTwE.jpg">
+
+《书香》
+作者：李沁
+一页页书卷，沉淀悠悠时光
+墨香萦绕教室，浸润年少心房
+在文字中观天地、悟成长
+让热爱与坚持，伴随一路前行
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY2ZqQ91MrrNmQcNlnOjlFcqw7rAIJQACYCIAAgNwIVbcUsG5RxfikjwE.jpg">
+
+《暖阳》
+作者：张鹏
+阳光穿过枝叶
+落在课桌、长廊与操场
+温柔包裹着朝夕相伴的我们
+平凡的校园时光
+因暖意与陪伴熠熠生光
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY2tqQ91ot1XqCSQAAdXsWZlJmvIwV58AAmUiAAIDcCFWqbAK-3jrhkc8BA.jpg">
+
+END
+
+这些质朴的篇章，皆是同学们用心观察生活、认真创作的成果。愿全体同学始终保有书写的热忱，坚持阅读与创作，在笔墨间涵养学识、丰盈内心。大胆抒发所思所感，以文字为伴，在文学天地里步履不停，收获成长与美好。
+            </div>
+        </div>
+
+        <!-- 第2期 灰鼠 -->
+        <div class="article-card" data-keywords="黄方 灰鼠 第2期">
+            <h3>玉祥文学社 第2期 诗歌：灰鼠</h3>
+            <div class="meta-line">投稿人：黄 方| 分类：文学专栏</div>
+            <div class="article-text">
+灰鼠
+灰鼠，灰鼠
+一进教室
+我就盯住这只老鼠了
+肩佝偻畏畏缩缩
+闻闻嗅嗅
+一副讨好又尴尬的模样
+人前是过分乖巧的虚假温顺
+人后是藏不住的细碎窥探
+我死死盯住
+那缩成一团的
+怯懦啊
+可笑可笑
+我把她所有卑劣都看穿
+令人作呕的发臭
+躲在人们脚底
+遇事只会缩起身子
+往自己的怯懦破洞里
+缩了又缩
+可怜你肥硕的胸脯和屁股
+将自己卡之洞外
+妄想用肥肉和厚皮毛
+挡住旁人肆意的打量与嗤笑
+嗨，我说臭老鼠
+你别以为这样
+就能藏住你的窘迫
+别以为我没有看见
+你秃光的鼠尾
+藏不住你笨拙的举止
+藏不住你垫底的荒唐
+更藏不住你窃窃私语猥琐伎俩
+
+感谢黄同学的投稿，整首作品文字直白尖锐，巧用比喻与细节刻画塑造灰鼠，外在举止、身形特点与内在卑劣品性相互呼应，层层揭去伪装。也期待广大同学们继续积极投稿，在文字创作中打磨自我、大胆表达，让我们相互学习、一起成长。
+
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY21qQ92W-vB2jNduxAng1QLOKaNnIQACaCIAAgNwIVbQb4WSBe2pljwE.jpg">
+            </div>
+        </div>
+
+        <!-- 第3期 无题 -->
+        <div class="article-card" data-keywords="徐若瑜 无题 第3期">
+            <h3>玉祥文学社 第3期 诗歌：无题</h3>
+            <div class="meta-line">投稿人：徐若瑜  | 分类：文学专栏</div>
+            <div class="article-text">
+无题
+徐若瑜
+
+火焰翻飞
+猎猎如死神的旗帜
+热浪蹂躏空气
+扭曲咫尺虚实
+我分不清烈狱人间
+
+垂落滚烫的泪
+裹挟温热鲜血
+屈辱悲鸣着
+留下炎火充斥我的身躯
+
+不为先祖而悲
+不为苦难而悲
+带着犁杖为未受死亡眷顾而悲
+
+空想主义攥紧最后一截琴弓
+斩断黄尘戾气
+荡尽世俗不公
+恰似普罗米修斯坠落的恩赐
+燎原烈火
+是救赎也是终祀
+火焰最后一次拥抱、湮灭我
+贪食火舌最后一次执念
+
+悲痛万分
+再多愤懑
+都是自我悲悯
+爬不上又无止境的
+是人间阶梯
+人踩着人
+双手双脚双眼双耳
+拥挤的烈狱皆是空惘
+
+火舌啊火舌
+你是我反刍的孩子
+而我是黄昏落幕时的温度
+最后一丝火星燃尽
+我的身躯崩裂出
+给予我泯灭去一切的岩浆
+
+非常感谢徐同学的分享，可以看出<span style="color:red;">句式</span>的精心设计，诗句式层次清晰、层层递进，从炼狱烈火的场景铺陈，到身心屈辱的情感抒发，再到自我悲戚的内核升华，节奏舒缓有度，读起来氛围感极强。文字里藏着不错的巧思。也期待广大同学们继续投稿，让我们共同学习，共同发展、共同进步。
+            </div>
+        </div>
+
+        <!-- 第4期 西游记 -->
+        <div class="article-card" data-keywords="杨柳又青 西游记 喜怒爱思欲忧 第4期">
+            <h3>玉祥文学社 第4期 阅读分享：西游记</h3>
+            <div class="meta-line">投稿人：杨柳又青 | 分类：文学专栏</div>
+            <div class="article-text">
+心猿归正，六贼无踪
+
+投稿人：杨柳又青
+心猿归正，六贼无踪
+很多人看《西游记》第十四回，只当是孙悟空出山后的第一场“打怪副本”：唐僧刚收悟空为徒，师徒二人初遇，路上撞见六个拦路抢劫的毛贼，猴王性情刚烈，二话不说尽数剿灭。
+小时候只觉得，这六贼就是普通路人反派，活该被打。长大后才懂，这六个无名无姓、匆匆下线的强盗，根本不是路人，而是人这一生最难根除的六种欲望。
+这也是西游最隐蔽的伏笔，今天笑着拆解这组藏在开篇的人性密码，专属密钥：喜怒爱思欲忧。
+这六个强盗，各有专属名号，对应人体六根，字字都是人心软肋：
+眼看喜（眼）：双眼贪看世间美色、繁华景致，见好看的就心生欢喜，贪恋外物浮华，是视觉带来的执念。
+耳听怒（耳）：双耳听闻闲言碎语、是非诋毁，入耳便心生嗔怒、烦躁不安，是听觉带来的情绪内耗。
+鼻嗅爱（鼻）：鼻闻香臭优劣，贪恋芬芳安逸，厌恶污浊窘迫，凭感官偏爱取舍，滋生偏爱执念。
+舌尝思（舌）：口舌贪恋五味美食，贪口腹之欲，尝遍百味便心生思虑、攀比奢求，永无满足之时。
+意见欲（意）：心念纷飞不息，胡思乱想、贪求名利，脑中万般欲望丛生，是人心最根本的贪欲源头。
+身本忧（身）：肉身贪恋安逸、畏惧疾苦，怕累、怕痛、怕失去，终日为皮囊奔波忧虑，自寻烦恼。
+六个名字，串起的就是普通人一辈子的情绪与欲望：喜、怒、爱、思、欲、忧
+很多人疑惑：唐僧为何因为悟空杀了六个毛贼，就执意责怪、数落悟空？
+根本不是唐僧心软圣母，是师徒二人的修行境界截然不同。
+在唐僧眼里：众生平等，杀生便是过错，是戒律大忌。
+在悟空眼里：六贼不除，道心不定。
+这六个强盗，拦的从来不是西行的路，是人心修行的路。六根不净，六欲缠身，哪怕踏上取经路，终究会被情绪、欲望、执念牵绊，寸步难行。
+孙悟空打死六贼，看似是杀伐，实则是心猿归正的第一步。
+何为心猿？人心如猿，躁动不安、杂念丛生。
+第十四回回目名「心猿归正，六贼无踪」，早已道破天机：想要修行前行，必先斩断六欲执念。
+我们普通人的人生，何尝不是一场西行？
+我们每天被眼看喜牵绊，沉迷短视频、浮华美景，贪慕外在光鲜；被耳听怒困扰，在意他人评价、流言蜚语，轻易动怒内耗；被鼻嗅爱、舌尝思裹挟，贪恋口舌之欲、舒适安逸，沉溺享乐；被意见欲支配，贪心不足、思虑过重，永远攀比；被身本忧束缚，焦虑得失、畏惧辛苦，终日惶惶不安。
+这六贼，从来不在取经路上，一直在我们心里。
+孙悟空能一棒打死心魔，可凡人的六欲，从来都打不死、除不尽。我们能做的，不是斩断所有情绪，而是学会掌控：不被欢喜裹挟、不被愤怒支配、不被偏爱困住、不被思虑内耗、不被欲望吞噬、不被忧愁纠缠。
+西游从不是神怪童话，是写尽人性的修行语录。
+记住 喜怒爱思欲忧，读懂六贼，便读懂了大半人生。
+所谓修行，不过是：净六根，除六贼，心无牵绊，方得始终。<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY5lqQ9-4yt0RsKW8hOXMR7riL3It2QAClyIAAgNwIVZI2lBqgtCrTTwE.jpg">
+            </div>
+        </div>
+
+        <!-- ========== 毕业专栏篇 ========== -->
+        <h2 id="graduate" class="category-title">毕业专栏篇</h2>
+        <div class="article-card" data-keywords="毕业季 高三 青春">
+            <h3>毕业季｜毕业专栏开启青春之歌</h3>
+            <div class="meta-line">玉祥文学社 | 分类：毕业专栏</div>
+            <div class="article-text">
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY6VqQ-EwVm3sa-J6tVXySHmxEr8z5QACqiIAAgNwIVYJ4lNvfCvMKTwE.jpg">
+前言：盛夏启新章，庆贺本届全体高三生圆满走完三载求学之路，顺利毕业。愿诸位携青春热忱，奔赴前路万丈荣光。▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+一、时光匆匆
+从初入校园时满眼青涩，到今朝褪去懵懂、圆满毕业。三载朝夕沉淀成长，少年已然从容成熟，即刻奔赴属于自己的崭新征程。
+
+视频链接：https://weixin.qq.com/sph/AlVdpd9R7U
+文档链接：https://www.kdocs.cn/l/cc76fdJfEl82
+
+二、青春作别
+毕业将至与青春作别，共赴一场毕业季征集活动即将开始诚邀每一位毕业生以热爱为笔，点亮毕业时刻向我们分享青春感悟。
+校门石匾上“玉祥中学” 四字，封存着每一届少年滚烫的三载春秋。夏风卷走试卷上淡淡的油墨香气，一身藏青白校服，藏满朝夕晨昏里的细碎时光。我们伏案苦读、并肩奔跑、相逢相伴，将青涩懵懂与满腔热血，尽数留在教学楼前的台阶，藏进后山层叠苍翠的山林轮廓之间。
+无论离校多少春秋，只要你曾身着校服踏过这道校门，此处永远为你留一方可以倾诉的角落。愿每一位学子怀揣母校赠予的温柔与底气，心怀滚烫期许奔赴广阔前路，前路漫漫亦灿灿，岁岁年年皆有崭新光亮；我们各赴山海万里，回首之时，永远记得来时这段少年时光。<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY1VqQ9u060WbAAL7ttFWQCdfJ7RdVwACTiIAAgNwIVZAtlZXwMT51zwE.jpg">
+本届高三：□□□□届6班合影留念。
+<span style="color:red;">珍惜每一秒时光。</span>
+            </div>
+        </div>
+
+        <div class="article-card" data-keywords="张依依 外公 毕业感言">
+            <h3>毕业致谢｜毕业生张依依-亲情伴耕耘</h3>
+            <div class="meta-line">投稿人：张依依 | 分类：毕业专栏</div>
+            <div class="article-text">
+教室窗外的蝉鸣还在循环播放，课桌边角写满未说出口的期许，曾经总觉得遥遥无期的离别，猝不及防落在眼前。
+这一路有早读的晨光、晚自习的晚风，有并肩赶路的好友，也有独自咬牙坚持的瞬间。那些散落在校园里的细碎日常，如今都成了独属于我们的珍贵收藏。
+本期，我们来看看毕业生张依依的毕业感言，听她聊聊这段滚烫青春里的故事。
+亲情给予奋斗的力量
+盛夏蝉鸣落幕，高中三年时光，终是落下篇章。回望滚烫又艰辛的高三岁月，题海奔波、步履匆匆，而支撑我跨越迷茫与困境的底气，是来自一直支持我的外公。
+这篇毕业感言，不谈盛大的青春，只真诚致谢默默陪伴、治愈我的外公。他从无华丽说教，只用质朴的陪伴与坚守，成为我高考路上最坚实的后盾，予我直面压力、奔赴前路的无限勇气。
+我的童年，藏着最治愈的田园烟火。儿时最欢喜的事，便是跟在外公身后，打理小院菜园、播种浇水。春日撒种，夏日除草，秋日收果，岁岁田园光景温柔了我的年少时光。那时我有个最质朴的梦想：我要和外公种一辈子的菜。
+时光匆匆，我告别小院烟火，奔赴学堂求学，一步步走向更广阔的世界。但外公在菜园里教会我的道理，始终扎根心底，伴我成长。幼时只觉种菜是简单劳作，历经高三深耕题海，我才真正读懂其中深意：种菜从无一蹴而就的丰收，唯有默默耕耘、耐住寂寞、静待时序，方能收获硕果，寒窗逐梦亦是如此。
+高三是我青春最煎熬的试炼。朝六晚十的日夜，我埋首于堆积的试卷与无尽的模考中，反复查漏补缺、订正错题。成绩起伏不定，备考压力层层叠加，无数个深夜，我深陷焦虑与自我怀疑，疲惫懈怠，甚至萌生过放弃的念头。
+每当濒临崩溃时，是外公告诉我：读书和种菜一样，从无捷径，所有默默深耕，终会收获回响。
+外公朴素的人生哲理，治愈了我备考焦虑。我慢慢学会沉下心来踏实刷题、耐心复盘，接纳成绩的起伏，在挫折中调整心态、稳步前行。熬过无数披星戴月的日夜，冲破层层迷茫与内耗，我终于走完高三漫漫征途，交出了青春答卷。
+曾经只想陪外公种菜摆摊的小女孩，在日复一日的坚守中褪去稚气、向阳成长。回望来路，满心感恩，感恩全力以赴的自己，更感恩我的外公。是他以田园烟火予我初心，以长久陪伴予我底气，教会我坚守与从容，让我拥有直面风雨、奔赴世界的勇气。
+青春翻页，新程启幕，在此想寄语奔赴高考的学弟学妹：高考从非孤军奋战，所有日复一日的坚持，都在悄悄铺垫前路。备考的迷茫、疲惫、焦虑都是常态，成绩起伏亦是成长。愿你们沉心深耕、不惧低谷，认真对待每一次练习、每一个知识点，咬牙坚持、不负热爱。请相信，所有披星戴月的付出，终会换来盛夏的繁花似锦。
+未来，我将怀揣纯粹初心奔赴山海，奔赴更广阔的人生，脚踏实地、向阳而行，不负耕耘、不负期许，不负外公岁岁年年的陪伴与偏爱。
+山水有来路，感恩亦如初。谢谢我最亲爱的外公，予我耕耘之力，赠我前行之光，让我勇敢奔赴世间所有美好与未知。
+最后，青春毕业，是终点亦是起点。很高兴能在滚烫的青春里相遇、成长。如果有学弟学妹想要交流高考学习经验、备考心态调整，或是校友同窗相识交流，都可以随时联系我。我的QQ：<span style="color:red;">2071837671</span>，欢迎大家随时交流、共同进步。
+            </div>
+        </div>
+
+        <div class="article-card" data-keywords="王艳凤 恩师 高三">
+            <h3>恩师专栏｜深耕教坛，暖心坚守——致通用技术王艳凤老师</h3>
+            <div class="meta-line">玉祥文学社 | 分类：毕业专栏</div>
+            <div class="article-text">
+高三漫漫备考征途，我们奔赴考场、逐梦前行，身后除了家人的默默守护，还有一位老师始终扎根校园、朝夕相伴，以赤诚育人之心，为我们的青春征途保驾护航。她就是我们的优秀指导老师、高中通用技术任课老师——王艳凤老师。
+在多数人的印象里，通用技术是一门温和的学科，但在高三备考的关键阶段，王艳凤老师却用极致的坚守与付出，让这门课成为我们备考路上的底气与慰藉。面对毕业班繁重的教学任务，王老师始终恪尽职守、倾尽心力，将全部精力倾注在学生与教学之上。
+高三的时光紧张且仓促，为了精准把握每一位学生的学习情况，及时解决大家备考中遇到的疑难问题，王艳凤老师几乎全程驻守校园。她摒弃了松弛的作息，扎根校园、坚守岗位，全程陪伴在毕业班学子身边，与我们同吃同住，朝夕相伴，从未有过半分懈怠。
+课堂上，她耐心深耕教学，细致拆解知识点，针对高三备考重点、难点逐一梳理，精准补齐我们的学科短板，用专业的教学能力，为我们的学科学习筑牢根基。面对同学们五花八门的疑问，她永远温柔且耐心，逐一细致答疑、反复讲解，不落下任何一个知识点，不放弃任何一位学生。
+课堂外，她是暖心的陪伴者与守护者。朝夕相处的日子里，王老师时刻留意着我们的学习状态与心理情绪。深知高三备考压力巨大，她总会细心察觉我们的焦虑与疲惫，适时开导、温柔鼓励，用温柔且坚定的力量，抚平我们备考路上的浮躁与内耗。她不仅用心打磨我们的学业成绩，更用心守护我们的成长心态。
+没有轰轰烈烈的宣言，只有日复一日的坚守；没有惊天动地的壮举，只有润物无声的耕耘。从晨光微露到夜色沉沉，王艳凤老师以校园为家、以学生为重，用日复一日的陪伴、极致负责的态度、温柔纯粹的师者初心，撑起了我们炙热的高三时光，为我们的高考之路保驾护航。
+师者仁心，润物无声；三尺讲台，四季坚守。感恩王艳凤老师的倾情付出、悉心栽培与长久陪伴。是您的坚守与温柔，让枯燥的备考时光多了无数温暖与底气。
+此程师恩，铭记于心，岁岁不忘。愿温柔尽责的王老师，桃李芬芳，岁岁顺遂，万事皆安！
+课后测试：https://ks.wjx.com/vm/rqYZTuZ.aspx
+            </div>
+        </div>
+
+        <div class="article-card" data-keywords="毕业诗词 高考 折桂">
+            <h3>毕业专栏｜诗词分享</h3>
+            <div class="meta-line">玉祥文学社| 分类：毕业专栏</div>
+            <div class="article-text">
+<span style="color:red;">才高八斗少年郎，今朝一登龙门。</span>提笔落笔皆锦绣，高考如愿折桂归！
+
+其一
+多载书窗历雪霜，终得振袂出明堂。
+胸中自有凌云志，笔下能铺锦绣章。
+暂别同窗酬远志，休凭浊酒怨离伤。
+长风送尔登前路，直上云霄向八荒。
+
+其二
+久伴青灯阅典章，如今束卷别书堂。
+一腔意气藏胸腑，满腹经纶润笔香。
+莫问前程多险阻，休嗟此际各参商。
+少年自有冲霄骨，踏尽风云赴远方。
+
+其三
+暮烛晨书历岁长，少年意气满诗行。
+凭君一纸凌云笔，踏尽关山向远方。
+
+其四
+数载埋窗伴墨香，今朝展卷赴文场。
+心藏丘壑从容写，自有清风送远扬。
+
+其五
+苦读春秋守砚台，胸中清韵自天开。
+从容落笔无牵绊，前路繁花次第来。
+
+其六
+久伴青灯读，才怀八斗书。
+挥毫答试卷，振袂赴云途。
+笔底山河阔，心中意气殊。
+今朝登龙门，一举入鸿庐。
+
+其七
+少年勤苦读，满腹蕴珠玑。
+案上千篇练，场中一气挥。
+从容答考卷，坦荡逐云霓。
+且待登龙日，春风踏锦堤。
+
+其八
+磨砚经寒暑，才情满寸隅。
+临场心不乱，落笔字皆珠。
+不负经年苦，当追万里途。
+登龙酬壮志，前路尽清娱。
+
+感谢各位同学踊跃来稿。诗词押韵是十分奇妙的语音艺术，而支撑音韵美感的理论基础，其中便有语言学家赵元任创制的<span style="color:red;">五度标记法（五度调值数字法）</span>。 这套方法将汉语声调的相对音高划分为五个层级：1 为最低音、2 次低音、3 中音、4 次高音、5 最高音，以数字组合标注声调高低起伏的走向，精准对应普通话阴、阳、上、去四类声调。            </div>
+        </div>
+
+        <!-- ========== 通知公告 ========== -->
+        <h2 id="notice" class="category-title">通知公告</h2>
+        <div class="article-card" data-keywords="端午 后山安全 投稿">
+            <h3>玉祥文学社：端午投稿收集邀请</h3>
+            <div class="meta-line">玉祥文学社 | 分类：通知</div>
+            <div class="article-text">
+时序流转，端午将至，浓郁的节日氛围渐渐笼罩校园。作为我国历史悠久的传统佳节，端午节历经千年传承，早已不只是吃粽、悬艾的民俗盛会，更融合了祭祀祈福、追思先贤、驱邪安康的文化内涵，是华夏民俗文化中浓墨重彩的一笔。
+端午自古便有祭祀礼俗，人们以庄重的仪式凭吊先贤、祈愿平安。古人会燃香静心、陈设供品，在肃穆的氛围里回望历史、沉淀心境，寄托对家国、亲友的美好祝愿。除了传统祭祀，挂艾草、佩香囊、赛龙舟、饮菖蒲酒、包食粽子等习俗也代代相传。艾草驱虫避秽，香囊暗藏清香，龙舟竞渡彰显奋进向上的精神，软糯的粽香则串联起阖家团圆的温情。多样的民俗活动，承载着古人对健康顺遂的期许，也蕴含着敬畏自然、向善修身的生活智慧。在课余闲暇之时，了解端午渊源、体验传统习俗，也是感受传统文化魅力、涵养心性的绝佳方式。
+近期校内各项教学工作有序开展，部分班级出现学生临时请假情况，同时有两位任课教师因工作调动、岗位调整暂时离岗，课程也做了相应统筹安排。教学节奏临时变动，也请同学们放平心态，合理规划学习任务，稳步跟上教学进度。
+不少同学留意到，学校后山区域近期有工作人员例行巡查。后山属于校园僻静区域，地形复杂且人迹较少，为保障全体师生人身安全，在此郑重提醒：请勿私自前往偏僻地带逗留、活动，严格遵守校园管理规定。
+针对近期校内的各项变化、大家的日常见闻与看法，以及本次分享的端午民俗文化、节日渊源、习俗趣事等内容，我们将在学校论坛收集。玉祥中学校园论坛已同步更新对应讨论板块，里面汇集了同学们的观点、现场实拍素材、校园旧事等讨论，欢迎大家前往文明交流、理性探讨，一同分享端午趣事、交流心得。
+校园生活需要彼此包容理解，也希望大家调整状态，安心投入学习。愿大家在感受端午佳节氛围的同时，承袭传统美德，修身律己，不负时光，稳步前行。
+https://devfile.cn/preview/p7xx61t8/luntan.html
+请同学们安心学习，传承传统文化美德。
+            </div>
+        </div>
+
+        <div class="article-card" data-keywords="寻人 杜羽棋 吴勇明 苏曼 黄方 林齐通 张鹏 郭强 宋佳琪 陈朦">
+            <h3>紧急通知｜全校失联师生寻人启事</h3>
+            <div class="meta-line">代玉祥中学安保处发布 | 分类：通知</div>
+            <div class="article-text">
+紧急寻人启事
+代玉祥中学安保处发布
+
+近日我校多名师生无故缺勤、失联，多处场所未见其人，情况紧急，特此发布寻人通知，望全校师生、周边群众积极留意，有线索及时上报。
+ 
+一、失联教职工
+ 
+杜羽棋（学校教导主任）、吴勇明（学校保安大队长）
+自5月11日起未到岗履职，办公室、校园各处均未见身影，通讯无法取得联系，现已上报，如有线索请联系。
+ 
+二、失联在校学生
+ 
+1.苏曼 高一（6）班
+4月21日起缺席课堂与校园活动，行踪不明。
+2. 黄方 高二（3）班
+5月24日起缺席课堂与校园活动，行踪不明。
+3. 林齐通 高二（3）班
+5月25日起缺席课堂与校园活动，与黄方同班，二人平日往来密切，同时失踪。
+4. 张鹏 高三（5）班
+6月15日之后再未到校。
+5. 郭强 高二（1）班
+6月17日当日起未正常出勤，校园内暂未找到。
+6.宋佳琪 高一（7）班
+6月17日起当日未正常出行，校园内暂未找到。
+7.徐若瑜 高二（3）班
+6月22日假期结束后失踪，目前下落不明，通讯无法取得联系。
+8.陈朦 高二（9）班
+6月25日失踪，目前下落不明。
+
+ 
+ 
+相关说明
+ 
+1. 以上人员失联范围主要集中在校园及校园周边区域，请大家相互转告、仔细排查。
+2. 若发现以上人员踪迹，或是掌握相关线索，请立即前往学校门卫室/安保处报备。
+3. 此事关乎校园安全，恳请全体师生积极配合，万分感谢！
+ 
+联系地点：学校正门门卫室
+联系电话：505050x12345            </div>
+        </div>
+
+        <div class="article-card" data-keywords="陈朦 精神分裂 后山 遇害">
+            <h3>玉祥中学关于失联师生案件侦查进展的通告</h3>
+            <div class="meta-line">玉祥中学安保处  | 分类：通知</div>
+            <div class="article-text">
+各位在校师生、学生家长、周边居民：
+我校安保处此前发布寻人通知，公示多名师生失联一事。经校内安保联合辖区虚构警务力量全域搜救、监控复盘、后山及外围河道全面勘查，现已查明部分失联人员涉案情况，现将相关核查进展通告如下：
+ 
+一、涉案人员基本情况
+ 
+涉案人员为我校高二（9）班学生陈朦。经调取学生心理档案、问询家属核实，该生确诊偏执型精神分裂症，入学时隐瞒相关病史，在校期间擅自停止服药。近期行为表现异常，常独自前往后山偏僻区域独处，存在情绪突发性失控情况。该生目前已被警方控制。
+ 
+二、已确认遇害失联人员
+ 
+经现场物证、痕迹比对核实，以下三名失联师生均遭到陈朦侵害：
+ 
+1. 杜羽棋，学校教导主任，5月11日失联；
+2. 黄方，高二（3）班学生，5月24日失联；
+3. 林齐通，高二（3）班学生，5月25日失联。
+ 
+其中黄方、林齐通二人常结伴在后山活动，偶然撞见陈朦异常举动；杜羽棋因多次约谈陈朦旷课、心理异常问题，与嫌疑人存在多次接触。
+ 
+三、现场勘查搜寻情况
+ 
+搜救队伍先后在校园后山、外围河道多处盲区发现遇难人员残骸与随身物品，相关区域常年人迹稀少，监控设备损坏无画面留存：
+（一）后山北侧废弃防空洞：洞内藏匿杜羽棋遗体残骸，洞口以枯枝、石块刻意封堵掩盖；
+（二）后山竹林低洼水塘：水草下发现黄方、林齐通人体组织碎片；
+（三）校园西侧外围河道下游：近期降雨冲刷后，陆续冲出现三名遇难者随身物品及零散残骸，河道沿岸无安防监控覆盖。
+ 
+四、其余失联人员现状
+ 
+吴勇明、苏曼、张鹏、郭强、宋佳琪、徐若瑜六名失联师生，现阶段未发现相关遇害物证与线索，下落仍不明，不排除与本案存在关联，后续将持续扩大搜寻范围。
+ 
+五、校园安全管控相关要求
+ 
+1. 即日起封闭后山全部出入口、围墙外侧河道小路，安保人员实行24小时轮岗巡逻，严禁学生单独前往山林、水域、废弃建筑等偏僻区域；
+2. 全校开展学生心理健康全面摸排，建立特殊学生专项台账，三日内完成全校监控盲区补装、故障设备检修；
+3. 全体师生、周边群众若发现案件相关可疑线索，请第一时间报备。
+ 
+六、线索报备渠道
+ 
+报备地点：玉祥中学正门门卫室、校内安保处
+联系电话：505050x12345
+
+附件：
+1.病例：https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEVj-RqMLANLLysK7sYrDWgZOtPpBtiNgACFyAAAjRriVX9aTzgyySndzwE.png
+2.官方文件：https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEVkDNqMLI3NXDibIiDQvw_qt-r-sTMFAACZSAAAjRriVWTnCQ_pyED7jwE.jpg
+ 
+玉祥中学安保处            </div>
+        </div>
+
+        <div class="article-card" data-keywords="公众号接管 原管理员失联">
+            <h3>关于玉祥文学社暂代接管的通知</h3>
+            <div class="meta-line">发布人：杨柳又青 | 分类：通知</div>
+            <div class="article-text">
+关于玉祥文学社公众号账号暂代接管的通知
+ 
+各处室、各年级班级、玉祥文学社全体社员：
+因文学社原负责管理人员失联，公众号运营工作出现空缺。经商议，现就公众号管理事宜通知如下：
+ 
+1. 自20□□年7月9日起，玉祥文学社官方公众号账号暂代接管，全权负责账号发布、后台留言、稿件审核等全部运营事务。
+2. 接管期间，所有待发布文稿、投稿素材统一社团办公室审核。
+3. 社团原有历史推文、存档稿件全部封存，禁止社员私自登录后台修改、删除内容。
+4. 若有社员发现账号异常登录、不明发布内容，第一时间上报。
+
+附件：/ARGgame/yuxiang/wenjuandiaocha.html
+ 
+玉祥中学行政办公室
+20□□年7月9日
+欢迎加入我们，等你的回复。
+          </div>
+        </div>
+
+        <!-- 投稿发布区 -->
+        <h2 id="publish" class="category-title">文章投稿发布</h2>
+        <div class="article-card publish-box">
+            <input placeholder="文章标题">
+            <select>
+                <option>文学专栏篇</option>
+                <option>毕业专栏篇</option>
+                <option>通知公告</option>
+            </select>
+            <textarea rows="14" placeholder="粘贴文章内容，任意文字均可提交"></textarea>
+            <button id="submit-publish">提交发布</button>
+        </div>
+    </main>
+
+    <!-- 侧边导航 -->
+    <aside class="sidebar">
+        <div class="article-card sidebar-card">
+            <h4>栏目快速导航</h4>
+            <div class="nav-list">
+                <a href="#literature">文学专栏 · 1-4期</a>
+                <a href="#graduate">毕业专栏篇</a>
+                <a href="#notice">通知公告</a>
+                <a href="#publish">投稿发布</a>
+            </div>
+            <br>
+            <h4>检索提示</h4>
+            <p class="sidebar-desc">搜索后可滑动查看完整带链接内容</p>
+            <br>
+            <h4>网站说明</h4>
+            <p class="sidebar-desc">页面内不展示外链，仅搜索区块完整可滚动，全站仅游客访问，无登录权限。
+            </p>
+			<br>
+			<h4>其他平台</h4>
+           <img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWaWJqRKDNxBte3Her4Wkh5lUjTKbdtwACWikAAgNwKVZi8mSwc3T6kTwE.jpg" alt="玉林中学二维码" width="200" height="200">
+        </div>
+    </aside>
+</div>
+
+<footer>
+©2026 玉祥文学社文学归档站 | 原文完整保留，搜索区域支持上下滑动，禁止商用
+</footer>
+
+<script>
+// 登录按钮弹窗
+const loginBtn = document.getElementById('login-btn');
+loginBtn.onclick = ()=>{
+    alert('本站仅开放游客浏览模式，无登录账号与后台权限，无法登录！');
+}
+
+// 投稿提交弹窗
+const publishBtn = document.getElementById('submit-publish');
+publishBtn.onclick = ()=>{
+    alert('欢迎加入我们！我们即是阿赖耶，阿赖耶即是我们。');
+}
+
+// 搜索核心逻辑（无返回首页按钮）
+const searchInput = document.getElementById('search-input');
+const searchBtn = document.getElementById('search-btn');
+const searchWrap = document.getElementById('search-result');
+const searchContent = document.getElementById('search-content');
+
+function doSearch(){
+    let key = searchInput.value.trim().toLowerCase();
+    searchWrap.style.display = 'none';
+    if(!key) return;
+    let outHtml = "";
+    // 专属关键词完整带链接内容
+    if(key === "灰鼠"){
+        outHtml = `<h3>检索结果：灰鼠</h3>
+<div class="article-text">
+<h4>玉祥文学社 第2期 诗歌：灰鼠</h4>
+<p class="meta-line">投稿人：黄方 </p>
+灰鼠
+灰鼠，灰鼠
+一进教室
+我就盯住这只老鼠了
+肩佝偻畏畏缩缩
+闻闻嗅嗅
+一副讨好又尴尬的模样
+人前是过分乖巧的虚假温顺
+人后是藏不住的细碎窥探
+我死死盯住
+那缩成一团的
+怯懦啊
+可笑可笑
+我把她所有卑劣都看穿
+令人作呕的发臭
+躲在人们脚底
+遇事只会缩起身子
+往自己的怯懦破洞里
+缩了又缩
+可怜你肥硕的胸脯和屁股
+将自己卡之洞外
+妄想用肥肉和厚皮毛
+挡住旁人肆意的打量与嗤笑
+嗨，我说臭老鼠
+你别以为这样
+就能藏住你的窘迫
+别以为我没有看见
+你秃光的鼠尾
+藏不住你笨拙的举止
+藏不住你垫底的荒唐
+更藏不住你窃窃私语猥琐伎俩
+
+感谢黄同学的投稿，整首作品文字直白尖锐，巧用比喻与细节刻画塑造灰鼠，外在举止、身形特点与内在卑劣品性相互呼应，层层揭去伪装。也期待广大同学们继续积极投稿，在文字创作中打磨自我、大胆表达，让我们相互学习、一起成长。
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY21qQ92W-vB2jNduxAng1QLOKaNnIQACaCIAAgNwIVbQb4WSBe2pljwE.jpg">
+全文官方链接：https://www.kdocs.cn/l/cpkrbQalzaeR
+</div>`;
+    }else if(key === "无题"){
+        outHtml = `<h3>检索结果：无题</h3>
+<div class="article-text">
+<h4>玉祥文学社 第3期 诗歌：无题</h4>
+<p class="meta-line">投稿人：徐若瑜 </p>
+无题
+徐若瑜
+
+火焰翻飞
+猎猎如死神的旗帜
+热浪蹂躏空气
+扭曲咫尺虚实
+我分不清烈狱人间
+
+垂落滚烫的泪
+裹挟温热鲜血
+屈辱悲鸣着
+留下炎火充斥我的身躯
+
+不为先祖而悲
+不为苦难而悲
+带着犁杖为未受死亡眷顾而悲
+
+空想主义攥紧最后一截琴弓
+斩断黄尘戾气
+荡尽世俗不公
+恰似普罗米修斯坠落的恩赐
+燎原烈火
+是救赎也是终祀
+火焰最后一次拥抱、湮灭我
+贪食火舌最后一次执念
+
+悲痛万分
+再多愤懑
+都是自我悲悯
+爬不上又无止境的
+是人间阶梯
+人踩着人
+双手双脚双眼双耳
+拥挤的烈狱皆是空惘
+
+火舌啊火舌
+你是我反刍的孩子
+而我是黄昏落幕时的温度
+最后一丝火星燃尽
+我的身躯崩裂出
+给予我泯灭去一切的岩浆
+
+非常感谢徐同学的分享，可以看出<span style="color:red;">句式</span>的精心设计，诗句式层次清晰、层层递进，从炼狱烈火的场景铺陈，到身心屈辱的情感抒发，再到自我悲戚的内核升华，节奏舒缓有度，读起来氛围感极强。文字里藏着不错的巧思。也期待广大同学们继续投稿，让我们共同学习，共同发展、共同进步。
+全文官方链接：https://www.kdocs.cn/l/cnPqTf4x7fVD
+</div>`;
+    }else if(key === "西游记"){
+        outHtml = `<h3>检索结果：西游记</h3>
+<div class="article-text">
+<h4>玉祥文学社 第4期 阅读分享：西游记</h4>
+<p class="meta-line">投稿人：杨柳又青 </p>
+心猿归正，六贼无踪
+很多人看《西游记》第十四回，只当是孙悟空出山后的第一场“打怪副本”：唐僧刚收悟空为徒，师徒二人初遇，路上撞见六个拦路抢劫的毛贼，猴王性情刚烈，二话不说尽数剿灭。
+小时候只觉得，这六贼就是普通路人反派，活该被打。长大后才懂，这六个无名无姓、匆匆下线的强盗，根本不是路人，而是人这一生最难根除的六种欲望。
+这也是西游最隐蔽的伏笔，今天笑着拆解这组藏在开篇的人性密码，专属密钥：喜怒爱思欲忧。
+这六个强盗，各有专属名号，对应人体六根，字字都是人心软肋：
+眼看喜（眼）：双眼贪看世间美色、繁华景致，见好看的就心生欢喜，贪恋外物浮华，是视觉带来的执念。
+耳听怒（耳）：双耳听闻闲言碎语、是非诋毁，入耳便心生嗔怒、烦躁不安，是听觉带来的情绪内耗。
+鼻嗅爱（鼻）：鼻闻香臭优劣，贪恋芬芳安逸，厌恶污浊窘迫，凭感官偏爱取舍，滋生偏爱执念。
+舌尝思（舌）：口舌贪恋五味美食，贪口腹之欲，尝遍百味便心生思虑、攀比奢求，永无满足之时。
+意见欲（意）：心念纷飞不息，胡思乱想、贪求名利，脑中万般欲望丛生，是人心最根本的贪欲源头。
+身本忧（身）：肉身贪恋安逸、畏惧疾苦，怕累、怕痛、怕失去，终日为皮囊奔波忧虑，自寻烦恼。
+六个名字，串起的就是普通人一辈子的情绪与欲望：喜、怒、爱、思、欲、忧
+很多人疑惑：唐僧为何因为悟空杀了六个毛贼，就执意责怪、数落悟空？
+根本不是唐僧心软圣母，是师徒二人的修行境界截然不同。
+在唐僧眼里：众生平等，杀生便是过错，是戒律大忌。
+在悟空眼里：六贼不除，道心不定。
+这六个强盗，拦的从来不是西行的路，是人心修行的路。六根不净，六欲缠身，哪怕踏上取经路，终究会被情绪、欲望、执念牵绊，寸步难行。
+孙悟空打死六贼，看似是杀伐，实则是心猿归正的第一步。
+何为心猿？人心如猿，躁动不安、杂念丛生。
+第十四回回目名「心猿归正，六贼无踪」，早已道破天机：想要修行前行，必先斩断六欲执念。
+我们普通人的人生，何尝不是一场西行？
+我们每天被眼看喜牵绊，沉迷短视频、浮华美景，贪慕外在光鲜；被耳听怒困扰，在意他人评价、流言蜚语，轻易动怒内耗；被鼻嗅爱、舌尝思裹挟，贪恋口舌之欲、舒适安逸，沉溺享乐；被意见欲支配，贪心不足、思虑过重，永远攀比；被身本忧束缚，焦虑得失、畏惧辛苦，终日惶惶不安。
+这六贼，从来不在取经路上，一直在我们心里。
+孙悟空能一棒打死心魔，可凡人的六欲，从来都打不死、除不尽。我们能做的，不是斩断所有情绪，而是学会掌控：不被欢喜裹挟、不被愤怒支配、不被偏爱困住、不被思虑内耗、不被欲望吞噬、不被忧愁纠缠。
+西游从不是神怪童话，是写尽人性的修行语录。
+记住 喜怒爱思欲忧，读懂六贼，便读懂了大半人生。
+所谓修行，不过是：净六根，除六贼，心无牵绊，方得始终
+<img src="https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAEWY5lqQ9-4yt0RsKW8hOXMR7riL3It2QAClyIAAgNwIVZI2lBqgtCrTTwE.jpg">
+全文官方链接：https://devfile.cn/preview/awy2hcjh/jisi%20zhonggao.html
+</div>`;
+    }else if(key === "王艳凤"){
+        outHtml = `<h3>检索结果：王艳凤</h3>
+<div class="article-text">
+<h4>恩师专栏｜深耕教坛，暖心坚守——致通用技术王艳凤老师</h4>
+<p class="meta-line">玉祥文学社 | 2026年6月29日</p>
+高三漫漫备考征途，我们奔赴考场、逐梦前行，身后除了家人的默默守护，还有一位老师始终扎根校园、朝夕相伴，以赤诚育人之心，为我们的青春征途保驾护航。她就是我们的优秀指导老师、高中通用技术任课老师——王艳凤老师。
+在多数人的印象里，通用技术是一门温和的学科，但在高三备考的关键阶段，王艳凤老师却用极致的坚守与付出，让这门课成为我们备考路上的底气与慰藉。面对毕业班繁重的教学任务，王老师始终恪尽职守、倾尽心力，将全部精力倾注在学生与教学之上。
+高三的时光紧张且仓促，为了精准把握每一位学生的学习情况，及时解决大家备考中遇到的疑难问题，王艳凤老师几乎全程驻守校园。她摒弃了松弛的作息，扎根校园、坚守岗位，全程陪伴在毕业班学子身边，与我们同吃同住，朝夕相伴，从未有过半分懈怠。
+课堂上，她耐心深耕教学，细致拆解知识点，针对高三备考重点、难点逐一梳理，精准补齐我们的学科短板，用专业的教学能力，为我们的学科学习筑牢根基。面对同学们五花八门的疑问，她永远温柔且耐心，逐一细致答疑、反复讲解，不落下任何一个知识点，不放弃任何一位学生。
+课堂外，她是暖心的陪伴者与守护者。朝夕相处的日子里，王老师时刻留意着我们的学习状态与心理情绪。深知高三备考压力巨大，她总会细心察觉我们的焦虑与疲惫，适时开导、温柔鼓励，用温柔且坚定的力量，抚平我们备考路上的浮躁与内耗。她不仅用心打磨我们的学业成绩，更用心守护我们的成长心态。
+没有轰轰烈烈的宣言，只有日复一日的坚守；没有惊天动地的壮举，只有润物无声的耕耘。从晨光微露到夜色沉沉，王艳凤老师以校园为家、以学生为重，用日复一日的陪伴、极致负责的态度、温柔纯粹的师者初心，撑起了我们炙热的高三时光，为我们的高考之路保驾护航。
+师者仁心，润物无声；三尺讲台，四季坚守。感恩王艳凤老师的倾情付出、悉心栽培与长久陪伴。是您的坚守与温柔，让枯燥的备考时光多了无数温暖与底气。
+此程师恩，铭记于心，岁岁不忘。愿温柔尽责的王老师，桃李芬芳，岁岁顺遂，万事皆安！
+课后测试：https://ks.wjx.com/vm/rqYZTuZ.aspx
+全文官方链接：4.https://www.kdocs.cn/l/ch5xUWUdbPmH
+</div>`;
+    }else if(key === "陈朦"){
+        outHtml = `<h3>检索结果：陈朦</h3>
+<div class="article-text">
+<h4>讣告</h4>
+<p class="meta-line">杨柳又青 </p>
+讣告
+吾亲友陈朦，不幸于20□□年7月5日，因突发心源性猝死，经全力抢救无效，永远离开了我们，享年17岁。
+陈朦一生性情温和，待人赤诚友善，为人谦逊坦荡，平日里孝顺亲友、真诚待人，对待生活始终热忱积极，与身边亲朋、同事挚友皆和睦相处，深受众人喜爱与挂念。其猝然离世，事发突然，令所有至亲好友悲痛万分，万般不舍。
+斯人已逝，音容永存。为缅怀逝者，寄托哀思，家属定于20□□年7月9日上午9时，于XX市殡仪馆一号告别厅举行遗体告别仪式，谨此告知各位亲友。
+望各位亲友知悉，节哀顺变。
+孝属：陈朦全体家属泣告
+20□□年7月6日
+附件：https://www.kdocs.cn/l/caU2hMaok44U
+</div>`;
+    }else if(key === "徐若瑜"){
+        outHtml = `<div style="text-align:center;font-size:24px;padding:30px;">当你觉得接近“end”时，改变网页。</div>`;
+    }else{
+        // 普通关键词匹配页面文章
+        outHtml = `<h3>检索关键词：${searchInput.value}</h3>`;
+        let hit = false;
+        document.querySelectorAll('.article-card[data-keywords]').forEach(card=>{
+            let tag = card.dataset.keywords.toLowerCase();
+            if(tag.includes(key)){
+                hit = true;
+                outHtml += `<div style="padding:10px;margin:8px 0;border:1px solid #a5d6a7;border-radius:8px;">
+<h4>${card.querySelector('h3').innerText}</h4>
+<p>${card.querySelector('.meta-line').innerText}</p>
+</div>`;
+            }
+        })
+        if(!hit) outHtml += "<p>无匹配内容</p>";
+    }
+    searchContent.innerHTML = outHtml;
+    searchWrap.style.display = "block";
+    searchWrap.scrollIntoView({behavior:"smooth"});
+}
+searchBtn.onclick = doSearch;
+searchInput.onkeydown = e=>{if(e.key === "Enter") doSearch();}
+</script>
+</body>
+</html>

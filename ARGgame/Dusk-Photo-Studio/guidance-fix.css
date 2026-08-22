@@ -1,0 +1,41 @@
+.task-guide {
+  margin: 0 0 14px;
+  padding: 14px 15px;
+  border: 1px solid rgba(120, 83, 51, .28);
+  border-left: 4px solid #b17a43;
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 238, .96), rgba(241, 226, 201, .88)),
+    repeating-linear-gradient(0deg, transparent 0 23px, rgba(91, 65, 43, .035) 24px);
+  color: #4c392b;
+  box-shadow: 0 5px 18px rgba(72, 48, 29, .08);
+}
+.task-guide[hidden] { display: none !important; }
+.task-guide__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.task-guide__eyebrow { font-weight: 800; letter-spacing: .08em; color: #6c472c; }
+.task-guide__code { font: 700 .74rem/1.2 ui-monospace, SFMono-Regular, Consolas, monospace; color: #8c6748; padding: 3px 7px; border: 1px solid rgba(140, 103, 72, .3); border-radius: 999px; background: rgba(255,255,255,.48); }
+.task-guide__steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; counter-reset: guide-step; }
+.task-guide__steps li { display: grid; grid-template-columns: 6.3em 1fr; gap: 8px; align-items: start; font-size: .88rem; line-height: 1.65; }
+.task-guide__steps li::before { counter-increment: guide-step; content: counter(guide-step); width: 20px; height: 20px; display: inline-grid; place-items: center; border-radius: 50%; background: #735039; color: #fffaf0; font: 700 .72rem/1 ui-monospace, monospace; grid-column: 1; position: absolute; opacity: 0; }
+.task-guide__steps b { color: #5e3f2a; white-space: nowrap; }
+.task-guide__steps span { color: #675448; }
+.task-guide__feedback { display: flex; gap: 8px; align-items: flex-start; margin-top: 11px; padding-top: 10px; border-top: 1px dashed rgba(104, 72, 45, .25); font-size: .82rem; color: #756253; }
+.task-guide__feedback b { flex: 0 0 auto; color: #7a583e; }
+.task-guide__feedback.is-active { color: #714638; }
+.guided-puzzle-card { position: relative; }
+.guided-puzzle-card::before { content: '可操作区域'; position: absolute; top: 9px; right: 10px; z-index: 2; padding: 3px 7px; border-radius: 999px; background: rgba(81, 58, 41, .78); color: #fff8e8; font-size: .66rem; letter-spacing: .06em; pointer-events: none; }
+.guided-control { outline-offset: 2px; }
+.guided-control:focus-visible { outline: 3px solid rgba(193, 128, 64, .68) !important; box-shadow: 0 0 0 5px rgba(255, 230, 178, .35) !important; }
+body.drag-assist .guided-control:hover { box-shadow: 0 0 0 2px rgba(177, 122, 67, .25); }
+.guide-nudge { animation: guide-nudge .42s ease; }
+@keyframes guide-nudge { 0%,100% { transform: translateX(0); } 30% { transform: translateX(-4px); } 65% { transform: translateX(3px); } }
+body.reduced-motion .guide-nudge { animation: none; }
+body.high-contrast .task-guide { border-color: currentColor; background: #fff; color: #17120f; }
+body.high-contrast .task-guide__steps span,
+body.high-contrast .task-guide__feedback { color: #17120f; }
+@media (max-width: 760px) {
+  .task-guide { padding: 12px; }
+  .task-guide__steps li { grid-template-columns: 1fr; gap: 2px; }
+  .task-guide__feedback { display: grid; gap: 3px; }
+  .guided-puzzle-card::before { position: static; display: table; margin: 0 0 8px auto; }
+}

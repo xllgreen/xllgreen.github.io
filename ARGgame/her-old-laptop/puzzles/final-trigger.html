@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加密文件夹</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .file-content {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 28px;
+    }
+    .file-content h2 {
+      font-size: 20px;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .file-content .meta-line {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 14px;
+    }
+    .file-content .section {
+      margin-bottom: 24px;
+    }
+    .file-content .section h3 {
+      font-size: 15px;
+      color: #444;
+      margin-bottom: 10px;
+      border-left: 3px solid #d9707e;
+      padding-left: 10px;
+    }
+    .file-content .section p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 8px;
+    }
+    .file-content .evidence-box {
+      background: #fff5f5;
+      border: 1px solid #ffcdd2;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 13px;
+      color: #c62828;
+      line-height: 1.8;
+    }
+    .file-content .evidence-box .label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .file-content .highlight-num {
+      display: inline-block;
+      background: #ff6b6b;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+    }
+    .file-content .emergency-contact {
+      background: #fffef5;
+      border: 1px dashed #e0d5a0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-size: 13px;
+      color: #8a7d5a;
+      line-height: 1.8;
+      font-family: "Georgia", "Songti SC", serif;
+    }
+    .file-content .emergency-contact .label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #6b5b3a;
+    }
+
+    /* 频谱图容器 */
+    .spectro-container {
+      margin: 20px 0;
+      background: #0a0a0a;
+      border-radius: 8px;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .spectro-container .spectro-label {
+      font-size: 11px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .spectro-container .spectro-hint-text {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+    .spectro-container .spectro-hint-text span {
+      color: #95ec69;
+      font-weight: 600;
+    }
+
+    /* 密码输入区 */
+    .trigger-input-area {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .trigger-input-area .trigger-label {
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .trigger-input-area .trigger-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .trigger-input-area input {
+      padding: 12px 18px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      width: 260px;
+      text-align: center;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .trigger-input-area input:focus {
+      border-color: #d9707e;
+      box-shadow: 0 0 0 3px rgba(217,112,126,0.1);
+    }
+    .trigger-input-area .trigger-btn {
+      padding: 12px 24px;
+      background: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+    .trigger-input-area .trigger-btn:hover {
+      background: #d93030;
+      box-shadow: 0 4px 12px rgba(217,48,48,0.3);
+    }
+    .trigger-input-area .trigger-err {
+      color: #fa5151;
+      font-size: 12px;
+      min-height: 18px;
+      text-align: center;
+    }
+    .trigger-input-area .trigger-fail-count {
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 4px;
+    }
+
+    /* 发件箱草稿入口（输入正确触发码后浮现） */
+    .draft-entry {
+      margin: 20px 0 0;
+    }
+    .draft-entry-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fffef5;
+      border: 1px dashed #e0d5a0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .draft-entry-inner:hover {
+      background: #fffbe0;
+      border-color: #d9c98a;
+    }
+    .draft-entry-icon { font-size: 22px; }
+    .draft-entry-info { flex: 1; min-width: 0; }
+    .draft-entry-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #6b5b3a;
+    }
+    .draft-entry-sub {
+      font-size: 11px;
+      color: #b0a37a;
+      margin-top: 2px;
+    }
+    .draft-entry-arrow {
+      color: #c9bd93;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* 抉择区 */
+    .decision-area {
+      display: none;
+      margin: 24px 0;
+      padding: 20px;
+      background: #fff;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .decision-area.visible { display: block; animation: fade-in 0.5s ease; }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+    .decision-area .decision-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .decision-area .decision-sub {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .decision-area .ending-choices {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">林晚的文件夹</span>
+    </div>
+    <div class="window-body">
+      <div class="file-content">
+        <h2>林晚_毕业材料_加密备份</h2>
+        <div class="meta-line">
+          <span>最后修改：2024年5月20日</span>
+          <span>作者：林晚</span>
+          <span>状态：待发送</span>
+        </div>
+
+        <div class="section">
+          <h3>一、证据概要</h3>
+          <p>陈正明教授课题组在2021-2024年间发表的5篇核心论文中，存在系统性数据篡改行为。以下为关键证据：</p>
+          <div class="evidence-box">
+            <span class="label">⚠ 核心证据</span>
+            1. Wilson (2021) 原始观测数据被篡改：期刊号从 <strong>17(114)</strong> 改为 <strong>17(8)</strong>，掩盖了114次实验的原始分布<br>
+            2. 三组对照实验数据被选择性"调整"以符合预期结论<br>
+            3. 张航同学整理的原始实验记录在2023年5月"丢失"<br>
+            4. 张航同学于2023年5月17日被发现溺亡于校园人工湖
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>二、张航的遗言</h3>
+          <p style="color:#666;font-style:italic;">以下是张航在事发前发给我的最后一条消息，我把它保存在这里。</p>
+          <div class="emergency-contact">
+            <span class="label">张航 · 2023年5月15日 23:47</span>
+            "学妹，我把所有东西都整理好了。密码你都知道。<br>
+            他们发现了。陈老师今天找我谈话，让我"想清楚"。<br>
+            如果明天我出什么事，请你帮我把这些东西发出去。<br>
+            不要怕。我们做了正确的事。<br>
+            把那束光送出去。"
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>三、托付给"晴天"的副本</h3>
+          <p style="color:#666;font-style:italic;">这一份打印件，5月18日深夜我交给了论坛里认识的"晴天"。她不知道里面是什么，只答应"替我保管"。</p>
+          <div class="emergency-contact">
+            <span class="label">📦 副本说明</span>
+            内容：本文件夹的纸质打印件 + 一张手写字条<br>
+            字条原文："如果下周我没主动联系你，请按字条背面的地址，把这个信封寄出去。不要打开它。"<br>
+            字条背面地址：妈妈
+          </div>
+          <p style="font-size:13px;color:#888;line-height:1.7;">
+            晴天不知道信封里是什么，也不知道我为什么要把一份"看起来像论文备份"的东西托付给她。
+            她答应的时候只问了一句"你吓到我了，到底怎么了"——我没回答。<br>
+            我不是不信任她，是我不想把她也卷进来。
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>四、紧急联系人</h3>
+          <div class="emergency-contact">
+            <span class="label">📋 举报接收方</span>
+            教育部学术规范委员会：<strong>report@moe.edu.cn</strong><br>
+            中国青年报调查部：<strong>tip@cyol.com</strong><br>
+            Nature Physics 编辑部：<strong>editorial@nature.com</strong>
+          </div>
+        </div>
+
+        <!-- 频谱图 -->
+        <div class="spectro-container">
+          <div class="spectro-label">▼ 音频频谱分析 ▼</div>
+          <div class="spectro-enhanced" id="spectro">
+            <!-- 用 JS 动态生成频谱图 -->
+          </div>
+          <div class="spectro-hint-text">
+            💡 提示：这看起来像一份<span>音频频谱图</span>。<br>
+            频率轴上的峰值排列成了字母。
+          </div>
+        </div>
+
+        <!-- 密码输入 -->
+        <div class="trigger-input-area">
+          <div class="trigger-label">
+            输入频段中隐藏的密钥，以发送举报材料：
+          </div>
+          <div class="trigger-wrap">
+            <input type="text" id="triggerInput" placeholder="输入密钥" maxlength="20" autocomplete="off">
+            <button class="trigger-btn" id="triggerBtn">发送</button>
+          </div>
+          <div class="trigger-err" id="triggerErr"></div>
+          <div class="trigger-fail-count" id="failCount"></div>
+        </div>
+
+        <!-- 发件箱草稿入口（正确输入触发码后浮现；长按频谱图字母 L 也可提前解锁） -->
+        <div class="draft-entry" id="draftEntry" style="display:none;">
+          <div class="draft-entry-inner" onclick="revealDraft()">
+            <span class="draft-entry-icon">📧</span>
+            <div class="draft-entry-info">
+              <div class="draft-entry-title">发件箱 · 草稿（1）</div>
+              <div class="draft-entry-sub">2024年5月19日 凌晨2:14 · 收件人：妈妈</div>
+            </div>
+            <span class="draft-entry-arrow">›</span>
+          </div>
+        </div>
+
+        <!-- 抉择区（正确输入后显示） -->
+        <div class="decision-area" id="decisionArea">
+          <div class="decision-title">材料已准备好，是否发送？</div>
+          <div class="decision-sub">
+            一旦发送，这些材料将直接提交至教育部学术规范委员会。<br>
+            这可能会改变一切——也可能什么都改变不了。
+          </div>
+          <div class="ending-choices">
+            <button class="choice-btn send" onclick="triggerEnding('good')">✓ 发送举报材料</button>
+            <button class="choice-btn" onclick="triggerEnding('neutral')">再想想…</button>
+            <button class="choice-btn close-btn-choice" onclick="triggerEnding('bad')">关闭电脑，放弃</button>
+          </div>
+        </div>
+
+        <!-- 隐藏内容：林晚给妈妈的草稿信 -->
+        <div class="hidden-draft" id="hiddenDraft">
+          <div class="draft-title">📝 草稿：未发送的邮件</div>
+          <div class="draft-date">2024年5月19日 凌晨2:14 · 收件人：妈妈</div>
+          <p>妈，</p>
+          <p>好久没给你打电话了。我这边的信号不好。</p>
+          <p>我知道你一直在找我。对不起让你担心。但我现在不能回去。</p>
+          <p>张航没了。他做了一件很勇敢的事，但他没能做完。他走之前把东西交给了我。我不能让他的努力白费。</p>
+          <p>你放心，我没有做危险的事。我只是在整理一些数据，一些论文，一些真相。等我把这些东西发出去了，我就回家。</p>
+          <p>你还记得我小时候，你说希望我做一个正直的人吗？我在努力。</p>
+          <p>妈，你上次做的红烧肉，我特别想吃。</p>
+          <p>等我回来。</p>
+          <p style="text-align:right;margin-top:20px;color:#8a7d5a;">你的女儿 林晚<br>2024年5月19日</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 结局层 -->
+  <div class="ending" id="endingGood" style="display:none;">
+    <div class="sending">发送中<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+    <div class="letter" style="display:none;" id="letterGood">
+      <h2>三天后</h2>
+      <p>教育部学术规范委员会回函：已收到举报材料，正式启动调查程序。</p>
+      <p>Nature Physics 编辑部撤回了陈正明课题组2021-2024年间发表的5篇论文。</p>
+      <p>一周后，林晚回来了。她瘦了很多，但眼睛是亮的。</p>
+      <p>她说陈正明被停职调查后，校外的那个住所没人再看着她了，她自己买了张火车票回来的。</p>
+      <p>她说："谢谢。张航也会谢谢你的。"</p>
+      <p>后来你听说，苏晴把那个信封交给了林晚的妈妈——她留了三个月，始终没有拆开。</p>
+      <p>你问她接下来打算做什么。她笑了笑，说想先回家吃一顿妈妈做的红烧肉。</p>
+      <p>你提起她还欠你一杯奶茶。她愣了一下，然后笑了："记着呢。这次是真的。"</p>
+      <p class="sign">—— 好结局 · 光找到了路 ——</p>
+    </div>
+    <button class="restart" onclick="restartGame()">重新开始</button>
+  </div>
+
+  <div class="ending bad-ending" id="endingBad" style="display:none;">
+    <div class="sending">连接中断<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+    <div class="letter" style="display:none;" id="letterBad">
+      <h2>你没有发送。</h2>
+      <p>你关掉了电脑，把它放回了她的工位上。</p>
+      <p>第二天，你尝试再次打开电脑，但系统提示：硬盘已被远程擦除。</p>
+      <p>你想起开机时见过的那行字——上次登录：6月19日，来源：陈正明。</p>
+      <p>你搜索林晚的名字，什么都没有。搜索张航，只有一条一年前的新闻——后来也被删了。</p>
+      <p>你想说什么，但不知道该对谁说。</p>
+      <p class="sign">—— 坏结局 · 沉默是帮凶 ——</p>
+    </div>
+
+    <!-- 后日谈：坏结局的"惩罚性叙事"（放在 .letter 外，避免被 config 结局渲染覆盖） -->
+    <div class="postscript" style="display:none;">
+      <p class="ps-label">三个月后</p>
+      <p>X大物理系陈正明教授获批国家自然科学基金重点项目</p>
+      <p>林晚母亲发布寻人启事 警方已立案</p>
+      <p>张航家属撤回申诉</p>
+      <p>周明离开了X大 不再联系任何人</p>
+      <p class="ps-final">没有人再提起那个夏天</p>
+    </div>
+    <button class="restart" onclick="restartGame()">重新开始</button>
+  </div>
+
+  <div class="ending neutral-ending" id="endingNeutral" style="display:none;">
+    <div class="sending">等待中<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></div>
+    <div class="letter" style="display:none;" id="letterNeutral">
+      <h2>你犹豫了很久。</h2>
+      <p>你保存了所有文件，但没有发送。</p>
+      <p>你告诉自己：再等等，时机还不成熟。也许有人会替你去做。</p>
+      <p>日子一天天过去，你没有再打开那台电脑。它安静地躺在抽屉深处，像一个没有被回答的问题。</p>
+      <p>有时候你会想起那台电脑右下角的猫咪贴纸，想起那些还没发出的邮件。</p>
+      <p>你告诉自己：总有一天。</p>
+      <p class="sign">—— 无事发生结局 · 未完成的夏天 ——</p>
+    </div>
+    <button class="restart" onclick="restartGame()">重新开始</button>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    let config = null;
+
+    // 加载配置
+    fetch(Game.ROOT + 'assets/config/game-config.json')
+      .then(r => r.json())
+      .then(c => { config = c; initTrigger(); })
+      .catch(() => { config = getDefaultConfig(); initTrigger(); });
+
+    function getDefaultConfig() {
+      return {
+        passwords: { final_trigger: "SENDTHELIGHT", max_wrong_attempts: 5 },
+        endings: {
+          good: { sending_text: "发送中", delay_ms: 2500, letter: { title: "三天后", paragraphs: ["教育部学术规范委员会回函...","Nature Physics 编辑部撤回了..."], sign: "—— 好结局 · 光找到了路 ——" } },
+          bad: { sending_text: "连接中断", delay_ms: 2500, letter: { title: "你没有发送。", paragraphs: ["你关掉了电脑..."], sign: "—— 坏结局 · 沉默是帮凶 ——" }, className: "bad-ending" },
+          neutral: { sending_text: "等待中", delay_ms: 2500, letter: { title: "你犹豫了很久。", paragraphs: ["你保存了所有文件..."], sign: "—— 无事发生结局 · 未完成的夏天 ——" }, className: "neutral-ending" }
+        },
+        hiddenContent: { title: "草稿：未发送的邮件", date: "2024年5月19日 凌晨2:14 · 收件人：妈妈", content: { salutation: "妈，", paragraphs: ["好久没给你打电话了。"], sign: "你的女儿 林晚\n2024年5月19日" } }
+      };
+    }
+
+    function initTrigger() {
+      const pw = config.passwords;
+      const maxWrong = pw.max_wrong_attempts || 5;
+      const triggerCode = pw.final_trigger;
+
+      // 频谱图
+      buildSpectrogram();
+
+      // 密码验证
+      let wrongAttempts = 0;
+
+      document.getElementById('triggerBtn').addEventListener('click', () => {
+        const input = document.getElementById('triggerInput').value.trim().toUpperCase();
+        const errEl = document.getElementById('triggerErr');
+        const failEl = document.getElementById('failCount');
+
+        if (input === triggerCode) {
+          errEl.textContent = '';
+          failEl.textContent = '';
+          document.getElementById('decisionArea').classList.add('visible');
+          // 正确输入后，发件箱的草稿自然浮现（先读信，再抉择）
+          document.getElementById('draftEntry').style.display = 'block';
+          document.getElementById('triggerInput').disabled = true;
+          document.getElementById('triggerBtn').disabled = true;
+          Game.log('▶ [最终密码] 正确: ' + triggerCode);
+          Game.mark('lw_final', 'solved');
+          Game.renderProgress();
+
+          // 隐藏内容触发：正确输入后字母 L 会闪烁暗示，长按 L 1.5 秒触发
+          const letterL = document.querySelector('.letter-block[data-letter="L"]');
+          if (letterL) {
+            letterL.style.cursor = 'pointer';
+            letterL.classList.add('hint-glow');  // 闪烁暗示
+            let holdTimer = null;
+            const startHold = (e) => {
+              e.preventDefault();
+              holdTimer = setTimeout(() => {
+                document.getElementById('hiddenDraft').classList.add('visible');
+                letterL.classList.remove('hint-glow');
+                letterL.style.cursor = 'default';
+                Game.log('▶ [隐藏内容] 长按 L 触发，发现林晚的未发送邮件草稿');
+                Game.monologue('L 是林晚的 L 也是 Light 的 L', 5000);
+              }, 1500);
+            };
+            const cancelHold = () => { if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; } };
+            letterL.addEventListener('mousedown', startHold);
+            letterL.addEventListener('mouseup', cancelHold);
+            letterL.addEventListener('mouseleave', cancelHold);
+            letterL.addEventListener('touchstart', startHold, { passive: false });
+            letterL.addEventListener('touchend', cancelHold);
+            letterL.addEventListener('touchcancel', cancelHold);
+          }
+        } else {
+          wrongAttempts++;
+          const remaining = maxWrong - wrongAttempts;
+          if (wrongAttempts >= maxWrong) {
+            triggerEnding('bad');
+            return;
+          }
+          // 失败 3 次后，"我"喃喃自语地点一句
+          if (wrongAttempts === 3) {
+            Game.monologue('频谱图上那些柱子，拼起来是字母……试着从左往右读。', 5500);
+          }
+          errEl.textContent = `密钥错误，还剩 ${remaining} 次尝试机会`;
+          failEl.textContent = `已尝试 ${wrongAttempts}/${maxWrong} 次`;
+          document.getElementById('triggerInput').classList.add('shake');
+          setTimeout(() => document.getElementById('triggerInput').classList.remove('shake'), 400);
+          document.getElementById('triggerInput').value = '';
+          document.getElementById('triggerInput').focus();
+        }
+      });
+
+      document.getElementById('triggerInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') document.getElementById('triggerBtn').click();
+      });
+
+      // 渲染隐藏内容
+      const hc = config.hiddenContent;
+      if (hc) {
+        const draft = document.getElementById('hiddenDraft');
+        draft.querySelector('.draft-title').textContent = '📝 ' + hc.title;
+        draft.querySelector('.draft-date').textContent = hc.date;
+        const contentDiv = draft.querySelector('p');
+        contentDiv.textContent = hc.content.salutation;
+        // 重建内容
+        let html = `<div class="draft-title">📝 ${hc.title}</div>`;
+        html += `<div class="draft-date">${hc.date}</div>`;
+        html += `<p>${hc.content.salutation}</p>`;
+        hc.content.paragraphs.forEach(p => { html += `<p>${p}</p>`; });
+        html += `<p style="text-align:right;margin-top:20px;color:#8a7d5a;">${hc.content.sign.replace(/\n/g,'<br>')}</p>`;
+        draft.innerHTML = html;
+      }
+
+      // 渲染结局内容
+      ['good','bad','neutral'].forEach(type => {
+        const ending = config.endings[type];
+        if (!ending) return;
+        const endingEl = document.getElementById('ending' + type.charAt(0).toUpperCase() + type.slice(1));
+        if (!endingEl) return;
+        const letterEl = endingEl.querySelector('.letter');
+        if (!letterEl) return;
+
+        const l = ending.letter;
+        let letterHtml = `<h2>${l.title}</h2>`;
+        l.paragraphs.forEach(p => { letterHtml += `<p>${p}</p>`; });
+        letterHtml += `<p class="sign">${l.sign}</p>`;
+        letterEl.innerHTML = letterHtml;
+      });
+    }
+
+    // 频谱图
+    function buildSpectrogram() {
+      const container = document.getElementById('spectro');
+      const group = document.createElement('div');
+      group.className = 'letter-group';
+      const letters = {
+        'S':[0,1,1,1,0,1,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,1,1,1,0],
+        'E':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,1,1,1,1],
+        'N':[1,0,0,0,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,1,1,0,0,0,1],
+        'D':[1,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,1,1,1,0],
+        'T':[1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0],
+        'H':[1,0,0,0,1,1,1,1,1,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,1],
+        'E2':[1,1,1,1,1,1,0,0,0,0,1,1,1,1,0,1,0,0,0,0,1,1,1,1,1],
+        'L':[1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,1,1,1],
+        'I':[0,1,1,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,1,0],
+        'G':[0,1,1,1,0,1,0,0,0,0,1,0,0,1,1,1,0,0,0,1,0,1,1,1,0],
+        'H2':[1,0,0,0,1,1,1,1,1,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,1],
+        'T2':[1,1,1,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0]
+      };
+      const letterKeys = ['S','E','N','D','T','H','E2','L','I','G','H2','T2'];
+      letterKeys.forEach((key, idx) => {
+        const block = document.createElement('div');
+        block.className = 'letter-block';
+        // 标注字母（去掉数字后缀，用于隐藏彩蛋触发）
+        block.dataset.letter = key.replace(/\d+$/, '');
+        const pattern = letters[key];
+        for (let c = 0; c < 5; c++) {
+          let sum = 0;
+          for (let r = 0; r < 5; r++) { if (pattern[r*5+c]) sum++; }
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.height = (sum > 0 ? (sum/5)*80+10 : 4) + 'px';
+          bar.style.animationDelay = (c*0.1 + (11-idx)*0.05) + 's';
+          if (sum === 0) bar.style.opacity = '0.2';
+          block.appendChild(bar);
+        }
+        group.appendChild(block);
+        if (idx < letterKeys.length - 1) {
+          const space = document.createElement('div');
+          space.className = 'space-block';
+          group.appendChild(space);
+        }
+      });
+      container.appendChild(group);
+    }
+
+    function triggerEnding(type) {
+      document.querySelector('.window').style.display = 'none';
+      const ending = config.endings[type];
+      if (!ending) return;
+      const endingEl = document.getElementById('ending' + (type === 'good' ? 'Good' : type === 'bad' ? 'Bad' : 'Neutral'));
+      const letterEl = endingEl.querySelector('.letter');
+      endingEl.style.display = 'flex';
+      Game.log('▶ [结局] ' + type + '结局');
+      Game.mark('lw_ending', type);
+      setTimeout(() => {
+        letterEl.style.display = 'block';
+        // 坏结局后日谈：正文显示后再延迟浮现，强化"惩罚性叙事"
+        if (type === 'bad') {
+          const ps = endingEl.querySelector('.postscript');
+          if (ps) setTimeout(() => { ps.style.display = 'block'; }, 2000);
+        }
+      }, ending.delay_ms || 2500);
+    }
+
+    function restartGame() {
+      localStorage.clear();
+      location.href = '/ARGgame/her-old-laptop/intro.html';
+    }
+
+    // 从"发件箱"入口查看隐藏草稿（给妈妈的信）
+    function revealDraft() {
+      const draft = document.getElementById('hiddenDraft');
+      if (draft.classList.contains('visible')) return;
+      draft.classList.add('visible');
+      Game.log('▶ [隐藏内容] 发件箱草稿：林晚给妈妈的未发送邮件');
+      Game.monologue('这是她给妈妈的信……一直没发出去。', 5000);
+      draft.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    window.triggerEnding = triggerEnding;
+    window.restartGame = restartGame;
+    window.revealDraft = revealDraft;
+    Game.renderProgress();
+  </script>
+</body>
+</html>

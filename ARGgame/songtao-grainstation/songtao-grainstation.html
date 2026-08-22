@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>松涛粮站：1997硬盘修复档案</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="paywall.css">
+</head>
+<body>
+  <div class="crt-noise" aria-hidden="true"></div>
+  <div class="scanline" aria-hidden="true"></div>
+
+  <main id="app">
+    <section id="boot-stage" class="boot-stage">
+      <div class="terminal-window boot-window">
+        <div class="terminal-title">
+          <span>恒通数据恢复系统 v2.0</span>
+          <span>HDD_RESCUE / 486-DX</span>
+        </div>
+        <div class="boot-grid">
+          <div class="boot-copy">
+            <p class="boot-line">正在接入委托硬盘：ST3400A 400MB / 松涛县粮站封存机</p>
+            <p class="boot-line">磁头响应：迟缓　坏道：06　可读分区：C: / D: / E: / F:</p>
+            <p class="boot-line warning">系统提示：请按硬盘贴纸出厂编号顺序修复坏扇区。</p>
+            <div class="disk-label">
+              <div class="label-top">QUANTUM FIREBALL ST3400A</div>
+              <div>粮站财务室 486 主机硬盘</div>
+              <div>出厂编号：HDS-LZ-<strong>970312</strong></div>
+              <div class="label-note">贴纸划痕：从左到右读 9 / 7 / 0 / 3 / 1 / 2</div>
+            </div>
+            <div class="repair-input">
+              <label for="serial-input">硬盘编号后 6 位</label>
+              <input id="serial-input" class="retro-input" maxlength="12" autocomplete="off" placeholder="例如 970312">
+              <button id="repair-submit" class="retro-btn primary" onclick="Game.submitRepair()">执行校验修复</button>
+            </div>
+            <div id="repair-status" class="system-log compact">
+              <div>等待扇区修复指令...</div>
+            </div>
+          </div>
+
+          <div class="sector-panel">
+            <div class="sector-head">
+              <span>坏道扇区映射</span>
+              <span id="sector-progress">0/6</span>
+            </div>
+            <div class="sector-map" aria-label="坏扇区地图">
+              <button class="sector sector-a" data-sector="9" onclick="Game.clickSector(this)">BAD-09</button>
+              <button class="sector sector-b" data-sector="7" onclick="Game.clickSector(this)">BAD-07</button>
+              <button class="sector sector-c" data-sector="0" onclick="Game.clickSector(this)">BAD-00</button>
+              <button class="sector sector-d" data-sector="3" onclick="Game.clickSector(this)">BAD-03</button>
+              <button class="sector sector-e" data-sector="1" onclick="Game.clickSector(this)">BAD-01</button>
+              <button class="sector sector-f" data-sector="2" onclick="Game.clickSector(this)">BAD-02</button>
+            </div>
+            <div class="hint-chip">顺序不对会重新寻道。别急，老硬盘脾气大。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="game-stage" class="game-stage hidden">
+      <header class="app-header">
+        <div>
+          <div class="app-title">松涛粮站：1997硬盘修复档案</div>
+          <div class="app-subtitle">恒通数据恢复系统 / 档案馆委托单 HT-2025-0719</div>
+        </div>
+        <div class="header-actions">
+          <button class="tool-btn" id="audio-toggle" onclick="AudioSys.toggle()">♪ 音效开</button>
+          <button class="tool-btn" onclick="Game.showSupport()">支持作者 1元</button>
+          <button class="tool-btn" onclick="Game.toggleCluePanel()">线索 <span id="clue-counter">0/22</span></button>
+          <button class="tool-btn danger" onclick="Game.confirmReset()">重新开始</button>
+        </div>
+      </header>
+
+      <nav class="tool-ribbon" aria-label="数据恢复工具栏">
+        <button class="ribbon-tool active" data-tool="magnifier" onclick="Game.setTool('magnifier')">🔍 放大镜</button>
+        <button class="ribbon-tool" data-tool="highlighter" onclick="Game.setTool('highlighter')">🖍 荧光显色</button>
+        <button class="ribbon-tool" data-tool="iodine" onclick="Game.setTool('iodine')">🧪 碘酒显影</button>
+        <button class="ribbon-tool" data-tool="denoise" onclick="Game.setTool('denoise')">🎚 降噪器</button>
+        <button class="ribbon-tool" onclick="Game.openSearch()">Ctrl+F 搜索</button>
+        <span id="tool-status" class="tool-status">当前工具：放大镜</span>
+      </nav>
+
+      <div class="workbench">
+        <aside class="sidebar">
+          <div class="sidebar-title">可恢复分区</div>
+          <button class="partition-tab active" data-partition="C" onclick="Game.goPartition('C')">C: 系统与日常</button>
+          <button class="partition-tab locked" data-partition="D" onclick="Game.goPartition('D')">D: 账务票据</button>
+          <button class="partition-tab locked" data-partition="E" onclick="Game.goPartition('E')">E: 人事往来</button>
+          <button class="partition-tab locked" data-partition="F" onclick="Game.goPartition('F')">F: 加密私密</button>
+          <button class="partition-tab locked" data-partition="H" onclick="Game.goPartition('H')">?: 隐藏扇区</button>
+          <div class="side-meter">
+            <div class="meter-label">线索收集度</div>
+            <div class="meter"><span id="progress-bar"></span></div>
+            <div id="progress-text">0%</div>
+          </div>
+          <div class="mini-desktop">
+            <button class="desktop-icon" onclick="Game.openMinesweeper()">💣<span>扫雷.exe</span></button>
+            <button class="desktop-icon" onclick="Game.recycleClick()">🗑<span>回收站</span></button>
+            <button class="desktop-icon" onclick="Game.showSystemClockEgg()">🕘<span id="fake-clock">1997-07-01</span></button>
+          </div>
+        </aside>
+
+        <section class="viewer" oncontextmenu="Game.handleViewerContext(event)">
+          <div class="viewer-titlebar">
+            <span id="partition-title">C: 系统与日常文件</span>
+            <span id="save-indicator">自动保存：就绪</span>
+          </div>
+
+          <article class="partition-page active" data-partition-page="C">
+            <div class="doc-stack">
+              <section class="paper">
+                <div class="stamp">已恢复 68%</div>
+                <h2>系统日志 WIN95-SYS.LOG</h2>
+                <p>1997-07-01 08:42　粮站财务室主机异常关机，最后登录用户：WHD。</p>
+                <p>1997-07-01 22:17　检测到「二季度粮款盘点表」被删除并覆写。</p>
+                <p>1997-07-02 00:31　有 12 个补助表格被连续打印，打印队列标题均为“临时救助”。</p>
+                <button class="inline-link" onclick="Game.collectFile('sys_log')">记录为线索</button>
+              </section>
+
+              <section class="paper note-paper">
+                <h2>桌面备忘录 memo.txt</h2>
+                <p>“D 盘密码：发不出工资的那个月。”</p>
+                <p>“老李说不要把盘点表放桌面，张副站长来过两次。”</p>
+                <p>“晓燕家长会……算了，先把医院那边稳住。”</p>
+                <button class="inline-link" onclick="Game.collectFile('memo')">记录为线索</button>
+              </section>
+
+              <section class="paper">
+                <h2>粮站值班表 1997 春</h2>
+                <table class="archive-table">
+                  <tr><th>月份</th><th>在岗人数</th><th>备注</th></tr>
+                  <tr><td>1 月</td><td>47</td><td>春节前库存盘点</td></tr>
+                  <tr><td>2 月</td><td>45</td><td>雨季防潮</td></tr>
+                  <tr class="bad-row"><td>3 月</td><td>23</td><td>工资停发，半数职工请假/外出讨说法</td></tr>
+                  <tr><td>4 月</td><td>39</td><td>医院催费单送达</td></tr>
+                </table>
+                <button class="inline-link" onclick="Game.collectFile('duty_roster')">记录为线索</button>
+              </section>
+            </div>
+
+            <section class="puzzle-panel">
+              <div class="puzzle-head">
+                <h3>回收站碎片还原</h3>
+                <button class="tiny-btn" onclick="Game.showHint('fragments')">提示</button>
+              </div>
+              <p>7 个删除碎片来自同一张盘点表。拖拽或点击碎片，把文件名和关键字段拼回原序。</p>
+              <div id="fragment-bank" class="fragment-bank">
+                <button draggable="true" data-frag="实收" onclick="Game.pickFragment(this)">实收</button>
+                <button draggable="true" data-frag="二季度" onclick="Game.pickFragment(this)">二季度</button>
+                <button draggable="true" data-frag="库存" onclick="Game.pickFragment(this)">库存</button>
+                <button draggable="true" data-frag="差额" onclick="Game.pickFragment(this)">差额</button>
+                <button draggable="true" data-frag="盘点" onclick="Game.pickFragment(this)">盘点</button>
+                <button draggable="true" data-frag="粮款" onclick="Game.pickFragment(this)">粮款</button>
+                <button draggable="true" data-frag="120万" onclick="Game.pickFragment(this)">120万</button>
+              </div>
+              <div id="fragment-slots" class="fragment-slots">
+                <button data-slot="0" onclick="Game.placeFragment(this)">?</button>
+                <button data-slot="1" onclick="Game.placeFragment(this)">?</button>
+                <button data-slot="2" onclick="Game.placeFragment(this)">?</button>
+                <button data-slot="3" onclick="Game.placeFragment(this)">?</button>
+                <button data-slot="4" onclick="Game.placeFragment(this)">?</button>
+                <button data-slot="5" onclick="Game.placeFragment(this)">?</button>
+                <button data-slot="6" onclick="Game.placeFragment(this)">?</button>
+              </div>
+              <div class="puzzle-actions">
+                <button id="fragment-check" class="retro-btn primary" onclick="Game.checkFragments()">校验碎片</button>
+                <button class="retro-btn" onclick="Game.resetFragments()">重排</button>
+              </div>
+              <div id="restored-ledger" class="restored-box hidden">
+                <strong>已还原：</strong>《1997 年二季度粮款盘点表》显示账面粮款与库存折价差额 120 万元。
+              </div>
+            </section>
+
+            <section class="puzzle-panel">
+              <div class="puzzle-head">
+                <h3>D 盘初级权限</h3>
+                <button class="tiny-btn" onclick="Game.showHint('dpass')">提示</button>
+              </div>
+              <p>结合备忘录和值班表，输入“发不出工资的那个月”。</p>
+              <div class="inline-form">
+                <input id="d-password" class="retro-input" placeholder="两位月份，如 03" autocomplete="off">
+                <button id="d-unlock" class="retro-btn primary" onclick="Game.checkDPassword()">解锁 D:</button>
+              </div>
+            </section>
+          </article>
+
+          <article class="partition-page" data-partition-page="D">
+            <div class="doc-stack">
+              <section class="paper">
+                <h2>票据报销文件夹 / 1997Q2</h2>
+                <p>系统提示：12 张销售发票中有 3 张与松涛粮站票据规则不一致。规则：编号连续、红章压线、纸张水印“松涛粮储”。</p>
+                <div id="invoice-grid" class="invoice-grid">
+                  <button data-invoice="ST9704012" onclick="Game.toggleInvoice(this)"><b>ST-9704-012</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9704013" onclick="Game.toggleInvoice(this)"><b>ST-9704-013</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9704018" onclick="Game.toggleInvoice(this)"><b>ST-9704-018</b><span>编号跳号 / 章偏右</span></button>
+                  <button data-invoice="ST9705019" onclick="Game.toggleInvoice(this)"><b>ST-9705-019</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9705020" onclick="Game.toggleInvoice(this)"><b>ST-9705-020</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9705031" onclick="Game.toggleInvoice(this)"><b>ST-9705-031</b><span>水印倒置 / 字距异常</span></button>
+                  <button data-invoice="ST9706032" onclick="Game.toggleInvoice(this)"><b>ST-9706-032</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9706033" onclick="Game.toggleInvoice(this)"><b>ST-9706-033</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9706034" onclick="Game.toggleInvoice(this)"><b>ST-9706-034</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9706044" onclick="Game.toggleInvoice(this)"><b>ST-9706-044</b><span>章未压线 / 无水印</span></button>
+                  <button data-invoice="ST9706045" onclick="Game.toggleInvoice(this)"><b>ST-9706-045</b><span>红章压线 / 水印正</span></button>
+                  <button data-invoice="ST9706046" onclick="Game.toggleInvoice(this)"><b>ST-9706-046</b><span>红章压线 / 水印正</span></button>
+                </div>
+                <div class="puzzle-actions">
+                  <button id="invoice-check" class="retro-btn primary" onclick="Game.checkInvoices()">提交可疑发票</button>
+                  <button class="retro-btn" onclick="Game.showHint('invoices')">提示</button>
+                </div>
+              </section>
+
+              <section id="private-ledger" class="paper hidden">
+                <div class="stamp danger-stamp">隐藏文件</div>
+                <h2>张副站长私人账务记录 Z-FZ-PRIVATE.XLS</h2>
+                <p>“4 月 18 日，老顾那边按 0.72 折收走 180 吨陈粮。王站长问票，我说是损耗。”</p>
+                <p>“6 月底不能再拖，他要查银行流水。先把亏空扣他头上，等他走了账就平。”</p>
+                <button class="inline-link" onclick="Game.collectFile('zhang_ledger')">记录为线索</button>
+              </section>
+
+              <section class="paper">
+                <h2>粮食收购台账 / 涂改页</h2>
+                <p>关键数字被涂改液覆盖。请选择“荧光显色”，点击三处涂改区域，再输入还原后的总亏空。</p>
+                <div class="ledger-sheet">
+                  <p>账面库存折价：¥ 2,430,000</p>
+                  <p>实际收购款：¥ <span class="smear" data-smear="a" onclick="Game.revealSmear(this)">涂改</span></p>
+                  <p>异常销售回款：¥ <span class="smear" data-smear="b" onclick="Game.revealSmear(this)">涂改</span></p>
+                  <p>医院垫付转账：¥ <span class="smear" data-smear="c" onclick="Game.revealSmear(this)">涂改</span></p>
+                </div>
+                <div class="inline-form">
+                  <input id="shortage-input" class="retro-input" placeholder="实际总亏空，例如 1850000" autocomplete="off">
+                  <button id="shortage-check" class="retro-btn primary" onclick="Game.checkShortage()">核对金额</button>
+                  <button class="retro-btn" onclick="Game.showHint('shortage')">提示</button>
+                </div>
+                <div id="hospital-transfer" class="restored-box hidden">
+                  显色记录显示：实际亏空 185 万，其中 65 万流向县人民医院，用途标注为“尘肺病住院押金及药费”。
+                </div>
+              </section>
+
+              <section class="paper side-note" onclick="Game.foundEgg('canteen_menu','食堂菜单便签')">
+                <h2>工资表背面便签</h2>
+                <p>周一：白菜炖豆腐　周三：红烧肉　周五：包子</p>
+                <small>“每月十五号才敢买一次肉。孩子们来食堂闻味儿，老林总多盛两勺。”</small>
+              </section>
+            </div>
+          </article>
+
+          <article class="partition-page" data-partition-page="E">
+            <div class="doc-stack">
+              <section class="paper">
+                <h2>职工病假与诊断摘录</h2>
+                <div class="staff-cards">
+                  <button onclick="Game.collectFile('zhou_case')"><b>老周</b><span>尘肺三期 / 每月药费 486.70</span></button>
+                  <button onclick="Game.collectFile('lin_case')"><b>林秀莲</b><span>食堂负责人 / 垫付伙食 9 次</span></button>
+                  <button onclick="Game.collectFile('workers_case')"><b>12 名职工</b><span>同批粉尘暴露 / 工伤款未批</span></button>
+                </div>
+                <button class="inline-link" onclick="Game.showDustCard()">查看角落科普卡片</button>
+              </section>
+
+              <section class="paper letter-paper">
+                <h2>寄往县人民医院的空白信</h2>
+                <p>信纸看似空白，纸角有淡淡碘渍。请选择“碘酒显影”，点击信纸。</p>
+                <div id="invisible-letter" class="invisible-letter" onclick="Game.revealIodineLetter()">
+                  <p>（空白信纸）</p>
+                  <div class="letter-content">
+                    <p>人民医院呼吸科：</p>
+                    <p>粮站老周等人的药不能断。工伤救助款我再去县里催，若暂时批不下来，请先按住院押金记账。</p>
+                    <p>欠款由我个人担保。若有人追问，就说粮站统一结算。</p>
+                    <p class="signature">王厚德　1997.4.24 夜</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="paper">
+                <h2>往来书信与时间线拼接</h2>
+                <p>拖拽或用上下按钮调整 6 个事件顺序。排对后可看出王厚德在亏空曝光前一周已知情，却仍在处理职工救助。</p>
+                <div id="timeline-list" class="timeline-list">
+                  <div draggable="true" data-event="stocktake"><span>7月1日 上午</span>季度盘点发现账面亏空</div>
+                  <div draggable="true" data-event="hospital"><span>4月22日</span>医院催缴尘肺病治疗费</div>
+                  <div draggable="true" data-event="missing"><span>7月1日 夜</span>站长失联，办公室抽屉清空</div>
+                  <div draggable="true" data-event="wage"><span>3月5日</span>首次停发工资，值班人数减半</div>
+                  <div draggable="true" data-event="trip"><span>6月24日</span>王厚德外出核对粮商底单</div>
+                  <div draggable="true" data-event="report"><span>6月29日</span>举报信寄出，上级准备突击查账</div>
+                </div>
+                <div class="puzzle-actions">
+                  <button class="retro-btn" onclick="Game.nudgeTimeline(-1)">上移选中</button>
+                  <button class="retro-btn" onclick="Game.nudgeTimeline(1)">下移选中</button>
+                  <button id="timeline-check" class="retro-btn primary" onclick="Game.checkTimeline()">校验时间线</button>
+                  <button class="retro-btn" onclick="Game.showHint('timeline')">提示</button>
+                </div>
+                <div id="timeline-result" class="restored-box hidden">
+                  顺序成立：他不是临时慌张“跑路”，而是在案发前后持续为医院、工会和职工家属奔走。
+                </div>
+              </section>
+
+              <section class="paper grain-ticket" onclick="Game.foundEgg('grain_ticket','1965年粮票')">
+                <h2>夹在档案里的粮票</h2>
+                <p>全国通用粮票　伍市斤　1965 年版</p>
+                <small>背面铅笔字：晓燕，等你考上大学，爸给你买新的书包。</small>
+              </section>
+            </div>
+          </article>
+
+          <article class="partition-page" data-partition-page="F">
+            <div id="f-lock" class="lock-panel">
+              <h2>F: 加密私密分区</h2>
+              <p>密码提示：“他最对不起女儿的那天”。结合往来书信中王晓燕高考时间和缺席家长会记录。</p>
+              <div class="inline-form">
+                <input id="f-password" class="retro-input" placeholder="四位日期，例如 0707" autocomplete="off">
+                <button id="f-unlock" class="retro-btn primary" onclick="Game.checkFPassword()">解锁 F:</button>
+                <button class="retro-btn" onclick="Game.showHint('fpass')">提示</button>
+              </div>
+            </div>
+
+            <div id="f-content" class="doc-stack hidden">
+              <section class="paper diary-paper">
+                <h2>王厚德私人日记 / 摘页</h2>
+                <p>1997.6.30：张说账已经平不了。我骂他不是人，他笑我也不干净。可老周今天又咳血了。</p>
+                <p>1997.7.7：晓燕高考第一天。她妈说她在考场门口找了我三次。我没有去。我这一辈子最对不起她。</p>
+                <button class="inline-link" onclick="Game.collectFile('diary')">记录为线索</button>
+                <button class="inline-link" onclick="Game.showEssayEgg()">查看夹页作文</button>
+              </section>
+
+              <section class="paper">
+                <h2>医院缴费回执与匿名捐款</h2>
+                <table class="archive-table">
+                  <tr><th>日期</th><th>项目</th><th>金额</th><th>备注</th></tr>
+                  <tr><td>1997.07.03</td><td>尘肺病药费</td><td>¥ 92,800</td><td>粮站统一垫付</td></tr>
+                  <tr><td>1997.07.06</td><td>困难家属补助</td><td>¥ 118,000</td><td>现金签收</td></tr>
+                  <tr><td>1997.07.09</td><td>县总工会医疗救助</td><td>¥ 310,000</td><td>匿名</td></tr>
+                </table>
+                <button class="inline-link" onclick="Game.collectFile('donation')">记录为线索</button>
+              </section>
+
+              <section class="paper audio-paper">
+                <h2>损坏录音 WHD-ZFZ.WAV</h2>
+                <p>噪声过强。调节“降噪强度”和“人声增益”，让波形进入绿色区间后转录。</p>
+                <div class="waveform">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+                <label>降噪强度 <input id="noise-slider" type="range" min="0" max="100" value="55" oninput="Game.updateAudioMeters()"></label>
+                <label>人声增益 <input id="voice-slider" type="range" min="0" max="100" value="45" oninput="Game.updateAudioMeters()"></label>
+                <div id="audio-meter" class="audio-meter">信噪比：不可读</div>
+                <button id="audio-check" class="retro-btn primary" onclick="Game.checkAudio()">尝试转录</button>
+                <button class="retro-btn" onclick="Game.showHint('audio')">提示</button>
+                <div id="audio-transcript" class="restored-box hidden">
+                  <p><b>张副站长：</b>“你把章签了，大家都说你拿的钱。”</p>
+                  <p><b>王厚德：</b>“罪名我担。钱必须全留给工人，少一分我都跟你鱼死网破。”</p>
+                  <p><b>张副站长：</b>“你女儿呢？她高考。”</p>
+                  <p><b>王厚德：</b>“她以后会恨我，但她得先有以后。”</p>
+                </div>
+              </section>
+
+              <section class="paper hidden-entry-zone" oncontextmenu="Game.openHiddenByRightClick(event)">
+                <h2>未分配空间</h2>
+                <p>这里没有可见文件。右键空白处或使用“查看磁盘扇区”可能发现残留数据。</p>
+                <button id="hidden-scan" class="inline-link" onclick="Game.tryOpenHidden()">扫描隐藏扇区</button>
+              </section>
+            </div>
+          </article>
+
+          <article class="partition-page" data-partition-page="H">
+            <div class="doc-stack">
+              <section class="paper final-paper">
+                <div class="stamp danger-stamp">隐藏扇区 0x0717</div>
+                <h2>未发出的自首书</h2>
+                <p>我，王厚德，松涛县粮站站长。粮款亏空一案，我负站长责任，也愿承担法律后果。</p>
+                <p>但恳请组织先核对职工遣散费和医疗救助款发放情况。若钱未到人手，请暂缓查封仓库账册。</p>
+                <p>我没有拿走粮站一分钱。我唯一藏起来的，是这些人的药费、饭钱和最后一个月工资。</p>
+                <button class="inline-link" onclick="Game.collectFile('confession')">记录为线索</button>
+              </section>
+
+              <section class="paper final-paper">
+                <h2>给王晓燕的信（未寄出）</h2>
+                <p>晓燕：</p>
+                <p>如果有人说你爸是贼，你不要急着替我辩。等你长大，若还愿意找真相，就来硬盘里找。</p>
+                <p>爸没去你高考，是爸这辈子最亏欠你的事。但我希望你坐在考场里时，还相信世上有些人值得被救。</p>
+                <p class="signature">王厚德　1997 年 7 月</p>
+                <button class="inline-link" onclick="Game.collectFile('daughter_letter')">记录为线索</button>
+              </section>
+
+              <section class="paper">
+                <h2>法院判决书与 2005 年联名感谢信</h2>
+                <p>判决书显示：王厚德因“失职造成国有资产重大损失”获刑，未认定其个人非法占有粮款。</p>
+                <p>2005 年，12 名老职工联名写信：“老王出来那天，我们都该去接他。欠他的不是钱，是一句清白。”</p>
+                <button class="inline-link" onclick="Game.collectFile('court_thanks')">记录为线索</button>
+              </section>
+
+              <section class="truth-panel">
+                <h2>真相三问</h2>
+                <p>把正确关键词放进三处空白，生成最终修复报告。</p>
+                <div class="truth-sentence">
+                  <button class="truth-blank" data-slot="person" onclick="Game.focusTruthSlot('person')">____</button>
+                  <span>扛下罪名，为了</span>
+                  <button class="truth-blank" data-slot="reason" onclick="Game.focusTruthSlot('reason')">____</button>
+                  <span>，最终选择</span>
+                  <button class="truth-blank" data-slot="choice" onclick="Game.focusTruthSlot('choice')">____</button>
+                </div>
+                <div class="truth-options">
+                  <button onclick="Game.placeTruth('王厚德')">王厚德</button>
+                  <button onclick="Game.placeTruth('张副站长')">张副站长</button>
+                  <button onclick="Game.placeTruth('保住职工生计')">保住职工生计</button>
+                  <button onclick="Game.placeTruth('掩盖私吞粮款')">掩盖私吞粮款</button>
+                  <button onclick="Game.placeTruth('自首揽责')">自首揽责</button>
+                  <button onclick="Game.placeTruth('携款潜逃')">携款潜逃</button>
+                </div>
+                <div class="puzzle-actions">
+                  <button id="truth-submit" class="retro-btn primary" onclick="Game.submitTruth()">提交修复报告</button>
+                  <button class="retro-btn" onclick="Game.showHint('truth')">提示</button>
+                </div>
+              </section>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <aside id="clue-panel" class="clue-panel">
+        <div class="clue-panel-head">
+          <span>已收集线索</span>
+          <button onclick="Game.toggleCluePanel()">×</button>
+        </div>
+        <div id="clue-list" class="clue-list"></div>
+      </aside>
+
+      <div id="context-menu" class="context-menu hidden">
+        <button onclick="Game.contextAction('property')">查看属性</button>
+        <button onclick="Game.contextAction('hex')">查看十六进制</button>
+        <button onclick="Game.contextAction('sector')">查看磁盘扇区</button>
+      </div>
+
+      <footer class="status-footer">
+        <span id="footer-partition">C: 系统与日常</span>
+        <span id="footer-message">单击文件可收集线索；右键可调用恢复菜单。</span>
+        <span id="footer-clock">2025-07-19 14:28</span>
+      </footer>
+    </section>
+  </main>
+
+  <script src="audio.js"></script>
+  <script src="paywall.js"></script>
+  <script src="core.js"></script>
+</body>
+</html>

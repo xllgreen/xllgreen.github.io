@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="炕边木箱">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#3e2b1c"/><stop offset="1" stop-color="#100c09"/></linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect x="0" y="430" width="1280" height="290" fill="#21160f"/>
+  <g transform="translate(236 260)">
+    <path d="M0 105 C60 25 720 25 810 105 L790 335 H34Z" fill="#4e331f"/>
+    <path d="M45 95 H765 V320 H45Z" fill="#6b4528"/>
+    <path d="M90 110 V315 M230 95 V325 M370 95 V325 M510 95 V325 M650 100 V320" stroke="#2b1b10" stroke-width="14" opacity=".5"/>
+    <path d="M40 170 H770 M35 260 H782" stroke="#1e140d" stroke-width="16"/>
+    <rect x="348" y="180" width="110" height="86" rx="10" fill="#2c241c" stroke="#b48b43" stroke-width="8"/>
+    <circle cx="383" cy="225" r="12" fill="#d0a14b"/><circle cx="423" cy="225" r="12" fill="#d0a14b"/>
+    <text x="405" y="74" fill="#d6bb85" font-size="30" text-anchor="middle" font-family="serif">班长教我的暗号</text>
+  </g>
+  <g transform="translate(940 144)">
+    <rect x="0" y="0" width="150" height="92" rx="38" fill="#33412c"/>
+    <text x="75" y="55" fill="#d9c28e" font-size="26" text-anchor="middle">1951</text>
+    <rect x="-36" y="145" width="220" height="42" rx="18" fill="#4f3725"/>
+    <text x="75" y="175" fill="#edd0a0" font-size="24" text-anchor="middle">枪托 07</text>
+  </g>
+  <g transform="translate(112 108) rotate(-8)">
+    <rect width="250" height="170" rx="8" fill="#d9c097"/>
+    <path d="M34 128 C88 70 145 116 220 44" stroke="#7e5d39" stroke-width="8" fill="none"/>
+    <circle cx="155" cy="82" r="24" fill="none" stroke="#a4312b" stroke-width="7"/>
+    <text x="155" y="90" fill="#693f27" font-size="28" text-anchor="middle">312</text>
+  </g>
+  <g transform="translate(530 112) rotate(5)">
+    <rect width="220" height="120" rx="14" fill="#b58a51"/>
+    <path d="M30 34 H190 M38 56 H180 M42 78 H174" stroke="#593620" stroke-width="8" stroke-linecap="round"/>
+    <text x="110" y="106" fill="#2b1a10" font-size="18" text-anchor="middle">人在台在，死守松峰</text>
+  </g>
+</svg>

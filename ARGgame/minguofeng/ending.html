@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山河谍影 · 终章 · 真相落幕</title>
+<link rel="stylesheet" href="paywall.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0c08;color:#c8b89a;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow-y:auto;min-height:100vh}
+.paper-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#0f0c08 0%,#1a150e 40%,#0e0a06 100%)}
+.paper-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(160,140,110,.015) 3px,rgba(160,140,110,.015) 6px);pointer-events:none}
+.desk-light{position:fixed;top:-15%;left:50%;transform:translateX(-50%);width:50%;height:45%;background:radial-gradient(ellipse,rgba(200,170,120,.06) 0%,transparent 70%);pointer-events:none;z-index:1}
+.desk-light-2{position:fixed;bottom:0;left:30%;width:40%;height:30%;background:radial-gradient(ellipse at bottom,rgba(180,150,100,.04) 0%,transparent 60%);pointer-events:none;z-index:1}
+.container{position:relative;z-index:10;width:92%;max-width:800px;margin:0 auto;padding:40px 0 120px;display:flex;flex-direction:column;align-items:center}
+.scene-header{text-align:center;margin-bottom:15px;opacity:0;animation:headerFadeIn 3s ease forwards}
+@keyframes headerFadeIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.scene-chapter{font-size:11px;color:#5a4a30;letter-spacing:8px;margin-bottom:8px}
+.scene-title{font-size:30px;letter-spacing:12px;color:#c8a868;text-shadow:0 2px 15px rgba(200,168,104,.25),0 0 40px rgba(200,168,104,.08);font-weight:bold}
+.scene-location{font-size:10px;color:#5a4a30;letter-spacing:5px;margin-top:6px}
+.scene-divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,#8a7a5a,transparent);margin:15px auto 30px}
+.scene-desc{color:#a09080;font-size:13.5px;line-height:2.3;margin:0 0 25px;letter-spacing:1px;text-align:left;max-width:750px;text-indent:2em;opacity:0}
+.scene-desc.fade-in{animation:textFadeIn 2s ease forwards}
+@keyframes textFadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.dialogue-box{background:rgba(35,30,20,.85);border:1px solid #4a4030;border-left:3px solid #8a7a5a;padding:22px 28px;margin:18px 0;max-width:720px;width:100%;border-radius:2px;position:relative;opacity:0}
+.dialogue-box.fade-in{animation:textFadeIn 2s ease forwards}
+.dialogue-box::before{content:attr(data-speaker);position:absolute;top:-10px;left:18px;background:#0f0c08;padding:0 10px;font-size:11px;color:#c8a868;letter-spacing:3px}
+.dialogue-text{font-size:13.5px;line-height:2.2;color:#b8a888;letter-spacing:.5px;padding-top:5px}
+.dialogue-text em{color:#d4b878;font-style:normal;border-bottom:1px dashed #6a5a40}
+.choice-section{margin:40px 0;text-align:center;opacity:0}
+.choice-section.visible{animation:choiceAppear 1.5s ease forwards}
+@keyframes choiceAppear{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.choice-prompt{font-size:15px;color:#c8a868;letter-spacing:6px;margin-bottom:8px;text-shadow:0 0 10px rgba(200,168,104,.15)}
+.choice-hint{font-size:11px;color:#6a5a40;letter-spacing:3px;margin-bottom:30px}
+.choice-list{display:flex;flex-direction:column;gap:16px;max-width:650px;width:100%;margin:0 auto}
+.choice-btn{display:block;width:100%;padding:20px 30px;background:rgba(35,30,20,.7);border:1px solid #4a4030;color:#a09070;font-family:inherit;font-size:14px;line-height:1.8;letter-spacing:2px;cursor:pointer;transition:all .5s;border-radius:3px;text-align:left;position:relative;overflow:hidden}
+.choice-btn::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(200,168,104,.05),transparent);opacity:0;transition:opacity .5s}
+.choice-btn:hover,.choice-btn:focus-visible{border-color:#8a7a5a;color:#d4b878;background:rgba(45,38,25,.85);box-shadow:0 4px 20px rgba(0,0,0,.4),inset 0 0 30px rgba(200,168,104,.05);transform:translateX(5px);outline:1px solid #c8a868;outline-offset:2px}
+.choice-btn:hover::before,.choice-btn:focus-visible::before{opacity:1}
+.choice-btn .choice-title{font-size:15px;color:#c8a868;letter-spacing:4px;display:block;margin-bottom:4px;font-weight:bold}
+.choice-btn .choice-desc{font-size:11.5px;color:#6a5a40;letter-spacing:1px;display:block}
+.ending-section{display:none;margin:40px 0;max-width:750px;width:100%}
+.ending-section.active{display:block}
+.ending-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid #3a3020}
+.ending-name{font-size:24px;letter-spacing:8px;color:#c8a868;text-shadow:0 2px 15px rgba(200,168,104,.2);font-weight:bold;opacity:0}
+.ending-name.fade-in{animation:titleGlow 2s ease forwards}
+@keyframes titleGlow{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.ending-subtitle{font-size:12px;color:#6a5a40;letter-spacing:5px;margin-top:8px}
+.ending-subtitle.fade-in{animation:textFadeIn 1.5s .5s ease forwards;opacity:0}
+.ending-paragraph{font-size:13.5px;line-height:2.3;color:#a09080;letter-spacing:.8px;text-indent:2em;margin:18px 0;opacity:0;transform:translateY(12px)}
+.ending-paragraph.fade-in{animation:paraFadeIn 1.8s ease forwards}
+.ending-quote{font-size:16px;line-height:2.4;color:#c8a868;letter-spacing:3px;text-align:center;margin:35px 0;padding:25px 30px;border-top:1px solid #3a3020;border-bottom:1px solid #3a3020;font-weight:bold;opacity:0;text-shadow:0 0 20px rgba(200,168,104,.12)}
+.ending-quote.fade-in{animation:quoteFadeIn 2.5s ease forwards}
+@keyframes quoteFadeIn{from{opacity:0;transform:translateY(15px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+.monument{background:rgba(35,30,20,.6);border:1px solid #4a4030;border-radius:3px;padding:30px;margin:25px 0;text-align:center;opacity:0}
+.monument.fade-in{animation:monumentRise 2.5s ease forwards}
+@keyframes monumentRise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.monument-names{font-size:15px;color:#c8a868;letter-spacing:4px;line-height:2.5;margin:15px 0;font-weight:bold}
+.monument-text{font-size:13px;color:#a09080;letter-spacing:2px;line-height:2;margin-top:15px;font-style:italic}
+.monument-inscription{font-size:12px;color:#c8a868;letter-spacing:3px;margin-top:20px;padding-top:15px;border-top:1px solid #3a3020}
+.monument-reveal{font-size:11.5px;color:#8b4040;letter-spacing:2px;margin-top:18px;padding:12px 20px;border:1px dashed #5a3a2a;background:rgba(139,64,64,.05);border-radius:2px;opacity:0}
+.monument-reveal.fade-in{animation:revealFadeIn 2s ease forwards}
+@keyframes revealFadeIn{from{opacity:0}to{opacity:1}}
+.replay-section{text-align:center;margin:40px 0 20px;padding-top:30px;border-top:1px solid #2a2018;opacity:0;display:none;width:100%}
+.replay-section.fade-in{animation:textFadeIn 1.5s ease forwards}
+.replay-btn{display:inline-block;padding:12px 40px;background:transparent;border:1px solid #5a4a30;color:#8a7a5a;font-family:inherit;font-size:13px;letter-spacing:6px;cursor:pointer;transition:all .5s;text-decoration:none;border-radius:3px}
+.replay-btn:hover,.replay-btn:focus-visible{border-color:#c8a868;color:#c8a868;box-shadow:0 0 20px rgba(200,168,104,.1);background:rgba(200,168,104,.05);outline:1px solid #c8a868;outline-offset:2px}
+.replay-hint{font-size:10px;color:#4a3a20;letter-spacing:3px;margin-top:12px}
+@keyframes paraFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:rgba(200,180,140,.05)}::-webkit-scrollbar-thumb{background:rgba(200,168,104,.2);border-radius:2px}::-webkit-scrollbar-thumb:hover{background:rgba(200,168,104,.35)}
+.fade-delay-1{animation-delay:1s}.fade-delay-2{animation-delay:3s}.fade-delay-3{animation-delay:5.5s}.fade-delay-4{animation-delay:8s}.fade-delay-5{animation-delay:11s}.fade-delay-6{animation-delay:14s}
+.ep-delay-1{animation-delay:.3s!important}.ep-delay-2{animation-delay:1.5s!important}.ep-delay-3{animation-delay:2.8s!important}.ep-delay-4{animation-delay:4.2s!important}.ep-delay-5{animation-delay:5.6s!important}.ep-delay-6{animation-delay:7s!important}.ep-delay-7{animation-delay:8.5s!important}.ep-delay-8{animation-delay:10s!important}.ep-delay-9{animation-delay:11.5s!important}.ep-delay-10{animation-delay:13s!important}.ep-delay-11{animation-delay:14.5s!important}.ep-delay-12{animation-delay:16s!important}.eq-delay-1{animation-delay:17.5s!important}.eq-delay-2{animation-delay:19s!important}.eq-delay-3{animation-delay:21s!important}.mn-delay-1{animation-delay:8s!important}.mn-delay-2{animation-delay:10s!important}.mn-delay-3{animation-delay:12s!important}.mn-delay-4{animation-delay:14s!important}
+@media(max-width:600px){.container{width:95%;padding:25px 0 100px}.scene-title{font-size:22px;letter-spacing:8px}.scene-desc,.dialogue-text,.ending-paragraph{font-size:12.5px;line-height:2.1}.choice-btn{padding:16px 20px}.choice-btn .choice-title{font-size:13px}.dialogue-box{padding:18px 20px}.ending-name{font-size:20px;letter-spacing:6px}.monument-names{font-size:13px;letter-spacing:3px}.ending-quote{font-size:14px;letter-spacing:2px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.scene-header,.scene-desc,.dialogue-box,.choice-section,.ending-name,.ending-subtitle,.ending-paragraph,.ending-quote,.monument,.monument-reveal,.replay-section{opacity:1!important;transform:none!important;filter:none!important}}
+</style>
+</head>
+<body>
+<div class="paper-bg"></div><div class="desk-light"></div><div class="desk-light-2"></div>
+<div class="container">
+<div class="scene-header"><p class="scene-chapter">终 章</p><h1 class="scene-title">真 相 落 幕</h1><p class="scene-location">金陵城 · 宪兵司令部 · 档案室</p><div class="scene-divider"></div></div>
+<div id="part-narrative">
+<p class="scene-desc fade-in fade-delay-1">沈逸站在档案室中，四周是无尽的铁架，架子上堆满了泛黄的文件和档案。收音机里延安的信号已经消失，只剩下沙沙的静电噪声在空旷的房间里回荡。</p>
+<p class="scene-desc fade-in fade-delay-2">他知道了一切。五名学者并非失踪——他们被陈望舒秘密转移至延安安全地点，在那里继续他们的研究。日本特务机关“梅机关”策划的“天工计划”，是为了窃取中国冶金专家的研究成果，制造一种名为“天工合金”的特殊武器材料。而陈望舒，那个被关押在宪兵司令部地下档案室的人，正是潜伏在敌人内部的地下情报员。</p>
+<p class="scene-desc fade-in fade-delay-3">但他面临一个问题——这份情报，该怎么办？</p>
+<div class="dialogue-box fade-in fade-delay-4" data-speaker="方先生（收音机）"><div class="dialogue-text">“沈先生，你听到了。现在你面临一个选择。这份情报如果公之于众，国民政府会颜面尽失——他们竟然让日本特务在眼皮底下活动了这么久。但如果不上报，<em>‘天工计划’</em>的阴谋就无法被阻止。”</div></div>
+<div class="dialogue-box fade-in fade-delay-5" data-speaker="方先生（收音机）"><div class="dialogue-text">“还有一种选择。你把这些情报直接送往延安。陈望舒同志需要人把这份<em>‘天工合金’</em>的危害性报告带给党中央，让全世界都知道日本人在策划什么。”</div></div>
+<div class="dialogue-box fade-in fade-delay-6" data-speaker="方先生（收音机）"><div class="dialogue-text">“但这样一来，你将彻底得罪国民政府。你再也回不了上海，回不了《东方晨报》。你将成为一个……<em>‘通匪’</em>的记者。”</div></div>
+</div>
+<div class="choice-section" id="choice-section"><p class="choice-prompt">—— 抉 择 ——</p><p class="choice-hint">沈逸，你会怎么做？</p><div class="choice-list">
+<button type="button" class="choice-btn" onclick="chooseEnding('A')"><span class="choice-title">【 公 开 发 表 】</span><span class="choice-desc">在《东方晨报》上发表调查报道，揭露“天工计划”和日本特务阴谋，同时暗指国民政府的失职</span></button>
+<button type="button" class="choice-btn" onclick="chooseEnding('B')"><span class="choice-title">【 送 往 延 安 】</span><span class="choice-desc">将情报秘密送往延安，帮助陈望舒和学者们完成“天工合金”的防御性研究</span></button>
+<button type="button" class="choice-btn" onclick="chooseEnding('C')"><span class="choice-title">【 双 重 棋 局 】</span><span class="choice-desc">先通过秘密渠道将关键情报送往延安，同时在《东方晨报》上发表一篇“看似客观”的报道，既揭露日本阴谋，又给国民政府留面子，用舆论推动官方行动</span></button>
+</div></div>
+
+<div class="ending-section" id="ending-A"><div class="ending-header"><div class="ending-name fade-in">笔 锋 如 刀</div><div class="ending-subtitle fade-in">结局 A · 公开发表</div></div>
+<p class="ending-paragraph fade-in ep-delay-1">沈逸回到上海，把自己关在报社的小阁楼里三天三夜。他用油印机偷偷印制了一份长达万字的调查报道——《天工计划：日本特务机关在华阴谋全记录》。他从档案室的铁架上一份份翻出来的证据——宪兵司令部的内部通讯、“梅机关”的组织架构图、“东亚文化保护协会”的资金往来记录——全部化作文字，化作刀锋。</p>
+<p class="ending-paragraph fade-in ep-delay-2">民国二十六年四月一日，《东方晨报》头版以通栏标题刊登了这篇报道。整个上海为之震动。报贩们还没来得及叫卖，报纸便被市民抢购一空。当天下午，三个报童在南京路被不明身份的人殴打——但第二天，更多的报纸从地下印刷厂流了出来。</p>
+<p class="ending-paragraph fade-in ep-delay-3">报道震动全国，国际舆论哗然。《纽约时报》驻上海记者将全文发回美国，伦敦的《泰晤士报》刊登了长篇摘要。日本大使馆被迫召开新闻发布会公开否认，但铁证如山——他们无法解释那些盖着宪兵司令部公章的内部文件。</p>
+<p class="ending-paragraph fade-in ep-delay-4">国民政府震怒。四月三日，军统特务查封了《东方晨报》编辑部，捣毁了印刷机，逮捕了十七名编辑和记者。沈逸在法租界的公寓中被秘密逮捕，连夜押送南京。他被关进了宁海路的秘密监狱，与外界彻底隔绝。</p>
+<p class="ending-paragraph fade-in ep-delay-5">在狱中的日子里，沈逸用指甲在墙壁上刻字，用饭粒黏合碎纸片写遗书。他写道——</p>
+<div class="ending-quote fade-in eq-delay-1">“记者之笔，可抵百万雄兵。<br>吾虽身陷囹圄，此心已遂。<br>真相已出，纵死何憾？”</div>
+<p class="ending-paragraph fade-in ep-delay-6">这封遗书被一名同情他的狱卒偷偷带出，在知识分子中广泛传抄。三个月后，地下党组织了一场精心策划的营救行动。沈逸被救出秘密监狱，乔装成商人，辗转经武汉、西安，最终到达延安。</p>
+<p class="ending-paragraph fade-in ep-delay-7">在延安的窑洞里，沈逸第一次见到了陈望舒。两个人在昏暗的油灯下对视良久，什么都没有说。陈望舒递给他一杯水，沈逸接过来，一饮而尽。有些事情，不需要言语。</p>
+<p class="ending-paragraph fade-in ep-delay-8">后来，沈逸成为新华社的首任编辑主任。他把在《东方晨报》学到的新闻理想，带到了这片黄土地上。他培养了一代又一代年轻的记者，告诉他们：“笔，从来不只是工具。它是脊梁。”</p>
+<div class="ending-quote fade-in eq-delay-2">有些真相，值得用自由去换取。</div></div>
+
+<div class="ending-section" id="ending-B"><div class="ending-header"><div class="ending-name fade-in">暗 夜 行 者</div><div class="ending-subtitle fade-in">结局 B · 送往延安</div></div>
+<p class="ending-paragraph fade-in ep-delay-1">沈逸用了整整一周的时间，将全部情报整理成一份详尽的报告。他在报告的每一页都做了编号，用自己设计的一套暗语系统重新编码了所有关键信息。这份报告包含了“天工计划”的完整细节、梅机关的组织架构、东亚文化保护协会的人员名单，以及宪兵司令部内部文件中涉及叛变者的信息。</p>
+<p class="ending-paragraph fade-in ep-delay-2">方先生的交通线从金陵出发，经武汉、郑州、西安，最终抵达延安。沈逸将报告分成三份，由三名不同的交通员分别携带，按照约定的时间在不同地点接头。他知道，如果任何一份被截获，其他两份仍然可以到达。他不能让这些情报有丝毫闪失。</p>
+<p class="ending-paragraph fade-in ep-delay-3">延安收到报告后，党中央立即指示成立了专项研究小组。五名学者的科研团队根据报告中的“天工合金”情报，提前分析了这种特殊合金的潜在威胁，并在两个月内研制出了针对性的防护方案和替代材料。当日本人最终试图将“天工合金”投入实战时，他们发现自己的技术优势已经不复存在。</p>
+<p class="ending-paragraph fade-in ep-delay-4">沈逸没有发表任何报道。他回到上海，继续做他的记者——采访、写稿、改版、开会，一切看起来和从前没有任何不同。同事们偶尔会注意到他在某些日子里会消失几个小时，问他去了哪里，他只是笑笑说“去喝了杯茶”。</p>
+<p class="ending-paragraph fade-in ep-delay-5">没有人知道，沈逸已经暗中成为地下情报网络的一名核心成员。他利用记者的身份作为掩护，在上海、南京、武汉之间穿梭，传递着一份又一份至关重要的情报。他的新闻稿里藏着密语，他的采访笔记里夹着微型胶卷，他的名片背面有一组只有联络人才能读懂的数字。</p>
+<p class="ending-paragraph fade-in ep-delay-6">他不再是以笔为刀的沈逸。他变成了一个影子——白天是记者沈逸，夜晚是代号“墨”的情报员。他学会了在黑暗中行走，学会了沉默，学会了用生命守护秘密。</p>
+<p class="ending-paragraph fade-in ep-delay-7">陈望舒后来从宪兵司令部脱身。那是一个月黑风高的夜晚，地下组织在宪兵司令部后墙炸开了一个洞。陈望舒带着最后一批档案，从那个洞里钻了出来，再也没有回头。他辗转到达延安，与五名学者在窑洞里重逢。</p>
+<p class="ending-paragraph fade-in ep-delay-8">他们拥抱在一起，没有言语。赵怀瑾哭了，周明远哭了，那个一直沉默的孙铭哲也哭了。陈望舒看着他们——这些他冒着生命危险保护的学者们——轻声说了一句话：“都到了。都在。”</p>
+<p class="ending-paragraph fade-in ep-delay-9">最终，日本人的“天工计划”彻底失败。他们想要的冶金专家一个都没有得到，他们费尽心机收集的古代冶金文献在延安变成了中国自己的国防技术储备。而那个策划一切的梅机关，在战后被发现时，文件柜里只剩下一堆无人能读懂的废纸。</p>
+<p class="ending-paragraph fade-in ep-delay-10">多年后，有人在一本不起眼的回忆录里读到这样一段话——“在最黑暗的日子里，总有一些人，他们不求名、不求利，只是默默地做着自己认为正确的事情。他们的名字或许永远不会被历史记住，但正是他们，让光明成为可能。”</p>
+<div class="ending-quote fade-in eq-delay-1">真正的英雄，从不在聚光灯下。<br>他们在黑暗中行走，让光明成为可能。</div></div>
+
+<div class="ending-section" id="ending-C"><div class="ending-header"><div class="ending-name fade-in">山 河 无 恙</div><div class="ending-subtitle fade-in">结局 C · 双重棋局</div></div>
+<p class="ending-paragraph fade-in ep-delay-1">沈逸用了三天时间，写了三篇文章。不是一篇——是三篇。每一篇面对不同的读者，每一篇传递不同的信息，每一篇都经过反复推敲，每一个字都经过了精密的计算。这是一盘棋，一盘所有人都不知道他在下、所有人都以为不在下的棋。</p>
+<p class="ending-paragraph fade-in ep-delay-2" style="font-weight:bold;color:#c8a868;text-indent:0;margin-top:25px">第一篇：公开发表的调查报道</p>
+<p class="ending-paragraph fade-in ep-delay-3">发表在《东方晨报》头版。标题是《东亚文化保护协会：揭开日本在华特务网络的面纱》。这篇报道用翔实的证据揭露了“东亚文化保护协会”是日本特务组织的真相，公开了山田诚一的真实身份，列出了该组织在华活动的详细时间线。</p>
+<p class="ending-paragraph fade-in ep-delay-4">但沈逸刻意回避了一件事——他没有提及国民政府的任何失职。报道中只字不提宪兵司令部的疏漏，只字不提军统和中统的情报失误，只字不提政府高层对日本渗透的漠视。他把矛头完全指向了日本特务机关，让这篇报道看起来像是一篇纯粹的反日爱国文章。</p>
+<p class="ending-paragraph fade-in ep-delay-5" style="font-weight:bold;color:#c8a868;text-indent:0;margin-top:25px">第二篇：秘密送往延安的情报报告</p>
+<p class="ending-paragraph fade-in ep-delay-6">这份报告通过方先生的地下交通线送往延安。报告中包含了“天工计划”的完整细节、宪兵司令部的内部文件、梅机关的组织架构图、以及陈望舒提供的日本特务在华活动网络的全部情报。这是沈逸真正的心血——每一页都经过交叉验证，每一个情报源都经过三重确认。</p>
+<p class="ending-paragraph fade-in ep-delay-7" style="font-weight:bold;color:#c8a868;text-indent:0;margin-top:25px">第三篇：匿名寄给外交部的备忘录</p>
+<p class="ending-paragraph fade-in ep-delay-8">这份备忘录以一个“知情者”的口吻写成，用隐晦的语言暗示日本特务渗透的严重程度远超官方想象。它没有署名，没有来源，只有一个简单的建议——“请立即加强在华日裔人员的审查力度，尤其是与所谓‘文化交流’相关的组织。”</p>
+<p class="ending-paragraph fade-in ep-delay-9">三篇文章，三个方向，三种力量。沈逸就像一个高明的棋手，同时推动着三枚棋子，让它们沿着不同的路线前进，最终汇聚在同一个终点。</p>
+<p class="ending-paragraph fade-in ep-delay-10">《东方晨报》的报道发表后，日本方面震怒。山田诚一通过日本大使馆向国民政府提出严正交涉，要求查处《东方晨报》“侮辱大日本帝国”的行为。但在外交部的高层会议上，有人注意到——这篇报道虽然揭露了日本的阴谋，却没有给国民政府造成任何政治压力。相反，它反而为政府提供了一个绝佳的借口。</p>
+<p class="ending-paragraph fade-in ep-delay-11">国民政府顺水推舟，配合了调查。“东亚文化保护协会”被勒令取缔，山田诚一被宣布为“不受欢迎的人”并驱逐出境。日本特务在南京的情报网络遭到了毁灭性的打击——而这一切，都是在“顺应民意”的旗帜下完成的。没有人知道，这场风暴的背后，是一个记者在暗中推波助澜。</p>
+<p class="ending-paragraph fade-in ep-delay-12">与此同时，在遥远的延安，五名学者在窑洞实验室里日以继夜地工作。他们根据沈逸送来的情报，成功破解了“天工合金”的技术原理。更令人振奋的是，陈望舒在研究中发现了一个日本人从未注意到的方向——利用中国传统的宋代胆铜法，结合现代冶金学理论，可以研制出一种比“天工合金”更坚韧、更轻便的国防材料。</p>
+<div class="monument fade-in mn-delay-1"><p style="font-size:12px;color:#6a5a40;letter-spacing:4px;margin-bottom:10px">—— 多年以后 ——</p><div class="monument-names">周明远 · 李书恒 · 赵怀瑾 · 孙铭哲 · 王素琴<br>陈望舒 · 张鹤年 · 方先生 · 沈逸 · 林素琴<br>刘怀恩 · 赵永宁 · 吴明德 · 周佩兰 · 郑守正</div><div class="monument-text">山河无恙，因有志士舍生忘死。</div><div class="monument-inscription">此碑立于壬午年秋，铭记十五位请愿书签名者<br>与所有为山河存亡奔走的无名英雄</div><div class="monument-reveal fade-in mn-delay-3">碑文下方，有一行极小的字，若不弯腰细看，几乎无人会注意到——<br><br><span style="color:#8b4040;font-weight:bold;letter-spacing:3px">立碑人：沈逸、陈望舒、张鹤年</span></div></div>
+<div class="ending-quote fade-in eq-delay-3">最伟大的棋局，不是将死对手，<br>而是让所有人都成为赢家。<br><br>山河无恙，便是对他们最好的告慰。</div></div>
+
+<div class="replay-section" id="replay-section" aria-live="polite">
+<a href="minguofeng.html" class="replay-btn">再 探 山 河</a>
+<button type="button" class="replay-btn support-replay-btn" onclick="showSupportPaywall()">支 持 作 者 · 1 元</button>
+<p class="replay-hint">—— 回到故事的开头，或为下一份真相留一盏灯 ——</p>
+</div>
+</div>
+<script src="paywall.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var selectedEnding = null;
+  var choiceTimer = null;
+  var replayTimer = null;
+  var supportTimer = null;
+  var autoScrollFrame = null;
+  var autoScrollCancelled = false;
+
+  function safeStorageSet(key, value) {
+    try { localStorage.setItem(key, value); } catch (error) {}
+  }
+
+  function revealChoices() {
+    var choiceSection = document.getElementById('choice-section');
+    if (!choiceSection || selectedEnding) return;
+    choiceSection.classList.add('visible');
+    if (!reduceMotion) {
+      setTimeout(function () {
+        if (!selectedEnding && choiceSection.offsetParent !== null) {
+          choiceSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+  }
+
+  choiceTimer = setTimeout(revealChoices, reduceMotion ? 100 : 10000);
+
+  window.chooseEnding = function (type) {
+    if (!['A', 'B', 'C'].includes(type) || selectedEnding) return;
+    selectedEnding = type;
+    clearTimeout(choiceTimer);
+    safeStorageSet('_shanhe_spy_last_ending', type);
+
+    var choiceSection = document.getElementById('choice-section');
+    var narrative = document.getElementById('part-narrative');
+    if (!choiceSection || !narrative) return;
+
+    choiceSection.style.transition = 'opacity 1s ease';
+    choiceSection.style.opacity = '0';
+    narrative.style.transition = 'opacity 1.5s ease';
+    narrative.style.opacity = '0';
+
+    setTimeout(function () {
+      choiceSection.style.display = 'none';
+      narrative.style.display = 'none';
+      var endingEl = document.getElementById('ending-' + type);
+      if (!endingEl) return;
+      endingEl.classList.add('active');
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+
+      endingEl.querySelectorAll('.fade-in').forEach(function (el) {
+        el.classList.remove('fade-in');
+        void el.offsetWidth;
+        el.classList.add('fade-in');
+      });
+
+      startScrollFollow(endingEl);
+      scheduleReplay(type);
+    }, reduceMotion ? 20 : 1500);
+  };
+
+  function cancelAutoScroll() {
+    autoScrollCancelled = true;
+    if (autoScrollFrame) cancelAnimationFrame(autoScrollFrame);
+  }
+
+  function startScrollFollow(endingEl) {
+    cancelAutoScroll();
+    if (reduceMotion) return;
+    autoScrollCancelled = false;
+    var totalDuration = 25000;
+    var startTime = Date.now();
+    var startScroll = window.scrollY;
+    var maxDistance = Math.max(0, endingEl.scrollHeight - window.innerHeight + 200);
+
+    function autoScroll() {
+      if (autoScrollCancelled) return;
+      var elapsed = Date.now() - startTime;
+      var progress = Math.min(elapsed / totalDuration, 1);
+      var targetScroll = startScroll + maxDistance * progress;
+      window.scrollTo({ top: targetScroll, behavior: 'auto' });
+      if (progress < 1 && !autoScrollCancelled) autoScrollFrame = requestAnimationFrame(autoScroll);
+    }
+
+    ['wheel', 'touchmove', 'pointerdown', 'keydown'].forEach(function (eventName) {
+      window.addEventListener(eventName, cancelAutoScroll, { once: true, passive: eventName !== 'keydown' });
+    });
+    setTimeout(function () {
+      if (!autoScrollCancelled) autoScrollFrame = requestAnimationFrame(autoScroll);
+    }, 2000);
+  }
+
+  function scheduleReplay(type) {
+    clearTimeout(replayTimer);
+    clearTimeout(supportTimer);
+    var delay = reduceMotion ? 100 : (type === 'C' ? 23000 : type === 'B' ? 15000 : 12000);
+    replayTimer = setTimeout(function () {
+      var replaySection = document.getElementById('replay-section');
+      if (!replaySection) return;
+      replaySection.style.display = 'block';
+      replaySection.classList.add('fade-in');
+      if (!reduceMotion && !autoScrollCancelled) {
+        replaySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      supportTimer = setTimeout(function () {
+        if (!window.Paywall || Paywall.hasPaid()) return;
+        var prompted = false;
+        try { prompted = sessionStorage.getItem('_shanhe_support_prompted') === '1'; } catch (error) {}
+        if (prompted) return;
+        try { sessionStorage.setItem('_shanhe_support_prompted', '1'); } catch (error) {}
+        showSupportPaywall();
+      }, reduceMotion ? 150 : 2500);
+    }, delay);
+  }
+
+  window.showSupportPaywall = function () {
+    if (!window.Paywall) return;
+    Paywall.show({
+      title: '支持《山河谍影》',
+      price: '1元',
+      studio: 'abc studio',
+      qrCode: 'paycode.png'
+    });
+  };
+
+  window.addEventListener('pagehide', function () {
+    clearTimeout(choiceTimer);
+    clearTimeout(replayTimer);
+    clearTimeout(supportTimer);
+    cancelAutoScroll();
+  }, { once: true });
+})();
+</script>
+</body>
+</html>

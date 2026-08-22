@@ -1,0 +1,20 @@
+/* 申江夜案 · 第一处异常交互优化（2026-08-15） */
+.anomaly-guide{display:grid;gap:12px;margin:14px 0}
+.anomaly-source-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.anomaly-source{border:1px solid rgba(74,52,35,.28);background:rgba(255,250,237,.58);padding:12px;box-shadow:0 5px 14px rgba(46,31,19,.06)}
+.anomaly-source .source-id{font-size:11px;letter-spacing:.08em;opacity:.66;margin-bottom:6px}
+.anomaly-source strong{display:block;font-size:18px;margin-bottom:4px}
+.anomaly-source p{margin:0;line-height:1.65}
+.anomaly-question{margin:2px 0 0;font-weight:700}
+.anomaly-choices{display:grid;gap:8px}
+.anomaly-choice{width:100%;text-align:left;border:1px solid rgba(72,48,30,.35);background:rgba(252,245,224,.72);padding:11px 12px;cursor:pointer;font:inherit;color:inherit;line-height:1.5;transition:transform .12s ease,background .12s ease,border-color .12s ease}
+.anomaly-choice:hover,.anomaly-choice:focus-visible{background:rgba(242,226,191,.88);border-color:rgba(94,54,27,.72);outline:none}
+.anomaly-choice:active{transform:translateY(1px)}
+.anomaly-choice.selected{background:rgba(219,197,150,.68);border-color:rgba(100,57,28,.86);box-shadow:inset 3px 0 0 rgba(105,48,29,.85)}
+.anomaly-or{display:flex;align-items:center;gap:8px;font-size:12px;opacity:.7;margin-top:2px}
+.anomaly-or::before,.anomaly-or::after{content:"";height:1px;flex:1;background:rgba(72,48,30,.2)}
+.anomaly-free-note{margin:0;font-size:12px;line-height:1.6;opacity:.76}
+.anomaly-answer-row{align-items:stretch}
+.anomaly-answer-row .answer-input{min-height:44px}
+.anomaly-answer-row .action-btn{min-height:44px}
+@media (max-width:620px){.anomaly-source-grid{grid-template-columns:1fr}.anomaly-choice{min-height:46px}.anomaly-answer-row{display:grid;grid-template-columns:1fr}.anomaly-answer-row .action-btn{width:100%}}

@@ -1,0 +1,18 @@
+LJ-GP-07 移交箱登记摘录
+对应文件：临儿序移〔2018〕21号
+登记日期：2018-11-09
+
+箱号：ARC-MOVE-07
+接收人：许盛
+接收节点：03
+封条：未见
+箱内目录：缺第 12 页
+
+节点补录文件：
+../assets/files/archive/ARC-DOC-012-device-index-check.docx
+
+受保护转储包：
+../assets/files/archive/ARC-MOVE-07-secure.zip
+
+说明：
+转储包包含三条 MOVE_TARGET 标签的位移登记。密码格式只记录在补录文件中。

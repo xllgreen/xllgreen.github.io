@@ -1,0 +1,587 @@
+# 《夜航》—— 技术实现文档
+
+> 最后更新：2026年6月13日
+>
+> **说明：** 本文档是剧本文档（Vol de Nuit.md）的技术配套，记录所有路由、交互、状态管理等实现细节。严格对照剧本文档编写。
+
+---
+
+## 一、密码系统
+
+| 密码 | 值 | 获取方式 | 用途 | 剧本章节 |
+|------|----|----------|------|---------|
+| **A** | Vol de Nuit | 塔台创站公告：书名 | 解锁⑬编辑记录 | 8.3 / 8.4 |
+| **B** | 道路一旦开辟，就不能不去追寻。 | ⑬编辑记录底部Vega小尾巴 | 解锁⑲Vega个人简介 | 8.6 / 9.1 |
+| **C** | 19930629 | ⑦创站公告日期+⑨年份推算（站长1993年6月29日生，圣埃克苏佩里诞辰） | 解锁⑭/⑮/⑲用户主页 | 8.4 / 8.7 |
+| **D** | sbire@zhengzao.com.cn（拼合） | 前半段sbire（⑭）+ 后半段@zhengzao.com.cn（㉗） | 解锁㉘最终档案 | 10.2 |
+| **E** | 20160924 | ⑪月亮照片右下角水印（即隼被杀日期） | 解锁盲区版块 | 9.2 |
+| **F** | 513431141533452444 | ㉒工具页：密码A经波利比奥斯5×5方阵加密 | 解锁盲区存档Ⅱ | 9.4 |
+
+### 密码输入框规范
+- 浮层弹窗，居中输入框，背景半透明模糊
+- 不区分大小写
+- 错误：输入框抖动 + "密码错误"
+- 正确：平滑过渡到目标页面
+
+### 解锁依赖链
+```
+密码A → ⑬编辑记录 → 获取密码B + beacon_holder/Gambit线索
+  ↓
+密码B → ⑲Vega个人简介 → 提示密码E方向
+密码C → 解锁⑭/⑮/⑲主页 → 获密码D前半段 + Δ关联
+  ↓
+密码E → 盲区存档Ⅰ → 获密码F提示
+  ↓
+密码F → 盲区存档Ⅱ → 获密码D拼合提示 + 最终档案路径
+  ↓
+密码D → 最终档案 → 结局
+```
+
+---
+
+## 二、页面路由清单
+
+### 2.1 论坛核心页面
+
+| 路径 | 页面 | 对应 | 说明 |
+|------|------|------|------|
+| `/board/deepspace` | 深空——怪谈区（入口页） | **①** | ~50帖子，含探险帖、地窖帖 |
+| `/board/lounge` | 候机室——水区 | **②** | ~30帖子，含月亮照片帖等 |
+| `/board/tower` | 塔台——公告区 | **③** | ~10帖，仅创站公告/关站公告可点击 |
+| `/board/blindzone` | 盲区——上锁 | **④** | 显示"请输入密钥解锁" |
+
+### 2.2 帖子页面
+
+| 路径 | 页面 | 对应 | 说明 |
+|------|------|------|------|
+| `/post/exploration` | 探险帖 | **⑤** | "阳光新城旁废弃危房区探险"，隼最初出现的帖子 |
+| `/post/cellar` | 地窖帖 | **⑥** | 隼的调查帖，底部有可点击编辑时间戳 |
+| `/post/founding` | 创站公告 | **⑦** | 提及 Vol de Nuit 和生日 |
+| `/post/shutdown` | 关站公告 | **⑧** | 底部回复链接→extra2告别墙 |
+| `/post/how-old` | "站长多大了" | **⑨** | 闲聊帖，推算密码C |
+| `/post/favorite-sentence` | "大家最喜欢的句子" | **⑩** | Vega评论+小尾巴 |
+| `/post/moon-photo` | 2015中秋晒月亮获奖作品 | **⑪** | 月亮照片（裁切→可放大） |
+| `/post/polybius` | 波利比奥斯科普帖 | **㉑** | 末尾有工具页链接 |
+
+### 2.3 编辑记录与盲区
+
+| 路径 | 对应 | 解锁条件 | 内容 |
+|------|------|---------|------|
+| `/edit-log/cellar` | **⑬** | 密码A | 四层内容，底部Vega回复含密码B |
+| `/blindzone/entry/1` | **⑳** | 密码E | 霄汉日志+折叠消息（密码F提示+extra5入口） |
+| `/blindzone/entry/2` | **㉓** | 密码F | 弹窗公布死讯+真相+final path提示+extra6入口 |
+
+### 2.4 用户主页
+
+| 路径 | 对应 | 解锁条件 | 内容 |
+|------|------|---------|------|
+| `/user/beacon_holder` | **⑭** | 密码C | 邮箱前半段、Δ头像、隐藏弹窗、踩点帖→`/post/scouting-2014`（extra3） |
+| `/user/gambit` | **⑮** | 密码C | 空白，右上角"档案"→`/user/gambit/archive` |
+| `/user/gambit/archive` | **⑯**（内含⑰私信记录+⑱恐吓信） | — | 档案列表页，点击打开私信记录（⑰）和恐吓信（⑱） |
+| `/user/gambit/pm` | **⑰** | — | 私信记录（与隼的站内私信） |
+| `/user/gambit/confession` | **⑱** | — | 恐吓信扫描图片（原自白信改为extra6陈述） |
+| `/user/vega` | **⑲** | 密码C | 内容已删，个人简介需密码B |
+
+### 2.5 外部线索页（搜索触发）
+
+| 路径 | 对应 | 关键词 | 风格 |
+|------|------|--------|------|
+| `/external/news` | **⑫** | 阳光新城 | 仿本地新闻网站 |
+| `/external/missing` | **㉔** | 徐山 | 仿警方档案页面 |
+| `/external/zhengzao` | **㉕** | 正造集团 | 仿地产公司官网 |
+| `/external/zhengzao/recruitment` | **㉖** | 正造招聘 2013 | 仿招聘存档（列表页） |
+| `/external/zhengzao/recruitment/2013` | **㉗** | — | 2013年行政助理招聘详情页（含周经理邮箱后半段） |
+
+### 2.6 彩蛋页
+
+| 路径 | extra | 入口方式 |
+|------|-------|---------|
+| `/saint-exupery/` | extra1 | 搜索"Vol de Nuit"/"voldenuit"/"夜航" |
+| `/farewell/` | extra2 | 关站公告底部回复链接 |
+| `/post/scouting-2014` | extra3 | beacon_holder主页上可点击打开 |
+| `/user/vega/drafts` | extra4 | Vega主页右上角私信箱图标 |
+| `/flight-path/` | extra5 | 盲区存档Ⅰ"希望我们不会像他一样遗憾"可点击 |
+| `/statement/` | extra6 | 盲区存档Ⅱ"弃子"可点击 |
+| `/memoir/xutian.html` | extra7 | 搜索"徐天" |
+
+### 2.7 终局页面
+
+| 路径 | 对应 | 解锁条件 | 内容 |
+|------|------|---------|------|
+| `/post/final-archive` | **㉘** | 密码D | 霄汉最后一封信+站内信+监控日志+选择按钮（同时支持`/final-archive`路径访问） |
+| `/ending/choice` | — | 在㉘中选择后跳转 | 中间页：公之于众 / 保持沉默 两个按钮 |
+| `/ending/disclose` | **㉙** | `completed==true` | 报纸+铅笔威胁+"第三航次已结束" |
+| `/ending/silence` | **㉚** | `completed==true` | "有些门"+第四航次+"第三航次已结束" |
+
+### 2.8 特殊页面
+
+| 路径 | 对应 | 说明 |
+|------|------|------|
+| `/external/polybius-tool` | **㉒** | 波利比奥斯加解密工具页（独立页面，脱离论坛UI） |
+| `*`（任意不存在路径） | — | 404页面：深蓝背景+"页面未找到"+可点击"确定"按钮（5次文字切换后重定向至深空版块） |
+
+---
+
+## 三、搜索关键词映射表
+
+### 触发搜索（返回外部独立页面）
+
+| 关键词 | 路由 |
+|--------|------|
+| 阳光新城 | `/external/news` |
+| 正造集团 | `/external/zhengzao` |
+| 徐山 | `/external/missing` |
+| 正造招聘 2013 | `/external/zhengzao/recruitment` |
+| Vol de Nuit / VoldeNuit / vol de nuit / voldenuit / 夜航 | `/saint-exupery/`（extra1） |
+| 徐天 | `/memoir/xutian.html`（extra7） |
+
+### 普通搜索（返回论坛站内结果）
+
+| 关键词 | 返回内容 |
+|--------|---------|
+| 地窖 | 隼的调查帖 |
+| 波利比奥斯 | 科普帖（末尾有工具页链接） |
+| beacon_holder | 个人主页（需密码C解锁），主页有踩点帖可点击进入（extra3） |
+| Gambit | 个人主页（需密码C解锁），主页右上角"档案"→ 档案页（内含私信记录+自白信） |
+| Vega | 大家最喜欢的句子（Vega评论的那条帖子） |
+
+### 实现规范
+- 搜索框位于导航栏右侧，全局可见
+- 点击搜索框时，下方展开下拉面板（深色主题）
+  - **未输入时：** 显示历史搜索记录（`search_history`），按时间倒序排列；点击某条历史记录 → 自动填入搜索框并显示对应结果
+  - **输入关键词后回车：** 匹配关键词表，下拉面板显示对应结果
+- 匹配规则：输入词先做归一化处理（**转小写、去空格、去标点符号**），再与同样归一化后的关键词做**精确对比**——不进行子串匹配、不进行模糊匹配
+- 匹配流程：
+  1. 先匹配触发搜索列表 → 命中则显示对应页面名称，可点击跳转
+  2. 未命中则匹配普通搜索关键词表 → 命中则显示对应站内结果，可点击跳转
+  3. 均未命中 → 显示"No result"（灰色文字，不可点击，不记入历史）
+- 示例：搜索"beacon_holder" → 下拉面板显示"beacon_holder的个人主页"（可点击）
+- 示例：搜索"Gambit" → 下拉面板显示"Gambit的个人主页"（可点击）
+- 仅命中关键词表的搜索词才追加到 `search_history`（去重，已存在则移至最前），无上限
+- 可搜索关键词在页面中首处出现时以特殊样式高亮，剧本中以**加粗**标记
+
+---
+
+## 四、全局状态管理
+
+使用 `localStorage`，键名前缀 `nf_`。
+
+| 状态键 | 类型 | 初值 | 触发条件 | 影响 |
+|--------|------|------|---------|------|
+| `pw_a` | bool | false | 输对密码A | 允许访问编辑记录页 |
+| `pw_b` | bool | false | 输对密码B | 解锁Vega个人简介 |
+| `pw_c` | bool | false | 输对密码C | 解锁用户主页 |
+| `pw_d` | bool | false | 输对密码D | 允许访问最终档案 |
+| `pw_e` | bool | false | 输对密码E | 解锁盲区版块 |
+| `pw_f` | bool | false | 输对密码F | 解锁盲区存档Ⅱ |
+| `edit_log_visited` | bool | false | 进入编辑记录页 | 解锁月亮照片可点击 |
+| `bz2_visited` | bool | false | 进入盲区存档Ⅱ | 解锁"弃子"可点击 |
+| `completed` | bool | false | 触发结局（在㉘中选择后） | 允许访问结局页面（㉙/㉚） |
+| `ip` | string | 生成随机IP | 首次访问 | 监控日志最后一行显示 |
+| `path_log` | array[] | [] | 每次访问关键页面追加 | 监控日志列表 |
+| `search_history` | string[] | [] | 每次有效搜索（匹配关键词表）后追加 | 点击搜索框时下拉显示历史记录 |
+
+### 关键交互条件
+
+| 元素 | 条件 | 行为 |
+|------|------|------|
+| 地窖帖编辑时间戳 | 始终可点击 | 弹出密码A输入框 |
+| 月亮照片 | `edit_log_visited==true`时才可点击 | 全尺寸显示+水印 |
+| b_h主页隐藏按钮 | 密码C已解锁 | 弹窗"真相在盲区" |
+| Gambit"档案" | 密码C已解锁 | 进入档案页 |
+| 盲区版块 | 始终可点击→弹出密码E框 | 正确→跳转存档Ⅰ |
+| 折叠消息 | 在存档Ⅰ页面 | 展开显示 |
+| "希望我们不会像他一样遗憾" | 在存档Ⅰ页面 | →`/flight-path/`(extra5) |
+| "弃子" | `bz2_visited==true` | →`/statement/`(extra6) |
+| 关站公告回复链接 | 始终可点击 | →`/farewell/`(extra2) |
+| 搜索beacon_holder | 始终触发跳转 | →`/user/beacon_holder`（密码C解锁后主页踩点帖可查阅extra3） |
+| 404确定按钮 | 始终可点击 | 5次文字→重定向深空版块 |
+| 站内信关闭 | 最终档案阅读完毕 | 展示监控日志+选择面板 |
+
+---
+
+## 五、各页面实现要点
+
+### 5.1 导航栏与全局布局
+所有版块页面共享统一的顶部导航栏和页脚：
+- 导航栏：四个版块链接（塔台、候机室、深空、盲区）+ 搜索框（右侧显著位置）
+- 无需注册/登录
+- 页脚：`© 2014-2016 夜航. All rights reserved.「 第三航次 」`
+
+### 5.2 版块页面颜色递进
+
+四个版块页面（塔台、候机室、深空、盲区）的背景色逐级加深，呼应"越深处越黑暗"的叙事感：
+
+| 版块 | 背景 `--bg-page` | 容器 `--bg-container` | 氛围 |
+|------|-----------------|---------------------|------|
+| 塔台 | `#1A2230` | `#232D3D` | 最亮，控制室灯光感 |
+| 候机室 | `#131B28` | `#1D2636` | 中等，夜间候机厅 |
+| 深空 | `#0B0F15` | `#151B24` | 暗，太空底色（当前实现） |
+| 盲区 | `#05080C` | `#0A0F18` | 最暗，近乎沉入黑色 |
+
+实现方式：`src/shared/theme.css` 定义 CSS 自定义属性（`--bg-page`、`--bg-container` 等），各版块 CSS 通过 `@import` 引用并覆写 `:root` 变量值。
+
+### 5.3 版块页面 `/board/*`
+- 帖子列表，按时间倒序
+- 塔台：10帖倒序（关站公告置顶→创站公告在底），中间帖子灰色不可点击
+- 候机室：月亮照片帖置顶
+- 深空：探险帖置顶或最热标记
+
+### 5.4 帖子详情页 `/post/*`
+- 标题、作者、发帖时间
+- 帖子正文
+- 评论区/回复列表
+- 地窖帖：底部"本帖最后由 霄汉 于 2016-9-23 03:14 编辑"——可点击弹出密码输入框
+- 关站公告：底部回复链接→`/farewell/`
+
+### 5.5 编辑记录页 `/edit-log/cellar`
+- 四层内容+底部Vega回复
+- 密码A输入正确后跳转
+
+### 5.6 用户主页 `/user/*`
+- beacon_holder：邮箱前半段+Δ头像+底部极淡按钮可点击→弹窗
+- Gambit：空白+右上角"档案"（文字样式，可点击）
+- Vega：内容删除+隐藏个人简介（密码B解锁显示指引文本）
+
+### 5.7 盲区版块 `/board/blindzone`
+- 点击/访问时弹出密码E输入框
+- 正确→`/blindzone/entry/1`
+
+### 5.8 盲区存档Ⅰ `/blindzone/entry/1`
+- 霄汉日志正文
+- 底部折叠消息（可点击展开）：叙事提示→暗示波利比奥斯
+- "希望我们不会像他一样遗憾"——可点击→`/flight-path/`(extra5)
+
+### 5.9 盲区存档Ⅱ `/blindzone/entry/2`
+- 进入时先弹窗公布死讯（模态框，必须关闭）
+- 日志正文（关站真相、徐山、beacon_holder、final path提示）
+- "弃子"可点击→`/statement/`(extra6)
+
+### 5.10 最终档案 `/final-archive`
+- 霄汉最后一封信（全文）
+- PS段落（字迹更抖的视觉样式）
+- 阅读完毕后自动弹出站内信模态框
+- 关闭站内信→展示后台监控日志（`path_log`数据渲染，最后一行显示当前`ip`）
+- 其后出现两个选择按钮：「公之于众」→`/ending/disclose`（㉙），「保持沉默」→`/ending/silence`（㉚）
+
+### 5.11 月亮照片查看器
+- 候机室帖子中：CSS裁切显示（隐藏上下部分和右下角）——初始不可点击
+- `edit_log_visited==true`后：变为可点击
+- 点击后：全尺寸显示（裁切恢复），右下角日期水印可见
+
+### 5.12 波利比奥斯工具页 `/polybius-tool`
+- 独立页面，无论坛UI
+- 输入框：输入密码A
+- 模式选择：加密/解密（玩家选加密：字母→数字）
+- 输出：密码F
+- 无需玩家理解算法
+
+### 5.13 404页面 `*`
+- 全屏深蓝色背景
+- 中央"页面未找到"
+- 颜色极淡的「确定」按钮，可点击
+- 5次点击文字切换→第5次后重定向深空版块（入口页）
+- 文字序列：①"你点了。然后呢？" ②"也许你找的东西不在这里。" ③"——但它确实存在。" ④"问题是你找对地方了吗？" ⑤"晚安，飞行员。"
+
+### 5.14 结局视觉效果
+
+**结局一 `/ending/disclose`（㉙ 公之于众）：**
+- 黑色渐入→滚动字幕"灯火暗去的那一刻……"→渐暗
+- 报纸图片浮现→底部铅笔手写"你以为我就找不到你吗？"→渐暗
+- "第三航次已结束"
+
+**结局二 `/ending/silence`（㉚ 保持沉默）：**
+- 黑色渐入→"有些门，进去了就出不来的。"→渐暗
+- "第三航次已结束"→停顿→"第四航次，会在你准备好面对的时候开始。"
+
+---
+
+## 六、外部线索页设计规范
+
+所有触发搜索返回的外部页面共享：
+- 独立URL，独立布局，脱离论坛UI
+- 设计模仿真实网站
+- 无游戏化元素（无进度条、无提示）
+- 可嵌入隐藏信息（源码注释、图片元数据等）
+
+| 页面 | 关键设计要点 |
+|------|------------|
+| 新闻报道 `/external/news` | 仿本地新闻网站；标题"阳光新城小区发生命案"；2016-09-24 |
+| 企业介绍 `/external/zhengzao` | 仿地产官网；含阳光新城项目；底部导航含招聘入口 |
+| 招聘存档 `/external/zhengzao/recruitment` | 仿招聘存档列表页；含多条启事 |
+| 招聘详情 `/external/zhengzao/recruitment/2013`（㉗） | 仿招聘公告详情页；联系人周经理；邮箱后半段 |
+| 失踪档案 `/external/missing` | 仿警方档案页；徐山基本信息；评论提正造集团 |
+| 百科页 `/saint-exupery/`(extra1) | 仿网络百科；含关联条目"夜航论坛"可点击进入深空版块 |
+
+---
+
+## 七、技术栈决定
+
+| 项目 | 决定 | 说明 |
+|------|------|------|
+| 构建工具 | **Vite** + TypeScript | 零配置生产构建，自动 tree-shaking + 变量名 mangling |
+| 框架 | **原生 TypeScript**（无框架依赖） | 内容展示型页面占多数，重型框架徒增体积 |
+| 路由 | 前端路由（History API） | 模拟多页面切换，SPA 模式 |
+| 状态 | localStorage（编码存储） | 见第九节·防窥探方案 |
+| 密码验证 | **SHA-256 哈希比对** | 源码中不出现密码明文，见第九节 |
+| 图片查看 | CSS 裁切 + 全尺寸切换 | 裁切→可点击→全尺寸 |
+| 密码工具 | JS 波利比奥斯 5×5 网格 | 输入密码A→输出密码F |
+| 弹窗/模态框 | CSS 纯样式 | 密码输入、站内信、死讯 |
+| 搜索 | 前端关键词→URL 映射 | 大小写不敏感，分触发搜索 / 普通搜索两级 |
+| 404 | 前端通配路由 | 捕获所有未匹配路径 |
+| 适配 | 响应式 CSS | 支持桌面 + 移动端触屏 |
+
+### 为什么是 Vite + 原生 TypeScript
+
+- **30 个页面**中 80% 是内容展示型（帖子、公告、档案），不需要响应式框架的运行时
+- Vite 的 Rollup 构建对 TypeScript 做**变量名 mangling**（`passwordHashA` → `a` → `x`），天然增加源码阅读难度
+- TypeScript 的类型系统让密码哈希、状态管理等逻辑在开发阶段更可靠，构建后类型信息被完全擦除
+- 无需配置，`npm create vite@latest . -- --template vanilla-ts` 即可启动
+
+---
+
+## 八、待确认事项
+
+| # | 事项 | 状态 |
+|---|------|------|
+| 1 | 最终档案路径 | ✅ `/post/final-archive`（同时支持 `/final-archive` 301跳转） |
+| 2 | 防直接访问最终档案 | ✅ 密码D校验 + localStorage + guard双重保护 |
+| 3 | 月亮照片裁切 | ✅ 280×200裁切，编辑记录访问后解锁点击 |
+| 4 | 音效/背景音乐 | ❌ 不实现（纯静默浏览体验） |
+| 5 | 移动端适配 | ⏳ 基础响应式已实现，待精细化 |
+| 6 | 帖子模拟数据量 | ✅ 已按剧本配置各版块帖子数据 |
+| 7 | 部署方案 | ✅ GitHub Pages + GitHub Actions自动部署 |
+| 8 | 搜索"Vega" | ✅ 返回"大家最喜欢的句子"帖子 |
+| 9 | 正造集团图片素材 | ✅ 5张已生成、压缩、部署 |
+
+---
+
+## 九、防窥探方案
+
+纯前端无法彻底阻止 DevTools 或直接请求，但以下三层方案可拦阻"顺手掀桌布"级别的窥探——即只会打开 F12 看明文、或在 Application 面板改值的玩家。
+
+### 9.1 密码存哈希（核心）
+
+六个密码的明文**不出现**在源码中。源码只存 SHA-256 哈希值，用户输入后先哈希再比对。
+
+```typescript
+// 源码中只出现预计算的 SHA-256 哈希（32字节十六进制串）
+const PASSWORD_HASHES: Record<string, string> = {
+  A: '8c6f7a...ae3b',  // "Vol de Nuit" 的 SHA-256
+  B: 'd41d8c...9f7e',  // "道路一旦开辟，就不能不去追寻。" 的 SHA-256
+  C: 'e99a18...a3d6',  // 站长完整生日的 SHA-256
+  D: 'a1b2c3...f0e1',  // 拼合邮箱的 SHA-256
+  E: 'f6f8b5...c2a4',  // 隼的死亡日期的 SHA-256
+  F: 'a73d2f...05a379',  // 513431141533452444（密码A经波利比奥斯加密）
+}
+
+async function checkPassword(id: string, input: string): Promise<boolean> {
+  const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input))
+  const hex = Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0')).join('')
+  return hex === PASSWORD_HASHES[id]
+}
+```
+
+**效果：** 打开 Sources 面板搜 `Vol de Nuit` 搜不到任何结果。哈希值本身不可逆。
+
+### 9.2 localStorage 编码存储
+
+防止玩家直接在 Application 面板中将 `nf_pw_a` 改为 `true` 跳过解谜。
+
+```typescript
+// 写入时：编码 + 校验标记
+function setProgress(key: string, val: boolean): void {
+  const entry = {
+    v: val,
+    t: Date.now(),
+    c: btoa(key + ':' + (val ? '1' : '0')),  // 简单校验
+  }
+  localStorage.setItem('nf_' + key, JSON.stringify(entry))
+}
+
+// 读取时：校验标记完整性，篡改视为未解锁
+function getProgress(key: string): boolean {
+  const raw = localStorage.getItem('nf_' + key)
+  if (!raw) return false
+  try {
+    const entry = JSON.parse(raw)
+    const expected = btoa(key + ':' + (entry.v ? '1' : '0'))
+    if (entry.c !== expected) return false  // 标记不匹配 → 数据被篡改
+    return entry.v
+  } catch {
+    return false
+  }
+}
+```
+
+**效果：** Application 面板中看到的不再是 `nf_pw_a: true`，而是一段 JSON。直接改值为 `true` 会被校验拦截。
+
+### 9.3 页面访问控制
+
+即使玩家通过 URL 直接跳转（或 curl 请求）访问受密码保护的页面，也会因状态缺失而被拦截：
+
+| 页面 | 防护条件 | 不满足时的行为 |
+|------|---------|--------------|
+| `/edit-log/cellar` | `pw_a == true` | 重定向深空版块 |
+| `/user/beacon_holder` | `pw_c == true` | 显示"用户不存在"404 |
+| `/user/gambit` | `pw_c == true` | 显示"用户不存在"404 |
+| `/user/gambit/archive` | `pw_c == true` | 显示"用户不存在"404 |
+| `/user/vega` | `pw_c == true` | 显示"用户不存在"404 |
+| `/blindzone/entry/1` | `pw_e == true` | 重定向 `/board/blindzone` 重新输密码 |
+| `/blindzone/entry/2` | `pw_f == true` | 重定向 `/board/blindzone` 重新输密码 |
+| `/final-archive` | `pw_d == true` | 显示空白页 + 标题"404 Not Found" |
+| `/post/final-archive` | `pw_d == true` | 显示空白页 + 标题"404 Not Found" |
+| `/ending/disclose` | `completed == true` | 重定向深空版块 |
+| `/ending/silence` | `completed == true` | 重定向深空版块 |
+
+错误行为统一为**叙事断裂**（404、空白页、重定向），而非弹窗提示"你没有权限"——保持沉浸感，且不泄露有受保护页面存在。
+
+### 9.4 分层防御总览
+
+| 层 | 方案 | 代码量 | 拦截目标 |
+|---|------|--------|---------|
+| 第一层 | 9.1 密码哈希比对 | ~15 行 | 🔒 搜密码明文 |
+| 第二层 | 9.2 localStorage 编码校验 | ~20 行 | 🔒 改 Application 值跳过解谜 |
+| 第三层 | 9.3 页面访问守卫 | 每页 ~5 行 | 🔒 直接 URL 访问受保护页面 |
+| 零成本 | Vite 构建 mangling + tree-shaking | 0 行 | 🔒 函数名/变量名可读性 |
+
+---
+
+## 十、部署方案
+
+### 10.1 GitHub Pages 自动部署
+
+使用 GitHub Actions 自动构建并部署到 GitHub Pages。
+
+**工作流程（`.github/workflows/deploy.yml`）：**
+1. 推送 `master` 分支触发
+2. `npm ci` → `npx vite build` → 构建到 `dist/`
+3. 运行 `node scripts/base-path-rewrite.mjs` 修正 HTML/JS 中的绝对路径为带 base 前缀
+4. 上传 `dist/` 到 GitHub Pages
+
+**Base 路径处理：**
+- `vite.config.ts` 根据运行模式自动切换：dev 用 `'/'`，production 用 `'/VolDeNuit/'`
+- 本地 `vite dev`：base 为 `/`，所有路径 `href="/board/tower"` 直接可用
+- 生产构建 `vite build`：base 为 `/VolDeNuit/`，Vite 自动处理资源路径
+- 构建后通过 `scripts/base-path-rewrite.mjs` 脚本将所有 `<a href="/board/...">` 和 `window.open("/user/...")` 等绝对路径改写为带 `/VolDeNuit/` 前缀
+- 根 `index.html` 使用相对路径 `./board/deepspace` 跳转，适配任意 base 环境
+
+### 10.2 404 页面彩蛋 / 论坛入口
+
+`index.html` 和 `404.html` 内容相同，均为深蓝背景的论坛入口/404 页面。
+
+- 居中"夜航" + "第三航次"
+- 底部淡色"→ 进入夜航论坛 ←"链接，点击进入深空版块
+- 淡色"确定"按钮（初始 `opacity:0.35`），逐次点击按钮颜色渐亮
+- 5 次点击文字序列：
+  ① "你点了。然后呢？"
+  ② "也许你找的东西不在这里。"
+  ③ "——但它确实存在。"
+  ④ "问题是你找对地方了吗？"
+  ⑤ "晚安，飞行员。" → 1.5 秒后重定向至深空版块
+
+**行为差异：**
+- `index.html`：Vite dev 模式中作为 fallback 页面，任意不存在路径自动显示
+- `404.html`：GitHub Pages 原生 404 处理，生产环境任意不存在路径显示此页
+
+---
+
+*技术文档结束 —— 严格对照剧本文档（Vol de Nuit.md）编写。如有不一致以剧本文档为准。*
+
+
+
+## 附录：图片素材清单
+
+所有图片统一放在 `public/images/` 目录下（需手动创建），在 HTML/CSS 中以 `/images/xxx.jpg` 引用。
+
+### 1. 探险帖照片（废弃老宅）
+
+替换页面：`post/exploration.html`
+
+| 文件名 | 用途 | AI 生图 Prompt |
+|--------|------|---------------|
+| `exploration.jpg` | 废弃老宅全景（1张） | 中国废弃老宅，几栋废弃民居挤在一起，院墙半塌，铁门上锈迹斑斑，一栋山墙已爬满藤蔓，窗户用木板封死，下午阴暗光线，真实摄影风格，电影感色调 |
+
+文件路径：`public/images/exploration.jpg`  
+替换方式：`<img class="exploration-photo" src="/images/exploration.jpg" alt="废弃老宅" />`（直接在 post-body 中）
+
+---
+
+### 2. 踩点帖照片（beacon_holder 随拍）
+
+替换页面：`post/scouting-2014.html`
+
+| 文件名 | 用途 | AI 生图 Prompt |
+|--------|------|---------------|
+| `scouting.jpg` | beacon_holder 随手拍的踩点照（1张） | 从路口拍摄的一片待开发区域，前景是黄土路和杂草，远处有几栋老宅屋顶和在建楼盘塔吊，构图随意（像普通游客随手拍），2014年手机摄影风格，低饱和度，偏冷色调 |
+
+文件路径：`public/images/scouting.jpg`  
+替换方式：`<img class="scout-photo-img" src="/images/scouting.jpg" alt="阳光新城周边" />`
+
+---
+
+### 3. 月亮照片
+
+替换页面：`post/moon-photo.html`·`#moon-photo-cropped`（裁切缩略图）和 `#photo-viewer`（全尺寸查看器）
+
+| 文件名 | 用途 | AI 生图 Prompt |
+|--------|------|---------------|
+| `moon-thumb.jpg` | 帖子内裁切显示的小图 | 一轮满月，月面纹理清晰，深蓝黑色夜空，无云，月亮居中偏左，中焦镜头拍摄的感觉，高对比度，月面环形山可见 |
+| `moon-full.jpg` | 点击放大后的完整尺寸 | 同一轮满月，更高分辨率，月亮在画面中央偏左上留出右下角空间用于显示水印，月面纹理极其清晰，深空背景 |
+
+文件路径：`public/images/moon-thumb.jpg` ~ `moon-full.jpg`
+替换方式：
+- 缩略图：将 `#moon-photo-cropped` 内的内容替换为 `<img id="moon-thumb-img" src="/images/moon-thumb.jpg" alt="月亮照片" />`
+- 全尺寸：将 `#photo-viewer .viewer-moon` 内的内容替换为 `<img id="moon-full-img" src="/images/moon-full.jpg" alt="月亮照片（完整）" />`
+- 水印 `20160924` 建议在生图时直接嵌入图片右下角（在当前月面照片的右下角空白区域以半透明白色等宽字体添加 `20160924`）
+
+---
+
+### 4. 圣埃克苏佩里航线图
+
+替换页面：`flight-path/index.html`（目前使用 SVG 虚线航线）
+
+| 文件名 | 用途 | AI 生图 Prompt |
+|--------|------|---------------|
+| `flight-map.jpg` | 地中海区域航图背景 | 地中海中部海域的古旧航图风格，纸张泛黄带纹理，有经线纬线网格，从科西嘉岛到北非海岸的虚线航线，航海图标记，罗盘玫瑰，复古1940年代地图风格，鸟瞰视角，做旧纸张质感 |
+
+文件路径：`public/images/flight-map.jpg`  
+替换方式：替换 `flight-path/index.html` 中的 SVG 航线可视化为 `<img id="flight-map-img" src="/images/flight-map.jpg" alt="航线图" />`，原左上角 `#flight-info` 信息面板保留覆盖在地图上方。
+
+---
+
+### 5. 正造地产集团图片 ×5
+
+替换页面：`external/zhengzao.html`（所有图片直接放在 `public/images/` 下）
+
+| 文件名 | 用途 | CSS 选择器 | AI 生图 Prompt |
+|--------|------|-----------|---------------|
+| `zhengzao-hero.jpg` | 首页大横幅（hero） | `#hero-bg` | 中国现代化住宅小区鸟瞰图，崭新的高层住宅楼群，绿化景观带，蓝天白云，傍晚暖金色光线，房地产宣传照风格，高饱和度，光照柔和，气势开阔 |
+| `zhengzao-about.jpg` | "关于正造"区配图 | `.about-img-placeholder` | 房地产集团总部写字楼外观，现代化玻璃幕墙建筑，前景有旗杆和企业标识，清晨光线，专业企业宣传摄影风格 |
+| `zhengzao-project-1.jpg` | 项目案例1·阳光新城 | `.project-card:nth-child(1) .project-img` | 已建成的住宅小区，多栋米色外墙高层住宅楼穿插绿化，小区入口有"阳光新城"字样门牌 |
+| `zhengzao-project-2.jpg` | 项目案例2·水岸花园 | `.project-card:nth-child(2) .project-img` | 沿河景观住宅，低密度花园洋房，河岸步道，柳树，水中倒影，傍晚暖色调 |
+| `zhengzao-project-3.jpg` | 项目案例3·北江国际 | `.project-card:nth-child(3) .project-img` | 城市 CBD 核心区的商业综合体，玻璃幕墙写字楼，底层商业裙楼，现代都市感 |
+
+替换方式：直接在各元素的 style 中用 `background: url('/images/xxx.jpg') center center / cover no-repeat;`
+
+---
+
+### 6. 结局一报纸图
+
+替换页面：`ending/disclose.html`·`#newspaper-placeholder`
+
+| 文件名 | 用途 | AI 生图 Prompt |
+|--------|------|---------------|
+| `newspaper.jpg` | 结局一的报纸实物照片 | 一张平铺展开的中文报纸俯拍，报纸名称为"雾港晚报"，日期 2016年10月4日，头条标题为"阳光新城命案告破：死者身份确认，嫌疑人供述作案动机"，报纸纸张有轻微泛黄，新闻正文为正常中文排版（可用Lorem Ipsum替代），左上角报纸略微卷边，自然光照明 |
+
+文件路径：`public/images/newspaper.jpg`  
+替换方式：将 `ending/disclose.html` 中的 `#newspaper-placeholder` 整体替换为 `<img id="newspaper-img" src="/images/newspaper.jpg" alt="报纸" />`。
+
+---
+
+### 生图通用建议
+
+- **比例/尺寸**：所有图片建议 2:3 或 4:3 横图，分辨率不低于 1024×768（月亮照片和报纸图建议 1920×1080）
+- **风格**：探险帖/踩点帖照片追求真实感（手机摄影/纪实风）；正造图片追求企业宣传照风格；航线图追求复古手绘地图风格
+- **文字处理**：生图工具通常不擅长生成中文字，报纸图建议用无文案版本出图后在 PS 中后期添加文字

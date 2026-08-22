@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">星河乐园游客导览图 2009</title>
+  <desc id="desc">2009年游客折页地图，标有正门、摩天轮、月湾小火车、儿童游艺区、巡游大道、家庭摄影馆和星河家庭休息中心。</desc>
+  <defs>
+    <filter id="paperNoise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".62" numOctaves="4" seed="21" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="gray"/>
+      <feComponentTransfer in="gray" result="faint">
+        <feFuncA type="table" tableValues="0 .09"/>
+      </feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="faint" mode="multiply"/>
+    </filter>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="2" dy="5" stdDeviation="5" flood-color="#4d3921" flood-opacity=".34"/>
+    </filter>
+    <pattern id="grass" width="36" height="36" patternUnits="userSpaceOnUse">
+      <rect width="36" height="36" fill="#dce7b4"/>
+      <path d="M4 31l3-7m0 7l-1-10m15 8l2-8m7 11l-2-6M13 13l3-6" stroke="#a7c27c" stroke-width="1" opacity=".55"/>
+      <circle cx="27" cy="9" r="1.2" fill="#f3d566" opacity=".75"/>
+      <circle cx="11" cy="21" r="1" fill="#e79877" opacity=".65"/>
+    </pattern>
+    <pattern id="parking" width="34" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(-12)">
+      <rect width="34" height="22" fill="#d5d2c5"/>
+      <path d="M2 1v20M32 1v20" stroke="#f5f0d7" stroke-width="2"/>
+    </pattern>
+    <pattern id="roofRed" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#bd6656"/>
+      <path d="M0 3h12M0 9h12" stroke="#8f493f" stroke-width="1" opacity=".5"/>
+    </pattern>
+    <linearGradient id="lake" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#94d6dc"/>
+      <stop offset=".55" stop-color="#63b8c5"/>
+      <stop offset="1" stop-color="#4a9cac"/>
+    </linearGradient>
+    <radialGradient id="stain">
+      <stop offset="0" stop-color="#8b6231" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#8b6231" stop-opacity="0"/>
+    </radialGradient>
+    <g id="tree">
+      <path d="M0 8v11" stroke="#76512d" stroke-width="3"/>
+      <circle cx="-5" cy="5" r="7" fill="#68a45f"/>
+      <circle cx="4" cy="4" r="8" fill="#79b56d"/>
+      <circle cx="0" cy="-2" r="8" fill="#89bd73"/>
+    </g>
+    <g id="marker">
+      <circle r="18" fill="#d14d3e" stroke="#fff7d7" stroke-width="4"/>
+    </g>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <rect x="12" y="10" width="1176" height="778" rx="5" fill="#f3e6c4"/>
+  </g>
+  <rect x="12" y="10" width="1176" height="778" rx="5" fill="#f6edcf" filter="url(#paperNoise)"/>
+  <path d="M402 12v774M798 12v774" stroke="#a88e61" stroke-width="2" opacity=".18"/>
+  <path d="M399 12v774M795 12v774" stroke="#fff9e8" stroke-width="1.5" opacity=".55"/>
+  <ellipse cx="1082" cy="704" rx="89" ry="65" fill="url(#stain)"/>
+  <ellipse cx="92" cy="89" rx="56" ry="35" fill="url(#stain)" opacity=".6"/>
+
+  <g font-family="'Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+    <text x="58" y="64" font-size="31" font-weight="700" fill="#356b76" letter-spacing="3">星河乐园游客导览图</text>
+    <text x="451" y="64" font-size="28" font-weight="700" fill="#c84f3e">2009</text>
+    <text x="57" y="89" font-size="13" fill="#846f4d" letter-spacing="1">游园路线仅供参考　开放项目以当日公告为准</text>
+    <path d="M55 98H1145" stroke="#d59e49" stroke-width="4"/>
+
+    <g id="map">
+      <path d="M86 178Q112 139 178 139L773 135Q875 140 920 209L929 633Q889 713 802 720L174 720Q91 693 69 623L75 241Q76 204 86 178Z"
+            fill="url(#grass)" stroke="#6e9563" stroke-width="5"/>
+      <path d="M92 185Q126 160 176 157L781 153Q866 160 901 215" fill="none" stroke="#eef0cb" stroke-width="21" opacity=".8"/>
+
+      <path d="M474 722C470 655 478 588 480 531C481 485 478 453 478 422"
+            fill="none" stroke="#f3d799" stroke-width="48" stroke-linecap="round"/>
+      <path d="M474 722C470 655 478 588 480 531C481 485 478 453 478 422"
+            fill="none" stroke="#d6ae67" stroke-width="2" stroke-dasharray="10 8" opacity=".8"/>
+      <path d="M133 420C233 407 329 418 420 425C540 435 672 415 871 423"
+            fill="none" stroke="#efd191" stroke-width="39" stroke-linecap="round"/>
+      <path d="M133 420C233 407 329 418 420 425C540 435 672 415 871 423"
+            fill="none" stroke="#cf9c58" stroke-width="2" stroke-dasharray="12 9"/>
+      <path d="M475 422C410 359 348 311 298 268M480 423C549 355 620 312 684 282M480 528C397 535 329 550 274 578M480 525C572 524 647 541 712 570"
+            fill="none" stroke="#ead5a4" stroke-width="24" stroke-linecap="round"/>
+
+      <path d="M606 198C647 163 734 167 785 197C830 222 848 278 821 319C790 366 713 375 653 347C606 324 573 266 606 198Z"
+            fill="url(#lake)" stroke="#397f8f" stroke-width="4"/>
+      <path d="M625 222C661 195 732 195 772 219C802 237 815 270 798 294C776 327 718 338 671 320C636 306 606 262 625 222Z"
+            fill="none" stroke="#c8f0ed" stroke-width="2" opacity=".75"/>
+      <path d="M579 186C632 137 753 139 818 179C876 214 887 292 847 342C799 403 675 407 606 365C543 326 524 238 579 186Z"
+            fill="none" stroke="#5c5146" stroke-width="5" stroke-dasharray="5 7"/>
+      <path d="M579 186C632 137 753 139 818 179C876 214 887 292 847 342C799 403 675 407 606 365C543 326 524 238 579 186Z"
+            fill="none" stroke="#c6a15d" stroke-width="2"/>
+      <g transform="translate(837 222) rotate(32)">
+        <rect x="-18" y="-10" width="36" height="20" rx="5" fill="#d34e40" stroke="#fff2c9" stroke-width="2"/>
+        <rect x="-8" y="-7" width="7" height="7" fill="#bde1e4"/><rect x="3" y="-7" width="7" height="7" fill="#bde1e4"/>
+        <circle cx="-10" cy="12" r="4" fill="#514b45"/><circle cx="11" cy="12" r="4" fill="#514b45"/>
+      </g>
+
+      <g transform="translate(261 254)">
+        <circle r="73" fill="#f8e9bf" stroke="#4f8590" stroke-width="6"/>
+        <circle r="8" fill="#d55443"/>
+        <path d="M0-70V70M-70 0H70M-50-50L50 50M50-50L-50 50M-25-65L25 65M65-25L-65 25"
+              stroke="#4f8590" stroke-width="3"/>
+        <path d="M-38 64L0 2L38 64M-49 68H49" fill="none" stroke="#8b6250" stroke-width="7"/>
+        <g fill="#e8b949" stroke="#fff1c9" stroke-width="2">
+          <rect x="-10" y="-79" width="20" height="16" rx="3"/>
+          <rect x="61" y="-9" width="20" height="16" rx="3"/>
+          <rect x="-81" y="-9" width="20" height="16" rx="3"/>
+          <rect x="-10" y="62" width="20" height="16" rx="3"/>
+          <rect x="42" y="-58" width="20" height="16" rx="3"/>
+          <rect x="-62" y="-58" width="20" height="16" rx="3"/>
+        </g>
+      </g>
+
+      <g transform="translate(218 543)">
+        <ellipse cx="0" cy="42" rx="75" ry="28" fill="#c5ad76" opacity=".35"/>
+        <path d="M-58 15H58L42 63H-43Z" fill="#e8be55" stroke="#936a37" stroke-width="3"/>
+        <path d="M0-62L-67 16H67Z" fill="#df5d50" stroke="#fff0c9" stroke-width="4"/>
+        <path d="M0-62V66" stroke="#77513b" stroke-width="5"/>
+        <path d="M-24-34L-35 50M26-31L35 50" stroke="#f9e8b8" stroke-width="3"/>
+        <g fill="#6aaab4">
+          <path d="M-48 42q13-19 26 0l-5 12h-17Z"/>
+          <path d="M18 42q13-19 26 0l-5 12H22Z"/>
+        </g>
+        <g transform="translate(101 14)">
+          <circle r="35" fill="#81c1ca" stroke="#fff0c9" stroke-width="4"/>
+          <path d="M0-29L9-8L30-7L14 8L19 29L0 17L-19 29L-14 8L-30-7L-9-8Z" fill="#f0c24e"/>
+        </g>
+      </g>
+
+      <g transform="translate(477 422)">
+        <path d="M0-48L12-16L46-15L19 6L27 40L0 21L-27 40L-19 6L-46-15L-12-16Z"
+              fill="#e9b83f" stroke="#fff7d1" stroke-width="5"/>
+        <circle r="10" fill="#c94f42"/>
+      </g>
+
+      <g transform="translate(650 548)">
+        <path d="M-58-23L0-63L58-23V55H-58Z" fill="#f1d49d" stroke="#8e6550" stroke-width="4"/>
+        <path d="M-68-18L0-69L68-18" fill="none" stroke="#b7554d" stroke-width="15"/>
+        <rect x="-46" y="-10" width="30" height="28" fill="#8fc3c8" stroke="#fff4d0" stroke-width="3"/>
+        <rect x="16" y="-10" width="30" height="28" fill="#8fc3c8" stroke="#fff4d0" stroke-width="3"/>
+        <rect x="-14" y="17" width="28" height="38" fill="#986852"/>
+        <circle cx="0" cy="-28" r="13" fill="#fff2cf"/>
+        <path d="M-6-28h12M0-34v12" stroke="#d65a4a" stroke-width="3"/>
+      </g>
+
+      <g transform="translate(792 554)">
+        <path d="M-76-77Q-4-103 72-69L79 73Q1 91-85 63Z" fill="#f5e4b4" stroke="#d18347" stroke-width="4" stroke-dasharray="9 5"/>
+        <path d="M-51-51L4-78L54-44V11H-51Z" fill="url(#roofRed)" stroke="#8a5743" stroke-width="3"/>
+        <rect x="-35" y="12" width="36" height="33" fill="#8ebbc1" stroke="#fff3cc" stroke-width="3"/>
+        <rect x="14" y="13" width="28" height="31" fill="#f2d28d" stroke="#9e6948" stroke-width="3"/>
+        <circle cx="-59" cy="48" r="10" fill="#7da969"/><circle cx="57" cy="48" r="10" fill="#7da969"/>
+        <path d="M-35 58h70M-26 51v15M26 51v15" stroke="#7b5b3e" stroke-width="4"/>
+        <path d="M77 21C100 22 113 29 129 38" fill="none" stroke="#e2c585" stroke-width="16" stroke-linecap="round"/>
+      </g>
+
+      <path d="M854 501Q900 491 919 518V650Q895 678 850 674Z" fill="url(#parking)" stroke="#8c897d" stroke-width="3"/>
+      <g fill="#6e9aaa" stroke="#fff4d2" stroke-width="2">
+        <rect x="873" y="533" width="31" height="14" rx="5"/>
+        <rect x="867" y="579" width="31" height="14" rx="5"/>
+        <rect x="884" y="625" width="31" height="14" rx="5"/>
+      </g>
+
+      <g fill="#aeb997" stroke="#776b55" stroke-width="2">
+        <rect x="405" y="165" width="66" height="42" rx="6"/>
+        <rect x="481" y="165" width="72" height="42" rx="6"/>
+      </g>
+      <text x="479" y="190" text-anchor="middle" font-size="14" fill="#5e584c">后勤区</text>
+
+      <g opacity=".9">
+        <use href="#tree" transform="translate(115 240)"/><use href="#tree" transform="translate(135 302)"/>
+        <use href="#tree" transform="translate(366 206)"/><use href="#tree" transform="translate(390 250)"/>
+        <use href="#tree" transform="translate(115 520)"/><use href="#tree" transform="translate(125 610)"/>
+        <use href="#tree" transform="translate(358 626)"/><use href="#tree" transform="translate(570 647)"/>
+        <use href="#tree" transform="translate(566 478)"/><use href="#tree" transform="translate(878 381)"/>
+      </g>
+
+      <g font-size="16" font-weight="700" text-anchor="middle" fill="#fff">
+        <g transform="translate(474 681)"><use href="#marker"/><text y="6">01</text></g>
+        <g transform="translate(188 185)"><use href="#marker"/><text y="6">02</text></g>
+        <g transform="translate(804 178)"><use href="#marker"/><text y="6">03</text></g>
+        <g transform="translate(157 486)"><use href="#marker"/><text y="6">04</text></g>
+        <g transform="translate(404 395)"><use href="#marker"/><text y="6">05</text></g>
+        <g transform="translate(610 493)"><use href="#marker"/><text y="6">06</text></g>
+        <g transform="translate(780 477)"><use href="#marker"/><text y="6">07</text></g>
+      </g>
+      <text x="474" y="748" text-anchor="middle" font-size="14" fill="#6e583c">正门 / 游客中心</text>
+      <text x="864" y="699" font-size="13" fill="#666154">停车区</text>
+      <text x="828" y="481" font-size="12" fill="#7f5a39">团体服务通道</text>
+
+      <g transform="translate(99 656)" fill="#5b5548">
+        <path d="M0 0h86v5H0zM0 0v11M43 0v11M86 0v11"/>
+        <text x="43" y="26" text-anchor="middle" font-size="11">约 100 米</text>
+      </g>
+      <g transform="translate(880 201)">
+        <path d="M0 38L18 0L36 38L18 28Z" fill="#cb5544" stroke="#fff1ce" stroke-width="2"/>
+        <text x="18" y="54" text-anchor="middle" font-size="11" fill="#615844">北</text>
+      </g>
+    </g>
+
+    <g transform="translate(955 118)">
+      <rect width="205" height="598" fill="#fff5d8" stroke="#c49e5c" stroke-width="2"/>
+      <rect width="205" height="48" fill="#4c8790"/>
+      <text x="102" y="31" text-anchor="middle" font-size="20" font-weight="700" fill="#fff8de">园区图例</text>
+      <g font-size="14" fill="#574b38">
+        <g transform="translate(18 78)"><circle cx="16" cy="0" r="14" fill="#d14d3e"/><text x="16" y="5" text-anchor="middle" fill="#fff" font-size="12">01</text><text x="43" y="5">正门广场</text></g>
+        <g transform="translate(18 125)"><circle cx="16" cy="0" r="14" fill="#d14d3e"/><text x="16" y="5" text-anchor="middle" fill="#fff" font-size="12">02</text><text x="43" y="5">银河摩天轮</text></g>
+        <g transform="translate(18 172)"><circle cx="16" cy="0" r="14" fill="#d14d3e"/><text x="16" y="5" text-anchor="middle" fill="#fff" font-size="12">03</text><text x="43" y="5">月湾小火车</text></g>
+        <g transform="translate(18 219)"><circle cx="16" cy="0" r="14" fill="#d14d3e"/><text x="16" y="5" text-anchor="middle" fill="#fff" font-size="12">04</text><text x="43" y="5">儿童游艺区</text></g>
+        <g transform="translate(18 266)"><circle cx="16" cy="0" r="14" fill="#d14d3e"/><text x="16" y="5" text-anchor="middle" fill="#fff" font-size="12">05</text><text x="43" y="5">星光巡游大道</text></g>
+        <g transform="translate(18 313)"><circle cx="16" cy="0" r="14" fill="#d14d3e"/><text x="16" y="5" text-anchor="middle" fill="#fff" font-size="12">06</text><text x="43" y="5">家庭摄影馆</text></g>
+      </g>
+      <rect x="9" y="350" width="187" height="94" fill="#fff0bd" stroke="#d14d3e" stroke-width="2"/>
+      <circle cx="35" cy="378" r="16" fill="#d14d3e"/><text x="35" y="383" text-anchor="middle" fill="#fff" font-size="13">07</text>
+      <text x="61" y="376" font-size="14" font-weight="700" fill="#8b4436">星河家庭</text>
+      <text x="61" y="397" font-size="14" font-weight="700" fill="#8b4436">休息中心</text>
+      <text x="24" y="426" font-size="11" fill="#68583e">阅读 · 摄影 · 团体服务</text>
+      <path d="M20 469H185" stroke="#c9ac75"/>
+      <text x="20" y="496" font-size="13" font-weight="700" fill="#4c7277">服务设施</text>
+      <text x="20" y="524" font-size="12" fill="#665b47">游客中心　医疗点</text>
+      <text x="20" y="547" font-size="12" fill="#665b47">母婴室　失物招领</text>
+      <text x="20" y="570" font-size="12" fill="#665b47">团体接待　纪念摄影</text>
+    </g>
+    <text x="60" y="771" font-size="12" fill="#806d4d">星河乐园游客服务部印制 · 2009年6月　　请妥善保管随身物品</text>
+    <text x="1144" y="771" text-anchor="end" font-size="11" fill="#9a8562">GP-MAP-0906</text>
+  </g>
+</svg>

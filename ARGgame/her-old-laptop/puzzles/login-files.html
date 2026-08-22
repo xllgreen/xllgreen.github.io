@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>解锁加密文件夹</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .unlock-wrap {
+      max-width: 480px; margin: 40px auto; padding: 0 20px;
+    }
+    .unlock-wrap h2 { font-size: 20px; text-align: center; margin-bottom: 8px; }
+    .unlock-wrap .sub {
+      font-size: 13px; color: #999; text-align: center; margin-bottom: 28px;
+    }
+    .unlock-form input {
+      width: 100%; padding: 14px 18px;
+      border: 2px solid #ddd; border-radius: 8px;
+      font-size: 16px; letter-spacing: 1px;
+      text-align: center; outline: none; transition: border-color 0.2s;
+      font-family: monospace;
+    }
+    .unlock-form input:focus { border-color: #fa5151; }
+    .unlock-form button {
+      width: 100%; margin-top: 12px; padding: 14px;
+      background: #fa5151; color: #fff; border: none;
+      border-radius: 8px; font-size: 15px; font-weight: 500;
+    }
+    .unlock-form .err { color: #fa5151; font-size: 12px; text-align: center; margin-top: 8px; min-height: 16px; }
+    .hint-box {
+      background: #f5f5f7; padding: 14px 16px; border-radius: 8px;
+      margin-top: 24px; font-size: 12px; color: #666; line-height: 1.7;
+    }
+    .hint-box code {
+      background: #fff; padding: 1px 6px; border-radius: 3px;
+      color: #fa5151; font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/apps/files/documents.html">‹</a>
+      <span class="title">林晚的文件夹</span>
+    </div>
+    <div class="window-body">
+      <div class="unlock-wrap">
+        <h2>🔒 加密文件夹</h2>
+        <div class="sub">输入密码以解锁</div>
+
+        <div class="unlock-form">
+          <input type="password" id="pwd" placeholder="密码" maxlength="20" autocomplete="off">
+          <button id="btn">解 锁</button>
+          <div class="err" id="err"></div>
+        </div>
+
+        <div class="hint-box">
+          <strong>提示：</strong><br>
+          这是周明学长留下的加密备份。密码由三段拼成：<br>
+          ① <code>3 个字母</code> · ② <code>3 个数字</code> · ③ <code>1 个英文单词</code><br>
+          <span style="color:#999;">三段分别藏在：周明的习惯、论文的批注、6 月 14 日的纸条。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    function submit() {
+      const v = document.getElementById('pwd').value;
+      Game.log('▶ 进入加密文件夹校验流程');
+      Game.verify(v, 'files', '加密文件夹', () => {
+        Game.mark('FILES_UNLOCK');
+        Game.toast('解锁成功');
+        // 内心独白：解开密码夹那一刻的震动
+        Game.monologue('她说"以后用得上" 原来指的是这个', 5500);
+        setTimeout(() => location.href = '/ARGgame/her-old-laptop/puzzles/final-trigger.html', 2400);
+      }, (failN) => {
+        if (failN === 3) Game.monologue('周明姓周——ZHO。论文批注里那个原始期刊号是 17(114)。日历纸条上的英文单词……TRUTH。', 6000);
+        document.getElementById('err').textContent = failN >= 3
+          ? '密码错误（已错 ' + failN + ' 次）'
+          : '密码错误';
+        document.getElementById('pwd').value = '';
+      });
+    }
+    document.getElementById('btn').addEventListener('click', submit);
+    document.getElementById('pwd').addEventListener('keydown', e => {
+      if (e.key === 'Enter') submit();
+    });
+    Game.renderProgress();
+  </script>
+</body>
+</html>

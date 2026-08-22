@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>大家最喜欢的句子 - 夜航论坛</title>
+  <link rel="stylesheet" href="/src/pages/post/favorite-sentence.css" />
+</head>
+<body>
+
+<div id="container">
+  <!-- ====== 顶栏 ====== -->
+  <div id="header">
+    <div id="header-top">
+      <div id="logo">
+        <span class="logo-night">夜航</span>
+        <span class="logo-sub">—— 飞行员的夜航手册</span>
+      </div>
+      <div id="header-search">
+        <input type="text" id="search-input" placeholder="搜索帖子、用户…" maxlength="50" />
+        <button id="search-btn">搜索</button>
+        <div id="search-panel" class="hidden">
+          <div id="search-history">
+            <div class="panel-header">搜索历史 <a href="#" id="clear-history">清空</a></div>
+            <ul id="history-list"></ul>
+          </div>
+          <div id="search-result" class="hidden">
+            <div class="panel-header">搜索结果</div>
+            <div id="result-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li><a href="/board/tower">塔台</a></li>
+        <li class="current"><a href="/board/lounge">候机室</a></li>
+        <li><a href="/board/deepspace">深空</a></li>
+        <li><a href="/board/blindzone">盲区</a></li>
+      </ul>
+      <span id="nav-welcome">欢迎您，<strong>访客</strong></span>
+    </div>
+  </div>
+
+  <div id="breadcrumb">
+    <a href="/board/lounge">候机室——水区</a>
+    <span class="sep">›</span>
+    <span class="current">大家最喜欢的句子</span>
+  </div>
+
+  <div id="main">
+    <div id="post-area">
+
+      <div id="post-header">
+        <h1 id="post-title">大家最喜欢的句子</h1>
+        <div id="post-meta">
+          <span><a href="/board/lounge" class="meta-board">候机室——水区</a></span>
+          <span class="meta-sep">|</span>
+          <span>由 <a href="javascript:void(0)" class="meta-author-link">麦麦</a> 发布于 2016-8-15</span>
+          <span class="meta-sep">|</span>
+          <span>回复: 12</span>
+          <span class="meta-sep">|</span>
+          <span>查看: 3678</span>
+        </div>
+      </div>
+
+      <div class="thread-toolbar">
+        <a href="javascript:void(0)">☆ 收藏</a>
+        <a href="javascript:void(0)">📋 订阅</a>
+        <a href="javascript:void(0)">🔗 分享</a>
+        <a href="javascript:void(0)">⚑ 举报</a>
+        <span class="toolbar-spacer"></span>
+      </div>
+
+      <div class="post" id="post-op">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%23303A48'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">麦麦</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>注册: <span>2015-3-12</span></div>
+              <div>帖子: <span>45</span></div>
+              <div>积分: <span>230</span></div>
+              <div>威望: <span>12</span></div>
+              <div class="pui-online"><span class="offline-indicator"></span> 离线</div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#1</span>
+              <span class="postdate">发表于 2016-8-15 10:20</span>
+            </div>
+            <div class="post-body">
+              <p>如题，分享一句你最喜欢的句子吧。可以是书里的、电影里的、歌词里的，什么都行。</p>
+              <p>我先来："真正重要的东西，用眼睛是看不见的。"——《小王子》</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <a href="javascript:void(0)" class="btn btn-like">♥ 赞 <span class="like-count">6</span></a>
+              <span class="rep-count">#1</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          用眼睛看世界，用心看本质
+        </div>
+      </div>
+
+    </div>
+
+    <div id="comments-area">
+      <div class="reply-header">回复 <span class="reply-count">(12)</span></div>
+
+      <!-- 回复 1 — 钱憨 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A3A48'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">ζ??雨夜</div>
+            <div class="pui-usertitle">金牌会员</div>
+            <div class="pui-level">Lv.5</div>
+            <div class="pui-stats">
+              <div>帖子: <span>68</span></div>
+              <div>积分: <span>340</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#2</span>
+              <span class="postdate">发表于 2016-8-15 10:45</span>
+            </div>
+            <div class="post-body">
+              <p>"星星发亮是为了让每一个人有一天都能找到属于自己的星星。"——《小王子》</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#2</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          星星发亮，是为了让每个人都找到属于自己的那颗
+        </div>
+      </div>
+
+      <!-- 回复 2 — 青空落 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%233A4048'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">青空落</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>36</span></div>
+              <div>积分: <span>185</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#3</span>
+              <span class="postdate">发表于 2016-8-15 11:30</span>
+            </div>
+            <div class="post-body">
+              <p>大家的小尾巴都是自己喜欢的句子吗</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#3</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature post-signature-empty">
+          <div class="sig-line">—————————————————————</div>
+          做自己的英雄
+        </div>
+      </div>
+
+      <!-- 回复 3 — 精神川湘人 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A3848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">精神川湘人</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>55</span></div>
+              <div>积分: <span>287</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#4</span>
+              <span class="postdate">发表于 2016-8-15 14:15</span>
+            </div>
+            <div class="post-body">
+              <p>"人生如逆旅，我亦是行人。"——苏轼</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#4</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          无辣不欢
+        </div>
+      </div>
+
+      <!-- 回复 4 — C303谁没来 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%23303048'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">C303谁没来</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>48</span></div>
+              <div>积分: <span>245</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#5</span>
+              <span class="postdate">发表于 2016-8-15 15:00</span>
+            </div>
+            <div class="post-body">
+              <p>你们都好有文化啊，我第一反应是《武林外传》里佟湘玉的"额滴神啊"😂</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#5</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          今天点名，没来的举手
+        </div>
+      </div>
+
+      <!-- 回复 5 — 雪落无痕 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A3848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">雪落无痕</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>55</span></div>
+              <div>积分: <span>287</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#6</span>
+              <span class="postdate">发表于 2016-8-15 16:20</span>
+            </div>
+            <div class="post-body">
+              <p>我想到《银魂》里的："与其想着怎样华丽地死去，不如想想怎样华丽地活下去。"</p>
+              <p>虽然是动漫但真的很有道理啊。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#6</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature post-signature-empty">
+          <span class="sig-empty">这家伙很懒，什么也没留下……</span>
+        </div>
+      </div>
+
+      <!-- 回复 6 — Vega -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A2A3A'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name"><a href="/user/vega" class="user-link" target="_blank">Vega</a></div>
+            <div class="pui-usertitle">版主</div>
+            <div class="pui-level">Lv.8</div>
+            <div class="pui-stats">
+              <div>帖子: <span>234</span></div>
+              <div>积分: <span>1890</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#7</span>
+              <span class="postdate">发表于 2016-8-15 18:30</span>
+            </div>
+            <div class="post-body">
+              <p>应该是吧，喜欢的才会设为小尾巴</p>
+              <p>自从看过霄汉说的那本书，我也挺喜欢的</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#7</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          道路一旦开辟，就不能不去追寻。
+        </div>
+      </div>
+
+      <!-- 回复 7 — 钱憨 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A3A48'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">钱憨</div>
+            <div class="pui-usertitle">金牌会员</div>
+            <div class="pui-level">Lv.5</div>
+            <div class="pui-stats">
+              <div>帖子: <span>68</span></div>
+              <div>积分: <span>340</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#8</span>
+              <span class="postdate">发表于 2016-8-15 20:10</span>
+            </div>
+            <div class="post-body">
+              <p>话说回来，我最近在追的剧里也有一句很戳："有时候好人跟坏人之间，就差那么一个选择。"</p>
+              <p>Vega签名里那句也挺有味道的，不知道是哪本书里的。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#8</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature post-signature-empty">
+          <span class="sig-empty">这家伙很懒，什么也没留下……</span>
+        </div>
+      </div>
+
+      <!-- 回复 8 — 煮酒论英雄 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%233A4848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">煮酒论英雄</div>
+            <div class="pui-usertitle">金牌会员</div>
+            <div class="pui-level">Lv.5</div>
+            <div class="pui-stats">
+              <div>帖子: <span>98</span></div>
+              <div>积分: <span>720</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#9</span>
+              <span class="postdate">发表于 2016-8-16 09:20</span>
+            </div>
+            <div class="post-body">
+              <p>让你写完了，那我们写什么？</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#9</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          古今多少事，都付笑谈中
+        </div>
+      </div>
+
+      <!-- 回复 9 — 微雨燕双飞 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%232A4840'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">微雨燕双飞</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>34</span></div>
+              <div>积分: <span>208</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#10</span>
+              <span class="postdate">发表于 2016-8-16 11:45</span>
+            </div>
+            <div class="post-body">
+              <p>落霞与孤鹜齐飞，秋水共长天一色。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#10</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature post-signature-empty">
+          <span class="sig-empty">这家伙很懒，什么也没留下……</span>
+        </div>
+      </div>
+
+      <!-- 回复 10 — 星河万里 -->
+      <div class="post">
+        <div class="post-inner">
+          <div class="post-user">
+            <div class="pui-avatar"><img class="pui-avatar-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' fill='%23304848'/%3E%3Ccircle cx='36' cy='26' r='14' fill='%234A6A8A'/%3E%3Cellipse cx='36' cy='58' rx='22' ry='16' fill='%234A6A8A'/%3E%3C/svg%3E" alt="" /></div>
+            <div class="pui-name">星河万里</div>
+            <div class="pui-usertitle">中级会员</div>
+            <div class="pui-level">Lv.3</div>
+            <div class="pui-stats">
+              <div>帖子: <span>41</span></div>
+              <div>积分: <span>276</span></div>
+            </div>
+          </div>
+          <div class="post-content">
+            <div class="post-head">
+              <span class="postnum">#11</span>
+              <span class="postdate">发表于 2016-8-16 14:30</span>
+            </div>
+            <div class="post-body">
+              <p>"黑夜给了我黑色的眼睛，我却用它寻找光明。"——顾城</p>
+              <p>突然觉得这句很应景我们这个论坛的氛围。</p>
+            </div>
+            <div class="post-foot">
+              <a href="javascript:void(0)" class="btn btn-primary">引用</a>
+              <a href="javascript:void(0)" class="btn">回复</a>
+              <a href="javascript:void(0)" class="btn btn-danger">举报</a>
+              <span class="rep-count">#11</span>
+            </div>
+          </div>
+        </div>
+        <div class="post-signature">
+          <div class="sig-line">—————————————————————</div>
+          星河滚烫，你是人间理想
+        </div>
+      </div>
+
+    </div>
+
+    <div class="quick-reply">
+      <h3>快速回复</h3>
+      <textarea placeholder="输入回复内容……（支持 BBcode: [b]粗体[/b]  [url]链接[/url]）" rows="3"></textarea>
+      <div class="qr-toolbar">
+        <div class="qr-smilies">
+          <a href="javascript:void(0)">😊</a>
+          <a href="javascript:void(0)">😂</a>
+          <a href="javascript:void(0)">😎</a>
+          <a href="javascript:void(0)">👍</a>
+          <a href="javascript:void(0)">❤️</a>
+          <a href="javascript:void(0)">🤔</a>
+        </div>
+        <div class="qr-actions">
+          <a href="javascript:void(0)" class="btn btn-primary">发表回复</a>
+          <a href="javascript:void(0)" class="btn">高级模式</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="footer">
+    <div class="footer-links">
+      <a href="/board/tower">塔台</a> · <a href="/board/lounge">候机室</a> ·
+      <a href="/board/deepspace">深空</a> · <a href="/board/blindzone">盲区</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2014-2016 夜航. All rights reserved. 「 第三航次 」
+    </div>
+  </div>
+</div>
+
+<div id="page-counter">10/30</div>
+
+<script type="module" src="/src/pages/post/favorite-sentence.ts"></script>
+</body>
+</html>

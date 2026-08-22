@@ -1,0 +1,699 @@
+/* ============================================================
+   正造地产集团官网 — 页面㉕
+   仿头部房企官网 · 专业 · 大气
+   配色：白色+深灰+绿色点缀
+   ============================================================ */
+
+:root {
+  --green: #2A7A4A;
+  --green-hover: #1E5E38;
+  --dark: #1A1A1A;
+  --gray: #F5F3EF;
+  --gray-light: #F8F7F5;
+  --gray-border: #E8E4DC;
+  --text: #333;
+  --text-light: #777;
+  --max-w: 1120px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Noto Sans SC', 'Microsoft YaHei', '微软雅黑', sans-serif;
+  background: #FFF;
+  color: var(--text);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   导航
+   ============================================================ */
+
+#nav-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--gray-border);
+}
+
+#nav {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+#nav-logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--green);
+  color: #FFF;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Noto Serif SC', serif;
+}
+
+#nav-logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 2px;
+}
+
+#nav-links {
+  display: flex;
+  gap: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 0 18px;
+  height: 64px;
+  line-height: 64px;
+  font-size: 14px;
+  color: #555;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  font-weight: 500;
+}
+
+/* 招聘公告 — 金色加粗，唯一可点击的导航项 */
+.nav-recruit {
+  color: #D0A040 !important;
+  font-weight: bold !important;
+  border-bottom-color: #D0A040 !important;
+}
+
+.nav-recruit:hover {
+  color: #E0B850 !important;
+  border-bottom-color: #E0B850 !important;
+}
+
+/* 非招聘入口 — 视觉惰性，无点击反馈 */
+.inert-link {
+  cursor: default !important;
+}
+
+.inert-link:hover {
+  color: inherit !important;
+  text-decoration: none !important;
+  border-bottom-color: transparent !important;
+  background: transparent !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+#nav-tel {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 1px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+
+#hero {
+  margin-top: 64px;
+  height: 560px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*
+ * TODO: 替换为实景照片 — 阳光新城小区鸟瞰/建筑外景
+ * 建议尺寸：1920×560px 以上，宽高比 >3:1
+ * 风格：城市天际线 / 住宅小区鸟瞰，偏暗或冷色调便于白色文字叠加
+ * 替换方式：
+ *   background: url('/images/zhengzao/hero.jpg') center center / cover no-repeat;
+ *   可保留底部的渐变叠加层 #hero-overlay 提升文字可读性
+ */
+#hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1A2A2A 0%, #2A4A3A 50%, #1A3A2A 100%);
+}
+
+#hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(200,50,50,0.08) 0%, transparent 50%);
+}
+
+#hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: heroFadeIn 1.2s ease-out;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#hero-tag {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 6px;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+#hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 52px;
+  color: #FFF;
+  letter-spacing: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+
+#hero-sub {
+  font-size: 16px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 4px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+#hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.cta-primary,
+.cta-secondary {
+  display: inline-block;
+  padding: 12px 36px;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.cta-primary {
+  background: var(--green);
+  color: #FFF;
+}
+
+.cta-secondary {
+  border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
+}
+
+#hero-indicator {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  gap: 10px;
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.3s;
+}
+
+.hero-dot.active {
+  background: rgba(255,255,255,0.7);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   数据统计
+   ============================================================ */
+
+#stats {
+  max-width: var(--max-w);
+  margin: -40px auto 0;
+  padding: 0 24px;
+  display: flex;
+  position: relative;
+  z-index: 10;
+  gap: 1px;
+  background: var(--gray-border);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.stat-item {
+  flex: 1;
+  background: #FFF;
+  padding: 28px 20px;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+
+/* 隐藏：stat-item hover 效果（非招聘入口，不误导） */
+
+.stat-num {
+  display: inline;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--green);
+  font-family: 'Arial', sans-serif;
+}
+
+.stat-unit {
+  font-size: 16px;
+  color: var(--green);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.stat-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   版块通用
+   ============================================================ */
+
+.section-wrap {
+  padding: 80px 24px;
+}
+
+.section-gray {
+  background: var(--gray-light);
+}
+
+.section-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-en {
+  display: block;
+  font-size: 11px;
+  color: #CCC;
+  letter-spacing: 4px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--dark);
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+.text-link {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 1px;
+  border-bottom: 1px solid transparent;
+}
+
+/* ============================================================
+   关于正造
+   ============================================================ */
+
+#about-body {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+#about-text {
+  flex: 1.2;
+}
+
+#about-text p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 14px;
+  text-indent: 2em;
+  line-height: 2;
+}
+
+#about-text .text-link {
+  margin-top: 8px;
+}
+
+#about-image {
+  flex: 0.8;
+}
+
+/*
+ * TODO: 替换为实景照片 — 集团总部/办公楼外观或项目沙盘
+ * 建议尺寸：400×300px 以上，4:3 比例
+ * 风格：明亮通透的建筑外景 / 办公楼玻璃幕墙
+ * 替换方式：
+ *   background: url('/images/zhengzao/about.jpg') center center / cover no-repeat;
+ */
+.about-img-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #E8E4DC 0%, #F0EDE8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.about-img-icon {
+  font-size: 60px;
+  opacity: 0.3;
+}
+
+/* ============================================================
+   项目展示
+   ============================================================ */
+
+#project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.project-card {
+  background: #FFF;
+  border: 1px solid var(--gray-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/*
+ * TODO: 替换为各项目实景照片，共3张
+ * 第1张(阳光新城)：建议 360×180px 以上，住宅小区外景/鸟瞰，暖色调
+ *   替换：.project-card:nth-child(1) .project-img 的 background
+ * 第2张(正造大厦)：建议 360×180px 以上，写字楼玻璃幕墙，冷色调
+ *   替换：.project-card:nth-child(2) .project-img 的 background
+ * 第3张(正造广场)：建议 360×180px 以上，商业综合体外观，暖色调
+ *   替换：.project-card:nth-child(3) .project-img 的 background
+ * 替换方式示例：
+ *   background: url('/images/zhengzao/project1.jpg') center center / cover no-repeat;
+ */
+.project-img {
+  height: 180px;
+  background: #EDEAE4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-icon {
+  font-size: 48px;
+  opacity: 0.4;
+}
+
+.project-info {
+  padding: 18px 20px;
+}
+
+.project-info h3 {
+  font-size: 16px;
+  color: var(--dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.project-info p {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+#project-footer {
+  text-align: center;
+  margin-top: 36px;
+}
+
+/* ============================================================
+   新闻动态
+   ============================================================ */
+
+#news-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.news-card {
+  padding: 24px;
+  background: var(--gray-light);
+  border: 1px solid var(--gray-border);
+  border-radius: 4px;
+}
+
+.news-badge {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--green);
+  background: rgba(184,40,42,0.06);
+  padding: 2px 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+.news-title {
+  font-size: 15px;
+  color: var(--dark);
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.news-summary {
+  font-size: 13px;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.news-date {
+  font-size: 12px;
+  color: #AAA;
+  font-family: 'Arial', sans-serif;
+}
+
+#news-footer {
+  text-align: center;
+  margin-top: 36px;
+}
+
+/* ============================================================
+   招聘横幅
+   ============================================================ */
+
+#recruit-banner {
+  background: linear-gradient(135deg, var(--dark) 0%, #2A2A2A 100%);
+  padding: 60px 24px;
+}
+
+#recruit-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#recruit-text h2 {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 26px;
+  color: #FFF;
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+}
+
+#recruit-text p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+}
+
+#recruit-btn {
+  display: inline-block;
+  padding: 14px 40px;
+  background: var(--green);
+  color: #FFF;
+  font-size: 14px;
+  letter-spacing: 2px;
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+#recruit-btn:hover {
+  background: var(--green-hover);
+  transform: translateY(-1px);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(184,40,42,0.3);
+}
+
+/* ============================================================
+   底部
+   ============================================================ */
+
+#footer {
+  background: #111;
+}
+
+#footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+#footer-top {
+  padding: 50px 24px 30px;
+  display: flex;
+  gap: 60px;
+}
+
+.footer-col {
+  flex: 1;
+}
+
+.footer-col-brand {
+  flex: 1.5;
+}
+
+.footer-col h4 {
+  font-size: 15px;
+  color: #DDD;
+  font-weight: 600;
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.footer-col-brand h4 {
+  font-size: 18px;
+  color: #FFF;
+  letter-spacing: 2px;
+}
+
+.footer-col-brand > p {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+#footer-contact p {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.footer-link {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.footer-social {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+#footer-bottom {
+  border-top: 1px solid #222;
+  padding: 16px 24px;
+  text-align: center;
+  font-size: 11px;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* 招聘链接由 .nav-recruit 控制（金色加粗） */
+
+/* 底部「招聘公告」金色高亮 */
+#footer-recruit-link {
+  color: #D0A040 !important;
+  font-weight: bold;
+}
+
+/* ---- Page Counter ---- */
+#page-counter {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 4px;
+  padding: 4px 10px;
+  letter-spacing: 0.5px;
+  user-select: none;
+  pointer-events: none;
+}

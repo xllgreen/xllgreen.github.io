@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Test Image</title></head>
+<body>
+  <h1>Image Test</h1>
+  <img src="assets/images/background.jpg" alt="Test" style="max-width:100%; border:2px solid red;">
+  <p>File size check:</p>
+  <script>
+    fetch('assets/images/background.jpg?t=' + Date.now())
+      .then(r => r.blob())
+      .then(b => document.getElementById('status').textContent = 'Loaded: ' + b.size + ' bytes, type: ' + b.type);
+  </script>
+  <div id="status">Checking...</div>
+</body>
+</html>

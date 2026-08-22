@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17110d" />
+  <meta name="shenjiang-build" content="2026-08-14-final-hardening" />
+  <meta name="shenjiang-first-info-fix" content="2026-08-15" />
+  <meta name="shenjiang-score-build" content="2026-08-16-score-settlement" />
+  <meta name="shenjiang-story-hardening" content="2026-08-16-story-hardening" />
+  <title>申江夜案｜民国侦探网页解谜</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="paywall.css" />
+  <link rel="stylesheet" href="first-info-fix.css" />
+  <link rel="stylesheet" href="score-system.css" />
+  <link rel="stylesheet" href="story-hardening.css" />
+</head>
+<body>
+  <div id="boot" class="boot">
+    <div class="boot-paper">
+      <div class="masthead-line">申江晚报 · 民国二十五年十月十七日 · 晨版付印前</div>
+      <h1>申江夜案</h1>
+      <div class="boot-rule"><span>调查记者 · 沈砚</span><span id="archiveMeta">报道档案 0/3</span></div>
+      <div class="boot-grid">
+        <div class="boot-lead">
+          <div class="edition-stamp">夜班<br>终校</div>
+          <h2>雨夜终校，一则临时短讯被塞进角栏。</h2>
+          <p>十六日深夜到十七日凌晨，报馆案头已经堆起几份来源不同、彼此还没有被核对过的纸面记录。你是《申江晚报》调查记者沈砚；在十七日晨版付印之前，把它们一份份核清，再决定什么能够写进报纸。</p>
+          <div class="boot-actions">
+            <button id="newGame" class="btn btn-primary">开始调查</button>
+            <button id="continueGame" class="btn">继续上次</button>
+            <button id="expertGame" class="btn hidden">独立复核</button>
+            <button id="scoreArchiveBtn" class="btn hidden">查看调查成绩</button>
+            <button id="resetGame" class="btn btn-quiet">重置案件</button>
+          </div>
+        </div>
+        <figure class="boot-photo period-frame"><img src="assets/images/scene_newsroom.png" alt="申江晚报夜班编辑室"><figcaption>《申江晚报》夜班编辑室 · 十七日晨版终校前</figcaption></figure>
+      </div>
+      <p class="boot-note">所有关键声音均有文字替代。存档保存在本机浏览器；独立复核将在首次结案后解锁。</p>
+    </div>
+  </div>
+  <div id="cinematic" class="cinematic hidden" aria-live="polite">
+    <div class="film-frame period-frame">
+      <img id="filmImage" src="" alt="剧情过渡镜头" />
+      <div class="film-grain"></div>
+      <div class="film-caption"><div id="filmKicker" class="film-kicker"></div><div id="filmText" class="film-text"></div></div>
+      <button id="filmNext" class="film-next">继续 ›</button>
+    </div>
+  </div>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-sheet">
+      <button id="modalClose" class="modal-close" aria-label="关闭">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+  <div id="game" class="game hidden">
+    <header class="topbar">
+      <div class="case-title">
+        <div class="paper-name">申 江 晚 报</div>
+        <div><span class="micro">调查记者 · 沈砚</span><h2>顾文洲死亡案</h2></div>
+      </div>
+      <div class="top-actions">
+        <button id="bagBtn" class="mini-btn">案件袋 <span id="bagCount">0</span></button>
+        <button id="hintBtn" class="mini-btn">当前页提示</button>
+        <button id="supportBtn" class="mini-btn support-mini-btn">支持作者 1元</button>
+        <button id="scoreBtn" class="mini-btn hidden">调查成绩</button>
+        <button id="soundBtn" class="mini-btn">声音：开</button>
+        <button id="saveBtn" class="mini-btn">落笔存档</button>
+      </div>
+    </header>
+    <div class="case-layout">
+      <aside class="left-panel desk-panel">
+        <div class="panel-heading">调查路线</div>
+        <div id="sceneNav" class="scene-nav"></div>
+        <div class="paper-tear"></div>
+        <div class="panel-heading">程序便笺</div>
+        <div id="objective" class="objective"></div>
+        <div id="stageProgress" class="stage-progress"></div>
+      </aside>
+      <main id="sceneContent" class="scene-content"></main>
+      <aside class="right-panel desk-panel">
+        <div class="panel-heading">关系人剪报</div>
+        <div id="peoplePanel" class="people-panel"></div>
+        <div class="paper-tear"></div>
+        <div class="panel-heading">可写入报道的事实</div>
+        <div id="factPanel" class="fact-panel"></div>
+      </aside>
+    </div>
+  </div>
+  <audio id="ambience" loop preload="auto"></audio>
+  <audio id="sfx" preload="auto"></audio>
+  <script src="paywall.js"></script>
+  <script src="app.js"></script>
+  <script src="first-info-fix.js"></script>
+  <script src="story-hardening.js"></script>
+  <script src="score-system.js"></script>
+</body>
+</html>

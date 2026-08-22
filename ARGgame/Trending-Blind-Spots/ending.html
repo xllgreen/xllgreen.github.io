@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热搜盲区 · 终章 · 真相落幕</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;overflow-y:auto;min-height:100vh}
+
+.bg{position:fixed;inset:0;z-index:0;background:#f5f5f7}
+.bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(0,0,0,0.015) 4px,rgba(0,0,0,0.015) 8px);pointer-events:none}
+
+.container{position:relative;z-index:10;width:92%;max-width:800px;margin:0 auto;padding:40px 0 120px;display:flex;flex-direction:column;align-items:center}
+
+/* ===== 场景标题 ===== */
+.scene-header{text-align:center;margin-bottom:15px;opacity:0;animation:headerFadeIn 3s ease forwards}
+@keyframes headerFadeIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.scene-chapter{font-size:11px;color:#86868b;letter-spacing:8px;margin-bottom:8px}
+.scene-title{font-size:30px;letter-spacing:10px;color:#1d1d1f;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,0.08)}
+.scene-location{font-size:11px;color:#86868b;letter-spacing:4px;margin-top:6px}
+.scene-divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,#c7c7cc,transparent);margin:15px auto 30px}
+
+/* ===== 场景描述 ===== */
+.scene-desc{color:#555;font-size:14px;line-height:2.4;margin:0 0 25px;letter-spacing:0.5px;text-align:left;max-width:750px;text-indent:2em;opacity:0}
+.scene-desc.fade-in{animation:textFadeIn 2s ease forwards}
+@keyframes textFadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== 对话框（现代消息气泡风） ===== */
+.dialogue-box{background:#fff;border:1px solid #e0e0e0;border-left:3px solid #0071e3;padding:22px 28px;margin:18px 0;max-width:720px;width:100%;border-radius:8px;position:relative;opacity:0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.dialogue-box.fade-in{animation:textFadeIn 2s ease forwards}
+.dialogue-box::before{content:attr(data-speaker);position:absolute;top:-10px;left:18px;background:#f5f5f7;padding:0 10px;font-size:11px;color:#0071e3;letter-spacing:2px;font-weight:600}
+.dialogue-text{font-size:14px;line-height:2.2;color:#444;letter-spacing:0.3px;padding-top:5px}
+.dialogue-text em{color:#c41e3a;font-style:normal;font-weight:600}
+
+/* ===== 选择区域 ===== */
+.choice-section{margin:40px 0;text-align:center;opacity:0}
+.choice-section.visible{animation:choiceAppear 1.5s ease forwards}
+@keyframes choiceAppear{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.choice-prompt{font-size:15px;color:#1d1d1f;letter-spacing:6px;margin-bottom:8px;font-weight:600}
+.choice-hint{font-size:11px;color:#86868b;letter-spacing:3px;margin-bottom:30px}
+.choice-list{display:flex;flex-direction:column;gap:16px;max-width:650px;width:100%;margin:0 auto}
+
+/* ===== 选择按钮 ===== */
+.choice-btn{display:block;width:100%;padding:20px 30px;background:#fff;border:1px solid #e0e0e0;color:#555;font-family:inherit;font-size:14px;line-height:1.8;letter-spacing:1px;cursor:pointer;transition:all 0.35s;border-radius:10px;text-align:left;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.choice-btn::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,113,227,0.03),transparent);opacity:0;transition:opacity 0.35s}
+.choice-btn:hover{border-color:#0071e3;color:#1d1d1f;background:#f5f9ff;box-shadow:0 4px 20px rgba(0,113,227,0.1);transform:translateX(5px)}
+.choice-btn:hover::before{opacity:1}
+.choice-btn .choice-title{font-size:15px;color:#1d1d1f;letter-spacing:3px;display:block;margin-bottom:4px;font-weight:700}
+.choice-btn .choice-desc{font-size:12px;color:#86868b;letter-spacing:0.5px;display:block;line-height:1.7}
+
+/* ===== 结局区域 ===== */
+.ending-section{display:none;margin:40px 0;max-width:750px;width:100%}
+.ending-section.active{display:block}
+.ending-header{text-align:center;margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid #e0e0e0}
+.ending-name{font-size:24px;letter-spacing:8px;color:#1d1d1f;font-weight:700;opacity:0}
+.ending-name.fade-in{animation:titleGlow 2s ease forwards}
+@keyframes titleGlow{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
+.ending-subtitle{font-size:12px;color:#86868b;letter-spacing:4px;margin-top:8px;opacity:0}
+.ending-subtitle.fade-in{animation:textFadeIn 1.5s 0.5s ease forwards}
+
+/* 结局段落 */
+.ending-paragraph{font-size:14px;line-height:2.4;color:#444;letter-spacing:0.5px;text-indent:2em;margin:18px 0;opacity:0;transform:translateY(12px)}
+.ending-paragraph.fade-in{animation:paraFadeIn 1.8s ease forwards}
+@keyframes paraFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* 结局引用/金句 */
+.ending-quote{font-size:16px;line-height:2.4;color:#1d1d1f;letter-spacing:2px;text-align:center;margin:35px 0;padding:25px 30px;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;font-weight:600;opacity:0;background:#fff;border-radius:8px}
+.ending-quote.fade-in{animation:quoteFadeIn 2.5s ease forwards}
+@keyframes quoteFadeIn{from{opacity:0;transform:translateY(15px);filter:blur(2px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+
+/* 结局C 数字纪念碑 */
+.monument{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:30px;margin:25px 0;text-align:center;opacity:0;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.monument.fade-in{animation:monumentRise 2.5s ease forwards}
+@keyframes monumentRise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.monument-names{font-size:15px;color:#1d1d1f;letter-spacing:3px;line-height:2.5;margin:15px 0;font-weight:700}
+.monument-text{font-size:13px;color:#666;letter-spacing:1px;line-height:2;margin-top:15px;font-style:italic}
+.monument-inscription{font-size:12px;color:#1d1d1f;letter-spacing:2px;margin-top:20px;padding-top:15px;border-top:1px solid #e0e0e0;font-weight:600}
+.monument-small{font-size:11px;color:#86868b;letter-spacing:1px;margin-top:12px}
+.monument-reveal{font-size:12px;color:#c41e3a;letter-spacing:1px;margin-top:18px;padding:12px 20px;border:1px dashed #e0e0e0;background:#fff5f5;border-radius:6px;opacity:0}
+.monument-reveal.fade-in{animation:revealFadeIn 2s ease forwards}
+@keyframes revealFadeIn{from{opacity:0}to{opacity:1}}
+
+/* 结尾分隔 */
+.ending-final{margin:50px 0 30px;text-align:center}
+.ending-final-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,#c7c7cc,transparent);margin:0 auto 25px}
+
+/* 重玩按钮 */
+.replay-section{text-align:center;margin:40px 0 20px;padding-top:30px;border-top:1px solid #e0e0e0;opacity:0;display:none}
+.replay-section.fade-in{animation:textFadeIn 1.5s ease forwards}
+.replay-btn{display:inline-block;padding:12px 40px;background:#fff;border:1px solid #e0e0e0;color:#555;font-family:inherit;font-size:13px;letter-spacing:4px;cursor:pointer;transition:all 0.3s;text-decoration:none;border-radius:8px}
+.replay-btn:hover{border-color:#0071e3;color:#0071e3;box-shadow:0 0 20px rgba(0,113,227,0.08);background:#f5f9ff}
+.replay-hint{font-size:11px;color:#86868b;letter-spacing:2px;margin-top:12px}
+
+/* 通用延时类 */
+.fade-delay-1{animation-delay:1s}
+.fade-delay-2{animation-delay:3s}
+.fade-delay-3{animation-delay:5.5s}
+.fade-delay-4{animation-delay:8s}
+.fade-delay-5{animation-delay:11s}
+.fade-delay-6{animation-delay:14s}
+
+.ep-delay-1{animation-delay:0.3s !important}
+.ep-delay-2{animation-delay:1.5s !important}
+.ep-delay-3{animation-delay:2.8s !important}
+.ep-delay-4{animation-delay:4.2s !important}
+.ep-delay-5{animation-delay:5.6s !important}
+.ep-delay-6{animation-delay:7s !important}
+.ep-delay-7{animation-delay:8.5s !important}
+.ep-delay-8{animation-delay:10s !important}
+.ep-delay-9{animation-delay:11.5s !important}
+.ep-delay-10{animation-delay:13s !important}
+.ep-delay-11{animation-delay:14.5s !important}
+.ep-delay-12{animation-delay:16s !important}
+.eq-delay-1{animation-delay:17.5s !important}
+.eq-delay-2{animation-delay:19s !important}
+.eq-delay-3{animation-delay:21s !important}
+.mn-delay-1{animation-delay:8s !important}
+.mn-delay-2{animation-delay:10s !important}
+.mn-delay-3{animation-delay:12s !important}
+.mn-delay-4{animation-delay:14s !important}
+
+/* 滚动条 */
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#f5f5f7}
+::-webkit-scrollbar-thumb{background:#ccc;border-radius:3px}
+
+/* 响应式 */
+@media(max-width:600px){
+.container{width:95%;padding:25px 0 100px}
+.scene-title{font-size:22px;letter-spacing:6px}
+.scene-desc,.dialogue-text,.ending-paragraph{font-size:13px;line-height:2.2}
+.choice-btn{padding:16px 20px}
+.choice-btn .choice-title{font-size:14px}
+.dialogue-box{padding:18px 20px}
+.ending-name{font-size:20px;letter-spacing:5px}
+.monument-names{font-size:13px;letter-spacing:2px}
+.ending-quote{font-size:14px;letter-spacing:1px}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+
+<div class="container">
+
+<!-- ===== 场景标题 ===== -->
+<div class="scene-header">
+<p class="scene-chapter">终 章</p>
+<h1 class="scene-title">真 相 落 幕</h1>
+<p class="scene-location">网络调查员后台 · 凌晨 03:15</p>
+<div class="scene-divider"></div>
+</div>
+
+<!-- ===== 第一部分：抉择前的叙述 ===== -->
+<div id="part-narrative">
+
+<p class="scene-desc fade-in fade-delay-1">
+你坐在屏幕前，四块显示器的光映在脸上。窗外的城市早已沉睡，但你面前的文档已经写了整整七个小时。
+</p>
+
+<p class="scene-desc fade-in fade-delay-2">
+你还原了一切。张明远——那个被全网钉在耻辱柱上的"受贿工程师""出轨渣男"——从未做过那些事。他伪造了自己的丑闻，主动把自己变成舆论的靶子，只是为了在死前制造足够大的声量，让那座城市的所有人停下手中的杯子，看一看自来水里究竟有什么。
+</p>
+
+<p class="scene-desc fade-in fade-delay-3">
+上游的青山化工园区偷排了整整四个月。重金属、有机污染物，通过取水口流进千家万户。张明远最早发现了数据异常，逐级举报，却被层层拦截。他最后选择用最极端的方式——用自己的命——把这件事砸进公众视野。
+</p>
+
+<p class="scene-desc fade-in fade-delay-4">
+3月15日，市政府宣布启动水质全面检测。那一天，距离他坠桥过去三天。他的死，终于撬动了那台沉默的机器。
+</p>
+
+<p class="scene-desc fade-in fade-delay-5">
+现在，你手握全部证据：聊天记录、被删改的新闻通稿、自媒体照片里的时间密码、广播中被消音的段落。你可以让真相大白于天下——但你也清楚，一旦发布，张明远用命保护的妻子和儿子，将永远活在"杀人犯家属"的阴影里。而那些真正该负责的人，或许早已找好了替罪羊。
+</p>
+
+<!-- 对话1 -->
+<div class="dialogue-box fade-in fade-delay-5" data-speaker="匿名委托人（私信）">
+<div class="dialogue-text">
+"调查员，你查到的比我预期的多得多。现在你有三个选择。公开，沉默，或者……走一条更难的路。"
+</div>
+</div>
+
+<!-- 对话2 -->
+<div class="dialogue-box fade-in fade-delay-6" data-speaker="匿名委托人（私信）">
+<div class="dialogue-text">
+"公开真相，张明远就白死了——人们只会记住他是一个'有问题的自杀者'，而水质问题会被他的'丑闻'冲淡。沉默，对得起你的良心吗？"
+</div>
+</div>
+
+<!-- 对话3 -->
+<div class="dialogue-box fade-in fade-delay-6" data-speaker="匿名委托人（私信）">
+<div class="dialogue-text">
+"或者，你可以学他。用更聪明的方式，让该负责的人负起责任，同时保护他留下的东西。"
+</div>
+</div>
+
+</div><!-- /part-narrative -->
+
+<!-- ===== 第二部分：三个选择 ===== -->
+<div class="choice-section" id="choice-section">
+<p class="choice-prompt">—— 抉 择 ——</p>
+<p class="choice-hint">作为网络调查员，你会怎么做？</p>
+
+<div class="choice-list">
+<button class="choice-btn" onclick="chooseEnding('A')">
+<span class="choice-title">【 全网公开 】</span>
+<span class="choice-desc">将所有证据整理成长文，发布在所有社交平台和新闻论坛，@所有能@到的媒体和监管部门，让张明远的名字和真相一起冲上热搜第一</span>
+</button>
+<button class="choice-btn" onclick="chooseEnding('B')">
+<span class="choice-title">【 就此封存 】</span>
+<span class="choice-desc">将证据打包加密，只发送给张明远的妻子，然后删除所有本地文件，注销调查员账号，从此不再过问此事</span>
+</button>
+<button class="choice-btn" onclick="chooseEnding('C')">
+<span class="choice-title">【 接力布局 】</span>
+<span class="choice-desc">不直接点名张明远，而是以"匿名工程师举报水质问题后离奇死亡"为线索，引导媒体和公众自己拼凑出真相；同时把完整证据链投递给更高层级的纪检和环保部门</span>
+</button>
+</div>
+</div>
+
+<!-- ===== 第三部分：三个结局 ===== -->
+
+<!-- ====== 结局A：热搜第一 ====== -->
+<div class="ending-section" id="ending-A">
+<div class="ending-header">
+<div class="ending-name fade-in">热 搜 第 一</div>
+<div class="ending-subtitle fade-in">结局 A · 全网公开</div>
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-1">
+你按下发布键的那一刻，手指在发抖。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-2">
+文章标题是《一个工程师如何用命，换一座城的水》。你写了他如何发现数据异常，如何被领导约谈，如何伪造自己的丑闻，如何在3月11日深夜给妻子发最后一条消息。你附上了聊天记录截图、被删改的新闻通稿对比、自媒体照片里的0315密码。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-3">
+凌晨四点十七分，文章阅读量突破十万。六点，有人转发了那张"远景照片"，圈出了烟囱下的数字0315。七点，#张明远#登上热搜第十七位。八点，市环保局发布紧急通报，宣布成立专项调查组。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-4">
+但热搜的背面，是另一场风暴。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-5">
+"既然他是清白的，为什么要伪造出轨照片？"
+"一个正常人会用这种方式解决问题吗？"
+"听说他老婆早就知道，夫妻俩一起演戏吧。"
+"这年头，死一个人就能成英雄了？"
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-6">
+张明远的妻子在老家接到了记者的电话。她什么都没说，挂掉电话，删掉了所有社交账号。三个月后，有人看见她带着儿子搬去了另一座省份的城市。没有人知道她们去了哪里。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-7">
+青山化工园区被罚款三百万元，三名中层管理人员被撤职。水质检测结果显示，污染指数已降至正常范围。市自来水厂换了新厂长，新厂长上任后第一件事是召开新闻发布会，承诺"让市民喝上放心水"。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-8">
+张明远的名字在热搜上挂了四十八小时，然后被一条娱乐新闻挤了下去。
+</p>
+
+<div class="ending-quote fade-in eq-delay-1">
+他上热搜了。<br>他上热搜了。<br>他成了一个热搜词条，像所有热搜词条一样，升起，然后消失。
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-9">
+一年后，你在某个深夜再次搜索"张明远"，发现他的名字已经和"网络暴力""心理健康"等关键词绑定在一起，成为某篇学术论文中的案例脚注。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-10">
+你偶尔会想起那篇文章发布前，你犹豫的三分钟。那三分钟里，你有没有想过另一种可能？
+</p>
+
+<div class="ending-quote fade-in eq-delay-2">
+真相被看见了。<br>但看见真相的人，不一定想知道真相。<br>
+</div>
+
+<div class="replay-section fade-in" id="replay-A">
+<div class="ending-final-divider"></div>
+<a href="game.html" class="replay-btn">↺ 重新开始调查</a>
+<p class="replay-hint">每个选择通向不同的真相。你想看看另一条路吗？</p>
+</div>
+</div><!-- /ending-A -->
+
+<!-- ====== 结局B：沉默档案 ====== -->
+<div class="ending-section" id="ending-B">
+<div class="ending-header">
+<div class="ending-name fade-in">沉 默 档 案</div>
+<div class="ending-subtitle fade-in">结局 B · 就此封存</div>
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-1">
+你把所有文件打包成一个加密压缩包，密码是张明远妻子名字首字母加上0315。然后你写了一封简短的邮件，只附了一个网盘链接，收件人是她在老家的邮箱地址。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-2">
+邮件正文只有一句话："他留给你的是真相，不是耻辱。"
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-3">
+你清空了本地硬盘，注销了调查员账号，把那张记着密码的便签纸撕碎冲进下水道。你的电脑桌面恢复了出厂设置，就像这七天从未存在过。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-4">
+三个月后，你在地铁上刷到一条新闻："我市自来水水质连续三季度达标，创历史最好成绩。"配图是新建的水质监测中心，玻璃幕墙在阳光下闪闪发亮。你盯着那条新闻看了很久，然后划走了。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-5">
+半年后，你在一家便利店排队时，听见前面两个中学生聊天。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-6">
+"你听说过张明远吗？"
+"谁啊？"
+"就那个出轨还受贿然后跳桥的工程师，去年挺火的。"
+"哦，那个渣男啊。死了活该。"
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-7">
+你没有回头，也没有说话。你买了烟，走出便利店，在冷风里点了一支。那是你戒烟三年后第一次复吸。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-8">
+又过了半年，你收到一个没有署名的快递。里面是一张贺卡，上面只写了两个字："谢谢。"字迹很淡，像是被水晕开过。你没有哭，你只是站在窗前，看着楼下的人群，想起张明远在聊天记录里说的那句话——
+</p>
+
+<div class="ending-quote fade-in eq-delay-1">
+"帮我做件事，让所有人恨我。"
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-9">
+你做到了。你让所有人继续恨他。你保护了那个真相，也埋葬了那个真相。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-10">
+有时候，在深夜，你会梦见那个加密压缩包。梦里你打开它，发现里面不是证据，而是一句话：
+</p>
+
+<div class="ending-quote fade-in eq-delay-2">
+"真相如果不能被使用，就只是一堆占内存的文件。"
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-11">
+你醒来，打开电脑，发现桌面空空如也。你知道那是对的。但你再也没有睡好过。
+</p>
+
+<div class="replay-section fade-in" id="replay-B">
+<div class="ending-final-divider"></div>
+<a href="game.html" class="replay-btn">↺ 重新开始调查</a>
+<p class="replay-hint">有些沉默是保护，有些沉默是共谋。你想改变这个结局吗？</p>
+</div>
+</div><!-- /ending-B -->
+
+<!-- ====== 结局C：接力布局 ====== -->
+<div class="ending-section" id="ending-C">
+<div class="ending-header">
+<div class="ending-name fade-in">接 力 布 局</div>
+<div class="ending-subtitle fade-in">结局 C · 以彼之道</div>
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-1">
+你没有写张明远的名字。你写的是《一名工程师的匿名举报与三天后的死亡》。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-2">
+文章里，他是一个"不愿透露姓名的市自来水厂技术人员"，在3月8日向多个部门递交了水质异常报告，随后遭遇"不明来源的舆论攻击"，于3月12日凌晨坠桥身亡。你没有提"出轨"，没有提"受贿"，只写了"舆论攻击"——留白的部分，交给读者自己去填。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-3">
+你同时向省纪委、省环保厅和一个以调查报道著称的媒体团队投递了完整证据链。你在邮件中写道："请在他妻子和儿子可能受到波及之前，先锁定应负责任的人。"
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-4">
+文章发布的第七天，省环保厅宣布介入调查，直接绕过市级部门。第十天，青山化工园区被全面关停，园区负责人被刑事拘留。第十五天，市自来水厂原厂长、分管环保的副市长先后被留置。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-5">
+没有热搜。没有全民狂欢。只有一条简短的官方通报，和几家严肃媒体的跟进报道。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-6">
+但你知道，真正的结果在更深处。那份完整证据链里，有张明远三年来每一次采样记录的扫描件，有他偷偷录下的领导约谈录音，有他计算出的污染扩散模型。这些东西足以让几个人的余生都在法庭上度过。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-7">
+三个月后，你收到一个快递。里面是一封手写信和一张照片。信是张明远的妻子写的：
+</p>
+
+<div class="ending-quote fade-in eq-delay-1" style="text-align:left;font-size:14px;font-weight:400;color:#444;background:#fafafa;border:1px solid #e0e0e0;padding:20px 25px;border-radius:8px">
+"调查员先生：<br><br>
+他走之前说，会有一个人看懂他做的事。那个人会把剩下的棋走完。<br><br>
+谢谢你把棋子下在了该下的地方。<br><br>
+照片是他在厂里最后一个生日拍的。他不爱笑，但那天他笑了。因为那天水质检测数据全部正常，他以为自己的努力终于有了结果。<br><br>
+我们不知道那天为什么数据正常。也许只是巧合。但他笑得很开心。<br><br>
+再次感谢。<br><br>
+—— 一个工程师的妻子"
+</div>
+
+<p class="ending-paragraph fade-in ep-delay-8">
+你看着那张照片。张明远站在水厂化验室里，穿着洗得发白的工作服，手里拿着一个烧杯，对着镜头笑。背后墙上的电子屏显示着一串数字：浊度 0.3，余氯 0.4，pH 7.1。全部正常。
+</p>
+
+<p class="ending-paragraph fade-in ep-delay-9">
+你把照片扫描件存进了一个加密文件夹，文件名是"0315"。然后你打开了新的委托页面。你的调查员账号没有注销，因为你知道，这座城市里还有很多个"张明远"，还有很多个被掩盖的0315。
+</p>
+
+<!-- 数字纪念碑 -->
+<div class="monument fade-in mn-delay-1">
+<div class="monument-text">以下数字，来自本案中被删除、被修改、被掩盖的真实信息</div>
+<div class="monument-names">
+4个月 — 偷排持续时间<br>
+18天 — 居民首次反映到官方承认的时间差<br>
+3天 — 从他坠桥到市政府启动检测的时间差<br>
+1个人 — 用全部名誉和生命，换一座城市的清醒
+</div>
+<div class="monument-inscription">他没有上热搜第一。<br>但他让热搜再也不能掩盖真相。</div>
+<div class="monument-small">本案所有证据已归档 · 案件编号 #2024-0315-X</div>
+<div class="monument-reveal fade-in mn-delay-4">
+<strong>真相从来不是被发现的。</strong><br>
+<strong>真相是被一个人，用命，一寸一寸，推进光里的。</strong>
+</div>
+</div>
+
+<div class="ending-quote fade-in eq-delay-2">
+以凡人之躯，行神明之事。<br>不求被铭记，只求被看见。
+</div>
+
+<div class="ending-quote fade-in eq-delay-3" style="border:none;background:transparent;font-size:13px;color:#86868b;font-weight:400;margin-top:10px">
+【完美结局 · 全线索回收 · 明暗双线闭合】
+</div>
+
+<div class="replay-section fade-in" id="replay-C">
+<div class="ending-final-divider"></div>
+<a href="game.html" class="replay-btn">↺ 重新开始调查</a>
+<p class="replay-hint">你已解锁全部真相。但张明远的故事，或许只是这座城市的开始。</p>
+</div>
+</div><!-- /ending-C -->
+
+</div><!-- /container -->
+
+<script>
+// 延迟显示选择区域
+setTimeout(function(){
+  document.getElementById('choice-section').classList.add('visible');
+}, 9000);
+
+function chooseEnding(ending){
+  // 隐藏叙述和选择
+  document.getElementById('part-narrative').style.display = 'none';
+  document.getElementById('choice-section').style.display = 'none';
+
+  // 显示对应结局
+  document.getElementById('ending-'+ending).classList.add('active');
+
+  // 显示重玩按钮（根据结局长度延迟）
+  let delay = 25000;
+  if(ending === 'A') delay = 28000;
+  if(ending === 'B') delay = 30000;
+  if(ending === 'C') delay = 35000;
+
+  setTimeout(function(){
+    document.getElementById('replay-'+ending).style.display = 'block';
+    setTimeout(function(){
+      document.getElementById('replay-'+ending).classList.add('fade-in');
+    }, 100);
+  }, delay);
+
+  // 滚动到顶部
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+</body>
+</html>

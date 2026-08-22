@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fdfdfd"/>
+      <stop offset="100%" stop-color="#ededed"/>
+    </linearGradient>
+    <filter id="pds" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect x="6" y="6" width="116" height="116" rx="26" fill="url(#pbg)" filter="url(#pds)"/>
+  <!-- Photos pinwheel - 8 colored leaves arranged in circle -->
+  <g transform="translate(64, 64)">
+    <!-- Bottom leaf (blue) -->
+    <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#00bcd4" opacity="0.92"/>
+    <!-- Bottom-right leaf (purple) -->
+    <g transform="rotate(45)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#9c27b0" opacity="0.92"/>
+    </g>
+    <!-- Right leaf (pink) -->
+    <g transform="rotate(90)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#e91e63" opacity="0.92"/>
+    </g>
+    <!-- Top-right leaf (orange) -->
+    <g transform="rotate(135)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#ff5722" opacity="0.92"/>
+    </g>
+    <!-- Top leaf (yellow) -->
+    <g transform="rotate(180)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#ffc107" opacity="0.92"/>
+    </g>
+    <!-- Top-left leaf (green) -->
+    <g transform="rotate(225)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#4caf50" opacity="0.92"/>
+    </g>
+    <!-- Left leaf (teal-green) -->
+    <g transform="rotate(270)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#009688" opacity="0.92"/>
+    </g>
+    <!-- Bottom-left leaf (indigo) -->
+    <g transform="rotate(315)">
+      <path d="M0 0 C-14 -6 -22 -22 -22 -34 C-22 -46 -14 -54 0 -54 Z" fill="#3f51b5" opacity="0.92"/>
+    </g>
+    <!-- Center highlight -->
+    <circle r="5" fill="#fff" opacity="0.9"/>
+    <circle r="3" fill="#fff" opacity="0.7"/>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-label="松峰岭小屋门前">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2b3a2b"/><stop offset=".65" stop-color="#0f1510"/></linearGradient>
+    <linearGradient id="wall" x1="0" x2="1"><stop stop-color="#5c4a35"/><stop offset="1" stop-color="#2b2017"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <path d="M0 560 C180 470 310 510 470 450 C620 390 755 430 900 385 C1060 336 1165 390 1280 342 L1280 720 L0 720Z" fill="#182217"/>
+  <g opacity=".8" filter="url(#blur)">
+    <path d="M78 80 L118 535 M112 96 L192 530 M1180 74 L1125 535 M1085 110 L1010 526" stroke="#243b2a" stroke-width="25" stroke-linecap="round"/>
+    <path d="M45 155 C120 130 165 130 230 155 M1010 180 C1100 132 1180 132 1240 170" stroke="#3f5a38" stroke-width="22" fill="none"/>
+  </g>
+  <g transform="translate(330 120)">
+    <path d="M-70 150 L300 -20 L680 150 Z" fill="#3a291b"/>
+    <rect x="0" y="130" width="620" height="430" rx="10" fill="url(#wall)"/>
+    <path d="M40 165 H580 M30 230 H590 M40 295 H580 M30 360 H590 M40 425 H580" stroke="#7c6244" stroke-width="8" opacity=".38"/>
+    <rect x="222" y="210" width="176" height="350" rx="8" fill="#241a13" stroke="#8b623d" stroke-width="10"/>
+    <path d="M235 230 H385 M235 305 H385 M235 380 H385 M235 455 H385" stroke="#4f3724" stroke-width="4"/>
+    <circle cx="370" cy="382" r="12" fill="#c59d50"/>
+    <g transform="translate(138 180) rotate(-3)">
+      <rect width="46" height="300" fill="#9b2626"/>
+      <text x="23" y="40" fill="#f5d7a0" font-size="27" writing-mode="tb" text-anchor="middle" font-family="serif">守山守林守初心</text>
+    </g>
+    <g transform="translate(445 180) rotate(3)">
+      <rect width="46" height="300" fill="#9b2626"/>
+      <text x="23" y="42" fill="#f5d7a0" font-size="27" writing-mode="tb" text-anchor="middle" font-family="serif">护林护家□□□</text>
+    </g>
+    <rect x="455" y="500" width="118" height="42" rx="8" fill="#8b6b3f"/>
+    <text x="514" y="528" fill="#f1d6aa" font-size="18" text-anchor="middle">护林守则</text>
+    <circle cx="155" cy="522" r="28" fill="#9f7b35"/>
+    <path d="M142 522 Q155 548 168 522" stroke="#4e371d" stroke-width="6" fill="none"/>
+  </g>
+  <path d="M0 650 C205 620 390 610 560 640 C740 672 900 610 1280 626 L1280 720 L0 720Z" fill="#2b251b"/>
+  <text x="1040" y="684" fill="#80725a" font-size="18">松峰岭 · 2025</text>
+</svg>

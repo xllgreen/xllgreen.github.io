@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" role="img" aria-labelledby="title desc">
+  <title id="title">第七实施区门禁平面图</title>
+  <desc id="desc">十个房间围绕中央走廊排列，箭头标示单向门禁方向。</desc>
+  <defs>
+    <pattern id="paper" width="8" height="8" patternUnits="userSpaceOnUse">
+      <rect width="8" height="8" fill="#eef1ec"/>
+      <circle cx="2" cy="3" r=".55" fill="#c8cec7"/>
+      <circle cx="7" cy="6" r=".4" fill="#d5dad4"/>
+    </pattern>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#304c5d"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="998" height="538" fill="url(#paper)" stroke="#52656d" stroke-width="2"/>
+  <text x="34" y="38" font-family="SimSun,serif" font-size="24" fill="#263b45">GP-B07 内部门禁平面图</text>
+  <text x="966" y="36" text-anchor="end" font-family="Arial,sans-serif" font-size="14" fill="#5c686d">REV.2014-06 / COPY 03</text>
+
+  <g fill="#faf9f2" stroke="#536770" stroke-width="2">
+    <rect x="65" y="85" width="160" height="130"/>
+    <rect x="242" y="85" width="160" height="130"/>
+    <rect x="419" y="85" width="160" height="130"/>
+    <rect x="596" y="85" width="160" height="130"/>
+    <rect x="773" y="85" width="160" height="130"/>
+    <rect x="65" y="330" width="160" height="130"/>
+    <rect x="242" y="330" width="160" height="130"/>
+    <rect x="419" y="330" width="160" height="130"/>
+    <rect x="596" y="330" width="160" height="130"/>
+    <rect x="773" y="330" width="160" height="130"/>
+  </g>
+
+  <g font-family="SimSun,serif" fill="#263b45" text-anchor="middle">
+    <text x="145" y="144" font-size="20">B07-01</text><text x="145" y="174" font-size="14">阅读 / 基线</text>
+    <text x="322" y="144" font-size="20">B07-02</text><text x="322" y="174" font-size="14">摄影 / 合成</text>
+    <text x="499" y="144" font-size="20">B07-03</text><text x="499" y="174" font-size="14">纪念物</text>
+    <text x="676" y="144" font-size="20">B07-04</text><text x="676" y="174" font-size="14">家庭问卷</text>
+    <text x="853" y="144" font-size="20">B07-05</text><text x="853" y="174" font-size="14">绘画输出</text>
+    <text x="145" y="389" font-size="20">B07-06</text><text x="145" y="419" font-size="14">放映 / 照片</text>
+    <text x="322" y="389" font-size="20">B07-07</text><text x="322" y="419" font-size="14">广播响应</text>
+    <text x="499" y="389" font-size="20">B07-08</text><text x="499" y="419" font-size="14">家庭讨论</text>
+    <text x="676" y="389" font-size="20">B07-09</text><text x="676" y="419" font-size="14">医务室</text>
+    <text x="853" y="389" font-size="20">B07-10</text><text x="853" y="419" font-size="14">夏令营登记</text>
+  </g>
+
+  <rect x="65" y="244" width="868" height="58" fill="#d9e0df" stroke="#607078"/>
+  <text x="499" y="278" text-anchor="middle" font-family="SimSun,serif" font-size="15" fill="#485b64">中央单向通道 / 门禁回放方向以箭头为准</text>
+  <g fill="none" stroke="#304c5d" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M88 285 H255"/>
+    <path d="M282 285 H449"/>
+    <path d="M476 285 H643"/>
+    <path d="M670 285 H837"/>
+    <path d="M145 330 V306"/>
+    <path d="M322 306 V330"/>
+    <path d="M853 244 V216"/>
+    <path d="M676 216 V242"/>
+  </g>
+  <g font-family="SimSun,serif" font-size="13" fill="#6b342f">
+    <text x="80" y="506">东侧家庭服务门 → B07-06</text>
+    <text x="920" y="506" text-anchor="end">离场方向：B07-08 → 家庭摄影馆</text>
+  </g>
+</svg>

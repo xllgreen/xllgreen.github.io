@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">柏叔拼接层</title>
+  <desc id="desc">窗框高光、灯影、缺失人物与右半枚确认手印</desc>
+  <defs><linearGradient id="beam" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe6a1" stop-opacity=".86"/><stop offset="1" stop-color="#e4a95e" stop-opacity=".06"/></linearGradient></defs>
+  <path d="M74 58h326v292H74zM237 64v280M80 201h314" fill="none" stroke="#d9e4d3" stroke-width="12"/>
+  <path d="M79 70L713 350 383 350z" fill="url(#beam)"/>
+  <g fill="#d7c9a8" stroke="#f3ddb1" stroke-width="5"><circle cx="576" cy="232" r="42"/><path d="M525 347q5-110 51-110t54 110z"/></g>
+  <ellipse cx="646" cy="356" rx="95" ry="24" fill="#edc678" opacity=".38"/>
+  <g fill="none" stroke="#b96356" stroke-width="13" stroke-linecap="round" opacity=".86">
+    <path d="M747 384q20-58-6-95"/><path d="M742 328l34-38M740 320l7-52M736 326l-29-43"/>
+  </g>
+  <g fill="#e7cf9c" opacity=".7"><circle cx="188" cy="158" r="8"/><circle cx="685" cy="201" r="6"/><circle cx="810" cy="321" r="7"/></g>
+</svg>

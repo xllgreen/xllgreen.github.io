@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540">
+<defs><linearGradient id="b" x1="0" x2="1"><stop stop-color="#dce8e7"/><stop offset="1" stop-color="#9ab4b1"/></linearGradient><filter id="n"><feTurbulence baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/><feBlend mode="multiply" in2="SourceGraphic"/></filter></defs>
+<rect width="920" height="540" rx="24" fill="url(#b)"/>
+<rect x="35" y="35" width="850" height="470" rx="16" fill="#eff4f2" stroke="#46635e" stroke-width="4"/>
+<rect x="70" y="110" width="240" height="300" fill="#a7b9b6"/><circle cx="190" cy="200" r="64" fill="#5f6f6d"/><path d="M110 385c14-94 147-94 160 0" fill="#5f6f6d"/>
+<text x="350" y="118" font-size="44" font-family="sans-serif" fill="#26433e" font-weight="700">白塔医院 员工证</text>
+<text x="350" y="190" font-size="32" font-family="sans-serif" fill="#2c3e3b">姓名：顾青禾</text>
+<text x="350" y="246" font-size="32" font-family="sans-serif" fill="#2c3e3b">科室：七楼呼吸病区</text>
+<text x="350" y="302" font-size="32" font-family="sans-serif" fill="#2c3e3b">编号：7F-N-14□2</text>
+<text x="350" y="358" font-size="26" font-family="monospace" fill="#6c7876">VALID 2011—2014</text>
+<path d="M355 398h430" stroke="#6c8e88" stroke-width="5" stroke-dasharray="13 9"/>
+<text x="350" y="448" font-size="23" font-family="sans-serif" fill="#6f7d7a">照片背面铅笔字：第二届护理技能赛</text>
+<rect width="920" height="540" rx="24" opacity=".08" filter="url(#n)"/>
+</svg>

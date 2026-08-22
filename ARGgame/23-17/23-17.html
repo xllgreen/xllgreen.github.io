@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#0c0f12" />
+<title>23:17</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="enhance.css" />
+<link rel="stylesheet" href="settlement.css" />
+</head>
+<body>
+<div id="startScreen" class="start-screen" aria-modal="true" role="dialog">
+  <div class="start-noise"></div>
+  <div class="start-card">
+    <div class="start-time">23:17</div>
+    <div class="start-line"></div>
+    <h1>今晚还没有发生</h1>
+    <p id="startSubtitle">钥匙停在703门锁里。你还可以把这一晚当成普通的一晚。</p>
+    <div class="start-actions">
+      <button id="startNewBtn" class="start-primary">把钥匙转下去</button>
+      <button id="startContinueBtn" class="start-secondary">沿着上一轮继续</button>
+      <button id="startSettingsBtn" class="start-secondary">校准今晚</button>
+      <button id="startResetBtn" class="start-danger">烧掉所有记录</button>
+    </div>
+    <div class="start-tip">每轮 22:47 → 23:17。你记得，世界不记得。</div>
+  </div>
+</div>
+<div id="settingsSheet" class="settings-sheet hidden" role="dialog" aria-modal="true">
+  <div class="settings-card">
+    <button id="settingsClose" class="modal-close" aria-label="关闭">×</button>
+    <div class="settings-kicker">校准今晚</div>
+    <h2>感官与记录</h2>
+    <label class="setting-row"><span>场景 BGM</span><input id="bgmToggle" type="checkbox" checked /></label>
+    <label class="setting-row setting-range"><span>背景音量</span><input id="bgmVolume" type="range" min="0" max="100" value="34" /></label>
+    <label class="setting-row"><span>环境声 / 音效</span><input id="sfxToggle" type="checkbox" checked /></label>
+    <label class="setting-row"><span>减少界面动态</span><input id="motionToggle" type="checkbox" /></label>
+    <p class="settings-note">BGM 会随房间、走廊、704、楼梯、天台和一楼区域自动切换。</p>
+  </div>
+</div>
+<div id="app">
+  <header class="topbar">
+    <div class="brand"><span class="title">23:17</span><span class="subtitle">循环调查记录</span></div>
+    <div class="status"><span id="loopBadge">第 1 轮</span><strong id="clock">22:47</strong></div>
+  </header>
+  <main class="layout">
+    <section class="scene-panel">
+      <div id="sceneWrap" class="scene-wrap" aria-label="当前场景">
+        <img id="sceneImg" src="assets/foyer.jpg" alt="当前场景" draggable="false" />
+        <div class="scene-grade"></div>
+        <div id="hotspots" class="hotspots" aria-hidden="true"></div>
+        <div class="scene-label" id="sceneLabel">703 · 玄关</div>
+        <div id="eventFlash" class="event-flash hidden"></div>
+        <div id="bgmBadge" class="bgm-badge">声场 · 703 夜归</div>
+      </div>
+      <div class="scene-meta">
+        <div class="meta-card">
+          <div class="meta-label">场景观察</div>
+          <p id="sceneNote">703门口的灯有点昏，厨房和玄关连在一起，像再普通不过的出租屋。</p>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">人物线索</div>
+          <p id="peopleNote">目前你只是在下班回家。还没有人向你解释今晚会发生什么。</p>
+        </div>
+      </div>
+      <div class="scene-actions">
+        <button id="timelineBtn" class="ghost">时间线</button>
+        <button id="knowledgeBtn" class="ghost">事实图谱</button>
+        <button id="peopleBtn" class="ghost">人物</button>
+        <button id="mapBtn" class="ghost">地点</button>
+        <button id="hintBtn" class="ghost">提示</button>
+        <button id="soundBtn" class="ghost">声音：开</button>
+        <button id="settingsBtn" class="ghost">校准</button>
+        <button id="resetSaveBtn" class="ghost danger-ghost">抹掉记录</button>
+        <button id="resetBtn" class="hidden" type="button" aria-hidden="true" tabindex="-1">重置存档</button>
+      </div>
+    </section>
+    <section class="console-panel">
+      <div class="objective-box">
+        <div class="objective-title">当前目标</div>
+        <div class="objective" id="objective">先回家。明天 8:30 还要上班。</div>
+      </div>
+      <div class="status-strip">
+        <div class="status-pill"><span>已知事实</span><strong id="knowledgeCount">0/0</strong></div>
+        <div class="status-pill"><span>关联链</span><strong id="chainCount">未展开</strong></div>
+        <div class="status-pill"><span>提示阶段</span><strong id="hintStageLabel">起始</strong></div>
+        <div class="status-pill"><span>当前焦点</span><strong id="focusName">无</strong></div>
+      </div>
+      <div id="log" class="log" role="log" aria-live="polite"></div>
+      <div class="input-zone">
+        <label for="commandInput">你准备做什么？</label>
+        <div class="input-row">
+          <textarea id="commandInput" rows="2" maxlength="240" placeholder="例如：洗漱一下 / 查物业工单 / 给小杜打电话 / 去704敲门……"></textarea>
+          <button id="sendBtn" class="primary">行动</button>
+        </div>
+        <div class="input-foot">
+          <span id="parserStatus">本地规则引擎</span>
+          <button id="ideasBtn" class="text-btn">没思路？</button>
+        </div>
+        <div id="ideas" class="ideas hidden"></div>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <button id="modalClose" class="modal-close" aria-label="关闭">×</button>
+    <h2 id="modalTitle"></h2>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+<div id="ending" class="ending hidden">
+  <div class="ending-card">
+    <div class="ending-kicker">23:17</div>
+    <h1 id="endingTitle"></h1>
+    <p id="endingText"></p>
+    <div id="endingStats" class="ending-stats"></div>
+    <div class="ending-actions"><button id="continueBtn" class="primary">重新开始</button><button id="supportBtn" class="ghost">自愿支持</button></div>
+  </div>
+</div>
+<script src="config.js"></script>
+<script>
+(function(){
+  try{
+    window.__G2317_HAD_SAVE__=!!(localStorage.getItem('game2317_save_v2')||localStorage.getItem('game2317_save_v1'));
+    if(!location.search.includes('qa=1')){
+      const u=new URL(location.href);u.searchParams.set('qa','1');history.replaceState(null,'',u.href);
+      window.__G2317_QA_QUERY_ADDED__=true;
+    }
+  }catch(e){}
+})();
+</script>
+<script src="app.js"></script>
+<script src="enhance.js"></script>
+<script src="settlement.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>夜航</title>
+  <link rel="stylesheet" href="/src/pages/404.css" />
+</head>
+<body>
+
+<div id="stage" class="hidden">
+  <div id="message-area">
+    <p id="main-msg">夜航</p>
+    <p id="sub" style="font-size:13px;color:#4A6A7A;margin-top:8px;">第 三 航 次</p>
+    <div id="sub-msg" class="hidden"></div>
+  </div>
+
+  <button id="confirm-btn" class="hidden">确定</button>
+
+  <div id="entry-link" class="hidden" style="margin-top:48px;font-size:12px;color:rgba(90,120,140,0.25);letter-spacing:1px;">
+    <a href="./board/deepspace" style="color:rgba(90,120,140,0.3);text-decoration:none;">→ 进入夜航论坛 ←</a>
+  </div>
+</div>
+
+<div id="page-counter">404</div>
+
+<script>
+(function() {
+  var path = window.location.pathname.replace(/\/+$/, '')
+  var isRoot = path === '' || path === '/ARGgame/summersover'
+
+  if (isRoot) {
+    window.location.replace('./board/deepspace')
+  } else {
+    document.getElementById('stage').classList.remove('hidden')
+    document.getElementById('confirm-btn').classList.remove('hidden')
+    document.getElementById('entry-link').classList.remove('hidden')
+  }
+})()
+</script>
+
+<script type="module" src="/src/pages/404.ts"></script>
+</body>
+</html>

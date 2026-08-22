@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>静心心理咨询中心 | 官方网站</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#2c3e50;--secondary:#8b7355;--accent:#8b2635;--bg:#faf9f7;--bg-warm:#f5f3ef;--text:#333;--text-light:#666;--border:#e0ddd8;--shadow:0 2px 12px rgba(0,0,0,0.06);--shadow-hover:0 8px 30px rgba(0,0,0,0.1);}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+::selection{background:rgba(139,38,53,0.15);color:#5c1a24}
+.top-bar{background:var(--primary);color:#fff;font-size:0.75rem;padding:0.4rem 0}
+.top-bar .container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;padding:0 2rem}
+.top-bar .datetime{opacity:0.7;letter-spacing:0.05em}
+.top-bar .notice{display:flex;align-items:center;gap:0.5rem}
+.top-bar .notice-dot{width:6px;height:6px;background:#e74c3c;border-radius:50%;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:0.3}}
+header{background:#fff;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}
+header .container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:70px}
+.logo{display:flex;align-items:center;gap:0.8rem;cursor:pointer}
+.logo-icon{width:40px;height:40px;border:2px solid var(--secondary);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.logo-icon::before{content:'';width:16px;height:16px;border:2px solid var(--secondary);border-radius:50%;position:absolute}
+.logo-icon::after{content:'';width:4px;height:4px;background:var(--secondary);border-radius:50%;position:absolute}
+.logo-text h1{font-family:'Noto Serif SC',serif;font-size:1.3rem;color:var(--primary);letter-spacing:0.1em;line-height:1.2}
+.logo-text span{font-size:0.65rem;color:var(--text-light);letter-spacing:0.15em}
+nav ul{display:flex;list-style:none;gap:2.5rem}
+nav a{color:var(--text);text-decoration:none;font-size:0.9rem;transition:color 0.3s;position:relative;padding-bottom:4px}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--accent);transition:width 0.3s}
+nav a:hover{color:var(--accent)}
+nav a:hover::after{width:100%}
+nav a.active{color:var(--accent)}
+nav a.active::after{width:100%}
+.header-actions{display:flex;align-items:center;gap:1rem}
+.search-box{position:relative}
+.search-box input{border:1px solid var(--border);border-radius:20px;padding:0.4rem 1rem 0.4rem 2rem;font-size:0.8rem;outline:none;transition:border-color 0.3s;width:160px;font-family:inherit}
+.search-box input:focus{border-color:var(--secondary)}
+.search-box svg{position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);width:14px;height:14px;stroke:var(--text-light)}
+.progress-indicator{display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--text-light);background:var(--bg-warm);padding:0.3rem 0.8rem;border-radius:20px}
+.progress-indicator .clue-count{color:var(--accent);font-weight:700}
+.page-section{display:none;max-width:1200px;margin:0 auto;padding:3rem 2rem;min-height:calc(100vh - 110px);animation:fadeIn 0.5s ease}
+.page-section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{position:relative;height:480px;border-radius:12px;overflow:hidden;margin-bottom:3rem;box-shadow:var(--shadow-hover)}
+.hero-slide{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:#fff;text-align:center;padding:2rem}
+.hero-slide.active{display:flex}
+.hero-slide .slide-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 6s ease}
+.hero-slide.active .slide-bg{transform:scale(1.05)}
+.hero-slide::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.5));z-index:1}
+.hero-content{position:relative;z-index:2;max-width:600px}
+.hero-content h2{font-family:'Noto Serif SC',serif;font-size:2.5rem;margin-bottom:1rem;text-shadow:0 2px 10px rgba(0,0,0,0.3);line-height:1.3}
+.hero-content p{font-size:1.1rem;opacity:0.9;margin-bottom:1.5rem}
+.hero-dots{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:3}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:all 0.3s}
+.hero-dot.active{background:#fff;width:24px;border-radius:4px}
+.slide-1 .slide-bg{background:url('hero-1.jpg') center/cover no-repeat}
+.slide-2 .slide-bg{background:url('hero-2.jpg') center/cover no-repeat}
+.slide-3 .slide-bg{background:url('hero-3.jpg') center/cover no-repeat;position:absolute}
+.slide-3 .hidden-hotspot{position:absolute;bottom:30%;right:25%;width:40px;height:40px;cursor:pointer;z-index:10;border-radius:50%;border:2px solid transparent;transition:border-color 0.3s}
+.slide-3 .hidden-hotspot:hover{border-color:rgba(255,255,255,0.5)}
+.slide-3 .hidden-hotspot::after{content:'?';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:1.2rem;font-weight:700}
+.quick-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-bottom:3rem}
+.quick-card{background:#fff;border-radius:12px;padding:2rem;box-shadow:var(--shadow);transition:all 0.3s;cursor:pointer;border:1px solid transparent}
+.quick-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px);border-color:var(--border)}
+.quick-card-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.5rem}
+.quick-card:nth-child(1) .quick-card-icon{background:#e8f4f8;color:#2c7a7b}
+.quick-card:nth-child(2) .quick-card-icon{background:#fdf2f0;color:#c0392b}
+.quick-card:nth-child(3) .quick-card-icon{background:#f0f7f0;color:#27ae60}
+.quick-card h3{font-size:1.1rem;margin-bottom:0.5rem;color:var(--primary)}
+.quick-card p{font-size:0.85rem;color:var(--text-light)}
+.notice-board{background:#fff;border-radius:12px;padding:2rem;box-shadow:var(--shadow);margin-bottom:3rem;border-left:4px solid var(--accent)}
+.notice-board h3{font-family:'Noto Serif SC',serif;font-size:1.2rem;margin-bottom:1rem;color:var(--primary);display:flex;align-items:center;gap:0.5rem}
+.notice-item{padding:0.8rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background 0.2s}
+.notice-item:hover{background:var(--bg-warm);margin:0 -2rem;padding:0.8rem 2rem}
+.notice-item:last-child{border-bottom:none}
+.notice-item-title{font-size:0.9rem;color:var(--text);display:flex;align-items:center;gap:0.5rem}
+.notice-item-title .tag-new{background:var(--accent);color:#fff;font-size:0.6rem;padding:0.1rem 0.4rem;border-radius:3px}
+.notice-item-date{font-size:0.8rem;color:var(--text-light)}
+.notice-item.special{position:relative}
+.notice-item.special::before{content:'';position:absolute;left:-2rem;top:0;bottom:0;width:4px;background:var(--accent);opacity:0;transition:opacity 0.3s}
+.notice-item.special:hover::before{opacity:1}
+.page-header{text-align:center;margin-bottom:3rem;padding-top:1rem}
+.page-header h2{font-family:'Noto Serif SC',serif;font-size:2rem;color:var(--primary);margin-bottom:0.5rem}
+.page-header p{color:var(--text-light);font-size:0.9rem}
+.about-content{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about-text h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;color:var(--primary);margin-bottom:1rem}
+.about-text p{margin-bottom:1rem;color:var(--text-light);font-size:0.9rem}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+.stat-item{text-align:center;padding:1rem;background:var(--bg-warm);border-radius:8px}
+.stat-number{font-size:1.8rem;font-weight:700;color:var(--secondary);line-height:1}
+.stat-label{font-size:0.75rem;color:var(--text-light);margin-top:0.3rem}
+.team-section{margin-top:4rem}
+.team-section h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;color:var(--primary);margin-bottom:2rem;text-align:center}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.team-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.3s;text-align:center}
+.team-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px)}
+.team-card-photo{height:200px;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.team-card-photo .avatar{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#ddd,#bbb);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#fff}
+.team-card-info{padding:1.5rem}
+.team-card-info h4{font-size:1.1rem;color:var(--primary);margin-bottom:0.3rem}
+.team-card-info .role{font-size:0.8rem;color:var(--secondary);margin-bottom:0.5rem}
+.team-card-info .desc{font-size:0.8rem;color:var(--text-light)}
+.team-card.limo{position:relative}
+.team-card.limo .team-card-photo{filter:grayscale(0.7);position:relative}
+.team-card.limo .team-card-photo::after{content:'已离职';position:absolute;bottom:10px;right:10px;background:rgba(139,38,53,0.8);color:#fff;font-size:0.7rem;padding:0.2rem 0.6rem;border-radius:3px}
+.team-card.limo .redacted{background:#333;color:transparent;user-select:text;border-radius:2px;padding:0 2px;cursor:text;position:relative}
+.team-card.limo .redacted::after{content:'[信息已删除]';position:absolute;left:0;top:0;color:var(--text-light);font-size:0.75rem;pointer-events:none}
+.team-card.limo .redacted:hover{background:transparent;color:inherit}
+.team-card.limo .redacted:hover::after{display:none}
+.service-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.service-table th{background:var(--primary);color:#fff;padding:1rem;text-align:left;font-weight:500;font-size:0.85rem}
+.service-table td{padding:1rem;border-bottom:1px solid var(--border);font-size:0.85rem}
+.service-table tr:last-child td{border-bottom:none}
+.service-table tr:hover{background:var(--bg-warm)}
+.service-table .price{color:var(--accent);font-weight:700;font-size:1rem}
+.service-table .service-name{font-weight:500;color:var(--primary)}
+.service-table .note{font-size:0.75rem;color:var(--text-light)}
+.reviews-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.review-card{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:var(--shadow);transition:all 0.3s;position:relative}
+.review-card:hover{box-shadow:var(--shadow-hover)}
+.review-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.review-avatar{width:45px;height:45px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;font-weight:700}
+.review-meta h4{font-size:0.9rem;color:var(--primary)}
+.review-meta .review-date{font-size:0.75rem;color:var(--text-light)}
+.review-content{font-size:0.85rem;color:var(--text-light);line-height:1.8}
+.review-content .highlight{color:var(--accent);font-weight:500;cursor:pointer}
+.review-content .hidden-msg{background:var(--bg-warm);padding:0.5rem 1rem;border-radius:6px;margin-top:0.5rem;font-size:0.8rem;color:var(--accent);display:none;border-left:3px solid var(--accent)}
+.review-content .hidden-msg.show{display:block;animation:slideDown 0.3s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.review-card.special-review{border:1px solid rgba(139,38,53,0.1)}
+.review-card.special-review .review-avatar{background:linear-gradient(135deg,#f093fb,#f5576c)}
+.booking-form{max-width:600px;margin:0 auto;background:#fff;border-radius:12px;padding:3rem;box-shadow:var(--shadow)}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;font-size:0.85rem;color:var(--primary);margin-bottom:0.5rem;font-weight:500}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.8rem 1rem;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:0.9rem;outline:none;transition:border-color 0.3s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--secondary)}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.submit-btn{width:100%;padding:1rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:1rem;cursor:pointer;transition:all 0.3s;font-family:inherit;letter-spacing:0.1em}
+.submit-btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 4px 15px rgba(139,38,53,0.3)}
+.search-page{text-align:center;padding-top:3rem}
+.search-big{max-width:500px;margin:0 auto 3rem;position:relative}
+.search-big input{width:100%;padding:1rem 1.5rem 1rem 3rem;border:2px solid var(--border);border-radius:30px;font-size:1rem;outline:none;transition:all 0.3s;font-family:inherit}
+.search-big input:focus{border-color:var(--secondary);box-shadow:0 0 20px rgba(139,115,85,0.1)}
+.search-big svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--text-light)}
+.search-results{text-align:left;max-width:700px;margin:0 auto}
+.search-result-item{padding:1.2rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding 0.2s}
+.search-result-item:hover{padding-left:1rem;background:var(--bg-warm)}
+.search-result-item h4{font-size:0.95rem;color:var(--primary);margin-bottom:0.3rem}
+.search-result-item p{font-size:0.8rem;color:var(--text-light)}
+.search-result-item .url{font-size:0.75rem;color:#27ae60;margin-top:0.3rem}
+.no-results{color:var(--text-light);font-size:0.9rem;text-align:center;padding:2rem}
+.archive-gate{max-width:500px;margin:4rem auto;text-align:center}
+.archive-gate h3{font-family:'Noto Serif SC',serif;font-size:1.5rem;color:var(--primary);margin-bottom:1rem}
+.archive-gate p{font-size:0.85rem;color:var(--text-light);margin-bottom:2rem}
+.archive-input{display:flex;gap:0.5rem;justify-content:center}
+.archive-input input{padding:0.8rem 1rem;border:2px solid var(--border);border-radius:8px;font-size:1rem;outline:none;width:200px;text-align:center;letter-spacing:0.2em;font-family:inherit}
+.archive-input input:focus{border-color:var(--accent)}
+.archive-input button{padding:0.8rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all 0.3s}
+.archive-input button:hover{background:#6b1d29}
+.archive-content{display:none;max-width:800px;margin:0 auto;background:#fff;border-radius:12px;padding:3rem;box-shadow:var(--shadow);position:relative}
+.archive-content.active{display:block}
+.archive-content::before{content:'机密档案';position:absolute;top:1rem;right:1rem;background:var(--accent);color:#fff;font-size:0.65rem;padding:0.2rem 0.5rem;border-radius:3px;letter-spacing:0.1em}
+.archive-content h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;color:var(--primary);margin-bottom:1.5rem;border-bottom:2px solid var(--accent);padding-bottom:0.5rem;display:inline-block}
+.archive-entry{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+.archive-entry:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.archive-entry .date{font-size:0.75rem;color:var(--text-light);margin-bottom:0.5rem}
+.archive-entry .title{font-size:1rem;color:var(--primary);font-weight:500;margin-bottom:0.8rem}
+.archive-entry .body{font-size:0.85rem;color:var(--text-light);line-height:1.9;white-space:pre-line}
+.archive-entry .body .secret{color:var(--accent);font-weight:500}
+.truth-page{max-width:700px;margin:0 auto;text-align:center;padding:3rem 0}
+.truth-page h2{font-family:'Noto Serif SC',serif;font-size:2rem;color:var(--accent);margin-bottom:1.5rem}
+.truth-content{background:#fff;border-radius:12px;padding:3rem;box-shadow:var(--shadow);text-align:left}
+.truth-content p{margin-bottom:1rem;font-size:0.9rem;color:var(--text-light);line-height:1.9}
+.truth-content .truth-highlight{background:rgba(139,38,53,0.08);padding:0.8rem 1.2rem;border-radius:6px;border-left:3px solid var(--accent);color:var(--primary);font-weight:500}
+.clue-modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.clue-modal.active{display:flex}
+.clue-modal-content{background:#fff;border-radius:16px;padding:2.5rem;max-width:400px;width:90%;text-align:center;animation:modalPop 0.4s cubic-bezier(0.175,0.885,0.32,1.275)}
+@keyframes modalPop{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+.clue-modal-icon{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#f093fb,#f5576c);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem}
+.clue-modal h3{font-family:'Noto Serif SC',serif;font-size:1.2rem;color:var(--primary);margin-bottom:0.5rem}
+.clue-modal p{font-size:0.85rem;color:var(--text-light);margin-bottom:1.5rem}
+.clue-modal .clue-text{background:var(--bg-warm);padding:1rem;border-radius:8px;font-size:0.9rem;color:var(--accent);font-weight:500;margin-bottom:1.5rem;border-left:3px solid var(--accent)}
+.clue-modal button{padding:0.6rem 2rem;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;font-family:inherit;transition:all 0.3s}
+.clue-modal button:hover{background:var(--accent)}
+footer{background:var(--primary);color:#fff;padding:3rem 0 1.5rem;margin-top:4rem}
+footer .container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.footer-content{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2rem}
+.footer-brand h3{font-family:'Noto Serif SC',serif;font-size:1.2rem;margin-bottom:0.5rem}
+.footer-brand p{font-size:0.8rem;opacity:0.7;line-height:1.8}
+.footer-links h4{font-size:0.85rem;margin-bottom:1rem;opacity:0.9}
+.footer-links ul{list-style:none}
+.footer-links li{margin-bottom:0.5rem}
+.footer-links a{color:#fff;opacity:0.6;text-decoration:none;font-size:0.8rem;transition:opacity 0.3s}
+.footer-links a:hover{opacity:1}
+.footer-bottom{text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.75rem;opacity:0.5}
+.hidden-link{color:inherit;text-decoration:none;border-bottom:1px dashed var(--text-light);cursor:pointer;transition:all 0.3s}
+.hidden-link:hover{color:var(--accent);border-color:var(--accent)}
+.text-center{text-align:center}.mt-2{margin-top:2rem}.mb-2{margin-bottom:2rem}
+.typewriter{overflow:hidden;border-right:2px solid var(--accent);white-space:nowrap;animation:typing 2s steps(20,end),blink-caret 0.75s step-end infinite}
+@keyframes typing{from{width:0}to{width:100%}}
+@keyframes blink-caret{from,to{border-color:transparent}50%{border-color:var(--accent)}}
+.rule-hint{position:fixed;bottom:2rem;right:2rem;background:#fff;padding:1rem 1.5rem;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.15);font-size:0.8rem;color:var(--text-light);max-width:280px;display:none;z-index:50;border-left:3px solid var(--accent)}
+.rule-hint.show{display:block;animation:slideInRight 0.4s ease}
+@keyframes slideInRight{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.rule-hint .close{position:absolute;top:0.3rem;right:0.5rem;cursor:pointer;color:var(--text-light);font-size:1.2rem;line-height:1}
+.rule-hint strong{color:var(--accent);display:block;margin-bottom:0.3rem}
+.flicker{animation:flicker 3s infinite}
+@keyframes flicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:0.3}94%{opacity:1}96%{opacity:0.5}97%{opacity:1}}
+.loading-text{text-align:center;color:var(--text-light);padding:3rem;font-size:0.9rem}
+@media(max-width:768px){.quick-cards{grid-template-columns:1fr}.about-content{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}.reviews-grid{grid-template-columns:1fr}.footer-content{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}nav ul{gap:1rem}.search-box{display:none}}
+</style>
+<link rel="stylesheet" href="jingmo-fix.css?v=3.0">
+<link rel="stylesheet" href="paywall.css?v=1.0">
+</head>
+<body>
+<!-- 顶部栏 -->
+<div class="top-bar">
+    <div class="container">
+        <span class="datetime" id="datetime">2026年07月30日 星期四</span>
+        <div class="notice">
+            <span class="notice-dot"></span>
+            <span>中心公告：原咨询师林默已离职，其患者已移交其他咨询师</span>
+        </div>
+    </div>
+</div>
+<!-- 导航 -->
+<header>
+    <div class="container">
+        <div class="logo" onclick="showPage('home')">
+            <div class="logo-icon"></div>
+            <div class="logo-text">
+                <h1>静心心理咨询中心</h1>
+                <span>JINGXIN PSYCHOLOGICAL COUNSELING</span>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active" data-page="home">首页</a></li>
+                <li><a href="#" data-page="about">关于我们</a></li>
+                <li><a href="#" data-page="services">服务项目</a></li>
+                <li><a href="#" data-page="reviews">患者心声</a></li>
+                <li><a href="#" data-page="booking">预约咨询</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" placeholder="站内搜索..." id="header-search" onkeypress="if(event.key==='Enter'){showPage('search');doSearch(this.value)}">
+            </div>
+            <div class="progress-indicator">
+                <span>线索:</span>
+                <span class="clue-count"><span id="clue-found">0</span>/7</span>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- 首页 -->
+<section class="page-section active" id="page-home">
+    <div class="hero">
+        <div class="hero-slide active slide-1">
+            <div class="slide-bg"></div>
+            <div class="hero-content">
+                <h2>专业 · 温暖 · 守护</h2>
+                <p>静心心理咨询中心，用专业与温度陪伴每一位来访者</p>
+            </div>
+        </div>
+        <div class="hero-slide slide-2">
+            <div class="slide-bg"></div>
+            <div class="hero-content">
+                <h2>8年专注心理健康</h2>
+                <p>累计服务超过3000位来访者，见证每一次心灵的成长</p>
+            </div>
+        </div>
+        <div class="hero-slide slide-3">
+            <div class="slide-bg"></div>
+            <div class="hidden-hotspot" onclick="findClue(1)" title=""></div>
+            <div class="hero-content">
+                <h2>每一个声音都值得被倾听</h2>
+                <p>在安全与保密的空间里，让内心找到归属</p>
+            </div>
+        </div>
+        <div class="hero-dots">
+            <span class="hero-dot active" onclick="setSlide(0)"></span>
+            <span class="hero-dot" onclick="setSlide(1)"></span>
+            <span class="hero-dot" onclick="setSlide(2)"></span>
+        </div>
+    </div>
+    <div class="quick-cards">
+        <div class="quick-card" onclick="showPage('about')">
+            <div class="quick-card-icon">&#9825;</div>
+            <h3>专业团队</h3>
+            <p>国家认证心理咨询师，平均从业经验8年以上</p>
+        </div>
+        <div class="quick-card" onclick="showPage('services')">
+            <div class="quick-card-icon">&#9775;</div>
+            <h3>多元服务</h3>
+            <p>个体咨询、家庭治疗、危机干预、企业EAP</p>
+        </div>
+        <div class="quick-card" onclick="showPage('booking')">
+            <div class="quick-card-icon">&#9745;</div>
+            <h3>在线预约</h3>
+            <p>便捷的在线预约系统，灵活安排咨询时间</p>
+        </div>
+    </div>
+    <div class="notice-board">
+        <h3>&#10038; 最新公告</h3>
+        <div class="notice-item" onclick="showPage('about')">
+            <span class="notice-item-title"><span class="tag-new">重要</span>中心人员变动通知</span>
+            <span class="notice-item-date">2026-07-15</span>
+        </div>
+        <div class="notice-item">
+            <span class="notice-item-title">暑期心理咨询预约调整通知</span>
+            <span class="notice-item-date">2026-07-10</span>
+        </div>
+        <div class="notice-item special" onclick="toggleRuleHint()">
+            <span class="notice-item-title">员工守则更新（内部）</span>
+            <span class="notice-item-date">2026-07-01</span>
+        </div>
+        <div class="notice-item">
+            <span class="notice-item-title">中心营业时间调整</span>
+            <span class="notice-item-date">2026-06-28</span>
+        </div>
+    </div>
+</section>
+<!-- 关于我们 -->
+<section class="page-section" id="page-about">
+    <div class="page-header">
+        <h2>关于静心</h2>
+        <p>用专业守护心灵，用温暖点亮希望</p>
+    </div>
+    <div class="about-content">
+        <div class="about-text">
+            <h3>中心简介</h3>
+            <p>静心心理咨询中心成立于2018年，是一家专注于心理健康服务的专业机构。我们致力于为个人、家庭和企业提供高质量的心理咨询服务。</p>
+            <p>中心拥有舒适的咨询环境和专业的咨询团队，所有咨询师均持有国家认证的心理咨询师资格证书，并持续接受专业督导和培训。</p>
+            <p>我们相信，每个人都有自我疗愈的力量，而心理咨询师的任务，就是陪伴来访者找到这份力量。</p>
+            <div class="about-stats">
+                <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">年专业服务</div></div>
+                <div class="stat-item"><div class="stat-number">3000+</div><div class="stat-label">服务来访者</div></div>
+                <div class="stat-item"><div class="stat-number">98%</div><div class="stat-label">满意度</div></div>
+            </div>
+        </div>
+        <div class="about-image" style="border-radius:12px;height:400px;overflow:hidden;">
+            <img src="center-room.jpg" alt="中心环境" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+    </div>
+    <div class="team-section">
+        <h3>咨询团队</h3>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-card-photo"><img src="avatar-zhang.jpg" alt="张雅雯" style="width:120px;height:120px;border-radius:50%;object-fit:cover;"></div>
+                <div class="team-card-info">
+                    <h4>张雅雯</h4>
+                    <div class="role">中心主任 / 首席咨询师</div>
+                    <div class="desc">国家二级心理咨询师，从业12年，擅长焦虑症、抑郁症及创伤后应激障碍的治疗。</div>
+                </div>
+            </div>
+            <div class="team-card limo" id="limo-card">
+                <div class="team-card-photo"><img src="avatar-linmo.jpg" alt="林默" style="width:120px;height:120px;border-radius:50%;object-fit:cover;filter:grayscale(0.7) blur(2px);opacity:0.6;"></div>
+                <div class="team-card-info">
+                    <h4><span class="redacted" onclick="findClue(2)">林默</span></h4>
+                    <div class="role">原咨询师（已离职）</div>
+                    <div class="desc"><span class="redacted">国家二级心理咨询师，专注于青少年心理和家庭关系咨询，在中心服务5年，深受来访者信赖。</span></div>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-card-photo"><img src="avatar-chen.jpg" alt="陈浩" style="width:120px;height:120px;border-radius:50%;object-fit:cover;"></div>
+                <div class="team-card-info">
+                    <h4>陈浩</h4>
+                    <div class="role">咨询师</div>
+                    <div class="desc">国家三级心理咨询师，从业4年，擅长职场压力和人际关系咨询。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 服务项目 -->
+<section class="page-section" id="page-services">
+    <div class="page-header"><h2>服务项目</h2><p>科学定价，透明服务，让专业触手可及</p></div>
+    <table class="service-table">
+        <thead><tr><th style="width:25%">服务类型</th><th style="width:35%">服务内容</th><th style="width:20%">时长</th><th style="width:20%">价格</th></tr></thead>
+        <tbody>
+            <tr><td class="service-name">个体心理咨询</td><td class="note">一对一深度心理咨询，针对情绪困扰、人际关系、自我成长等议题</td><td>50分钟/次</td><td class="price" onclick="findClue(3)">¥307</td></tr>
+            <tr><td class="service-name">家庭治疗</td><td class="note">针对家庭关系、亲子沟通、婚姻问题等，2-4人参与</td><td>90分钟/次</td><td class="price">¥600</td></tr>
+            <tr><td class="service-name">危机干预</td><td class="note">紧急心理援助，针对突发创伤事件、自杀危机等特殊情况 <span style="color:var(--accent);cursor:pointer;font-size:0.7rem;" onclick="showCrisisHint()">[?]</span></td><td>随时响应</td><td class="price" onclick="findClue(3)">¥514</td></tr>
+            <tr><td class="service-name">企业EAP服务</td><td class="note">企业员工心理援助计划，包含讲座、团辅、个案咨询</td><td>按项目定制</td><td class="price">¥面议</td></tr>
+            <tr><td class="service-name">心理测评</td><td class="note">专业心理量表测评与解读，包含SCL-90、SDS、SAS等</td><td>30分钟</td><td class="price">¥200</td></tr>
+            <tr><td class="service-name">团体心理辅导</td><td class="note">6-12人小团体，围绕特定主题进行心理成长</td><td>120分钟/次</td><td class="price">¥150</td></tr>
+        </tbody>
+    </table>
+    <p class="text-center" style="margin-top:1.5rem;font-size:0.8rem;color:var(--text-light);">* 价格已包含咨询场地费和基础测评费用<br>* 学生凭有效证件可享受8折优惠</p>
+</section>
+<!-- 患者心声 -->
+<section class="page-section" id="page-reviews">
+    <div class="page-header"><h2>患者心声</h2><p>真实的改变，从勇敢面对开始</p></div>
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="review-header"><img src="review-avatar-1.jpg" alt="李先生" class="review-avatar" style="width:45px;height:45px;border-radius:50%;object-fit:cover;"><div class="review-meta"><h4>李先生</h4><div class="review-date">2026-06-20</div></div></div>
+            <div class="review-content"><p>在张老师的帮助下，我逐渐走出了焦虑的阴影。咨询室的环境很温馨，让人很放松。每次咨询完都能感受到内心的平静。<span class="highlight" onclick="findClue(4)">张</span>老师很专业，也很耐心。</p></div>
+        </div>
+        <div class="review-card special-review">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#333,#666);">?</div><div class="review-meta"><h4>匿名</h4><div class="review-date">2026-07-02</div></div></div>
+            <div class="review-content"><p>我在这里接受了三个月的咨询。咨询师很有耐心，但我总觉得有些地方不太对劲。<span class="highlight" onclick="toggleHiddenMsg(this)">特别是晚上的咨询室...</span></p><div class="hidden-msg">他们不是在帮你，是在收集数据。林医生发现了真相，然后他就"消失"了。如果你看到这留言，去搜搜看他的档案。</div></div>
+        </div>
+        <div class="review-card">
+            <div class="review-header"><img src="review-avatar-2.jpg" alt="王女士" class="review-avatar" style="width:45px;height:45px;border-radius:50%;object-fit:cover;"><div class="review-meta"><h4>王女士</h4><div class="review-date">2026-05-15</div></div></div>
+            <div class="review-content"><p>家庭治疗帮助我和我的丈夫重建了沟通。陈咨询师的方法很实用，我们现在学会了如何更好地倾听彼此。非常感谢静心中心！</p></div>
+        </div>
+        <div class="review-card special-review">
+            <div class="review-header"><img src="review-avatar-3.jpg" alt="林遥" class="review-avatar" style="width:45px;height:45px;border-radius:50%;object-fit:cover;"><div class="review-meta"><h4>林遥</h4><div class="review-date">2026-07-25</div></div></div>
+            <div class="review-content"><p>我哥哥在这里工作了五年。他们说他辞职了，但我知道这不是真的。<span class="highlight" onclick="findClue(5)">307房间</span>的灯每晚都亮着，可那里已经没人办公了。有人在掩盖什么，我需要知道真相。</p></div>
+        </div>
+        <div class="review-card">
+            <div class="review-header"><img src="review-avatar-4.jpg" alt="张同学" class="review-avatar" style="width:45px;height:45px;border-radius:50%;object-fit:cover;"><div class="review-meta"><h4>张同学</h4><div class="review-date">2026-04-10</div></div></div>
+            <div class="review-content"><p>学生价很实惠，咨询师也很理解我们的压力。考试焦虑的问题改善了很多，推荐给了好几个同学。</p></div>
+        </div>
+        <div class="review-card special-review">
+            <div class="review-header"><div class="review-avatar" style="background:linear-gradient(135deg,#2c3e50,#34495e);">?</div><div class="review-meta"><h4>用户0482</h4><div class="review-date">2026-07-28</div></div></div>
+            <div class="review-content"><p>感谢静心中心在我最困难的时候给予帮助。咨询过程中我学到了很多关于<span class="highlight" onclick="findClue(6)">自我的认知</span>。如果林医生还在的话，我想当面谢谢他。</p></div>
+        </div>
+    </div>
+</section>
+<!-- 预约咨询 -->
+<section class="page-section" id="page-booking">
+    <div class="page-header"><h2>预约咨询</h2><p>迈出第一步，就是改变的开始</p></div>
+    <div class="booking-form">
+        <div class="form-row">
+            <div class="form-group"><label>您的姓名</label><input type="text" placeholder="请输入真实姓名" id="book-name"></div>
+            <div class="form-group"><label>联系电话</label><input type="tel" placeholder="请输入手机号码" id="book-phone"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label>咨询类型</label><select id="book-type"><option value="">请选择咨询类型</option><option value="individual">个体心理咨询</option><option value="family">家庭治疗</option><option value="crisis">危机干预</option><option value="enterprise">企业EAP</option></select></div>
+            <div class="form-group"><label>期望日期</label><input type="date" id="book-date"></div>
+        </div>
+        <div class="form-group"><label>备注说明</label><textarea placeholder="请简述您的困扰或需求，以便我们为您匹配合适的咨询师..." id="book-note"></textarea></div>
+        <button class="submit-btn" onclick="submitBooking()">提交预约</button>
+    </div>
+</section>
+<!-- 搜索结果 -->
+<section class="page-section" id="page-search">
+    <div class="search-page">
+        <div class="search-big"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="输入关键词搜索..." id="big-search" onkeypress="if(event.key==='Enter'){doSearch(this.value)}"></div>
+        <div class="search-results" id="search-results"><div class="loading-text">输入关键词开始搜索</div></div>
+    </div>
+</section>
+<!-- 隐藏档案 -->
+<section class="page-section" id="page-archive">
+    <div class="archive-gate" id="archive-gate">
+        <h3>&#128274; 机密档案室</h3>
+        <p>请输入访问密码以查看林默的私人档案</p>
+        <div class="archive-input"><input type="text" placeholder="密码" id="archive-password" maxlength="6" onkeypress="if(event.key==='Enter'){checkArchivePassword()}"><button onclick="checkArchivePassword()">进入</button></div>
+        <p style="margin-top:1rem;font-size:0.75rem;color:var(--text-light);">提示：收集所有线索后，密码将显现</p>
+    </div>
+    <div class="archive-content" id="archive-content">
+        <h3>林默的笔记</h3>
+        <div class="archive-entry">
+            <div class="date">2026年4月3日</div><div class="title">关于0482号患者的异常</div>
+            <div class="body">0482号患者的咨询记录引起了我的注意。他描述的症状与其他几位患者惊人地相似——失眠、记忆断层、对特定声音产生强烈恐惧。
+我调阅了近半年的档案，发现已有<span class="secret">7位患者</span>出现相同症状模式。他们互不相识，却描述了几乎相同的"梦境"。
+
+这不可能只是巧合。</div>
+        </div>
+        <div class="archive-entry">
+            <div class="date">2026年4月17日</div><div class="title">发现</div>
+            <div class="body">我趁夜班时间进入了307房间。那里名义上是"设备间"，但我从未见过任何人进出。
+
+房间里有一台我不认识的仪器，连接着数十根线缆。墙上有每位患者的照片，照片下方标注着数字和符号。
+我拍了几张照片，但还没看完就被警报惊动了。我必须尽快离开。</div>
+        </div>
+        <div class="archive-entry">
+            <div class="date">2026年5月8日</div><div class="title">我必须说出来</div>
+            <div class="body">我确认了。静心中心不是在做心理咨询。
+
+他们在进行某种<span class="secret">记忆实验</span>。利用咨询的名义，在患者最脆弱的时候，通过催眠和某种声波装置植入虚假记忆、提取真实记忆。
+
+张雅雯是负责人。润泽集团提供资金支持。
+
+我尝试联系媒体，但电话被监听了。我把证据藏在了这个网站的代码里。如果你看到了这些，请报警。
+
+访问凭证是两次关键日期按先后写成的组合。我把更多证据留在了这两段时间记录里。
+我不知道还能相信谁。</div>
+        </div>
+        <div class="archive-entry">
+            <div class="date">2026年5月12日</div><div class="title">最后一条记录</div>
+            <div class="body">他们发现我知道了。
+
+如果有人看到这个，请记住：
+- 不要独自去307房间
+- 不要相信张雅雯的任何话
+- 联系蔚海市警局，找魏警官
+- 保护我的妹妹林遥
+
+真相必须被揭露。
+<span class="secret">——林默</span></div>
+        </div>
+        <div style="text-align:center;margin-top:2rem;"><button class="submit-btn" onclick="showPage('truth')">还原完整真相</button></div>
+    </div>
+</section>
+<!-- 真相 -->
+<section class="page-section" id="page-truth">
+    <div class="truth-page">
+        <h2>真相</h2>
+        <div class="truth-content">
+            <p class="truth-highlight">静心心理咨询中心的真实身份，是润泽集团旗下一个非法记忆研究项目的掩护机构。</p>
+            <p>自2023年起，该中心以"心理咨询"为幌子，招募不知情的心理咨询师和来访者。在咨询过程中，他们利用特制的声波设备（伪装成环境白噪音）和深度催眠技术，对来访者进行记忆操控实验。</p>
+            <p>林默于2026年3月7日（3.07）首次发现异常，5月14日（5.14）确认了全部真相。在他准备向媒体曝光前，被中心以"心理崩溃自杀"为由灭口。</p>
+            <p>林遥（林默的妹妹）在哥哥失踪后察觉异常，通过伪装成来访者深入调查，并在网站上留下了隐蔽线索。玩家扮演的调查记者受林遥委托，通过浏览静心中心官网，逐步揭开了这一骇人真相。</p>
+            <p style="text-align:center;margin-top:2rem;color:var(--text-light);font-size:0.8rem;">—— 全案终结 ——<br><br><span style="font-size:0.75rem;">感谢你的调查。林默的牺牲不会被遗忘。</span></p>
+        </div>
+        <div style="text-align:center;margin-top:2rem;"><button class="submit-btn" onclick="location.reload()" style="max-width:300px;">重新调查</button></div>
+    </div>
+</section>
+<!-- 线索弹窗 -->
+<div class="clue-modal" id="clue-modal">
+    <div class="clue-modal-content">
+        <div class="clue-modal-icon">&#128269;</div><h3>发现线索！</h3><p id="clue-modal-desc">你找到了一条重要线索</p><div class="clue-text" id="clue-modal-text"></div><button onclick="closeClueModal()">继续调查</button>
+    </div>
+</div>
+<!-- 规则提示 -->
+<div class="rule-hint" id="rule-hint"><span class="close" onclick="document.getElementById('rule-hint').classList.remove('show')">&times;</span><strong>员工守则更新（第7条补充）</strong>任何员工不得在夜间进入307房间。如发现房间内有灯光或异常声响，请立即离开并报告给张主任。不要试图查看房间内的任何设备。</div>
+<!-- 底部 -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-brand"><h3>静心心理咨询中心</h3><p>地址：蔚海市静安区梧桐路168号<br>电话：021-3075-1407<br>邮箱：contact@jingxin.center<br><span style="color:var(--accent);cursor:pointer;" onclick="showPage('archive')">内部档案系统入口 &rarr;</span></p></div>
+            <div class="footer-links"><h4>快速导航</h4><ul><li><a href="#" onclick="showPage('home')">首页</a></li><li><a href="#" onclick="showPage('about')">关于我们</a></li><li><a href="#" onclick="showPage('services')">服务项目</a></li><li><a href="#" onclick="showPage('booking')">在线预约</a></li></ul></div>
+            <div class="footer-links"><h4>关注我们</h4><ul><li><a href="#">微信公众号</a></li><li><a href="#">新浪微博</a></li><li><a href="#">小红书</a></li><li><a href="#">抖音</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>静心心理咨询中心 &copy; 2018-2026 | 京ICP备xxxxxxxx号 | 本网站仅为解谜游戏虚构内容</p></div>
+    </div>
+</footer>
+<script>
+// ========== 游戏状态 ==========
+const gameState = { cluesFound: new Set(), currentSlide: 0, totalSlides: 3 };
+const clues = {
+    1: { desc: '在首页轮播图的第三张照片中，你发现了旧录像叠加信息。', text: '照片并非普通宣传照，画面保留了3月7日晚的录制时间。', key: '03-07' },
+    2: { desc: '关于林默的介绍被"删除"了，但你找到了隐藏的文字。', text: '选择文字后，林默的完整介绍显现。他在这里工作了5年，不是主动离职。', key: '五年' },
+    3: { desc: '服务价格表中隐藏着两处异常数字。', text: '307与514被写入两个无关服务项目；它们只是异常价格，必须继续查看备案版本才能判断用途。', key: '两处异常价格' },
+    4: { desc: '患者的评价中暗藏玄机。', text: '李先生的评价中提到了"张老师"。但仔细品味他的措辞，似乎别有深意。', key: '张' },
+    5: { desc: '林遥的留言透露出关键信息。', text: '307房间的灯每晚都亮着。这是林默最后出现的地方。', key: '307房间' },
+    6: { desc: '匿名用户的留言提到了"自我的认知"。', text: '0482号患者——林默笔记中提到的关键编号。', key: '0482' },
+    7: { desc: '你完成了多来源证据综合。', text: '价格版本记录与307门禁缓存指向同一日期，并与较早的照片时间构成两组按先后排列的月日信息。', key: '两组日期' }
+};
+function showPage(page) {
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    const target = document.getElementById('page-' + page);
+    if(target) target.classList.add('active');
+    const navLink = document.querySelector('nav a[data-page="' + page + '"]');
+    if(navLink) navLink.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('nav a').forEach(a => { a.addEventListener('click', e => { e.preventDefault(); showPage(a.dataset.page); }); });
+function setSlide(index) {
+    gameState.currentSlide = index;
+    document.querySelectorAll('.hero-slide').forEach((s,i) => s.classList.toggle('active', i===index));
+    document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===index));
+}
+setInterval(() => { gameState.currentSlide = (gameState.currentSlide + 1) % gameState.totalSlides; setSlide(gameState.currentSlide); }, 5000);
+function findClue(id) {
+    if(gameState.cluesFound.has(id)) return;
+    gameState.cluesFound.add(id);
+    document.getElementById('clue-found').textContent = gameState.cluesFound.size;
+    const clue = clues[id];
+    document.getElementById('clue-modal-desc').textContent = clue.desc;
+    document.getElementById('clue-modal-text').textContent = clue.text;
+    document.getElementById('clue-modal').classList.add('active');
+    // 第7条线索不再自动触发，须由补丁中的多来源证据综合完成。
+}
+function closeClueModal() { document.getElementById('clue-modal').classList.remove('active'); }
+function toggleHiddenMsg(el) { const msg = el.parentElement.querySelector('.hidden-msg'); if(msg) msg.classList.toggle('show'); }
+function showCrisisHint() { alert('危机干预热线：400-xxx-xxxx\n\n（提示：这个价格似乎不太寻常...）'); }
+function toggleRuleHint() { document.getElementById('rule-hint').classList.add('show'); setTimeout(() => document.getElementById('rule-hint').classList.remove('show'), 8000); }
+function submitBooking() {
+    const note = document.getElementById('book-note').value.toLowerCase();
+    const name = document.getElementById('book-name').value;
+    if(!name) { alert('请输入姓名'); return; }
+    if(note.includes('林默') || note.includes('真相') || note.includes('307')) {
+        alert('系统提示：检测到敏感关键词。您的预约已记录，将有专人与您联系。\n\n（同时你发现了一条线索）');
+        if(!gameState.cluesFound.has(5)) findClue(5);
+    } else alert('预约提交成功！我们的工作人员将在24小时内与您联系确认。');
+}
+function doSearch(keyword) {
+    const resultsDiv = document.getElementById('search-results');
+    if(!keyword.trim()) { resultsDiv.innerHTML = '<div class="loading-text">请输入关键词</div>'; return; }
+    keyword = keyword.toLowerCase();
+    const allResults = [
+        { title: '中心简介', desc: '静心心理咨询中心成立于2018年，位于蔚海市静安区...', url: '/about', page: 'about' },
+        { title: '咨询团队', desc: '张雅雯（主任）、林默（原咨询师）、陈浩...', url: '/about', page: 'about' },
+        { title: '个体心理咨询', desc: '一对一深度心理咨询，针对情绪困扰、人际关系...', url: '/services', page: 'services' },
+        { title: '危机干预', desc: '紧急心理援助，针对突发创伤事件、自杀危机...', url: '/services', page: 'services' },
+        { title: '患者评价 - 李先生', desc: '在张老师的帮助下，我逐渐走出了焦虑的阴影...', url: '/reviews', page: 'reviews' },
+        { title: '患者评价 - 林遥', desc: '我哥哥在这里工作了五年。他们说他辞职了...', url: '/reviews', page: 'reviews' },
+        { title: '预约须知', desc: '请提前24小时预约，首次咨询请提前15分钟到达...', url: '/booking', page: 'booking' },
+        { title: '营业时间', desc: '周一至周日 9:00-21:00（周三延长至22:00）', url: '/booking', page: 'booking' }
+    ];
+    if(keyword.includes('林默') || keyword.includes('档案') || keyword.includes('真相')) allResults.push({ title: '〖机密〗林默的私人档案', desc: '访问受限，需要密码才能查看。提示：日期...', url: '/archive', page: 'archive', special: true });
+    const results = allResults.filter(r => r.title.toLowerCase().includes(keyword) || r.desc.toLowerCase().includes(keyword));
+    if(results.length === 0) resultsDiv.innerHTML = '<div class="no-results">未找到相关结果，请尝试其他关键词</div>';
+    else resultsDiv.innerHTML = results.map(r => `<div class="search-result-item ${r.special?'special-review':''}" onclick="showPage('${r.page}')"><h4>${r.title}</h4><p>${r.desc}</p><div class="url">jingxin.center${r.url}</div></div>`).join('');
+}
+function checkArchivePassword() {
+    const pwd = document.getElementById('archive-password').value.trim();
+    if(pwd === '307514') { document.getElementById('archive-gate').style.display = 'none'; document.getElementById('archive-content').classList.add('active'); }
+    else alert('密码错误。请收集所有线索后再试。');
+}
+function updateDateTime() {
+    const now = new Date();
+    const weekdays = ['日','一','二','三','四','五','六'];
+    const str = `${now.getFullYear()}年${String(now.getMonth()+1).padStart(2,'0')}月${String(now.getDate()).padStart(2,'0')}日 星期${weekdays[now.getDay()]}`;
+    document.getElementById('datetime').textContent = str;
+}
+updateDateTime();
+setInterval(updateDateTime, 60000);
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        if(gameState.cluesFound.size === 0) {
+            document.getElementById('rule-hint').innerHTML = '<span class="close" onclick="document.getElementById(\'rule-hint\').classList.remove(\'show\')">&times;</span><strong>调查提示</strong>这是一个伪装成心理咨询中心官网的解谜游戏。请仔细浏览每个页面，寻找隐藏的线索。点击可疑的文字和区域，拼凑出完整真相。';
+            document.getElementById('rule-hint').classList.add('show');
+            setTimeout(() => document.getElementById('rule-hint').classList.remove('show'), 10000);
+        }
+    }, 2000);
+});
+</script>
+<script src="jingmo-fix.js?v=3.1"></script>
+<script src="paywall.js?v=1.0"></script>
+</body>
+</html>

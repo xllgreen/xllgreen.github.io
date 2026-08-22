@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650">
+<rect width="1000" height="650" fill="#d7ece8"/><g stroke="#30605a" fill="none" stroke-width="7"><rect x="95" y="70" width="820" height="500"/><path d="M95 245h820M95 425h820M295 70v500M550 70v500M770 70v500"/><path d="M550 245h220v180H550z" fill="#567c76" fill-opacity=".12"/></g>
+<g font-family="sans-serif" font-size="32" fill="#315650"><text x="125" y="175">B7-01—03</text><text x="355" y="175">护士站</text><text x="608" y="175">储藏室</text><text x="805" y="175">楼梯</text><text x="125" y="350">B7-04—06</text><text x="355" y="350">治疗室</text><text x="605" y="350">设备间</text><text x="808" y="350">电梯</text><text x="125" y="520">封闭区</text><text x="365" y="520">氧气间</text><text x="620" y="520">洗衣梯</text></g>
+<text x="88" y="40" fill="#315650" font-family="sans-serif" font-size="28">白塔医院改造竣工图（2013）</text>
+<path d="M545 247h225v178" stroke="#f05454" stroke-width="8" fill="none" stroke-dasharray="18 13"/>
+</svg>

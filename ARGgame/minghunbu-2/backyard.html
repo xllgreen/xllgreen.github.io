@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冥婚簿 · 续 —— 后院</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0807;color:#c4b998;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow-y:auto;min-height:100vh}
+.fog{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 30%,rgba(50,15,15,0.3) 0%,rgba(10,8,7,1) 70%);pointer-events:none}
+.moon{position:fixed;top:5%;right:8%;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(180,30,30,0.3) 0%,rgba(120,10,10,0.1) 50%,transparent 70%);animation:moonPulse 4s ease-in-out infinite;pointer-events:none}
+@keyframes moonPulse{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:0.9;transform:scale(1.05)}}
+.candle-glow{position:fixed;bottom:10%;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(255,100,0,0.05) 0%,transparent 70%);animation:flicker 0.15s infinite;pointer-events:none}
+@keyframes flicker{0%,100%{opacity:0.6}50%{opacity:0.9}}
+
+.container{position:relative;z-index:10;max-width:760px;margin:0 auto;padding:30px 20px 60px}
+.back-link{position:fixed;top:20px;left:20px;z-index:20;color:#5a4a3a;font-size:13px;text-decoration:none;letter-spacing:2px;border:1px solid #2a2015;padding:6px 16px;border-radius:4px;transition:all 0.3s}
+.back-link:hover{border-color:#5a3a2a;color:#8a7d6a}
+
+.page-title{font-size:28px;letter-spacing:8px;color:#6b2020;text-align:center;margin-bottom:8px;text-shadow:0 0 20px rgba(120,30,30,0.3)}
+.page-sub{font-size:12px;color:#4a3a2a;text-align:center;letter-spacing:4px;margin-bottom:30px}
+
+/* ---- 主角内心独白 ---- */
+.inner-thought{background:linear-gradient(90deg,transparent,rgba(139,48,48,0.08),transparent);padding:18px 30px;margin:25px 0;font-size:14px;color:#8a7060;line-height:2.2;letter-spacing:1px;text-align:center;font-style:italic;border-top:1px solid rgba(139,48,48,0.15);border-bottom:1px solid rgba(139,48,48,0.15)}
+.inner-thought .voice{color:#c5a059;font-style:normal;font-weight:bold;letter-spacing:2px}
+
+/* ---- 场景叙述 ---- */
+.scene-text{color:#7a6d5a;font-size:14px;line-height:2.2;margin-bottom:18px;letter-spacing:1px}
+.highlight{color:#c5a059}
+.red{color:#8b3030}
+.note{color:#6a5a4a;font-size:12px;font-style:italic;margin-top:10px}
+
+/* ---- 对话系统 ---- */
+.dialogue-scene{background:rgba(20,15,10,0.7);border:1px solid #2a2015;border-radius:4px;padding:25px;margin:20px 0;display:none}
+.dialogue-scene.show{display:block;animation:fadeIn 0.8s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.dialogue-speaker{font-size:13px;color:#c5a059;letter-spacing:3px;margin-bottom:10px;font-weight:bold}
+.dialogue-text{font-size:14px;color:#9a8d7a;line-height:2.1;margin-bottom:20px;letter-spacing:1px}
+.dialogue-choices{display:flex;flex-direction:column;gap:8px}
+.dialogue-choice{padding:10px 16px;background:rgba(25,20,15,0.7);border:1px solid #3a2a1a;color:#8a7d6a;font-family:inherit;font-size:13px;letter-spacing:1px;cursor:pointer;transition:all 0.3s;border-radius:4px;text-align:left}
+.dialogue-choice:hover{border-color:#8b3030;color:#c5a059;background:rgba(35,25,18,0.8)}
+
+/* ---- 物品栏 ---- */
+.inventory-bar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0;padding:15px;background:rgba(15,10,8,0.5);border:1px solid #2a2015;border-radius:4px;min-height:50px;align-items:center}
+.inventory-label{font-size:11px;color:#4a3a2a;letter-spacing:2px;margin-right:10px;white-space:nowrap}
+.inventory-slot{width:45px;height:45px;background:rgba(20,15,10,0.6);border:1px dashed #3a2a1a;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:all 0.3s;position:relative}
+.inventory-slot.filled{border-style:solid;border-color:#5a3a2a;cursor:pointer}
+.inventory-slot.filled:hover{border-color:#8b3030;box-shadow:0 0 10px rgba(139,48,48,0.2)}
+.inventory-slot.tooltip:hover::after{content:attr(data-name);position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:11px;color:#c5a059;white-space:nowrap;letter-spacing:1px;background:rgba(15,10,8,0.9);padding:2px 8px;border-radius:2px;z-index:50}
+
+/* ---- 场景物品 ---- */
+.items-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:25px 0}
+.item-card{background:rgba(25,20,15,0.7);border:1px solid #2a2015;padding:20px 12px;text-align:center;cursor:pointer;transition:all 0.3s;border-radius:4px;position:relative}
+.item-card:hover{border-color:#5a3a2a;background:rgba(35,28,20,0.8)}
+.item-card.collected{opacity:0.5;pointer-events:none;border-color:#2a2015}
+.item-icon{font-size:28px;margin-bottom:6px;opacity:0.7}
+.item-name{font-size:13px;color:#8a7d6a;letter-spacing:2px}
+.item-tag{font-size:10px;color:#5a4a3a;margin-top:4px}
+
+/* ---- 组合提示 ---- */
+.combine-hint{text-align:center;font-size:13px;color:#6a5a4a;letter-spacing:1px;margin:10px 0;display:none}
+.combine-hint.show{display:block}
+
+/* ---- 旋转环机关 ---- */
+.ring-puzzle{background:rgba(20,15,10,0.7);border:1px solid #3a2a1a;border-radius:4px;padding:30px;margin:20px 0;text-align:center;display:none}
+.ring-puzzle.show{display:block;animation:fadeIn 0.8s}
+.ring-title{font-size:15px;color:#c5a059;letter-spacing:3px;margin-bottom:8px}
+.ring-desc{font-size:13px;color:#6a5a4a;margin-bottom:20px;letter-spacing:1px}
+.ring-container{display:flex;gap:20px;justify-content:center;align-items:center;margin:20px 0}
+.ring-group{display:flex;flex-direction:column;align-items:center;gap:8px}
+.ring-label{font-size:11px;color:#5a4a3a;letter-spacing:2px}
+.ring-display{width:70px;height:70px;border-radius:50%;border:3px solid #3a2a1a;background:rgba(15,10,8,0.8);display:flex;align-items:center;justify-content:center;font-size:22px;color:#c5a059;transition:all 0.3s;user-select:none}
+.ring-display:hover{border-color:#8b3030}
+.ring-arrows{display:flex;gap:12px}
+.ring-arrow{width:30px;height:30px;border-radius:50%;border:1px solid #3a2a1a;background:rgba(20,15,10,0.7);color:#7a6d5a;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-family:inherit}
+.ring-arrow:hover{border-color:#8b3030;color:#c5a059}
+.ring-confirm-btn{display:block;margin:20px auto 0;padding:8px 30px;background:transparent;border:1px solid #5a3a2a;color:#8a6d5a;font-family:inherit;font-size:14px;letter-spacing:3px;cursor:pointer;transition:all 0.3s}
+.ring-confirm-btn:hover{border-color:#8b3030;color:#c08070}
+.ring-error{color:#8b3030;font-size:13px;text-align:center;height:18px;letter-spacing:2px;margin-top:10px}
+
+/* ---- 揭示区域 ---- */
+.reveal-section{display:none;margin-top:30px}
+.reveal-section.show{display:block;animation:fadeIn 1.2s}
+.reveal-content{background:linear-gradient(135deg,rgba(35,28,18,0.9),rgba(20,15,10,0.95));border:1px solid #3a2a1a;padding:30px;border-radius:4px}
+.reveal-content h3{color:#c5a059;font-size:16px;letter-spacing:3px;margin-bottom:12px;text-align:center}
+.reveal-content p{font-size:14px;color:#9a8d7a;line-height:2.1;margin-bottom:10px}
+.next-link{display:block;margin-top:25px;padding:14px 30px;background:rgba(139,48,48,0.1);border:1px solid #8b3030;color:#c5a059;font-family:inherit;font-size:15px;letter-spacing:4px;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.4s;border-radius:4px}
+.next-link:hover{background:rgba(139,48,48,0.2);box-shadow:0 0 20px rgba(139,48,48,0.3)}
+
+/* ---- 进度条 ---- */
+.progress-bar{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.progress-dot{width:10px;height:10px;border-radius:50%;background:#2a2015;transition:all 0.5s}
+.progress-dot.done{background:#8b3030;box-shadow:0 0 8px rgba(139,48,48,0.5)}
+.progress-dot.current{background:#c5a059;box-shadow:0 0 12px rgba(197,160,89,0.5);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(15,10,8,0.95);border:1px solid #5a3a2a;padding:20px 40px;color:#c5a059;font-size:15px;letter-spacing:3px;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.5s;border-radius:4px}
+.toast.show{opacity:1}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+</style>
+</head>
+<body>
+<div class="fog"></div>
+<div class="moon"></div>
+<div class="candle-glow"></div>
+
+<a href="intro.html" class="back-link">← 返回前情</a>
+
+<div class="container">
+
+<div class="progress-bar">
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot current"></span>
+<span class="progress-dot"></span>
+</div>
+
+<h1 class="page-title">后 院</h1>
+<p class="page-sub">—— 沈府后花园 · 子时三刻 ——</p>
+
+<!-- 场景叙述 -->
+<p class="scene-text">
+祠堂密道尽头，一扇锈迹斑斑的铁门被你推开。潮湿的夜风裹着泥土腥气扑面而来。你踏入了沈府荒废已久的后花园。
+</p>
+
+<!-- 主角内心独白 ① -->
+<div class="inner-thought">
+<span class="voice">萧砚</span> 心想：<br>
+「又是这样的夜。十五年前，芷儿也是在这样的夜里……」<br>
+他攥紧了拳头，指甲嵌入掌心。不能让它再发生了。不能。
+</div>
+
+<p class="scene-text">
+园中杂草丛生，枯藤缠绕着倾颓的假山。月光透过枯枝洒下斑驳碎影。园子中央，一口<span class="red">青石古井</span>孤零零地立着，井口压着厚重的石盖，石盖上刻满了密密麻麻的符文。
+</p>
+
+<!-- 场景物品 -->
+<div class="items-grid" id="sceneItems">
+<div class="item-card" id="card-wellstone" onclick="examineScene('wellstone')">
+<div class="item-icon">🪨</div>
+<div class="item-name">井盖符文</div>
+<div class="item-tag">可调查</div>
+</div>
+<div class="item-card" id="card-hairpin" onclick="examineScene('hairpin')">
+<div class="item-icon">💎</div>
+<div class="item-name">银 簪</div>
+<div class="item-tag">可拾取</div>
+</div>
+<div class="item-card" id="card-letter" onclick="examineScene('letter')">
+<div class="item-icon">✉</div>
+<div class="item-name">油纸信</div>
+<div class="item-tag">可拾取</div>
+</div>
+<div class="item-card" id="card-footprint" onclick="examineScene('footprint')">
+<div class="item-icon">👣</div>
+<div class="item-name">地面痕迹</div>
+<div class="item-tag">可调查</div>
+</div>
+<div class="item-card" id="card-sundial" onclick="examineScene('sundial')">
+<div class="item-icon">☀</div>
+<div class="item-name">残破日晷</div>
+<div class="item-tag">可调查</div>
+</div>
+<div class="item-card" id="card-well" onclick="examineScene('well')">
+<div class="item-icon">🕳</div>
+<div class="item-name">古井机关</div>
+<div class="item-tag">需钥匙</div>
+</div>
+</div>
+
+<!-- 物品栏 -->
+<div class="inventory-bar" id="inventoryBar">
+<span class="inventory-label">随身物品</span>
+<span class="inventory-slot" id="inv0" data-slot="0"></span>
+<span class="inventory-slot" id="inv1" data-slot="1"></span>
+<span class="inventory-slot" id="inv2" data-slot="2"></span>
+<span class="inventory-slot" id="inv3" data-slot="3"></span>
+</div>
+<p class="combine-hint" id="combineHint">点击物品栏中的物品，再点击场景中的目标，可以组合使用</p>
+
+<!-- 旋转环机关 -->
+<div class="ring-puzzle" id="ringPuzzle">
+<div class="ring-title">井盖 — 干支机关</div>
+<div class="ring-desc">石盖中央有四道同心圆环，每环可旋转选择一字。井沿铭文：<span style="color:#c5a059">"岁次丙辰，干支为钥"</span></div>
+<div class="ring-container">
+<div class="ring-group">
+<span class="ring-label">天干·前</span>
+<div class="ring-display" id="ring0">甲</div>
+<div class="ring-arrows">
+<button class="ring-arrow" onclick="rotateRing(0,-1)">◀</button>
+<button class="ring-arrow" onclick="rotateRing(0,1)">▶</button>
+</div>
+</div>
+<div class="ring-group">
+<span class="ring-label">天干·后</span>
+<div class="ring-display" id="ring1">甲</div>
+<div class="ring-arrows">
+<button class="ring-arrow" onclick="rotateRing(1,-1)">◀</button>
+<button class="ring-arrow" onclick="rotateRing(1,1)">▶</button>
+</div>
+</div>
+<div class="ring-group">
+<span class="ring-label">地支·前</span>
+<div class="ring-display" id="ring2">子</div>
+<div class="ring-arrows">
+<button class="ring-arrow" onclick="rotateRing(2,-1)">◀</button>
+<button class="ring-arrow" onclick="rotateRing(2,1)">▶</button>
+</div>
+</div>
+<div class="ring-group">
+<span class="ring-label">地支·后</span>
+<div class="ring-display" id="ring3">子</div>
+<div class="ring-arrows">
+<button class="ring-arrow" onclick="rotateRing(3,-1)">◀</button>
+<button class="ring-arrow" onclick="rotateRing(3,1)">▶</button>
+</div>
+</div>
+</div>
+<button class="ring-confirm-btn" onclick="checkRingPuzzle()">确认归位</button>
+<p class="ring-error" id="ring-error"></p>
+</div>
+
+<!-- 对话场景 -->
+<div class="dialogue-scene" id="dialogue1">
+<div class="dialogue-speaker">？？？</div>
+<div class="dialogue-text">
+"御史大人好胆色。深夜独闯沈府，就不怕有来无回？"
+</div>
+<div class="dialogue-choices">
+<button class="dialogue-choice" onclick="dialogueChoice('d1_a')">"你是谁？报上名来。"</button>
+<button class="dialogue-choice" onclick="dialogueChoice('d1_b')">"怕的话，我就不会来了。"</button>
+</div>
+</div>
+
+<div class="dialogue-scene" id="dialogue2">
+<div class="dialogue-speaker">陆怀瑾</div>
+<div class="dialogue-text" id="dialogue2Text">
+</div>
+<div class="dialogue-choices">
+<button class="dialogue-choice" onclick="dialogueChoice('d2_trust')">"我相信你。你姐姐的事……我很抱歉。"</button>
+<button class="dialogue-choice" onclick="dialogueChoice('d2_doubt')">"你也是三家后人，我凭什么信你？"</button>
+</div>
+</div>
+
+<div class="dialogue-scene" id="dialogue3">
+<div class="dialogue-speaker">陆怀瑾</div>
+<div class="dialogue-text" id="dialogue3Text">
+</div>
+<div class="dialogue-choices">
+<button class="dialogue-choice" onclick="dialogueChoice('d3_accept')">接过钥匙。"沈明远现在何处？"</button>
+<button class="dialogue-choice" onclick="dialogueChoice('d3_decline')">"我不能让你替我冒险。一起去。"</button>
+</div>
+</div>
+
+<!-- 揭示区域 -->
+<div class="reveal-section" id="reveal-section">
+<div class="reveal-content">
+<h3>井盖缓缓移开</h3>
+<p>石盖在沉闷的摩擦声中滑向一侧，露出漆黑的井口。一股阴冷潮湿的风从井底涌出，夹杂着隐约的<span class="red">腥甜气味</span>。</p>
+<p>井壁上嵌有铁制踏脚，锈迹斑斑，但尚可攀附。你点亮火折子，向下望去——井底并非水面，而是一条<span class="highlight">横向的砖砌暗道</span>，隐约可见深处有微光闪烁。</p>
+</div>
+
+<!-- 主角内心独白 ② -->
+<div class="inner-thought">
+<span class="voice">萧砚</span> 深吸一口气：<br>
+「芷儿……这次，我不会再迟到了。」
+</div>
+
+<a href="well-passage.html" class="next-link">攀入井底暗道 →</a>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ 游戏状态 ============
+const state = {
+inventory: [],
+selectedItem: null,
+dialoguePath: null, // 记录对话选择
+rings: ['甲','甲','子','子'], // 四个环的当前位置
+wellUnlocked: false
+};
+
+const heavenlyStems = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const earthlyBranches = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+
+// ============ 物品栏系统 ============
+function addToInventory(name, icon) {
+if (state.inventory.length >= 4) { showToast('物品栏已满'); return; }
+state.inventory.push({ name, icon });
+renderInventory();
+showToast('获得：「' + name + '」');
+}
+
+function removeFromInventory(name) {
+const idx = state.inventory.findIndex(i => i.name === name);
+if (idx >= 0) { state.inventory.splice(idx, 1); renderInventory(); }
+}
+
+function renderInventory() {
+for (let i = 0; i < 4; i++) {
+const slot = document.getElementById('inv' + i);
+if (i < state.inventory.length) {
+slot.classList.add('filled');
+slot.innerHTML = state.inventory[i].icon;
+slot.dataset.name = state.inventory[i].name;
+slot.onclick = () => selectInventoryItem(i);
+} else {
+slot.classList.remove('filled');
+slot.innerHTML = '';
+slot.dataset.name = '';
+slot.onclick = null;
+}
+}
+}
+
+function selectInventoryItem(idx) {
+if (idx >= state.inventory.length) return;
+if (state.selectedItem === idx) {
+state.selectedItem = null;
+document.querySelectorAll('.inventory-slot').forEach(s => s.style.boxShadow = '');
+document.getElementById('combineHint').classList.remove('show');
+return;
+}
+state.selectedItem = idx;
+document.querySelectorAll('.inventory-slot').forEach((s, i) => {
+s.style.boxShadow = i === idx ? '0 0 15px rgba(197,160,89,0.5)' : '';
+});
+document.getElementById('combineHint').classList.add('show');
+}
+
+// ============ 场景调查 ============
+function examineScene(id) {
+// 如果选中了物品，尝试组合
+if (state.selectedItem !== null) {
+handleCombine(state.selectedItem, id);
+return;
+}
+
+switch(id) {
+case 'wellstone':
+showToast('井盖刻有铭文："岁次丙辰，干支为钥"。天干地支各两位，需以旋转环归位。');
+break;
+case 'hairpin':
+if (!state.inventory.find(i => i.name === '方如月的银簪')) {
+addToInventory('方如月的银簪', '💎');
+document.getElementById('card-hairpin').classList.add('collected');
+} else {
+showToast('你已经拾取了银簪。');
+}
+break;
+case 'letter':
+if (!state.inventory.find(i => i.name === '陆怀瑾的密信')) {
+addToInventory('陆怀瑾的密信', '✉');
+document.getElementById('card-letter').classList.add('collected');
+showToast('一封用油纸包裹的信，署名陆怀瑾。');
+} else {
+showToast('你已经拾取了密信。');
+}
+break;
+case 'footprint':
+showToast('地面有两组足迹：绣花鞋印直奔井口，布鞋印在井口徘徊后折返。布鞋印旁有零星血迹。');
+break;
+case 'sundial':
+showToast('日晷底座刻有："天干十位，丙居其三。地支十二，辰列第五。"有人刻意留下了线索。');
+break;
+case 'well':
+if (state.wellUnlocked) {
+showToast('井盖已经打开了。');
+} else {
+showToast('井盖被机关锁住。需要先找到开启机关的方法。');
+}
+break;
+}
+}
+
+// ============ 物品组合 ============
+function handleCombine(itemIdx, targetId) {
+const item = state.inventory[itemIdx];
+state.selectedItem = null;
+document.querySelectorAll('.inventory-slot').forEach(s => s.style.boxShadow = '');
+document.getElementById('combineHint').classList.remove('show');
+
+if (item.name === '陆怀瑾的密信' && targetId === 'wellstone') {
+showToast('你将密信中的干支线索与井盖铭文对照……机关启动！');
+document.getElementById('ringPuzzle').classList.add('show');
+document.getElementById('ringPuzzle').scrollIntoView({ behavior: 'smooth' });
+document.getElementById('card-well').querySelector('.item-tag').textContent = '可操作';
+} else if (item.name === '方如月的银簪' && targetId === 'footprint') {
+showToast('银簪与绣花鞋印大小吻合——这确实是方如月遗落的。');
+} else {
+showToast('这样组合似乎没什么用。');
+}
+}
+
+// ============ 旋转环机关 ============
+function rotateRing(ringIdx, delta) {
+if (ringIdx < 2) {
+// 天干环
+const current = state.rings[ringIdx];
+const stemIdx = heavenlyStems.indexOf(current);
+const newIdx = (stemIdx + delta + 10) % 10;
+state.rings[ringIdx] = heavenlyStems[newIdx];
+} else {
+// 地支环
+const current = state.rings[ringIdx];
+const branchIdx = earthlyBranches.indexOf(current);
+const newIdx = (branchIdx + delta + 12) % 12;
+state.rings[ringIdx] = earthlyBranches[newIdx];
+}
+document.getElementById('ring' + ringIdx).textContent = state.rings[ringIdx];
+}
+
+function checkRingPuzzle() {
+// 正确：丙辰 = 丙(天干3) + 辰(地支5) → 显示为 丙丙辰辰
+const correct = ['丙','丙','辰','辰'];
+const err = document.getElementById('ring-error');
+if (state.rings.every((v, i) => v === correct[i])) {
+err.textContent = '';
+document.getElementById('ringPuzzle').style.display = 'none';
+state.wellUnlocked = true;
+showToast('机关启动——井盖缓缓移开');
+setTimeout(() => {
+document.getElementById('reveal-section').classList.add('show');
+document.getElementById('reveal-section').scrollIntoView({ behavior: 'smooth' });
+}, 2000);
+} else {
+err.textContent = '环位不对。再想想：丙为天干第几？辰为地支第几？';
+}
+}
+
+// ============ 对话系统 ============
+function showDialogue(id) {
+document.getElementById(id).classList.add('show');
+document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function dialogueChoice(choice) {
+switch(choice) {
+case 'd1_a':
+case 'd1_b':
+document.getElementById('dialogue1').classList.remove('show');
+const reply = choice === 'd1_a' ? 
+'那人从假山后缓步走出："在下陆怀瑾，陆家三房庶子，已在此恭候多时。"' :
+'那人轻笑一声，从假山后走出："好胆色。在下陆怀瑾。与沈文忠一样，是来毁这邪祭的。"';
+document.getElementById('dialogue2Text').textContent = reply;
+showDialogue('dialogue2');
+state.dialoguePath = choice;
+break;
+case 'd2_trust':
+document.getElementById('dialogue2').classList.remove('show');
+document.getElementById('dialogue3Text').textContent = 
+'陆怀瑾眼中闪过一丝惊讶，随即深深一揖："大人信我，怀瑾感激不尽。这是井底暗道的备用钥匙。沈明远已先一步下去了，方如月危在旦夕。我脚上有伤，拖累大人，大人先行，我随后便到。"';
+showDialogue('dialogue3');
+state.dialoguePath = 'trust';
+break;
+case 'd2_doubt':
+document.getElementById('dialogue2').classList.remove('show');
+document.getElementById('dialogue3Text').textContent = 
+'陆怀瑾苦笑："大人疑我，也是应当。我胞姐二十年前被送入祭台，我亲眼所见。此后我隐忍二十年，暗中搜集三家罪证。沈文忠是我唯一的盟友。大人若不信，可看此物——"他从怀中掏出一把铜钥匙，"这是井底暗道的钥匙。我脚上有伤，不便同行。大人先行，我随后便到。"';
+showDialogue('dialogue3');
+state.dialoguePath = 'doubt';
+break;
+case 'd3_accept':
+document.getElementById('dialogue3').classList.remove('show');
+showToast('陆怀瑾将铜钥匙递给你，抱拳一揖。');
+// 自动打开机关
+document.getElementById('ringPuzzle').classList.add('show');
+document.getElementById('ringPuzzle').scrollIntoView({ behavior: 'smooth' });
+document.getElementById('card-well').querySelector('.item-tag').textContent = '可操作';
+break;
+case 'd3_decline':
+document.getElementById('dialogue3').classList.remove('show');
+showToast('陆怀瑾愣了一下，随即露出笑容："大人仁义。那便同去。"他从怀中掏出铜钥匙，与你一同走向井口。');
+document.getElementById('ringPuzzle').classList.add('show');
+document.getElementById('ringPuzzle').scrollIntoView({ behavior: 'smooth' });
+document.getElementById('card-well').querySelector('.item-tag').textContent = '可操作';
+break;
+}
+}
+
+function showToast(msg) {
+const t = document.getElementById('toast');
+t.textContent = msg;
+t.classList.add('show');
+setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ============ 初始化 ============
+// 当玩家收集了银簪和密信后，自动触发对话
+const origExamineScene = examineScene;
+examineScene = function(id) {
+origExamineScene(id);
+// 两个关键物品都收集后触发对话
+if (state.inventory.find(i => i.name === '方如月的银簪') && 
+state.inventory.find(i => i.name === '陆怀瑾的密信') &&
+!document.getElementById('dialogue1').classList.contains('show') &&
+!state.wellUnlocked) {
+setTimeout(() => showDialogue('dialogue1'), 1500);
+}
+};
+</script>
+</body>
+</html>

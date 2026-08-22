@@ -1,0 +1,17 @@
+星河乐园网站文件服务器维护摘录
+记录号：GP-WEB-181028
+导出账户：CB0317
+导出日期：2018-10-29
+
+08:04  WEB/MAP_2009             REMOVE_INDEX
+08:17  GP-ALB-ECHO              MOVE FAMILY_PHOTO_BACKUP
+08:31  LSY-MEMO-17              BODY_CHECK_FAILED
+08:33  LSY-MEMO-17/*.title      KEEP 11
+08:36  LSY-MEMO-17              ATTACH_REF QVJDLURPQy0wMDk=
+
+附件恢复引用：
+QVJDLURPQy0wMDk=
+
+备注：
+正文预览缓存不可用。DOCX 副本校验通过，11 条文件名顺序完整。
+旧站导出程序使用六十四字符表保存短目录引用，行末等号为补位符；恢复时应还原为原附件索引号。

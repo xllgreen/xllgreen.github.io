@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷调查</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #dcf4e3; /* 淡绿色主色调 */
+            color: #1a3322;
+            padding: 40px 20px;
+            transition: all 0.6s ease;
+        }
+        /* 提交后切换黑红主题 */
+        body.darkred-mode {
+            background-color: #0a0000;
+            color: #ff4444;
+        }
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.65);
+            padding: 35px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px #88c9a080;
+            transition: all 0.6s ease;
+        }
+        body.darkred-mode .container {
+            background: rgba(30,0,0,0.75);
+            box-shadow: 0 0 22px #991111;
+        }
+        .question-block {
+            margin-bottom: 32px;
+            display: none;
+        }
+        .q-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom:16px;
+        }
+        .option-item {
+            margin:10px 0;
+            font-size:16px;
+            cursor:pointer;
+        }
+        textarea {
+            width:100%;
+            min-height:120px;
+            padding:12px;
+            font-size:16px;
+            border:1px solid #77bb90;
+            border-radius:8px;
+            background:#ffffff;
+            margin-top:12px;
+            resize:vertical;
+        }
+        body.darkred-mode textarea{
+            background:#180505;
+            border-color:#771818;
+            color:#ff8888;
+        }
+        button {
+            padding:12px 32px;
+            font-size:17px;
+            border:none;
+            border-radius:8px;
+            background:#61b883;
+            color:#fff;
+            cursor:pointer;
+            margin-top:14px;
+        }
+        button:hover{
+            background:#469464;
+        }
+        body.darkred-mode button{
+            background:#991515;
+        }
+        body.darkred-mode button:hover{
+            background:#bb1c1c;
+        }
+        /* 邀请函弹窗 默认隐藏 */
+        .invite-modal{
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.85);
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+        .invite-modal.show {
+            display:flex;
+        }
+        .invite-card{
+            background:#120000;
+            color:#ff5555;
+            border:2px solid #992222;
+            padding:45px 35px;
+            border-radius:12px;
+            max-width:520px;
+            width:100%;
+            white-space:pre-line;
+            font-size:17px;
+            line-height:1.8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 第一题 -->
+    <div class="question-block" id="q1" style="display:block;">
+        <div class="q-title">第一题：您是否正在探寻真相。</div>
+        <div class="option-item">
+            <input type="radio" name="q1" id="q1yes" value="是">
+            <label for="q1yes">是</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q1" id="q1no" value="否">
+            <label for="q1no">否</label>
+        </div>
+    </div>
+
+    <!-- 第二题 -->
+    <div class="question-block" id="q2">
+        <div class="q-title">第二题：您是否加入我们</div>
+        <div class="option-item">
+            <input type="radio" name="q2" id="q2_1" value="是">
+            <label for="q2_1">是</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q2" id="q2_2" value="是是">
+            <label for="q2_2">是是</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q2" id="q2_3" value="是是是">
+            <label for="q2_3">是是是</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q2" id="q2_4" value="是是是是">
+            <label for="q2_4">是是是是</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q2" id="q2_5" value="是是是是是">
+            <label for="q2_5">是是是是是</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q2" id="q2_6" value="是是是是是是">
+            <label for="q2_6">是是是是是是</label>
+        </div>
+    </div>
+
+    <!-- 第三题 -->
+    <div class="question-block" id="q3">
+        <div class="q-title">第三题：我们即是阿赖耶，阿赖耶即是我们</div>
+        <div class="option-item">
+            <input type="radio" name="q3" id="q3opt1" value="我们即是阿赖耶">
+            <label for="q3opt1">我们即是阿赖耶</label>
+        </div>
+        <div class="option-item">
+            <input type="radio" name="q3" id="q3opt2" value="阿赖耶即是我们">
+            <label for="q3opt2">阿赖耶即是我们</label>
+        </div>
+    </div>
+
+    <!-- 第四题+留言板+提交 -->
+    <div class="question-block" id="q4">
+        <div class="q-title">第四题：我们会再见面的</div>
+        <textarea id="msgInput"></textarea>
+        <br>
+        <button id="submitBtn">提交</button>
+    </div>
+</div>
+
+<!-- 邀请函弹窗，初始隐藏 -->
+<div class="invite-modal" id="inviteModal">
+    <div class="invite-card">
+邀请函
+亲爱的同学：
+
+以热爱为笔，与我们一同书写青春诗篇。欢迎您加入玉祥文学社，与我们共进步共成长。
+
+            玉祥文学社
+            20□□年□月□日
+    </div>
+</div>
+
+<script>
+    const q1Yes = document.getElementById('q1yes');
+    const q1No = document.getElementById('q1no');
+    const q2Block = document.getElementById('q2');
+    const q3Block = document.getElementById('q3');
+    const q4Block = document.getElementById('q4');
+    const submitBtn = document.getElementById('submitBtn');
+    const inviteModal = document.getElementById('inviteModal');
+    const body = document.body;
+
+    //第一题逻辑
+    q1Yes.addEventListener('change', ()=>{
+        q2Block.style.display = 'block';
+    })
+    q1No.addEventListener('change', ()=>{
+        q2Block.style.display = 'none';
+        q3Block.style.display = 'none';
+        q4Block.style.display = 'none';
+    })
+
+    //第二题任意选择显示第三题
+    document.querySelectorAll('input[name="q2"]').forEach(radio=>{
+        radio.addEventListener('change',()=>{
+            q3Block.style.display = 'block';
+        })
+    })
+
+    //第三题任意选择显示第四题
+    document.querySelectorAll('input[name="q3"]').forEach(radio=>{
+        radio.addEventListener('change',()=>{
+            q4Block.style.display = 'block';
+        })
+    })
+
+    //点击提交：页面切换黑红主题，弹出邀请函弹窗
+    submitBtn.addEventListener('click',()=>{
+        body.classList.add('darkred-mode');
+        inviteModal.classList.add('show');
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+/* ===== 全局基础与无障碍 ===== */
+:root {
+  --font-han: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-han);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* 文字对比度兜底（即使暗调氛围，正文区单独提亮） */
+.readable { color: #e8e8ea; }
+
+a { color: inherit; }
+
+/* 焦点可见（键盘可达） */
+:focus-visible {
+  outline: 2px solid #7fc1ff;
+  outline-offset: 2px;
+}
+
+/* ===== 减少动态效果（运行时由 theme.ts 在 <html> 上加 .reduce-motion） ===== */
+.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+.reduce-motion .will-flicker { animation: none !important; }
+
+/* 同时尊重系统级偏好 */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ===== 字幕容器（subtitles 关时 .hidden 隐藏） ===== */
+.subtitle { font-size: 0.85em; opacity: 0.75; }
+.subtitle.hidden { display: none; }
+
+/* ===== 通用 UI 组件 ===== */
+.btn {
+  display: inline-block;
+  padding: 0.55em 1.1em;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.btn:hover { background: rgba(255,255,255,0.08); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.input {
+  padding: 0.5em 0.7em;
+  border: 1px solid currentColor;
+  background: rgba(0,0,0,0.3);
+  color: inherit;
+  font: inherit;
+  border-radius: 3px;
+  min-width: 14em;
+}
+
+.hint-box {
+  border-left: 3px solid #b98a3e;
+  background: rgba(185,138,62,0.08);
+  padding: 0.6em 0.9em;
+  margin: 0.8em 0;
+  font-size: 0.92em;
+}
+.hint-box .hint-lvl { color: #b98a3e; font-weight: 600; }
+
+.error-msg { color: #ff8a8a; font-size: 0.9em; min-height: 1.2em; }
+.ok-msg { color: #8aff9e; font-size: 0.9em; }
+
+/* 顶部"虚构浏览器"导航条 */
+.faux-bar {
+  display: flex; align-items: center; gap: 0.6em;
+  padding: 0.4em 0.8em;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.85em;
+  background: rgba(0,0,0,0.4);
+}
+.faux-bar .faux-url {
+  flex: 1;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.faux-bar .faux-brand { font-weight: 600; }
+
+/* 通用容器 */
+.page { max-width: 880px; margin: 0 auto; padding: 1.5em 1.2em 4em; }
+.page h1 { font-size: 1.5em; margin: 0.4em 0; }
+.page h2 { font-size: 1.15em; margin: 1.2em 0 0.4em; }
+
+/* ===== 各站点皮肤 ===== */
+body.skin-system { background: #0d0f12; color: #cfd3da; }
+body.skin-mail    { background: #0f1419; color: #d8dde4; }
+body.skin-scenic  {
+  background: linear-gradient(180deg, #0a1410 0%, #10241c 100%);
+  color: #dfe8e0;
+}
+body.skin-chat    { background: #11160e; color: #dde6d2; }
+body.skin-news    { background: #15171a; color: #d6d8db; }
+body.skin-backend { background: #0c0c0f; color: #c9ccd2; font-family: var(--font-mono); font-size: 0.95em; }
+body.skin-ending  { background: #000; color: #b8b8b8; }
+
+/* 合奘教：表面治愈、温和，米白偏暖，细读发凉 */
+body.skin-hezong {
+  background: linear-gradient(180deg, #f5f0e8 0%, #ede6d8 100%);
+  color: #3a3530;
+}
+.skin-hezong .readable { color: #3a3530; }
+.hezong-header { text-align: center; padding: 1.5em 0 0.5em; }
+.hezong-header h1 { font-size: 2em; color: #6b5d4f; margin: 0; letter-spacing: 4px; }
+.hezong-slogan { color: #8a7a66; font-style: italic; margin: 0.5em 0; letter-spacing: 2px; }
+.hezong-nav {
+  display: flex; gap: 4px; flex-wrap: wrap; justify-content: center;
+  border-bottom: 1px solid #d6cdb8; padding-bottom: 0.5em; margin-bottom: 1.5em;
+}
+.hezong-nav-btn {
+  background: transparent; border: none; color: #8a7a66; padding: 8px 14px;
+  cursor: pointer; font-size: 14px; border-radius: 6px; transition: all .15s;
+}
+.hezong-nav-btn:hover { background: rgba(107,93,79,0.1); color: #6b5d4f; }
+.hezong-nav-btn.active { background: #6b5d4f; color: #f5f0e8; }
+.hezong-body h2 { color: #6b5d4f; border-left: 3px solid #b8a890; padding-left: 10px; }
+.hezong-body .mail-body { line-height: 1.9; font-size: 15px; }
+
+/* 论坛：朴素 BBS 风 */
+body.skin-forum {
+  background: #f0f0f0; color: #333;
+}
+.skin-forum .readable { color: #333; }
+.forum-list { list-style: none; padding: 0; margin: 1em 0; }
+.forum-item {
+  display: grid; grid-template-columns: auto 1fr auto auto; gap: 10px;
+  padding: 10px 12px; border-bottom: 1px solid #ddd; cursor: pointer;
+  transition: background .12s; align-items: center;
+}
+.forum-item:hover { background: #e8e8f0; }
+.forum-cat {
+  font-size: 11px; padding: 2px 8px; border-radius: 10px;
+  background: #e0e0e8; color: #666; white-space: nowrap;
+}
+.forum-title { font-size: 14px; }
+.forum-title.key { color: #c0392b; font-weight: 600; }
+.forum-meta { font-size: 12px; color: #999; white-space: nowrap; }
+.forum-detail {
+  margin-top: 1.5em; border: 1px solid #ccc; background: #fafafa;
+  padding: 1em 1.2em; border-radius: 6px;
+}
+.forum-detail h2 { margin: 0 0 0.3em; }
+.forum-detail .meta { color: #888; font-size: 13px; margin-bottom: 0.8em; }
+.forum-detail .body { white-space: pre-wrap; line-height: 1.8; }
+
+/* ===== 邮件列表/正文（Gmail 式左右分栏独立滚动） ===== */
+.mail-avatar { border-radius: 6px; flex-shrink: 0; }
+.mail-dot { color: #ff5252; font-size: 0.7em; }
+
+/* 整体布局：固定视口高度，左右各自滚动 */
+.mail-page { max-width: 1080px; }
+.mail-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.2);
+  /* 固定高度：视口减去上方标题区域 */
+  height: calc(100vh - 200px);
+  min-height: 400px;
+}
+/* 左侧列表区 */
+.mail-list-pane {
+  border-right: 1px solid rgba(255,255,255,0.10);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.mail-list-header {
+  padding: 0.7em 1em;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #aaa;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+.mail-list {
+  overflow-y: auto;
+  flex: 1;
+  /* 自定义滚动条 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+.mail-list::-webkit-scrollbar { width: 6px; }
+.mail-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+.mail-list .mail-item {
+  padding: 0.65em 0.9em;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: background .12s;
+}
+.mail-list .mail-item:hover { background: rgba(255,255,255,0.04); }
+.mail-list .mail-item.active { background: rgba(127,193,255,0.10); border-left: 3px solid #7fc1ff; padding-left: calc(0.9em - 3px); }
+.mail-list .mail-item.unread strong { color: #fff; }
+
+/* 右侧正文区 */
+.mail-view-pane {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.mail-view {
+  overflow-y: auto;
+  flex: 1;
+  padding: 1.2em 1.5em;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+.mail-view::-webkit-scrollbar { width: 6px; }
+.mail-view::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+/* 正文空状态 */
+.mail-view-empty {
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; opacity: 0.3; font-size: 0.9em; text-align: center;
+}
+.mail-body { white-space: pre-wrap; padding: 0.6em 0; }
+
+/* 响应式：窄屏改为上下，列表限高 */
+@media (max-width: 680px) {
+  .mail-layout { grid-template-columns: 1fr; grid-template-rows: 200px 1fr; height: calc(100vh - 200px); }
+  .mail-list-pane { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.10); }
+}
+
+/* ===== 景区官网 hero + 传说页照片 ===== */
+.scenic-hero { position: relative; margin: -0.5em -1.2em 1em; border-radius: 8px; overflow: hidden; }
+.scenic-hero-img {
+  display: block; width: 100%; max-height: 240px; object-fit: cover;
+  filter: brightness(0.55);
+}
+.scenic-hero h1 {
+  position: absolute; left: 0; right: 0; bottom: 0.6em;
+  margin: 0; padding: 0 1.2em;
+  font-size: 1.5em; text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+}
+.scenic-photo {
+  display: block; width: 100%; max-width: 520px;
+  border-radius: 6px; margin: 0.8em 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ===== 景区传说页 ===== */
+.legend-page .annotation {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  opacity: 0.55;
+  margin-top: 1.5em;
+  border-top: 1px dashed rgba(255,255,255,0.15);
+  padding-top: 0.8em;
+}
+
+/* ===== 聊天气泡 ===== */
+.chat-msg { margin: 0.5em 0; max-width: 78%; }
+.chat-msg.her { text-align: left; }
+.chat-msg.her .bubble {
+  display: inline-block; padding: 0.5em 0.8em;
+  background: rgba(255,255,255,0.08); border-radius: 10px;
+}
+.chat-time { font-size: 0.75em; opacity: 0.5; }
+
+/* 主角消息（右对齐） */
+.chat-msg.me { text-align: right; max-width: 78%; margin: 0.5em 0; }
+.chat-msg.me .bubble-me {
+  display: inline-block; padding: 0.5em 0.8em;
+  background: rgba(127,193,255,0.15); border: 1px solid rgba(127,193,255,0.3);
+  border-radius: 10px; color: #b8d8f8; text-align: left;
+}
+
+/* 对话选项 */
+.chat-choices { display: flex; flex-direction: column; gap: 0.5em; margin: 0.8em 0; max-width: 78%; }
+.chat-choice {
+  background: transparent; border: 1px solid rgba(127,193,255,0.35);
+  color: #9ec8ef; padding: 0.6em 0.9em; border-radius: 10px;
+  cursor: pointer; font-size: 14px; text-align: left; transition: all .15s;
+  font-family: inherit;
+}
+.chat-choice:hover { background: rgba(127,193,255,0.12); border-color: rgba(127,193,255,0.6); }
+
+/* ===== 异常照片（真实图片） ===== */
+.photo-mold {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.photo-stamp {
+  font-family: var(--font-mono); font-size: 0.75em; opacity: 0.6;
+  margin-top: 0.3em;
+}
+
+/* ===== 后台记录表 ===== */
+.records-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+.records-table th, .records-table td {
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.5em 0.6em; text-align: left;
+}
+.records-table tr.warn { background: rgba(180,60,60,0.12); }
+
+/* ===== 结尾演出（克制） ===== */
+.ending-fake-msg {
+  font-size: 1.1em; margin: 1.5em 0;
+  border-left: 3px solid #6a3030; padding-left: 0.8em;
+}
+/* 逐字淡入，仅在非 reduce-motion 下生效 */
+.typewriter span { opacity: 0; animation: fadeIn 0.6s forwards; }
+@keyframes fadeIn { to { opacity: 1; } }
+.reduce-motion .typewriter span { opacity: 1; animation: none; }
+
+/* 闪烁元素：频率严格 ≤ 1Hz，reduce-motion 下静止 */
+.will-flicker { animation: gentle-flicker 2.4s ease-in-out infinite; }
+@keyframes gentle-flicker {
+  0%,100% { opacity: 0.85; }
+  50% { opacity: 0.55; }
+}
+
+/* ===== 设置面板 ===== */
+.settings-row { display: flex; align-items: center; gap: 0.8em; margin: 0.6em 0; }
+.settings-row label { min-width: 9em; }
+
+/* 锁定链接（节点未解锁） */
+.locked-link {
+  opacity: 0.45; cursor: not-allowed; text-decoration: line-through;
+  pointer-events: none;
+}
+
+/* ===== 音效字幕浮现（sfx.ts 调用） ===== */
+.sfx-subtitle {
+  position: fixed; left: 50%; bottom: 2em; transform: translateX(-50%);
+  background: rgba(0,0,0,0.75); color: #d8d8d8;
+  padding: 0.5em 1.1em; border-radius: 6px;
+  font-size: 0.85em; letter-spacing: 0.5px;
+  z-index: 100; pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.12);
+  animation: sfx-fade 3s forwards;
+}
+
+/* ===== lab 站点（实验室内网） ===== */
+.lab-tabs { display: flex; gap: 4px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1em; }
+.lab-tab {
+  background: transparent; border: none; color: #888; padding: 8px 16px;
+  cursor: pointer; font-size: 13px; border-bottom: 2px solid transparent;
+  font-family: var(--font-mono);
+}
+.lab-tab.active { color: #7fc1ff; border-bottom-color: #7fc1ff; }
+.lab-pre {
+  white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.85em;
+  background: rgba(0,0,0,0.3); padding: 0.8em; border-radius: 4px; color: #9ad;
+  line-height: 1.5; border: 1px solid rgba(120,170,220,0.15);
+}
+/* 监控画面框 */
+.monitor-frame {
+  display: inline-block; padding: 10px; background: #0a0a0a;
+  border: 2px solid #2a2a2a; border-radius: 4px; max-width: 100%;
+}
+.monitor-screen {
+  position: relative; width: 480px; max-width: 100%; aspect-ratio: 4/3;
+  background: #0d0d0d; overflow: hidden;
+}
+.monitor-grain {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 3px 3px; pointer-events: none;
+}
+.monitor-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) contrast(1.2) brightness(0.7);
+  opacity: 0.85;
+}
+.monitor-overlay {
+  position: absolute; top: 6px; left: 8px; right: 8px;
+  display: flex; justify-content: space-between;
+  font-family: var(--font-mono); font-size: 11px; color: #ff5252;
+  text-shadow: 0 0 4px rgba(0,0,0,0.9);
+}
+.monitor-overlay span:first-child { animation: rec-blink 1s infinite; }
+@keyframes rec-blink { 50% { opacity: 0.3; } }
+.reduce-motion .monitor-overlay span:first-child { animation: none; }
+.reduce-motion .will-flicker { animation: none !important; }
+
+/* ===== P11 真假消息选择项 ===== */
+.identify-choice {
+  display: flex; align-items: flex-start; gap: 0.6em;
+  padding: 0.7em 0.9em; margin: 0.5em 0;
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 8px;
+  cursor: pointer; transition: all .15s; line-height: 1.6;
+}
+.identify-choice:hover { background: rgba(255,255,255,0.04); border-color: rgba(127,193,255,0.4); }
+.identify-choice input { margin-top: 4px; accent-color: #7fc1ff; }
+.identify-choice.chosen {
+  background: rgba(127,193,255,0.10); border-color: #7fc1ff;
+  box-shadow: 0 0 0 1px rgba(127,193,255,0.3);
+}
+
+/* ===== P12 三结局选择项 ===== */
+.ending-choice {
+  display: flex; align-items: center; gap: 1em;
+  padding: 1.1em 1.3em; margin: 0.8em 0;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 10px;
+  cursor: pointer; transition: all .2s; background: rgba(255,255,255,0.02);
+}
+.ending-choice:hover {
+  background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.35);
+  transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.ending-choice-num {
+  font-size: 1.6em; color: #6a6a6a; font-weight: 300; min-width: 1.2em;
+}
+.ending-choice-label { font-size: 1.1em; font-weight: 600; color: #d8d8d8; }
+.ending-choice-desc { font-size: 0.88em; color: #888; margin-top: 4px; line-height: 1.5; }
+@keyframes sfx-fade {
+  0% { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.reduce-motion .sfx-subtitle { animation: none; opacity: 1; }

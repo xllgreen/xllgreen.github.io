@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>桂花巷三号杂货铺</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="paywall.css" />
+</head>
+<body>
+  <div class="site-bg" aria-hidden="true">
+    <span class="osmanthus petal-a"></span>
+    <span class="osmanthus petal-b"></span>
+    <span class="osmanthus petal-c"></span>
+    <span class="osmanthus petal-d"></span>
+  </div>
+
+  <div class="boot" id="boot">
+    <div class="boot-window">
+      <div class="boot-title">桂花巷三号杂货铺 · 线上纪念站</div>
+      <div class="boot-body">
+        <p class="typing">正在载入：旧账本、便签墙、相册、铁皮信箱……</p>
+        <div class="boot-progress"><span></span></div>
+        <button id="startBtn" class="primary boot-start">进入旧站</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="app" id="app" hidden>
+    <header class="topbar">
+      <div>
+        <div class="tiny">2008 personal homepage / archive mirror</div>
+        <h1>桂花巷三号杂货铺</h1>
+        <p>受托整理一座老杂货铺的线上纪念站。请慢慢翻，旧物不催人。</p>
+      </div>
+      <div class="top-actions">
+        <button id="audioBtn" class="ghost">开启风铃 BGM</button>
+        <button id="supportBtn" class="ghost">1元支持</button>
+        <button id="resetBtn" class="ghost danger">重置</button>
+      </div>
+    </header>
+
+    <section class="status-panel">
+      <div class="status-card">
+        <span>整理进度</span>
+        <strong id="progressText">0%</strong>
+        <div class="meter"><i id="progressBar"></i></div>
+      </div>
+      <div class="status-card">
+        <span>已找到纪念物</span>
+        <strong id="keepsakeCount">0 / 3</strong>
+        <div class="keepsake-dots" id="keepsakeDots">
+          <i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="status-card">
+        <span>当前章节</span>
+        <strong id="chapterLabel">第一章</strong>
+        <button id="hintBtn" class="mini">提示</button>
+      </div>
+    </section>
+
+    <nav class="chapter-tabs" id="chapterTabs" aria-label="章节导航">
+      <button data-chapter="1" class="active">一 · 旧账本</button>
+      <button data-chapter="2" disabled>二 · 便签墙</button>
+      <button data-chapter="3" disabled>三 · 旧相册</button>
+      <button data-chapter="4" disabled>四 · 铁皮信箱</button>
+      <button data-chapter="5" disabled>五 · 最后的回信</button>
+    </nav>
+
+    <section class="notice-board" id="noticeBoard">
+      <span class="pin"></span>
+      <p id="storyNotice">匿名邮件写着：“请帮我整理完桂花巷三号。店主生前一直在等一个人。”</p>
+    </section>
+
+    <section class="scene-shell">
+      <div class="scene" id="scene"></div>
+    </section>
+  </main>
+
+  <aside class="hint-drawer" id="hintDrawer" aria-hidden="true">
+    <div class="hint-card">
+      <button class="close-x" id="closeHint" aria-label="关闭提示">×</button>
+      <h2>提示记录</h2>
+      <p class="hint-sub">提示只对应当前谜题，不会提前剧透后面的反转。</p>
+      <div class="hint-levels">
+        <button data-level="1">一级提示</button>
+        <button data-level="2">二级提示</button>
+        <button data-level="3">直接答案</button>
+      </div>
+      <div class="hint-output" id="hintOutput">选择一个提示等级。</div>
+      <h3>已查看</h3>
+      <div class="hint-log" id="hintLog"></div>
+    </div>
+  </aside>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal-card">
+      <button class="close-x" id="modalClose" aria-label="关闭">×</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="paywall.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

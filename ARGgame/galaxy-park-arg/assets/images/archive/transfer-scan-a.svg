@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280">
+  <defs>
+    <pattern id="p" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#eee9db"/><circle cx="2" cy="5" r=".45" fill="#c8c0ae"/></pattern>
+  </defs>
+  <rect width="420" height="280" fill="url(#p)"/>
+  <circle cx="16" cy="72" r="7" fill="#b7b0a2"/><circle cx="16" cy="210" r="7" fill="#b7b0a2"/>
+  <text x="42" y="42" font-family="SimSun,serif" font-size="17" fill="#2d2d2a">临江市儿童公共环境适应项目</text>
+  <text x="42" y="68" font-family="SimSun,serif" font-size="14" fill="#45443f">附件移交登记（续页）</text>
+  <line x1="42" y1="84" x2="420" y2="84" stroke="#55534d"/>
+  <text x="46" y="116" font-family="SimSun,serif" font-size="13" fill="#47453f">项目编号：LJ-GP-07</text>
+  <text x="46" y="145" font-family="SimSun,serif" font-size="13" fill="#47453f">附件序号：03</text>
+  <line x1="42" y1="166" x2="420" y2="166" stroke="#8b877c"/>
+  <text x="46" y="194" font-family="SimSun,serif" font-size="13" fill="#47453f">文件题名：长期记忆修正</text>
+  <line x1="42" y1="220" x2="420" y2="220" stroke="#8b877c"/>
+  <circle cx="420" cy="280" r="78" fill="none" stroke="#9a332f" stroke-width="7" opacity=".62"/>
+  <path d="M348 252 C370 229 393 218 420 216" fill="none" stroke="#9a332f" stroke-width="3" opacity=".55"/>
+</svg>

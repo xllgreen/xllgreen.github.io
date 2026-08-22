@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">完整显影的第六张相纸</title>
+  <desc id="desc">童年的小刺猬抱着投影机电源线，站在照向渡口的光束里</desc>
+  <defs><linearGradient id="dark" x2="0" y2="1"><stop stop-color="#26384b"/><stop offset="1" stop-color="#141b24"/></linearGradient><linearGradient id="light"><stop stop-color="#ffe8a8" stop-opacity=".82"/><stop offset="1" stop-color="#e9b35b" stop-opacity=".05"/></linearGradient><radialGradient id="fur"><stop stop-color="#ead6aa"/><stop offset="1" stop-color="#a77d58"/></radialGradient></defs>
+  <rect width="960" height="540" fill="url(#dark)"/>
+  <path d="M74 58h328v278H74z" fill="#1c2933" stroke="#c8a46e" stroke-width="14"/><path d="M238 64v266M80 196h316" stroke="#c8a46e" stroke-width="12"/>
+  <path d="M90 91L904 402 346 432z" fill="url(#light)"/>
+  <path d="M0 418q236-55 483-13t477-7v142H0z" fill="#312820"/>
+  <g transform="translate(378 145)">
+    <path d="M21 120L2 89l34 5-15-31 39 13 1-40 33 25 17-40 25 39 27-35 14 45 42-17-5 46 42-3-26 35 37 16-38 24 25 35-45 3 4 44-39-17-17 41-30-32-31 34-16-42-41 18 2-47-42 7 22-40-40-13 34-30-31-25 44-12z" fill="#8d6a4d" stroke="#5a4234" stroke-width="5"/>
+    <ellipse cx="121" cy="139" rx="94" ry="82" fill="url(#fur)"/>
+    <ellipse cx="85" cy="134" rx="9" ry="13" fill="#29211d"/><ellipse cx="157" cy="134" rx="9" ry="13" fill="#29211d"/><circle cx="121" cy="159" r="11" fill="#3e2d25"/><path d="M102 178q20 15 39 0" fill="none" stroke="#684636" stroke-width="7" stroke-linecap="round"/>
+    <path d="M56 218q65-24 130 0l28 168H27z" fill="#466070" stroke="#d0ad79" stroke-width="7"/>
+    <path d="M80 250L43 315M164 250l39 67" stroke="#d8bd8d" stroke-width="28" stroke-linecap="round"/>
+    <path d="M45 316q68 54 157 0" fill="none" stroke="#252a2d" stroke-width="12"/>
+    <circle cx="205" cy="318" r="24" fill="#3b332d" stroke="#c3a06e" stroke-width="7"/>
+  </g>
+  <path d="M579 461c112-74 207-53 304-119" fill="none" stroke="#1b1a19" stroke-width="10"/>
+  <path d="M16 16h928v508H16z" fill="none" stroke="#ead3a0" stroke-opacity=".5" stroke-width="10"/>
+</svg>

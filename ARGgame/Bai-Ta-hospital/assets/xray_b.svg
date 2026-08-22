@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760">
+<rect width="620" height="760" fill="#071013"/>
+<g stroke="#b5dfe3" fill="none" opacity=".72">
+<path d="M310 70v580" stroke-width="20" opacity=".45"/>
+<path d="M310 120C170 100 95 205 120 360c19 118 75 214 190 250M310 120c126-35 220 70 194 238-18 118-75 210-194 252" stroke-width="15"/>
+<path d="M310 170c-116-30-165 30-158 154 6 91 49 179 158 241M310 170c105-47 160 20 160 150 0 100-42 190-160 245" stroke-width="11" opacity=".65"/>
+<path d="M178 210h265M148 275h328M145 345h336M157 415h307M184 485h255" stroke-width="7" opacity=".45"/>
+</g>
+<path d="M174 520q34 28 68 0" stroke="#f4f8f8" stroke-width="8" fill="none" opacity=".9"/>
+<circle cx="202" cy="542" r="15" fill="#d4f5f7" opacity=".8"/><circle cx="420" cy="531" r="15" fill="#d4f5f7" opacity=".8"/>
+<text x="25" y="45" fill="#a8d9dc" font-family="monospace" font-size="24">PACS 2013-09-17  RIGHT?</text>
+<text x="532" y="55" fill="#fff" font-size="40">R</text>
+</svg>

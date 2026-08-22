@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>她的旧电脑</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* 微信对话模拟 - 手机框样式 */
+    .wechat-scene {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+    .wechat-scene.visible { display: flex; }
+    .phone-frame {
+      width: 320px;
+      height: 560px;
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      animation: phone-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    @keyframes phone-in {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .wechat-status-bar {
+      height: 22px;
+      background: #ededed;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 11px;
+      color: #000;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .wechat-nav {
+      height: 48px;
+      background: #ededed;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      border-bottom: 1px solid #d9d9d9;
+      flex-shrink: 0;
+    }
+    .wechat-nav .back-arrow {
+      color: #000;
+      font-size: 18px;
+      margin-right: 8px;
+      opacity: 0.6;
+    }
+    .wechat-nav .avatar-small {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .wechat-nav .name-wrap {
+      flex: 1;
+      margin-left: 10px;
+    }
+    .wechat-nav .name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #000;
+    }
+    .wechat-nav .status-text {
+      font-size: 11px;
+      color: #999;
+      margin-top: 2px;
+    }
+    .wechat-nav .dots {
+      color: #000;
+      font-size: 20px;
+      opacity: 0.5;
+      padding: 0 8px;
+    }
+    .wechat-body {
+      flex: 1;
+      background: #ededed;
+      overflow-y: auto;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .wechat-body::-webkit-scrollbar { width: 0; }
+    .msg-wx {
+      display: flex;
+      gap: 6px;
+      max-width: 85%;
+      animation: wx-msg-in 0.3s ease;
+    }
+    @keyframes wx-msg-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg-wx .avatar-wx {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .msg-wx.from-her .avatar-wx { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .msg-wx.from-me {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+    .msg-wx.from-me .avatar-wx { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .bubble {
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.45;
+      word-break: break-word;
+      position: relative;
+    }
+    .msg-wx.from-her .bubble {
+      background: #fff;
+      color: #000;
+    }
+    .msg-wx.from-me .bubble {
+      background: #95ec69;
+      color: #000;
+    }
+    .msg-wx .bubble.small {
+      font-size: 13px;
+      color: #888;
+      font-style: italic;
+    }
+    .time-divider {
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      padding: 6px 0;
+    }
+    .typing-indicator {
+      display: none;
+      align-self: flex-start;
+      margin-left: 38px;
+      gap: 3px;
+      padding: 8px 12px;
+      background: #fff;
+      border-radius: 4px;
+      animation: wx-msg-in 0.3s ease;
+    }
+    .typing-indicator.visible { display: flex; }
+    .typing-indicator span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #bbb;
+      animation: typing-bounce 1.2s infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+    .chat-end-hint {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 20px;
+      letter-spacing: 1px;
+      animation: hint-pulse 2s ease-in-out infinite;
+    }
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    /* 输入栏 */
+    .wechat-input-bar {
+      height: auto;
+      min-height: 50px;
+      background: #f7f7f7;
+      border-top: 1px solid #d9d9d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      gap: 8px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    .wx-choice-btn {
+      padding: 8px 14px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      max-width: 240px;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .wx-choice-btn:hover {
+      border-color: #07c160;
+      color: #07c160;
+      background: #f0fff4;
+    }
+    .wx-choice-btn:active {
+      transform: scale(0.97);
+    }
+    .wx-choice-hint {
+      width: 100%;
+      text-align: center;
+      font-size: 11px;
+      color: #999;
+      margin-top: 2px;
+    }
+    /* 通话弹层 */
+    .call-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 60px;
+      z-index: 100;
+      border-radius: 28px;
+    }
+    .call-overlay.visible { display: flex; }
+    .call-type-label {
+      color: #fff;
+      font-size: 14px;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+    .call-avatar-ring {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 14px;
+    }
+    .call-avatar-ring .ring {
+      position: absolute;
+      inset: -15px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: ring-pulse 2s ease-out infinite;
+    }
+    .call-avatar-ring .ring.delay { animation-delay: 1s; }
+    @keyframes ring-pulse {
+      0% { transform: scale(0.8); opacity: 1; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .call-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+    }
+    .call-name {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .call-status {
+      color: #fff;
+      font-size: 14px;
+      opacity: 0.6;
+      margin-bottom: 40px;
+      min-height: 20px;
+    }
+    .call-status .dots::after {
+      content: '';
+      display: inline-block;
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+    @keyframes dots {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+    }
+    .call-buttons {
+      display: flex;
+      gap: 40px;
+      margin-top: auto;
+      margin-bottom: 60px;
+    }
+    .call-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: pointer;
+      transition: transform 0.15s;
+      border: none;
+      color: #fff;
+    }
+    .call-btn:active { transform: scale(0.92); }
+    .call-btn.hangup {
+      background: #ff3b30;
+    }
+    .call-btn.answer {
+      background: #07c160;
+    }
+    .call-btn-label {
+      text-align: center;
+      color: #fff;
+      font-size: 11px;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+    .call-btn-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* 视频通话背景 */
+    .call-overlay.video-mode .call-avatar {
+      display: none;
+    }
+    .call-overlay.video-mode {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    .call-overlay.video-mode::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      opacity: 0.4;
+      filter: blur(2px);
+    }
+    .call-overlay.video-mode .call-avatar-ring { display: none; }
+  </style>
+</head>
+<body>
+  <div class="intro-overlay" id="intro">
+    <button class="intro-music-btn" id="musicBtn" title="音乐">♪</button>
+
+    <!-- 第一阶段：文字叙事 -->
+    <div class="intro-content" id="introContent"></div>
+
+    <!-- 第二阶段：微信对话 -->
+    <div class="wechat-scene" id="wechatScene">
+      <div class="phone-frame">
+        <div class="wechat-status-bar">
+          <span>9:41</span>
+          <span>📶 📡 🔋</span>
+        </div>
+        <div class="wechat-nav">
+          <span class="back-arrow">‹</span>
+          <div class="avatar-small">林</div>
+          <div class="name-wrap">
+            <div class="name">林晚</div>
+            <div class="status-text" id="wxStatus">林晚</div>
+          </div>
+          <span class="dots">···</span>
+        </div>
+        <div class="wechat-body" id="wechatBody"></div>
+        <div class="wechat-input-bar" id="wxInputBar"></div>
+        <!-- 通话弹层 -->
+        <div class="call-overlay" id="callOverlay">
+          <div class="call-type-label" id="callTypeLabel">语音通话</div>
+          <div class="call-avatar-ring">
+            <div class="ring"></div>
+            <div class="ring delay"></div>
+            <div class="call-avatar">林</div>
+          </div>
+          <div class="call-name">林晚</div>
+          <div class="call-status" id="callStatus">正在呼叫<span class="dots"></span></div>
+          <div class="call-buttons">
+            <div class="call-btn-wrap">
+              <div class="call-btn hangup" id="callHangup" style="background:#ff3b30;">📞</div>
+              <div class="call-btn-label">挂断</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-end-hint" id="chatEndHint" style="display:none;">点击屏幕继续</div>
+    </div>
+
+    <div class="intro-skip" id="skipHint">点击屏幕跳过</div>
+    <div class="intro-continue" id="continueBtn" style="display:none;">点击进入</div>
+  </div>
+
+  <script src="assets/js/common.js"></script>
+  <script>
+    // ===== Web Audio API 回忆纯音乐 =====
+    let audioCtx = null;
+    let musicPlaying = false;
+    let musicNodes = [];
+
+    function createAmbientMusic() {
+      if (audioCtx) return;
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioCtx.currentTime;
+
+      const notes = [
+        { freq: 261.63, time: 0, dur: 2.0 },
+        { freq: 329.63, time: 2.0, dur: 1.5 },
+        { freq: 392.00, time: 3.5, dur: 2.0 },
+        { freq: 440.00, time: 5.5, dur: 1.5 },
+        { freq: 392.00, time: 7.0, dur: 1.0 },
+        { freq: 329.63, time: 8.0, dur: 1.5 },
+        { freq: 293.66, time: 9.5, dur: 2.0 },
+        { freq: 261.63, time: 11.5, dur: 3.0 },
+      ];
+      const bassNotes = [{ freq: 130.81, time: 0, dur: 14.5 }];
+
+      function playNote(freq, startTime, duration, type, gain, pan) {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        const panNode = audioCtx.createStereoPanner();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, now + startTime);
+        gainNode.gain.setValueAtTime(0, now + startTime);
+        gainNode.gain.linearRampToValueAtTime(gain, now + startTime + 0.3);
+        gainNode.gain.setValueAtTime(gain, now + startTime + duration - 0.5);
+        gainNode.gain.linearRampToValueAtTime(0, now + startTime + duration);
+        panNode.pan.setValueAtTime(pan, now);
+        osc.connect(gainNode);
+        gainNode.connect(panNode);
+        panNode.connect(audioCtx.destination);
+        osc.start(now + startTime);
+        osc.stop(now + startTime + duration + 0.1);
+        musicNodes.push(osc, gainNode, panNode);
+      }
+
+      notes.forEach(n => {
+        playNote(n.freq, n.time, n.dur, 'sine', 0.08, 0);
+        playNote(n.freq * 2, n.time, n.dur, 'sine', 0.02, 0.2);
+        playNote(n.freq * 3, n.time, n.dur, 'sine', 0.008, -0.2);
+      });
+      bassNotes.forEach(n => playNote(n.freq, n.time, n.dur, 'sine', 0.04, 0));
+
+      const envOsc = audioCtx.createOscillator();
+      const envGain = audioCtx.createGain();
+      envOsc.type = 'sine';
+      envOsc.frequency.setValueAtTime(880, now);
+      envGain.gain.setValueAtTime(0.008, now);
+      envGain.gain.linearRampToValueAtTime(0.012, now + 7);
+      envGain.gain.linearRampToValueAtTime(0.006, now + 14);
+      envOsc.connect(envGain);
+      envGain.connect(audioCtx.destination);
+      envOsc.start(now);
+      envOsc.stop(now + 15);
+      musicNodes.push(envOsc, envGain);
+
+      const loopDuration = 15;
+      let loopCount = 0;
+      const maxLoops = 20;
+      function scheduleLoop() {
+        if (loopCount >= maxLoops || !musicPlaying) return;
+        const loopStart = now + (loopCount + 1) * loopDuration;
+        notes.forEach(n => {
+          playNote(n.freq, n.time + (loopCount + 1) * loopDuration, n.dur, 'sine', 0.06, 0);
+          playNote(n.freq * 2, n.time + (loopCount + 1) * loopDuration, n.dur, 'sine', 0.015, 0.2);
+        });
+        playNote(130.81, (loopCount + 1) * loopDuration, 14.5, 'sine', 0.03, 0);
+        loopCount++;
+        setTimeout(scheduleLoop, loopDuration * 1000 - 200);
+      }
+      setTimeout(scheduleLoop, loopDuration * 1000 - 200);
+    }
+
+    function startMusic() {
+      if (musicPlaying) return;
+      musicPlaying = true;
+      createAmbientMusic();
+      document.getElementById('musicBtn').classList.remove('muted');
+      document.getElementById('musicBtn').textContent = '♪';
+    }
+    function stopMusic() {
+      musicPlaying = false;
+      musicNodes.forEach(n => { try { n.stop(); } catch(e) {} });
+      musicNodes = [];
+      if (audioCtx) { audioCtx.close(); audioCtx = null; }
+      document.getElementById('musicBtn').classList.add('muted');
+      document.getElementById('musicBtn').textContent = '🔇';
+    }
+    // 首次用户交互时启动音乐：浏览器自动播放策略要求先有用户手势，
+    // 否则 AudioContext 会被挂起而无声。因此不在页面加载时自动播放。
+    let musicAutoStarted = false;
+    function ensureMusic() {
+      if (!musicAutoStarted) {
+        musicAutoStarted = true;
+        startMusic();
+      }
+    }
+    document.getElementById('musicBtn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (musicPlaying) stopMusic();
+      else startMusic();
+    });
+
+    // ===== 第一阶段：文字叙事（无剧透版） =====
+    const script = [
+      { text: "我认识一个人。", pause: 900 },
+      { text: "她叫林晚，物理系研究生，比我高一届。", pause: 1000 },
+      { text: "", br: true, pause: 400 },
+      { text: "她对研究很痴迷，", pause: 900 },
+      { text: "实验室里待到最晚的总是她。", pause: 900 },
+      { text: "她在图书馆给我讲过量子力学，", pause: 900 },
+      { text: "在二手群把旧教材便宜卖给我。", pause: 900 },
+      { text: "", br: true, pause: 400 },
+      { text: "我们约好五月一起去看毕业展，", pause: 1000 },
+      { text: "她说太忙了，论文赶进度，去不了。", pause: 1000 },
+      { text: "我说那等你忙完。", pause: 1100 },
+      { text: "", br: true, pause: 500 },
+      { text: "后来，她不再回消息了。", pause: 1100 },
+      { text: "她的朋友圈，也清空了。", pause: 1200 },
+      { text: "", br: true, pause: 600 },
+      { text: "八月底，实验室重新分配工位，", pause: 1000 },
+      { text: "我接手了她的位置。", pause: 1000 },
+      { text: "她的电脑还在桌上，没有人来收。", pause: 1100 },
+      { text: "", br: true, pause: 600 },
+      { text: "那台电脑的右下角，贴着一只歪歪扭扭的小猫咪。", pause: 1000 },
+      { text: "我认得它——她总在奶茶杯上画这个，画完舍不得扔。", pause: 1200 },
+      { text: "", br: true, pause: 600 },
+      { text: "我按下了开机键。", pause: 1600 },
+      { text: "屏幕亮了。", pause: 2000 },
+    ];
+
+    const container = document.getElementById('introContent');
+    const skipHint = document.getElementById('skipHint');
+    const wechatScene = document.getElementById('wechatScene');
+    const wechatBody = document.getElementById('wechatBody');
+    const wxStatus = document.getElementById('wxStatus');
+    const chatEndHint = document.getElementById('chatEndHint');
+
+    let charIndex = 0;
+    let lineIndex = 0;
+    let currentLine = null;
+    let typing = true;
+    let timeouts = [];
+
+    function clearAllTimeouts() {
+      timeouts.forEach(t => clearTimeout(t));
+      timeouts = [];
+    }
+
+    function typeNext() {
+      if (lineIndex >= script.length) {
+        typing = false;
+        skipHint.textContent = '点击屏幕继续';
+        // 等待一下后自动进入微信阶段
+        timeouts.push(setTimeout(() => {
+          enterWeChatScene();
+        }, 1800));
+        return;
+      }
+      const item = script[lineIndex];
+      if (item.br) {
+        const br = document.createElement('div');
+        br.style.height = '0.6em';
+        container.appendChild(br);
+        lineIndex++;
+        timeouts.push(setTimeout(typeNext, item.pause || 500));
+        return;
+      }
+      if (!currentLine || charIndex === 0) {
+        currentLine = document.createElement('div');
+        currentLine.className = 'intro-line';
+        container.appendChild(currentLine);
+      }
+      if (charIndex < item.text.length) {
+        currentLine.textContent += item.text[charIndex];
+        charIndex++;
+        const delay = item.text[charIndex - 1] === '，' || item.text[charIndex - 1] === '。' ? 120 : 50;
+        timeouts.push(setTimeout(typeNext, delay));
+      } else {
+        charIndex = 0;
+        lineIndex++;
+        currentLine = null;
+        timeouts.push(setTimeout(typeNext, item.pause || 500));
+      }
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // ===== 第二阶段：互动式微信对话 =====
+    // 回合制：玩家点击发送 → 出我方消息 → 对方正在输入 → 对方回复
+    const wechatTurns = [
+      { auto_time: '2024年5月19日（三个月前）' },
+      { me: '学姐，毕业展你到底去不去呀', her: ['真的去不了', '论文还有好多数据要跑'] },
+      { me: '你天天泡实验室，也不怕猝死', her: ['哈哈不会的', '等这阵忙完我请你喝奶茶'] },
+      { me: '行，你说的啊', her: [] },
+      { me: '对了 我听说你以前跟张航学长一起做过课题', her: ['嗯 我们同门嘛 合作过一阵子'] },
+      { me: '实验室老人都说你俩关系特别好', her: ['课题有交叉 正常交流啦'] },
+      { me: '那你们挺般配的 哈哈', her: ['你想什么呢', '他是我师兄'] },
+      { me: '哦 那就好', her_typing_first: true, her: ['我可能要走了', '陈老师说帮我走国家公派 CSC，去瑞士 ETH 做一年访问学者，之后能转博', '他说推荐信已经写好了 让我专心答辩 不用操心'] },
+      { me: '卧槽 真的假的', her: ['嗯 还没定 但基本确定了'] },
+      { me: '那恭喜你啊学姐 太厉害了', her: ['谢谢', '有些事想在走之前处理好'] },
+      { me: '什么事', her: ['没什么', '对了 我想跟你说个事'] },
+      { me: '你说', her: ['算了 等我想好了再说吧'] },
+      { me: '搞什么神神秘秘的', her: ['嘿嘿', '总之谢谢你一直照顾我'] },
+      { me: '客气什么 你一直帮我的', her: ['嗯', '有机会的话 以后请你吃饭'] },
+      { auto_time: '（5月19日深夜 她回得越来越慢）' },
+      { me: '学姐？', her: [] },
+      { me: '听说你下周就要走了？', her: [] },
+      { me: '也不跟我说一声', her: [] },
+      { me: '你是不是因为张航学长的事才要走的', her: [] },
+      { me: '去年的事 我一直觉得没那么简单', her_typing_first: true, her: ['不是你想的那样', '有些事我现在没法跟你说'] },
+      { me: '你到底什么意思', her: ['对不起', '等我处理好了会联系你的'] },
+      { auto_time: '（第二天起 她再也没有回过消息）' },
+      { me: '学姐？', her: [] },
+      { me: '你在哪？', her: [] },
+      { me: '我找了你很久', her: [] },
+      { me: '张航学长的事 果然没那么简单', her: [] },
+      { me: '朋友圈怎么也清空了', her: [] },
+      { me: '你回我一下好不好', her: [] },
+      { me: '我真的很担心你', her: [] },
+      { call: 'voice' },
+      { call: 'video' },
+    ];
+
+    let turnIndex = 0;
+    let waitingForUser = false;
+
+    function appendTime(text) {
+      const div = document.createElement('div');
+      div.className = 'time-divider';
+      div.textContent = text;
+      wechatBody.appendChild(div);
+      wechatBody.scrollTop = wechatBody.scrollHeight;
+    }
+
+    function appendMessage(type, text) {
+      const avatarText = type === 'me' ? '我' : '林';
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `msg-wx from-${type}`;
+      msgDiv.innerHTML = `
+        <div class="avatar-wx">${avatarText}</div>
+        <div class="bubble">${text}</div>
+      `;
+      wechatBody.appendChild(msgDiv);
+      wechatBody.scrollTop = wechatBody.scrollHeight;
+    }
+
+    function showTyping() {
+      wxStatus.textContent = '对方正在输入...';
+      const typing = document.createElement('div');
+      typing.className = 'typing-indicator visible';
+      typing.id = 'typingInd';
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      wechatBody.appendChild(typing);
+      wechatBody.scrollTop = wechatBody.scrollHeight;
+    }
+
+    function removeTyping() {
+      const t = document.getElementById('typingInd');
+      if (t) t.remove();
+      wxStatus.textContent = '林晚';
+    }
+
+    function setNextPrompt() {
+      const bar = document.getElementById('wxInputBar');
+      while (turnIndex < wechatTurns.length) {
+        const t = wechatTurns[turnIndex];
+        if (t.auto_time) {
+          appendTime(t.auto_time);
+          turnIndex++;
+          continue;
+        }
+        if (t.call) {
+          showCall(t.call);
+          return;
+        }
+        if (t.me !== undefined) {
+          waitingForUser = true;
+          bar.innerHTML = '';
+          const btn = document.createElement('button');
+          btn.className = 'wx-choice-btn';
+          btn.textContent = t.me;
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sendChosenMessage(t.me);
+          });
+          bar.appendChild(btn);
+          const hint = document.createElement('div');
+          hint.className = 'wx-choice-hint';
+          hint.textContent = '点击发送';
+          bar.appendChild(hint);
+          return;
+        }
+        turnIndex++;
+      }
+      waitingForUser = false;
+      wxStatus.textContent = '她的最后一条消息，停在这里';
+      bar.innerHTML = '';
+      chatEndHint.style.display = 'block';
+      chatEndHint.textContent = '点击屏幕进入她的电脑';
+    }
+
+    function showCall(type) {
+      const overlay = document.getElementById('callOverlay');
+      const label = document.getElementById('callTypeLabel');
+      const status = document.getElementById('callStatus');
+      const hangup = document.getElementById('callHangup');
+
+      overlay.classList.remove('video-mode');
+      if (type === 'video') {
+        overlay.classList.add('video-mode');
+        label.textContent = '视频通话';
+      } else {
+        label.textContent = '语音通话';
+      }
+
+      status.innerHTML = '正在呼叫<span class="dots"></span>';
+      overlay.classList.add('visible');
+
+      // 本次通话内部使用的超时，挂断时统一清理
+      const callTimeouts = [];
+
+      // 3秒后显示"无人接听"
+      callTimeouts.push(setTimeout(() => {
+        status.innerHTML = '无人接听';
+        // 震动动画效果
+        hangup.style.animation = 'ring-pulse 0.3s ease-in-out 2';
+        callTimeouts.push(setTimeout(() => {
+          hangup.style.animation = '';
+        }, 700));
+      }, 3000 + Math.random() * 1500));
+
+      // 结束当前通话并进入下一轮（只推进一次 turnIndex）
+      function endCall() {
+        callTimeouts.forEach(t => clearTimeout(t));
+        callTimeouts.length = 0;
+        overlay.classList.remove('visible');
+        turnIndex++;
+        timeouts.push(setTimeout(setNextPrompt, 300));
+      }
+
+      // 6.5秒后自动挂断
+      callTimeouts.push(setTimeout(endCall, 6500));
+
+      // 挂断按钮
+      hangup.onclick = (e) => {
+        e.stopPropagation();
+        endCall();
+      };
+    }
+
+    function sendChosenMessage(text) {
+      if (!waitingForUser) return;
+      const bar = document.getElementById('wxInputBar');
+      bar.innerHTML = '';
+      appendMessage('me', text);
+      waitingForUser = false;
+
+      const turn = wechatTurns[turnIndex];
+      if (!turn) return;
+      const herReplies = turn.her || [];
+      const typingBefore = turn.her_typing_first && herReplies.length > 0;
+
+      if (herReplies.length === 0) {
+        turnIndex++;
+        timeouts.push(setTimeout(setNextPrompt, 500));
+        return;
+      }
+
+      let replyIdx = 0;
+      function showHerReply() {
+        if (replyIdx >= herReplies.length) {
+          turnIndex++;
+          timeouts.push(setTimeout(setNextPrompt, 600));
+          return;
+        }
+        if (replyIdx > 0) {
+          showTyping();
+          timeouts.push(setTimeout(() => {
+            removeTyping();
+            appendMessage('her', herReplies[replyIdx]);
+            replyIdx++;
+            const delay = herReplies[replyIdx - 1].length > 15 ? 900 : 700;
+            timeouts.push(setTimeout(showHerReply, delay));
+          }, 900 + Math.random() * 400));
+        } else {
+          appendMessage('her', herReplies[replyIdx]);
+          replyIdx++;
+          const delay = herReplies[replyIdx - 1].length > 15 ? 900 : 700;
+          timeouts.push(setTimeout(showHerReply, delay));
+        }
+      }
+
+      if (typingBefore) {
+        showTyping();
+        timeouts.push(setTimeout(() => {
+          removeTyping();
+          showHerReply();
+        }, 1200 + Math.random() * 500));
+      } else {
+        const firstDelay = 400 + Math.random() * 400;
+        timeouts.push(setTimeout(showHerReply, firstDelay));
+      }
+    }
+
+    function enterWeChatScene() {
+      container.style.display = 'none';
+      wechatScene.classList.add('visible');
+      skipHint.style.display = 'none';
+
+      turnIndex = 0;
+      waitingForUser = false;
+      setNextPrompt();
+    }
+
+    function skipToWeChat() {
+      clearAllTimeouts();
+      container.innerHTML = '';
+      script.forEach(item => {
+        if (item.br) {
+          const br = document.createElement('div');
+          br.style.height = '0.6em';
+          container.appendChild(br);
+        } else {
+          const line = document.createElement('div');
+          line.className = 'intro-line';
+          line.textContent = item.text;
+          container.appendChild(line);
+        }
+      });
+      typing = false;
+      skipHint.textContent = '点击屏幕继续';
+      timeouts.push(setTimeout(() => enterWeChatScene(), 1000));
+    }
+
+    function finishIntro() {
+      clearAllTimeouts();
+      stopMusic();
+      sessionStorage.setItem('lw_from_intro', '1');
+      location.href = '/ARGgame/her-old-laptop/her-old-laptop.html';
+    }
+
+    // 点击处理
+    document.getElementById('intro').addEventListener('click', (e) => {
+      ensureMusic();
+      // 通话弹层内部自己处理点击
+      if (e.target.closest('.call-overlay')) {
+        return;
+      }
+      if (e.target.closest('.wx-choice-btn')) {
+        return;
+      }
+      if (wechatScene.classList.contains('visible')) {
+        if (chatEndHint.style.display === 'block') {
+          finishIntro();
+        }
+        return;
+      }
+      if (typing) {
+        skipToWeChat();
+      } else {
+        skipToWeChat();
+      }
+    });
+
+    // 开始
+    // 音乐不在此处自动播放，改为玩家首次点击屏幕时由 ensureMusic 启动
+    setTimeout(typeNext, 800);
+  </script>
+</body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日历</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ===== iOS 日历风格 ===== */
+    .ios-calendar {
+      font-family: -apple-system, "SF Pro Text", "PingFang SC", sans-serif;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .cal-header {
+      padding: 12px 16px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px solid #e5e5ea;
+    }
+    .cal-month {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1c1c1e;
+      letter-spacing: -0.5px;
+    }
+    .cal-nav {
+      display: flex;
+      gap: 8px;
+    }
+    .cal-nav button {
+      width: 32px; height: 32px;
+      border: none; background: transparent;
+      color: #007aff; font-size: 20px;
+      border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cal-nav button:hover { background: #f2f2f7; }
+
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 8px 8px 4px;
+    }
+    .cal-weekdays div {
+      text-align: center;
+      font-size: 13px;
+      color: #8e8e93;
+      font-weight: 500;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-auto-rows: minmax(36px, 48px);
+      gap: 2px;
+      padding: 0 8px 8px;
+      align-content: start;
+      flex-shrink: 0;
+    }
+    .cal-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.12s;
+      padding: 2px;
+    }
+    .cal-cell:hover { background: #f2f2f7; }
+    .cal-cell.empty { cursor: default; }
+    .cal-cell.empty:hover { background: transparent; }
+    .cal-cell .date-num {
+      font-size: 15px;
+      font-weight: 500;
+      color: #1c1c1e;
+      line-height: 1;
+    }
+    .cal-cell.today .date-num {
+      color: #fff;
+      background: #007aff;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cal-cell.has-event .date-num { font-weight: 600; }
+    .cal-cell .event-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      margin-top: 2px;
+    }
+    .cal-cell .dot-red { background: #ff3b30; }
+    .cal-cell .dot-orange { background: #ff9500; }
+    .cal-cell .dot-blue { background: #007aff; }
+    .cal-cell .dot-green { background: #34c759; }
+    .cal-cell .dot-gray { background: #c7c7cc; }
+    .cal-cell .dot-purple { background: #af52de; }
+
+    /* 选中日期样式 */
+    .cal-cell.selected .date-num {
+      background: #007aff;
+      color: #fff;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ===== 事件列表（点击日期后显示） ===== */
+    .events-panel {
+      flex: 1 1 180px;
+      min-height: 180px;
+      max-height: 45vh;
+      overflow-y: auto;
+      background: #f2f2f7;
+      border-top: 0.5px solid #e5e5ea;
+      padding: 12px 16px 20px;
+    }
+    /* 选中新日期时，面板轻微闪一下，暗示"这里内容变了" */
+    .events-panel.panel-flash {
+      animation: panel-flash 0.45s ease-out;
+    }
+    @keyframes panel-flash {
+      0%   { background: #e1eefa; }
+      40%  { background: #eaf2fd; }
+      100% { background: #f2f2f7; }
+    }
+    .events-date-label {
+      font-size: 13px;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .event-item {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .event-bar {
+      width: 4px;
+      border-radius: 2px;
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+    .event-content { flex: 1; min-width: 0; }
+    .event-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1c1c1e;
+      margin-bottom: 2px;
+      line-height: 1.3;
+    }
+    .event-time {
+      font-size: 12px;
+      color: #8e8e93;
+      margin-bottom: 4px;
+    }
+    .event-note {
+      font-size: 13px;
+      color: #3c3c43;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .event-note .hint {
+      color: #ff3b30;
+      font-weight: 500;
+    }
+    .events-empty {
+      text-align: center;
+      color: #8e8e93;
+      font-size: 14px;
+      padding: 24px 0;
+    }
+
+    /* ==== 失联日（2024-06-20）之后的事件：视觉降级，暗示「没实现」==== */
+    /* 1) 单元格文字与圆点变淡、空心 */
+    .cal-cell.future-unreal .date-num {
+      color: #c7c7cc;
+    }
+    .cal-cell.future-unreal .event-dot {
+      background: transparent !important;
+      border: 1px dashed #bbb;
+      width: 6px; height: 6px;
+    }
+    /* 2) 事件卡片整体变淡，类似"被划掉的计划" */
+    .events-panel.future-day .event-item {
+      opacity: 0.55;
+      background: #f7f7fa;
+      filter: saturate(0.35);
+    }
+    .events-panel.future-day .events-date-label::after {
+      content: ' · 她没等到这一天';
+      color: #c7c7cc;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">日历</span>
+    </div>
+    <div class="window-body" style="padding:0;">
+      <div class="ios-calendar">
+
+        <!-- 月导航 -->
+        <div class="cal-header">
+          <div class="cal-month" id="calMonth">2024年6月</div>
+          <div class="cal-nav">
+            <button onclick="changeMonth(-1)" title="上个月">‹</button>
+            <button onclick="changeMonth(1)" title="下个月">›</button>
+          </div>
+        </div>
+
+        <!-- 星期 -->
+        <div class="cal-weekdays">
+          <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+        </div>
+
+        <!-- 日期网格 -->
+        <div class="cal-grid" id="calGrid"></div>
+
+        <!-- 事件面板 -->
+        <div class="events-panel" id="eventsPanel">
+          <div class="events-empty">点击日期查看日程</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    // ===== 日历事件数据（iOS风格） =====
+    // 真实生活化的日程，关键线索藏在笔记里，不直接剧透
+    const calData = {
+      // 5月
+      '2024-05-19': [
+        { bar: 'blue',   title: '小组会', time: '14:00 - 15:30', note: '和导师、周明讨论实验进展' },
+        { bar: 'orange', title: '还图书馆书', time: '17:00', note: '借期快到了' },
+        { bar: 'green',  title: '奶茶',     time: '19:00', note: '楼下新开的店 还想再去一次' },
+      ],
+      '2024-05-22': [
+        { bar: 'red',    title: '师兄生日', time: '', note: '去年还一起吃过蛋糕' },
+      ],
+      '2024-05-25': [
+        { bar: 'blue',   title: '系里例会', time: '10:00', note: '每次都是那些内容 但不能缺席' },
+      ],
+      '2024-05-28': [
+        { bar: 'orange', title: '体检',     time: '09:30', note: '校医院 别忘了带医保卡' },
+      ],
+      // 6月
+      '2024-06-03': [
+        { bar: 'blue',   title: '论文答辩预审', time: '14:00 - 17:00', note: '陈老师要求改第3章和第5章的数据分析' },
+      ],
+      '2024-06-06': [
+        { bar: 'green',  title: '体测补测',   time: '08:00', note: '800米 上次跑了4分50' },
+      ],
+      '2024-06-10': [
+        { bar: 'orange', title: '买返程票',   time: '', note: '6月底的票 妈妈说早买' },
+      ],
+      '2024-06-12': [
+        { bar: 'blue',   title: '答辩PPT终审', time: '全天', note: '改了三遍 应该没问题了' },
+      ],
+      // 6月14日：答辩日 + 密码线索（笔记里隐晦提到）
+      '2024-06-14': [
+        { bar: 'red',    title: '答辩',             time: '14:00 - 17:00', note: '物理楼302\n答完回实验室收尾\n妈说她那天来' },
+        { bar: 'orange', title: '寄材料',           time: '18:30', note: '答辩材料寄回家 别忘了挂号信' },
+        { bar: 'green',  title: '周明的纸条',       time: '答辩前', note: '他塞给我一张纸条。\n上面写了一个英文单词——TRUTH。他只说"以后用得上"，没解释。\n我把它收好了。' },
+      ],
+      '2024-06-15': [
+        { bar: 'blue',   title: '和周明吃饭', time: '12:00', note: '他说答辩之后要请我 庆祝一下' },
+      ],
+      '2024-06-20': [
+        { bar: 'gray',   title: '学院学位委员会',   time: '全天', note: '答辩结果上会 通过就等拿证' },
+      ],
+      '2024-06-25': [
+        { bar: 'gray',   title: '整理行李', time: '', note: '把宿舍东西清一清 要离校了\n7月5日和周明约了 见最后一面\n票都订好了 别迟到' },
+      ],
+      // 6月28日：毕业典礼 + 回家（票买的就是这一天——可惜她没等到）
+      '2024-06-28': [
+        { bar: 'purple', title: '硕士研究生毕业典礼', time: '09:00', note: '主楼报告厅\n拨穗 拿学位证正本\n妈妈说会来' },
+        { bar: 'green',  title: '回家',               time: '下午', note: '下午的票 跟妈妈一起走' },
+      ],
+      // ===== 7月：林晚失联后没人取消的"未来计划" —— 悲剧伏笔（视觉上会变淡灰）=====
+      '2024-07-05': [
+        { bar: 'blue',   title: '和周明见面', time: '15:00', note: '南门咖啡馆\n他说要给我一份东西 我没问是什么' },
+      ],
+      '2024-07-15': [
+        { bar: 'purple', title: 'CSC 联培材料截止', time: '23:59', note: '陈老师说帮我走国家公派\n去ETH做一年访问学者\n推荐信他已经写好了 让我直接交\n但我现在不太确定 还要不要交了' },
+      ],
+      '2024-07-20': [
+        { bar: 'gray', title: '妈住院复查', time: '上午', note: '说好我陪她去的\n票订的7月19晚上的卧铺' },
+      ],
+    };
+
+    let currentYear = 2024;
+    let currentMonth = 6; // 当前显示6月
+    let selectedDate = null;
+
+    // ===== 渲染日历 =====
+    function renderCalendar() {
+      const grid = document.getElementById('calGrid');
+      const monthLabel = document.getElementById('calMonth');
+      monthLabel.textContent = `${currentYear}年${currentMonth}月`;
+
+      const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+      let html = '';
+
+      // 前置空格
+      for (let i = 0; i < firstDay; i++) {
+        html += '<div class="cal-cell empty"></div>';
+      }
+
+      const todayStr = '2024-06-20'; // 故事发生时的"今天"是6月20日（林晚失联当天）
+      const lostDay = '2024-06-20';
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${currentYear}-${String(currentMonth).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const isToday = dateStr === todayStr;
+        const events = calData[dateStr] || [];
+        const hasEvents = events.length > 0;
+        const eventClass = hasEvents ? getEventClass(events) : '';
+        const isSelected = dateStr === selectedDate;
+        const isFutureUnreal = dateStr > lostDay;
+
+        html += `
+          <div class="cal-cell ${isToday ? 'today' : ''} ${hasEvents ? 'has-event' : ''} ${isSelected ? 'selected' : ''} ${isFutureUnreal ? 'future-unreal' : ''}"
+               data-date="${dateStr}"
+               onclick="selectDate('${dateStr}')">
+            <span class="date-num">${d}</span>
+            ${hasEvents ? `<span class="event-dot ${eventClass}"></span>` : ''}
+          </div>
+        `;
+      }
+
+      grid.innerHTML = html;
+
+      // 恢复选中高亮（renderCalendar 内部补 class，避免 selectDate 里重复调 renderEvents 造成的闪烁）
+      if (selectedDate) {
+        const selCell = grid.querySelector(`[data-date="${selectedDate}"]`);
+        if (selCell) selCell.classList.add('selected');
+      }
+    }
+
+    function getEventClass(events) {
+      // 取第一个事件的颜色
+      const map = { red: 'dot-red', orange: 'dot-orange', blue: 'dot-blue', green: 'dot-green', gray: 'dot-gray', purple: 'dot-purple' };
+      const bar = events[0].bar || 'gray';
+      return map[bar] || 'dot-gray';
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+      if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+      // 切月：如果这个月有当前选中日期就保持，否则清空事件面板
+      const sameMonthSelected = selectedDate &&
+        selectedDate.startsWith(`${currentYear}-${String(currentMonth).padStart(2,'0')}`);
+      renderCalendar();
+      if (sameMonthSelected) {
+        renderEvents(selectedDate, false); // 切月保留选中内容但不闪
+      } else {
+        document.getElementById('eventsPanel').innerHTML = '<div class="events-empty">点击日期查看日程</div>';
+      }
+    }
+
+    function selectDate(dateStr) {
+      selectedDate = dateStr;
+      renderCalendar();
+      renderEvents(dateStr, true);
+    }
+
+    function formatDateLabel(dateStr) {
+      const [y, m, d] = dateStr.split('-');
+      const dt = new Date(parseInt(y), parseInt(m)-1, parseInt(d));
+      const weekdays = ['周日','周一','周二','周三','周四','周五','周六'];
+      const today = new Date(2024, 5, 20); // 故事"今天"（6月20日）
+      const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
+      const yesterday = new Date(today); yesterday.setDate(today.getDate()-1);
+
+      if (dt.getTime() === today.getTime()) return '今天';
+      if (dt.getTime() === tomorrow.getTime()) return '明天';
+      if (dt.getTime() === yesterday.getTime()) return '昨天';
+
+      return `${parseInt(m)}月${parseInt(d)}日 · ${weekdays[dt.getDay()]}`;
+    }
+
+    function renderEvents(dateStr, withFlash = false) {
+      const panel = document.getElementById('eventsPanel');
+      const events = calData[dateStr] || [];
+      const label = formatDateLabel(dateStr);
+
+      let html = `<div class="events-date-label">${label}</div>`;
+
+      if (events.length === 0) {
+        html += '<div class="events-empty">这一天没有日程</div>';
+        panel.innerHTML = html;
+      } else {
+        events.forEach(ev => {
+          const barColors = { red: '#ff3b30', orange: '#ff9500', blue: '#007aff', green: '#34c759', gray: '#c7c7cc', purple: '#af52de' };
+          const barColor = barColors[ev.bar] || '#c7c7cc';
+          const noteHtml = ev.note ? `<div class="event-note">${ev.note.replace(/\n/g,'<br>')}</div>` : '';
+          const timeHtml = ev.time ? `<div class="event-time">${ev.time}</div>` : '';
+
+          html += `
+            <div class="event-item">
+              <div class="event-bar" style="background:${barColor};"></div>
+              <div class="event-content">
+                <div class="event-title">${ev.title}</div>
+                ${timeHtml}
+                ${noteHtml}
+              </div>
+            </div>
+          `;
+        });
+        panel.innerHTML = html;
+      }
+
+      // 标记日期是否在失联日 (2024-06-20) 之后 → 面板降级视觉，暗示"她没等到"
+      const lostDay = '2024-06-20';
+      panel.classList.toggle('future-day', dateStr > lostDay);
+
+      // 关键线索日期：只在用户"主动点击"时标记已看，避免进页面就解锁
+      if (dateStr === '2024-06-14' && withFlash === true) {
+        Game.markRaw('lw_calendar_june14_viewed');
+      }
+
+      // 面板闪烁提示：点击/切月显示不同日期时闪一下，玩家知道下面内容更新了
+      if (withFlash) {
+        panel.classList.remove('panel-flash');
+        // 强制 reflow 让动画可重播
+        void panel.offsetWidth;
+        panel.classList.add('panel-flash');
+        setTimeout(() => panel.classList.remove('panel-flash'), 500);
+      }
+    }
+
+    // 初始化：6月14日自动选中，让玩家一眼看到关键日期
+    selectedDate = '2024-06-14';
+    renderCalendar();
+    renderEvents('2024-06-14');
+
+    // 暴露方法
+    window.changeMonth = changeMonth;
+    window.selectDate = selectDate;
+
+    Game.renderProgress();
+  </script>
+</body>
+</html>

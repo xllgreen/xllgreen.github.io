@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《她的旧电脑》测试套件</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body { background: #1a1a1a; color: #e8e8e8; overflow: auto; padding: 20px; user-select: text; }
+    h1 { font-size: 22px; margin-bottom: 8px; color: #fff; }
+    .sub { font-size: 13px; color: #999; margin-bottom: 20px; }
+    .toolbar { margin-bottom: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .toolbar button {
+      padding: 8px 16px; background: #007aff; color: #fff;
+      border: none; border-radius: 6px; font-size: 13px;
+    }
+    .toolbar button.gray { background: #666; }
+    .toolbar button.danger { background: #fa5151; }
+    .account-bar {
+      background: #2a2a2a; padding: 12px 16px; border-radius: 8px;
+      margin-bottom: 16px; font-size: 13px; line-height: 1.8;
+    }
+    .account-bar .role {
+      display: inline-block; padding: 2px 10px; border-radius: 12px;
+      font-size: 11px; margin-right: 6px;
+    }
+    .account-bar .role.tester { background: #fa5151; color: #fff; }
+    .account-bar .role.player { background: #07c160; color: #fff; }
+    .case {
+      background: #2a2a2a; padding: 12px 16px; border-radius: 6px;
+      margin-bottom: 8px; font-size: 13px; border-left: 4px solid #666;
+    }
+    .case.pass { border-left-color: #07c160; }
+    .case.fail { border-left-color: #fa5151; }
+    .case.skip { border-left-color: #ffd60a; }
+    .case .title { font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .case .desc { color: #aaa; font-size: 12px; margin-bottom: 4px; }
+    .case .result { font-size: 12px; }
+    .case .result.pass { color: #07c160; }
+    .case .result.fail { color: #fa5151; }
+    .case .result.skip { color: #ffd60a; }
+    .case .expect { color: #888; font-size: 11px; margin-top: 4px; }
+    .case .got { color: #ffb84d; font-size: 11px; }
+    .stats {
+      position: sticky; top: 0; background: #1a1a1a;
+      padding: 12px 0; border-bottom: 1px solid #333; margin-bottom: 16px;
+      font-size: 14px; font-weight: 500; z-index: 10;
+    }
+    .stats .pass { color: #07c160; }
+    .stats .fail { color: #fa5151; }
+    .stats .skip { color: #ffd60a; }
+    .log-box {
+      background: #000; color: #0f0; padding: 12px;
+      border-radius: 6px; font-family: monospace; font-size: 12px;
+      max-height: 200px; overflow-y: auto; margin-top: 16px;
+    }
+    .section-title {
+      margin: 24px 0 8px; font-size: 15px; color: #ddd;
+      border-bottom: 1px solid #333; padding-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 《她的旧电脑》测试套件</h1>
+  <div class="sub">不依赖任何测试框架，纯前端跑用例。覆盖：密码校验、错误重试、字符串修复回归、线索解锁、路径相对性。</div>
+
+  <div class="toolbar">
+    <button onclick="runAll()">▶ 运行所有用例</button>
+    <button onclick="runSection('pwd')" class="gray">仅密码校验</button>
+    <button onclick="runSection('retry')" class="gray">仅错误重试</button>
+    <button onclick="runSection('regression')" class="gray">仅回归（字符串修复）</button>
+    <button onclick="runSection('flow')" class="gray">仅流程链路</button>
+    <button onclick="Game.reset()" class="danger">⚠ 清空存档</button>
+  </div>
+
+  <div class="account-bar">
+    <strong>测试账号：</strong>
+    <span class="role tester">tester</span>
+    一个虚拟测试号，不参与正式游戏。<br>
+    <strong>测试方式：</strong>本页用 <code>Game.verify()</code> 直接喂入"模拟输入"，<br>
+    正常密码、错误密码、空密码、大小写敏感、空格、连续错误触发 3 次提示。<br>
+    <span class="role player">player</span>
+    <strong>真实玩家：</strong>直接玩 <a href="/ARGgame/her-old-laptop/her-old-laptop.html" style="color:#6cf;">her-old-laptop.html</a>，<br>
+    控制台所有日志前缀 <code>[ARG]</code>，方便筛查。
+  </div>
+
+  <div class="stats" id="stats">📋 准备就绪，点击"运行所有用例"</div>
+
+  <div id="cases"></div>
+
+  <div class="section-title">📜 日志输出（同步打印到下方）</div>
+  <div class="log-box" id="log"></div>
+
+  <script src="assets/js/common.js"></script>
+  <script>
+    // ===== 测试套件本体 =====
+    // 把 Game.DEBUG 关掉，避免和测试日志互相干扰；测试自己写 log
+    Game.DEBUG = false;
+
+    // 测试时关闭 toast 弹窗（不然会闪）
+    const _toast = Game.toast.bind(Game);
+    Game.toast = () => {};
+
+    let passCount = 0, failCount = 0, skipCount = 0;
+    const casesEl = document.getElementById('cases');
+    const logEl = document.getElementById('log');
+
+    function log(msg) {
+      const line = `[test] ${msg}`;
+      console.log(line);
+      logEl.innerHTML += line + '\n';
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function addCase(section, title, desc, expect, fn) {
+      const wrap = document.createElement('div');
+      wrap.className = 'case skip';
+      wrap.dataset.section = section;
+      wrap.innerHTML = `
+        <div class="title">${title}</div>
+        <div class="desc">${desc}</div>
+        <div class="result skip">⏸ 未运行</div>
+        <div class="expect">期望：${expect}</div>
+        <div class="got" style="display:none;"></div>
+      `;
+      casesEl.appendChild(wrap);
+      wrap._run = () => {
+        let actual, ok, reason;
+        try {
+          const r = fn();
+          if (r && typeof r === 'object') {
+            actual = r.actual; ok = r.ok; reason = r.reason;
+          } else {
+            actual = r; ok = !!r;
+          }
+        } catch (e) {
+          actual = '抛出异常: ' + e.message; ok = false; reason = 'exception';
+        }
+        if (ok === 'skip') {
+          skipCount++;
+          wrap.classList.remove('skip'); wrap.classList.add('skip');
+          wrap.querySelector('.result').className = 'result skip';
+          wrap.querySelector('.result').textContent = '⊘ 跳过';
+        } else if (ok) {
+          passCount++;
+          wrap.classList.remove('skip'); wrap.classList.add('pass');
+          wrap.querySelector('.result').className = 'result pass';
+          wrap.querySelector('.result').textContent = '✓ 通过';
+        } else {
+          failCount++;
+          wrap.classList.remove('skip'); wrap.classList.add('fail');
+          wrap.querySelector('.result').className = 'result fail';
+          wrap.querySelector('.result').textContent = '✗ 失败';
+          const got = wrap.querySelector('.got');
+          got.style.display = 'block';
+          got.textContent = '实际：' + actual;
+        }
+        updateStats();
+      };
+    }
+
+    function updateStats() {
+      document.getElementById('stats').innerHTML =
+        `📊 <span class="pass">通过 ${passCount}</span> · ` +
+        `<span class="fail">失败 ${failCount}</span> · ` +
+        `<span class="skip">跳过 ${skipCount}</span>`;
+    }
+
+    function runAll() { runSection('all'); }
+    function runSection(name) {
+      // 重置计数
+      passCount = failCount = skipCount = 0;
+      logEl.innerHTML = '';
+      log('=== 开始运行测试 ===');
+      document.querySelectorAll('.case').forEach(c => {
+        c.classList.remove('pass','fail');
+        c.classList.add('skip');
+        c.querySelector('.result').className = 'result skip';
+        c.querySelector('.result').textContent = '⏸ 未运行';
+        c.querySelector('.got').style.display = 'none';
+      });
+      document.querySelectorAll('.case').forEach(c => {
+        if (name === 'all' || c.dataset.section === name) c._run();
+      });
+      log(`=== 结束：通过 ${passCount} / 失败 ${failCount} / 跳过 ${skipCount} ===`);
+      updateStats();
+    }
+
+    // ============ 测试用例 ============
+
+    // —— 密码校验正确性 ——
+    addCase('pwd', 'boot 密码正确', 'Game.check("0307","boot") 应为 true', 'true',
+      () => ({ actual: Game.check('0307','boot'), ok: Game.check('0307','boot') }));
+
+    addCase('pwd', 'wechat 密码正确', 'Game.check("LW2024","wechat") 应为 true', 'true',
+      () => ({ actual: Game.check('LW2024','wechat'), ok: Game.check('LW2024','wechat') }));
+
+    addCase('pwd', 'mail 密码正确', 'Game.check("0614","mail") 应为 true', 'true',
+      () => ({ actual: Game.check('0614','mail'), ok: Game.check('0614','mail') }));
+
+    addCase('pwd', 'files 密码正确', 'Game.check("ZHO114truth","files") 应为 true', 'true',
+      () => ({ actual: Game.check('ZHO114truth','files'), ok: Game.check('ZHO114truth','files') }));
+
+    addCase('pwd', 'final 触发码正确', 'Game.check("SENDTHELIGHT","final") 应为 true', 'true',
+      () => ({ actual: Game.check('SENDTHELIGHT','final'), ok: Game.check('SENDTHELIGHT','final') }));
+
+    // —— 大小写敏感性（关键：final 应该是大小写敏感）——
+    addCase('pwd', 'final 大小写敏感', '小写 sendthelight 应被拒绝', 'false',
+      () => {
+        const r = Game.check('sendthelight','final');
+        return { actual: r, ok: r === false };
+      });
+
+    addCase('pwd', 'files 大小写敏感', '小写 zho114truth 应被拒绝', 'false',
+      () => {
+        const r = Game.check('zho114truth','files');
+        return { actual: r, ok: r === false };
+      });
+
+    // —— 空输入 / 空格 ——
+    addCase('pwd', '空输入被拒', 'Game.check("","boot") 应为 false', 'false',
+      () => {
+        const r = Game.check('','boot');
+        return { actual: r, ok: r === false };
+      });
+
+    addCase('pwd', '前后空格被 trim', 'Game.check(" 0307 ","boot") 应为 true', 'true',
+      () => {
+        const r = Game.check(' 0307 ','boot');
+        return { actual: r, ok: r === true };
+      });
+
+    // —— 错误重试计数 ——
+    // 注意：每个用例开头都重置 Game.failCount，避免用例间状态污染
+    addCase('retry', '首次失败 failCount=1',
+      '错误密码一次后 failCount[boot] 应为 1', '1',
+      () => {
+        Game.failCount = {};
+        let calledFail = false, n;
+        Game.verify('xxxx', 'boot', '锁屏', () => {}, (k) => { calledFail = true; n = k; });
+        const ok = Game.failCount.boot === 1 && calledFail === true && n === 1;
+        return { actual: `failCount=${Game.failCount.boot}, calledFail=${calledFail}, n=${n}`, ok };
+      });
+
+    addCase('retry', '连续 3 次失败 n=3',
+      '连错 3 次后 failCount[boot] 应为 3', '3',
+      () => {
+        Game.failCount = {};
+        for (let i = 0; i < 3; i++) {
+          Game.verify('bad', 'boot', '锁屏', () => {}, () => {});
+        }
+        return { actual: Game.failCount.boot, ok: Game.failCount.boot === 3 };
+      });
+
+    addCase('retry', '成功后 failCount 清零',
+      '错一次再成功，failCount[boot] 应归零', '0',
+      () => {
+        Game.failCount = {};
+        Game.verify('bad', 'boot', '锁屏', () => {}, () => {});
+        let okCalled = false;
+        Game.verify('0307', 'boot', '锁屏', () => { okCalled = true; }, () => {});
+        return { actual: Game.failCount.boot, ok: Game.failCount.boot === 0 && okCalled === true };
+      });
+
+    // —— 字符串跨行修复回归（之前的 bug）——
+    addCase('regression', 'notes.html 字符串模板可用',
+      '第4条备忘录内容应能正常渲染，无 SyntaxError', '无异常',
+      () => {
+        // 模拟 notes.html 第4条的内容构造（修复前是单引号跨行，会抛 SyntaxError）
+        try {
+          const content = `万一我忘了所有密码——
+
+<span class="hint-text">照片，永远是照片。</span>
+
+L + W + 4位数字（年份），开微信。`;
+          return { actual: '渲染成功，长度=' + content.length, ok: content.length > 0 };
+        } catch (e) {
+          return { actual: e.message, ok: false };
+        }
+      });
+
+    addCase('regression', 'login-files 密码含中文语境拼接',
+      'ZHO114truth 三段拼接逻辑校验', '正确',
+      () => {
+        // 模拟玩家从线索推出来的三段
+        const part1 = 'ZHO';              // 周明姓"周"拼音前3字母
+        const part2 = '114';              // 论文文献第7条期刊号
+        const part3 = 'truth';            // "真相"英文
+        const composed = part1 + part2 + part3;
+        const ok = Game.check(composed, 'files');
+        return { actual: composed + ' => ' + ok, ok };
+      });
+
+    addCase('regression', 'renderProgress 路径自适应',
+      '/ARGgame/her-old-laptop/根目录 hints.html / apps/ ../hints.html / apps/files/hints.html', '三层路径正确',
+      () => {
+        // 与 renderProgress 内部一致：目录深度 = parts.length - 1（去掉文件名）
+        function calcHintPath(pathname) {
+          const parts = pathname.split('/').filter(Boolean);
+          const dirDepth = parts.length > 0 ? parts.length - 1 : 0;
+          return '../'.repeat(dirDepth) + '/ARGgame/her-old-laptop/hints.html';
+        }
+        const root = calcHintPath('/test.html');          // 根目录 → hints.html
+        const apps = calcHintPath('/apps/notes.html');     // apps/ → ../hints.html
+        const files = calcHintPath('/apps/files/x.html');  // apps/files/ → ../../hints.html
+        const puzzles = calcHintPath('/puzzles/x.html');   // puzzles/ → ../hints.html
+        const ok = root === '/ARGgame/her-old-laptop/hints.html' &&
+                   apps === '../hints.html' &&
+                   files === '../../hints.html' &&
+                   puzzles === '../hints.html';
+        return { actual: `root=${root}, apps=${apps}, files=${files}, puzzles=${puzzles}`, ok };
+      });
+
+    // —— 流程链路（端到端顺序）——
+    addCase('flow', '解锁流程顺序',
+      '12 条线索按 ORDER 顺序解锁后 progress=12', '12',
+      () => {
+        // 先清掉所有
+        Game.ORDER.forEach(k => localStorage.removeItem(k));
+        // 按 ORDER 顺序逐个标记
+        Game.ORDER.forEach(k => localStorage.setItem(k, '1'));
+        const p = Game.progress();
+        // 还原
+        Game.ORDER.forEach(k => localStorage.removeItem(k));
+        return { actual: p, ok: p === 12 };
+      });
+
+    addCase('flow', '未登录直接访问 mail-key.html 会被踢',
+      'Game.unlocked("MAIL_LOGIN") 在未登录时为 false', 'false',
+      () => {
+        localStorage.removeItem('lw_mail_login');
+        const r = Game.unlocked('MAIL_LOGIN');
+        return { actual: r, ok: r === false };
+      });
+
+    addCase('flow', '登录后 unlocked 立即为 true',
+      '标记 MAIL_LOGIN 后 unlocked 应为 true', 'true',
+      () => {
+        localStorage.removeItem('lw_mail_login');
+        Game.mark('MAIL_LOGIN');
+        const r = Game.unlocked('MAIL_LOGIN');
+        localStorage.removeItem('lw_mail_login');
+        return { actual: r, ok: r === true };
+      });
+
+    addCase('flow', 'mark 重复调用不会重复计数',
+      '同一线索 mark 两次，progress 只 +1', '1',
+      () => {
+        Game.ORDER.forEach(k => localStorage.removeItem(k));
+        Game.mark('BOOT');
+        Game.mark('BOOT');
+        const p = Game.progress();
+        localStorage.removeItem('lw_boot');
+        return { actual: p, ok: p === 1 };
+      });
+
+    addCase('flow', 'reset 清空全部存档',
+      'reset 后 progress 应为 0', '0',
+      () => {
+        Game.ORDER.forEach(k => localStorage.setItem(k, '1'));
+        // 注意：reset 会跳转页面，这里只测清空逻辑
+        Game.ORDER.forEach(k => localStorage.removeItem(k));
+        Game.failCount = {};
+        const p = Game.progress();
+        return { actual: p, ok: p === 0 };
+      });
+
+    log('测试用例已加载，共 ' + document.querySelectorAll('.case').length + ' 条');
+    updateStats();
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>未发送的草稿 - 夜航论坛</title>
+  <link rel="stylesheet" href="/src/pages/extra/drafts.css" />
+</head>
+<body>
+
+<div id="container">
+  <div id="header">
+    <div id="header-top">
+      <div id="logo">
+        <span class="logo-night">夜航</span>
+        <span class="logo-sub">—— 飞行员的夜航手册</span>
+      </div>
+    </div>
+    <div id="nav">
+      <ul>
+        <li><a href="/board/tower">塔台</a></li>
+        <li><a href="/board/lounge">候机室</a></li>
+        <li><a href="/board/deepspace">深空</a></li>
+        <li><a href="/board/blindzone">盲区</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="breadcrumb">
+    <a href="/user/vega">Vega的个人主页</a>
+    <span class="sep">›</span>
+    <span>未发送的草稿</span>
+  </div>
+
+  <div id="main">
+    <div class="draft-notice">
+      <span class="draft-icon">📝</span>
+      <span class="draft-label">草稿 · 未发送</span>
+    </div>
+
+    <div id="pm-container">
+      <div id="pm-header">
+        <div class="pm-field"><span class="pm-label">收件人：</span>霄汉</div>
+        <div class="pm-field"><span class="pm-label">发件人：</span>Vega</div>
+      </div>
+
+      <div id="pm-body">
+        <p>霄汉：</p>
+        <p>你说得对，我们查得太深了。</p>
+        <p>我删了一部分东西，不知道这样够不够。但至少他们来找的话，看到的只会是一个"普通网友"的痕迹。毕竟你也说过，"最好的隐藏不是锁起来，而是混在人群里假装什么都没发生。"</p>
+        <p>但我没法假装什么都没发生，我也看到那些东西了，我知道你比我走得更深。虽然你说只是在"整理数据"，可你从来不会为整理数据熬到凌晨四点。</p>
+        <p>我知道劝不了你，你不想让我卷进来。</p>
+        <p>但我也有自己的想法。</p>
+        <p>所以我只拜托你一件事：如果真的要继续下去，也请让我知道。我不是想拦着你，至少，还要有人能知道发生了什么。</p>
+      </div>
+
+      <div id="pm-footer">
+        <button class="btn-send" id="btn-send">发送</button>
+        <button class="btn-discard">放弃</button>
+      </div>
+    </div>
+
+    <div id="pm-cursor-note">
+      <span class="cursor-blink">▌</span> 光标停在"发送"按钮上，但这封信从未被发出。
+    </div>
+  </div>
+
+  <div id="footer">
+    <div class="footer-links">
+      <a href="/board/tower">塔台</a> · <a href="/board/lounge">候机室</a> ·
+      <a href="/board/deepspace">深空</a> · <a href="/board/blindzone">盲区</a>
+    </div>
+    <div class="footer-copy">
+      &copy; 2014-2016 夜航. All rights reserved. 「 第三航次 」
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/src/pages/extra/drafts.ts"></script>
+
+<div id="page-counter">extra 4/7</div>
+
+</body>
+</html>

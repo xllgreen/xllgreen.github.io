@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>又是我的空间</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        /* 添加壁纸背景 */
+        body {
+            background-color: #f0f5ff;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                url('https://i.postimg.cc/L8yKkN7K/he-zhao.jpg'),
+                radial-gradient(circle at 5% 10%, rgba(70, 130, 230, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 95% 90%, rgba(30, 100, 200, 0.05) 0%, transparent 25%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        /* 添加半透明遮罩层，提高文字可读性 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(240, 245, 255, 0.85);
+            z-index: -1;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 左侧导航栏 - 去圆角 */
+        .sidebar {
+            flex: 0 0 200px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(224, 232, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .user-info {
+            padding: 30px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(74, 140, 255, 0.9) 0%, rgba(30, 111, 217, 0.9) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .user-info::before {
+            content: "✦";
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.1;
+            top: 10px;
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+        
+        .user-info::after {
+            content: "✦";
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.1;
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(20deg);
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #1e6fd9;
+            border: 4px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 2;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: rgba(232, 241, 255, 0.9);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .username {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .user-location {
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .nav-section {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(224, 232, 255, 0.7);
+        }
+        
+        .nav-section:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e6fd9;
+            padding: 0 20px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-title i {
+            font-size: 18px;
+        }
+        
+        .nav-links {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            padding: 12px 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid transparent;
+        }
+        
+        .nav-links li:hover, .nav-links li.active {
+            background-color: rgba(240, 247, 255, 0.7);
+            color: #1e6fd9;
+            border-left: 4px solid #4a8cff;
+        }
+        
+        .nav-links li i {
+            width: 20px;
+            font-size: 16px;
+        }
+        
+        .nav-links li span {
+            font-size: 15px;
+        }
+        
+        /* 主要内容区域 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 15px 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(224, 232, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .space-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e6fd9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .space-title i {
+            color: #4a8cff;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: rgba(245, 248, 255, 0.7);
+            padding: 8px 18px;
+            width: 320px;
+            border: 1px solid rgba(208, 223, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 5px 12px;
+            width: 100%;
+            font-size: 14px;
+            outline: none;
+            color: #333;
+        }
+        
+        .search-box i {
+            color: #4a8cff;
+        }
+        
+        .tools {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 8px 12px;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .tool-item:hover {
+            background-color: rgba(240, 247, 255, 0.9);
+            color: #1e6fd9;
+        }
+        
+        /* 内容区域 */
+        .content-area {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        .left-column {
+            flex: 0 0 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* 卡片样式 - 去圆角 */
+        .card {
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid rgba(224, 232, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .card-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid rgba(224, 232, 255, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(248, 251, 255, 0.5);
+        }
+        
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1e6fd9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .card-title i {
+            color: #4a8cff;
+        }
+        
+        .card-more {
+            font-size: 13px;
+            color: #4a8cff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .card-more:hover {
+            color: #1e6fd9;
+            text-decoration: underline;
+        }
+        
+        .card-content {
+            padding: 22px;
+        }
+        
+        /* 关心我的 */
+        .care-me {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px;
+            background-color: rgba(248, 251, 255, 0.5);
+            border: 1px solid rgba(208, 223, 255, 0.7);
+        }
+        
+        .care-me-count {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1e6fd9;
+        }
+        
+        .care-me-text {
+            font-size: 14px;
+            color: #1e6fd9;
+        }
+        
+        .care-me-btn {
+            background-color: #4a8cff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .care-me-btn:hover {
+            background-color: #1e6fd9;
+        }
+        
+        /* 精选相册 */
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .album-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border: 1px solid rgba(224, 232, 255, 0.7);
+            background-color: rgba(248, 251, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .album-item:hover {
+            transform: scale(1.05);
+            border-color: #4a8cff;
+            box-shadow: 0 4px 12px rgba(74, 140, 255, 0.2);
+        }
+        
+        .album-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .album-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* 博客区域 */
+        .blog-card {
+            margin-bottom: 20px;
+        }
+        
+        .blog-item {
+            border-bottom: 1px solid rgba(240, 245, 255, 0.7);
+            padding: 25px;
+        }
+        
+        .blog-item:last-child {
+            border-bottom: none;
+        }
+        
+        .blog-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .blog-avatar {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(232, 241, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #1e6fd9;
+            border: 2px solid rgba(208, 223, 255, 0.7);
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .blog-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .blog-date {
+            font-size: 14px;
+            color: #4a8cff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .blog-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+            padding-left: 62px;
+        }
+        
+        .blog-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            margin: 15px 0 15px 62px;
+            border: 1px solid rgba(224, 232, 255, 0.7);
+            background-color: rgba(248, 251, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .blog-image:hover {
+            border-color: #4a8cff;
+            box-shadow: 0 4px 12px rgba(74, 140, 255, 0.2);
+        }
+        
+        .blog-image img {
+            max-width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .blog-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .blog-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: rgba(240, 247, 255, 0.5);
+            border: 2px dashed rgba(208, 223, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin: 15px 0 15px 62px;
+        }
+        
+        .blog-actions {
+            display: flex;
+            gap: 20px;
+            padding-left: 62px;
+        }
+        
+        .blog-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 6px 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .blog-action:hover {
+            color: #1e6fd9;
+            background-color: rgba(240, 247, 255, 0.9);
+        }
+        
+        /* 新日志区域 */
+        .new-blog {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 22px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(224, 232, 255, 0.7);
+            margin-bottom: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .new-blog h3 {
+            font-size: 18px;
+            margin-bottom: 18px;
+            color: #1e6fd9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .blog-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 1px solid rgba(208, 223, 255, 0.7);
+            resize: vertical;
+            font-size: 15px;
+            margin-bottom: 18px;
+            background-color: rgba(248, 251, 255, 0.5);
+            color: #333;
+        }
+        
+        .blog-submit {
+            background: linear-gradient(to right, #4a8cff, #1e6fd9);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .blog-submit:hover {
+            background: linear-gradient(to right, #1e6fd9, #4a8cff);
+        }
+        
+        /* 博客分页 */
+        .blog-pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+        
+        .page-btn {
+            padding: 10px 16px;
+            border: 1px solid rgba(208, 223, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background-color: #4a8cff;
+            color: white;
+            border-color: #4a8cff;
+        }
+        
+        /* 统计卡片 */
+        .stats-card {
+            padding: 18px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(248, 251, 255, 0.5);
+            border: 1px solid rgba(224, 232, 255, 0.7);
+        }
+        
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e6fd9;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        /* 书籍样式 */
+        .book-mention {
+            background-color: rgba(240, 247, 255, 0.5);
+            padding: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #4a8cff;
+        }
+        
+        .book-title {
+            font-weight: 600;
+            color: #1e6fd9;
+        }
+        
+        /* 装饰元素 */
+        .decor-element {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: rgba(74, 140, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .line {
+            position: absolute;
+            height: 1px;
+            background-color: rgba(74, 140, 255, 0.05);
+        }
+        
+        /* 图片放大模态框 */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        
+        .modal-close:hover {
+            color: #4a8cff;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .modal-nav:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
+        }
+        
+        .modal-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+            padding: 10px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .container {
+                padding: 15px;
+                gap: 15px;
+            }
+            
+            .left-column {
+                flex: 0 0 260px;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 0 0 auto;
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .user-info {
+                flex: 0 0 200px;
+            }
+            
+            .nav-section {
+                flex: 1;
+                min-width: 180px;
+            }
+            
+            .blog-content, .blog-actions, .blog-image, .blog-image-placeholder {
+                padding-left: 0;
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .album-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .blog-content, .blog-actions, .blog-image, .blog-image-placeholder {
+                padding-left: 0;
+                margin-left: 0;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .modal-content {
+            animation: zoomIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- 装饰元素 -->
+    <div class="decor-element" id="decorElement"></div>
+    
+    <!-- 图片放大模态框 -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="modal-nav modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <img id="modalImage" src="" alt="放大图片">
+            <button class="modal-nav modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- 左侧导航栏 -->
+        <div class="sidebar">
+            <div class="user-info">
+                <div class="avatar">
+                    <!-- 使用图片替代图标 -->
+                    <img src="images/tx.png" alt="用户头像" onerror="this.onerror=null; this.src='images/tx.png=头像';">
+                </div>
+                <h2 class="username">又是我</h2>
+                <p class="user-location">武阳市 · 青苗中学</p>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">
+                    <i class="fas fa-home"></i>
+                    <span>我的空间</span>
+                </div>
+                <ul class="nav-links">
+                    <li class="active"><i class="fas fa-book-open"></i><span>日志</span></li>
+                    <li><i class="fas fa-comments"></i><span>留言板</span></li>
+                    <li><i class="fas fa-heart"></i><span>特别关心</span></li>
+                    <li><i class="fas fa-star"></i><span>收藏</span></li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">
+                    <i class="fas fa-rss"></i>
+                    <span>动态</span>
+                </div>
+                <ul class="nav-links">
+                    <li><i class="fas fa-users"></i><span>与我相关</span></li>
+                    <li><i class="fas fa-history"></i><span>那年今日</span></li>
+                    <li><i class="fas fa-music"></i><span>音乐</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 顶部栏 -->
+            <div class="top-bar card">
+                <div class="space-title">
+                    <i class="fas fa-user-circle"></i>
+                    <span>又是我的空间</span>
+                </div>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜索日志...">
+                </div>
+                
+                <div class="tools">
+                    <div class="tool-item">
+                        <i class="fas fa-pen"></i>
+                        <span>写日志</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fas fa-bell"></i>
+                        <span>通知</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 内容区域 -->
+            <div class="content-area">
+                <!-- 左栏 -->
+                <div class="left-column">
+                    <!-- 关心我的 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-heart"></i>
+                                <span>关心我的</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="care-me">
+                                <div>
+                                    <div class="care-me-count">3</div>
+                                    <div class="care-me-text">位好友特别关心</div>
+                                </div>
+                                <button class="care-me-btn">
+                                    <i class="fas fa-share-alt"></i>
+                                    <span>晒一晒</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 空间统计 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>空间统计</span>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stat-item">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">日志阅读</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">47</div>
+                                <div class="stat-label">留言</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">特别关心</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">收藏</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 新增：精选相册 -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-images"></i>
+                                <span>精选相册</span>
+                            </div>
+                            <div class="card-more">更多 <i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        <div class="card-content">
+                            <div class="album-grid">
+                                <div class="album-item" data-src="images/hy.jpg" data-caption="合影">
+                                    <img src="images/hy.jpg" alt="合影">
+                                </div>
+                                <div class="album-item" data-src="images/cat.jpg" data-caption="小猫">
+                                    <img src="images/cat.jpg" alt="小猫">
+                                </div>
+                                <div class="album-item" data-src="images/mian.jpg" data-caption="面">
+                                    <img src="images/mian.jpg" alt="面">
+                                </div>
+                                <div class="album-item" data-src="images/hua.jpg" data-caption="花">
+                                    <img src="images/hua.jpg" alt="花">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右栏 - 主要博文内容 -->
+                <div class="right-column">
+                    <!-- 发布新日志 -->
+                    <div class="new-blog">
+                        <h3><i class="fas fa-edit"></i> 发布新日志</h3>
+                        <textarea class="blog-input" placeholder="记录生活的点滴..."></textarea>
+                        <button class="blog-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>发表日志</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 博客内容 -->
+                    <div class="card blog-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-book"></i>
+                                <span>我的日志</span>
+                            </div>
+                            <div class="card-more">更多日志 <i class="fas fa-chevron-right"></i></div>
+                        </div>
+                        
+                        <div class="card-content">
+                            <!-- 第一篇博客 -->
+                            <div class="blog-item">
+                                <div class="blog-header">
+                                    <div class="blog-avatar">
+                                        <!-- 使用图片替代图标 -->
+                                        <img src="images/tx.png" alt="用户头像" onerror="images/tx.png=头像';">
+                                    </div>
+                                    <div class="blog-info">
+                                        <h4>又是我</h4>
+                                        <div class="blog-date">
+                                            <i class="far fa-calendar"></i>
+                                            2023年8月12日
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    终于收到了青苗中学的录取通知书，全家都为我高兴。这份成绩是自己努力的结果，也让我更加坚定了自己的方向。
+                                </div>
+                                <div class="blog-actions">
+                                    <div class="blog-action">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>点赞(15)</span>
+                                    </div>
+                                    <div class="blog-action">
+                                        <i class="far fa-comment"></i>
+                                        <span>评论(8)</span>
+                                    </div>
+                                    <div class="blog-action">
+                                        <i class="fas fa-share"></i>
+                                        <span>分享</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 第二篇博客 -->
+                            <div class="blog-item">
+                                <div class="blog-header">
+                                    <div class="blog-avatar">
+                                        <!-- 使用图片替代图标 -->
+                                        <img src="images/tx.png" alt="用户头像" onerror="images/tx.png=头像';">
+                                    </div>
+                                    <div class="blog-info">
+                                        <h4>又是我</h4>
+                                        <div class="blog-date">
+                                            <i class="far fa-calendar"></i>
+                                            2023年1月25日
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    买了《麦田里的守望者》和《丑人儿》两本书，文字让我安静下来，思索生活中的意义。
+                                </div>
+                                
+                                <div class="book-mention">
+                                    <div><span class="book-title">《麦田里的守望者》</span> - J.D.塞林格</div>
+                                    <div><span class="book-title">《丑人儿》</span> - 斯科特·韦斯特费尔德</div>
+                                </div>
+                                
+                                <!-- 配图 -->
+                                <div class="blog-image" data-caption="《麦田里的守望者》与《丑人儿》">
+                                    <img src="images/book.jpg" alt="书籍配图">
+                                </div>
+                                
+                                <div class="blog-actions">
+                                    <div class="blog-action">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>点赞(12)</span>
+                                    </div>
+                                    <div class="blog-action">
+                                        <i class="far fa-comment"></i>
+                                        <span>评论(5)</span>
+                                    </div>
+                                    <div class="blog-action">
+                                        <i class="fas fa-share"></i>
+                                        <span>分享</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 第三篇博客 -->
+                            <div class="blog-item">
+                                <div class="blog-header">
+                                    <div class="blog-avatar">
+                                        <!-- 使用图片替代图标 -->
+                                        <img src="images/tx.png" alt="用户头像" onerror="images/tx.png=头像';">
+                                    </div>
+                                    <div class="blog-info">
+                                        <h4>又是我</h4>
+                                        <div class="blog-date">
+                                            <i class="far fa-calendar"></i>
+                                            2022年11月23日
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="blog-content">
+                                    为弟弟庆祝了12岁生日，他很开心。最近学习压力很大，今天真是难得愉快的一天。
+                                </div>
+                                
+                                <!-- 配图 -->
+                                <div class="blog-image" data-caption="弟弟的生日庆祝">
+                                    <img src="images/srdg.jpg" alt="生日配图">
+                                </div>
+                                
+                                <div class="blog-actions">
+                                    <div class="blog-action">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>点赞(20)</span>
+                                    </div>
+                                    <div class="blog-action">
+                                        <i class="far fa-comment"></i>
+                                        <span>评论(10)</span>
+                                    </div>
+                                    <div class="blog-action">
+                                        <i class="fas fa-share"></i>
+                                        <span>分享</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 分页 -->
+                            <div class="blog-pagination">
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn">2</button>
+                                <button class="page-btn">3</button>
+                                <button class="page-btn">下一页 <i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 创建装饰元素
+        function createDecor() {
+            const decor = document.getElementById('decorElement');
+            
+            // 创建点
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.left = `${Math.random() * 100}%`;
+                dot.style.top = `${Math.random() * 100}%`;
+                dot.style.width = `${Math.random() * 6 + 2}px`;
+                dot.style.height = dot.style.width;
+                dot.style.opacity = Math.random() * 0.1 + 0.05;
+                
+                decor.appendChild(dot);
+            }
+            
+            // 创建线
+            for (let i = 0; i < 20; i++) {
+                const line = document.createElement('div');
+                line.className = 'line';
+                line.style.left = `${Math.random() * 100}%`;
+                line.style.top = `${Math.random() * 100}%`;
+                line.style.width = `${Math.random() * 100 + 50}px`;
+                line.style.transform = `rotate(${Math.random() * 360}deg)`;
+                line.style.opacity = Math.random() * 0.05 + 0.02;
+                
+                decor.appendChild(line);
+            }
+        }
+        
+        // 图片放大功能
+        let currentImageIndex = 0;
+        let allImages = [];
+        
+        function initImageModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const modalClose = document.getElementById('modalClose');
+            const modalPrev = document.getElementById('modalPrev');
+            const modalNext = document.getElementById('modalNext');
+            
+            // 收集所有可放大的图片（不包括头像）
+            allImages = [
+                // 精选相册图片
+                ...document.querySelectorAll('.album-item'),
+                // 博客图片
+                ...document.querySelectorAll('.blog-image img')
+            ].map(item => {
+                if (item.classList.contains('album-item')) {
+                    return {
+                        src: item.getAttribute('data-src'),
+                        caption: item.getAttribute('data-caption') || '精选相册'
+                    };
+                } else {
+                    const parent = item.closest('.blog-image');
+                    return {
+                        src: item.src,
+                        caption: parent.getAttribute('data-caption') || '日志图片'
+                    };
+                }
+            });
+            
+            // 为所有可放大的图片添加点击事件
+            document.querySelectorAll('.album-item, .blog-image').forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    currentImageIndex = index;
+                    showImage(currentImageIndex);
+                });
+            });
+            
+            // 为头像也添加点击放大功能（单独处理）
+            document.querySelectorAll('.avatar img, .blog-avatar img').forEach((img, index) => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    const avatarData = {
+                        src: img.src,
+                        caption: '我的头像'
+                    };
+                    
+                    // 临时添加到图片集合并显示
+                    const tempIndex = allImages.length;
+                    allImages.push(avatarData);
+                    currentImageIndex = tempIndex;
+                    showImage(currentImageIndex);
+                });
+            });
+            
+            // 关闭模态框
+            modalClose.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+            
+            // 点击模态框背景关闭
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // 上一张
+            modalPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+                showImage(currentImageIndex);
+            });
+            
+            // 下一张
+            modalNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentImageIndex = (currentImageIndex + 1) % allImages.length;
+                showImage(currentImageIndex);
+            });
+            
+            // 键盘控制
+            document.addEventListener('keydown', (e) => {
+                if (modal.style.display === 'flex') {
+                    if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                    } else if (e.key === 'ArrowLeft') {
+                        currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+                        showImage(currentImageIndex);
+                    } else if (e.key === 'ArrowRight') {
+                        currentImageIndex = (currentImageIndex + 1) % allImages.length;
+                        showImage(currentImageIndex);
+                    }
+                }
+            });
+            
+            function showImage(index) {
+                if (allImages.length === 0) return;
+                
+                modalImage.src = allImages[index].src;
+                modalCaption.textContent = allImages[index].caption;
+                modal.style.display = 'flex';
+                
+                // 预加载相邻图片
+                const nextIndex = (index + 1) % allImages.length;
+                const prevIndex = (index - 1 + allImages.length) % allImages.length;
+                
+                const preloadNext = new Image();
+                preloadNext.src = allImages[nextIndex].src;
+                
+                const preloadPrev = new Image();
+                preloadPrev.src = allImages[prevIndex].src;
+            }
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createDecor();
+            initImageModal();
+            
+            // 导航点击效果
+            const navItems = document.querySelectorAll('.nav-links li');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // 晒一晒按钮
+            const shareBtn = document.querySelector('.care-me-btn');
+            shareBtn.addEventListener('click', function() {
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 分享中...';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                    alert('分享成功！3位关心你的好友已收到提醒。');
+                }, 1500);
+            });
+            
+            // 点赞功能
+            const likeButtons = document.querySelectorAll('.blog-action .fa-thumbs-up');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const countElement = this.nextElementSibling;
+                    let count = parseInt(countElement.textContent.match(/\d+/)[0]);
+                    
+                    if(this.classList.contains('far')) {
+                        this.classList.remove('far');
+                        this.classList.add('fas');
+                        count++;
+                        countElement.textContent = `点赞(${count})`;
+                        this.parentElement.style.color = '#1e6fd9';
+                    } else {
+                        this.classList.remove('fas');
+                        this.classList.add('far');
+                        count--;
+                        countElement.textContent = `点赞(${count})`;
+                        this.parentElement.style.color = '#666';
+                    }
+                });
+            });
+            
+            // 搜索框功能
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('keypress', function(e) {
+                if(e.key === 'Enter') {
+                    if(this.value.trim() === '') {
+                        alert('请输入搜索内容');
+                    } else {
+                        alert(`搜索: ${this.value}`);
+                        this.value = '';
+                    }
+                }
+            });
+            
+            // 写日志按钮
+            const writeBtn = document.querySelector('.tool-item:nth-child(1)');
+            writeBtn.addEventListener('click', function() {
+                document.querySelector('.blog-input').focus();
+            });
+            
+            // 发表日志功能
+            const submitBtn = document.querySelector('.blog-submit');
+            submitBtn.addEventListener('click', function() {
+                const textarea = document.querySelector('.blog-input');
+                if(textarea.value.trim() === '') {
+                    alert('请先输入日志内容！');
+                    textarea.focus();
+                    return;
+                }
+                
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 发表中...';
+                this.disabled = true;
+                
+                // 模拟发表过程
+                setTimeout(() => {
+                    alert('日志发表成功！');
+                    textarea.value = '';
+                    this.innerHTML = originalHTML;
+                    this.disabled = false;
+                }, 1500);
+            });
+            
+            // 分页按钮
+            const pageBtns = document.querySelectorAll('.page-btn');
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    pageBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if(this.textContent.includes('下一页')) {
+                        alert('加载更多日志...');
+                    } else {
+                        alert(`切换到第 ${this.textContent.trim()} 页`);
+                    }
+                });
+            });
+            
+            // 更多日志按钮
+            const moreLogsBtn = document.querySelector('.card-more');
+            moreLogsBtn.addEventListener('click', function() {
+                alert('查看所有日志...');
+            });
+            
+            // 更多相册按钮
+            const moreAlbumBtn = document.querySelectorAll('.card-more')[1];
+            moreAlbumBtn.addEventListener('click', function() {
+                alert('查看所有相册...');
+            });
+            
+            // 添加通知功能
+            const notifyBtn = document.querySelector('.tool-item:nth-child(2)');
+            notifyBtn.addEventListener('click', function() {
+                alert('您有3条新通知：\n1. 李明评论了您的日志\n2. 王芳特别关心了您\n3. 张伟访问了您的空间');
+            });
+            
+            // 处理图片加载错误
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    if (this.closest('.avatar') || this.closest('.blog-avatar')) {
+                        this.src = 'https://via.placeholder.com/150/4a8cff/ffffff?text=头像';
+                    } else {
+                        this.src = 'https://via.placeholder.com/400x300/4a8cff/ffffff?text=图片加载失败';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

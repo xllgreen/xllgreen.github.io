@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>访达 · 文稿</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .finder-content {
+      padding: 0;
+    }
+    .finder-header {
+      padding: 14px 20px;
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 13px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .finder-header .path {
+      font-size: 12px;
+      color: #999;
+    }
+    .finder-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+      transition: background 0.15s;
+      gap: 12px;
+    }
+    .finder-item:hover { background: #f8f8f8; }
+    .finder-item .file-icon {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .finder-item .file-info { flex: 1; min-width: 0; }
+    .finder-item .file-name {
+      font-size: 14px; color: #1a1a1a; font-weight: 500;
+    }
+    .finder-item .file-meta {
+      font-size: 11px; color: #aaa; margin-top: 2px;
+    }
+    .finder-item .file-arrow {
+      color: #ccc; font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">访达 · 文稿</span>
+    </div>
+    <div class="window-body">
+      <div class="finder-content">
+        <div class="finder-header">
+          <span>📁 文稿</span>
+          <span class="path">/Users/linwan/Documents/</span>
+        </div>
+
+        <div class="finder-item" onclick="location.href='/ARGgame/her-old-laptop/apps/files/thesis.html'">
+          <div class="file-icon" style="background:#e3f2fd;">📄</div>
+          <div class="file-info">
+            <div class="file-name">硕士论文_林晚.pdf</div>
+            <div class="file-meta">PDF · 最后修改 2024/5/18</div>
+          </div>
+          <div class="file-arrow">›</div>
+        </div>
+
+        <div class="finder-item" data-file="backup">
+          <div class="file-icon" style="background:#fce4ec;">🖼️</div>
+          <div class="file-info">
+            <div class="file-name">桌面壁纸备份.png</div>
+            <div class="file-meta">PNG · 已损坏或格式不受支持</div>
+          </div>
+          <div class="file-arrow">›</div>
+        </div>
+
+        <div class="finder-item" data-file="notes">
+          <div class="file-icon" style="background:#f3e5f5;">📝</div>
+          <div class="file-info">
+            <div class="file-name">研二课程笔记.md</div>
+            <div class="file-meta">Markdown · 文件已损坏，无法打开</div>
+          </div>
+          <div class="file-arrow">›</div>
+        </div>
+
+        <div class="finder-item" data-file="evidence">
+          <div class="file-icon" style="background:#fff3e0;">🔒</div>
+          <div class="file-info">
+            <div class="file-name">实验数据汇总_加密.zip</div>
+            <div class="file-meta">加密压缩包 · 需要密码</div>
+          </div>
+          <div class="file-arrow">›</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 文件错误弹窗 -->
+  <div class="file-error-overlay" id="fileErrorOverlay"></div>
+  <div class="file-error-toast" id="fileErrorToast">
+    <div class="icon" id="fileErrorIcon">📁</div>
+    <div class="msg" id="fileErrorMsg"></div>
+    <button class="ok-btn" onclick="closeFileError()">确定</button>
+  </div>
+
+  <script src="../../assets/js/common.js"></script>
+  <script>
+    // 文件点击行为
+    document.querySelectorAll('.finder-item[data-file]').forEach(item => {
+      item.addEventListener('click', () => {
+        const file = item.dataset.file;
+
+        if (file === 'backup') {
+          showFileError(
+            '⚠️',
+            '无法打开文件"桌面壁纸备份.png"<br><br>此文件已损坏或格式不受支持。<br><br><span style="font-size:12px;color:#999;">文件可能在上次关机时被意外写入。</span>'
+          );
+        } else if (file === 'notes') {
+          showFileError(
+            '📝',
+            '无法打开文件"研二课程笔记.md"<br><br>文件内容已损坏，无法恢复。<br><br><span style="font-size:12px;color:#999;">最后的修改记录显示为 2024年5月19日 23:58。</span>'
+          );
+        } else if (file === 'evidence') {
+          location.href = '/ARGgame/her-old-laptop/puzzles/login-files.html';
+        }
+      });
+    });
+
+    function showFileError(icon, msg) {
+      document.getElementById('fileErrorIcon').textContent = icon;
+      document.getElementById('fileErrorMsg').innerHTML = msg;
+      document.getElementById('fileErrorOverlay').classList.add('visible');
+      document.getElementById('fileErrorToast').classList.add('visible');
+    }
+
+    function closeFileError() {
+      document.getElementById('fileErrorOverlay').classList.remove('visible');
+      document.getElementById('fileErrorToast').classList.remove('visible');
+    }
+
+    window.closeFileError = closeFileError;
+
+    Game.renderProgress();
+  </script>
+</body>
+</html>

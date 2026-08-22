@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>陈教授</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/apps/wechat.html">‹</a>
+      <span class="title">陈教授</span>
+    </div>
+    <div class="window-body">
+      <div class="chat-window">
+        <div class="chat-header">陈教授（导师）</div>
+        <div class="chat-messages">
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            晚晚，答辩准备得怎么样了？最近看你状态不太好，是不是没休息好
+          </div>
+          <div class="msg from-me">老师好，论文初稿差不多了，还想再核对一下数据</div>
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            数据的事我和期刊那边确认过了，流程都没问题，你别给自己太大压力，按原定方案走就行
+          </div>
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            <span class="key-info">周四上午10点来办公室一趟</span>，我把整理好的实验记录给你，你照着改就行，省得自己再跑一遍
+          </div>
+          <div class="msg from-me">好的老师，记下了</div>
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            对了，最近实验室人来人往的，有些事你别太上心，把毕业先弄完最重要
+          </div>
+          <div class="msg from-me">……知道了老师</div>
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            还有，最近学校邮箱查得严，你邮箱里一些没发出去的草稿，<span class="key-info">"06-14"</span> 那封，记得清理一下，别留没用的东西在系统里，对你影响不好
+          </div>
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            晚晚，听老师一句劝，毕业要紧，别的都是次要的
+          </div>
+          <div class="msg from-me" style="background:#eee;color:#999;">（对方撤回了一条消息）</div>
+          <div class="msg from-them">
+            <div class="sender">陈教授</div>
+            <span class="key-info">https://news.example.edu/zhanghang</span><br>
+            这个你也看看，了解一下背景，别在论文里写些不该写的
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    if (!Game.unlocked('WECHAT_LOGIN')) location.href = '/ARGgame/her-old-laptop/puzzles/login-wechat.html';
+    // 看完聊天解锁线索
+    setTimeout(() => Game.mark('CHEN_CHAT'), 1200);
+    // 内心独白：陈教授的"关心"让"我"不安（仅首次进入显示）
+    if (!sessionStorage.getItem('lw_chen_first_seen')) {
+      sessionStorage.setItem('lw_chen_first_seen', '1');
+      setTimeout(() => Game.monologue('这种关心我总觉得哪里不对 学姐从来不这样说话', 5500), 2500);
+    }
+
+    // 聊天里的链接可点
+    document.querySelectorAll('.msg .link, .msg a').forEach(el => {
+      el.addEventListener('click', () => {
+        Game.toast('这条链接需要去浏览器里搜「张航」看看');
+      });
+    });
+
+    Game.renderProgress();
+  </script>
+</body>
+</html>

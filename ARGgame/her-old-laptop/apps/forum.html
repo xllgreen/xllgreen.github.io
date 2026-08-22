@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X大校内论坛</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* ===== 论坛整体 ===== */
+    .forum-full {
+      display: flex; flex-direction: column; height: 100%;
+      background: #f5f6fa;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    /* 登录页 */
+    .forum-login {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; flex: 1; padding: 40px 20px;
+    }
+    .forum-login .login-card {
+      width: 100%; max-width: 380px;
+      background: #fff; border-radius: 16px;
+      padding: 32px 28px; box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .forum-login .login-card .forum-logo {
+      font-size: 40px; margin-bottom: 8px;
+    }
+    .forum-login .login-card h2 {
+      font-size: 18px; color: #1a1a1a; margin-bottom: 4px;
+    }
+    .forum-login .login-card .login-sub {
+      font-size: 12px; color: #999; margin-bottom: 24px;
+    }
+    .forum-login .login-card .login-field {
+      text-align: left; margin-bottom: 16px;
+    }
+    .forum-login .login-card .login-field label {
+      font-size: 12px; color: #666; display: block; margin-bottom: 6px;
+    }
+    .forum-login .login-card .login-field input {
+      width: 100%; padding: 12px 14px; border: 1.5px solid #e0e0e0;
+      border-radius: 8px; font-size: 14px; outline: none;
+      transition: border-color 0.2s; background: #fafafa;
+    }
+    .forum-login .login-card .login-field input:focus {
+      border-color: #4facfe; background: #fff;
+    }
+    .forum-login .login-card .login-btn {
+      width: 100%; padding: 12px; background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #fff; border: none; border-radius: 8px; font-size: 15px;
+      font-weight: 500; cursor: pointer; margin-top: 8px; transition: all 0.2s;
+    }
+    .forum-login .login-card .login-btn:hover {
+      transform: translateY(-1px); box-shadow: 0 4px 12px rgba(79,172,254,0.3);
+    }
+    .forum-login .login-card .login-err {
+      color: #fa5151; font-size: 12px; margin-top: 8px; min-height: 18px;
+    }
+    .forum-login .login-card .login-hint {
+      font-size: 11px; color: #bbb; margin-top: 16px; line-height: 1.6;
+    }
+
+    /* 论坛首页 */
+    .forum-home {
+      display: none; flex-direction: column; height: 100%;
+    }
+    .forum-home.visible { display: flex; }
+
+    /* 论坛顶栏 */
+    .forum-topbar {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #fff; padding: 14px 20px; flex-shrink: 0;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .forum-topbar .forum-topbar-title {
+      font-size: 17px; font-weight: 600; letter-spacing: 1px;
+    }
+    .forum-topbar .user-info {
+      margin-left: auto; font-size: 12px; opacity: 0.9;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .forum-topbar .user-info .avatar-circle {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,0.3); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600;
+    }
+
+    /* 论坛导航 */
+    .forum-nav {
+      background: #fff; border-bottom: 1px solid #e8e8e8;
+      padding: 0 16px; flex-shrink: 0; overflow-x: auto;
+      display: flex; gap: 0;
+    }
+    .forum-nav .nav-item {
+      padding: 12px 16px; font-size: 13px; color: #666;
+      cursor: pointer; border-bottom: 2px solid transparent;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .forum-nav .nav-item.active {
+      color: #4facfe; border-bottom-color: #4facfe; font-weight: 500;
+    }
+    .forum-nav .nav-item:hover { color: #4facfe; }
+
+    /* 搜索栏 */
+    .forum-search-row {
+      padding: 10px 16px; background: #fff;
+      border-bottom: 1px solid #e8e8e8; flex-shrink: 0;
+    }
+    .forum-search-row .search-box {
+      display: flex; align-items: center; background: #f5f5f5;
+      border-radius: 20px; padding: 0 14px; height: 36px;
+      transition: all 0.2s;
+    }
+    .forum-search-row .search-box:focus-within {
+      background: #fff; box-shadow: 0 0 0 2px rgba(79,172,254,0.2);
+    }
+    .forum-search-row .search-box input {
+      flex: 1; border: none; outline: none; background: transparent;
+      font-size: 14px; color: #333;
+    }
+    .forum-search-row .search-box input::placeholder { color: #bbb; }
+    .forum-search-row .search-box .search-icon {
+      color: #999; margin-right: 8px; flex-shrink: 0;
+    }
+
+    /* 帖子列表 */
+    .forum-posts-area {
+      flex: 1; overflow-y: auto; padding: 0;
+    }
+    .forum-board-header {
+      padding: 14px 20px 8px; font-size: 13px; font-weight: 600;
+      color: #888; display: flex; align-items: center; gap: 6px;
+    }
+    .forum-post-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 20px; background: #fff; border-bottom: 1px solid #f0f0f0;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .forum-post-item:hover { background: #fafbfc; }
+    .forum-post-item .post-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 15px; flex-shrink: 0;
+      font-weight: 600;
+    }
+    .forum-post-item .post-body { flex: 1; min-width: 0; }
+    .forum-post-item .post-title-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+    }
+    .forum-post-item .post-title-text {
+      font-size: 14px; color: #1a1a1a; font-weight: 500; line-height: 1.4;
+    }
+    .forum-post-item .post-title-text .tag {
+      display: inline-block; font-size: 10px; padding: 1px 6px;
+      border-radius: 3px; margin-right: 6px; font-weight: 500;
+      vertical-align: middle;
+    }
+    .forum-post-item .post-title-text .tag.hot { background: #ff4757; color: #fff; }
+    .forum-post-item .post-title-text .tag.pin { background: #007aff; color: #fff; }
+    .forum-post-item .post-meta {
+      font-size: 11px; color: #aaa; display: flex; gap: 14px;
+      align-items: center;
+    }
+    .forum-post-item .post-reply-count {
+      background: #f5f5f5; color: #888; font-size: 11px;
+      padding: 2px 8px; border-radius: 10px; flex-shrink: 0;
+    }
+    .forum-post-item .post-reply-count.hot {
+      background: #ff4757; color: #fff;
+    }
+
+    /* 帖子详情弹窗 */
+    .forum-detail-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+      z-index: 200; display: none;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .forum-detail-overlay.visible { display: flex; }
+    .forum-detail-card {
+      background: #fff; max-width: 600px; width: 100%;
+      max-height: 85vh; border-radius: 12px; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: card-in 0.3s ease;
+    }
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .forum-detail-card .detail-header {
+      padding: 20px 24px 16px; border-bottom: 1px solid #f0f0f0;
+    }
+    .forum-detail-card .detail-header h2 {
+      font-size: 17px; color: #1a1a1a; margin-bottom: 8px; line-height: 1.5;
+    }
+    .forum-detail-card .detail-header .detail-meta {
+      font-size: 12px; color: #999; display: flex; gap: 16px;
+    }
+    .forum-detail-card .detail-body {
+      padding: 20px 24px; font-size: 14px; line-height: 1.9; color: #444;
+    }
+    .forum-detail-card .detail-body .highlight {
+      background: #fff8e1; padding: 2px 6px; border-radius: 3px;
+      color: #d9707e; font-weight: 500;
+    }
+    .forum-detail-card .detail-replies {
+      padding: 0 24px 20px; border-top: 1px solid #f5f5f5;
+    }
+    .forum-detail-card .detail-replies .reply {
+      padding: 14px 0; border-bottom: 1px solid #f8f8f8;
+      font-size: 13px; color: #555; line-height: 1.7;
+    }
+    .forum-detail-card .detail-replies .reply .reply-user {
+      font-weight: 500; color: #333; margin-bottom: 4px;
+    }
+    .forum-detail-card .detail-replies .reply .reply-time {
+      font-size: 11px; color: #bbb; float: right;
+    }
+    .forum-detail-card .detail-close {
+      display: block; width: 100%; padding: 14px;
+      background: #f5f5f5; border: none; color: #666;
+      font-size: 14px; cursor: pointer; border-radius: 0 0 12px 12px;
+    }
+    .forum-detail-card .detail-close:hover { background: #eee; }
+
+    /* 搜索无结果 */
+    .forum-search-empty {
+      display: none; text-align: center; padding: 60px 20px; color: #bbb;
+    }
+    .forum-search-empty.visible { display: block; }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">X大校内论坛</span>
+    </div>
+    <div class="window-body" style="padding:0;">
+      <div class="forum-full">
+
+        <!-- ===== 登录页 ===== -->
+        <div class="forum-login" id="forumLogin">
+          <div class="login-card">
+            <div class="forum-logo">🏫</div>
+            <h2>X大校内BBS</h2>
+            <div class="login-sub">学术讨论 · 校园生活 · 实名认证</div>
+            <div class="login-field">
+              <label>学号 / 用户名</label>
+              <input type="text" id="loginUser" placeholder="请输入学号" value="linwan" autocomplete="off">
+            </div>
+            <div class="login-field">
+              <label>密码</label>
+              <input type="password" id="loginPwd" placeholder="请输入密码" autocomplete="off">
+            </div>
+            <button class="login-btn" onclick="forumLogin()">登 录</button>
+            <div class="login-err" id="loginErr"></div>
+            <div class="login-hint">提示：账号是学号（linwan），密码是你常用的那个</div>
+          </div>
+        </div>
+
+        <!-- ===== 论坛首页 ===== -->
+        <div class="forum-home" id="forumHome">
+          <!-- 顶栏 -->
+          <div class="forum-topbar">
+            <span class="forum-topbar-title">X大校内BBS</span>
+            <div class="user-info">
+              <span>林晚 (linwan)</span>
+              <div class="avatar-circle">林</div>
+            </div>
+          </div>
+
+          <!-- 分区导航 -->
+          <div class="forum-nav" id="forumNav"></div>
+
+          <!-- 搜索栏 -->
+          <div class="forum-search-row">
+            <div class="search-box">
+              <span class="search-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="#999" stroke-width="1.5"/><path d="M10 10l4.5 4.5" stroke="#999" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <input type="text" id="forumSearchInput" placeholder="搜索帖子…" autocomplete="off">
+            </div>
+          </div>
+
+          <!-- 帖子列表 -->
+          <div class="forum-posts-area" id="forumPostsArea"></div>
+          <div class="forum-search-empty" id="forumSearchEmpty">
+            <div style="font-size:40px;margin-bottom:12px;">🔍</div>
+            <div>没有找到相关帖子</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 帖子详情弹窗 -->
+  <div class="forum-detail-overlay" id="detailOverlay">
+    <div class="forum-detail-card" id="detailCard"></div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    let config = null;
+    let currentBoard = 'all';
+
+    fetch(Game.ROOT + 'assets/config/game-config.json')
+      .then(r => r.json())
+      .then(c => { config = c; initForum(); })
+      .catch(() => { console.warn('配置加载失败'); config = getDefaultForumConfig(); initForum(); });
+
+    function getDefaultForumConfig() {
+      return {
+        forum: {
+          login: { username: "linwan", password: "0307", hint: "账号是学号（linwan），密码是你常用的" },
+          boards: [
+            { id: "academic", name: "学术讨论", icon: "📚", desc: "论文、实验、学术交流" },
+            { id: "campus", name: "校园生活", icon: "🏫", desc: "吃住行、社团活动" },
+            { id: "market", name: "跳蚤市场", icon: "🛒", desc: "二手转让、求购" },
+            { id: "emotion", name: "情感交流", icon: "💬", desc: "树洞、吐槽、情感" },
+            { id: "job", name: "求职就业", icon: "💼", desc: "实习、校招、职场" },
+            { id: "complaint", name: "投诉建议", icon: "📢", desc: "对学校的意见与建议" }
+          ],
+          posts: {
+            normal: [
+              { board: "campus", title: "二食堂的麻辣香锅是不是换厨师了？", author: "吃货小分队", replies: 23, date: "5月18日" },
+              { board: "market", title: "出二手《量子力学》教材，九成新", author: "毕业清仓", replies: 5, date: "5月17日" },
+              { board: "academic", title: "求助：Matlab拟合曲线一直报错", author: "研一菜鸟", replies: 12, date: "5月18日" },
+              { board: "emotion", title: "考研二战失败，不知道该怎么办了", author: "匿名用户", replies: 67, date: "5月16日" },
+              { board: "job", title: "有人收到华为的终面通知了吗？", author: "等offer中", replies: 34, date: "5月17日" },
+              { board: "campus", title: "图书馆空调能不能修一下", author: "热死的考研党", replies: 45, date: "5月19日" },
+              { board: "market", title: "转租：学校北门单间，月租800", author: "即将离校", replies: 8, date: "5月15日" },
+              { board: "complaint", title: "宿舍热水供应时间太短了", author: "瑟瑟发抖", replies: 89, date: "5月14日" },
+              { board: "emotion", title: "喜欢上实验室的师姐了怎么办", author: "匿名", replies: 156, date: "5月13日" }
+            ],
+            story: [
+              {
+                board: "academic", title: "物理系研究生答辩安排出了吗？", author: "物理系小透明", replies: 42, date: "5月18日",
+                keywords: ["答辩", "物理系"],
+                detail: { body: "<p>如题，今年物理系答辩安排在6月，具体日期还没出。听说有几位同学的导师比较严格，尤其是陈老师那边。有没有人知道林晚学姐的答辩日期？</p>", replies: [{ user: "知道内情的人", time: "5月18日", text: "她好像是6月14号。不过最近没看到她人。" }, { user: "匿名", time: "5月20日", text: "别问了。她可能不会参加了。" }] }
+              },
+              {
+                board: "academic", title: "有没有人觉得陈老师的实验室氛围不太对？", author: "匿名用户", replies: 87, date: "5月10日",
+                keywords: ["陈老师", "陈教授", "实验室"],
+                detail: { body: "<p>RT。最近去物理系那边帮忙，感觉气氛特别压抑。有个师姐在走廊里哭，好像是被陈老师骂了。有没有人知道那边什么情况？</p>", replies: [{ user: "物理系老人", time: "5月10日", text: "陈老师这几年脾气越来越差。" }, { user: "匿名", time: "5月11日", text: "劝你别多管闲事。" }] }
+              },
+              {
+                board: "academic", title: "研二学姐出事了？有人知道林晚去哪了吗", author: "研一小透明", replies: 156, date: "5月25日",
+                keywords: ["林晚"],
+                detail: { body: "<p>5月11日之后就完全没见到林晚学姐了。辅导员说她「走国家公派CSC联培去瑞士」了。可是她连朋友圈都清空了。有人知道她到底怎么了吗？</p>", replies: [{ user: "知情人士", time: "5月25日", text: "她导师是陈XX。" }, { user: "匿名", time: "5月26日", text: "她电脑被人收走过，后来又放回实验室了。听说打不开那个加密文件夹。" }] }
+              },
+              {
+                board: "academic", title: "去年物理系那起事件，有人还记得吗", author: "记得的人", replies: 23, date: "4月15日",
+                keywords: ["去年", "事件"],
+                detail: { body: "<p>去年5月，物理系发生了一件事。具体情况校方没细说。</p><p>但听说某人那阵子一直在整理一份材料。后来材料不见了。</p><p>一年了，学校什么都没说。</p>", replies: [{ user: "沉默的大多数", time: "4月16日", text: "学校没再提这事。" }, { user: "记得的人", time: "4月17日", text: "家属到现在还在上访。" }] }
+              },
+              {
+                board: "academic", title: "关于一个课题组的文献问题", author: "知道一点内情", replies: 56, date: "4月20日",
+                keywords: ["课题组", "文献", "数据"],
+                detail: { body: "<p>我听人说的。某个课题组的论文有问题。最关键的是一篇文献的版本对不上。</p><p>两个版本的数据不一样。有人一直在查，但没结果。</p>", replies: [{ user: "知道一点内情", time: "4月21日", text: "有人拿走了之前留下的东西。" }, { user: "匿名", time: "4月22日", text: "谁敢深究。" }] }
+              },
+              {
+                board: "academic", title: "[已删除] 关于陈XX课题组数据问题的说明", author: "***（已注销）", replies: 12, date: "3月8日",
+                keywords: ["陈老师", "陈教授", "论文", "数据"],
+                detail: { body: "<p style=\"color:#999;\">[此帖已被管理员删除，以下为缓存内容]</p><p>某课题组2021-2024年间发表的论文，有人发现了一些问题。<span class=\"highlight\">原始版本与发表版本有差异。</span></p>", replies: [{ user: "系统管理员", time: "3月8日", text: "此帖违反社区规范，已删除。" }] }
+              },
+              {
+                board: "academic", title: "Nature Physics 2021年17卷的文献求助", author: "文献求助", replies: 5, date: "5月8日",
+                keywords: ["文献", "Wilson", "Nature Physics"],
+                detail: { body: "<p>Wilson, R. Observational Effects in Quantum Systems. Nature Physics, 2021. 我们学校数据库里只有17(8)的版本，但Google Scholar上引用是17(114)。两个版本的数据不一样。</p>", replies: [{ user: "物理系老人", time: "5月9日", text: "114是原始版本，被撤回了。8是修改版。" }, { user: "匿名", time: "5月9日", text: "别深究了。" }] }
+              },
+              {
+                board: "academic", title: "林晚学姐真的出国了吗？", author: "怀疑的人", replies: 34, date: "5月25日",
+                keywords: ["林晚", "出国"],
+                detail: { body: "<p>辅导员说她走CSC联培去瑞士ETH了。但国际合作处没有林晚的派出记录，国家公派名单里也没有。她妈妈也来学校找过，被保安拦了。</p>", replies: [{ user: "沉默", time: "5月26日", text: "她不是出国。" }, { user: "路人", time: "5月27日", text: "银白色外壳，右下角贴着只猫咪贴纸。那台电脑还在她工位上，没人敢碰。" }, { user: "沉默", time: "5月28日", text: "别去碰。她可能是故意留给谁的。" }] }
+              }
+            ]
+          }
+        }
+      };
+    }
+
+    function initForum() {
+      // 构建导航
+      const nav = document.getElementById('forumNav');
+      const boards = config.forum.boards;
+      nav.innerHTML = `
+        <div class="nav-item active" data-board="all" onclick="switchBoard('all')">全部</div>
+        ${boards.map(b => `
+          <div class="nav-item" data-board="${b.id}" onclick="switchBoard('${b.id}')">${b.icon} ${b.name}</div>
+        `).join('')}
+      `;
+
+      renderPosts();
+
+      // 搜索监听
+      const searchInput = document.getElementById('forumSearchInput');
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim();
+        if (query) {
+          searchPosts(query);
+        } else {
+          renderPosts();
+        }
+      });
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          searchInput.value = '';
+          renderPosts();
+        }
+      });
+    }
+
+    function forumLogin() {
+      const user = document.getElementById('loginUser').value.trim();
+      const pwd = document.getElementById('loginPwd').value;
+      const loginCfg = config.forum.login;
+
+      if (user === loginCfg.username && pwd === loginCfg.password) {
+        Game.log('▶ [论坛] 登录成功');
+        document.getElementById('forumLogin').style.display = 'none';
+        document.getElementById('forumHome').classList.add('visible');
+      } else {
+        document.getElementById('loginErr').textContent = '账号或密码错误';
+        Game.log('▶ [论坛] 登录失败');
+      }
+    }
+
+    function switchBoard(boardId) {
+      currentBoard = boardId;
+      document.querySelectorAll('.forum-nav .nav-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.board === boardId);
+      });
+      const query = document.getElementById('forumSearchInput').value.trim();
+      if (query) {
+        searchPosts(query);
+      } else {
+        renderPosts();
+      }
+    }
+
+    function renderPosts() {
+      const area = document.getElementById('forumPostsArea');
+      const empty = document.getElementById('forumSearchEmpty');
+      empty.classList.remove('visible');
+
+      const normal = config.forum.posts.normal || [];
+      const story = config.forum.posts.story || [];
+
+      // 合并所有帖子
+      let allPosts = [...normal.map(p => ({ ...p, isStory: false })), ...story.map(p => ({ ...p, isStory: true }))];
+
+      // 按分区筛选
+      if (currentBoard !== 'all') {
+        allPosts = allPosts.filter(p => p.board === currentBoard);
+      }
+
+      const boards = config.forum.boards;
+      const boardMap = {};
+      boards.forEach(b => { boardMap[b.id] = b; });
+
+      // 按分区分组
+      const grouped = {};
+      allPosts.forEach(p => {
+        if (!grouped[p.board]) grouped[p.board] = [];
+        grouped[p.board].push(p);
+      });
+
+      let html = '';
+
+      // 如果有搜索词，已在searchPosts中处理
+      if (currentBoard === 'all') {
+        // 显示所有分区
+        for (const [boardId, posts] of Object.entries(grouped)) {
+          const board = boardMap[boardId] || { name: boardId, icon: '📌' };
+          html += `<div class="forum-board-header">${board.icon} ${board.name}</div>`;
+          posts.forEach(p => {
+            html += buildPostItem(p);
+          });
+        }
+      } else {
+        const board = boardMap[currentBoard] || { name: currentBoard, icon: '📌' };
+        html += `<div class="forum-board-header">${board.icon} ${board.name}</div>`;
+        (grouped[currentBoard] || []).forEach(p => {
+          html += buildPostItem(p);
+        });
+      }
+
+      if (!html) {
+        html = `<div style="text-align:center;padding:40px;color:#bbb;">该分区暂无帖子</div>`;
+      }
+
+      area.innerHTML = html;
+
+      // 绑定点击事件
+      area.querySelectorAll('.forum-post-item[data-story]').forEach(el => {
+        el.addEventListener('click', () => showPostDetail(el.dataset.story));
+      });
+    }
+
+    function buildPostItem(p) {
+      const avatarColors = ['#667eea','#f093fb','#4facfe','#43e97b','#fa709a','#f5576c','#a18cd1','#fbc2eb'];
+      const color = avatarColors[Math.floor(Math.random() * avatarColors.length)];
+      const initials = (p.author || '?')[0];
+      const hotClass = p.replies > 50 ? 'hot' : '';
+
+      return `
+        <div class="forum-post-item" ${p.isStory && p.detail ? `data-story="${p.title}"` : ''}>
+          <div class="post-avatar" style="background:${color};">${initials}</div>
+          <div class="post-body">
+            <div class="post-title-row">
+              <span class="post-title-text">${p.title}</span>
+              ${p.replies > 50 ? '<span class="tag hot">热</span>' : ''}
+            </div>
+            <div class="post-meta">
+              <span>${p.author}</span>
+              <span>${p.date}</span>
+            </div>
+          </div>
+          <div class="post-reply-count ${hotClass}">${p.replies}</div>
+        </div>
+      `;
+    }
+
+    function searchPosts(query) {
+      const area = document.getElementById('forumPostsArea');
+      const empty = document.getElementById('forumSearchEmpty');
+      const ql = query.toLowerCase();
+      const story = config.forum.posts.story || [];
+
+      // 在故事线帖子中搜索关键词
+      const matched = story.filter(p => {
+        if (currentBoard !== 'all' && p.board !== currentBoard) return false;
+        const kws = (p.keywords || []).join(' ').toLowerCase();
+        const title = p.title.toLowerCase();
+        return kws.includes(ql) || title.includes(ql);
+      });
+
+      if (matched.length === 0) {
+        area.innerHTML = '';
+        empty.classList.add('visible');
+        return;
+      }
+
+      empty.classList.remove('visible');
+      Game.log('▶ [论坛搜索] ' + query);
+      Game.markRaw('lw_forum_searched');
+
+      let html = `<div class="forum-board-header">🔍 搜索 "${query}" 的结果（${matched.length}条）</div>`;
+      matched.forEach(p => {
+        html += buildPostItem(p);
+      });
+      area.innerHTML = html;
+
+      // 绑定点击
+      area.querySelectorAll('.forum-post-item[data-story]').forEach(el => {
+        el.addEventListener('click', () => showPostDetail(el.dataset.story));
+      });
+    }
+
+    function showPostDetail(title) {
+      const story = config.forum.posts.story || [];
+      const post = story.find(p => p.title === title);
+      if (!post || !post.detail) return;
+
+      let repliesHtml = '';
+      if (post.detail.replies && post.detail.replies.length > 0) {
+        repliesHtml = '<div class="detail-replies">';
+        post.detail.replies.forEach(r => {
+          repliesHtml += `
+            <div class="reply">
+              <div class="reply-user">${r.user} <span class="reply-time">${r.time}</span></div>
+              <div>${r.text}</div>
+            </div>`;
+        });
+        repliesHtml += '</div>';
+      }
+
+      const card = document.getElementById('detailCard');
+      card.innerHTML = `
+        <div class="detail-header">
+          <h2>${post.title}</h2>
+          <div class="detail-meta">${post.author} · ${post.date} · ${post.replies}回复</div>
+        </div>
+        <div class="detail-body">${post.detail.body}</div>
+        ${repliesHtml}
+        <button class="detail-close" onclick="closeDetail()">关闭</button>
+      `;
+
+      document.getElementById('detailOverlay').classList.add('visible');
+    }
+
+    function closeDetail() {
+      document.getElementById('detailOverlay').classList.remove('visible');
+    }
+
+    document.getElementById('detailOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('detailOverlay')) closeDetail();
+    });
+
+    window.forumLogin = forumLogin;
+    window.switchBoard = switchBoard;
+    window.showPostDetail = showPostDetail;
+    window.closeDetail = closeDetail;
+
+    Game.renderProgress();
+  </script>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山河谍影</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1410;color:#c8b89a;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow:hidden;height:100vh}
+
+/* 民国旧纸质感 */
+.paper-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#1a1410 0%,#201a14 40%,#181410 100%)}
+.paper-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(160,140,110,0.02) 3px,rgba(160,140,110,0.02) 6px);pointer-events:none}
+
+/* 灯光效果 */
+.desk-light{position:fixed;top:-10%;left:50%;transform:translateX(-50%);width:60%;height:50%;background:radial-gradient(ellipse,rgba(200,170,120,0.08) 0%,transparent 70%);pointer-events:none;z-index:1}
+
+.container{position:relative;z-index:10;width:92%;max-width:900px;margin:0 auto;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+
+/* 开场信 */
+#letter-overlay{position:fixed;inset:0;z-index:100;background:#1a1410;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px;transition:opacity 2s ease;overflow-y:auto}
+#letter-overlay.fade{opacity:0;pointer-events:none}
+.letter-paper{background:linear-gradient(180deg,#f5f0e5,#ebe5d5);color:#3a3020;padding:40px 50px;max-width:560px;box-shadow:0 4px 30px rgba(0,0,0,0.5),inset 0 0 60px rgba(200,180,140,0.1);position:relative;border:1px solid #c8b898}
+.letter-paper::before{content:"";position:absolute;top:-3px;left:15px;right:15px;height:3px;background:repeating-linear-gradient(90deg,#a09070 0px,#a09070 10px,transparent 10px,transparent 14px)}
+.letter-paper::after{content:"";position:absolute;bottom:-3px;left:15px;right:15px;height:3px;background:repeating-linear-gradient(90deg,#a09070 0px,#a09070 10px,transparent 10px,transparent 14px)}
+.letter-text{font-size:14.5px;line-height:2.3;letter-spacing:1.5px}
+.letter-text p{margin-bottom:10px;text-indent:2em}
+.letter-text .seal{display:inline-block;width:50px;height:50px;border:2px solid #8b2020;border-radius:4px;text-align:center;line-height:50px;color:#8b2020;font-size:11px;margin:15px 0 0 auto;float:right;transform:rotate(-5deg)}
+.letter-btn{margin-top:25px;padding:10px 40px;background:transparent;border:1px solid #8a7a5a;color:#a09070;font-family:inherit;font-size:13px;letter-spacing:6px;cursor:pointer;transition:all 0.4s}
+.letter-btn:hover{border-color:#c8a868;color:#d4b878}
+
+/* 主场景 */
+#main-scene{display:none;width:100%}
+#main-scene.show{display:block;animation:fadeIn 1.5s}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.game-title{font-size:36px;letter-spacing:12px;color:#c8a868;margin-bottom:4px;text-shadow:0 2px 10px rgba(200,168,104,0.3);font-weight:bold}
+.game-subtitle{font-size:12px;color:#6a5a40;letter-spacing:6px;margin-bottom:30px}
+
+.scene-desc{color:#a09080;font-size:13px;line-height:2.2;margin-bottom:20px;letter-spacing:1px;text-align:left;max-width:750px}
+
+/* 办公桌图标区域 */
+.desk-area{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin:25px 0;max-width:700px;width:100%}
+.desk-item{background:rgba(40,35,25,0.8);border:1px solid #4a4030;padding:22px 14px;text-align:center;cursor:pointer;transition:all 0.3s;border-radius:4px;position:relative}
+.desk-item:hover{border-color:#8a7a5a;background:rgba(50,45,30,0.9);box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.desk-icon{font-size:32px;margin-bottom:8px;display:block}
+.desk-name{font-size:13px;color:#a09070;letter-spacing:3px}
+.desk-status{font-size:10px;color:#6a5a40;margin-top:4px;letter-spacing:1px}
+.desk-item.checked .desk-status{color:#8a7a5a}
+.desk-item.important::after{content:"●";position:absolute;top:6px;right:8px;color:#8b4040;font-size:8px}
+
+/* 弹窗 */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(20,16,12,0.92);display:none;justify-content:center;align-items:center;padding:20px}
+.overlay.show{display:flex}
+.modal{background:linear-gradient(180deg,#f5f0e5,#ebe5d5);color:#3a3020;max-width:620px;width:100%;padding:35px;border-radius:2px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.5);border:1px solid #c8b898;max-height:80vh;overflow-y:auto}
+.modal-close{position:absolute;top:10px;right:14px;color:#8a7a5a;font-size:20px;cursor:pointer;background:none;border:none;font-family:inherit}
+.modal-close:hover{color:#5a3a2a}
+.modal-title{font-size:17px;color:#2a2010;letter-spacing:5px;margin-bottom:18px;text-align:center;border-bottom:1px solid #d8c8a8;padding-bottom:12px}
+.modal-content{font-size:13.5px;color:#4a3a25;line-height:2.1;letter-spacing:1px}
+.modal-content .highlight{color:#8b2020;font-weight:bold}
+.modal-content .clue{color:#2a5080;font-weight:bold}
+.modal-content .note{color:#8a7a5a;font-size:12px;font-style:italic;margin-top:10px;padding:8px;border-left:2px solid #d8c8a8}
+.modal-content .clickable{color:#2a5080;cursor:pointer;border-bottom:1px dashed #2a5080;transition:color 0.2s}
+.modal-content .clickable:hover{color:#4a70a0}
+.modal-content .useful-header{background:#f0ead8;padding:8px 12px;margin:12px 0;border-left:3px solid #8b2020;font-size:12px;color:#8b2020;letter-spacing:2px}
+
+/* 报纸样式 */
+.newspaper{background:#f8f4e8;border:1px solid #c8c0a8;padding:25px;margin:15px 0;box-shadow:2px 2px 8px rgba(0,0,0,0.1)}
+.newspaper-header{text-align:center;border-bottom:3px double #2a2010;padding-bottom:10px;margin-bottom:15px}
+.newspaper-name{font-size:22px;color:#2a2010;letter-spacing:8px;font-weight:bold}
+.newspaper-date{font-size:11px;color:#8a7a5a;margin-top:4px;letter-spacing:3px}
+.news-item{padding:10px 0;border-bottom:1px solid #e8e0d0}
+.news-item:last-child{border-bottom:none}
+.news-title{font-size:14px;font-weight:bold;color:#2a2010;margin-bottom:5px}
+.news-body{font-size:12.5px;color:#4a3a25;line-height:1.9}
+.news-body .useful{color:#2a5080;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;transition:color 0.2s}
+.news-body .useful:hover{color:#8b2020}
+
+/* 收音机 */
+.radio-panel{background:linear-gradient(180deg,#3a3530,#2a2520);border:2px solid #5a4a30;border-radius:8px;padding:25px;text-align:center;margin:15px 0}
+.radio-dial{width:200px;height:100px;background:#1a1510;border:2px solid #4a3a20;border-radius:4px;margin:15px auto;position:relative;overflow:hidden}
+.radio-freq{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:#c8a868;font-size:14px;letter-spacing:2px}
+.radio-noise{font-size:11px;color:#8a7a5a;margin:10px 0;line-height:1.8}
+.radio-noise .station{color:#c8a868;cursor:pointer;border-bottom:1px dashed #8a7a5a}
+.radio-noise .station:hover{color:#f0d890}
+.radio-btn{padding:8px 25px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:12px;letter-spacing:3px;cursor:pointer;border-radius:4px;transition:all 0.3s;margin:5px}
+.radio-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+.radio-btn.active{background:rgba(200,168,104,0.4);border-color:#c8a868;color:#f0d890}
+
+/* 信件 */
+.letter-content{background:#faf6ec;border:1px solid #d8c8a8;padding:20px;margin:10px 0;line-height:2.2;font-size:13px}
+.letter-content .bold-clue{color:#8b2020;font-weight:bold;font-size:14px}
+
+/* 画报 */
+.magazine-page{border:1px solid #c8b898;padding:20px;margin:10px 0;background:#faf8f0}
+.magazine-caption{font-size:11px;color:#8a7a5a;text-align:center;margin:8px 0;letter-spacing:2px}
+
+/* 搜索栏 */
+.search-bar{display:flex;gap:10px;margin:15px 0;max-width:400px}
+.search-input{flex:1;padding:10px 15px;background:rgba(250,248,240,0.9);border:1px solid #c8b898;color:#3a3020;font-family:inherit;font-size:13px;border-radius:2px;outline:none}
+.search-input:focus{border-color:#8a7a5a}
+.search-btn{padding:10px 20px;background:#3a3020;color:#d8c8a8;font-family:inherit;font-size:12px;letter-spacing:3px;border:none;cursor:pointer;border-radius:2px;transition:background 0.3s}
+.search-btn:hover{background:#5a4a30}
+.search-result{margin:10px 0;padding:12px;background:#faf6ec;border-left:3px solid #2a5080;font-size:12.5px;line-height:1.9}
+
+/* 密码输入 */
+.lock-section{margin-top:20px;background:rgba(40,35,25,0.6);border:1px solid #4a4030;padding:25px;border-radius:4px;max-width:500px;width:100%}
+.lock-label{font-size:12px;color:#8a7a5a;letter-spacing:3px;margin-bottom:10px;text-align:center}
+.lock-hint{font-size:11px;color:#6a5a40;text-align:center;margin-bottom:15px;line-height:1.8}
+.lock-input{display:flex;gap:8px;justify-content:center;margin-bottom:15px}
+.lock-digit{width:50px;height:55px;background:rgba(250,248,240,0.9);border:2px solid #8a7a5a;color:#2a2010;font-size:24px;text-align:center;font-family:inherit;border-radius:2px;outline:none;transition:border-color 0.3s}
+.lock-digit:focus{border-color:#c8a868;box-shadow:0 0 10px rgba(200,168,104,0.3)}
+.lock-btn{display:block;margin:0 auto;padding:8px 30px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:13px;letter-spacing:4px;cursor:pointer;border-radius:4px;transition:all 0.3s}
+.lock-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+.lock-error{color:#8b4040;font-size:12px;text-align:center;height:18px;letter-spacing:2px;margin-top:8px}
+
+/* 导航 */
+.nav-links{display:flex;gap:15px;justify-content:center;margin-top:20px}
+.nav-link{padding:10px 25px;background:rgba(40,35,25,0.6);border:1px solid #4a4030;color:#a09070;font-family:inherit;font-size:13px;letter-spacing:3px;cursor:pointer;text-decoration:none;transition:all 0.3s;border-radius:4px;display:none}
+.nav-link.show{display:block}
+.nav-link:hover{border-color:#8a7a5a;color:#c8a868}
+
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(30,25,18,0.95);border:1px solid #5a4a30;padding:18px 40px;color:#c8a868;font-size:14px;letter-spacing:4px;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.5s;border-radius:4px;box-shadow:0 4px 25px rgba(0,0,0,0.4)}
+.toast.show{opacity:1}
+
+/* 已收集线索提示 */
+.clue-bar{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(20,16,12,0.9);border-top:1px solid #4a4030;padding:8px 20px;display:flex;align-items:center;gap:15px}
+.clue-bar-label{font-size:11px;color:#6a5a40;letter-spacing:2px;white-space:nowrap}
+.clue-bar-items{display:flex;gap:8px;overflow-x:auto;flex:1}
+.clue-tag{padding:4px 12px;background:rgba(200,168,104,0.1);border:1px solid #4a4030;color:#8a7a5a;font-size:11px;letter-spacing:1px;white-space:nowrap;border-radius:2px;cursor:pointer;transition:all 0.2s}
+.clue-tag:hover{border-color:#8a7a5a;color:#c8a868}
+.clue-tag.found{border-color:#8b4040;color:#c8a868;background:rgba(139,64,64,0.1)}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* 滚动条美化 */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:rgba(200,180,140,0.1)}
+::-webkit-scrollbar-thumb{background:rgba(200,168,104,0.3);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="paper-bg"></div>
+<div class="desk-light"></div>
+
+<!-- 开场信 -->
+<div id="letter-overlay">
+<div class="letter-paper">
+<div class="letter-text">
+<p>沈先生台鉴：</p>
+<p>在下不才，素闻先生为《东方晨报》主笔，笔锋锐利，心怀家国。今有一事相托，事关重大，非先生不能为。</p>
+<p>三月以来，金陵城接连有五名青年学者失踪。官府以"私逃他乡"结案，然家属所报皆不符——这些人素无远行之意，且失踪前均曾接触过同一份文件。在下辗转得知，此文件藏于旧书坊"墨香阁"中。</p>
+<p>先生若肯接此委托，请于明日午时前往墨香阁，以<span class="bold-clue">"风起长安"</span>为暗号。届时自有分晓。</p>
+<p>万望先生以天下苍生为念，莫让真相沉于浊水。</p>
+<p style="text-align:right;margin-top:20px">敬颂 时绥</p>
+<p style="text-align:right;color:#8a7a5a">一 不具名者</p>
+<p style="text-align:right;color:#8a7a5a;font-size:12px">民国二十六年 · 三月十五日</p>
+<div class="seal">机密</div>
+</div>
+</div>
+<button class="letter-btn" onclick="startGame()">接 受 委 托</button>
+</div>
+
+<!-- 主游戏场景 -->
+<div class="container">
+<div id="main-scene">
+<h1 class="game-title">山 河 谍 影</h1>
+<p class="game-subtitle">—— 东方晨报 · 沈逸之案 ——</p>
+
+<p class="scene-desc">
+你是沈逸，上海《东方晨报》的调查记者。一封匿名信将你引向一桩离奇连环失踪案——五名青年学者接连消失，官府草草结案。你决定从报社开始，搜集线索，追查真相。
+</p>
+
+<!-- 办公桌 -->
+<div class="desk-area">
+<div class="desk-item important" onclick="openModal('desk-newspaper')">
+<span class="desk-icon">📰</span>
+<span class="desk-name">报社档案</span>
+<span class="desk-status">未查阅</span>
+</div>
+<div class="desk-item" onclick="openModal('desk-letter')">
+<span class="desk-icon">✉️</span>
+<span class="desk-name">来稿信件</span>
+<span class="desk-status">未查阅</span>
+</div>
+<div class="desk-item" onclick="openModal('desk-radio')">
+<span class="desk-icon">📻</span>
+<span class="desk-name">收音机</span>
+<span class="desk-status">待调试</span>
+</div>
+<div class="desk-item" onclick="openModal('desk-note')">
+<span class="desk-icon">📓</span>
+<span class="desk-name">采访笔记</span>
+<span class="desk-status">未查阅</span>
+</div>
+</div>
+
+<!-- 收集的线索 -->
+<div class="clue-bar">
+<span class="clue-bar-label">已获线索：</span>
+<div class="clue-bar-items" id="clue-bar-items">
+<span class="clue-tag">匿名委托信</span>
+</div>
+</div>
+
+<!-- 信件解谜区域（点击匿名信中加粗文字后出现） -->
+<div class="lock-section" id="code-section" style="display:none">
+<p class="lock-label">—— 墨香阁暗号门 ——</p>
+<p class="lock-hint">墨香阁的掌柜问你暗号。输入信中提到的<span style="color:#c8a868">四个字</span>（注意繁体/简体）</p>
+<div class="lock-input">
+<input type="text" class="lock-digit" style="width:60px" maxlength="1" id="c1" oninput="autoNext(this,'c2')">
+<input type="text" class="lock-digit" style="width:60px" maxlength="1" id="c2" oninput="autoNext(this,'c3')">
+<input type="text" class="lock-digit" style="width:60px" maxlength="1" id="c3" oninput="autoNext(this,'c4')">
+<input type="text" class="lock-digit" style="width:60px" maxlength="1" id="c4">
+</div>
+<button class="lock-btn" onclick="checkCode()">对 暗 号</button>
+<p class="lock-error" id="code-error"></p>
+</div>
+
+<!-- 导航 -->
+<div class="nav-links">
+<a href="scene2.html" class="nav-link" id="scene2Link">前往墨香阁 →</a>
+</div>
+</div>
+</div>
+
+<!-- 弹窗：报社档案（报纸） -->
+<div class="overlay" id="modal-desk-newspaper">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">报 社 档 案</h2>
+<div class="modal-content">
+<p class="useful-header">以下为近期《东方晨报》存档，蓝色文字可点击查看详情</p>
+
+<div class="newspaper">
+<div class="newspaper-header">
+<div class="newspaper-name">东 方 晨 报</div>
+<div class="newspaper-date">民国二十六年 · 三月一日 · 第七版</div>
+</div>
+<div class="news-item">
+<div class="news-title">金陵大学化学系实验室爆炸</div>
+<div class="news-body">昨日下午，金陵大学化学系三号实验室发生爆炸，一名助教轻伤。校方称系操作失误所致。<span class="useful" onclick="showNewsDetail(1)">【详细报道】</span></div>
+</div>
+<div class="news-item">
+<div class="news-title">本市米价持续上涨 市民叫苦不迭</div>
+<div class="news-body">受战事影响，本月米价已上涨三成。粮食公会在南京路举行抗议集会。</div>
+</div>
+<div class="news-item">
+<div class="news-title">国际联盟特使抵达南京</div>
+<div class="news-body">国联特使怀特先生于昨日抵达南京，将与外交部就远东局势进行磋商。据悉特使将停留两周。</div>
+</div>
+<div class="news-item">
+<div class="news-title">复旦大学学者发表论文获国际关注</div>
+<div class="news-body">复旦大学历史系讲师<span class="useful" onclick="showNewsDetail(2)">周明远</span>在《亚细亚学报》发表关于古代冶金技术的论文，引起国际学界关注。</div>
+</div>
+</div>
+
+<div class="newspaper">
+<div class="newspaper-header">
+<div class="newspaper-name">东 方 晨 报</div>
+<div class="newspaper-date">民国二十六年 · 三月十日 · 第五版</div>
+</div>
+<div class="news-item">
+<div class="news-title">青年学者联名上书 请愿加强国防科研</div>
+<div class="news-body">十五名青年学者联名向教育部提交请愿书，呼吁政府重视基础科学研究。请愿发起人为金陵大学物理系<span class="useful" onclick="showNewsDetail(3)">陈望舒</span>。</div>
+</div>
+<div class="news-item">
+<div class="news-title">海关查获走私军火</div>
+<div class="news-body">上海海关在上月查获一批走私军火，价值约二十万大洋。涉案嫌疑人正在追捕中。</div>
+</div>
+</div>
+
+<div class="note">—— 报社档案中，关于实验室爆炸和青年学者的报道似乎有些关联。那个周明远的论文主题是"古代冶金"……</div>
+</div>
+</div>
+</div>
+
+<!-- 弹窗：来稿信件 -->
+<div class="overlay" id="modal-desk-letter">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">来 稿 信 件</h2>
+<div class="modal-content">
+<p style="margin-bottom:15px;color:#8a7a5a;font-size:12px">编辑部收到的来稿信件中，有两封引起了你的注意——</p>
+
+<div class="letter-content">
+<p><b>第一封 · 来稿</b></p>
+<p>编辑先生：</p>
+<p>我是金陵大学化学系的一名学生。我想揭露一件可怕的事情。</p>
+<p>上个月实验室爆炸后，我发现了助教<span class="bold-clue">李书恒</span>留下的一本笔记。笔记里记载着一种特殊的<span class="bold-clue">合金配方</span>——不是普通的合金，而是一种能在高温下产生<span class="bold-clue">剧烈化学反应</span>的物质。</p>
+<p>笔记最后一页写着："此配方若落入日人之手，后果不堪设想。务必送往<span class="bold-clue">延安</span>。"</p>
+<p>我不敢声张。但助教失踪了。我需要帮助。</p>
+<p style="text-align:right;color:#8a7a5a">一个害怕的学生 敬上</p>
+<p style="text-align:right;color:#8a7a5a;font-size:11px">三月五日</p>
+</div>
+
+<div class="letter-content">
+<p><b>第二封 · 私人信</b></p>
+<p>沈逸兄：</p>
+<p>好久不见。我最近在<span class="bold-clue">金陵</span>做一项秘密调研，涉及到一些很敏感的东西。如果你碰巧看到和"<span class="bold-clue">合金</span>"有关的新闻，留意一下。我怀疑有人在系统性地<span class="bold-clue">收集国内冶金学专家</span>。</p>
+<p>不方便多说。见面再聊。</p>
+<p style="text-align:right;color:#8a7a5a">你的老友 张鹤年</p>
+<p style="text-align:right;color:#8a7a5a;font-size:11px">三月十二日</p>
+</div>
+
+<div class="note">—— 两封信都提到了"合金"和"金陵"。你的老友张鹤年是《大公报》的战地记者，他的消息一向可靠。五名失踪的学者……莫非都是冶金领域的？</div>
+</div>
+</div>
+</div>
+
+<!-- 弹窗：收音机 -->
+<div class="overlay" id="modal-desk-radio">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">收 音 机</h2>
+<div class="modal-content">
+<div class="radio-panel">
+<div class="radio-dial">
+<div class="radio-freq" id="radio-freq">—— OFF ——</div>
+</div>
+<p style="color:#c8a868;font-size:12px;margin-bottom:10px">拧动旋钮搜索频道</p>
+<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+<button class="radio-btn" onclick="tuneRadio(580)">580 kHz</button>
+<button class="radio-btn" onclick="tuneRadio(720)">720 kHz</button>
+<button class="radio-btn" onclick="tuneRadio(900)">900 kHz</button>
+<button class="radio-btn" onclick="tuneRadio(1050)">1050 kHz</button>
+<button class="radio-btn" onclick="tuneRadio(1200)">1200 kHz</button>
+</div>
+</div>
+<div class="radio-noise" id="radio-content">
+<span style="color:#6a5a40">收音机沙沙作响，请选择一个频率……</span>
+</div>
+<div class="note">—— 720kHz是中央广播电台的频率，通常播放新闻。其他频率可能是民间电台或境外信号。</div>
+</div>
+</div>
+</div>
+
+<!-- 弹窗：采访笔记 -->
+<div class="overlay" id="modal-desk-note">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">采 访 笔 记</h2>
+<div class="modal-content">
+<p style="margin-bottom:15px;color:#8a7a5a;font-size:12px">你翻开自己的采访笔记本，找到了一些旧记录——</p>
+
+<div class="letter-content" style="border-left:3px solid #d8c8a8">
+<p><b>二月二十八日 · 上海街头采访</b></p>
+<p>今天在南京路采访米价抗议，偶遇一个穿长衫的中年男人。他自称是<span class="bold-clue">"旧书商人"</span>，姓<span class="bold-clue">方</span>。他说最近生意不好做，因为"有些人在大量收购古籍，尤其是涉及<span class="bold-clue">冶炼、铸造</span>类目的善本"。</p>
+<p>我问他是谁在收购，他犹豫了一下，说："日本人。但他们不是通过正常渠道，是通过一个叫<span class="bold-clue">'东亚文化保护协会'</span>的组织。"</p>
+<p>我当时没太在意。现在看来……</p>
+</div>
+
+<div class="letter-content" style="border-left:3px solid #d8c8a8">
+<p><b>三月八日 · 电话记录</b></p>
+<p>老友<span class="bold-clue">张鹤年</span>来电。他说在金陵发现了一个可疑的<span class="bold-clue">日本商会</span>，表面做贸易，实际在秘密招募中国科技人员。他还说在商会附近看到过<span class="bold-clue">穿着便装的日本军官</span>。</p>
+<p>他让我查一下<span class="bold-clue">"东亚文化保护协会"</span>的背景。我还没来得及查，他就失踪了。</p>
+</div>
+
+<div class="note">—— 张鹤年失踪了？这封信就是他失踪前寄来的。五名失踪学者、张鹤年、匿名委托人……所有线索都指向金陵。你必须去墨香阁看看。</div>
+</div>
+</div>
+</div>
+
+<!-- 弹窗：新闻详情 -->
+<div class="overlay" id="modal-news-detail">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title" id="news-detail-title"></h2>
+<div class="modal-content" id="news-detail-content"></div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let clues=[];
+const allClues=['匿名委托信','实验室爆炸','周明远论文','陈望舒请愿','李书恒笔记','合金配方','张鹤年线索','东亚文化保护协会','方姓书商','金陵日本商会','收音机广播'];
+
+function addClue(text){
+if(!clues.includes(text)){
+clues.push(text);
+const bar=document.getElementById('clue-bar-items');
+const tag=document.createElement('span');
+tag.className='clue-tag found';
+tag.textContent=text;
+tag.onclick=function(){showToast('线索：'+text)};
+bar.appendChild(tag);
+}
+}
+
+function startGame(){
+document.getElementById('letter-overlay').classList.add('fade');
+setTimeout(()=>{
+document.getElementById('letter-overlay').style.display='none';
+document.getElementById('main-scene').classList.add('show');
+},2000);
+}
+
+function openModal(id){
+document.getElementById('modal-'+id).classList.add('show');
+const idx=['desk-newspaper','desk-letter','desk-radio','desk-note'].indexOf(id);
+if(idx>=0){
+const item=document.querySelectorAll('.desk-item')[idx];
+item.classList.add('checked');
+item.querySelector('.desk-status').textContent='已查阅';
+}
+}
+
+function closeModal(){
+document.querySelectorAll('.overlay.show').forEach(o=>o.classList.remove('show'));
+}
+
+function showNewsDetail(id){
+const data={
+1:{title:'金陵大学实验室爆炸详细报道',content:'<p>记者走访金陵大学后获悉，爆炸发生在化学系三号实验室。事发时，助教<span class="bold-clue">李书恒</span>正在做实验。</p><p>据目击者称，爆炸前李书恒曾将一份<span class="bold-clue">文件投入焚化炉</span>。爆炸发生后，李书恒被送往医院，但当晚即<span class="highlight">自行出院，此后下落不明</span>。</p><p>校方发言人表示，爆炸原因系化学品存放不当。但化学系多名学生透露，李书恒近日一直在研究一种<span class="bold-clue">特殊合金材料</span>，并经常深夜独自留在实验室。</p><div class="note">—— 李书恒研究特殊合金，爆炸前销毁文件，之后失踪。他发现了什么？</div>'},
+2:{title:'周明远学术论文摘要',content:'<p>周明远，金陵大学历史系讲师，研究方向为中国古代冶金史。其最新论文《<span class="bold-clue">宋代胆铜法</span>的失传工艺》发表于《亚细亚学报》。</p><p>论文摘要中提到，周明远在研究中发现了一种<span class="bold-clue">失传的合金冶炼技术</span>，据传该技术可冶炼出一种<span class="highlight">异常坚硬且耐高温的金属</span>，远超当时的技术水平。</p><p>周明远在论文中呼吁，这类传统工艺应当被保护和研究，"否则将永远湮没于历史尘埃中"。</p><div class="note">—— 周明远是失踪学者之一吗？他研究的失传冶炼技术和李书恒的特殊合金之间有联系吗？</div>'},
+3:{title:'青年学者请愿书全文',content:'<p>请愿书发起人<span class="bold-clue">陈望舒</span>，金陵大学物理系研究员，专攻材料物理学。</p><p>请愿书指出："我国虽拥有悠久的冶金传统，但现代材料科学研究严重落后。当局应投入资源，建立国家级材料研究实验室。"</p><p>请愿书签名者共十五人，包括：</p><p><span class="bold-clue">周明远</span>（历史系）、<span class="bold-clue">李书恒</span>（化学系）、<span class="bold-clue">赵怀瑾</span>（物理系）、<span class="bold-clue">孙铭哲</span>（地质系）、<span class="bold-clue">王素琴</span>（化学系）等。</p><p class="highlight">截至目前，以上签名者中已有四人失踪。仅陈望舒一人下落明确——他于两周前被警方以"涉嫌煽动"为由逮捕，目前关押在南京宪兵司令部。</p><div class="note">—— 五名失踪学者全是请愿书签名者！而唯一没失踪的陈望舒，反而被关进了宪兵司令部。这是巧合吗？</div>'}
+};
+const d=data[id];
+document.getElementById('news-detail-title').textContent=d.title;
+document.getElementById('news-detail-content').innerHTML=d.content;
+document.getElementById('modal-news-detail').classList.add('show');
+if(id===1)addClue('实验室爆炸');
+if(id===2)addClue('周明远论文');
+if(id===3)addClue('陈望舒请愿');
+}
+
+function tuneRadio(freq){
+const content=document.getElementById('radio-content');
+const freqEl=document.getElementById('radio-freq');
+freqEl.textContent=freq+' kHz';
+document.querySelectorAll('.radio-btn').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+
+if(freq===720){
+content.innerHTML='<p style="color:#c8a868">【中央广播电台 · 新闻播报】</p><p>\u201c据中央社南京电：<span class="bold-clue">教育部近日否认收到青年学者联名请愿书</span>，称相关报道\u2018纯属子虚乌有\u2019。同日，驻南京日本大使馆发言人表示，日本对中国学者\u2018深表尊重\u2019，并否认有关\u2018文化渗透\u2019的传言。\u201d</p><p>\u201c另据报道，上海<span class="bold-clue">东亚文化保护协会</span>今日举行中日文化交流茶会，协会会长<span class="bold-clue">山田诚一</span>致辞表示……\u201d</p>';
+addClue('收音机广播');
+}else if(freq===1050){
+content.innerHTML='<p style="color:#c8a868">【未知频道 · 断续信号】</p><p>"……滋滋……听到请回答……五号……<span class="bold-clue">墨香阁</span>……滋滋……东西已经转移到……滋滋……方掌柜……滋滋……今晚<span class="bold-clue">亥时</span>（晚上9-11点）……滋滋……"</p><p>信号突然中断，只剩下沙沙的噪音。</p><div class="note">—— 这个频道的信号似乎和墨香阁有关。"方掌柜"是谁？晚上9点到11点会发生什么？</div>';
+addClue('收音机广播');
+}else{
+const noises=['一段京剧唱段','沙沙的静电噪声','一段不明外语广播','轻柔的江南丝竹','模糊的人声，听不清内容'];
+content.innerHTML='<span style="color:#6a5a40">—— '+noises[Math.floor(Math.random()*noises.length)]+' ——</span>';
+}
+}
+
+function autoNext(current,nextId){
+if(current.value.length===1){
+const next=document.getElementById(nextId);
+if(next)next.focus();
+}
+}
+
+function checkCode(){
+const code=c1.value+c2.value+c3.value+c4.value;
+const err=document.getElementById('code-error');
+if(code==='风起长安'){
+err.textContent='';
+showToast('掌柜微微颔首："里头请。"');
+addClue('墨香阁暗号');
+setTimeout(()=>{
+document.getElementById('scene2Link').classList.add('show');
+},1500);
+}else{
+err.textContent='暗号不对。回头看看委托信里提到的那四个字。';
+const lock=document.querySelector('.lock-input');
+lock.style.animation='none';
+setTimeout(()=>{lock.style.animation='shake 0.4s'},10);
+}
+}
+
+function showToast(msg){
+const t=document.getElementById('toast');
+t.textContent=msg;
+t.classList.add('show');
+setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// 点击弹窗外的overlay关闭
+document.querySelectorAll('.overlay').forEach(o=>{
+o.addEventListener('click',function(e){
+if(e.target===this)closeModal();
+});
+});
+
+// 查看完信件后显示暗号输入区
+const origOpen=openModal;
+const deskLetter=document.querySelector('[onclick*="desk-letter"]');
+let letterOpened=false;
+deskLetter.addEventListener('click',function(){
+if(!letterOpened){
+letterOpened=true;
+setTimeout(()=>{
+document.getElementById('code-section').style.display='block';
+document.getElementById('code-section').scrollIntoView({behavior:'smooth'});
+},300);
+}
+});
+</script>
+</body>
+</html>

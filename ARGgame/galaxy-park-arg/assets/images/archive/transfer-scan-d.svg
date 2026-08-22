@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280">
+  <defs>
+    <pattern id="p" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#eee9db"/><circle cx="5" cy="5" r=".45" fill="#c8c0ae"/></pattern>
+  </defs>
+  <rect width="420" height="280" fill="url(#p)"/>
+  <circle cx="0" cy="0" r="78" fill="none" stroke="#9a332f" stroke-width="7" opacity=".62"/>
+  <path d="M0 64 C27 62 50 51 72 28" fill="none" stroke="#9a332f" stroke-width="3" opacity=".55"/>
+  <line x1="0" y1="0" x2="378" y2="0" stroke="#8b877c"/>
+  <text x="20" y="55" font-family="SimSun,serif" font-size="13" fill="#47453f">原始回执：未恢复</text>
+  <text x="20" y="83" font-family="SimSun,serif" font-size="13" fill="#47453f">接收签章：缺失</text>
+  <line x1="0" y1="108" x2="378" y2="108" stroke="#8b877c"/>
+  <text x="20" y="142" font-family="SimSun,serif" font-size="13" fill="#47453f">手写补记：第七区设备间</text>
+  <path d="M18 153 C120 145 225 158 354 149" fill="none" stroke="#304f7c" stroke-width="2" opacity=".75"/>
+  <text x="20" y="190" font-family="SimSun,serif" font-size="12" fill="#59574f">复核：XS-DIGI</text>
+  <line x1="0" y1="204" x2="378" y2="204" stroke="#8b877c"/>
+  <text x="378" y="246" text-anchor="end" font-family="Courier New,monospace" font-size="12" fill="#555">SCAN BLOCK 4/4</text>
+</svg>

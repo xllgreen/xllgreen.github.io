@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冥婚簿 · 续 —— 井底暗道</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080a09;color:#b8c4b8;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow-y:auto;min-height:100vh}
+.fog{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 30%,rgba(10,30,25,0.3) 0%,rgba(8,10,9,1) 70%);pointer-events:none}
+.water-ripple{position:fixed;inset:0;z-index:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(20,60,50,0.02) 3px,rgba(20,60,50,0.02) 6px);pointer-events:none;animation:ripple 8s linear infinite}
+@keyframes ripple{from{background-position:0 0}to{background-position:0 60px}}
+
+.container{position:relative;z-index:10;max-width:760px;margin:0 auto;padding:30px 20px 60px}
+.back-link{position:fixed;top:20px;left:20px;z-index:20;color:#3a5a4a;font-size:13px;text-decoration:none;letter-spacing:2px;border:1px solid #152a1a;padding:6px 16px;border-radius:4px;transition:all 0.3s}
+.back-link:hover{border-color:#3a5a3a;color:#6a8d7a}
+
+.page-title{font-size:28px;letter-spacing:8px;color:#1a6040;text-align:center;margin-bottom:8px;text-shadow:0 0 20px rgba(20,100,50,0.3)}
+.page-sub{font-size:12px;color:#2a4a3a;text-align:center;letter-spacing:4px;margin-bottom:30px}
+
+/* 主角内心独白 */
+.inner-thought{background:linear-gradient(90deg,transparent,rgba(30,100,70,0.08),transparent);padding:18px 30px;margin:25px 0;font-size:14px;color:#708a80;line-height:2.2;letter-spacing:1px;text-align:center;font-style:italic;border-top:1px solid rgba(30,100,70,0.15);border-bottom:1px solid rgba(30,100,70,0.15)}
+.inner-thought .voice{color:#59c5a0;font-style:normal;font-weight:bold;letter-spacing:2px}
+
+/* 回忆闪回 */
+.flashback{background:linear-gradient(135deg,rgba(25,20,15,0.9),rgba(15,12,10,0.95));border:1px solid #3a2a1a;padding:25px 30px;margin:25px 0;border-radius:4px;display:none}
+.flashback.show{display:block;animation:fadeIn 1.2s}
+.flashback .flash-label{font-size:11px;color:#8b3030;letter-spacing:3px;text-align:center;margin-bottom:12px}
+.flashback .flash-text{font-size:14px;color:#9a8d7a;line-height:2.2;letter-spacing:1px;text-align:center}
+.flashback .flash-voice{color:#c5a059;font-weight:bold}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.scene-text{color:#6a7d6a;font-size:14px;line-height:2.2;margin-bottom:18px;letter-spacing:1px}
+.highlight{color:#59c5a0}
+.red{color:#8b3030}
+.dim{color:#4a5a4a;font-size:12px}
+
+/* 八卦谜题 */
+.trigram-puzzle{background:rgba(12,18,14,0.8);border:1px solid #1a2a1a;border-radius:4px;padding:30px;margin:20px 0;text-align:center}
+.trigram-title{font-size:15px;color:#59c5a0;letter-spacing:3px;margin-bottom:8px}
+.trigram-desc{font-size:13px;color:#5a6a4a;margin-bottom:20px;letter-spacing:1px;line-height:1.8}
+
+/* 壁画 */
+.mural{background:rgba(10,15,12,0.7);border:1px solid #1a2a1a;padding:20px;margin:15px 0;border-radius:4px}
+.mural-title{font-size:12px;color:#4a5a4a;letter-spacing:3px;margin-bottom:10px}
+.mural-text{font-size:14px;color:#7a8d7a;line-height:2.4;letter-spacing:2px;text-align:center}
+
+/* 八卦按钮 */
+.trigram-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:500px;margin:20px auto}
+.trigram-btn{aspect-ratio:1;background:rgba(15,20,16,0.8);border:2px solid #1a2a1a;border-radius:8px;cursor:pointer;transition:all 0.3s;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:inherit;color:#6a7d6a;padding:10px}
+.trigram-btn:hover{border-color:#3a6a4a;background:rgba(20,30,22,0.8)}
+.trigram-btn.selected{border-color:#59c5a0;background:rgba(20,50,35,0.5);box-shadow:0 0 15px rgba(89,197,160,0.2)}
+.trigram-btn.wrong{animation:shake 0.4s}
+.trigram-symbol{font-size:32px;margin-bottom:4px;font-family:"Noto Serif SC",serif}
+.trigram-char{font-size:13px;letter-spacing:1px}
+
+/* 序列显示 */
+.sequence-display{display:flex;gap:12px;justify-content:center;margin:20px 0;min-height:50px;align-items:center}
+.seq-slot{width:50px;height:50px;border:2px dashed #1a2a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#59c5a0;transition:all 0.3s}
+.seq-slot.filled{border-style:solid;border-color:#3a5a4a;background:rgba(20,40,30,0.5)}
+.seq-arrow{color:#3a5a4a;font-size:18px}
+
+.trigram-actions{display:flex;gap:12px;justify-content:center;margin-top:15px}
+.trigram-action-btn{padding:8px 24px;background:transparent;border:1px solid #2a3a2a;color:#6a8d7a;font-family:inherit;font-size:13px;letter-spacing:2px;cursor:pointer;transition:all 0.3s;border-radius:4px}
+.trigram-action-btn:hover{border-color:#3a6a4a;color:#59c5a0}
+.trigram-error{color:#8b3030;font-size:13px;text-align:center;height:18px;letter-spacing:2px;margin-top:10px}
+
+/* 揭示区域 */
+.reveal-section{display:none;margin-top:30px}
+.reveal-section.show{display:block;animation:fadeIn 1.2s}
+.reveal-content{background:linear-gradient(135deg,rgba(20,30,25,0.9),rgba(12,18,14,0.95));border:1px solid #2a3a2a;padding:30px;border-radius:4px;margin-bottom:20px}
+.reveal-content h3{color:#59c5a0;font-size:16px;letter-spacing:3px;margin-bottom:12px;text-align:center}
+.reveal-content p{font-size:14px;color:#7a8d7a;line-height:2.1;margin-bottom:10px}
+
+/* 选择 */
+.story-choice{background:rgba(15,20,16,0.7);border:1px solid #2a3a2a;border-radius:4px;padding:25px;margin:20px 0;text-align:center}
+.story-choice .choice-prompt{font-size:14px;color:#9a8d7a;letter-spacing:1px;margin-bottom:15px;line-height:2}
+.choice-options{display:flex;flex-direction:column;gap:8px;max-width:400px;margin:0 auto}
+.choice-btn{padding:12px 20px;background:rgba(20,28,22,0.7);border:1px solid #3a4a3a;color:#7a8d7a;font-family:inherit;font-size:13px;letter-spacing:1px;cursor:pointer;transition:all 0.3s;border-radius:4px;text-align:left}
+.choice-btn:hover{border-color:#3a6a4a;color:#59c5a0;background:rgba(25,35,28,0.8)}
+
+.next-link{display:block;margin-top:25px;padding:14px 30px;background:rgba(30,100,70,0.1);border:1px solid #1a6040;color:#59c5a0;font-family:inherit;font-size:15px;letter-spacing:4px;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.4s;border-radius:4px}
+.next-link:hover{background:rgba(30,100,70,0.2);box-shadow:0 0 20px rgba(30,100,70,0.3)}
+
+.progress-bar{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.progress-dot{width:10px;height:10px;border-radius:50%;background:#1a2a1a;transition:all 0.5s}
+.progress-dot.done{background:#1a6040;box-shadow:0 0 8px rgba(30,100,70,0.5)}
+.progress-dot.current{background:#59c5a0;box-shadow:0 0 12px rgba(89,197,160,0.5);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(8,15,10,0.95);border:1px solid #3a5a4a;padding:20px 40px;color:#59c5a0;font-size:15px;letter-spacing:3px;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.5s;border-radius:4px}
+.toast.show{opacity:1}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+</style>
+</head>
+<body>
+<div class="fog"></div>
+<div class="water-ripple"></div>
+
+<a href="backyard.html" class="back-link">← 返回后院</a>
+
+<div class="container">
+
+<div class="progress-bar">
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot current"></span>
+</div>
+
+<h1 class="page-title">井底暗道</h1>
+<p class="page-sub">—— 沈府地下 · 丑时初刻 ——</p>
+
+<p class="scene-text">
+铁制踏脚在脚下发出沉闷的回响。你攀下约三丈，靴底触及一片湿滑的砖地。火折子的微光照亮了四周——这是一条<span class="highlight">人工开凿的暗道</span>，墙壁由青砖砌成，缝隙中渗出暗绿色的苔藓。空气潮湿而寒冷，每一次呼吸都像在吞咽冰水。
+</p>
+
+<!-- 主角内心独白 ① -->
+<div class="inner-thought">
+<span class="voice">萧砚</span> 环顾四周：<br>
+「这暗道修得如此规整，绝非一朝一夕之功。沈家三代人，用了多少年才凿出这条通往江底的路？两百年，十条人命，就为了维持这条暗道尽头的秘密。」
+</div>
+
+<p class="scene-text">
+暗道向前延伸，两侧墙壁上开始出现<span class="highlight">壁画</span>。你举起火折子，一幅幅诡谲的图案在火光中浮现——波涛、祭坛、白衣女子、金色鳞光……这些壁画记录着两百年来每一次祭祀的场景。
+</p>
+
+<p class="scene-text">
+你注意到壁画中反复出现一个图案——<span class="red">八组由三条线组成的符号</span>，排列在祭坛周围。而在壁画的最末端，一扇石门挡在了暗道尽头，门上赫然刻着八个这样的符号，排成环形。
+</p>
+
+<!-- 八卦谜题 -->
+<div class="trigram-puzzle" id="trigramPuzzle">
+<div class="trigram-title">石 门 八 卦 锁</div>
+<div class="trigram-desc">
+石门上的八个符号，正是<span class="highlight">八卦</span>。门楣刻有一行铭文——
+</div>
+
+<div class="mural">
+<div class="mural-title">壁画铭文</div>
+<div class="mural-text">
+<span style="color:#59c5a0">坎</span>水为魅，<span style="color:#c5a059">离</span>火克之。<br>
+<span style="color:#59c5a0">震</span>雷劈浪，<span style="color:#c5a059">艮</span>山压渊。
+</div>
+</div>
+
+<div class="trigram-desc">
+按照铭文顺序，依次按下对应的卦象——
+</div>
+
+<!-- 序列显示 -->
+<div class="sequence-display" id="sequenceDisplay">
+<span class="seq-slot" id="seq0"></span>
+<span class="seq-arrow">→</span>
+<span class="seq-slot" id="seq1"></span>
+<span class="seq-arrow">→</span>
+<span class="seq-slot" id="seq2"></span>
+<span class="seq-arrow">→</span>
+<span class="seq-slot" id="seq3"></span>
+</div>
+
+<!-- 八卦按钮 -->
+<div class="trigram-grid" id="trigramGrid">
+<button class="trigram-btn" data-trigram="乾" data-symbol="☰" onclick="selectTrigram('乾')">
+<span class="trigram-symbol">☰</span><span class="trigram-char">乾</span>
+</button>
+<button class="trigram-btn" data-trigram="兑" data-symbol="☱" onclick="selectTrigram('兑')">
+<span class="trigram-symbol">☱</span><span class="trigram-char">兑</span>
+</button>
+<button class="trigram-btn" data-trigram="离" data-symbol="☲" onclick="selectTrigram('离')">
+<span class="trigram-symbol">☲</span><span class="trigram-char">离</span>
+</button>
+<button class="trigram-btn" data-trigram="震" data-symbol="☳" onclick="selectTrigram('震')">
+<span class="trigram-symbol">☳</span><span class="trigram-char">震</span>
+</button>
+<button class="trigram-btn" data-trigram="巽" data-symbol="☴" onclick="selectTrigram('巽')">
+<span class="trigram-symbol">☴</span><span class="trigram-char">巽</span>
+</button>
+<button class="trigram-btn" data-trigram="坎" data-symbol="☵" onclick="selectTrigram('坎')">
+<span class="trigram-symbol">☵</span><span class="trigram-char">坎</span>
+</button>
+<button class="trigram-btn" data-trigram="艮" data-symbol="☶" onclick="selectTrigram('艮')">
+<span class="trigram-symbol">☶</span><span class="trigram-char">艮</span>
+</button>
+<button class="trigram-btn" data-trigram="坤" data-symbol="☷" onclick="selectTrigram('坤')">
+<span class="trigram-symbol">☷</span><span class="trigram-char">坤</span>
+</button>
+</div>
+
+<div class="trigram-actions">
+<button class="trigram-action-btn" onclick="resetSequence()">清除重选</button>
+<button class="trigram-action-btn" onclick="checkSequence()">确认序列</button>
+</div>
+<p class="trigram-error" id="trigram-error"></p>
+</div>
+
+<!-- 回忆闪回 -->
+<div class="flashback" id="flashback1">
+<div class="flash-label">—— 十五年前 · 江陵渡口 ——</div>
+<div class="flash-text">
+那年你十三岁。妹妹<span class="flash-voice">萧芷</span>九岁，扎着两条羊角辫，总跟在你身后叫你"阿兄"。<br><br>
+中元节那天，村里的人说河神要娶新娘。他们选中了芷儿。<br><br>
+你记得她哭喊着被拖上船的样子。你记得自己拼命游向那条船，却被浪头一次次打回来。<br><br>
+你记得船到江心时，那团突然出现的<span style="color:#8b3030">金色鳞光</span>。<br><br>
+你再也没见过芷儿。
+</div>
+</div>
+
+<!-- 发现方如月 -->
+<div class="reveal-section" id="reveal-section">
+<div class="reveal-content">
+<h3>石门缓缓开启</h3>
+<p>石门在沉闷的摩擦声中旋开，一股更浓烈的腥甜气息扑面而来。门后是一条更宽阔的通道，地面由青砖变为<span class="highlight">天然岩石</span>，你已进入了钱塘江底。</p>
+<p>通道一侧的石台上，你发现了一件<span class="red">被撕破的嫁衣</span>——红绸上绣着并蒂莲，与银簪上的纹样一致。嫁衣旁有一本被水浸过的册子，字迹娟秀而潦草。</p>
+</div>
+
+<!-- 主角内心独白 ② -->
+<div class="inner-thought">
+<span class="voice">萧砚</span> 翻开册子，手指微微发颤：<br>
+「方如月……她经过了这里。她还活着，至少写下这些字的时候还活着。」
+</div>
+
+<div class="reveal-content">
+<h3>方如月的手记</h3>
+<p>"我叫方如月，今年十七。父亲说沈家要娶我，我以为是嫁给沈家公子，谁知是嫁一个死人。更可怕的是，陆怀瑾告诉我，连死人都不算——他们是要把我<span class="highlight">扔进江里喂妖怪</span>。"</p>
+<p>"陆怀瑾说，沈家老爷沈文忠想救我，但他的儿子沈明远不答应。沈明远说，若不按时祭祀，河伯发怒，钱塘江会决堤，三家都会完蛋。"</p>
+<p>"我不懂什么大道理。我只知道，<span class="red">我不想死</span>。冥婚那夜，我趁乱跑了出来。陆怀瑾让我躲进井里，说井底有路通往江边，等天亮了就会有船来接我。"</p>
+<p>"但沈明远追来了。我听见他在井口喊我的名字。他说——<span class="red">'方如月，你逃不掉的。祭台需要你。'</span>"</p>
+<p>"我拼命往暗道深处跑。水越来越深，空气越来越冷。我好像听见了什么声音……是从江底传上来的……"</p>
+<p style="color:#8b3030">（最后几行字迹潦草，几乎无法辨认）</p>
+<p>"它醒了。"</p>
+</div>
+</div>
+
+<!-- 关键选择 -->
+<div class="story-choice" id="storyChoice">
+<div class="choice-prompt">
+暗道尽头，隐隐传来低沉的呜咽声——像是水流的轰鸣，又像是什么巨大生物的呼吸。你的火折子几欲熄灭。<br><br>
+继续前进，你很清楚自己将要面对什么。十五年前你在江陵渡口见过那种金色鳞光。<br><br>
+<span class="highlight">你选择——</span>
+</div>
+<div class="choice-options">
+<button class="choice-btn" onclick="makeChoice('continue')">握紧火折子，继续深入。"芷儿，阿兄来了。"</button>
+<button class="choice-btn" onclick="makeChoice('prepare')">先停下来，仔细观察周围，寻找可以利用的东西。</button>
+</div>
+</div>
+
+<div class="reveal-section" id="final-reveal">
+<div class="reveal-content">
+<h3 id="finalTitle"></h3>
+<p id="finalText"></p>
+</div>
+
+<!-- 主角内心独白 ③ -->
+<div class="inner-thought">
+<span class="voice">萧砚</span> 望向暗道深处，那里有微弱的金色光芒在闪烁：<br>
+「十五年了。我终于要面对你了。」
+</div>
+
+<a href="riverbed.html" class="next-link" id="nextLink" style="display:none">步入江底祭台 →</a>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ 游戏状态 ============
+const sequence = [];
+let doorOpened = false;
+let choiceMade = false;
+
+// ============ 八卦选择 ============
+function selectTrigram(name) {
+if (doorOpened) return;
+if (sequence.length >= 4) {
+showToast('序列已满，请先确认或清除');
+return;
+}
+sequence.push(name);
+updateSequenceDisplay();
+// 高亮按钮
+document.querySelectorAll('.trigram-btn').forEach(btn => {
+if (btn.dataset.trigram === name) {
+btn.classList.add('selected');
+setTimeout(() => btn.classList.remove('selected'), 300);
+}
+});
+}
+
+function updateSequenceDisplay() {
+for (let i = 0; i < 4; i++) {
+const slot = document.getElementById('seq' + i);
+if (i < sequence.length) {
+const btn = document.querySelector(`.trigram-btn[data-trigram="${sequence[i]}"]`);
+slot.textContent = btn ? btn.dataset.symbol : '';
+slot.classList.add('filled');
+} else {
+slot.textContent = '';
+slot.classList.remove('filled');
+}
+}
+}
+
+function resetSequence() {
+if (doorOpened) return;
+sequence.length = 0;
+updateSequenceDisplay();
+document.getElementById('trigram-error').textContent = '';
+}
+
+function checkSequence() {
+if (doorOpened) return;
+const err = document.getElementById('trigram-error');
+const correct = ['坎','离','震','艮'];
+
+if (sequence.length < 4) {
+err.textContent = '请选择四个卦象，构成完整序列。';
+return;
+}
+
+if (sequence.every((v, i) => v === correct[i])) {
+err.textContent = '';
+doorOpened = true;
+showToast('机关启动——石门缓缓开启');
+setTimeout(() => {
+document.getElementById('reveal-section').classList.add('show');
+document.getElementById('reveal-section').scrollIntoView({ behavior: 'smooth' });
+// 显示回忆闪回
+setTimeout(() => {
+document.getElementById('flashback1').classList.add('show');
+document.getElementById('flashback1').scrollIntoView({ behavior: 'smooth' });
+// 显示选择
+setTimeout(() => {
+document.getElementById('storyChoice').scrollIntoView({ behavior: 'smooth' });
+}, 1500);
+}, 2000);
+}, 1500);
+} else {
+err.textContent = '卦象序列不对。壁画铭文给出了线索，再读一遍。';
+document.querySelectorAll('.trigram-btn').forEach(btn => btn.classList.add('wrong'));
+setTimeout(() => document.querySelectorAll('.trigram-btn').forEach(btn => btn.classList.remove('wrong')), 400);
+resetSequence();
+}
+}
+
+// ============ 关键选择 ============
+function makeChoice(choice) {
+if (choiceMade) return;
+choiceMade = true;
+
+const finalTitle = document.getElementById('finalTitle');
+const finalText = document.getElementById('finalText');
+
+if (choice === 'continue') {
+finalTitle.textContent = '义无反顾';
+finalText.innerHTML = 
+'你不再犹豫。十五年前你没能救下芷儿，今天你至少可以救方如月。<br><br>' +
+'你握紧火折子，大步向暗道深处走去。脚下的岩石越来越湿滑，空气中的腥味越来越浓。' +
+'前方，<span class="highlight">金色光芒</span>越来越亮。';
+} else {
+finalTitle.textContent = '谋定后动';
+finalText.innerHTML = 
+'你强迫自己冷静下来。愤怒和恐惧都救不了人。<br><br>' +
+'你仔细观察四周，发现岩壁上嵌着一些<span class="highlight">黑色的矿石碎片</span>——这些矿石散发着微弱的荧光，' +
+'而在祭录中记载，水魅畏惧两种东西：<span class="red">火</span>和<span class="red">黑曜石</span>。<br><br>' +
+'你小心翼翼地从岩壁上撬下几块黑曜石碎片，收入袖中。然后，你深吸一口气，继续前进。';
+}
+
+document.getElementById('final-reveal').classList.add('show');
+document.getElementById('final-reveal').scrollIntoView({ behavior: 'smooth' });
+setTimeout(() => {
+document.getElementById('nextLink').style.display = 'block';
+document.getElementById('nextLink').scrollIntoView({ behavior: 'smooth' });
+}, 1500);
+}
+
+function showToast(msg) {
+const t = document.getElementById('toast');
+t.textContent = msg;
+t.classList.add('show');
+setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>

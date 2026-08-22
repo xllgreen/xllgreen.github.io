@@ -1,0 +1,48 @@
+/** 《静默之心》自愿支持浮层样式 */
+body.paywall-open{overflow:hidden}
+.jmx-support-button{appearance:none;border:1px solid rgba(139,38,53,.32);background:#fff7f5;color:var(--accent,#8b2635);border-radius:18px;padding:.36rem .78rem;font:600 .75rem/1.2 inherit;white-space:nowrap;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.jmx-support-button:hover,.jmx-support-button:focus-visible{background:#fff;transform:translateY(-1px);box-shadow:0 4px 14px rgba(139,38,53,.14);outline:none}
+.jmx-support-button.is-supported{border-color:rgba(44,62,80,.2);background:#f4f3ef;color:#66706d}
+.paywall-overlay[hidden]{display:none!important}
+.paywall-overlay{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(16,22,28,.72);backdrop-filter:blur(7px);opacity:0;transition:opacity .26s ease}
+.paywall-overlay.paywall-show{opacity:1}
+.paywall-overlay.paywall-closing{opacity:0}
+.paywall-card{position:relative;isolation:isolate;width:min(92vw,470px);max-height:92vh;overflow:auto;border:1px solid rgba(139,115,85,.25);border-radius:18px;background:linear-gradient(150deg,#fffdf8,#eee8dc);box-shadow:0 24px 70px rgba(0,0,0,.35);transform:translateY(18px) scale(.96);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.paywall-overlay.paywall-show .paywall-card{transform:translateY(0) scale(1)}
+.paywall-close{position:absolute;right:13px;top:10px;z-index:30;width:36px;height:36px;border:0;border-radius:50%;background:transparent;color:#918a80;font:300 1.8rem/1 sans-serif;cursor:pointer;transition:background .2s ease,color .2s ease,transform .2s ease}
+.paywall-close:hover,.paywall-close:focus-visible{background:rgba(139,38,53,.08);color:#6d2330;transform:rotate(90deg);outline:none}
+.paywall-card-inner{position:relative;z-index:1;padding:30px 28px 24px}
+.paywall-header{text-align:center;margin-bottom:18px}
+.paywall-title-row{display:flex;align-items:center;justify-content:center;gap:10px}
+.paywall-heart{color:#8b2635;font-size:1.15rem;animation:paywallHeartbeat 1.8s ease-in-out infinite}
+@keyframes paywallHeartbeat{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.18);opacity:1}}
+.paywall-title{margin:0;color:#2c3e50;font-family:'Noto Serif SC',serif;font-size:1.42rem;letter-spacing:.08em}
+.paywall-subtitle{margin:5px 0 0;color:#88796b;font-size:.78rem}
+.paywall-body{display:flex;flex-direction:column;align-items:center;gap:14px}
+.paywall-qr-wrapper{position:relative;width:132px;height:132px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 5px 20px rgba(39,45,48,.14)}
+.paywall-qr-img{display:block;width:100%;height:100%;object-fit:contain}
+.paywall-qr-fallback{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:12px;text-align:center;color:#8b2635;font-size:.76rem;line-height:1.6}
+.paywall-qr-fallback[hidden]{display:none}
+.paywall-qr-glow{position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 2px rgba(139,38,53,.1);pointer-events:none}
+.paywall-qr-tip{color:#88796b;font-size:.74rem;text-align:center}
+.paywall-message{text-align:center;width:100%}
+.paywall-msg-warm{margin:0 0 9px;color:#35444d;font-size:.94rem;font-weight:700}
+.paywall-msg-body{margin:0 0 10px;color:#626662;font-size:.83rem;line-height:1.85}
+.paywall-msg-body strong{color:#8b2635}
+.paywall-msg-cute{margin:0 0 10px;padding:9px 13px;border-radius:9px;background:rgba(139,38,53,.07);color:#6f5a50;font-size:.81rem;line-height:1.7}
+.paywall-msg-warm2{margin:0;color:#777065;font-size:.81rem;line-height:1.65}
+.paywall-footer{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(139,115,85,.28)}
+.paywall-hint{display:flex;align-items:flex-start;gap:7px;margin-bottom:13px;color:#92887d;font-size:.7rem;line-height:1.55}
+.paywall-btns{display:flex;gap:10px}
+.paywall-btn{flex:1;border-radius:9px;padding:11px 14px;font:600 .86rem/1.2 inherit;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+.paywall-btn-support{border:0;color:#fff;background:linear-gradient(135deg,#7f2432,#a14b55);box-shadow:0 5px 15px rgba(139,38,53,.23)}
+.paywall-btn-support:hover,.paywall-btn-support:focus-visible{transform:translateY(-1px);box-shadow:0 7px 20px rgba(139,38,53,.32);outline:none}
+.paywall-btn-later{border:1px solid rgba(139,115,85,.22);background:#f5f1ea;color:#81766b}
+.paywall-btn-later:hover,.paywall-btn-later:focus-visible{background:#eee7dc;outline:none}
+.paywall-studio{text-align:center;margin-top:13px;color:#aaa095;font-size:.72rem;letter-spacing:.12em}
+.paywall-toast{position:fixed;left:50%;bottom:28px;z-index:12001;max-width:min(90vw,520px);padding:12px 20px;border-radius:10px;background:rgba(44,62,80,.96);color:#fff;font-size:.86rem;text-align:center;box-shadow:0 8px 28px rgba(0,0,0,.22);opacity:0;transform:translate(-50%,18px);transition:opacity .3s ease,transform .3s ease}
+.paywall-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.header-actions{gap:.55rem}.jmx-support-button{padding:.34rem .65rem}}
+@media(max-width:768px){.jmx-support-button{position:fixed;right:14px;bottom:78px;z-index:110;border-radius:999px;box-shadow:0 5px 18px rgba(0,0,0,.14)}.paywall-card-inner{padding:27px 18px 20px}.paywall-card{width:min(94vw,460px)}.paywall-btns{flex-direction:column}.paywall-qr-wrapper{width:118px;height:118px}}
+@media(max-width:420px){.paywall-overlay{padding:10px}.paywall-card{max-height:95vh;border-radius:14px}.paywall-title{font-size:1.2rem}.paywall-msg-body br{display:none}.paywall-toast{bottom:18px;font-size:.78rem}}
+@media(prefers-reduced-motion:reduce){.paywall-overlay,.paywall-card,.paywall-toast,.jmx-support-button{transition:none!important}.paywall-heart{animation:none!important}}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>热搜盲区 · 正在载入终章</title>
+<style>html,body{margin:0;height:100%;background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.loader{height:100%;display:grid;place-items:center;text-align:center;padding:24px;box-sizing:border-box}.loader b{display:block;font-size:18px;letter-spacing:3px;margin-bottom:12px}.loader p{color:#777;font-size:13px;line-height:1.8}.retry{margin-top:18px;padding:10px 22px;border:1px solid #bbb;background:#fff;color:#333;border-radius:6px;cursor:pointer}</style></head>
+<body><div class="loader" id="loader"><div><b>终章载入中</b><p>正在恢复最终抉择……</p></div></div>
+<script>
+(function(){
+  function endingHotfix(){
+    'use strict';
+    const started=Date.now();
+    const style=document.createElement('style');
+    style.textContent='.choice-section.visible{opacity:1!important;transform:none!important;animation:none!important}.tbs-choice-rescue{position:fixed;right:18px;bottom:18px;z-index:99999;border:1px solid #d4d4d8;background:rgba(255,255,255,.96);color:#1d1d1f;padding:10px 14px;border-radius:8px;font:600 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:1px;box-shadow:0 6px 24px rgba(0,0,0,.12);cursor:pointer}@media(max-width:600px){.tbs-choice-rescue{right:12px;bottom:12px}.choice-btn:hover{transform:none!important}}@media(prefers-reduced-motion:reduce){.scene-header,.scene-desc,.dialogue-box,.ending-name,.ending-subtitle,.ending-paragraph,.ending-quote,.monument,.monument-reveal,.replay-section{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}.choice-section.visible{opacity:1!important}}';
+    document.head.appendChild(style);
+
+    function revealChoice(scroll){
+      const section=document.getElementById('choice-section');if(!section)return false;
+      section.classList.add('visible');section.style.opacity='1';section.style.transform='none';
+      if(scroll)section.scrollIntoView({behavior:'smooth',block:'start'});return true;
+    }
+    const rescue=document.createElement('button');rescue.type='button';rescue.className='tbs-choice-rescue';rescue.textContent='抉择未显示？点此恢复';rescue.onclick=()=>revealChoice(true);document.body.appendChild(rescue);
+
+    setTimeout(()=>revealChoice(false),9000);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&Date.now()-started>=9000)revealChoice(false)});
+    window.addEventListener('pageshow',()=>{if(Date.now()-started>=9000)revealChoice(false)});
+
+    document.querySelectorAll('a[href="game.html"]').forEach(a=>a.setAttribute('href','game-fixed.html'));
+    document.querySelectorAll('.choice-btn').forEach(btn=>btn.setAttribute('type','button'));
+
+    if(typeof chooseEnding==='function'){
+      const originalChooseEnding=chooseEnding;
+      chooseEnding=function(ending){
+        try{localStorage.setItem('trending_blind_spots_last_ending',String(ending))}catch(e){}
+        originalChooseEnding(ending);
+        rescue.style.display='none';
+        const section=document.getElementById('ending-'+ending);if(section){section.style.display='block'}
+      };
+    }
+
+    // 如果浏览器关闭了动画，保证叙述与结局内容仍可读，而不是永久 opacity:0。
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.querySelectorAll('.fade-in,.scene-header').forEach(el=>{el.style.opacity='1';el.style.transform='none';el.style.filter='none'});
+    }
+  }
+  function inject(html){
+    const patch='<script>('+endingHotfix.toString()+')();<\/script>';
+    if(/<\/body\s*>/i.test(html))return html.replace(/<\/body\s*>/i,patch+'</body>');
+    return html+patch;
+  }
+  fetch('ending.html',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).then(html=>{document.open();document.write(inject(html));document.close()}).catch(err=>{
+    document.getElementById('loader').innerHTML='<div><b>终章载入失败</b><p>无法读取 ending.html。请确认该文件与本文件位于同一目录。<br>'+String(err.message).replace(/[<>]/g,'')+'</p><button class="retry" onclick="location.reload()">重新载入</button><br><a href="game-fixed.html" style="display:inline-block;margin-top:14px;color:#666">返回调查</a></div>';
+  });
+})();
+</script></body></html>

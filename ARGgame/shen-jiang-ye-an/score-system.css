@@ -1,0 +1,18 @@
+/* 2026-08-16: investigation score / independent-review settlement */
+.score-summary{margin:0 0 16px;padding:14px 16px;border:2px double #7b6046;background:linear-gradient(100deg,#f6ead3,#e3cfaa);box-shadow:0 5px 14px rgba(63,43,27,.12)}
+.score-summary-head{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid rgba(112,84,58,.34);padding-bottom:9px;margin-bottom:9px}
+.score-summary .score-kicker{font-size:10px;letter-spacing:.16em;color:#785c43}
+.score-summary .score-title{font-size:18px;margin-top:3px;color:#34261d}
+.score-badge{min-width:72px;text-align:center;border:3px double #74322d;color:#74322d;background:#fff1d8;padding:8px 10px;transform:rotate(-1deg);font-weight:700}
+.score-badge strong{display:block;font-size:25px;line-height:1}.score-badge span{display:block;font-size:9px;letter-spacing:.12em;margin-top:4px}
+.score-summary p{font-size:12px;line-height:1.75;color:#594737;margin:7px 0}
+.score-open-btn{margin-top:5px}
+.score-sheet .score-hero{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:18px;align-items:center;background:linear-gradient(105deg,#efe0c3,#d7bd92);border:1px solid #9a7b58;padding:16px;margin:4px 0 15px}
+.score-sheet .score-hero h3{font-size:24px;font-weight:500;margin:2px 0 6px}.score-sheet .score-hero p{margin:0;color:#5d4b3b;line-height:1.75}
+.score-seal{border:4px double #71332e;color:#71332e;background:#faecd1;min-height:108px;display:grid;place-items:center;text-align:center;transform:rotate(1.2deg);padding:9px}
+.score-seal strong{font-size:34px;line-height:1}.score-seal span{font-size:10px;letter-spacing:.14em}.score-seal em{font-style:normal;font-size:13px;margin-top:3px}
+.score-breakdown{display:grid;gap:7px;margin:10px 0 14px}.score-row{display:grid;grid-template-columns:110px minmax(0,1fr) 54px;gap:10px;align-items:center;font-size:12px}.score-bar{height:8px;background:#d8c4a2;border:1px solid #b49a76;overflow:hidden}.score-bar i{display:block;height:100%;background:#6d4a3a}.score-value{text-align:right;font-variant-numeric:tabular-nums}
+.review-result{margin-top:14px;padding:13px 14px;background:#eee0c5;border-left:4px solid #33494a}.review-result-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.review-grade{font-size:26px;color:#33494a;font-weight:700}.review-result p{margin:6px 0 0;line-height:1.7;font-size:12px;color:#534638}
+.score-rule-note{border-top:1px dotted #9c876a;padding-top:10px;margin-top:12px!important;font-size:11px!important;color:#6d5b49!important}
+.score-archive-empty{padding:16px;border:1px dashed #9d8567;background:#f1e3ca;color:#5c4b3b}
+@media(max-width:700px){.score-sheet .score-hero{grid-template-columns:1fr}.score-seal{min-height:90px}.score-row{grid-template-columns:90px minmax(0,1fr) 48px}.score-summary-head{align-items:flex-start}.score-badge{min-width:64px}.score-summary{padding:12px}.score-sheet .score-hero h3{font-size:21px}}

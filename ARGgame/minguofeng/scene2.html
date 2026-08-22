@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山河谍影 · 第二幕 · 墨香阁</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#1a1410;color:#c8b89a;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow-x:hidden;min-height:100vh}
+
+/* 民国旧纸质感 */
+.paper-bg{position:fixed;inset:0;z-index:0;background:linear-gradient(180deg,#1a1410 0%,#201a14 40%,#181410 100%)}
+.paper-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(160,140,110,0.02) 3px,rgba(160,140,110,0.02) 6px);pointer-events:none}
+
+/* 灯光效果 */
+.desk-light{position:fixed;top:-10%;left:50%;transform:translateX(-50%);width:60%;height:50%;background:radial-gradient(ellipse,rgba(200,170,120,0.08) 0%,transparent 70%);pointer-events:none;z-index:1}
+
+.container{position:relative;z-index:10;width:92%;max-width:900px;margin:0 auto;padding:30px 0 100px;display:flex;flex-direction:column;align-items:center}
+
+/* 场景标题 */
+.scene-header{text-align:center;margin-bottom:10px}
+.scene-chapter{font-size:12px;color:#6a5a40;letter-spacing:6px;margin-bottom:6px}
+.scene-title{font-size:32px;letter-spacing:10px;color:#c8a868;text-shadow:0 2px 10px rgba(200,168,104,0.3);font-weight:bold}
+.scene-location{font-size:11px;color:#6a5a40;letter-spacing:4px;margin-top:4px}
+
+/* 场景描述 */
+.scene-desc{color:#a09080;font-size:13px;line-height:2.2;margin:15px 0 25px;letter-spacing:1px;text-align:left;max-width:750px;text-indent:2em}
+
+/* 物品网格 */
+.items-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0;max-width:750px;width:100%}
+.item-card{background:rgba(40,35,25,0.8);border:1px solid #4a4030;padding:20px 10px;text-align:center;cursor:pointer;transition:all 0.3s;border-radius:4px;position:relative}
+.item-card:hover{border-color:#8a7a5a;background:rgba(50,45,30,0.9);box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.item-icon{font-size:30px;margin-bottom:6px;display:block}
+.item-name{font-size:12px;color:#a09070;letter-spacing:2px}
+.item-status{font-size:10px;color:#6a5a40;margin-top:4px;letter-spacing:1px}
+.item-card.checked .item-status{color:#8a7a5a}
+.item-card.important::after{content:"●";position:absolute;top:6px;right:8px;color:#8b4040;font-size:8px}
+
+/* 弹窗 */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(20,16,12,0.92);display:none;justify-content:center;align-items:center;padding:20px}
+.overlay.show{display:flex}
+.modal{background:linear-gradient(180deg,#f5f0e5,#ebe5d5);color:#3a3020;max-width:640px;width:100%;padding:35px;border-radius:2px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,0.5);border:1px solid #c8b898;max-height:82vh;overflow-y:auto}
+.modal-close{position:absolute;top:10px;right:14px;color:#8a7a5a;font-size:20px;cursor:pointer;background:none;border:none;font-family:inherit}
+.modal-close:hover{color:#5a3a2a}
+.modal-title{font-size:17px;color:#2a2010;letter-spacing:5px;margin-bottom:18px;text-align:center;border-bottom:1px solid #d8c8a8;padding-bottom:12px}
+.modal-content{font-size:13.5px;color:#4a3a25;line-height:2.1;letter-spacing:1px}
+.modal-content .highlight{color:#8b2020;font-weight:bold}
+.modal-content .clue{color:#2a5080;font-weight:bold}
+.modal-content .note{color:#8a7a5a;font-size:12px;font-style:italic;margin-top:10px;padding:8px;border-left:2px solid #d8c8a8}
+.modal-content .clickable{color:#2a5080;cursor:pointer;border-bottom:1px dashed #2a5080;transition:color 0.2s}
+.modal-content .clickable:hover{color:#4a70a0}
+.modal-content .useful-header{background:#f0ead8;padding:8px 12px;margin:12px 0;border-left:3px solid #8b2020;font-size:12px;color:#8b2020;letter-spacing:2px}
+
+/* 报纸样式 */
+.newspaper{background:#f8f4e8;border:1px solid #c8c0a8;padding:25px;margin:15px 0;box-shadow:2px 2px 8px rgba(0,0,0,0.1)}
+.newspaper-header{text-align:center;border-bottom:3px double #2a2010;padding-bottom:10px;margin-bottom:15px}
+.newspaper-name{font-size:20px;color:#2a2010;letter-spacing:8px;font-weight:bold}
+.newspaper-date{font-size:11px;color:#8a7a5a;margin-top:4px;letter-spacing:3px}
+.news-item{padding:10px 0;border-bottom:1px solid #e8e0d0}
+.news-item:last-child{border-bottom:none}
+.news-title{font-size:14px;font-weight:bold;color:#2a2010;margin-bottom:5px}
+.news-body{font-size:12.5px;color:#4a3a25;line-height:1.9}
+.news-body .useful{color:#2a5080;cursor:pointer;text-decoration:underline;text-decoration-style:dotted;transition:color 0.2s}
+.news-body .useful:hover{color:#8b2020}
+
+/* 信件样式 */
+.letter-content{background:#faf6ec;border:1px solid #d8c8a8;padding:20px;margin:10px 0;line-height:2.2;font-size:13px}
+.letter-content .bold-clue{color:#8b2020;font-weight:bold;font-size:14px}
+
+/* 画报样式 */
+.magazine-page{border:1px solid #c8b898;padding:20px;margin:10px 0;background:#faf8f0}
+.magazine-caption{font-size:11px;color:#8a7a5a;text-align:center;margin:8px 0;letter-spacing:2px}
+.magazine-cover{background:linear-gradient(135deg,#f0ead8,#e8e0c8);border:2px solid #c8b898;padding:25px;margin:15px 0;text-align:center;position:relative}
+.magazine-cover-title{font-size:24px;letter-spacing:8px;color:#2a2010;font-weight:bold;margin-bottom:5px}
+.magazine-cover-sub{font-size:11px;color:#8a7a5a;letter-spacing:4px}
+.magazine-cover-date{font-size:10px;color:#6a5a40;margin-top:8px;letter-spacing:3px}
+
+/* 画报中的"图片"用ASCII风格描述 */
+.photo-frame{border:3px solid #8a7a5a;padding:20px;margin:15px 0;background:#ece8d8;position:relative}
+.photo-frame::before{content:"[ 黑白照片 ]";position:absolute;top:-10px;left:15px;background:#f5f0e5;padding:0 8px;font-size:10px;color:#8a7a5a;letter-spacing:2px}
+.photo-desc{font-size:13px;line-height:2.1;color:#3a3020;text-indent:2em}
+.photo-desc .detail{color:#2a5080;font-weight:bold}
+.photo-desc .hidden-clue{color:#8b2020;font-weight:bold}
+
+/* 收音机面板 */
+.radio-panel{background:linear-gradient(180deg,#3a3530,#2a2520);border:2px solid #5a4a30;border-radius:8px;padding:25px;text-align:center;margin:15px 0}
+.radio-dial{width:220px;height:110px;background:#1a1510;border:2px solid #4a3a20;border-radius:4px;margin:15px auto;position:relative;overflow:hidden}
+.radio-dial::before{content:"";position:absolute;top:10px;left:10%;right:10%;height:1px;background:repeating-linear-gradient(90deg,#4a3a20 0px,#4a3a20 3px,transparent 3px,transparent 6px)}
+.radio-freq{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);color:#c8a868;font-size:16px;letter-spacing:3px;font-weight:bold}
+.radio-noise{font-size:11px;color:#8a7a5a;margin:10px 0;line-height:1.8}
+.radio-noise .station{color:#c8a868;cursor:pointer;border-bottom:1px dashed #8a7a5a}
+.radio-noise .station:hover{color:#f0d890}
+.radio-btn{padding:8px 20px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:12px;letter-spacing:3px;cursor:pointer;border-radius:4px;transition:all 0.3s;margin:5px}
+.radio-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+
+/* 频率输入 */
+.freq-input-area{margin-top:15px;padding:15px;background:rgba(200,168,104,0.08);border:1px solid #5a4a30;border-radius:4px}
+.freq-label{font-size:12px;color:#c8a868;letter-spacing:3px;margin-bottom:10px}
+.freq-hint{font-size:11px;color:#6a5a40;margin-bottom:12px;line-height:1.8}
+.freq-input-row{display:flex;gap:6px;justify-content:center;margin-bottom:12px}
+.freq-digit{width:48px;height:52px;background:rgba(250,248,240,0.95);border:2px solid #8a7a5a;color:#2a2010;font-size:22px;text-align:center;font-family:inherit;border-radius:2px;outline:none;transition:border-color 0.3s}
+.freq-digit:focus{border-color:#c8a868;box-shadow:0 0 10px rgba(200,168,104,0.3)}
+.freq-btn{display:block;margin:0 auto;padding:8px 28px;background:rgba(200,168,104,0.15);border:1px solid #8a7a5a;color:#c8a868;font-family:inherit;font-size:13px;letter-spacing:4px;cursor:pointer;border-radius:4px;transition:all 0.3s}
+.freq-btn:hover{background:rgba(200,168,104,0.3);border-color:#c8a868}
+.freq-error{color:#8b4040;font-size:12px;text-align:center;height:18px;letter-spacing:2px;margin-top:8px}
+.freq-success{color:#2a6040;font-size:13px;text-align:center;margin-top:8px;line-height:1.8;letter-spacing:1px}
+
+/* 地图样式 */
+.map-frame{border:2px solid #8a7a5a;padding:20px;margin:15px 0;background:#ece6d4;text-align:center}
+.map-frame::before{content:"[ 金陵城示意图 · 民国二十六年 ]";display:block;font-size:11px;color:#8a7a5a;letter-spacing:3px;margin-bottom:15px}
+.map-text{font-size:13px;line-height:2.2;color:#3a3020;text-align:left}
+.map-text .location{color:#8b2020;font-weight:bold;cursor:pointer;border-bottom:1px dashed #8b2020}
+.map-text .location:hover{color:#a03030}
+.map-text .route{color:#2a5080}
+
+/* 报纸选择tab */
+.newspaper-tabs{display:flex;gap:8px;margin-bottom:15px;flex-wrap:wrap}
+.newspaper-tab{padding:6px 16px;background:#ece8d8;border:1px solid #c8c0a8;color:#4a3a25;font-family:inherit;font-size:12px;cursor:pointer;border-radius:2px;transition:all 0.2s;letter-spacing:2px}
+.newspaper-tab:hover{background:#e0d8c0}
+.newspaper-tab.active{background:#d0c8b0;border-color:#8a7a5a;color:#2a2010;font-weight:bold}
+.newspaper-content-area{min-height:100px}
+
+/* 导航 */
+.nav-links{display:flex;gap:15px;justify-content:center;margin-top:20px}
+.nav-link{padding:10px 25px;background:rgba(40,35,25,0.6);border:1px solid #4a4030;color:#a09070;font-family:inherit;font-size:13px;letter-spacing:3px;cursor:pointer;text-decoration:none;transition:all 0.3s;border-radius:4px;display:none}
+.nav-link.show{display:block;animation:fadeIn 1s}
+.nav-link:hover{border-color:#8a7a5a;color:#c8a868}
+.nav-link.important-link{border-color:#8b4040;color:#c8a868}
+.nav-link.important-link:hover{border-color:#c8a868;background:rgba(139,64,64,0.15)}
+
+/* 线索栏 */
+.clue-bar{position:fixed;bottom:0;left:0;right:0;z-index:50;background:rgba(20,16,12,0.9);border-top:1px solid #4a4030;padding:8px 20px;display:flex;align-items:center;gap:15px}
+.clue-bar-label{font-size:11px;color:#6a5a40;letter-spacing:2px;white-space:nowrap}
+.clue-bar-items{display:flex;gap:8px;overflow-x:auto;flex:1}
+.clue-tag{padding:4px 12px;background:rgba(200,168,104,0.1);border:1px solid #4a4030;color:#8a7a5a;font-size:11px;letter-spacing:1px;white-space:nowrap;border-radius:2px;cursor:pointer;transition:all 0.2s}
+.clue-tag:hover{border-color:#8a7a5a;color:#c8a868}
+.clue-tag.found{border-color:#8b4040;color:#c8a868;background:rgba(139,64,64,0.1)}
+
+/* Toast */
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(30,25,18,0.95);border:1px solid #5a4a30;padding:18px 40px;color:#c8a868;font-size:14px;letter-spacing:4px;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.5s;border-radius:4px;box-shadow:0 4px 25px rgba(0,0,0,0.4)}
+.toast.show{opacity:1}
+
+/* 动画 */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* 进入动画 */
+.scene-enter{animation:fadeIn 1.5s ease}
+
+/* 进度指示器 */
+.progress-bar{width:100%;max-width:750px;margin:0 auto 15px;display:flex;gap:4px;align-items:center}
+.progress-dot{width:10px;height:10px;border:1px solid #4a4030;border-radius:50%;background:transparent;transition:all 0.3s}
+.progress-dot.filled{background:#8b4040;border-color:#8b4040}
+.progress-line{flex:1;height:1px;background:#4a4030}
+.progress-label{font-size:10px;color:#6a5a40;letter-spacing:2px;white-space:nowrap;margin-left:8px}
+
+/* 滚动条美化 */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:rgba(200,180,140,0.1)}
+::-webkit-scrollbar-thumb{background:rgba(200,168,104,0.3);border-radius:2px}
+
+/* 响应式 */
+@media(max-width:600px){
+.items-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+.item-card{padding:15px 6px}
+.item-icon{font-size:24px}
+.item-name{font-size:11px}
+.modal{padding:20px;max-height:85vh}
+.scene-title{font-size:24px;letter-spacing:6px}
+}
+</style>
+</head>
+<body>
+<div class="paper-bg"></div>
+<div class="desk-light"></div>
+
+<div class="container">
+<div class="scene-enter">
+<!-- 场景标题 -->
+<div class="scene-header">
+<p class="scene-chapter">第 二 幕</p>
+<h1 class="scene-title">墨 香 阁</h1>
+<p class="scene-location">金陵城 · 秦淮河畔 · 旧书坊</p>
+</div>
+
+<!-- 进度指示 -->
+<div class="progress-bar">
+<div class="progress-dot filled"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog1"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog2"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog3"></div>
+<div class="progress-line"></div>
+<div class="progress-dot" id="prog4"></div>
+<div class="progress-label" id="progress-text">0 / 5</div>
+</div>
+
+<!-- 场景描述 -->
+<p class="scene-desc">
+你对上暗号后，方掌柜将你引至墨香阁后堂的一间密室。室内陈设古朴，四壁皆是书架，一张老式红木桌上摆着几盏油灯，昏黄的光线在旧纸上跳动。方先生压低声音说道："沈先生，你要找的东西都在这里。五名学者失踪的真相……恐怕比你想的更深。请慢慢查看，切莫声张。"
+</p>
+
+<!-- 物品网格 -->
+<div class="items-grid">
+<div class="item-card important" onclick="openModal('newspapers')">
+<span class="item-icon">📰</span>
+<span class="item-name">旧报纸堆</span>
+<span class="item-status" id="status-newspapers">未查阅</span>
+</div>
+<div class="item-card important" onclick="openModal('magazine')">
+<span class="item-icon">📖</span>
+<span class="item-name">画报架</span>
+<span class="item-status" id="status-magazine">未查阅</span>
+</div>
+<div class="item-card" onclick="openModal('secret-letter')">
+<span class="item-icon">✉️</span>
+<span class="item-name">秘密信件</span>
+<span class="item-status" id="status-secret-letter">未查阅</span>
+</div>
+<div class="item-card" onclick="openModal('map')">
+<span class="item-icon">🗺️</span>
+<span class="item-name">金陵地图</span>
+<span class="item-status" id="status-map">未查阅</span>
+</div>
+<div class="item-card important" onclick="openModal('radio')">
+<span class="item-icon">📻</span>
+<span class="item-name">密码收音机</span>
+<span class="item-status" id="status-radio">待调试</span>
+</div>
+</div>
+
+<!-- 导航 -->
+<div class="nav-links">
+<a href="scene3.html" class="nav-link important-link" id="nextSceneLink">前往宪兵司令部 →</a>
+</div>
+</div>
+</div>
+
+<!-- 线索栏 -->
+<div class="clue-bar">
+<span class="clue-bar-label">已获线索：</span>
+<div class="clue-bar-items" id="clue-bar-items">
+<span class="clue-tag found">墨香阁暗号</span>
+</div>
+</div>
+
+<!-- ==================== 弹窗1：旧报纸堆 ==================== -->
+<div class="overlay" id="modal-newspapers">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">旧 报 纸 堆</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">桌上堆着几份旧报纸，纸张已经泛黄卷边。蓝色标题可点击查看详情。</p>
+<p class="useful-header">以下为近期金陵本地报纸，部分报道可能包含有用信息</p>
+
+<!-- 报纸选择Tab -->
+<div class="newspaper-tabs">
+<button class="newspaper-tab active" onclick="switchNewspaper(1, this)">二月二十日</button>
+<button class="newspaper-tab" onclick="switchNewspaper(2, this)">三月三日</button>
+<button class="newspaper-tab" onclick="switchNewspaper(3, this)">三月十五日</button>
+</div>
+
+<!-- 报纸1 -->
+<div class="newspaper-content-area" id="newspaper-1">
+<div class="newspaper">
+<div class="newspaper-header">
+<div class="newspaper-name">金 陵 晚 报</div>
+<div class="newspaper-date">民国二十六年 · 二月二十日 · 第三版</div>
+</div>
+<div class="news-item">
+<div class="news-title" style="color:#2a5080;cursor:pointer" onclick="showNewsDetail('n1_1')">东亚文化保护协会在秦淮河畔设立办事处</div>
+<div class="news-body">据本报讯，由日本驻南京大使馆支持的"东亚文化保护协会"于昨日在秦淮河畔夫子庙附近租用一处宅院，设立驻金陵办事处。该协会自称宗旨为"保护东亚传统文化遗产"。</div>
+</div>
+<div class="news-item">
+<div class="news-title">本市公厕改造工程启动 市民拍手称快</div>
+<div class="news-body">市政厅昨日宣布，将在全市范围内改造公厕设施，预计耗资三万大洋。</div>
+</div>
+<div class="news-item">
+<div class="news-title" style="color:#2a5080;cursor:pointer" onclick="showNewsDetail('n1_2')">宪兵司令部近日提审一名姓陈的学者</div>
+<div class="news-body">据可靠消息，南京宪兵司令部近日秘密提审一名姓陈的学者。该学者据传与一份"敏感文件"有关，目前下落不明。</div>
+</div>
+<div class="news-item">
+<div class="news-title">秦淮河灯会今晚开幕 游人如织</div>
+<div class="news-body">一年一度的秦淮灯会将于今晚正式开幕。今年灯会规模为近年之最，预计将持续至元宵节后。</div>
+</div>
+</div>
+</div>
+
+<!-- 报纸2 -->
+<div class="newspaper-content-area" id="newspaper-2" style="display:none">
+<div class="newspaper">
+<div class="newspaper-header">
+<div class="newspaper-name">金 陵 晚 报</div>
+<div class="newspaper-date">民国二十六年 · 三月三日 · 第五版</div>
+</div>
+<div class="news-item">
+<div class="news-title">中央研究院新任所长履新</div>
+<div class="news-body">中央研究院历史语言研究所新任所长赵元任已于昨日履新。</div>
+</div>
+<div class="news-item">
+<div class="news-title" style="color:#2a5080;cursor:pointer" onclick="showNewsDetail('n2_1')">山田诚一出席东亚文化协会年会</div>
+<div class="news-body">东亚文化保护协会于昨日在金陵饭店举行年度大会。日本驻华文化参赞<span class="highlight">山田诚一</span>出席并致辞。山田在致辞中表示，协会将"进一步加强对中国古籍及传统工艺的研究与保护"。与会者中有数名身着军装的不明身份人士。</div>
+</div>
+<div class="news-item">
+<div class="news-title">城南粮店发生火灾 无人员伤亡</div>
+<div class="news-body">昨晨，城南中华门附近一家粮店发生火灾，火势已被扑灭，无人员伤亡。</div>
+</div>
+<div class="news-item">
+<div class="news-title">金陵女子学院举办春季运动会</div>
+<div class="news-body">金陵女子文理学院于昨日举办第八届春季运动会，场面热闹非凡。</div>
+</div>
+</div>
+</div>
+
+<!-- 报纸3 -->
+<div class="newspaper-content-area" id="newspaper-3" style="display:none">
+<div class="newspaper">
+<div class="newspaper-header">
+<div class="newspaper-name">金 陵 晚 报</div>
+<div class="newspaper-date">民国二十六年 · 三月十五日 · 第四版</div>
+</div>
+<div class="news-item">
+<div class="news-title">教育部拨专款用于高校建设</div>
+<div class="news-body">教育部近日拨付专款二十万大洋，用于全国各高校基础设施改善。</div>
+</div>
+<div class="news-item">
+<div class="news-title">玄武湖游览须知公布</div>
+<div class="news-body">南京市园林管理处昨日公布玄武湖游览新规，游船租赁费上调两成。</div>
+</div>
+<div class="news-item">
+<div class="news-title" style="color:#2a5080;cursor:pointer" onclick="showNewsDetail('n3_1')">秦淮河码头发现一具无名尸体，身穿长衫</div>
+<div class="news-body">昨日上午，秦淮河下游码头附近发现一具男性尸体。死者身着<span class="highlight">青色长衫</span>，面容因浸泡难以辨认。警方初步判断死者为三十岁左右的青壮年，身上未发现身份证明。目前尸体已被送往义庄。据码头工人称，近日常有可疑船只在此出没。</div>
+</div>
+</div>
+</div>
+
+<div class="note">—— 这些旧报纸中有些信息值得留意。那具穿长衫的无名尸体……会不会是张鹤年？</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗2：画报架 ==================== -->
+<div class="overlay" id="modal-magazine">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">画 报 架</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">书架上放着一本旧《良友画报》，封面有些磨损，但内页保存完好。</p>
+
+<!-- 画报封面 -->
+<div class="magazine-cover">
+<div class="magazine-cover-title">良 友 画 报</div>
+<div class="magazine-cover-sub">THE YOUNG COMPANION</div>
+<div class="magazine-cover-date">民国二十六年 · 第三期</div>
+</div>
+
+<!-- 画报内容 - 核心照片描述 -->
+<div class="magazine-page">
+<p style="font-size:12px;color:#6a5a40;letter-spacing:2px;margin-bottom:12px;text-align:center">—— 翻开至第十二页 ——</p>
+
+<div class="photo-frame">
+<div class="photo-desc">
+<b>【图一：东亚文化保护协会茶会合影】</b><br><br>
+照片拍于一间装饰华丽的厅堂内。长桌中央摆满了精致的茶具，<span class="detail">茶杯按照"品"字形排列</span>——上排<span class="hidden-clue">3个杯子</span>，中间一排<span class="hidden-clue">5个杯子</span>，下排<span class="hidden-clue">3个杯子</span>。<br><br>
+照片前景中，数位身着西装的中日人士围坐，面带微笑。其中一人引人注目——坐在中央位置的<span class="detail">山田诚一</span>，他身后站着两名身着便装的日本人，姿态笔挺，目光锐利。<br><br>
+照片背景的墙上挂着一幅水墨画，画中描绘了连绵的山峦，仔细观察，<span class="detail">山上共有五条横向的云带</span>，从远到近依次排列。<br><br>
+照片右下角，一张矮桌上放着一个<span class="detail">座钟</span>。钟面清晰可见——<span class="hidden-clue">短针指向3，长针指向7</span>。
+</div>
+<div class="magazine-caption">图注：东亚文化保护协会成立周年茶会 · 山田诚一先生（中）与各位来宾</div>
+</div>
+
+<div class="note">—— 茶杯的排列、座钟的时间、墙上的画……这些细节中似乎隐藏着某种编码。请仔细记住这些数字——它们可能是解开收音机频率的关键。</div>
+</div>
+
+<div class="magazine-page">
+<p style="font-size:12px;color:#6a5a40;letter-spacing:2px;margin-bottom:10px;text-align:center">—— 同期其他内容（无特殊线索） ——</p>
+<div class="photo-frame" style="opacity:0.6">
+<div class="photo-desc">
+<b>【图二：金陵城墙风光】</b><br><br>
+金陵明城墙的壮丽全景，拍摄于中华门城堡之上。远处可见紫金山轮廓，近处是秦淮河蜿蜒而过。一片宁静祥和的景象。
+</div>
+<div class="magazine-caption">图注：金陵古城墙一隅</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗3：秘密信件 ==================== -->
+<div class="overlay" id="modal-secret-letter">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">秘 密 信 件</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">方先生从书架暗格中取出一封信，递给你。信封上写着"沈逸亲启"。</p>
+
+<div class="letter-content">
+<p><b>沈逸先生：</b></p>
+<p>你好。我是方先生。</p>
+<p>我知道你不只是个记者。<span class="bold-clue">老张（张鹤年）</span>在失踪前曾来找过我，他委托我保管一些东西——一份关于<span class="bold-clue">东亚文化保护协会</span>的情报。他说这个协会表面是文化机构，实际是<span class="bold-clue">日本特务机关</span>的外围组织，专门收集中国科技情报，特别是与<span class="bold-clue">冶金术</span>相关的研究成果。</p>
+<p>老张说，五名失踪的学者都掌握着一种<span class="bold-clue">失传合金技术的关键信息</span>。日本人的目的就是获取这项技术，用于制造某种特殊武器。</p>
+<p>他让我把这些东西藏好，等待一个可靠的人来取。信中提到的暗号只有我知道——你既然来了，说明老张信任你。</p>
+<p>这间密室里的东西请仔细查看。<span class="bold-clue">旧报纸</span>中有我标注的重要新闻，<span class="bold-clue">画报</span>里藏着老张留下的密码。那台<span class="bold-clue">收音机</span>……只有输入正确的频率，才能听到一段关键的秘密广播。</p>
+<p>另外，<span class="bold-clue">陈望舒</span>还活着。他被关在<span class="bold-clue">宪兵司令部的地下档案室</span>。老张最后的线索就指向那里。</p>
+<p>时间紧迫，请务必小心。</p>
+<p style="text-align:right;margin-top:20px">方先生</p>
+<p style="text-align:right;color:#8a7a5a;font-size:11px">民国二十六年 · 三月十六日</p>
+</div>
+
+<div class="note">—— 方先生的信确认了许多猜测：东亚文化保护协会是日本特务组织、五名学者掌握失传合金技术、陈望舒被关在宪兵司令部。但最关键的是——画报中藏着密码，收音机需要特定频率才能收听秘密广播。</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗4：金陵地图 ==================== -->
+<div class="overlay" id="modal-map">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">金 陵 地 图</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">密室的墙上挂着一张金陵城（南京）的详细地图，上面有人用红笔标注了几个地点。</p>
+
+<div class="map-frame">
+<div class="map-text">
+<p><b>标注一：</b><span class="location" onclick="showToast('秦淮河畔 · 墨香阁所在地')">夫子庙 · 秦淮河畔</span></p>
+<p style="color:#6a5a40;font-size:12px;margin-bottom:10px">—— 此处即为墨香阁所在。方先生曾提到，东亚文化保护协会的办事处也设在附近。</p>
+
+<p><b>标注二：</b><span class="location" onclick="showToast('张府园 · 东亚文化保护协会办事处')">张府园</span></p>
+<p style="color:#6a5a40;font-size:12px;margin-bottom:10px">—— 用红圈标注，旁边写着"东文协"三个字。这里应该是东亚文化保护协会的驻金陵办事处。</p>
+
+<p><b>标注三：</b><span class="location" onclick="showToast('瞻园路 · 宪兵司令部')">瞻园路 · 宪兵司令部</span></p>
+<p style="color:#6a5a40;font-size:12px;margin-bottom:10px">—— 用双圈着重标注，旁边写着"陈在此"。方先生信中说陈望舒被关在这里的地下档案室。</p>
+
+<p><b>标注四：</b><span class="location" onclick="showToast('下关码头 · 发现无名尸体的地点')">下关码头（秦淮河下游）</span></p>
+<p style="color:#6a5a40;font-size:12px;margin-bottom:10px">—— 标注了一条虚线从秦淮河下游码头指向此处，旁边画了一个叉号。</p>
+
+<p><b>路线标注：</b><span class="route">墨香阁 → 张府园（步行约一刻钟） → 瞻园路（步行约半刻钟）</span></p>
+<p style="color:#6a5a40;font-size:12px">—— 三个地点相距不远，看来日本人特意将办事处选在秦淮河畔。</p>
+</div>
+</div>
+
+<div class="note">—— 地图上的路线显示，从墨香阁到宪兵司令部并不远。但宪兵司令部是军事重地，正面闯入无异于自杀。需要找到更安全的办法。</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗5：密码收音机 ==================== -->
+<div class="overlay" id="modal-radio">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title">密 码 收 音 机</h2>
+<div class="modal-content">
+<p style="margin-bottom:12px;color:#8a7a5a;font-size:12px">桌上放着一台老旧的短波收音机，机身上刻着一行小字："特制型 · 四位码启动"。方先生说这是老张留下的，只有输入正确的四位数频率才能启动。</p>
+
+<div class="radio-panel">
+<div class="radio-dial">
+<div class="radio-freq" id="radio-freq">—— LOCKED ——</div>
+</div>
+<p style="color:#c8a868;font-size:12px;margin:10px 0 5px">密码收音机 · 需要四位频率密码</p>
+</div>
+
+<!-- 频率输入区 -->
+<div class="freq-input-area">
+<p class="freq-label">—— 输入频率密码 ——</p>
+<p class="freq-hint">方先生说密码藏在<span style="color:#c8a868">画报的照片</span>中。仔细回忆画报里的那些数字细节……</p>
+<div class="freq-input-row">
+<input type="text" class="freq-digit" maxlength="1" id="f1" oninput="freqAutoNext(this,'f2')">
+<input type="text" class="freq-digit" maxlength="1" id="f2" oninput="freqAutoNext(this,'f3')">
+<input type="text" class="freq-digit" maxlength="1" id="f3" oninput="freqAutoNext(this,'f4')">
+<input type="text" class="freq-digit" maxlength="1" id="f4">
+</div>
+<button class="freq-btn" onclick="checkFrequency()">调 频 启 动</button>
+<p class="freq-error" id="freq-error"></p>
+<div id="freq-success-area"></div>
+</div>
+
+<div class="note">—— 方先生提到"画报中藏着老张留下的密码"。回到画报仔细看看那些视觉细节：茶杯的排列、座钟的指针……</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 弹窗6：新闻详情 ==================== -->
+<div class="overlay" id="modal-news-detail">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">✕</button>
+<h2 class="modal-title" id="news-detail-title"></h2>
+<div class="modal-content" id="news-detail-content"></div>
+</div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ========== 游戏状态 ========== */
+let clues = ['墨香阁暗号'];
+// 进度追踪：需要完成哪些条件
+let progress = {
+    newsRead: 0,       // 需要读3条有用新闻
+    magazineViewed: false,
+    radioHeard: false,
+    letterRead: false
+};
+const REQUIRED_NEWS = 3;
+
+/* ========== 线索系统 ========== */
+function addClue(text) {
+    if (!clues.includes(text)) {
+        clues.push(text);
+        const bar = document.getElementById('clue-bar-items');
+        const tag = document.createElement('span');
+        tag.className = 'clue-tag found';
+        tag.textContent = text;
+        tag.onclick = function() { showToast('线索：' + text); };
+        bar.appendChild(tag);
+    }
+}
+
+/* ========== 进度更新 ========== */
+function updateProgress() {
+    let done = 0;
+    if (progress.newsRead >= REQUIRED_NEWS) {
+        document.getElementById('prog1').classList.add('filled');
+        done++;
+    }
+    if (progress.magazineViewed) {
+        document.getElementById('prog2').classList.add('filled');
+        done++;
+    }
+    if (progress.letterRead) {
+        document.getElementById('prog3').classList.add('filled');
+        done++;
+    }
+    if (progress.radioHeard) {
+        document.getElementById('prog4').classList.add('filled');
+        done++;
+    }
+    document.getElementById('progress-text').textContent = done + ' / 4';
+
+    // 通过条件：所有3条有用新闻 + 画报 + 收听广播
+    if (progress.newsRead >= REQUIRED_NEWS && progress.magazineViewed && progress.radioHeard) {
+        document.getElementById('nextSceneLink').classList.add('show');
+        showToast('所有关键线索已收集完毕！');
+    }
+}
+
+/* ========== 弹窗系统 ========== */
+function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('show');
+    // 标记为已查阅
+    const statusEl = document.getElementById('status-' + id);
+    if (statusEl) {
+        statusEl.textContent = '已查阅';
+        statusEl.closest('.item-card').classList.add('checked');
+    }
+    // 特殊处理
+    if (id === 'magazine' && !progress.magazineViewed) {
+        progress.magazineViewed = true;
+        addClue('画报密码线索');
+        updateProgress();
+    }
+    if (id === 'secret-letter' && !progress.letterRead) {
+        progress.letterRead = true;
+        addClue('方先生的信');
+        updateProgress();
+    }
+}
+
+function closeModal() {
+    document.querySelectorAll('.overlay.show').forEach(function(o) {
+        o.classList.remove('show');
+    });
+}
+
+/* ========== Toast提示 ========== */
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2500);
+}
+
+/* ========== 报纸Tab切换 ========== */
+function switchNewspaper(num, btn) {
+    // 隐藏所有报纸内容
+    document.getElementById('newspaper-1').style.display = 'none';
+    document.getElementById('newspaper-2').style.display = 'none';
+    document.getElementById('newspaper-3').style.display = 'none';
+    // 取消所有tab高亮
+    document.querySelectorAll('.newspaper-tab').forEach(function(t) {
+        t.classList.remove('active');
+    });
+    // 显示选中的
+    document.getElementById('newspaper-' + num).style.display = 'block';
+    btn.classList.add('active');
+}
+
+/* ========== 新闻详情 ========== */
+const newsData = {
+    'n1_1': {
+        title: '东亚文化保护协会在秦淮河畔设立办事处',
+        content: '<p>据本报详细调查，该协会由<span class="bold-clue">日本驻南京大使馆</span>提供资金支持，名义上为"保护东亚传统文化遗产"的民间组织。</p><p>办事处选址于秦淮河畔<span class="bold-clue">夫子庙附近</span>，租用了一处三进院落的旧宅。附近居民反映，常有<span class="highlight">穿军装的日本人</span>出入此处，与"文化保护"的宗旨似乎不太相符。</p><p>据工商登记信息显示，该协会会长为<span class="bold-clue">山田诚一</span>，其公开身份为"文化学者"，但有消息称其与日本军方关系密切。</p><div class="note">—— 这个协会就是方先生信中提到的日本特务外围组织！办事处就在墨香阁附近。</div>',
+        clue: '东亚文协办事处'
+    },
+    'n1_2': {
+        title: '宪兵司令部提审姓陈的学者',
+        content: '<p>本报从可靠渠道获悉，南京<span class="bold-clue">宪兵司令部</span>于近日秘密提审了一名姓陈的学者。该学者被指控"涉嫌窃取军事机密"，但具体罪名从未公开。</p><p>据消息人士透露，该学者为<span class="bold-clue">金陵大学物理系研究员陈望舒</span>，是此前联名请愿加强国防科研的发起人。被捕前，他正在研究一种特殊的<span class="highlight">金属材料</span>。</p><p>陈望舒被捕后一直被关押在宪兵司令部内，至今未被移交法院。有传言称他被关在<span class="bold-clue">地下档案室</span>中。</p><div class="note">—— 陈望舒！请愿书的发起人，被关在宪兵司令部的地下档案室。方先生的信中也提到了这个地方。</div>',
+        clue: '陈望舒被捕'
+    },
+    'n2_1': {
+        title: '山田诚一出席东亚文化协会年会',
+        content: '<p>东亚文化保护协会年度大会于金陵饭店举行，约有百余人出席。日本驻华文化参赞<span class="highlight">山田诚一</span>作为主宾出席并发表演讲。</p><p>山田在演讲中声称，协会已在中国各地收集了<span class="bold-clue">数百份古代冶金文献</span>，并计划在南京建立一个"东亚古代工艺研究中心"。他特别强调了对<span class="bold-clue">宋代冶金技术</span>的研究兴趣。</p><p>令人注意的是，会场中有数名身着便装的<span class="highlight">日本军人</span>在旁观察，而非普通的文化交流参与者。本报记者试图接近山田提问，被几名便衣人员阻止。</p><div class="note">—— "收集古代冶金文献"——这正是方先生说的，日本人在系统性地收集与冶金术相关的一切信息！山田诚一显然不是什么文化学者。</div>',
+        clue: '山田诚一年会'
+    },
+    'n3_1': {
+        title: '秦淮河码头发现无名尸体',
+        content: '<p>昨日上午八时许，秦淮河下游<span class="bold-clue">下关码头</span>附近水域浮现一具男性尸体。</p><p>死者身穿<span class="highlight">青色长衫</span>，年龄约三十岁上下，体格中等，面部因浸泡多日难以辨认。身上无任何身份证明文件，仅内衣口袋中有一张被水浸湿的<span class="bold-clue">《大公报》记者证残片</span>。</p><p>码头工人称，近日常有不明身份的<span class="highlight">小船</span>在夜间出没于该水域。警方已将此案定性为"溺水身亡"，但拒绝透露更多调查细节。</p><p class="highlight">——《大公报》记者证……张鹤年就是《大公报》的记者。他失踪前穿着长衫。这具无名尸体……很可能就是张鹤年。</p><div class="note">—— 张鹤年恐怕已经遇害了。他在秦淮河下游被发现，而墨香阁就在秦淮河畔。他生前到过这里，留下了画报密码和收音机。你一定要替他完成未竟之事。</div>',
+        clue: '码头无名尸体'
+    }
+};
+
+function showNewsDetail(id) {
+    const data = newsData[id];
+    if (!data) return;
+
+    document.getElementById('news-detail-title').textContent = data.title;
+    document.getElementById('news-detail-content').innerHTML = data.content;
+    document.getElementById('modal-news-detail').classList.add('show');
+
+    // 添加线索并更新进度
+    if (data.clue) {
+        addClue(data.clue);
+    }
+    // 标记新闻已读
+    progress.newsRead++;
+    updateProgress();
+
+    // 标记报纸为已查阅
+    const statusEl = document.getElementById('status-newspapers');
+    if (statusEl) {
+        statusEl.textContent = '已查阅';
+        statusEl.closest('.item-card').classList.add('checked');
+    }
+}
+
+/* ========== 收音机频率输入 ========== */
+function freqAutoNext(current, nextId) {
+    if (current.value.length === 1) {
+        const next = document.getElementById(nextId);
+        if (next) next.focus();
+    }
+}
+
+function checkFrequency() {
+    const code = document.getElementById('f1').value +
+                 document.getElementById('f2').value +
+                 document.getElementById('f3').value +
+                 document.getElementById('f4').value;
+    const errEl = document.getElementById('freq-error');
+    const successArea = document.getElementById('freq-success-area');
+
+    if (code.length < 4) {
+        errEl.textContent = '请输入完整的四位频率密码。';
+        return;
+    }
+
+    if (code === '3537') {
+        // 正确密码
+        errEl.textContent = '';
+        successArea.innerHTML = '<div class="freq-success">' +
+            '<p style="margin-top:12px;padding:12px;background:rgba(42,96,128,0.1);border:1px solid #2a5080;border-radius:4px">' +
+            '<span style="color:#2a5080;font-weight:bold">【信号接通 · 秘密广播】</span><br><br>' +
+            '<span style="color:#3a3020">收音机发出一阵刺耳的电流声，随后逐渐清晰——</span><br><br>' +
+            '<span style="color:#3a3020">"……呼叫墨香阁，这里是<span class="bold-clue">燕子</span>。五号文件已安全转移至<span class="bold-clue">宪兵司令部地下档案室</span>，与陈望舒关押在同一区域。文件被伪装成一份普通的军事档案，编号为<span class="bold-clue">J-26-0315</span>。重复，编号J-26-0315。"</span><br><br>' +
+            '<span style="color:#3a3020">"方掌柜，请在收到此广播后<span class="bold-clue">销毁所有纸质情报</span>。我们的身份已经暴露。下一步行动方案将在<span class="bold-clue">宪兵司令部</span>直接执行。"</span><br><br>' +
+            '<span style="color:#3a3020">"……滋滋……通话完毕。"</span>' +
+            '</p>' +
+            '<p style="margin-top:8px;color:#8a7a5a;font-size:12px;font-style:italic">广播结束，收音机恢复了沙沙的噪音。</p>' +
+            '</div>';
+        document.getElementById('radio-freq').textContent = '3537 kHz';
+
+        // 标记完成
+        progress.radioHeard = true;
+        addClue('秘密广播');
+        addClue('五号文件');
+        addClue('宪兵司令部档案室');
+
+        // 标记收音机已查阅
+        const statusEl = document.getElementById('status-radio');
+        if (statusEl) {
+            statusEl.textContent = '已破解';
+            statusEl.closest('.item-card').classList.add('checked');
+        }
+
+        updateProgress();
+    } else {
+        // 错误密码
+        errEl.textContent = '频率错误，无法接通信号。请仔细检查画报中的数字线索。';
+        successArea.innerHTML = '';
+        const inputRow = document.querySelector('.freq-input-row');
+        inputRow.style.animation = 'none';
+        setTimeout(function() { inputRow.style.animation = 'shake 0.4s'; }, 10);
+    }
+}
+
+/* ========== Overlay点击关闭 ========== */
+document.querySelectorAll('.overlay').forEach(function(o) {
+    o.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+});
+
+/* ========== 初始化进度显示 ========== */
+updateProgress();
+</script>
+</body>
+</html>

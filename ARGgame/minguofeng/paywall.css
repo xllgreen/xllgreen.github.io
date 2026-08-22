@@ -1,0 +1,44 @@
+/** 《山河谍影》自愿支持浮层：沿用《松涛粮站》流程，调整为民国旧报风格。 */
+body.paywall-open{overflow:hidden}
+.paywall-overlay{position:fixed;inset:0;background:rgba(8,6,4,.78);backdrop-filter:blur(6px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;transition:opacity .32s ease}
+.paywall-overlay.paywall-show{opacity:1}
+.paywall-overlay.paywall-closing{opacity:0}
+.paywall-card{position:relative;width:min(92vw,470px);max-height:92vh;overflow:auto;background:linear-gradient(145deg,#e8d8b6,#cdb98e);border:1px solid rgba(91,66,34,.55);border-radius:5px;box-shadow:0 24px 80px rgba(0,0,0,.58),inset 0 0 45px rgba(86,58,24,.13);transform:scale(.94) translateY(18px);transition:transform .32s cubic-bezier(.2,.8,.2,1);color:#3d3020;font-family:"Noto Serif SC","STSong","SimSun",serif}
+.paywall-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(72,49,24,.035) 3px,rgba(72,49,24,.035) 4px);border-radius:inherit}
+.paywall-overlay.paywall-show .paywall-card{transform:scale(1) translateY(0)}
+.paywall-close{position:absolute;top:10px;right:12px;z-index:2;border:0;background:transparent;color:#776344;font:30px/1 Georgia,serif;cursor:pointer;padding:6px 10px;border-radius:3px;transition:color .2s,transform .2s}
+.paywall-close:hover,.paywall-close:focus-visible{color:#3f2a14;transform:rotate(90deg);outline:1px solid rgba(91,66,34,.5)}
+.paywall-card-inner{position:relative;padding:30px 28px 23px}
+.paywall-header{text-align:center;margin-bottom:18px}
+.paywall-title-row{display:flex;align-items:center;justify-content:center;gap:10px}
+.paywall-title{font-size:1.35rem;letter-spacing:.14em;color:#3d2b17;margin:0}
+.paywall-heart{color:#8b352a;font-size:1.1rem;animation:paywallPulse 1.8s ease-in-out infinite}
+@keyframes paywallPulse{50%{transform:scale(1.22)}}
+.paywall-subtitle{font-size:.8rem;color:#766344;letter-spacing:.08em;margin-top:7px}
+.paywall-body{display:flex;flex-direction:column;align-items:center;gap:15px}
+.paywall-qr-wrapper{position:relative;width:132px;height:132px;background:#fff;border:5px solid rgba(255,255,255,.75);border-radius:4px;overflow:hidden;box-shadow:0 5px 18px rgba(45,27,8,.22)}
+.paywall-qr-img{display:block;width:100%;height:100%;object-fit:contain}
+.paywall-qr-glow{position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(95,61,22,.25);pointer-events:none}
+.paywall-qr-tip{font-size:.74rem;color:#79684d;letter-spacing:.05em}
+.paywall-message{text-align:center;width:100%}
+.paywall-msg-warm{font-size:.94rem;font-weight:700;color:#48331e;margin-bottom:9px}
+.paywall-msg-body{font-size:.82rem;color:#5f4d34;line-height:1.9;margin-bottom:10px}
+.paywall-msg-body strong{color:#8b352a}
+.paywall-msg-cute{font-size:.81rem;line-height:1.7;color:#61452b;padding:8px 13px;background:rgba(103,68,30,.1);border-left:3px solid rgba(139,53,42,.55);margin-bottom:10px}
+.paywall-msg-warm2{font-size:.78rem;color:#76664d;line-height:1.7}
+.paywall-footer{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(83,57,27,.32)}
+.paywall-hint{display:flex;gap:7px;font-size:.7rem;line-height:1.6;color:#85765e;margin-bottom:13px}
+.paywall-btns{display:flex;gap:10px}
+.paywall-btn{flex:1;min-height:44px;padding:10px 14px;border-radius:3px;font-family:inherit;font-size:.84rem;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.paywall-btn:focus-visible{outline:2px solid #8b352a;outline-offset:2px}
+.paywall-btn-support{border:1px solid #6b3029;background:linear-gradient(135deg,#6f2f28,#9b4c36);color:#f4e4c5;box-shadow:0 4px 13px rgba(75,35,25,.25)}
+.paywall-btn-support:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(75,35,25,.34)}
+.paywall-btn-later{border:1px solid rgba(83,57,27,.3);background:rgba(248,239,218,.65);color:#77654a}
+.paywall-btn-later:hover{background:rgba(255,248,232,.85)}
+.paywall-studio{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.15em;color:#95836a;margin-top:13px}
+.paywall-toast{position:fixed;left:50%;bottom:28px;z-index:10001;max-width:min(88vw,560px);padding:12px 20px;border:1px solid rgba(214,187,135,.35);border-radius:4px;background:rgba(44,31,18,.97);color:#dbc394;font-family:"Noto Serif SC","STSong","SimSun",serif;font-size:.84rem;line-height:1.6;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.4);opacity:0;transform:translate(-50%,18px);transition:opacity .35s,transform .35s}
+.paywall-toast.show{opacity:1;transform:translate(-50%,0)}
+.support-replay-btn{margin-left:12px;border-color:#8b5b45!important;color:#b98767!important}
+.support-replay-btn:hover{border-color:#cf9a78!important;color:#e0b28e!important;background:rgba(139,64,48,.08)!important}
+@media(max-width:560px){.paywall-card-inner{padding:27px 18px 18px}.paywall-title{font-size:1.13rem}.paywall-btns{flex-direction:column}.paywall-qr-wrapper{width:116px;height:116px}.support-replay-btn{margin:12px 0 0}.replay-section .replay-btn{display:block;width:min(88%,290px);margin-left:auto;margin-right:auto}}
+@media(prefers-reduced-motion:reduce){.paywall-overlay,.paywall-card,.paywall-close,.paywall-btn,.paywall-toast{transition:none!important}.paywall-heart{animation:none!important}}

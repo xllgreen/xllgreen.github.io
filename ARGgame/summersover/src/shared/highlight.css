@@ -1,0 +1,20 @@
+/* ============================================================
+   线索关键词高亮（全局统一）
+   所有"可搜索关键词"和"重要角色名"使用同一套视觉样式
+   ============================================================ */
+
+/** 正文内嵌线索关键词（搜索提示） */
+.clue-highlight {
+  color: #D0A040;
+  font-weight: bold;
+}
+
+/** 版块帖子列表中可点击线索帖的标题 */
+.clickable-highlight {
+  color: #D0A040 !important;
+  font-weight: bold;
+}
+
+.clickable-highlight:hover {
+  color: #E0B040 !important;
+}

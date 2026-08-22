@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280">
+  <defs>
+    <pattern id="p" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="#eee9db"/><circle cx="5" cy="2" r=".45" fill="#c8c0ae"/></pattern>
+  </defs>
+  <rect width="420" height="280" fill="url(#p)"/>
+  <text x="392" y="34" text-anchor="end" font-family="Courier New,monospace" font-size="12" fill="#444">LJ-GP-07/03-A</text>
+  <text x="392" y="58" text-anchor="end" font-family="SimSun,serif" font-size="12" fill="#555">第 4 页　共 6 页</text>
+  <line x1="0" y1="84" x2="378" y2="84" stroke="#55534d"/>
+  <text x="20" y="116" font-family="SimSun,serif" font-size="13" fill="#47453f">形成日期：2016-11-03</text>
+  <text x="20" y="145" font-family="SimSun,serif" font-size="13" fill="#47453f">公开状态：目录撤下</text>
+  <line x1="0" y1="166" x2="378" y2="166" stroke="#8b877c"/>
+  <text x="20" y="194" font-family="SimSun,serif" font-size="13" fill="#47453f">样本说明（内部工作稿）</text>
+  <line x1="0" y1="220" x2="378" y2="220" stroke="#8b877c"/>
+  <circle cx="0" cy="280" r="78" fill="none" stroke="#9a332f" stroke-width="7" opacity=".62"/>
+  <path d="M0 216 C27 218 50 229 72 252" fill="none" stroke="#9a332f" stroke-width="3" opacity=".55"/>
+</svg>

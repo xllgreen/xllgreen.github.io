@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微信</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">微信</span>
+    </div>
+    <div class="window-body">
+      <div class="wechat-header">微信</div>
+      <div class="wechat-list">
+        <a class="chat-item" href="/ARGgame/her-old-laptop/apps/wechat-moments.html">
+          <div class="avatar" style="background:linear-gradient(135deg,#f9d423,#f83600);">圈</div>
+          <div class="info">
+            <div class="name">朋友圈</div>
+            <div class="last">她的朋友圈已经清空……</div>
+          </div>
+        </a>
+        <a class="chat-item" href="/ARGgame/her-old-laptop/apps/wechat-su.html">
+          <div class="avatar" style="background:linear-gradient(135deg,#f093fb,#a85ee5);">晴</div>
+          <div class="info">
+            <div class="name">晴天（论坛认识的）</div>
+            <div class="last">你最后那句话 到底是什么意思...</div>
+          </div>
+        </a>
+        <a class="chat-item" href="/ARGgame/her-old-laptop/apps/wechat-chen.html">
+          <div class="avatar" style="background:linear-gradient(135deg,#6b5b95,#9b8cb4);">陈</div>
+          <div class="info">
+            <div class="name">陈教授（导师）</div>
+            <div class="last">晚晚 老师一直关心你</div>
+          </div>
+        </a>
+        <a class="chat-item" href="/ARGgame/her-old-laptop/apps/wechat-zhou.html">
+          <div class="avatar" style="background:linear-gradient(135deg,#4a90e2,#357abd);">周</div>
+          <div class="info">
+            <div class="name">周明学长</div>
+            <div class="last">那个文件夹别删</div>
+          </div>
+        </a>
+        <a class="chat-item" href="/ARGgame/her-old-laptop/apps/wechat-mom.html">
+          <div class="avatar" style="background:linear-gradient(135deg,#ff9a9e,#fad0c4);">妈</div>
+          <div class="info">
+            <div class="name">妈妈</div>
+            <div class="last">6月14号答辩是吧？妈给你炖汤</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    // 没登录的话踢回登录页
+    if (!Game.unlocked('WECHAT_LOGIN')) {
+      location.href = '/ARGgame/her-old-laptop/puzzles/login-wechat.html';
+    }
+    Game.renderProgress();
+  </script>
+</body>
+</html>

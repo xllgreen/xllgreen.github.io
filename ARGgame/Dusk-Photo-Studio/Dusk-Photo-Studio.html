@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#4a392f">
+  <meta name="description" content="《暮光照相馆：未显影的第六张》——温馨治愈照片修复叙事解谜网页游戏。">
+  <link rel="icon" href="assets/ui/favicon.svg" type="image/svg+xml">
+  <title>暮光照相馆：未显影的第六张</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="guidance-fix.css">
+  <link rel="stylesheet" href="paywall.css">
+</head>
+<body>
+  <div id="toast-root" aria-live="polite"></div>
+  <main id="cover" class="cover-screen" aria-label="游戏封面">
+    <div class="cover-paper"></div>
+    <section class="cover-menu-panel">
+      <div class="cover-title-wrap">
+        <div class="moon-mark" aria-hidden="true">◉</div>
+        <h1>暮光照相馆</h1>
+        <p>未显影的第六张</p>
+      </div>
+      <nav class="main-menu" aria-label="主菜单">
+        <button id="start-btn" class="wood-btn primary">开始游戏</button>
+        <button id="continue-btn" class="wood-btn">继续游戏</button>
+        <button id="settings-btn" class="wood-btn">设置</button>
+        <button id="cover-audio-btn" class="wood-btn">音效：开</button>
+        <button id="album-btn" class="wood-btn">相册</button>
+        <button id="about-btn" class="wood-btn">关于</button>
+      </nav>
+      <p id="continue-note" class="menu-note">尚无胶片修复记录</p>
+      <div class="cover-footer">暮光与胶片 · 温和的谜题 · 多种明天</div>
+    </section>
+    <section class="cover-art-panel" aria-hidden="true">
+      <img src="assets/cover-art.webp" alt="">
+      <div class="rain-layer"></div>
+    </section>
+  </main>
+  <main id="game" class="game-screen is-hidden" aria-label="游戏主界面">
+    <header class="game-header">
+      <button id="home-btn" class="icon-btn" title="返回封面" aria-label="返回封面">⌂</button>
+      <div class="chapter-heading">
+        <span id="chapter-kicker">序章</span>
+        <strong id="chapter-title">重新对焦</strong>
+      </div>
+      <div class="header-progress">
+        <span id="night-progress">第 0 / 6 卷</span>
+        <span id="save-indicator" class="save-indicator">已保存</span>
+      </div>
+      <button id="journal-btn" class="icon-btn text-btn">暗房笔记</button>
+      <button id="support-btn" class="icon-btn text-btn">支持作者 1元</button>
+      <button id="game-audio-btn" class="icon-btn" title="切换音效" aria-label="切换音效">♪</button>
+      <button id="game-settings-btn" class="icon-btn" title="设置" aria-label="设置">⚙</button>
+    </header>
+    <div class="game-layout">
+      <section class="scene-panel" aria-label="照相馆场景">
+        <img class="scene-bg" src="assets/studio-scene.webp" alt="暮光中的旧照相馆">
+        <div id="scene-tint" class="scene-tint"></div>
+        <div class="scene-lights" aria-hidden="true"><i></i><i></i><i></i></div>
+        <button id="memory-hotspot" class="memory-hotspot" title="观察本夜的胶片标记">
+          <span>✦</span><b>胶片标记</b>
+        </button>
+        <div id="guest-card" class="guest-card">
+          <img id="guest-portrait" src="assets/characters/kada-camera.svg" alt="咔嗒">
+          <div><small id="guest-role">暗房引导</small><strong id="guest-name">咔嗒</strong></div>
+        </div>
+        <div id="environment-note" class="environment-note">夕光正从百叶窗缝里慢慢移动。</div>
+      </section>
+      <aside class="task-panel" aria-label="任务与谜题">
+        <div class="task-top">
+          <div>
+            <small>当前目标</small>
+            <h2 id="objective-title">校准旧相机</h2>
+          </div>
+          <button id="hint-btn" class="hint-main-btn">咔嗒提示</button>
+        </div>
+        <p id="objective-desc" class="objective-desc"></p>
+        <section id="task-guide" class="task-guide" aria-live="polite" hidden></section>
+        <div id="puzzle-root" class="puzzle-root"></div>
+        <div class="task-actions">
+          <button id="check-btn" class="action-btn primary">确认</button>
+          <button id="reset-puzzle-btn" class="action-btn secondary">重置本题</button>
+        </div>
+        <div class="chapter-meter">
+          <div><span>本章进度</span><b id="chapter-percent">0%</b></div>
+          <div class="meter"><i id="chapter-meter-fill"></i></div>
+        </div>
+      </aside>
+    </div>
+    <section id="dialogue-panel" class="dialogue-panel" aria-live="polite">
+      <img id="dialogue-portrait" src="assets/characters/kada-camera.svg" alt="">
+      <div class="dialogue-copy">
+        <div class="dialogue-speaker" id="dialogue-speaker">咔嗒</div>
+        <p id="dialogue-text">旧镜头有些发涩。先让三个距离重新清晰起来吧。</p>
+      </div>
+      <button id="dialogue-next" class="dialogue-next">继续 ›</button>
+    </section>
+  </main>
+
+  <div id="modal-root"></div>
+  <template id="modal-template">
+    <div class="modal-backdrop" role="presentation">
+      <section class="modal-card" role="dialog" aria-modal="true">
+        <button class="modal-close" aria-label="关闭">×</button>
+        <div class="modal-content"></div>
+      </section>
+    </div>
+  </template>
+
+  <script src="audio.js"></script>
+  <script src="paywall.js"></script>
+  <script src="game.js"></script>
+  <script src="guidance-fix.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>草稿箱</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .mail-view { padding: 24px 20px 80px; max-width: 680px; margin: 0 auto; }
+    .mail-view h2 { font-size: 20px; margin-bottom: 8px; }
+    .mail-view .meta {
+      font-size: 12px; color: #999; padding-bottom: 12px;
+      border-bottom: 1px solid #eee; margin-bottom: 20px;
+    }
+    .mail-view .body { font-size: 14px; line-height: 1.9; color: #333; }
+    .mail-view .body p { margin-bottom: 14px; }
+    .mail-view .draft-tag {
+      display: inline-block; background: #fff8e1; color: #8a6d3b;
+      padding: 2px 10px; border-radius: 10px; font-size: 11px;
+      margin-left: 8px; vertical-align: middle;
+    }
+    .mail-view .recipient {
+      background: #f5f5f7; padding: 12px 16px; border-radius: 6px;
+      margin-bottom: 20px; font-size: 13px;
+    }
+    .mail-view .recipient span { color: #999; margin-right: 8px; }
+    .mail-view .warning {
+      background: #fff0f3; border-left: 3px solid #fa5151;
+      padding: 12px 16px; margin: 16px 0; border-radius: 4px;
+      font-size: 13px; color: #c0392b; line-height: 1.7;
+    }
+    .mail-view .attachment {
+      background: #f0f7ff; padding: 12px 16px; border-radius: 6px;
+      margin-top: 16px; font-size: 13px; color: #007aff;
+      display: flex; align-items: center; gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/desktop.html">‹</a>
+      <span class="title">草稿箱</span>
+    </div>
+    <div class="window-body">
+      <div class="mail-view">
+        <h2>毕业材料 - 待发送 <span class="draft-tag">草稿</span></h2>
+        <div class="meta">2024年5月19日 23:47　最后编辑</div>
+
+        <div class="recipient">
+          <span>收件人：</span>教育部学术规范委员会 / X大学纪委<br>
+          <span>抄送：</span>周明 / 校园观察记者
+        </div>
+
+        <div class="body">
+          <p>各位领导、老师：</p>
+
+          <p>我是X大学物理系2021级研究生林晚。本邮件附件为我的导师陈XX教授长期数据造假的完整证据，包括原始实验记录、被修改的论文版本对照、以及与陈教授相关的另外一起事件——研究生张航溺亡案的相关材料。</p>
+
+          <p>张航学长生前曾向我透露，他掌握陈教授造假的证据。在他"意外"身亡后，所有材料从他的电脑中消失。我用了半年时间，重新整理了一份完整的证据链，存放在加密压缩包中。</p>
+
+          <p>我没敢在邮件正文里写明密钥。密钥藏在我电脑的深处，需要有人愿意花时间，一点一点把它找出来。</p>
+
+          <div class="warning">
+            ⚠️ 如果你正在看这封邮件，说明事情已经超出了我的控制。<br><br>
+            请完成我没能完成的事：找到加密压缩包，解开它，<br>
+            然后按下那个我已经设好的"发送"触发器。<br><br>
+            一旦触发，所有材料会自动发送到上面这些收件人。<br>
+            我没有办法亲手按下去，但你可以。
+          </div>
+
+          <p>所有线索都在这台电脑里。备忘录、聊天记录、相册、论文——它们会告诉你密钥在哪。<br><br>谢谢你愿意看到这里。<br><br>——林晚</p>
+
+          <div class="attachment">
+            <span style="font-size:24px;">📦</span>
+            <div>
+              <div>附件：毕业材料压缩包.zip（已加密）</div>
+              <div style="font-size:11px;color:#999;margin-top:2px;">解压密码见电脑深处</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/common.js"></script>
+  <script>
+    Game.log('/ARGgame/her-old-laptop/apps/▶ [邮箱] 访问 mail-key.html');
+    if (!Game.unlocked('MAIL_LOGIN')) {
+      Game.warn('/ARGgame/her-old-laptop/apps/  └ 未登录邮箱，重定向到 login-mail.html');
+      location.href = '/ARGgame/her-old-laptop/puzzles/login-mail.html';
+    } else {
+      Game.log('  └ 已登录，展示举报邮件草稿');
+      // 滚动到底部才标记已读，方便排查玩家是否真的看完了
+      let marked = false;
+      const onScroll = () => {
+        if (marked) return;
+        const sc = document.querySelector('.window-body');
+        if (sc && sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 50) {
+          marked = true;
+          Game.log('  └ ★ 玩家滚到底部，标记 KEY_MAIL 已读');
+          Game.mark('KEY_MAIL');
+        }
+      };
+      document.querySelector('.window-body').addEventListener('scroll', onScroll);
+      // 兜底：1.5s 后也标记（防极短屏）
+      setTimeout(() => {
+        if (!marked) {
+          Game.log('  └ 兜底标记 KEY_MAIL 已读');
+          Game.mark('KEY_MAIL');
+          marked = true;
+        }
+      }, 1500);
+
+      // 阶段性引导：看完举报信后，若还没碰过加密文件夹，给一条"我"的独白
+      if (!Game.unlocked('FILES_UNLOCK') && !sessionStorage.getItem('lw_mail_nudge')) {
+        sessionStorage.setItem('lw_mail_nudge', '1');
+        setTimeout(() => Game.monologue('「找到加密压缩包，解开它。」……访达「文稿」里那个加密的 zip，应该就是它。', 6000), 2200);
+      }
+    }
+    Game.renderProgress();
+  </script>
+</body>
+</html>

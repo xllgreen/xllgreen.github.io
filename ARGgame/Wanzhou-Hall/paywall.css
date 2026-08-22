@@ -1,0 +1,98 @@
+/** 《晚舟堂》一元自愿支持浮层；结构与交互沿用《松涛粮站》，配色调整为晚舟堂旧纸与药铺主题。 */
+html.paywall-open { overflow: hidden; }
+.paywall-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 16, 12, .72);
+  backdrop-filter: blur(7px);
+  opacity: 0;
+  transition: opacity .36s ease;
+}
+.paywall-overlay[hidden] { display: none !important; }
+.paywall-overlay.paywall-show { opacity: 1; }
+.paywall-overlay.paywall-closing { opacity: 0; }
+.paywall-card {
+  position: relative;
+  width: min(460px, 94vw);
+  max-height: min(92vh, 780px);
+  overflow-y: auto;
+  border: 1px solid rgba(126, 81, 43, .28);
+  border-radius: 20px;
+  background:
+    linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.02)),
+    linear-gradient(145deg,#f2e6c9,#d9c39a);
+  color: #30281f;
+  box-shadow: 0 25px 75px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.35);
+  transform: scale(.91) translateY(22px);
+  transition: transform .38s cubic-bezier(.34,1.56,.64,1);
+}
+.paywall-overlay.paywall-show .paywall-card { transform: scale(1) translateY(0); }
+.paywall-close {
+  position: absolute;
+  top: 10px;
+  right: 13px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(83, 54, 37, .08);
+  color: #6f5f50;
+  font: 28px/1 sans-serif;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease;
+}
+.paywall-close:hover { transform: rotate(90deg); background: rgba(83,54,37,.15); }
+.paywall-close:focus-visible,.paywall-btn:focus-visible { outline: 3px solid rgba(126,51,43,.45); outline-offset: 2px; }
+.paywall-card-inner { padding: 30px 28px 23px; }
+.paywall-header { text-align: center; margin-bottom: 18px; padding: 0 26px; }
+.paywall-title-row { display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:7px; }
+.paywall-heart { display:grid;place-items:center;width:28px;height:28px;border:1px solid rgba(126,51,43,.25);border-radius:50%;color:#7e332b;font-size:.72rem;animation:paywallBreath 1.8s ease-in-out infinite; }
+@keyframes paywallBreath { 50% { transform:scale(1.08); box-shadow:0 0 0 5px rgba(126,51,43,.06); } }
+.paywall-title { color:#46382a;font-size:1.42rem;font-weight:700;letter-spacing:.08em; }
+.paywall-subtitle { color:#806f5b;font-size:.78rem;line-height:1.6; }
+.paywall-body { display:flex;flex-direction:column;align-items:center;gap:15px; }
+.paywall-qr-wrapper { position:relative;width:132px;height:156px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 5px 22px rgba(55,39,25,.18); }
+.paywall-qr-img { width:100%;height:100%;object-fit:contain;display:block; }
+.paywall-qr-glow { position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 2px rgba(155,113,57,.2);pointer-events:none; }
+.paywall-qr-tip { margin-top:-7px;color:#827465;font: .72rem/1.5 var(--font-sans,"Microsoft YaHei",sans-serif);text-align:center; }
+.paywall-qr-tip strong { color:#1677ff; }
+.paywall-message { width:100%;text-align:center; }
+.paywall-message p { margin:0; }
+.paywall-msg-warm { color:#4d4938;font-weight:700;font-size:.94rem;margin-bottom:9px !important; }
+.paywall-msg-body { color:#5e5547;font-size:.83rem;line-height:1.9;margin-bottom:10px !important; }
+.paywall-msg-body strong { color:#7e332b; }
+.paywall-msg-cute { margin-bottom:9px !important;padding:9px 13px;border-radius:10px;background:rgba(82,107,85,.11);color:#59664f;font-size:.82rem;line-height:1.7; }
+.paywall-msg-warm2 { color:#786b5c;font-size:.8rem;line-height:1.7; }
+.paywall-footer { margin-top:18px;padding-top:15px;border-top:1px dashed rgba(92,70,48,.23); }
+.paywall-hint { display:flex;align-items:flex-start;gap:6px;margin-bottom:13px;color:#8b7d6d;font: .7rem/1.6 var(--font-sans,"Microsoft YaHei",sans-serif); }
+.paywall-hint-icon { flex:0 0 auto; }
+.paywall-btns { display:flex;gap:10px; }
+.paywall-btn { flex:1;padding:11px 13px;border-radius:10px;border:0;font:600 .84rem/1.35 var(--font-sans,"Microsoft YaHei",sans-serif);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease; }
+.paywall-btn-support { color:#fff7e6;background:linear-gradient(135deg,#7e332b,#a8753f);box-shadow:0 5px 15px rgba(126,51,43,.24); }
+.paywall-btn-support:hover { transform:translateY(-2px);box-shadow:0 8px 20px rgba(126,51,43,.33); }
+.paywall-btn-later { color:#756757;background:rgba(255,255,255,.4);border:1px solid rgba(97,73,49,.16); }
+.paywall-btn-later:hover { background:rgba(255,255,255,.65); }
+.paywall-studio { margin-top:13px;text-align:center;color:#9d8e7d;font-size:.75rem;font-weight:700;letter-spacing:.08em; }
+.paywall-toast { position:fixed;left:50%;bottom:28px;z-index:10001;max-width:min(90vw,620px);padding:12px 22px;border-radius:999px;background:rgba(82,107,85,.97);color:#fff;text-align:center;font:.86rem/1.5 var(--font-sans,"Microsoft YaHei",sans-serif);box-shadow:0 8px 28px rgba(0,0,0,.25);opacity:0;transform:translate(-50%,20px);transition:opacity .35s ease,transform .35s ease; }
+.paywall-toast.show { opacity:1;transform:translate(-50%,0); }
+#supportBtn { border-color:rgba(226,184,112,.42);background:rgba(155,113,57,.16); }
+#supportBtn:hover { background:rgba(155,113,57,.28); }
+#supportBtn.supported { border-color:rgba(109,153,104,.5);background:rgba(82,107,85,.3);color:#edf7df; }
+@media (max-width:480px) {
+  .paywall-overlay { padding:10px;align-items:flex-end; }
+  .paywall-card { width:100%;max-height:94vh;border-radius:18px 18px 10px 10px; }
+  .paywall-card-inner { padding:25px 17px 17px; }
+  .paywall-title { font-size:1.2rem; }
+  .paywall-qr-wrapper { width:116px;height:138px; }
+  .paywall-btns { flex-direction:column; }
+  .paywall-btn { width:100%; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .paywall-overlay,.paywall-card,.paywall-toast,.paywall-heart { transition-duration:.01ms!important;animation:none!important; }
+}

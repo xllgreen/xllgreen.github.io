@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#245ba5">
+  <meta name="description" content="第404楼：雾桥旧网 - 00年代旧电脑悬疑解谜游戏">
+  <title>第404楼：雾桥旧网</title>
+  <link rel="stylesheet" href="styles.css?v=2.1.0">
+</head>
+<body>
+  <noscript>本游戏需要启用 JavaScript。</noscript>
+  <div id="crt-noise" aria-hidden="true"></div>
+
+  <section id="boot" class="boot-screen">
+    <div id="story-stage" class="story-stage">
+      <div class="story-card">
+        <div class="story-date">2026 / 暑假 · 雾桥大学城</div>
+        <h1>第404楼：雾桥旧网</h1>
+        <p class="tagline">删掉的不是那条回帖，而是它原本从哪里来。</p>
+        <div class="story-copy">
+          <p>大学生小周在暑期二手市场淘来一台落满灰的旧电脑。摊主只说它曾属于一家倒闭的网吧，硬盘坏了很多年。</p>
+          <p>换过电源、清理灰尘后，机箱第一次亮起。侧面的旧标签写着：<b>蓝鲸网吧 · 17号机</b>。</p>
+        </div>
+        <div class="computer-preview" aria-hidden="true"><span class="preview-monitor"></span><span class="preview-tower"></span><span class="preview-light"></span></div>
+        <button id="power-on" class="xp-button primary">按下电源</button>
+        <p id="resume-note" class="boot-note" hidden>硬盘中检测到上次调查记录。登录后将从原位置继续。</p>
+        <p class="boot-note">建议使用耳机：雨声、机箱低鸣、硬盘寻道与界面反馈会随程序变化。全程无跳脸；可一键关闭全部声音与闪烁。所有机构、平台和联系方式均为虚构。</p>
+      </div>
+    </div>
+
+    <div id="post-stage" class="post-stage" hidden aria-live="polite">
+      <div class="bios-head">WQ-AWARD MODULAR BIOS v6.00PG</div>
+      <div class="bios-logo">ENERGY STAR<br><small>ALLY</small></div>
+      <div class="bios-lines" aria-label="电脑开机自检信息">
+        <p data-boot-line>Intel(R) Pentium(R) 4 CPU 2.40GHz</p>
+        <p data-boot-line>Memory Test: 524288K OK</p>
+        <p data-boot-line>Primary Master: ST380011A</p>
+        <p data-boot-line>Detecting IDE Drives ... IDE-03 FOUND</p>
+        <p data-boot-line>CMOS checksum error - Defaults loaded</p>
+        <p data-boot-line>Boot from HDD-0 ...</p>
+      </div>
+      <div class="bios-footer">Press DEL to enter SETUP　　08/07/2008-WQ-17</div>
+    </div>
+
+    <div id="login-stage" class="login-stage" hidden>
+      <header class="login-header"><b>WQ 家庭版</b><span>蓝鲸网吧 17号机</span></header>
+      <div class="login-body">
+        <section class="login-welcome">
+          <h2>欢迎使用</h2>
+          <p>若要开始，请单击用户并输入密码。</p>
+          <div class="case-sticker">
+            <b>机箱维修贴</b>
+            <span>重装日期：2008.08.07</span>
+            <span>本机编号：17</span>
+            <span>密码提示：月日＋机号（6位）</span>
+          </div>
+        </section>
+        <form id="login-form" class="login-account" autocomplete="off">
+          <div class="account-avatar" aria-hidden="true"><span></span></div>
+          <div class="account-fields">
+            <strong>Administrator</strong>
+            <label for="login-password">键入密码</label>
+            <div class="password-row"><input id="login-password" name="password" type="password" inputmode="numeric" maxlength="6" aria-describedby="login-error"><button type="submit" aria-label="登录">➜</button></div>
+            <p id="login-error" class="login-error" role="alert"></p>
+          </div>
+        </form>
+      </div>
+      <footer class="login-footer"><span>关闭计算机后，调查进度仍保存在这台电脑中。</span></footer>
+    </div>
+  </section>
+
+  <main id="desktop" class="desktop" hidden>
+    <div class="desktop-area">
+      <header class="system-bar" aria-label="调查控制栏">
+        <div class="brand-block"><span class="archive-mark">WQ</span><div><b>蓝鲸17号机 · 小周的旧电脑</b><small id="stage-label">序章 · 只读挂载</small></div></div>
+        <div class="progress-wrap" aria-label="调查进度"><span id="progress-bar"></span><em id="progress-text">0%</em></div>
+        <div class="toolbar">
+          <button id="hint-btn" class="tool-button">提示 <span id="hint-level">0/3</span></button>
+          <button id="support-btn" class="tool-button support-button">1元自愿支持</button>
+          <button id="notes-btn" class="icon-button" title="调查便签" aria-label="调查便签">▤</button>
+          <button id="sound-btn" class="icon-button" title="声音" aria-label="切换声音">♪</button>
+          <button id="settings-btn" class="icon-button" title="控制面板" aria-label="控制面板">⚙</button>
+          <button id="save-btn" class="icon-button" title="保存" aria-label="保存调查">▣</button>
+        </div>
+      </header>
+
+      <nav id="app-nav" class="app-nav desktop-icons" aria-label="调查程序">
+        <button data-app="case" class="nav-app desktop-shortcut"><span class="desktop-icon icon-case" aria-hidden="true"><i>▤</i></span><b>调查记录簿</b></button>
+        <button data-app="backend" class="nav-app desktop-shortcut"><span class="desktop-icon icon-backend" aria-hidden="true"><i>▰</i></span><b>蓝鲸后台</b></button>
+        <button data-app="tianya" class="nav-app desktop-shortcut"><span class="desktop-icon icon-tianya" aria-hidden="true"><i>天</i></span><b>天崖社区</b></button>
+        <button data-app="baidu" class="nav-app desktop-shortcut"><span class="desktop-icon icon-baidu" aria-hidden="true"><i>百</i></span><b>百渡帖吧</b></button>
+        <button data-app="blog" class="nav-app desktop-shortcut"><span class="desktop-icon icon-blog" aria-hidden="true"><i>新</i></span><b>新琅博园</b></button>
+        <button data-app="alumni" class="nav-app desktop-shortcut"><span class="desktop-icon icon-alumni" aria-hidden="true"><i>狐</i></span><b>狐搜校友录</b></button>
+        <button data-app="qq" class="nav-app desktop-shortcut"><span class="desktop-icon icon-qq" aria-hidden="true"><i>企</i></span><b>企鹅聊聊</b></button>
+        <button data-app="sms" class="nav-app desktop-shortcut"><span class="desktop-icon icon-sms" aria-hidden="true"><i>飞</i></span><b>飞讯短信</b></button>
+        <button data-app="mail" class="nav-app desktop-shortcut"><span class="desktop-icon icon-mail" aria-hidden="true"><i>壹</i></span><b>壹陆叁信箱</b></button>
+      </nav>
+
+      <nav class="system-icons" aria-label="系统图标">
+        <button data-system="computer" class="desktop-shortcut system-shortcut"><span class="desktop-icon icon-computer" aria-hidden="true"><i></i></span><b>我的电脑</b></button>
+        <button data-system="documents" class="desktop-shortcut system-shortcut"><span class="desktop-icon icon-documents" aria-hidden="true"><i></i></span><b>我的文档</b></button>
+        <button data-system="network" class="desktop-shortcut system-shortcut"><span class="desktop-icon icon-network" aria-hidden="true"><i></i></span><b>网上邻居</b></button>
+        <button data-system="recycle" class="desktop-shortcut system-shortcut"><span class="desktop-icon icon-recycle" aria-hidden="true"><i></i></span><b>回收站</b></button>
+      </nav>
+
+      <div id="desktop-welcome" class="desktop-welcome"><b>欢迎，Administrator</b><span>单击桌面图标打开程序。建议先查看“调查记录簿”。</span></div>
+
+      <section id="app-window" class="window-shell" hidden aria-label="程序窗口">
+        <div id="window-titlebar" class="window-titlebar">
+          <span id="window-icon">▤</span><b id="window-title">调查记录簿</b>
+          <div class="window-controls">
+            <button type="button" data-window-action="minimize" title="最小化" aria-label="最小化">—</button>
+            <button type="button" data-window-action="maximize" title="最大化" aria-label="最大化">□</button>
+            <button type="button" data-window-action="close" title="关闭" aria-label="关闭">×</button>
+          </div>
+        </div>
+        <div id="window-content" class="window-content" tabindex="-1"></div>
+      </section>
+
+      <aside id="notebook" class="notebook" hidden>
+        <div class="notebook-head"><b>调查便签</b><span id="evidence-count">0条已校验</span><button id="notes-close" aria-label="关闭便签">×</button></div>
+        <textarea id="notes" aria-label="调查便签" placeholder="把搜索词、日期、账号或矛盾记在这里。便签会自动保存，但不会自动变成证据。"></textarea>
+        <div class="ledger-mini">
+          <h3>本周目路线</h3><div id="route-badges" class="badge-row"><span>尚未挂载</span></div>
+          <h3>已校验记录</h3><ol id="evidence-list"><li>尚无。浏览和搜索不会自动记录。</li></ol>
+        </div>
+      </aside>
+
+      <div id="start-menu" class="start-menu" hidden>
+        <div class="start-user"><span class="start-avatar"></span><b>Administrator</b></div>
+        <div class="start-columns">
+          <div><button data-system="computer">我的电脑</button><button data-system="documents">我的文档</button><button data-app="case">调查记录簿</button><button data-start-action="settings">控制面板</button></div>
+          <div><button data-system="network">网上邻居</button><button data-system="recycle">回收站</button><button data-start-action="notes">记事本</button><button data-start-action="run">运行...</button></div>
+        </div>
+        <div class="start-footer"><button data-start-action="power">关闭计算机...</button></div>
+      </div>
+    </div>
+
+    <footer class="taskbar">
+      <button id="start-menu-btn" class="start-button" aria-expanded="false">▦ 开始</button>
+      <button id="task-button" class="task-button" hidden><span id="task-icon">▤</span><span id="task-name">调查记录簿</span></button>
+      <span class="task-spacer"></span>
+      <span class="tray-icon" aria-hidden="true">▥</span><span class="tray-icon" aria-hidden="true">♪</span><span id="system-time">2026-08-07 00:17</span>
+    </footer>
+  </main>
+
+  <div id="modal" class="modal-layer" hidden><div class="modal-card"><button class="modal-close" aria-label="关闭">×</button><div id="modal-content"></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js?v=2.1.0"></script>
+  <script src="apps.js?v=2.1.0"></script>
+  <script src="logic.js?v=2.1.0"></script>
+  <script src="game.js?v=2.1.0"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>——</title>
+  <link rel="stylesheet" href="../../ui/common.css" />
+</head>
+<body>
+  <main class="page" id="root" hidden>
+    <!-- 演出区：假消息 + 照片矛盾（克制，无 jump-scare） -->
+    <section id="scene">
+      <div class="faux-bar" style="margin:-1.5em -1.2em 1em">
+        <span class="faux-brand">谛听</span>
+        <span class="faux-url">来自：沈苒（已离线 5 小时 32 分）</span>
+      </div>
+      <div class="chat-msg her" id="fakeMsg"></div>
+      <div id="photoRow" hidden>
+        <img id="ritualPhoto" class="photo-mold" width="240" alt="一张沈苒发来的照片" />
+        <div class="photo-stamp">IMG_20260621_021103.jpg · 时间戳 02:11</div>
+      </div>
+      <div id="clues" hidden style="margin-top:1.5em"></div>
+    </section>
+
+    <!-- 阶段结束页 -->
+    <section id="endPage" hidden>
+      <h1 id="endTitle" class="will-flicker"></h1>
+      <div id="endSummary" class="readable mail-body"></div>
+      <hr style="margin:1.5em 0; border-color:rgba(255,255,255,0.1)" />
+      <p class="readable">存档已自动保存。你随时可以从启动器"继续游戏"回到此处。</p>
+      <p class="readable" style="margin-top:1em">
+        <a class="btn" href="/ARGgame/yuezhuangshan/yuezhuangshan.html">返回导航首页</a>
+      </p>
+      <p class="readable" style="opacity:0.5; margin-top:1.5em; font-size:0.85em">
+        —— 第一阶段纵向切片 · 完 ——<br/>
+        下一阶段预告：进入岳圣桩维护通道；与"半是沈苒、半是母体"的她周旋；面对最终的选择——提交、销毁，或成为容器。
+      </p>
+    </section>
+  </main>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

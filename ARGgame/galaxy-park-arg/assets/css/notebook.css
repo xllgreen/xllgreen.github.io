@@ -1,0 +1,350 @@
+.notebook-page {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(76, 61, 39, .04) 1px, transparent 1px) 0 0 / 100% 26px,
+    #e4dfd3;
+  color: #292820;
+  font-family: "Microsoft YaHei", SimSun, sans-serif;
+}
+
+.notebook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  padding: 27px max(24px, calc((100% - 1120px) / 2)) 22px;
+  border-bottom: 5px solid #293a46;
+  background: #f5f0e4;
+  box-shadow: 0 3px 12px rgba(51, 43, 31, .16);
+}
+
+.notebook-header p,
+.notebook-header h1 {
+  margin: 0;
+}
+
+.notebook-header p {
+  color: #977b48;
+  font: 10px/1.4 "Courier New", monospace;
+  letter-spacing: 4px;
+}
+
+.notebook-header h1 {
+  margin-top: 3px;
+  font-family: STSong, SimSun, serif;
+  font-size: 31px;
+  letter-spacing: 5px;
+}
+
+.notebook-header nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.notebook-header nav a,
+.notebook-header nav button {
+  padding: 7px 12px;
+  border: 1px solid #6d6a60;
+  background: transparent;
+  color: #333;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.notebook-main {
+  width: min(1120px, calc(100% - 36px));
+  margin: 28px auto 60px;
+}
+
+.notebook-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 22px;
+  padding: 21px 25px;
+  border: 1px solid #afa58f;
+  border-left: 7px solid #9e3f34;
+  background: rgba(255, 252, 244, .92);
+  box-shadow: 2px 3px 0 rgba(84, 71, 49, .12);
+}
+
+.notebook-label,
+.notebook-section-heading p {
+  margin: 0;
+  color: #997b45;
+  font: 10px/1.5 "Courier New", monospace;
+  letter-spacing: 3px;
+}
+
+.notebook-summary h2,
+.notebook-section-heading h2 {
+  margin: 2px 0 0;
+  color: #293a46;
+  font-size: 20px;
+}
+
+.notebook-progress-copy {
+  align-self: center;
+  color: #293a46;
+}
+
+.notebook-progress-copy strong {
+  font: 31px/1 "Courier New", monospace;
+}
+
+.notebook-progress-copy span {
+  color: #706c62;
+}
+
+.notebook-progress-track {
+  grid-column: 1 / -1;
+  height: 7px;
+  overflow: hidden;
+  background: #d8d1c2;
+}
+
+.notebook-progress-track span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #9e3f34;
+  transition: width .25s ease;
+}
+
+.notebook-summary > [data-progress-message] {
+  grid-column: 1 / -1;
+  margin: 2px 0 0;
+  color: #6d675d;
+  font-size: 12px;
+}
+
+.notebook-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, .65fr);
+  gap: 28px;
+  margin-top: 29px;
+  align-items: start;
+}
+
+.notebook-section-heading {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #293a46;
+}
+
+.case-list {
+  display: grid;
+  gap: 14px;
+}
+
+.case-card {
+  position: relative;
+  padding: 18px 20px 17px;
+  border: 1px solid #b7ad99;
+  background: #fffdf7;
+  box-shadow: 2px 3px 0 rgba(84, 71, 49, .1);
+}
+
+.case-card::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 27px;
+  width: 62px;
+  height: 13px;
+  background: rgba(207, 183, 126, .5);
+  transform: rotate(-1.8deg);
+}
+
+.case-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.case-card h3 {
+  margin: 0;
+  color: #263b49;
+  font-size: 17px;
+}
+
+.case-status {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border: 1px solid #9f9582;
+  color: #706858;
+  font-size: 11px;
+}
+
+.case-card.is-solved .case-status {
+  border-color: #5e7c6d;
+  background: #e5eee7;
+  color: #365b47;
+}
+
+.case-card.is-unknown {
+  min-height: 132px;
+  color: rgba(33, 39, 45, .52);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .72), rgba(237, 239, 238, .72)),
+    repeating-linear-gradient(0deg, transparent 0 22px, rgba(37, 45, 52, .04) 22px 23px);
+}
+
+.case-card.is-unknown::before {
+  background: #8c9295;
+}
+
+.case-card.is-unknown h3 {
+  color: #666d71;
+  letter-spacing: .32em;
+}
+
+.case-card.is-unknown p {
+  margin: 22px 0 2px;
+  font-size: 13px;
+}
+
+.notebook-direction {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px dashed #a7773b;
+  background: #fff7dc;
+}
+
+.notebook-direction-label {
+  color: #654818;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.notebook-direction button {
+  padding: 7px 13px;
+  border: 1px solid #8c611d;
+  background: #9b6b20;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.notebook-direction button:hover,
+.notebook-direction button:focus-visible {
+  background: #754d11;
+}
+
+.notebook-direction button:disabled {
+  cursor: default;
+  opacity: .72;
+}
+
+.notebook-direction p {
+  flex-basis: 100%;
+  overflow-wrap: anywhere;
+  margin: 0;
+  padding-top: 9px;
+  border-top: 1px solid rgba(140, 97, 29, .24);
+  color: #4d3c20;
+  font-size: 13px;
+}
+
+.case-source {
+  margin: 8px 0 12px;
+  color: #6f6a61;
+  font-size: 12px;
+}
+
+.case-hints {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed #c2b9a8;
+}
+
+.case-hints p {
+  margin: 6px 0 0;
+  padding: 7px 9px;
+  background: #f2ede2;
+  color: #4f4c45;
+  font-size: 13px;
+}
+
+.case-hints button {
+  padding: 4px 10px;
+  border: 1px solid #8f8470;
+  background: transparent;
+  color: #544c3f;
+  font-size: 12px;
+}
+
+.evidence-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidence-list li {
+  margin-bottom: 10px;
+  padding: 12px 13px;
+  border-left: 4px solid #99804d;
+  background: rgba(255, 252, 244, .86);
+  box-shadow: 1px 2px 0 rgba(84, 71, 49, .08);
+}
+
+.evidence-list strong,
+.evidence-list span {
+  display: block;
+}
+
+.evidence-list strong {
+  color: #2d414e;
+  font-size: 14px;
+}
+
+.evidence-list span {
+  margin-top: 3px;
+  color: #746f65;
+  font-size: 12px;
+}
+
+.evidence-list .empty-record {
+  border-left-color: #aaa397;
+  color: #777167;
+}
+
+@media (max-width: 720px) {
+  .notebook-header {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 20px 18px 16px;
+  }
+
+  .notebook-header nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .notebook-header nav a,
+  .notebook-header nav button {
+    text-align: center;
+  }
+
+  .notebook-main {
+    width: calc(100% - 24px);
+    margin-top: 18px;
+  }
+
+  .notebook-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .notebook-summary {
+    padding: 17px 16px;
+  }
+}

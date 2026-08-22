@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>林晚的旧电脑</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="lockscreen">
+    <!-- 顶部磨砂栏 -->
+    <div class="menubar">
+      <span></span>
+      <div class="right-icons">
+        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"><rect x="0.5" y="0.5" width="18" height="11" rx="2" stroke="rgba(255,255,255,0.6)"/><rect x="2" y="2" width="14" height="8" rx="1" fill="rgba(255,255,255,0.8)"/><rect x="19" y="4" width="1.5" height="4" rx="0.5" fill="rgba(255,255,255,0.6)"/></svg>
+        <svg width="16" height="12" viewBox="0 0 15 12" fill="rgba(255,255,255,0.8)"><path d="M7.5 2C4.5 2 1.8 3.2 0 5.1l1.2 1.2C2.7 4.7 5 3.8 7.5 3.8s4.8.9 6.3 2.5l1.2-1.2C13.2 3.2 10.5 2 7.5 2zM7.5 5.5c-1.9 0-3.6.7-4.9 1.9l1.2 1.2c.9-.9 2.3-1.5 3.7-1.5s2.8.6 3.7 1.5l1.2-1.2c-1.3-1.2-3-1.9-4.9-1.9zM7.5 9c-1 0-1.9.4-2.5 1l2.5 2 2.5-2c-.6-.6-1.5-1-2.5-1z"/></svg>
+      </div>
+    </div>
+
+    <!-- 顶部居中大时钟 -->
+    <div style="position:absolute; top:14%; left:50%; transform:translateX(-50%); z-index:1; text-align:center;">
+      <div style="font-size:128px; font-weight:200; color:#fff; letter-spacing:2px; text-shadow:0 4px 30px rgba(0,0,0,0.3); font-variant-numeric: tabular-nums; line-height:1;" id="time">--:--</div>
+      <div style="font-size:22px; color:rgba(255,255,255,0.9); margin-top:10px; letter-spacing:2px; font-weight:300;" id="date">--</div>
+    </div>
+
+    <!-- 右下角线索便签 -->
+    <div style="position:absolute; right:28px; bottom:80px;
+                background:rgba(255,248,225,0.82); padding:12px 14px;
+                font-family:'Georgia',serif; color:#5d4037; font-size:11px;
+                transform:rotate(-3deg); border-radius:2px;
+                box-shadow:2px 4px 12px rgba(0,0,0,0.3), inset 0 0 16px rgba(255,220,130,0.3);
+                pointer-events:none; z-index:2;">
+      <div style="font-weight:bold; margin-bottom:2px;">生日快乐 · 0307</div>
+      <div style="font-size:9px; color:#999; font-style:italic;">—— 给自己的备忘</div>
+    </div>
+
+    <!-- 头像 + 姓名 + 胶囊密码框 -->
+    <div class="avatar">
+      <svg viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 4C21.5 4 13 12.5 13 23c0 7.5 4.3 14 10.6 17.2-6.2 3-10.6 9.2-10.6 16.3V60h38v-3.5c0-7.1-4.4-13.3-10.6-16.3C46.7 37 51 30.5 51 23c0-10.5-8.5-19-19-19zm0 8c6.1 0 11 4.9 11 11s-4.9 11-11 11-11-4.9-11-11 4.9-11 11-11z"/>
+      </svg>
+    </div>
+    <div class="name">林晚</div>
+
+    <!-- 胶囊密码框 -->
+    <div class="pwd-wrap" id="pwdWrap">
+      <svg class="lock-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="16" height="11" rx="2" fill="rgba(255,255,255,0.9)"/>
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input
+        type="password"
+        class="pwd-input"
+        id="pwd"
+        placeholder="请输入密码"
+        maxlength="10"
+        autocomplete="off"
+      >
+      <button class="unlock-btn" id="btn">解锁</button>
+    </div>
+
+    <div class="err" id="err"></div>
+    <div class="hint">提示：注意看屏幕右下角</div>
+
+    <!-- 顶部小字：上次登录（仿 macOS 真实行为） -->
+    <div style="position:absolute; top:6px; left:50%; transform:translateX(-50%);
+                font-size:10px; color:rgba(255,255,255,0.42); letter-spacing:0.5px;
+                font-family:'SF Mono','Menlo',monospace; pointer-events:none; z-index:1;">
+      上次登录：2024-06-19 22:14 · 来源：陈正明
+    </div>
+  </div>
+
+  <script src="assets/js/common.js"></script>
+  <script>
+    // 从开场白 finishIntro 过来的就直接显示桌面
+    if (!sessionStorage.getItem('lw_from_intro')) {
+      location.href = '/ARGgame/her-old-laptop/intro.html';
+    } else {
+      sessionStorage.removeItem('lw_from_intro');
+    }
+
+    // 实时时间
+    function tick() {
+      const d = new Date();
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      const wd = ['日','一','二','三','四','五','六'][d.getDay()];
+      const M = String(d.getMonth() + 1).padStart(2, '0');
+      const D = String(d.getDate()).padStart(2, '0');
+      const t = document.getElementById('time');
+      const dt = document.getElementById('date');
+      if (t) t.textContent = `${hh}:${mm}`;
+      if (dt) dt.textContent = `${M}月${D}日 星期${wd}`;
+    }
+    tick();
+    setInterval(tick, 10000);
+
+    // 密码校验（回车 + 点击解锁按钮）
+    const input = document.getElementById('pwd');
+    const btn = document.getElementById('btn');
+    const err = document.getElementById('err');
+
+    function submit() {
+      Game.log('▶ 进入锁屏页校验流程');
+      Game.verify(input.value, 'boot', '锁屏', () => {
+        Game.mark('BOOT');
+        Game.toast('解锁成功');
+        setTimeout(() => location.href = '/ARGgame/her-old-laptop/desktop.html', 600);
+      }, (failN) => {
+        if (failN === 3) Game.monologue('右下角那张便签……「生日快乐 · 0307」。是她的生日吧。', 5000);
+        err.textContent = failN >= 3 ? '密码错误（已错 ' + failN + ' 次）' : '密码错误';
+        input.value = '';
+        const wrap = document.getElementById('pwdWrap');
+        wrap.classList.add('shake');
+        setTimeout(() => {
+          wrap.classList.remove('shake');
+          err.textContent = '';
+        }, 500);
+        input.focus();
+      });
+    }
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submit();
+    });
+    btn.addEventListener('click', submit);
+    input.focus();
+  </script>
+</body>
+</html>

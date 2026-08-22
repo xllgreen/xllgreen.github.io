@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冥婚簿 · 续 —— 江底祭台</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#06080a;color:#a8c0c8;font-family:"Noto Serif SC","STSong","SimSun",serif;overflow-y:auto;min-height:100vh}
+.fog{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 40%,rgba(15,40,60,0.3) 0%,rgba(6,8,10,1) 70%);pointer-events:none}
+.gold-glow{position:fixed;top:30%;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(180,140,40,0.06) 0%,transparent 60%);animation:goldPulse 4s ease-in-out infinite;pointer-events:none}
+@keyframes goldPulse{0%,100%{opacity:0.5;transform:translateX(-50%) scale(1)}50%{opacity:0.8;transform:translateX(-50%) scale(1.1)}}
+.water-ripple{position:fixed;inset:0;z-index:0;background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(20,50,70,0.02) 4px,rgba(20,50,70,0.02) 8px);pointer-events:none;animation:ripple 10s linear infinite}
+@keyframes ripple{from{background-position:0 0}to{background-position:0 80px}}
+
+.container{position:relative;z-index:10;max-width:760px;margin:0 auto;padding:30px 20px 60px}
+.back-link{position:fixed;top:20px;left:20px;z-index:20;color:#3a5a6a;font-size:13px;text-decoration:none;letter-spacing:2px;border:1px solid #152530;padding:6px 16px;border-radius:4px;transition:all 0.3s}
+.back-link:hover{border-color:#3a5a6a;color:#6a9dad}
+
+.page-title{font-size:28px;letter-spacing:8px;color:#1a5060;text-align:center;margin-bottom:8px;text-shadow:0 0 20px rgba(20,80,100,0.4)}
+.page-sub{font-size:12px;color:#2a4a50;text-align:center;letter-spacing:4px;margin-bottom:30px}
+
+.scene-text{color:#6a8a90;font-size:14px;line-height:2.2;margin-bottom:18px;letter-spacing:1px}
+.highlight{color:#59c5b0}
+.gold{color:#c5a059}
+.red{color:#8b3030}
+.dim{color:#3a5a60;font-size:12px}
+
+.inner-thought{background:linear-gradient(90deg,transparent,rgba(20,80,100,0.08),transparent);padding:18px 30px;margin:25px 0;font-size:14px;color:#608090;line-height:2.2;letter-spacing:1px;text-align:center;font-style:italic;border-top:1px solid rgba(20,80,100,0.15);border-bottom:1px solid rgba(20,80,100,0.15)}
+.inner-thought .voice{color:#59c5b0;font-style:normal;font-weight:bold;letter-spacing:2px}
+
+/* 分段叙述 */
+.story-segment{background:rgba(10,15,18,0.8);border:1px solid #152530;border-radius:4px;padding:25px;margin:20px 0;display:none}
+.story-segment.show{display:block;animation:fadeIn 1s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.story-segment .seg-title{font-size:13px;color:#59c5b0;letter-spacing:3px;margin-bottom:12px;text-align:center;font-weight:bold}
+.story-segment .seg-text{font-size:14px;color:#8aa0a8;line-height:2.2;letter-spacing:1px}
+.story-segment .seg-text .speaker{color:#c5a059;font-weight:bold}
+
+/* 选择 */
+.choice-section{background:rgba(12,18,22,0.8);border:1px solid #1a3040;border-radius:4px;padding:25px;margin:20px 0;text-align:center;display:none}
+.choice-section.show{display:block;animation:fadeIn 0.8s}
+.choice-prompt{font-size:14px;color:#8aa0a8;letter-spacing:1px;margin-bottom:18px;line-height:2.2}
+.choice-options{display:flex;flex-direction:column;gap:10px;max-width:450px;margin:0 auto}
+.choice-btn{padding:14px 22px;background:rgba(15,25,30,0.7);border:1px solid #2a4050;color:#7a9da8;font-family:inherit;font-size:13px;letter-spacing:1px;cursor:pointer;transition:all 0.3s;border-radius:4px;text-align:left;line-height:1.8}
+.choice-btn:hover{border-color:#3a7a8a;color:#59c5b0;background:rgba(20,35,42,0.8)}
+.choice-btn .hint{font-size:11px;color:#3a5a60;margin-top:4px;display:block}
+
+/* 结局 */
+.ending{display:none;margin-top:30px}
+.ending.show{display:block;animation:fadeIn 2s}
+.ending-box{background:linear-gradient(135deg,rgba(15,25,30,0.95),rgba(8,12,15,0.98));border:1px solid #1a4050;padding:40px 35px;border-radius:4px;margin-bottom:20px}
+.ending-title{font-size:24px;letter-spacing:8px;text-align:center;margin-bottom:8px}
+.ending-title.good{color:#59c5b0;text-shadow:0 0 20px rgba(89,197,176,0.3)}
+.ending-title.neutral{color:#c5a059;text-shadow:0 0 20px rgba(197,160,89,0.3)}
+.ending-title.bad{color:#8b3030;text-shadow:0 0 20px rgba(139,48,48,0.3)}
+.ending-sub{font-size:12px;color:#3a5a60;text-align:center;letter-spacing:4px;margin-bottom:25px}
+.ending-text{font-size:14px;color:#8aa0a8;line-height:2.4;letter-spacing:1px;margin-bottom:15px}
+.ending-text .gold{color:#c5a059}
+.ending-text .red{color:#8b3030}
+.ending-text .highlight{color:#59c5b0}
+
+/* 悬念结尾 */
+.cliffhanger{background:linear-gradient(135deg,rgba(20,10,10,0.9),rgba(10,5,5,0.98));border:1px solid #3a1515;padding:35px;border-radius:4px;margin-top:25px;display:none}
+.cliffhanger.show{display:block;animation:fadeIn 2s}
+.cliffhanger-label{font-size:11px;color:#5a2020;letter-spacing:6px;text-align:center;margin-bottom:15px}
+.cliffhanger-text{font-size:14px;color:#8a6060;line-height:2.4;letter-spacing:1px;text-align:center}
+.cliffhanger-text .ominous{color:#8b3030;font-weight:bold}
+.cliffhanger-text .mystery{color:#6a4a4a;font-style:italic}
+
+/* 最终悬念 */
+.final-mystery{background:rgba(5,3,3,0.95);border:1px solid #2a1010;padding:30px;border-radius:4px;margin-top:20px;text-align:center;display:none}
+.final-mystery.show{display:block;animation:fadeIn 3s}
+.final-mystery-text{font-size:16px;color:#5a3030;line-height:2.6;letter-spacing:2px}
+.final-mystery-text .blood{color:#8b3030}
+.final-teaser{font-size:12px;color:#3a2020;letter-spacing:3px;margin-top:20px;font-style:italic}
+
+/* 按钮 */
+.restart-link{display:block;margin-top:25px;padding:14px 30px;background:rgba(20,80,100,0.1);border:1px solid #1a5060;color:#59c5b0;font-family:inherit;font-size:15px;letter-spacing:4px;cursor:pointer;text-align:center;text-decoration:none;transition:all 0.4s;border-radius:4px}
+.restart-link:hover{background:rgba(20,80,100,0.2);box-shadow:0 0 20px rgba(20,80,100,0.3)}
+
+.progress-bar{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.progress-dot{width:10px;height:10px;border-radius:50%;background:#152530;transition:all 0.5s}
+.progress-dot.done{background:#1a5060;box-shadow:0 0 8px rgba(20,80,100,0.5)}
+.progress-dot.current{background:#59c5b0;box-shadow:0 0 12px rgba(89,197,176,0.5);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(6,12,15,0.95);border:1px solid #3a5a6a;padding:20px 40px;color:#59c5b0;font-size:15px;letter-spacing:3px;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.5s;border-radius:4px}
+.toast.show{opacity:1}
+
+/* 石碑互动 */
+.tablet-interact{background:rgba(8,12,15,0.8);border:1px solid #1a3040;border-radius:4px;padding:30px;margin:20px 0;text-align:center;display:none}
+.tablet-interact.show{display:block;animation:fadeIn 0.8s}
+.tablet-title{font-size:16px;color:#c5a059;letter-spacing:4px;margin-bottom:12px}
+.tablet-desc{font-size:13px;color:#5a7a80;margin-bottom:20px;line-height:1.8}
+.tablet-glyphs{font-size:28px;color:#8b7040;letter-spacing:8px;margin:20px 0;font-family:"Noto Serif SC",serif}
+</style>
+</head>
+<body>
+<div class="fog"></div>
+<div class="gold-glow"></div>
+<div class="water-ripple"></div>
+
+<a href="well-passage.html" class="back-link">← 返回暗道</a>
+
+<div class="container">
+
+<div class="progress-bar">
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot done"></span>
+<span class="progress-dot current"></span>
+</div>
+
+<h1 class="page-title">江底祭台</h1>
+<p class="page-sub">—— 钱塘江底 · 丑时三刻 ——</p>
+
+<!-- ===== 第一幕：到达 ===== -->
+<div class="story-segment show" id="seg1">
+<div class="seg-title">—— 江底祭台 ——</div>
+<div class="seg-text">
+<p>暗道尽头豁然开朗。你踏入了一个巨大的天然岩洞——不，应该说是一个被江水淹没又被人工排干的<span class="highlight">地下空间</span>。</p>
+<p>头顶是拱形的岩壁，渗出的水滴在火光中闪烁如星。洞穴中央，一座<span class="gold">青石祭台</span>拔地而起，台上绑着一根锈迹斑斑的铁柱。祭台四周的地面上，刻满了密密麻麻的古篆符文，形成一个巨大的圆形阵法。</p>
+<p>而祭台之上——</p>
+<p>一个白衣女子被铁链缚在铁柱上，嫁衣凌乱，面容苍白却尚有气息。<span class="highlight">方如月</span>还活着。</p>
+<p>祭台对面，一个身穿玄色长袍的男人正背对着你，双手按在祭台后方的一块<span class="gold">黑色石碑</span>上。石碑表面流动着诡异的金色纹路，如同活物的血管。</p>
+<p><span class="speaker">沈明远</span>头也不回，声音在空旷的洞穴中回荡：</p>
+<p style="color:#c5a059">"御史大人，你来得比我预想的早。"</p>
+<p>他缓缓转身，面容清瘦，眼神中透着一种令人不安的平静。</p>
+<p style="color:#c5a059">"但你来得太晚了。碑已经醒了。"</p>
+</div>
+</div>
+
+<!-- 主角内心独白 -->
+<div class="inner-thought">
+<span class="voice">萧砚</span> 盯着那块石碑，瞳孔骤缩：<br>
+「金色鳞光……和十五年前江陵渡口一模一样。那不是什么河伯。那是……」
+</div>
+
+<!-- ===== 第二幕：对峙 ===== -->
+<div class="story-segment" id="seg2">
+<div class="seg-title">—— 对 峙 ——</div>
+<div class="seg-text">
+<p><span class="speaker">萧砚</span>："放开方如月。"</p>
+<p><span class="speaker">沈明远</span>轻笑一声："放开她？大人可知道，这块碑已经沉睡了两百年？若不以处女之血祭之，它今夜就会完全苏醒。届时钱塘江底裂开，江水倒灌，整个钱塘城都会化为泽国。"</p>
+<p>他走近一步："我父亲不懂。他以为毁掉石碑就能终结一切。可石碑一旦被毁，封印在水魅身上的束缚也会随之消散。到时候死的不是一个人，而是<span class="red">一城的人</span>。"</p>
+<p><span class="speaker">萧砚</span>："所以你杀了你父亲？"</p>
+<p>沈明远沉默片刻，眼中闪过一丝痛苦："他逼我的。他要毁碑，我拦他……我们争执间，他的头撞上了供桌的角。我没有想杀他。但人已经死了，祭祀不能停。"</p>
+<p>他看向方如月，语气冰冷："她是方家的女儿。方家当年立了约，轮到方家出人，就该方家出人。这是祖辈的誓言。"</p>
+<p>方如月在铁柱上微微睁开眼，虚弱地望着你。她的嘴唇翕动，似乎在说什么。</p>
+<p>你听见她说的是——<span class="red">"石碑……背面……"</span></p>
+</div>
+</div>
+
+<!-- ===== 选择一 ===== -->
+<div class="choice-section" id="choice1">
+<div class="choice-prompt">
+沈明远的手正按在石碑上，金色的纹路越来越亮。方如月虚弱地示意你去看石碑的背面。<br><br>
+你必须做出选择——
+</div>
+<div class="choice-options">
+<button class="choice-btn" onclick="makeChoice1('attack')">
+直接冲向祭台，制服沈明远，救下方如月。
+<span class="hint">风险：石碑可能在你制服他之前完全苏醒</span>
+</button>
+<button class="choice-btn" onclick="makeChoice1('tablet')">
+绕到石碑背面，查看方如月所说的秘密。
+<span class="hint">风险：可能来不及救方如月</span>
+</button>
+<button class="choice-btn" onclick="makeChoice1('talk')">
+"沈明远，你父亲临死前说了一句话——'不可再祭'。你确定他错了吗？"
+<span class="hint">尝试说服沈明远</span>
+</button>
+</div>
+</div>
+
+<!-- ===== 分支剧情 ===== -->
+<div class="story-segment" id="seg3_attack">
+<div class="seg-title">—— 搏 斗 ——</div>
+<div class="seg-text">
+<p>你拔出腰间佩刀，冲向祭台。沈明远反应极快，侧身闪避，同时从袖中抽出一柄短刃。</p>
+<p>两人在祭台旁短兵相接。沈明远虽然清瘦，身手却极为敏捷——他显然早有准备。</p>
+<p>交手十余招后，你抓住一个破绽，一刀背击中他的手腕，短刃落地。你将他按倒在祭台上。</p>
+<p>但就在这时，石碑上的金色纹路突然暴涨——方才的搏斗中，沈明远的血溅在了碑面上。</p>
+<p><span class="red">血祭已成。碑……醒了。</span></p>
+</div>
+</div>
+
+<div class="story-segment" id="seg3_tablet">
+<div class="seg-title">—— 石碑背面 ——</div>
+<div class="seg-text">
+<p>你没有理会沈明远，而是快速绕到石碑后方。方如月不会无缘无故让你看这里——她一定发现了什么。</p>
+<p>石碑背面没有金色纹路，取而代之的是密密麻麻的古篆刻文。你举起火折子，辨认出其中几行——</p>
+<p style="color:#c5a059;text-align:center;letter-spacing:2px;margin:15px 0">
+"此碑非一。九州之下，共立<span class="gold">九碑</span>。<br>
+镇九渊水魅，各据一方。<br>
+若有一碑毁，则一渊水魅出；<br>
+若<span class="red">九碑尽毁</span>，则天下大乱。"
+</p>
+<p>你的手不由自主地颤抖起来。这块石碑——不是唯一的。钱塘江底的水魅，只是<span class="highlight">九个</span>之一。</p>
+<p>碑背还有一行小字，字迹较新，像是后来刻上去的："永乐十五年，三家得此碑，方知天下尚有八碑。陆平川建议献祭养魅，以碑为饵，徐图九碑。三家从之。"</p>
+<p>原来如此。三家并非只是为一己私利祭祀水魅——他们知道<span class="red">还有八块石碑</span>，还有八个水魅。他们用活祭维持这块碑的封印，同时也是在研究如何控制碑中的力量。</p>
+<p>但这一切，沈文忠不知道。他只看到了眼前的杀戮，却没看到碑背的秘密。</p>
+<p>沈明远在你身后冷冷开口：<span class="speaker">"现在你明白了？我父亲要毁碑，可碑毁则魅出。我不是不想停，是<span class="red">停不了</span>。"</span></p>
+</div>
+</div>
+
+<div class="story-segment" id="seg3_talk">
+<div class="seg-title">—— 言 语 交 锋 ——</div>
+<div class="seg-text">
+<p><span class="speaker">萧砚</span>："沈明远，你父亲不是蠢人。他若知道毁碑会放出魅，你觉得他还会去毁吗？"</p>
+<p>沈明远动作一顿。</p>
+<p><span class="speaker">萧砚</span>："他临死前说'不可再祭'，不是因为他不知道后果，而是因为他知道——祭祀本身也在喂养水魅。每祭一次，碑上的金色纹路就亮一分。你在续命，也在催命。"</p>
+<p>沈明远的手从石碑上缓缓放下。他转过身，直视你的眼睛。</p>
+<p><span class="speaker">沈明远</span>："……你怎么知道？"</p>
+<p><span class="speaker">萧砚</span>："因为我见过。十五年前，江陵渡口。那里的水魅没有石碑镇压，但它一样需要祭品。它吞噬祭品后会变强，而不是安分。你们的祭祀，从来就不是在镇压它，而是在<span class="red">养肥它</span>。"</p>
+<p>洞穴陷入死寂。石碑上的金色纹路微微闪烁，仿佛在回应你们的对话。</p>
+<p>沈明远低头看着自己的双手，声音沙哑："那……我父亲是对的？"</p>
+</div>
+</div>
+
+<!-- ===== 选择二 ===== -->
+<div class="choice-section" id="choice2">
+<div class="choice-prompt">
+无论先前发生了什么，石碑上的金色纹路都在持续变亮。<span class="red">水魅正在苏醒。</span><br><br>
+方如月仍被绑在祭台上。沈明远的态度因你的行动而改变。<br><br>
+此刻你必须——
+</div>
+<div class="choice-options">
+<button class="choice-btn" onclick="makeChoice2('destroy')">
+无论代价如何，毁掉石碑。水魅苏醒也要赌一把。
+<span class="hint">高风险：可能释放水魅</span>
+</button>
+<button class="choice-btn" onclick="makeChoice2('seal')">
+利用祭台上的符文阵法，重新封印石碑。需要方如月的血——但不必取她性命。
+<span class="hint">中庸之道：以血为引，重铸封印</span>
+</button>
+<button class="choice-btn" onclick="makeChoice2('wait')">
+先救下方如月，带她离开。石碑之事，来日方长。
+<span class="hint">保守：保全性命，但隐患犹存</span>
+</button>
+</div>
+</div>
+
+<!-- ===== 结局 ===== -->
+<div class="ending" id="ending">
+<div class="ending-box">
+<h2 class="ending-title" id="endingTitle"></h2>
+<p class="ending-sub" id="endingSub"></p>
+<div class="ending-text" id="endingText"></div>
+</div>
+
+<!-- 悬念区域 -->
+<div class="cliffhanger" id="cliffhanger">
+<div class="cliffhanger-label">—— 尾 声 ——</div>
+<div class="cliffhanger-text" id="cliffhangerText"></div>
+</div>
+
+<!-- 最终悬念 -->
+<div class="final-mystery" id="finalMystery">
+<div class="final-mystery-text" id="finalMysteryText"></div>
+<p class="final-teaser" id="finalTeaser"></p>
+</div>
+
+<a href="backyard.html" class="restart-link">重新开始</a>
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ 游戏状态 ============
+let choice1Made = null;
+let choice2Made = null;
+
+// ============ 流程控制 ============
+function showSegment(id) {
+document.getElementById(id).classList.add('show');
+document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+function showChoice(id) {
+document.getElementById(id).classList.add('show');
+document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============ 第一选择 ============
+function makeChoice1(choice) {
+choice1Made = choice;
+document.getElementById('choice1').classList.remove('show');
+
+setTimeout(() => {
+if (choice === 'attack') {
+showSegment('seg3_attack');
+setTimeout(() => showChoice('choice2'), 2000);
+} else if (choice === 'tablet') {
+showSegment('seg3_tablet');
+setTimeout(() => showChoice('choice2'), 2000);
+} else if (choice === 'talk') {
+showSegment('seg3_talk');
+setTimeout(() => showChoice('choice2'), 2000);
+}
+}, 800);
+}
+
+// ============ 第二选择 ============
+function makeChoice2(choice) {
+choice2Made = choice;
+document.getElementById('choice2').classList.remove('show');
+
+setTimeout(() => {
+showEnding();
+}, 800);
+}
+
+// ============ 结局生成 ============
+function showEnding() {
+let title, sub, text, cliffText, mysteryText, teaser;
+let titleClass = 'good';
+
+// 根据两个选择组合出不同结局
+if (choice2Made === 'seal') {
+// 最佳结局：重铸封印
+titleClass = 'good';
+title = '重铸封印';
+sub = '—— 结局一 · 以血为引 ——';
+text = 
+'<p>你做出了选择。让沈明远协助你，将方如月从铁柱上解下。她虚弱地靠在祭台上，却咬着牙点了点头。</p>' +
+'<p>"只需几滴血，"你翻开祭录中记载的封印之法，"以方家之血为引，重铸石碑封印。不需要你的命。"</p>' +
+'<p>方如月咬破指尖，将血滴在石碑正面的阵法中央。金色的纹路像是被注入了什么，先是暴涨，然后缓缓收敛。</p>' +
+'<p>石碑最终恢复了沉寂的黑色。水魅的呼吸声消失了。洞穴中只剩下水滴落下的回响。</p>' +
+'<p>沈明远跪倒在石碑前，久久不语。最后他说："我会去官府自首。杀父之罪，我认。"</p>' +
+'<p>你扶起方如月，三人沿暗道返回。天将破晓，沈府的灯笼在晨雾中渐渐熄灭。</p>' +
+'<p>方如月在你身后轻声说："谢谢。"</p>' +
+'<p>你没有回头。你听见自己的声音比想象中平静许多："不用谢。我只是……做了十五年前没人替我做的事。"</p>';
+
+cliffText = 
+'案件了结后，你将石碑背面的秘密呈报朝廷。圣上震怒，命你彻查<span class="ominous">"九碑之事"</span>。<br><br>' +
+'三日后，你收到一封无名信函。信中只有一行字：<br><br>' +
+'<span class="ominous">"钱塘碑只是其一。其余八碑，分镇于九江、洞庭、鄱阳、洪泽、太湖、云梦、洛水、渭水之下。每碑之下，各有一族守碑。守碑者，亦祭魅者。"</span><br><br>' +
+'信末盖着一枚朱印——<span class="ominous">"渊渟"</span>。<br><br>' +
+'<span class="mystery">你从未听过这个名字。但你的直觉告诉你，这封信的寄出者，知道得比你多得多。</span>';
+
+mysteryText = 
+'你翻开方如月的手记最后一页。那一页的字迹你先前没有看清——不是方如月写的。<br><br>' +
+'是另一种笔迹，苍劲而古拙，与石碑背面的刻文如出一辙：<br><br>' +
+'<span class="blood">"九碑非镇压之器，乃豢养之笼。<br>养魅者，非三家，非九族——<br>乃碑中之物自养自也。<br>待九魅皆醒，则笼碎而天下溺。"</span><br><br>' +
+'<span class="blood">"吾已沉眠太久。是时候让世人知道真相了。"</span>';
+
+teaser = '—— 冥婚簿 · 续 ——  第一个故事 · 完 ——';
+
+} else if (choice2Made === 'destroy') {
+// 高风险结局：毁碑
+titleClass = 'neutral';
+title = '碎碑之人';
+sub = '—— 结局二 · 赌注 ——';
+text = 
+'<p>你挥刀斩向石碑。刀锋触及碑面的瞬间，一道金色光芒炸裂开来，将你震退数步。</p>' +
+'<p>石碑从中央裂开，金色纹路如同断裂的血管，光芒四散。一股巨大的力量从裂缝中涌出——</p>' +
+'<p><span class="red">水魅脱困了。</span></p>' +
+'<p>但出乎你意料的是，水魅并没有立刻暴起伤人。它化作一团金色的雾气，在洞穴中盘旋片刻，然后——<span class="highlight">向着江底深处游去</span>，消失在黑暗中。</p>' +
+'<p>方如月虚弱地笑了："它……走了？"</p>' +
+'<p>你望着水魅消失的方向，心中却没有丝毫轻松。你见过那种金色鳞光。你知道水魅不会无缘无故离开。</p>' +
+'<p>沈明远瘫坐在碎裂的石碑旁，喃喃自语："它走了……它真的走了……也许父亲是对的……"</p>' +
+'<p>你救下了方如月，毁掉了石碑。但你知道，这并不是结束。';
+
+cliffText = 
+'三日后，钱塘城安然无恙。你以为赌赢了。<br><br>' +
+'但第七日清晨，你收到来自<span class="ominous">九江</span>的急报：<br><br>' +
+'<span class="ominous">"九江江底裂开一道缝隙，金色雾气涌出。沿岸三村村民尽数失踪。"</span><br><br>' +
+'你猛然想起石碑背面的文字——<span class="ominous">"若有一碑毁，则一渊水魅出。"</span><br><br>' +
+'你毁了钱塘的碑。钱塘的水魅走了。但它去了哪里？<br><br>' +
+'<span class="mystery">它去找它的同类了。九碑相连，一碑碎，则余碑皆动。</span>';
+
+mysteryText = 
+'当夜，你在驿馆中辗转难眠。窗外忽然传来一阵轻微的响动。<br><br>' +
+'你推窗望去，院中空无一人。但石桌上多了一样东西——<br><br>' +
+'一块<span class="blood">残破的石碑碎片</span>，与你在钱塘江底砸碎的那块，材质一模一样。<br><br>' +
+'碎片背面刻着两个字：<br><br>' +
+'<span class="blood" style="font-size:24px;letter-spacing:6px">渊 渟</span><br><br>' +
+'你握紧碎片，指尖传来一阵冰凉的震颤。那不是石头的温度。<br><br>' +
+'<span class="blood">那是活物的脉搏。</span>';
+
+teaser = '—— 冥婚簿 · 续 ——  第一个故事 · 完 ——';
+
+} else {
+// 保守结局：先离开
+titleClass = 'neutral';
+title = '来日方长';
+sub = '—— 结局三 · 隐患 ——';
+text = 
+'<p>你斩断方如月身上的铁链，将她背起。沈明远没有阻拦你，他只是站在石碑前，像一尊雕塑。</p>' +
+'<p>"你走吧，"他说，声音空洞，"我留在这里。碑不能没人守。"</p>' +
+'<p>你没有回头。你背着方如月，沿暗道返回。身后，石碑上的金色纹路依然在闪烁，像一只永远不会闭上的眼睛。</p>' +
+'<p>三天后，方如月在你的护送下回到了方家。她向朝廷呈上了证词，三家两百年来的罪行终于大白于天下。沈明远被捕入狱，秋后问斩。</p>' +
+'<p>但石碑……仍然在江底。金色纹路仍在闪烁。没有人知道它何时会完全苏醒。</p>' +
+'<p>你在奏折中写道："钱塘江底石碑，臣建议由朝廷派专人看守，另寻彻底镇压之法。"</p>' +
+'<p>圣上准奏。但你知道，这不过是权宜之计。';
+
+cliffText = 
+'一个月后，你奉命巡查<span class="ominous">太湖</span>水利。<br><br>' +
+'在太湖深处的一座荒岛上，你发现了一座废弃的祠堂。祠堂的结构与沈家祠堂几乎一模一样——五盏长明灯，散乱的牌位，供桌下的暗格。<br><br>' +
+'暗格中有一本祭录，封皮上写着：<br><br>' +
+'<span class="ominous">"太湖周氏 · 河伯祭录"</span><br><br>' +
+'你颤抖着翻开第一页。上面的文字与沈家祭录如出一辙——<br><br>' +
+'<span class="ominous">"永乐十五年，周氏先祖于太湖底得一石碑……"</span><br><br>' +
+'<span class="mystery">原来如此。沈、陆、方三家不是唯一守碑的家族。九碑九族，散布九州。而你知道的，只是冰山一角。</span>';
+
+mysteryText = 
+'你合上周氏祭录，正要离开祠堂。<br><br>' +
+'忽然，祠堂门口传来一个声音——苍老、沙哑，却带着一种说不出的威严：<br><br>' +
+'<span class="blood">"萧御史，久仰。"</span><br><br>' +
+'你猛然转身。门口站着一个灰袍老者，面容隐在斗篷的阴影中。<br><br>' +
+'<span class="blood">"老夫等这一天，已经等了三十年。"</span>他缓缓摘下斗篷，露出一张布满疤痕的脸，<br><br>' +
+'<span class="blood">"你想知道九碑的真相吗？想知道你的妹妹萧芷，为何会被选为祭品吗？"</span><br><br>' +
+'<span class="blood">"跟我来。但我要提醒你——知道真相的人，没有退路。"</span>';
+
+teaser = '—— 冥婚簿 · 续 ——  第一个故事 · 完 ——';
+}
+
+const titleEl = document.getElementById('endingTitle');
+titleEl.className = 'ending-title ' + titleClass;
+titleEl.textContent = title;
+document.getElementById('endingSub').textContent = sub;
+document.getElementById('endingText').innerHTML = text;
+
+document.getElementById('ending').classList.add('show');
+document.getElementById('ending').scrollIntoView({ behavior: 'smooth' });
+
+// 延迟显示悬念
+setTimeout(() => {
+document.getElementById('cliffhangerText').innerHTML = cliffText;
+document.getElementById('cliffhanger').classList.add('show');
+document.getElementById('cliffhanger').scrollIntoView({ behavior: 'smooth' });
+
+setTimeout(() => {
+document.getElementById('finalMysteryText').innerHTML = mysteryText;
+document.getElementById('finalTeaser').textContent = teaser;
+document.getElementById('finalMystery').classList.add('show');
+document.getElementById('finalMystery').scrollIntoView({ behavior: 'smooth' });
+}, 3000);
+}, 3000);
+}
+
+// ============ 初始化 ============
+// 依次显示第一幕、第二幕，然后显示第一个选择
+window.addEventListener('load', function() {
+setTimeout(() => {
+showSegment('seg2');
+setTimeout(() => {
+showChoice('choice1');
+}, 2000);
+}, 2000);
+});
+
+function showToast(msg) {
+const t = document.getElementById('toast');
+t.textContent = msg;
+t.classList.add('show');
+setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>

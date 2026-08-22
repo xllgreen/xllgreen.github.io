@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0d0e">
+<title>第二份口供｜第17号案件</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="paywall.css?v=1.0.0">
+<link rel="stylesheet" href="assets/css/context-hints.css?v=1.1.0">
+</head>
+<body>
+<div id="boot" class="boot">
+  <div class="boot-bg"></div>
+  <div class="boot-vignette"></div>
+  <main class="boot-desk">
+    <section class="boot-file">
+      <div class="file-edge">荔州市公安局 · 刑侦案件移送卷</div>
+      <div class="file-sheet">
+        <div class="mono">CASE NO.17 / TRANSFER FILE</div>
+        <h1>第二份口供</h1>
+        <p>第17号案件 · 移送材料核验</p>
+        <div class="file-rule"></div>
+        <dl>
+          <div><dt>死者</dt><dd>邱承 / 38岁</dd></div>
+          <div><dt>到案人员</dt><dd>陈默 / 主动投案</dd></div>
+          <div><dt>地点</dt><dd>西河公寓 B座4-702</dd></div>
+          <div><dt>卷宗</dt><dd>讯问、现场、物证材料齐备</dd></div>
+        </dl>
+        <p class="file-note">你接手的是一份等待移送的卷宗。按程序核对材料是否对应。</p>
+        <div class="boot-actions">
+          <button class="primary" data-action="new">签收卷宗</button>
+          <button data-action="continue" id="continueBtn">继续上次进度</button>
+          <button class="ghost hidden" data-action="truth-replay" id="truthReplayBoot">真相标注回看</button>
+          <button class="ghost hidden" id="independentBoot">独立复核二周目</button>
+        </div>
+        <small>建议耳机 · 关键声音均有文字替代 · 自动存档</small>
+      </div>
+    </section>
+    <aside class="boot-side">
+      <div class="envelope"><span>随卷附件 01</span><b>第一次讯问录像</b><small>ROOM 03 / REC</small></div>
+      <div class="envelope"><span>随卷附件 02</span><b>现场勘验册</b><small>4-702 / SEALED</small></div>
+    </aside>
+  </main>
+</div>
+<div id="app" class="app hidden">
+  <header class="hud">
+    <button class="back-location" data-action="hall">← 返回走廊</button>
+    <div class="hud-title"><b id="hudLocation">案卷室</b><span id="hudStatus">移送材料核验</span></div>
+    <div class="hud-actions">
+      <button data-action="folder">案件袋</button>
+      <button data-action="hint">提示</button>
+      <button type="button" id="supportBtn" class="support-entry" aria-label="支持作者 1元">支持作者 1元</button>
+      <button data-action="sound" id="soundBtn">声音：开</button>
+      <button data-action="tools">工具</button>
+    </div>
+  </header>
+  <main id="view" class="view"></main>
+</div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-card">
+    <button class="modal-close" data-action="close-modal">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div id="folder" class="folder-overlay hidden" role="dialog" aria-modal="true">
+  <div class="folder-shell">
+    <button class="folder-close" data-action="folder-close">关闭卷宗</button>
+    <div class="folder-tabs">
+      <button data-folder-tab="evidence" class="active">证物</button>
+      <button data-folder-tab="facts">已确认记录</button>
+      <button data-folder-tab="people">人物</button>
+    </div>
+    <div id="folderBody"></div>
+  </div>
+</div>
+<div id="hintPanel" class="hint-panel hidden" role="dialog" aria-modal="true">
+  <div class="hint-card">
+    <button data-action="hint-close">×</button>
+    <div class="mono">SUN LAN / REVIEW ASSIST</div>
+    <h2>需要提示？</h2>
+    <p id="hintText">提示只在你主动打开时出现。</p>
+    <div class="hint-actions">
+      <button data-action="hint-next">下一层提示</button>
+      <button data-action="hint-close">先自己查</button>
+    </div>
+  </div>
+</div>
+<div id="theatre" class="theatre hidden" role="dialog" aria-modal="true">
+  <div class="film-grain"></div>
+  <div class="letterbox top"></div>
+  <div class="letterbox bottom"></div>
+  <img id="filmImg" alt="">
+  <div id="filmHud" class="film-hud"></div>
+  <div id="filmStamp" class="film-stamp hidden"></div>
+  <div id="filmCaption" class="film-caption"></div>
+  <div class="subtitle-wrap">
+    <div id="filmSpeaker" class="film-speaker"></div>
+    <div id="filmLine" class="film-line"></div>
+  </div>
+  <button id="filmAdvance" class="film-advance" aria-label="继续">继续</button>
+</div>
+<div id="toast" class="toast hidden"></div>
+
+<script src="data.js"></script>
+<script src="paywall.js?v=1.0.0"></script>
+<script src="assets/js/stability-fix.js?v=1.0.0"></script>
+<script src="app.js"></script>
+<script src="assets/js/context-hints.js?v=1.1.0"></script>
+</body>
+</html>

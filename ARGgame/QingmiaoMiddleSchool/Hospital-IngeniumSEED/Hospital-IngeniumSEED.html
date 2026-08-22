@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青苗中学校医院 - 健康成材第一站</title>
+    <link rel="icon" href="images/logo1.png" type="image/png">
+	<link rel="stylesheet" href="images/logo1.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', 'Microsoft YaHei', monospace;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #cccccc;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* 扫描线效果 */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(255, 0, 0, 0.05) 50%
+            );
+            background-size: 100% 4px;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: scanline 10s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        /* 血滴背景效果 */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 0, 0.05) 0%, transparent 5%),
+                radial-gradient(circle at 90% 40%, rgba(255, 0, 0, 0.05) 0%, transparent 5%),
+                radial-gradient(circle at 50% 80%, rgba(255, 0, 0, 0.05) 0%, transparent 5%),
+                radial-gradient(circle at 30% 60%, rgba(255, 0, 0, 0.05) 0%, transparent 5%),
+                radial-gradient(circle at 70% 10%, rgba(255, 0, 0, 0.05) 0%, transparent 5%);
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .warning {
+            animation: warning 2s infinite;
+        }
+        
+        @keyframes warning {
+            0%, 100% { color: #ff3333; }
+            50% { color: #990000; }
+        }
+
+        .main-nav {
+            background: linear-gradient(135deg, #1a0000 0%, #330000 100%);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+            border-bottom: 2px solid #660000;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .nav-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .nav-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 51, 51, 0.9);
+            box-shadow: 0 3px 10px rgba(255, 0, 0, 0.5);
+            background-color: #1a0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .nav-logo::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,0,0,0.4) 0%, rgba(255,0,0,0) 70%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .nav-logo i {
+            color: #ff3333;
+            font-size: 28px;
+            z-index: 1;
+        }
+        
+        .nav-logo-text h2 {
+            color: #ff6666;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            text-shadow: 1px 1px 3px rgba(255, 0, 0, 0.7);
+        }
+        
+        .nav-logo-text p {
+            color: rgba(255, 102, 102, 0.9);
+            font-size: 12px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            height: 100%;
+        }
+        
+        .nav-item {
+            padding: 0 25px;
+            color: rgba(255, 102, 102, 0.95);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 0, 0, 0.15);
+            color: #ff3333;
+            text-shadow: 0 0 8px #ff0000;
+        }
+        
+        .nav-item.active {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #ff3333;
+            font-weight: 600;
+        }
+        
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: #ff3333;
+            box-shadow: 0 0 10px #ff0000;
+        }
+        
+        .header-banner {
+            position: relative;
+            height: 450px;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(rgba(26, 0, 0, 0.9), rgba(51, 0, 0, 0.95));
+            border-bottom: 3px solid #660000;
+        }
+        
+        .banner-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.3;
+            filter: grayscale(100%) brightness(0.5) contrast(1.2);
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255, 0, 0, 0.1), rgba(102, 0, 0, 0.6));
+            z-index: 2;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .hospital-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .hospital-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 51, 51, 0.9);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+            background-color: #1a0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .hospital-logo::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,0,0,0.5) 0%, rgba(255,0,0,0) 70%);
+            animation: pulse 2s infinite;
+        }
+        
+        .hospital-logo i {
+            color: #ff3333;
+            font-size: 48px;
+            z-index: 1;
+        }
+        
+        .hospital-name {
+            color: #ff6666;
+        }
+        
+        .hospital-name h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.7);
+            animation: flicker 3s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+                text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.7);
+            }
+            20%, 24%, 55% {
+                opacity: 0.8;
+                text-shadow: none;
+            }
+        }
+        
+        .hospital-name p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .header-search-container {
+            position: relative;
+            width: 400px;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            padding-right: 50px;
+            border: 1px solid #660000;
+            border-radius: 30px;
+            font-size: 15px;
+            background-color: rgba(26, 0, 0, 0.95);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+            color: #ff9999;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+            background-color: #1a0000;
+            border-color: #ff3333;
+        }
+        
+        .search-input::placeholder {
+            color: #996666;
+        }
+        
+        .search-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #660000, #330000);
+            border: 1px solid #990000;
+            color: #ff6666;
+            cursor: pointer;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .search-button:hover {
+            background: linear-gradient(135deg, #330000, #660000);
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 0 10px #ff0000;
+            color: #ff3333;
+        }
+        
+        .banner-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #ff9999;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .banner-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.7);
+            line-height: 1.2;
+            animation: flicker 5s infinite alternate;
+        }
+        
+        .banner-subtitle {
+            font-size: 24px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .garbled-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .garbled-text::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #ff3333;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: garbled 10s infinite linear;
+            text-shadow: 0 0 5px #ff0000;
+            filter: blur(0.5px);
+        }
+        
+        @keyframes garbled {
+            0% { clip-path: inset(0 0 0 0); }
+            10% { clip-path: inset(20% 0 30% 0); }
+            20% { clip-path: inset(60% 0 10% 0); }
+            30% { clip-path: inset(10% 0 50% 0); }
+            40% { clip-path: inset(40% 0 20% 0); }
+            50% { clip-path: inset(30% 0 30% 0); }
+            60% { clip-path: inset(70% 0 10% 0); }
+            70% { clip-path: inset(10% 0 60% 0); }
+            80% { clip-path: inset(50% 0 20% 0); }
+            90% { clip-path: inset(20% 0 40% 0); }
+            100% { clip-path: inset(0 0 0 0); }
+        }
+
+        .flicker {
+            animation: flicker-animation 0.5s infinite;
+        }
+        
+        @keyframes flicker-animation {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            background-color: rgba(26, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+            padding: 40px 30px;
+            border: 1px solid #660000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        main::before {
+            content: "⚠ WARNING ⚠";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #ff3333;
+            font-size: 12px;
+            font-weight: bold;
+            opacity: 0.7;
+            animation: warning-blink 2s infinite;
+        }
+        
+        @keyframes warning-blink {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.2; }
+        }
+        
+        .section-title {
+            color: #ff6666;
+            font-size: 32px;
+            padding-bottom: 10px;
+            margin-bottom: 35px;
+            border-bottom: 3px solid #990000;
+            display: inline-block;
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+        }
+        
+        .notice-section {
+            margin-bottom: 70px;
+        }
+        
+        .notice-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .notice-item {
+            background-color: rgba(51, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+            transition: all 0.3s;
+            border-left: 5px solid #990000;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-top: 1px solid #660000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notice-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .notice-item:hover::before {
+            left: 100%;
+        }
+        
+        .notice-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
+            border-left-color: #ff3333;
+        }
+        
+        .notice-item h3 {
+            color: #ff9999;
+            font-size: 20px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+        
+        .notice-date {
+            color: #cc9999;
+            font-size: 14px;
+            margin-bottom: 15px;
+            background-color: rgba(102, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            border: 1px solid #660000;
+        }
+        
+        .notice-summary {
+            color: #ccaaaa;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            flex-grow: 1;
+            font-size: 15px;
+            padding: 15px 0;
+            border-top: 1px solid #660000;
+            border-bottom: 1px solid #660000;
+        }
+        
+        .notice-summary ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .notice-summary li {
+            margin-bottom: 8px;
+            color: #ccaaaa;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: #1a0000;
+            background: linear-gradient(135deg, #990000, #660000);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 6px;
+            transition: all 0.3s;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 15px;
+            box-shadow: 0 4px 10px rgba(153, 0, 0, 0.4);
+            border: 1px solid #990000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .read-more:hover {
+            background: linear-gradient(135deg, #660000, #990000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(153, 0, 0, 0.6);
+            color: #ffcccc;
+        }
+        
+        .functions-section {
+            margin-bottom: 70px;
+        }
+        
+        .functions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .function-card {
+            background-color: rgba(51, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+            transition: all 0.3s;
+            text-align: center;
+            border-top: 5px solid #990000;
+            border: 1px solid #660000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .function-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.7s;
+        }
+        
+        .function-card:hover::before {
+            left: 100%;
+        }
+        
+        .function-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
+            border-top-color: #ff3333;
+        }
+        
+        .function-icon {
+            font-size: 48px;
+            color: #ff3333;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .function-card h3 {
+            color: #ff9999;
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .function-card p {
+            color: #ccaaaa;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .function-link {
+            display: inline-block;
+            color: #ff6666;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+        
+        .function-link:hover {
+            border-bottom-color: #ff3333;
+            color: #ff3333;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: rgba(26, 0, 0, 0.95);
+            color: #ff9999;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+            border-top: 3px solid #660000;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "⚠ 访问记录已记录 ⚠";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #ff3333;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 40px;
+            color: #ff3333;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        .footer-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ff6666;
+        }
+        
+        .footer-content p {
+            margin-bottom: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: #ff3333;
+            font-size: 18px;
+        }
+        
+        .copyright {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 0, 0, 0.1);
+            font-size: 14px;
+            opacity: 0.8;
+            color: #cc9999;
+        }
+        
+        /* 文章页面样式 */
+        .article-page, .doctor-page, .search-results-page, .search-detail-page {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: none;
+            background-color: rgba(26, 0, 0, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+            padding: 40px;
+            border: 1px solid #660000;
+            color: #cccccc;
+        }
+        
+        .article-header, .search-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #990000;
+        }
+        
+        .article-title, .search-title {
+            color: #ff6666;
+            font-size: 36px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #cc9999;
+            font-size: 16px;
+        }
+        
+        .article-content, .search-content {
+            line-height: 1.8;
+            font-size: 17px;
+            margin-bottom: 40px;
+            color: #cccccc;
+        }
+        
+        .article-content p, .search-content p {
+            margin-bottom: 20px;
+        }
+        
+        .article-content ul, .article-content ol, .search-content ul, .search-content ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .article-content li, .search-content li {
+            margin-bottom: 10px;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            color: #ff6666;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 40px;
+            padding: 12px 25px;
+            border: 2px solid #990000;
+            border-radius: 6px;
+            transition: all 0.3s;
+            background-color: rgba(51, 0, 0, 0.5);
+        }
+        
+        .back-to-home:hover {
+            background-color: #660000;
+            color: #ffcccc;
+            border-color: #ff3333;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        
+        /* 搜索结果页面 */
+        .search-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #990000;
+        }
+        
+        .search-title {
+            color: #ff6666;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .search-query {
+            color: #cc9999;
+            font-size: 18px;
+            font-style: italic;
+        }
+        
+        .search-results {
+            margin-bottom: 40px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px 30px;
+        }
+        
+        .no-results-icon {
+            font-size: 60px;
+            color: #660000;
+        }
+        
+        .no-results h3 {
+            color: #cc9999;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .no-results p {
+            color: #996666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .search-suggestions {
+            background-color: rgba(51, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #660000;
+        }
+        
+        .search-suggestions h4 {
+            color: #ff9999;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .search-suggestions ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .search-suggestions li {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #660000;
+        }
+        
+        .search-suggestions li:last-child {
+            border-bottom: none;
+        }
+        
+        .keyword-link {
+            color: #ff6666;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .keyword-link:hover {
+            text-decoration: underline;
+            color: #ff3333;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        /* 医生详情页面样式 */
+        .doctor-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #990000;
+        }
+        
+        .doctor-title {
+            color: #ff6666;
+            font-size: 36px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        .doctor-subtitle {
+            color: #cc9999;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .doctor-content {
+            line-height: 1.8;
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+        
+        .doctor-specialty {
+            color: #ff3333;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            border-left: 4px solid #990000;
+            padding-left: 15px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+        }
+        
+        .doctor-schedule {
+            background-color: rgba(51, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 1px solid #660000;
+        }
+        
+        .doctor-schedule h4 {
+            color: #ff9999;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        /* 搜索详情页面样式 */
+        .search-detail-content {
+            padding: 30px;
+            background-color: rgba(51, 0, 0, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid #990000;
+            margin: 20px 0;
+        }
+        
+        .search-detail-title {
+            color: #ff9999;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .search-detail-meta {
+            color: #cc9999;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .search-detail-item {
+            background-color: rgba(26, 0, 0, 0.7);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(255, 0, 0, 0.2);
+            border-left: 3px solid #990000;
+            border: 1px solid #660000;
+        }
+        
+        .search-detail-item h4 {
+            color: #ff9999;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            color: #cccccc;
+        }
+        
+        th {
+            background-color: #660000;
+            color: #ffcccc;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #990000;
+        }
+        
+        td {
+            padding: 12px;
+            border: 1px solid #660000;
+        }
+        
+        tr:nth-child(even) {
+            background-color: rgba(51, 0, 0, 0.3);
+        }
+        
+        tr:nth-child(odd) {
+            background-color: rgba(26, 0, 0, 0.5);
+        }
+        
+        /* 图片响应式样式 */
+        .article-image-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .article-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.3);
+            display: inline-block;
+            transition: transform 0.3s ease;
+            border: 1px solid #660000;
+        }
+        
+        .article-image img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.5);
+        }
+        
+        .image-caption {
+            margin-top: 10px;
+            color: #cc9999;
+            font-size: 14px;
+        }
+        
+        /* 警告框样式 */
+        .warning-box {
+            background-color: rgba(102, 0, 0, 0.7);
+            border: 2px solid #ff3333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .warning-box::before {
+            content: "⚠";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 24px;
+            color: #ff3333;
+            animation: warning-blink 2s infinite;
+        }
+        
+        /* 随机闪烁效果 */
+        .random-flicker {
+            animation: random-flicker 5s infinite;
+        }
+        
+        @keyframes random-flicker {
+            0%, 100% { opacity: 1; }
+            5%, 15%, 25%, 35%, 45% { opacity: 0.9; }
+            10%, 20%, 30%, 40%, 50% { opacity: 0.5; }
+            55%, 65%, 75%, 85%, 95% { opacity: 0.8; }
+            60%, 70%, 80%, 90% { opacity: 0.6; }
+        }
+        
+        /* 脉冲光效 */
+        .hospital-logo .pulse-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,0,0,0.5) 0%, rgba(255,0,0,0) 70%);
+            animation: pulse 2s infinite;
+            pointer-events: none;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .nav-menu {
+                padding: 0 10px;
+            }
+            
+            .nav-item {
+                padding: 0 18px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .main-nav {
+                height: 60px;
+            }
+            
+            .nav-logo-text h2 {
+                font-size: 20px;
+            }
+            
+            .nav-logo {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .nav-menu {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            .nav-item {
+                padding: 0 15px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .header-search-container {
+                width: 100%;
+            }
+            
+            .banner-title {
+                font-size: 36px;
+            }
+            
+            .banner-subtitle {
+                font-size: 20px;
+            }
+            
+            .hospital-logo {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .hospital-name h1 {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-nav {
+                padding: 0 10px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+            
+            .nav-logo-area {
+                margin-bottom: 10px;
+            }
+            
+            .nav-menu {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .nav-item {
+                flex: 1;
+                text-align: center;
+                padding: 10px 5px;
+                font-size: 13px;
+            }
+            
+            .header-banner {
+                height: 350px;
+            }
+            
+            .hospital-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .banner-title {
+                font-size: 32px;
+            }
+            
+            .banner-subtitle {
+                font-size: 18px;
+            }
+            
+            .notice-list, .functions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            main {
+                padding: 30px 20px;
+            }
+            
+            .article-page, .doctor-page, .search-results-page, .search-detail-page {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .nav-item {
+                font-size: 12px;
+                padding: 10px 3px;
+            }
+            
+            .nav-logo-text h2 {
+                font-size: 18px;
+            }
+            
+            .header-banner {
+                height: 300px;
+            }
+            
+            .hospital-logo {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .hospital-logo i {
+                font-size: 36px;
+            }
+            
+            .hospital-name h1 {
+                font-size: 24px;
+            }
+            
+            .banner-title {
+                font-size: 28px;
+            }
+            
+            .article-title, .doctor-title, .search-title {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 26px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 扫描线效果 -->
+    <div class="scanlines"></div>
+    
+    <!-- 页面加载时的警告信息 -->
+    <div id="initialWarning" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); z-index: 10001; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #ff3333; font-size: 24px; text-align: center; padding: 20px;">
+        <div style="margin-bottom: 30px; font-size: 48px;">⚠</div>
+        <div id="warningText" class="garbled-text warning" data-text="警告：访问异常医疗记录">警告：访问异常医疗记录</div>
+        <div style="margin-top: 20px; font-size: 16px; color: #cc9999;">系统检测到异常访问模式</div>
+        <div style="margin-top: 10px; font-size: 14px; color: #996666;">正在加载受保护内容...</div>
+        <div style="margin-top: 40px; font-size: 12px; color: #660000;">按任意键继续...</div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo-area">
+                <div class="nav-logo">
+                    <img src="images/logo1.png" alt="医院图标" style="width: 50px; height: 50px; vertical-align: middle;">
+                </div>
+                <div class="nav-logo-text">
+                    <h2 class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</h2>
+                    <p>QINGMIAO SCHOOL HOSPITAL</p>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-item active">首页</a></li>
+                <li><a href="#" class="nav-item">医疗服务</a></li>
+                <li><a href="#" class="nav-item">健康管理</a></li>
+                <li><a href="#" class="nav-item">健康知识</a></li>
+                <li><a href="#" class="nav-item">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="header-banner">
+        <!-- 背景图片 -->
+        <img id="bannerBg" class="banner-background" src="images/xyy1.png" alt="医院背景">
+        
+        <!-- 遮罩层 -->
+        <div id="bannerOverlay" class="banner-overlay"></div>
+        
+        <div class="header-content">
+            <div class="header-top">
+                <div class="hospital-header">
+                    <div class="hospital-logo">
+                        <img src="images/logo1.png" alt="校医院Logo" style="width: 110%; height: 110%; border-radius: 50%;">
+                        <div class="pulse-overlay"></div>
+                    </div>
+                    <div class="hospital-name">
+                        <h1>青苗中学校医院</h1>
+                        <p class="garbled-text" data-text="异常访问已记录">QINGMIAO SCHOOL HOSPITAL</p>
+                    </div>
+                </div>
+                  
+                <div class="header-search-container">
+                    <div class="search-box">
+                        <input type="text" class="search-input" placeholder="搜索医生、值班、就诊记录..." id="searchInput">
+                        <button class="search-button" id="searchButton">
+                            🔍
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="banner-main">
+                <h1 class="banner-title">守护健康，助力成长</h1>
+                <p class="banner-subtitle">青苗中学校医院为全体师生提供专业、便捷、高效的医疗服务</p>
+            </div>
+        </div>
+    </div>
+
+    <main id="mainContent">
+        <section class="notice-section">
+            <h2 class="section-title">最新通知</h2>
+            <div class="notice-list">
+                <article class="notice-item">
+                    <h3 class="garbled-text" data-text="新生入学体检通知｜健康成材第一站">新生入学体检通知｜健康成材第一站</h3>
+                    <div class="notice-date">2025年8月12日</div>
+                    <div class="notice-summary">
+                        <p>为保障2025级全体新生身心健康，构建完善的健康档案体系，我校医院将组织新生入学体检...</p>
+                        <ul>
+                            <li>体检时间：2025年8月28日-8月30日</li>
+                            <li>体检地点：青苗中学校医院主楼</li>
+                            <li>重要提示：包含YC基因筛查项目</li>
+                        </ul>
+                    </div>
+                    <a href="#article1" class="read-more detail-link" data-target="article1">查看详情</a>
+                </article>
+                
+                <article class="notice-item">
+                    <h3 class="garbled-text" data-text="2025年秋季学期校医院医生值班表">2025年秋季学期校医院医生值班表</h3>
+                    <div class="notice-date">2025年8月25日</div>
+                    <div class="notice-summary">
+                        <p>2025年秋季学期校医院医生值班安排已确定，为方便师生就医，现将值班表公布如下...</p>
+                        <ul>
+                            <li>门诊时间：周一至周五 8:00-17:30</li>
+                            <li>急诊时间：24小时全天候服务</li>
+                            <li>值班医生：张蕾、吴英才、林译等</li>
+                        </ul>
+                    </div>
+                    <a href="#article2" class="read-more detail-link" data-target="article2">查看详情</a>
+                </article>
+            </div>
+        </section>
+        
+        <section class="functions-section">
+            <h2 class="section-title">快捷服务</h2>
+            <div class="functions-grid">
+                <div class="function-card">
+                    <div class="function-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>在线预约</h3>
+                    <p>在线预约挂号，避免排队等候，节省就诊时间，提高就医效率。</p>
+                    <a href="#" class="function-link">立即预约</a>
+                </div>
+                
+                <div class="function-card">
+                    <div class="function-icon">
+                        <i class="fas fa-file-medical"></i>
+                    </div>
+                    <h3>健康档案</h3>
+                    <p>建立个人电子健康档案，记录体检结果、就诊记录，便于健康管理。</p>
+                    <a href="#" class="function-link">查看档案</a>
+                </div>
+                
+                <div class="function-card">
+                    <div class="function-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h3>药品查询</h3>
+                    <p>查询校医院药品库存、价格及用药说明，方便师生了解药品信息。</p>
+                    <a href="#" class="function-link">查询药品</a>
+                </div>
+                
+                <div class="function-card">
+                    <div class="function-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>急救服务</h3>
+                    <p>24小时急救电话：027-12345679，校园内紧急医疗情况请立即拨打。</p>
+                    <a href="#" class="function-link">紧急呼叫</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+
+            <h3>青苗中学校医院</h3>
+            <p class="garbled-text" data-text="我们为青苗中学全体师生提供专业、全面、贴心的医疗服务">我们为青苗中学全体师生提供专业、全面、贴心的医疗服务，保障校园健康，助力学生成长。</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>地址：武阳市青苗路1号青苗中学校内</span>
+                </div>
+                    <span>邮箱：hospital@qingmiao.edu.cn</span>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>版权所有 © 2025 青苗中学校医院 | 守护健康，助力成长</p>
+                <p class="garbled-text warning" data-text="※ 警告：本网站内容涉及异常医疗记录">※ 警告：本网站内容涉及异常医疗记录</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="article1" class="article-page">
+        <div class="article-header">
+            <h1 class="article-title">新生入学体检通知｜健康成材第一站</h1>
+            <div class="article-meta">
+                <span>2025年8月12日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="article-content">
+            <div class="warning-box">
+                <p><strong>警告：</strong> 以下内容包含异常医疗程序信息。访问已记录。</p>
+            </div>
+            
+            <p>为保障2025级全体新生身心健康，构建完善的健康档案体系，我校医院将组织新生入学体检。本次体检将在青苗中学校医院集中开展，所有新生均须参加，相关事宜通知如下：</p>
+            
+            <h3>一、体检时间与安排</h3>
+            <p><strong>2025年8月28日-8月30日（上午7:30-11:30，下午13:30-16:30）</strong></p>
+            <p>请按报名编号分批次前往，具体时间安排如下：</p>
+            <ul>
+                <li><strong>8月28日（星期三）：</strong>报名编号001-200号</li>
+                <li><strong>8月29日（星期四）：</strong>报名编号201-400号</li>
+                <li><strong>8月30日（星期五）：</strong>报名编号401-500号</li>
+            </ul>
+            
+            <h3>二、体检地点</h3>
+            <p><strong>青苗中学校医院主楼（校园东侧健康中心）</strong></p>
+            <p>地址：武阳市青苗路1号青苗中学校内</p>
+            
+            <h3>三、体检项目</h3>
+            <p>本次体检包含以下项目，全面评估学生身体状况：</p>
+            <ul>
+                <li><strong>1. 常规检查：</strong>身高、体重、视力、听力、血压、脉搏、体温</li>
+                <li><strong>2. 内科检查：</strong>心、肺、肝、脾、神经系统全面检查</li>
+                <li><strong>3. 外科检查：</strong>皮肤、四肢、脊柱、关节、淋巴系统</li>
+                <li><strong>4. 五官科检查：</strong>耳、鼻、喉、口腔、牙齿健康</li>
+                <li><strong>5. 实验室检查：</strong>血常规、尿常规、肝功能、肾功能</li>
+                <li><strong>6. 影像学检查：</strong>胸部X光检查（排除肺结核等传染病）</li>
+                <li><strong>7. 心电图检查：</strong>心脏功能初步筛查</li>
+                <li><strong>8. YC基因筛查：</strong>潜能基因检测与评估（学校特色项目）</li>
+            </ul>
+            
+            <h3>四、注意事项</h3>
+            <p>1. <strong>空腹要求：</strong>体检当日早晨请勿进食、饮水，需保持至少8小时空腹状态，确保血液检测结果准确。</p>
+            <p>2. <strong>服装要求：</strong>请穿着宽松、易穿脱的衣物，女生请避免穿连衣裙、连体裤。</p>
+            <p>3. <strong>材料准备：</strong>请携带录取通知书、身份证（或户口本）及近期一寸免冠照片2张。</p>
+            <p>4. <strong>电子设备管理：</strong>为保障体检秩序与隐私安全，所有体检区域严禁携带手机、智能手表等电子设备，入场前请配合工作人员存放至指定保管处。</p>
+            <p>5. <strong>YC基因筛查说明：</strong>本次体检包含"YC潜能基因筛查"项目，用于评估学生的体质特质与发展潜能，为后续个性化培养提供科学依据。</p>
+            
+            <div class="warning-box">
+                <p><strong>异常记录：</strong> YC基因筛查项目涉及非标准医疗程序。访问者身份已验证。</p>
+            </div>
+            
+            <h3>五、联系我们</h3>
+            <p>健康的身体是成长的基石，青苗中学校医院始终将学生身心发展置于首位。请各位新生与家长积极配合，共同完成入学前的重要准备。</p>
+            
+            <p><strong>咨询电话：</strong>027-12345679（校医院总机）</p>
+            <p><strong>体检专线：</strong>027-12345680</p>
+            <p><strong>负责人：</strong>吴英才 主任医师</p>
+        </div>
+        
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+
+    <div id="article2" class="article-page">
+        <div class="article-header">
+            <h1 class="article-title">2025年秋季学期校医院医生值班表</h1>
+            <div class="article-meta">
+                <span>2025年8月25日</span>
+                <span class="garbled-text" data-text="青苗中学校医院办公室">青苗中学校医院办公室</span>
+            </div>
+        </div>
+        
+        <div class="article-content">
+            <div class="warning-box">
+                <p><strong>注意：</strong> 以下值班表包含异常医疗活动记录。</p>
+            </div>
+            
+            <p>2025年秋季学期校医院医生值班安排已确定，为方便师生就医，现将值班表公布如下。校医院实行24小时值班制度，确保及时处理各类医疗需求。</p>
+            
+            <h3>一、门诊时间安排</h3>
+            <p><strong>常规门诊：</strong>周一至周日 8:00-18:00（中午12:00-13:30休息）</p>
+            <p><strong>急诊服务：</strong>24小时全天候服务（夜间请按急诊门铃）</p>
+            
+            <h3>二、紧急联系方式</h3>
+            <p><strong>校医院总机：</strong>027-12345679</p>
+            <p><strong>急救电话：</strong>027-12345679（校内直接拨打12345679）</p>
+            <p><strong>心理热线：</strong>027-12345681（周一至周五 14:00-17:00）</p>
+            
+            <div class="warning-box">
+                <p><strong>记录：</strong> 值班表包含特殊医疗项目活动。访问权限已授权。</p>
+            </div>
+            
+            <p>青苗中学校医院全体医护人员将竭诚为全校师生提供优质的医疗服务，保障校园健康安全。</p>
+        </div>
+        
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+
+      
+    <div id="search-yingcai" class="search-detail-page">
+        <div class="article-header">
+            <h1 class="article-title">青苗中学「英材培育计划」实施纲要</h1>
+            <div class="article-meta">
+                <span>2020年09月01日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>警告：</strong> 以下文件包含异常医疗信息。访问权限已验证。</p>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-image-container">
+                <div class="article-image" onclick="openImageModal('images/ssjh1.jpg')">
+                    <img src="images/ssjh1.jpg" alt="英材培育计划1">
+                </div>
+				                <div class="article-image" onclick="openImageModal('images/ssjh2.jpg)">
+                    <img src="images/ssjh2.jpg" alt="英材培育计划2">
+                </div>
+				                <div class="article-image" onclick="openImageModal('images/ssjh3.jpg')">
+                    <img src="images/ssjh3.jpg" alt="英材培育计划3">
+                </div>
+            </div>
+        </div>
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+    
+   <div id="search-YC230721016" class="search-detail-page">
+        <div class="article-header">
+            <h1 class="article-title">编号YC230721016实验体转化报告</h1>
+            <div class="article-meta">
+                <span>2024年09月10日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>警告：</strong> 以下文件包含异常医疗信息。访问权限已验证。</p>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-image-container">
+                <div class="article-image" onclick="openImageModal('images/bmmzhbg.jpg')">
+                    <img src="images/bmmzhbg.jpg" alt="白目目转化报告">
+                </div>
+                <p class="image-caption">编号YC230721016实验体转化报告（图片可点击放大）</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+    
+    <div id="search-YC231106017" class="search-detail-page">
+          <div class="article-header">
+            <h1 class="article-title">编号YC231106017实验体转化报告</h1>
+            <div class="article-meta">
+                <span>2024年09月10日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>警告：</strong> 以下文件包含异常医疗信息。访问权限已验证。</p>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-image-container">
+                <div class="article-image" onclick="openImageModal('images/ryzhbg.jpg')">
+                    <img src="images/ryzhbg.jpg" alt="容易转化报告">
+                </div>
+                <p class="image-caption">编号YC231106017实验体转化报告（图片可点击放大）</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-home">返回首页</a>
+
+    </div>
+        <div id="search-YC230809015" class="search-detail-page">
+          <div class="article-header">
+            <h1 class="article-title">编号YC230809015实验体转化报告</h1>
+            <div class="article-meta">
+                <span>2024年09月10日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>警告：</strong> 以下文件包含异常医疗信息。访问权限已验证。</p>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-image-container">
+                <div class="article-image" onclick="openImageModal('images/gdhzhbg.jpg')">
+                    <img src="images/gdhzhbg.jpg" alt="官大华转化报告">
+                </div>
+                <p class="image-caption">编号YC230809015实验体转化报告（图片可点击放大）</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+
+    </div>
+        <div id="search-YC251123489" class="search-detail-page">
+          <div class="article-header">
+            <h1 class="article-title">编号YC251123489实验体转化报告</h1>
+            <div class="article-meta">
+                <span>2025年09月10日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>警告：</strong> 以下文件包含异常医疗信息。访问权限已验证。</p>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-image-container">
+                <div class="article-image" onclick="openImageModal('images/lzzhbg.jpg')">
+                    <img src="images/lzzhbg.jpg" alt="林昭转化报告">
+                </div>
+                <p class="image-caption">编号YC251123489实验体转化报告（图片可点击放大）</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+
+    <div id="search-YC230617001" class="search-detail-page">
+           <div class="article-header">
+            <h1 class="article-title">编号YC230617001实验体转化报告</h1>
+            <div class="article-meta">
+                <span>2024年09月10日</span>
+                <span class="garbled-text" data-text="青苗中学校医院">青苗中学校医院</span>
+            </div>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>警告：</strong> 以下文件包含异常医疗信息。访问权限已 verified。</p>
+        </div>
+        
+        <div class="article-content">
+            <div class="article-image-container">
+                <div class="article-image" onclick="openImageModal('images/lyzhbg.jpg')">
+                    <img src="images/lyzhbg.jpg" alt="林又转化报告">
+                </div>
+                <p class="image-caption">编号YC230617001实验体转化报告（图片可点击放大）</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+    
+    <div id="searchResultsPage" class="search-results-page">
+        <div class="search-header">
+            <h1 class="search-title">搜索结果</h1>
+            <p class="search-query">搜索关键词：<span id="searchQueryDisplay"></span></p>
+        </div>
+        
+        <div class="warning-box">
+            <p><strong>注意：</strong> 搜索查询包含敏感关键词。访问已记录。</p>
+        </div>
+        
+        <div class="search-results" id="searchResultsContent">
+        </div>
+        
+        <a href="#" class="back-to-home">返回首页</a>
+    </div>
+    
+    <!-- 音频元素用于播放恐怖音效 -->
+    <audio id="terrorAudio" preload="auto" style="display: none;">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-horror-laugh-583.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加页面加载时的恐怖效果
+            window.addEventListener('load', function() {
+                // 随机延迟后显示警告
+                setTimeout(() => {
+                    const warnings = [
+                        "警告：系统监控中...",
+                        "注意：所有访问将被记录",
+                        "警告：异常活动检测",
+                        "系统提示：保持安静"
+                    ];
+                    const randomWarning = warnings[Math.floor(Math.random() * warnings.length)];
+                    
+                    // 创建临时警告元素
+                    const warningEl = document.createElement('div');
+                    warningEl.style.position = 'fixed';
+                    warningEl.style.top = '50%';
+                    warningEl.style.left = '50%';
+                    warningEl.style.transform = 'translate(-50%, -50%)';
+                    warningEl.style.backgroundColor = 'rgba(0,0,0,0.9)';
+                    warningEl.style.color = '#ff0000';
+                    warningEl.style.padding = '20px';
+                    warningEl.style.border = '2px solid #990000';
+                    warningEl.style.borderRadius = '10px';
+                    warningEl.style.zIndex = '10000';
+                    warningEl.style.fontSize = '24px';
+                    warningEl.style.textShadow = '0 0 10px rgba(255,0,0,0.8)';
+                    warningEl.style.fontFamily = 'monospace';
+                    warningEl.textContent = randomWarning;
+                    warningEl.classList.add('garbled-text', 'flicker');
+                    
+                    document.body.appendChild(warningEl);
+                    
+                    // 3秒后移除警告
+                    setTimeout(() => {
+                        warningEl.remove();
+                    }, 3000);
+                }, 1000);
+            });
+            
+            // 移除初始警告
+            setTimeout(function() {
+                const warningDiv = document.getElementById('initialWarning');
+                if (warningDiv) {
+                    warningDiv.style.opacity = '0';
+                    warningDiv.style.transition = 'opacity 1s';
+                    setTimeout(() => warningDiv.remove(), 1000);
+                }
+                
+                // 随机显示警告信息
+                const warnings = [
+                    "警告：访问异常医疗记录",
+                    "注意：系统检测到异常访问模式",
+                    "警报：敏感内容访问",
+                    "⚠ 非授权访问尝试 ⚠",
+                    "记录：异常医疗数据查询"
+                ];
+                
+                const randomWarning = warnings[Math.floor(Math.random() * warnings.length)];
+                document.title = randomWarning + " - 青苗中学校医院";
+                
+            }, 2000);
+            
+            // 点击任意键跳过初始警告
+            document.addEventListener('keydown', function() {
+                const warningDiv = document.getElementById('initialWarning');
+                if (warningDiv) {
+                    warningDiv.style.opacity = '0';
+                    warningDiv.style.transition = 'opacity 0.5s';
+                    setTimeout(() => warningDiv.remove(), 500);
+                }
+            });
+            
+            document.addEventListener('click', function() {
+                const warningDiv = document.getElementById('initialWarning');
+                if (warningDiv) {
+                    warningDiv.style.opacity = '0';
+                    warningDiv.style.transition = 'opacity 0.5s';
+                    setTimeout(() => warningDiv.remove(), 500);
+                }
+            });
+            
+            // 初始化乱码效果
+            applyGarbledEffect();
+            
+            // 定期更新乱码效果
+            setInterval(() => {
+                applyGarbledEffect();
+            }, 3000);
+            
+            // 添加随机闪烁效果
+            setInterval(() => {
+                const randomElements = document.querySelectorAll('.garbled-text');
+                if (randomElements.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * randomElements.length);
+                    randomElements[randomIndex].classList.add('flicker');
+                    
+                    setTimeout(() => {
+                        randomElements[randomIndex].classList.remove('flicker');
+                    }, 1000);
+                }
+            }, 2000);
+        });
+        
+        // 应用乱码效果
+        function applyGarbledEffect() {
+            const garbledElements = document.querySelectorAll('.garbled-text');
+            garbledElements.forEach(element => {
+                const originalText = element.getAttribute('data-text') || element.textContent;
+                if (!element.hasAttribute('data-original')) {
+                    element.setAttribute('data-original', originalText);
+                }
+                
+                // 随机将部分字符替换为方块字符
+                const chars = ['█', '▓', '▒', '░', '■', '□', '▣', '▤', '▥', '▦', '▧', '▨'];
+                let garbledText = '';
+                for (let i = 0; i < originalText.length; i++) {
+                    if (Math.random() > 0.7) {
+                        garbledText += chars[Math.floor(Math.random() * chars.length)];
+                    } else {
+                        garbledText += originalText[i];
+                    }
+                }
+                
+                // 短暂显示乱码
+                const currentText = element.textContent;
+                element.textContent = garbledText;
+                
+                // 1秒后恢复
+                setTimeout(() => {
+                    element.textContent = currentText;
+                }, 500);
+            });
+        }
+        
+        function openImageModal(src) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                cursor: pointer;
+            `;
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.cssText = `
+                max-width: 90%;
+                max-height: 90%;
+                border-radius: 8px;
+                box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+                border: 2px solid #660000;
+            `;
+            modal.appendChild(img);
+            modal.onclick = () => modal.remove();
+            document.body.appendChild(modal);
+            
+            // 尝试播放恐怖音效
+            try {
+                const audio = document.getElementById('terrorAudio');
+                audio.currentTime = 0;
+                audio.play().catch(e => console.log("音频播放失败:", e));
+            } catch (e) {
+                console.log("音效播放异常");
+            }
+        }
+
+        const searchData = [
+            {
+                keywords: ['英材'],
+                title: '青苗中学「英材培育计划」实施纲要',
+                description: '青苗中学「英材培育计划」实施纲要',
+                target: 'search-yingcai',
+                date: '2022年09月01日'
+            },
+            {
+                keywords: ['YC230721016'],
+                title: '编号YC230721016实验体转化报告',
+                description: '白目目转化报告',
+                target: 'search-YC230721016',
+                date: '2024年09月10日'
+            },
+            {
+                keywords: ['YC231106017'],
+                title: '编号YC231106017实验体转化报告',
+                description: '容易转化报告',
+                target: 'search-YC231106017',
+                date: '2024年09月10日'
+            },
+			 {
+                keywords: ['YC230809015'],
+                title: '编号YC230809015实验体转化报告',
+                description: '官大华转化报告',
+                target: 'search-YC230809015',
+                date: '2024年09月10日'
+            },
+			            {
+                keywords: ['YC251123489'],
+                title: '编号YC251123489实验体转化报告',
+                description: '林昭转化报告',
+                target: 'search-YC251123489',
+                date: '2025年09月10日'
+            },
+            {
+                keywords: ['YC230617001'],
+                title: '编号YC230617001实验体转化报告',
+                description: '林又转化报告',
+                target: 'search-YC230617001',
+                date: '2024年9月10日'
+            }
+
+        ];
+        
+        // 导航栏交互效果
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+
+                hideAllPages();
+                showMainPage();
+
+                if (!this.textContent.includes('首页')) {
+                    // 恐怖化提示信息
+                    const terrorMessages = [
+                        "系统错误：访问被拒绝",
+                        "警告：该页面不存在或已被移除",
+                        "错误：权限不足，无法访问",
+                        "⚠ 异常：页面内容无法加载",
+                        "记录：未授权访问尝试"
+                    ];
+                    const randomMsg = terrorMessages[Math.floor(Math.random() * terrorMessages.length)];
+                    alert(randomMsg + "\n\n功能正在建设中，敬请期待。");
+                    
+                    // 尝试播放恐怖音效
+                    try {
+                        const audio = document.getElementById('terrorAudio');
+                        audio.currentTime = 0;
+                        audio.play().catch(e => console.log("音频播放失败:", e));
+                    } catch (e) {
+                        console.log("音效播放异常");
+                    }
+                }
+            });
+        });
+        
+        // 通知公告点击效果 - 跳转到完整文章
+        document.querySelectorAll('.detail-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                
+                hideAllPages();
+                
+                document.getElementById(targetId).style.display = 'block';
+                
+                window.scrollTo(0, 0);
+                
+                // 尝试播放恐怖音效
+                try {
+                    const audio = document.getElementById('terrorAudio');
+                    audio.currentTime = 0;
+                    audio.play().catch(e => console.log("音频播放失败:", e));
+                } catch (e) {
+                    console.log("音效播放异常");
+                }
+            });
+        });
+        
+        document.querySelectorAll('.function-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const functionName = this.closest('.function-card').querySelector('h3').textContent;
+                
+                // 恐怖化提示信息
+                const terrorMessages = [
+                    "系统错误：功能无法访问",
+                    "警告：该服务暂时不可用",
+                    "错误：权限验证失败",
+                    "⚠ 异常：服务请求被拒绝",
+                    "记录：未授权功能访问尝试"
+                ];
+                const randomMsg = terrorMessages[Math.floor(Math.random() * terrorMessages.length)];
+                alert(randomMsg + '\n\n"' + functionName + '"功能正在建设中，敬请期待。');
+                
+                // 尝试播放恐怖音效
+                try {
+                    const audio = document.getElementById('terrorAudio');
+                    audio.currentTime = 0;
+                    audio.play().catch(e => console.log("音频播放失败:", e));
+                } catch (e) {
+                    console.log("音效播放异常");
+                }
+            });
+        });
+        
+        document.querySelectorAll('.back-to-home').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                hideAllPages();
+                
+                showMainPage();
+                
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        document.getElementById('searchButton').addEventListener('click', performSearch);
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (!query) {
+                alert('请输入搜索关键词');
+                return;
+            }
+            
+            // 尝试播放恐怖音效
+            try {
+                const audio = document.getElementById('terrorAudio');
+                audio.currentTime = 0;
+                audio.play().catch(e => console.log("音频播放失败:", e));
+            } catch (e) {
+                console.log("音效播放异常");
+            }
+            
+            const results = searchData.filter(item => {
+                return item.keywords.some(keyword => 
+                    keyword.toLowerCase().includes(query) || query.includes(keyword.toLowerCase())
+                );
+            });
+            
+            hideAllPages();
+            
+            if (results.length > 0) {
+
+                if (results.length === 1) {
+                    const result = results[0];
+                    const targetPage = document.getElementById(result.target);
+                    if (targetPage) {
+                        targetPage.style.display = 'block';
+                    }
+                } else {
+
+                    document.getElementById('searchResultsPage').style.display = 'block';
+                    document.getElementById('searchQueryDisplay').textContent = query;
+                    
+                    const resultsContent = document.getElementById('searchResultsContent');
+                    
+                    let resultsHTML = `
+                        <div class="search-results">
+                            <p class="results-count" style="color: #ff6666;">找到 ${results.length} 条相关结果</p>
+                            <div class="search-suggestions">
+                                <ul>
+                    `;
+                    
+                    results.forEach(result => {
+                        resultsHTML += `
+                            <li>
+                                <a href="javascript:void(0)" class="keyword-link" data-target="${result.target}">
+                                    <strong>${result.title}</strong>
+                                </a>
+                                <div style="color: #cc9999; font-size: 14px; margin-top: 5px;">${result.description}</div>
+                                <div style="color: #996666; font-size: 13px; margin-top: 3px;">${result.date}</div>
+                            </li>
+                        `;
+                    });
+                    
+                    resultsHTML += `
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                    
+                    resultsContent.innerHTML = resultsHTML;
+                    
+                    document.querySelectorAll('.keyword-link[data-target]').forEach(link => {
+                        link.addEventListener('click', function() {
+                            const targetId = this.getAttribute('data-target');
+                            
+                            document.getElementById('searchResultsPage').style.display = 'none';
+                            
+                            const targetPage = document.getElementById(targetId);
+                            if (targetPage) {
+                                targetPage.style.display = 'block';
+                            }
+                            
+                            window.scrollTo(0, 0);
+                            
+                            // 尝试播放恐怖音效
+                            try {
+                                const audio = document.getElementById('terrorAudio');
+                                audio.currentTime = 0;
+                                audio.play().catch(e => console.log("音频播放失败:", e));
+                            } catch (e) {
+                                console.log("音效播放异常");
+                            }
+                        });
+                    });
+                }
+            } else {
+                document.getElementById('searchResultsPage').style.display = 'block';
+                document.getElementById('searchQueryDisplay').textContent = query;
+                
+                const resultsContent = document.getElementById('searchResultsContent');
+                
+                const noResultsHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <h3>没有查找到与"${query}"相关的信息</h3>
+                    </div>
+                `;
+                
+                resultsContent.innerHTML = noResultsHTML;
+                
+                document.querySelectorAll('.keyword-link[data-keyword]').forEach(link => {
+                    link.addEventListener('click', function() {
+                        const keyword = this.getAttribute('data-keyword');
+                        document.getElementById('searchInput').value = keyword;
+                        performSearch();
+                    });
+                });
+            }
+            
+            window.scrollTo(0, 0);
+        }
+        
+        function hideAllPages() {
+            document.querySelectorAll('.article-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.doctor-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.search-detail-page').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            document.getElementById('searchResultsPage').style.display = 'none';
+            
+            document.getElementById('mainContent').style.display = 'none';
+            document.querySelector('.header-banner').style.display = 'none';
+            document.querySelector('footer').style.display = 'none';
+        }
+        
+        function showMainPage() {
+            document.getElementById('mainContent').style.display = 'block';
+            document.querySelector('.header-banner').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+        }
+        
+        document.getElementById('searchInput').addEventListener('blur', function() {
+            if (this.value === '') {
+                this.placeholder = '搜索实验体编号...';
+            }
+        });
+        
+        // 随机添加闪烁效果
+        function addRandomFlicker() {
+            const elements = document.querySelectorAll('h1, h2, h3, .notice-item, .function-card');
+            elements.forEach(el => {
+                if (Math.random() > 0.7) {
+                    el.classList.add('random-flicker');
+                }
+            });
+        }
+        
+        // 随机显示警告信息
+        setInterval(() => {
+            const warnings = [
+                "警告：系统检测到异常访问模式",
+                "注意：医疗记录访问已记录",
+                "⚠ 异常数据访问警告 ⚠",
+                "系统提示：敏感内容访问",
+                "记录：非标准医疗程序查询"
+            ];
+            
+            if (Math.random() > 0.95) {
+                const randomWarning = warnings[Math.floor(Math.random() * warnings.length)];
+                console.log(randomWarning);
+                
+                // 在页面右下角短暂显示警告
+                const warningDiv = document.createElement('div');
+                warningDiv.textContent = randomWarning;
+                warningDiv.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background-color: rgba(102, 0, 0, 0.9);
+                    color: #ff6666;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    border: 1px solid #ff3333;
+                    z-index: 10001;
+                    font-size: 12px;
+                    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+                    animation: fadeInOut 3s;
+                `;
+                
+                document.body.appendChild(warningDiv);
+                
+                setTimeout(() => {
+                    warningDiv.remove();
+                }, 3000);
+            }
+        }, 10000);
+        
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: translateY(20px); }
+                20% { opacity: 1; transform: translateY(0); }
+                80% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(20px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

@@ -1,0 +1,589 @@
+/* ============================================================
+   夜航论坛 - 用户主页 · Gambit（页面⑮）
+   配色：朴素单调 · 内容留白 · 暗示虚空
+   对应解谜链序号 ⑮，右下角显示 15/30
+   ============================================================ */
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  overflow-y: scroll;
+}
+
+body {
+  font-family: 'Microsoft YaHei', '微软雅黑', '宋体', SimSun, Tahoma, Arial, sans-serif;
+  background: #05080C;
+  color: #9AABB8;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: #5A8AAA;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #E0B040;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #406070;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ---- Layout ---- */
+#container {
+  width: 100%;
+  max-width: 1280px;
+  min-width: 800px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #0A0F18;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Header ---- */
+#header {
+  background: linear-gradient(180deg, #0A0E18 0%, #0E1525 40%, #121C2E 100%);
+  border-bottom: 1px solid #1A283A;
+}
+
+#header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px 12px;
+}
+
+#logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.logo-night {
+  font-size: 28px;
+  font-weight: bold;
+  color: #C8BEA8;
+  text-shadow: 0 0 12px rgba(200, 170, 120, 0.08);
+  letter-spacing: 4px;
+}
+
+.logo-sub {
+  font-size: 13px;
+  color: #405A72;
+  font-weight: normal;
+}
+
+/* ---- Header Search ---- */
+#header-search {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+#header-search input {
+  width: 200px;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid #1A283A;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+  background: #0E1525;
+  color: #9AABB8;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+#header-search input::placeholder {
+  color: #3A4A5A;
+}
+
+#header-search input:focus {
+  background: #121C2E;
+  border-color: #3A6078;
+}
+
+#header-search button {
+  height: 28px;
+  padding: 0 14px;
+  border: 1px solid #1A283A;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, #1A2D40 0%, #0E1A28 100%);
+  color: #6A8AAA;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s;
+}
+
+#header-search button:hover {
+  background: linear-gradient(180deg, #1E3250 0%, #14202E 100%);
+  color: #B8C4D0;
+}
+
+/* ---- Search Panel ---- */
+#search-panel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  margin-top: 4px;
+  background: #0E1622;
+  border: 1px solid #1A2D4A;
+  border-radius: 3px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+}
+
+#search-panel.hidden {
+  display: none;
+}
+
+.panel-header {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #4A6078;
+  border-bottom: 1px solid #1A2A3A;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header a {
+  color: #3A6078;
+  font-size: 12px;
+}
+
+.panel-header a:hover {
+  color: #E0B040;
+}
+
+#history-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#history-list li {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #8A9AA8;
+  cursor: pointer;
+  border-bottom: 1px solid #0E1824;
+  transition: background 0.1s;
+}
+
+#history-list li:hover {
+  background: #121C2E;
+  color: #B8C4D0;
+}
+
+#result-body {
+  padding: 10px 12px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#result-body:hover {
+  background: #121C2E;
+}
+
+.result-label {
+  color: #5A8AAA;
+}
+
+.result-type {
+  font-size: 11px;
+  color: #3A6070;
+  background: #0A1420;
+  padding: 1px 6px;
+  border-radius: 2px;
+}
+
+/* ---- Nav ---- */
+#nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  height: 34px;
+  background: linear-gradient(180deg, #080C14 0%, #0A101E 100%);
+  border-top: 1px solid #121C2E;
+}
+
+#nav ul {
+  display: flex;
+  gap: 0;
+  height: 100%;
+}
+
+#nav ul li {
+  position: relative;
+}
+
+#nav ul li a {
+  display: block;
+  padding: 0 18px;
+  height: 34px;
+  line-height: 34px;
+  color: #4A6078;
+  font-size: 13px;
+  font-weight: bold;
+  border-right: 1px solid #121C2E;
+  text-shadow: none;
+  transition: color 0.12s, background 0.12s;
+}
+
+#nav ul li a:hover {
+  color: #E0B040;
+  background: rgba(255, 255, 255, 0.02);
+  text-decoration: none;
+}
+
+#nav ul li.current a {
+  color: #C8BEA8;
+  background: #121C2E;
+  border-color: #1A283A;
+  text-shadow: none;
+  border-radius: 0;
+}
+
+#nav-welcome {
+  color: #3A5060;
+  font-size: 12px;
+  padding-right: 4px;
+}
+
+#nav-welcome strong {
+  color: #607A8E;
+  font-weight: normal;
+}
+
+/* ---- Breadcrumb ---- */
+#breadcrumb {
+  padding: 8px 24px;
+  font-size: 13px;
+  color: #4A6070;
+  background: #0A101E;
+  border-bottom: 1px solid #14202E;
+  display: flex;
+  align-items: center;
+}
+
+#breadcrumb .sep {
+  margin: 0 6px;
+  color: #3A5060;
+}
+
+#breadcrumb a {
+  color: #4A6078;
+}
+
+#breadcrumb .current {
+  color: #7A8A9A;
+}
+
+/* ============================================================
+   锁屏界面（与 beacon_holder 一致）
+   ============================================================ */
+
+#lock-screen {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  transition: opacity 0.4s ease;
+}
+
+#lock-screen.lock-hidden {
+  display: none;
+}
+
+#lock-box {
+  width: 380px;
+  padding: 40px 32px 32px;
+  background: #0E1622;
+  border: 1px solid #1A2D4A;
+  border-top: 3px solid #2A4060;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+#lock-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.lock-title {
+  font-size: 15px;
+  color: #C8BEA8;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.lock-hint {
+  font-size: 12.5px;
+  color: #4A6A7A;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.lock-input-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+#lock-password {
+  width: 200px;
+  height: 34px;
+  padding: 0 10px;
+  border: 1px solid #1A2D4A;
+  background: #080E18;
+  color: #B8C4D0;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#lock-password:focus {
+  border-color: #3A6078;
+}
+
+#lock-submit {
+  height: 34px;
+  padding: 0 20px;
+  border: 1px solid #1A2D4A;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #1A2D40 0%, #0E1A28 100%);
+  color: #6A8AAA;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s;
+}
+
+#lock-submit:hover {
+  background: linear-gradient(180deg, #1E3250 0%, #14202E 100%);
+  color: #B8C4D0;
+}
+
+#lock-error {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #B04A4A;
+}
+
+#lock-error.hidden {
+  display: none;
+}
+
+/* ============================================================
+   用户主页内容
+   ============================================================ */
+
+#profile-content {
+  flex: 1;
+  padding: 24px;
+  transition: opacity 0.4s ease;
+}
+
+#profile-content.content-hidden {
+  display: none;
+}
+
+/* ---- 用户信息卡 ---- */
+#profile-card {
+  display: flex;
+  gap: 28px;
+  padding: 24px;
+  background: #0E1622;
+  border: 1px solid #1A2A3A;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#profile-avatar {
+  flex-shrink: 0;
+}
+
+#avatar-default {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #3A5060;
+  background: #0A1420;
+  border: 2px solid #1A2A3A;
+  border-radius: 6px;
+}
+
+#profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+#profile-username {
+  font-size: 22px;
+  font-weight: bold;
+  color: #C8BEA8;
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+}
+
+.profile-group {
+  font-size: 12px;
+  color: #3A6A5A;
+  margin-bottom: 14px;
+  padding-left: 2px;
+}
+
+#profile-stats {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#profile-stats tr {
+  border-bottom: 1px solid #121C28;
+}
+
+#profile-stats tr:last-child {
+  border-bottom: none;
+}
+
+#profile-stats td {
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.stat-label {
+  width: 80px;
+  color: #4A6A7A;
+}
+
+.stat-value {
+  color: #8AAABA;
+}
+
+/* ---- 档案按钮 ---- */
+#archive-area {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+#archive-link {
+  display: inline-block;
+  padding: 6px 16px;
+  border: 1px solid #1A2D4A;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #1A2D40 0%, #0E1A28 100%);
+  color: #6A8AAA;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.12s, background 0.12s, border-color 0.12s;
+}
+
+#archive-link:hover {
+  background: linear-gradient(180deg, #1E3250 0%, #14202E 100%);
+  color: #B8C4D0;
+  border-color: #2A4A6A;
+  text-decoration: none;
+}
+
+/* ---- 空内容提示 ---- */
+#empty-notice {
+  padding: 40px 24px;
+  background: #0C1420;
+  border: 1px solid #1A2A3A;
+  text-align: center;
+}
+
+#empty-notice p {
+  font-size: 13px;
+  color: #3A5060;
+  letter-spacing: 1px;
+}
+
+/* ---- Footer ---- */
+#footer {
+  padding: 16px 24px;
+  background: #0A101E;
+  border-top: 1px solid #14202E;
+  text-align: center;
+  font-size: 12px;
+  color: #3A5060;
+  line-height: 2;
+}
+
+.footer-links a {
+  color: #4A6070;
+  margin: 0 2px;
+}
+
+.footer-copy {
+  color: #3A5060;
+}
+
+/* ---- Utility ---- */
+.hidden {
+  display: none !important;
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+/* ---- Page Counter (fixed) ---- */
+#page-counter-fixed {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  font-family: 'Georgia', serif;
+  font-size: 13px;
+  color: rgba(200, 190, 168, 0.20);
+  background: rgba(5, 8, 12, 0.6);
+  border: 1px solid rgba(200, 190, 168, 0.08);
+  border-radius: 4px;
+  padding: 4px 10px;
+  letter-spacing: 0.5px;
+  user-select: none;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}

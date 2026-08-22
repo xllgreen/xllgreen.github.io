@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>毕业论文</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .thesis { padding: 24px 20px 80px; max-width: 720px; margin: 0 auto; }
+    .thesis h1 { font-size: 22px; text-align: center; margin-bottom: 8px; }
+    .thesis .author { text-align: center; color: #666; font-size: 13px; margin-bottom: 32px; }
+    .thesis h2 { font-size: 16px; margin: 24px 0 12px; }
+    .thesis p { font-size: 14px; line-height: 1.9; color: #333; margin-bottom: 12px; text-indent: 2em; }
+    .thesis .refs { margin-top: 40px; }
+    .thesis .refs h2 { border-bottom: 2px solid #333; padding-bottom: 8px; }
+    .thesis .ref {
+      font-size: 13px; line-height: 1.7; color: #444;
+      margin-bottom: 8px; padding-left: 24px; text-indent: -24px;
+    }
+    /* 第7条文献异常：藏密钥数字 114 */
+    .thesis .ref.suspicious {
+      background: #fff8e1; padding: 10px 10px 10px 34px;
+      border-left: 3px solid #fa5151; border-radius: 2px;
+      margin: 12px 0;
+    }
+    .thesis .ref.suspicious .flag {
+      color: #fa5151; font-weight: 600;
+    }
+    .thesis .note {
+      background: #fff0f3; padding: 10px 14px; border-radius: 4px;
+      font-size: 12px; color: #d9707e; margin-top: 8px;
+      border-left: 3px solid #d9707e;
+    }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="window-bar">
+      <a class="back" href="/ARGgame/her-old-laptop/apps/files/documents.html">‹</a>
+      <span class="title">林晚_毕业论文_最终版.pdf</span>
+    </div>
+    <div class="window-body">
+      <div class="thesis">
+        <h1>基于量子观测效应的实验数据复现性研究</h1>
+        <div class="author">作者：林晚　指导教师：陈XX 教授　2024年6月</div>
+
+        <h2>摘要</h2>
+        <p>本文复现了 Wilson (2021) 提出的量子观测实验，并对其中的数据一致性进行了系统性检验。在复现过程中，作者发现原始数据与期刊发表版本之间存在显著偏差，且偏差方向高度集中于"使结果更显著"的方向。本文将详细记录这一发现，并提出数据完整性的相关讨论。</p>
+
+        <h2>参考文献</h2>
+        <div class="refs">
+          <div class="ref">[1] 张三, 李四. 量子测量理论综述[J]. 物理学报, 2019, 68(12): 12-25.</div>
+          <div class="ref">[2] Wilson, R. Observational Effects in Quantum Systems[J]. Nature Physics, 2021, 17(8): 912-918.</div>
+          <div class="ref">[3] 王五. 实验数据处理方法[M]. 北京: 科学出版社, 2020.</div>
+          <div class="ref">[4] Liu, Y. et al. Reproducibility in Physics[J]. Science, 2022.</div>
+          <div class="ref">[5] 赵六. 学术伦理与数据完整性[J]. 学术界, 2023.</div>
+          <div class="ref">[6] 陈XX. 量子系统实验方法论[J]. X大学学报, 2020.</div>
+          <!-- 第7条：异常文献，藏密钥数字 114 -->
+          <div class="ref suspicious">
+            [7] <span class="flag">Wilson, R. Observational Effects in Quantum Systems (原始未修改版)</span>[J]. Nature Physics, 2021, <span class="flag">17(114)</span>: 912-918.
+            <div class="note">
+              林晚批注：←原始 114
+            </div>
+          </div>
+          <div class="ref">[8] Brown, K. Data Integrity in Research[J]. Nature, 2023.</div>
+          <div class="ref">[9] 周明. 科研诚信与数据溯源方法[D]. X大学, 2024.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/common.js"></script>
+  <script>
+    // 看到论文 = 解锁线索
+    setTimeout(() => Game.mark('THESIS'), 1500);
+    Game.renderProgress();
+  </script>
+</body>
+</html>

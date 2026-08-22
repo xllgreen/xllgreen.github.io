@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760">
+<rect width="620" height="760" fill="#071013"/>
+<g stroke="#9ed3d8" fill="none" opacity=".72">
+<path d="M310 70v580" stroke-width="20" opacity=".45"/>
+<path d="M310 120C180 90 100 195 115 355c10 125 70 230 195 255M310 120c130-30 210 75 195 235-10 125-70 230-195 255" stroke-width="15"/>
+<path d="M310 170c-110-40-160 25-160 150 0 95 42 190 160 245M310 170c110-40 160 25 160 150 0 95-42 190-160 245" stroke-width="11" opacity=".65"/>
+<path d="M180 210h260M150 275h320M145 345h330M155 415h310M180 485h260" stroke-width="7" opacity=".45"/>
+</g>
+<circle cx="204" cy="538" r="15" fill="#d4f5f7" opacity=".8"/><circle cx="416" cy="538" r="15" fill="#d4f5f7" opacity=".8"/>
+<text x="25" y="45" fill="#a8d9dc" font-family="monospace" font-size="24">PACS 2013-09-12  LEFT</text>
+<text x="532" y="55" fill="#fff" font-size="40">L</text>
+</svg>
