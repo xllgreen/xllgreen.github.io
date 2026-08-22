@@ -14,7 +14,7 @@ const { denied } = bootstrap({
   pageId: 'news', brand: '岳桩资讯', domain: 'yuezhuang-news.cn', skin: 'news', node: 'P04',
   accessDeniedHint: '资讯检索暂不可用。先确认沈苒的失联情况。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

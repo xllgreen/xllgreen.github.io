@@ -14,7 +14,7 @@ const { denied } = bootstrap({
   pageId: 'scenic', brand: '岳桩山生态景区', domain: 'yuezhuangshan-scenic.cn', skin: 'scenic', node: 'P02',
   accessDeniedHint: '景区官网尚未上线。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

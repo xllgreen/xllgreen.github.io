@@ -136,7 +136,6 @@ function setScene(next) {
   addStory(storySeeds[next]);
   saveState();
   render();
-  if (next === "chest") maybeShowPaywall();
 }
 
 function showGame() {
@@ -147,19 +146,6 @@ function showGame() {
   if (!state.story.length) addStory(storySeeds.door);
   saveState();
   render();
-}
-
-function maybeShowPaywall() {
-  if (localStorage.getItem(PAY_PROMPT_KEY)) return;
-  localStorage.setItem(PAY_PROMPT_KEY, "1");
-  if (window.Paywall && !Paywall.hasPaid()) {
-    setTimeout(() => Paywall.show({
-      title: "支持《松峰岭小屋》",
-      price: "1元",
-      studio: "abc studio",
-      qrCode: "paycode.png"
-    }), 1400);
-  }
 }
 
 function render() {
@@ -801,12 +787,7 @@ document.addEventListener("click", (event) => {
 
 $("#startBtn").addEventListener("click", showGame);
 $("#continueBtn").addEventListener("click", showGame);
-$("#supportBtn").addEventListener("click", () => Paywall.show({
-  title: "支持《松峰岭小屋》",
-  price: "1元",
-  studio: "abc studio",
-  qrCode: "paycode.png"
-}));
+
 $("#resetBtn").addEventListener("click", resetGame);
 $("#backToGameBtn").addEventListener("click", () => $("#tributeCredits").classList.add("hidden"));
 

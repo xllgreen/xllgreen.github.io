@@ -12,6 +12,7 @@ import { IMG } from '@data/assets';
 import { GAME_CLOCK } from '@data/content';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+const basePath = '/ARGgame/yuezhuangshan/';
 
 // 注入 favicon
 (() => {
@@ -133,21 +134,21 @@ function enterGame(fromEntry?: string): void {
   }
   // 否则按最近进度继续
   const order: Array<{ node: string; url: string }> = [
-    { node: 'P12', url: '/ARGgame/yuezhuangshan/src/pages/ending2/index.html' },
-    { node: 'P11', url: '/ARGgame/yuezhuangshan/src/pages/identify/index.html' },
-    { node: 'P10', url: '/ARGgame/yuezhuangshan/src/pages/lab/index.html' },
-    { node: 'P09', url: '/ARGgame/yuezhuangshan/src/pages/lab/index.html' },
-    { node: 'P08', url: '/ARGgame/yuezhuangshan/src/pages/lab/index.html' },
-    { node: 'P07', url: '/ARGgame/yuezhuangshan/src/pages/ending/index.html' },
-    { node: 'P06', url: '/ARGgame/yuezhuangshan/src/pages/backend/index.html' },
-    { node: 'P05', url: '/ARGgame/yuezhuangshan/src/pages/backend/index.html' },
-    { node: 'P04', url: '/ARGgame/yuezhuangshan/src/pages/news/index.html' },
-    { node: 'P03', url: '/ARGgame/yuezhuangshan/src/pages/chat/index.html' },
-    { node: 'P02', url: '/ARGgame/yuezhuangshan/src/pages/scenic/index.html' },
-    { node: 'P01', url: '/ARGgame/yuezhuangshan/src/pages/mail/index.html' },
+    { node: 'P12', url: basePath + 'src/pages/ending2/index.html' },
+    { node: 'P11', url: basePath + 'src/pages/identify/index.html' },
+    { node: 'P10', url: basePath + 'src/pages/lab/index.html' },
+    { node: 'P09', url: basePath + 'src/pages/lab/index.html' },
+    { node: 'P08', url: basePath + 'src/pages/lab/index.html' },
+    { node: 'P07', url: basePath + 'src/pages/ending/index.html' },
+    { node: 'P06', url: basePath + 'src/pages/backend/index.html' },
+    { node: 'P05', url: basePath + 'src/pages/backend/index.html' },
+    { node: 'P04', url: basePath + 'src/pages/news/index.html' },
+    { node: 'P03', url: basePath + 'src/pages/chat/index.html' },
+    { node: 'P02', url: basePath + 'src/pages/scenic/index.html' },
+    { node: 'P01', url: basePath + 'src/pages/mail/index.html' },
   ];
   const target = order.find((o) => s.unlockedNodes.includes(o.node as any));
-  location.href = target?.url ?? '/ARGgame/yuezhuangshan/src/pages/mail/index.html';
+  location.href = target?.url ?? basePath + 'src/pages/mail/index.html';
 }
 
 function renderNav(): void {
@@ -343,7 +344,7 @@ function setupBookmarks(): void {
       e.preventDefault();
       const entry = el.dataset.entry!;
       if (entry === '最终抉择') {
-        location.href = '/ARGgame/yuezhuangshan/src/pages/ending2/index.html';
+        location.href = `${basePath}src/pages/ending2/index.html`;
       } else {
         enterGame(entry);
       }

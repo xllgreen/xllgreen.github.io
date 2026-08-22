@@ -253,11 +253,8 @@
     hidden:['隐藏结局','重新拍一张','你回到已经停电的307，把相机架在讲台上。\n\n闪光灯亮起。\n\n照片里只有空教室和一排排旧桌椅。可最后一排窗边，似乎有一道比阴影更浅的人形。\n\n照片背面：2026.08 · 307最后一张照片。']
   }[type];
     const elapsed=Math.max(1,Math.round((Date.now()-state.startedAt)/60000));
-    openCustom('',`<div class="ending"><div class="tag">${data[0]}</div><h2>${data[1]}</h2><p>${data[2].replace(/\n/g,'<br>')}</p><div class="stats">关键线索 ${state.clues.length}/${Object.keys(clueDefs).length}　·　隐藏资料 ${hasClue('bookmark')?1:0}/1　·　调查约 ${elapsed} 分钟</div><div class="modal-actions"><button id="reviewBtn">查看线索册</button><button id="restartBtn">重新调查</button></div><div class="support"><p>案件已经结束。如果这段调查让你愿意记住林遥几分钟，可以自愿支持作者继续做下一份档案。</p><div class="support-buttons"><button data-tip="1">¥1 支持一下</button><button data-tip="3">¥3 很喜欢这个故事</button><button data-tip="6">¥6 等下一案</button><button id="leaveSupport">暂不支持</button></div><p class="micro">收款码可在项目配置中替换；不支持也不会缺少任何剧情或结局。</p></div></div>`,'wide',false);
-    setTimeout(()=>{$('#restartBtn').onclick=reset;$('#reviewBtn').onclick=openNotebook;$('#leaveSupport').onclick=()=>openTitle();document.querySelectorAll('[data-tip]').forEach(b=>b.onclick=()=>support(b.dataset.tip));},0);
-  }
-  function support(amount){
-    openCustom('自愿支持',`<div class="paper"><h3>感谢支持 ¥${amount}</h3><p>当前交付包没有写入作者的真实收款码，以避免错误收款信息。</p><p>部署前，把你的微信/支付宝收款二维码图片放进 <b>assets/img/</b>，并按 README 中“付款入口配置”替换即可。</p><p>这不会影响玩家返回结局或完整游玩。</p></div><div class="modal-actions"><button id="supportBack">返回结局</button></div>`,'narrow'); setTimeout(()=>$('#supportBack').onclick=()=>finish(state.ending||'photo'),0);
+    openCustom('',`<div class="ending"><div class="tag">${data[0]}</div><h2>${data[1]}</h2><p>${data[2].replace(/\n/g,'<br>')}</p><div class="stats">关键线索 ${state.clues.length}/${Object.keys(clueDefs).length}　·　隐藏资料 ${hasClue('bookmark')?1:0}/1　·　调查约 ${elapsed} 分钟</div><div class="modal-actions"><button id="reviewBtn">查看线索册</button><button id="restartBtn">重新调查</button></div></div>`,'wide',false);
+    setTimeout(()=>{$('#restartBtn').onclick=reset;$('#reviewBtn').onclick=openNotebook;},0);
   }
 
   function openNotebook(){

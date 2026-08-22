@@ -11,7 +11,7 @@ const { denied } = bootstrap({
   pageId: 'identify', brand: '谛听', domain: 'diting.app', skin: 'chat', node: 'P11',
   accessDeniedHint: '还没有消息到来。先在监控里确认那不是她。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

@@ -80,8 +80,7 @@ function prepareFreshRun(showTitle){
  else if(originalStartContinue){originalStartContinue.call($('#startContinueBtn'));}
  else{$('#startScreen')?.classList.add('hidden');$('#commandInput')?.focus();}
 }
-function support(){const modal=$('#modal');if(!modal)return;$('#modalTitle').textContent='自愿支持';$('#modalBody').innerHTML='<p>完整游戏与全部结局不因付款受限。正式上线时可在这里接入你的自愿支持方式。</p>';modal.classList.remove('hidden');}
-function wireEndingActions(){const actions=$('#ending .ending-actions');if(!actions)return;actions.innerHTML='<button id="nightArchiveBtn" class="ghost">回看今夜记录</button><button id="nightRestartBtn" class="primary">从22:47重新经历</button><button id="nightTitleBtn" class="ghost">回到标题</button><button id="nightSupportBtn" class="ghost night-support">自愿支持</button>';$('#nightArchiveBtn').onclick=showArchive;$('#nightRestartBtn').onclick=()=>prepareFreshRun(false);$('#nightTitleBtn').onclick=()=>prepareFreshRun(true);$('#nightSupportBtn').onclick=support;}
+function wireEndingActions(){const actions=$('#ending .ending-actions');if(!actions)return;actions.innerHTML='<button id="nightArchiveBtn" class="ghost">回看今夜记录</button><button id="nightRestartBtn" class="primary">从22:47重新经历</button><button id="nightTitleBtn" class="ghost">回到标题</button>';$('#nightArchiveBtn').onclick=showArchive;$('#nightRestartBtn').onclick=()=>prepareFreshRun(false);$('#nightTitleBtn').onclick=()=>prepareFreshRun(true);}
 function renderSettlement(){
  if(rendering)return;const end=$('#ending'),title=$('#endingTitle');if(!end||end.classList.contains('hidden')||!title?.textContent.trim())return;
  rendering=true;try{

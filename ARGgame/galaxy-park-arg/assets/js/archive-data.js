@@ -495,7 +495,7 @@ window.GALAXY_SITE_DATA.archive = {
         <div class="ending-actions">
           <button type="button" data-clear-progress>重置游戏 / 清除进度</button>
           <a href="/ARGgame/galaxy-park-arg/thanks.html">感谢页</a>
-          <a href="https://space.bilibili.com/1806769398?spm_id_from=333.1007.0.0" target="_blank" rel="noopener">支持作者：<strong>凛雪</strong>YukiRins</a>
+
         </div>
       `
     },
@@ -518,7 +518,7 @@ window.GALAXY_SITE_DATA.archive = {
         <div class="ending-actions">
           <button type="button" data-clear-progress>重置游戏 / 清除进度</button>
           <a href="/ARGgame/galaxy-park-arg/thanks.html">感谢页</a>
-          <a href="https://space.bilibili.com/1806769398?spm_id_from=333.1007.0.0" target="_blank" rel="noopener">支持作者：<strong>凛雪</strong>YukiRins</a>
+
         </div>
       `
     },
@@ -580,7 +580,7 @@ window.GALAXY_SITE_DATA.archive = {
         <div class="ending-actions">
           <button type="button" data-clear-progress>重置游戏 / 清除进度</button>
           <a href="/ARGgame/galaxy-park-arg/thanks.html">感谢页</a>
-          <a href="https://space.bilibili.com/1806769398?spm_id_from=333.1007.0.0" target="_blank" rel="noopener">支持作者：<strong>凛雪</strong>YukiRins</a>
+
         </div>
       `
     }

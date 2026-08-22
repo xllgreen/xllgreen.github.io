@@ -11,7 +11,6 @@
 - `index.html`：页面入口
 - `style.css`：主视觉与响应式样式
 - `game.js`：五章谜题、存档、提示、多结局逻辑
-- `paywall.js` / `paywall.css`：1 元支持弹窗，沿用潮汐福利院的前端标记方案并做本作适配
 - `paycode.png`：收款码
 
 ## 已验证流程

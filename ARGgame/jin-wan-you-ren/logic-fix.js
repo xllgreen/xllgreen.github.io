@@ -375,10 +375,7 @@ function repairRoomNavigation(){
     if(!locked){btn.tabIndex=0;btn.dataset.logicRoom=scene;}
   });
   // Mobile browsers sometimes keep a stale transparent support layer for a frame/timer.
-  const pay=$('#paywall-overlay');
-  if(pay&&!pay.classList.contains('paywall-show'))pay.style.pointerEvents='none';
-  if(pay&&pay.classList.contains('paywall-show'))pay.style.pointerEvents='auto';
-}
+  }
 function roomSwitcherHTML(){
   const s=state();
   return `<div class="logic-room-switcher" aria-label="切换房间">${Object.entries(ROOM_LABELS).map(([scene,label])=>{
@@ -597,13 +594,6 @@ function polishEnding(root){
     setText(code,'THE ROUTINE');setText(title,'隐藏结局 · 作息表');
     setHTML(body,'你和陈阿姨先下了楼，把今晚拍下的照片、聊天记录和时间记录一起交给警方。你没有再回705收拾。<br><br>等候时，你重新翻了一遍另外几条细节：21:36的小区东门便利店小票、搬家照里徐洲钥匙圈上的绿色硬塑料标签、704门框的新擦痕、卫生间陌生的薄荷味、夹道里的旧充电线，以及那张只写着“705”和几个夜间时段的便签。<br><br>三个月前，徐洲发过这套房源链接，也来帮过你搬家。旧聊天本身很普通；真正改变含义的是后来出现的物业标签、704使用痕迹、夹道物品和作息记录。<br><br>今晚没有贵重物品丢失。被碰过的却是窗帘、牙刷、手巾、充电线和日常杯子。<br><br>你不知道这一切究竟从什么时候开始，也没有证据替他解释原因。你只把能确认的事实留给警方。<br><br>第二天，在物业和警方陪同下，你搬离705，换了号码，也申请了调岗。<br><br>两周后，新办公室前台收到一个没有寄件人的纸箱。<br><br>里面是一双和705玄关同款、同尺码的新拖鞋。<br><br>左右并排摆得整整齐齐。');
   }
-}
-function polishPaywall(){
-  const overlay=$('#paywall-overlay');if(overlay&&!overlay.classList.contains('paywall-show'))overlay.style.pointerEvents='none';if(overlay&&overlay.classList.contains('paywall-show'))overlay.style.pointerEvents='auto';
-  if(!overlay)return;
-  const body=overlay.querySelector('.paywall-msg-body');
-  if(body)setHTML(body,'如果你玩到这里觉得还不错，愿意留下 <strong>1元</strong> 自愿支持，我会把它继续用在网页悬疑的素材、测试和后续更新上。');
-  const last=overlay.querySelector('.paywall-msg-warm2');setText(last,'不支持也完全没关系。剧情、提示、结局和二周目都不会受影响。');
 }
 function polishStructureTerms(root){
   if(!root)return;

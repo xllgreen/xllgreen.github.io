@@ -256,7 +256,7 @@ const audio = new AmbientAudio();
 
 function cacheElements() {
   [
-    'coverScreen','gameShell','newGameBtn','continueBtn','coverSettingsBtn','homeBtn','chapterLabel','audioBtn','hintBtn','supportBtn','notesBtn','saveBtn','settingsBtn','chapterNav','progressText','progressBar','sceneFrame','sceneImage','sceneCaption','sceneMood','sectionKicker','sectionTitle','storyContent','objectiveText','puzzleArea','feedback','clueBoardBtn','clueCount','evidenceList','portrait','speakerName','speakerThought','hintDialog','hintLevels','hintResult','notesDialog','notesArea','clearNotesBtn','clueDialog','clueBoard','settingsDialog','settingAudio','settingMotion','settingLargeText','manualSaveBtn','exportSaveBtn','importSaveInput','resetGameBtn','saveStatus','resetDialog','resetConfirmInput','confirmResetBtn','endingDialog','endingContent','toast','mobileCloseEvidence'
+    'coverScreen','gameShell','newGameBtn','continueBtn','coverSettingsBtn','homeBtn','chapterLabel','audioBtn','hintBtn','notesBtn','saveBtn','settingsBtn','chapterNav','progressText','progressBar','sceneFrame','sceneImage','sceneCaption','sceneMood','sectionKicker','sectionTitle','storyContent','objectiveText','puzzleArea','feedback','clueBoardBtn','clueCount','evidenceList','portrait','speakerName','speakerThought','hintDialog','hintLevels','hintResult','notesDialog','notesArea','clearNotesBtn','clueDialog','clueBoard','settingsDialog','settingAudio','settingMotion','settingLargeText','manualSaveBtn','exportSaveBtn','importSaveInput','resetGameBtn','saveStatus','resetDialog','resetConfirmInput','confirmResetBtn','endingDialog','endingContent','toast','mobileCloseEvidence'
   ].forEach(id => { els[id] = document.getElementById(id); });
 }
 
@@ -339,27 +339,6 @@ function clearFeedback() {
   els.feedback.textContent = '';
 }
 
-function supportConfig() {
-  return {
-    qrCode: 'paycode.png',
-    price: '1元',
-    title: '支持《晚舟堂》',
-    studio: 'abc studio'
-  };
-}
-
-function showSupport(auto = false) {
-  if (!window.Paywall) {
-    if (!auto) showToast('支持模块暂未加载，请刷新页面后重试');
-    return;
-  }
-  if (auto) {
-    window.Paywall.autoShowOnce(supportConfig(), 900);
-    return;
-  }
-  window.Paywall.show(supportConfig());
-}
-
 function startGame(newGame = false) {
   if (newGame) {
     state = defaultState();
@@ -372,7 +351,6 @@ function startGame(newGame = false) {
   renderAll();
   saveState(false);
   if (state.audioEnabled) audio.init().catch(() => {});
-  showSupport(true);
 }
 
 function showCover() {
@@ -920,7 +898,6 @@ function setupEvents() {
   [els.coverSettingsBtn,els.settingsBtn].forEach(btn => btn.addEventListener('click', () => els.settingsDialog.showModal()));
   els.audioBtn.addEventListener('click', () => { state.audioEnabled = !state.audioEnabled; els.settingAudio.checked = state.audioEnabled; applySettings(); saveState(false); showToast(state.audioEnabled ? '音效已开启' : '音效已关闭'); });
   els.hintBtn.addEventListener('click', openHintDialog);
-  els.supportBtn.addEventListener('click', () => showSupport(false));
   els.notesBtn.addEventListener('click', () => { els.notesArea.value = state.notes; els.notesDialog.showModal(); });
   els.saveBtn.addEventListener('click', () => saveState(true));
   els.clueBoardBtn.addEventListener('click', () => { renderClueBoard(); els.clueDialog.showModal(); });
@@ -951,7 +928,6 @@ function init() {
   els.newGameBtn.textContent = state.started ? '重新归乡' : '入堂启卷';
   applySettings();
   setupEvents();
-  if (window.Paywall) window.Paywall._syncSupportButton(window.Paywall.hasPaid());
   if (state.started) {
     els.continueBtn.hidden = false;
   }

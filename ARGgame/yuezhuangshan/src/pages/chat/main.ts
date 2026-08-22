@@ -12,7 +12,7 @@ const { denied } = bootstrap({
   pageId: 'chat', brand: '谛听', domain: 'diting.app', skin: 'chat', node: 'P03',
   accessDeniedHint: '聊天记录暂不可用。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

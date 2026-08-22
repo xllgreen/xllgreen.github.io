@@ -14,7 +14,7 @@ const { denied } = bootstrap({
   pageId: 'lab', brand: '实验室内网', domain: 'lab.yuezhuangshan.cn', skin: 'backend', node: 'P08',
   accessDeniedHint: '内网需要从维护通道进入。先完成第一阶段的调查。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

@@ -43,7 +43,6 @@
   let audioCtx = null;
   let ambientNodes = [];
   let portalView = null;
-  let autoSupportTimer = null;
 
   const puzzleByPage = {
     staff: 'p1', handover: 'p2', call: 'p3', emr: 'p4', pacs: 'p5', maintenance: 'p6',
@@ -242,7 +241,6 @@
     renderPage(id);
     updateProgress();
     save();
-    if (Object.keys(state.completed).filter(k => state.completed[k]).length >= 1) scheduleAutoSupport();
     requestAnimationFrame(() => E.page.scrollTo({ top: 0, behavior: 'auto' }));
   }
 
@@ -322,7 +320,6 @@
     ev.forEach(addEvidence);
     updateProgress(); save(); renderSide();
     toast(msg);
-    if (k === 'p1') scheduleAutoSupport();
   }
 
   function result(id, ok, t) {
@@ -706,13 +703,6 @@
     go(prev, false);
   }
 
-  function scheduleAutoSupport() {
-    if (!window.Paywall || window.Paywall.hasAutoPrompted()) return;
-    clearTimeout(autoSupportTimer);
-    autoSupportTimer = setTimeout(() => {
-      if (!E.app.classList.contains('hidden')) window.Paywall.showOnce();
-    }, 3000);
-  }
 
   function shell(title, sub, body, mark = '白') {
     return `<div class="site-shell">
@@ -1314,7 +1304,6 @@
   $('#noteBtn').onclick = () => openSide('notes');
   $('#evidenceBtn').onclick = () => openSide('evidence');
   $('#hintBtn').onclick = openHint;
-  $('#supportBtn').onclick = () => { closeMoreMenu(); window.Paywall?.showManual(); };
   $('#moreBtn').onclick = e => {
     e.stopPropagation();
     const menu = $('#moreMenu');

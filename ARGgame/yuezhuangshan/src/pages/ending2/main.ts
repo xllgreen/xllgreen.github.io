@@ -10,7 +10,7 @@ const { denied } = bootstrap({
   pageId: 'ending2', brand: '——', domain: 'localhost', skin: 'ending', node: 'P12',
   accessDeniedHint: '你还没到做选择的时候。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

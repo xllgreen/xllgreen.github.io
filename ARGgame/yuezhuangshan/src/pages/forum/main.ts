@@ -9,7 +9,7 @@ const { denied } = bootstrap({
   skin: 'forum', node: 'SIDE_FORUM',
   accessDeniedHint: '论坛需要先了解岳桩山的基本情况。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

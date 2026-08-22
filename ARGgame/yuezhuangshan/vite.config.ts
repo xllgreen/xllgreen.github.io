@@ -37,7 +37,7 @@ export default defineConfig({
   //   本地访问 http://localhost:5173/yuezhuangshan/
   //   线上访问 https://yelikour.github.io/yuezhuangshan/
   // 若将来换部署路径（如自定义域名根路径），把 BASE 改成 '/' 即可。
-  base: '/yuezhuangshan/',
+  base: '/ARGgame/yuezhuangshan/',
   // 构建版本标识：构建时把时间戳注入每个 HTML 的 <meta name="build">，
   // 供线上版本核对。肉眼不可见，不影响沉浸感。
   // 核对：curl -s https://yelikour.github.io/yuezhuangshan/ | grep -o 'name="build"[^>]*'

@@ -16,6 +16,4 @@
 
 双击 `index.html` 可本地试玩。Windows 用户可双击 `build_release.bat`：脚本会检查核心文件；若系统安装 Node.js，会执行 `node --check app.js`；随后生成 `release\2008届毕业照` 和 `2008届毕业照-release.zip`。
 
-## 自愿支持入口
 
-结局后保留 ¥1 / ¥3 / ¥6 自愿支持入口，但当前源码不包含作者真实收款码。若需要接入，请将二维码图片放入 `assets/img/` 并修改 `app.js` 中 `support(amount)`。

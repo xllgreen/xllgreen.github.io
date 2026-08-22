@@ -78,6 +78,18 @@ body {
     flex-direction: column;
 }
 
+/* 工具页根据视口宽度扩展内容区域，避免复杂工具被固定窄容器限制 */
+@media (min-width: 601px) {
+    body:has(.tool-wrap) .main {
+        max-width: 1440px;
+    }
+
+    body:has(.tool-wrap) .tool-wrap {
+        width: 100%;
+        max-width: none !important;
+    }
+}
+
 .welcome {
       font-family: sans-serif;
     font-size: 55px;

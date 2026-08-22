@@ -212,29 +212,6 @@
     audio.timer = setInterval(ring, 4200);
   }
 
-  function maybeShowPaywall(reason) {
-    if (!window.Paywall || Paywall.hasPaid()) return;
-    if (localStorage.getItem(PAY_PROMPT_KEY)) return;
-    localStorage.setItem(PAY_PROMPT_KEY, reason || "chapter2");
-    setTimeout(() => {
-      Paywall.show({
-        title: "给桂花巷续一盏灯",
-        price: "1元",
-        qrCode: "paycode.png",
-        studio: "abc studio"
-      });
-    }, 650);
-  }
-
-  function showSupport() {
-    if (!window.Paywall) return;
-    Paywall.show({
-      title: "支持《桂花巷三号杂货铺》",
-      price: "1元",
-      qrCode: "paycode.png",
-      studio: "abc studio"
-    });
-  }
 
   function progress() {
     let p = 6;
@@ -375,7 +352,6 @@
       $("#ledgerFeedback").textContent = "密码正确。留言墙的便签纸一张张亮了起来。";
       $("#ledgerFeedback").className = "feedback ok";
       toast("第二章已解锁。");
-      maybeShowPaywall("after_chapter1");
       setTimeout(render, 600);
     } else {
       $("#ledgerFeedback").textContent = "密码不对。婆婆最盼的，似乎不是最后离开的那天。";
@@ -870,7 +846,6 @@
   });
 
   $("#audioBtn").addEventListener("click", toggleAudio);
-  $("#supportBtn").addEventListener("click", showSupport);
   $("#resetBtn").addEventListener("click", resetGame);
   $("#hintBtn").addEventListener("click", openHints);
   $("#closeHint").addEventListener("click", closeHints);

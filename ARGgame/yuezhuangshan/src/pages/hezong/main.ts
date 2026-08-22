@@ -9,7 +9,7 @@ const { denied } = bootstrap({
   skin: 'hezong', node: 'SIDE_HEZONG',
   accessDeniedHint: '这个页面似乎来自一个内部的链接。也许等你知道得更多时，再回来看。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

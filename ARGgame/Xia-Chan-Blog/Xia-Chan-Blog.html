@@ -7,7 +7,6 @@
   <meta name="description" content="一款以2008年个人博客为载体的纯前端叙事解谜游戏。">
   <title>夏蝉博客：2008备份修复</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="paywall.css">
 </head>
 <body>
   <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
@@ -33,7 +32,6 @@
               <button id="unzip-submit" class="blog-btn primary" onclick="Game.checkUnzip()">解压并开始修复</button>
               <button class="blog-btn" onclick="Game.showHint('unzip')">免费提示</button>
             </div>
-            <p class="free-note">提示系统完全免费，与自愿支持无关，也不会影响结局。</p>
           </div>
           <aside class="metadata-card">
             <h2>备份元数据</h2>
@@ -62,7 +60,6 @@
           <button class="blog-btn" onclick="Game.openHintPanel()">💡 免费提示</button>
           <button class="blog-btn" onclick="Game.manualSave()">💾 手动存档</button>
           <button class="blog-btn" id="audio-toggle" onclick="AudioSys.toggle()">♪ 音效开</button>
-          <button class="blog-btn support" onclick="Game.showSupport()">♡ 自愿支持 ¥1</button>
           <button class="blog-btn danger" onclick="Game.confirmReset()">重新开始</button>
         </div>
       </header>
@@ -157,6 +154,6 @@
   <div id="dialog-root"></div>
   <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
   <input type="file" id="save-import" accept="application/json" class="hidden" onchange="Game.importSave(event)">
-  <script src="audio.js"></script><script src="paywall.js"></script><script src="core.js"></script>
+  <script src="audio.js"></script><script src="core.js"></script>
 </body>
 </html>

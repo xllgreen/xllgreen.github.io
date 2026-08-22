@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>潮汐福利院：1999关停档案 - 档案查阅系统</title>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="paywall.css">
 </head>
 <body>
 
@@ -954,7 +953,6 @@
 
 <script src="core.js"></script>
 <script src="audio.js"></script>
-<script src="paywall.js"></script>
 <script>
 // ========== 初始化 ==========
 window.addEventListener('DOMContentLoaded', () => {
@@ -965,9 +963,6 @@ window.addEventListener('DOMContentLoaded', () => {
   
   // 显示打赏浮层（进入game.html时弹出）
   setTimeout(() => {
-    if (typeof Paywall !== 'undefined' && !Paywall.hasPaid()) {
-      Paywall.show({ qrCode: 'paycode.png', price: '1元', title: '支持作者', studio: 'abc studio' });
-    }
   }, 1500);
   
   // 启动环境音

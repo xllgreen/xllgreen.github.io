@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill.B5Qt9EMX.js";import{a}from"./state.Ctb6WHVk.js";function n(){a("进入外部页面: 徐山失踪档案"),document.querySelectorAll("#nav-bar a, #breadcrumb-bar a").forEach(e=>{e.addEventListener("click",t=>t.preventDefault())})}document.addEventListener("DOMContentLoaded",n);

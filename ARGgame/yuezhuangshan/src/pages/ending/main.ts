@@ -15,7 +15,7 @@ const { denied } = bootstrap({
   pageId: 'ending', brand: '——', domain: 'localhost', skin: 'ending', node: 'P07',
   accessDeniedHint: '还没有消息到来。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

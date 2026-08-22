@@ -28,27 +28,6 @@ let currentChapterHint = 'ch1';
 
 // 存档密钥
 const SAVE_KEY = 'yuhua_nightstudy_v2';
-const SUPPORT_PROMPT_KEY = 'nightstudy_support_prompted_v1';
-
-function showSupportPaywall() {
-  if (window.Paywall) {
-    Paywall.show({
-      title: '支持《晚自习留校名单》',
-      price: '1元',
-      studio: 'abc studio',
-      qrCode: 'paycode.png'
-    });
-  } else {
-    showToast('支持组件尚未加载，请刷新页面后重试');
-  }
-}
-
-function maybeShowSupportPaywall() {
-  if (localStorage.getItem(SUPPORT_PROMPT_KEY)) return;
-  localStorage.setItem(SUPPORT_PROMPT_KEY, '1');
-  setTimeout(showSupportPaywall, 900);
-}
-
 function saveGame() {
   const data = {
     currentChapter: GameState.currentChapter,
@@ -290,7 +269,6 @@ function startGame() {
     if (indicator) indicator.textContent = '第一章';
     showToast('点击 <便笺> 可随时记录推理笔记', 4000);
     startChapterTimer('ch1');
-    maybeShowSupportPaywall();
     saveGame();
   });
 }
@@ -2337,8 +2315,6 @@ window.closeModal = closeModal;
 window.showToast = showToast;
 window.saveGame = saveGame;
 window.resetGame = resetGame;
-window.showSupportPaywall = showSupportPaywall;
-window.maybeShowSupportPaywall = maybeShowSupportPaywall;
 window.startGame = startGame;
 window.goToChapter = goToChapter;
 window.setCamTime = setCamTime;

@@ -323,11 +323,6 @@
       this.renderAll();
       AudioSys && AudioSys.startAmbience();
       this.toast('硬盘修复完成，C: 分区已挂载。', 'success');
-      if (!this.state.paywallShown) {
-        this.state.paywallShown = true;
-        this.save();
-        setTimeout(() => this.showSupport(true), 800);
-      }
     },
 
     logRepair(message) {
@@ -859,13 +854,11 @@
           </div>
           <div class="ending-actions">
             <button class="retro-btn" data-close-ending>继续查阅</button>
-            <button class="retro-btn primary" data-support-ending>支持作者 1元</button>
           </div>
         </div>
       `;
       document.body.appendChild(screen);
       screen.querySelector('[data-close-ending]').addEventListener('click', () => screen.remove());
-      screen.querySelector('[data-support-ending]').addEventListener('click', () => this.showSupport());
       this.play(type === 'normal' ? 'playDramatic' : 'playUnlock');
     },
 
@@ -1075,19 +1068,6 @@
       result.innerHTML = '<p style="color:#91a68e;">未找到匹配结果。旧硬盘里，有些词要换一种问法。</p>';
     },
 
-    showSupport(silentIfPaid) {
-      if (typeof Paywall === 'undefined') return;
-      if (Paywall.hasPaid()) {
-        if (!silentIfPaid) this.toast('已记录你的支持，感谢！', 'success');
-        return;
-      }
-      Paywall.show({
-        qrCode: 'paycode.png',
-        price: '1元',
-        title: '支持《松涛粮站》',
-        studio: 'abc studio'
-      });
-    },
 
     showHint(id) {
       const list = hints[id];

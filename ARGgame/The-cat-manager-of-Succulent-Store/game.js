@@ -50,7 +50,7 @@
     ["key","七片钥匙"],["greenhouse","花房重启"],["memory","记忆拼图"],["choice","做出选择"],
     ["clear","全章节通关"],["feeder","猫粮供应商"],["groomer","梳毛师"],["player","逗猫棒冠军"],
     ["pet10","摸到第十下"],["collector","图鉴收藏家"],["logger","外婆便签收藏"],["nohint","独立解开一章"],
-    ["hint3","看过三级提示"],["meteor","傍晚流星"],["support","支持独立创作"],["reborn","老店新生"]
+    ["hint3","看过三级提示"],["meteor","傍晚流星"],["reborn","老店新生"]
   ].map(([id,name]) => ({id,name}));
   const ACH_BY_ID = Object.fromEntries(ACHIEVEMENTS.map(a => [a.id,a]));
 
@@ -441,7 +441,6 @@
   function bindEvents(){
     $("#startBtn").addEventListener("click",startNewGame);$("#continueBtn").addEventListener("click",continueGame);
     $("#settingsBtnStart").addEventListener("click",openSettings);$("#settingsBtn").addEventListener("click",openSettings);
-    $("#supportBtnStart").addEventListener("click",()=>window.Paywall?.show());$("#supportBtn").addEventListener("click",()=>window.Paywall?.show());
     $("#manualSaveBtn").addEventListener("click",()=>safeSave(true));$("#hintBtn").addEventListener("click",openHints);$("#resetBtn").addEventListener("click",openReset);$("#collectionBtn").addEventListener("click",()=>openCollection());
     $("#modalClose").addEventListener("click",closeModal);$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
     $("#chapterRoadmap").addEventListener("click",e=>{const b=e.target.closest("[data-chapter]");if(!b||b.disabled)return;state.viewChapter=Number(b.dataset.chapter);safeSave();render();$("#mainPanel")?.focus()});
@@ -464,7 +463,6 @@
     });
     $("#modalBody").addEventListener("change",e=>{if(e.target.id==="textScale"){state.settings.textScale=Number(e.target.value);safeSave();applySettings()}if(e.target.id==="importFile")importSave(e.target.files?.[0])});
     document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("#modal").classList.contains("hidden"))closeModal()}if(e.ctrlKey&&e.key.toLowerCase()==="s"){e.preventDefault();safeSave(true)}});
-    window.addEventListener("catshop:supported",()=>{unlockAchievement("support");safeSave();toast("谢谢你。支持状态只用于显示感谢，不解锁任何内容。")});
     window.addEventListener("beforeunload",()=>safeSave(false));
   }
 

@@ -5,8 +5,7 @@
   const A = window.WUQIAO_APPS;
   const SAVE_KEY = "wuqiao_404_save_v1";
   const ROUTE_KEY = "wuqiao_404_routes_ever";
-  const SUPPORT_SEEN_KEY = "_wuqiao_404_support_seen";
-  const SUPPORT_PAID_KEY = "_wuqiao_404_support_paid";
+
   const LOGIN_PASSWORD = "080717";
 
   const DEFAULT_STATE = {
@@ -336,7 +335,6 @@
       e.preventDefault(); const fd = new FormData(form);
       if (norm(fd.get("label")) !== "lj17" || norm(fd.get("seat")) !== "17" || fd.get("mode") !== "readonly") return setError(form, "还有一项没有对应上：硬盘名字要和17号机一致，打开方式要保证不修改原硬盘。");
       advance("H-17", "17号机硬盘只读挂载");
-      scheduleSupport();
     });
   }
 
@@ -809,22 +807,9 @@
   function openModal(html, extraClass="") { const modal=$("#modal");modal.hidden=false;modal.querySelector(".modal-card").className=`modal-card ${extraClass}`;$("#modal-content").innerHTML=html; }
   function closeModal() { $("#modal").hidden=true;$("#modal-content").innerHTML="";$("#modal").querySelector(".modal-card").className="modal-card"; }
 
-  function scheduleSupport() {
-    if(storageGet(SUPPORT_SEEN_KEY)||storageGet(SUPPORT_PAID_KEY))return;
-    storageSet(SUPPORT_SEEN_KEY,"1");
-    setTimeout(()=>showSupport(true),800);
-  }
-
-  function showSupport(auto=false) {
-    if(storageGet(SUPPORT_PAID_KEY)){if(!auto)toast("已记录你的支持，感谢！","success");return;}
-    storageSet(SUPPORT_SEEN_KEY,"1");
-    openModal(`<div class="paywall-inner"><div class="paywall-title">支持《第404楼：雾桥旧网》</div><div class="paywall-sub">1元 自愿支持 · 不影响任何谜题、提示与结局</div><div class="paywall-qr"><img src="assets/paycode.png" alt="自愿支持收款码"></div><div class="paywall-tip">请用某宝扫码自愿支持 1元</div><div class="paywall-copy"><p>你好，我是 abc studio 的独立开发者。</p><p>这部旧网调查里的每一条时间、引用与删帖记录都经过反复校对。如果你愿意支持1元，它会成为我继续制作网页解谜的动力。</p><p class="paywall-cute">1块钱买不到一杯奶茶，但能让17号机再转一会儿。</p><p>关闭后可以继续全部内容；这里不验证真实付款，也不会出售答案。</p></div><div class="paywall-actions"><button class="submit-button" data-supported>已完成支持 ♡</button><button class="subtle-button" data-later>继续调查</button></div><div class="paywall-studio">abc studio</div></div>`,`paywall-card`);
-    $("[data-supported]").addEventListener("click",()=>{storageSet(SUPPORT_PAID_KEY,btoa(`${Date.now()}_abc_studio`));closeModal();toast("感谢你的支持！硬盘继续转，真相继续亮着。","success");});
-    $("[data-later]").addEventListener("click",closeModal);
-  }
 
   function showSettings() {
-    openModal(`<div class="modal-body"><h2>蓝鲸17号机控制面板</h2><div class="field-grid single"><label><span><input type="checkbox" id="setting-motion" ${state.settings.reduceMotion?"checked":""}> 减少闪烁与动态</span></label><label><span><input type="checkbox" id="setting-fear" ${state.settings.lowFear?"checked":""}> 低恐怖模式（关闭CRT噪点）</span></label></div><div class="submit-row"><button class="subtle-button" data-export>导出存档JSON</button><label class="subtle-button">导入存档<input id="import-save" type="file" accept="application/json" hidden></label></div><div class="notice">重新开始会清除本周目进度，但保留自愿支持记录与跨周目路线记录。</div><button class="subtle-button" data-reset>重新开始本周目</button></div>`);
+    openModal(`<div class="modal-body"><h2>蓝鲸17号机控制面板</h2><div class="field-grid single"><label><span><input type="checkbox" id="setting-motion" ${state.settings.reduceMotion?"checked":""}> 减少闪烁与动态</span></label><label><span><input type="checkbox" id="setting-fear" ${state.settings.lowFear?"checked":""}> 低恐怖模式（关闭CRT噪点）</span></label></div><div class="submit-row"><button class="subtle-button" data-export>导出存档JSON</button><label class="subtle-button">导入存档<input id="import-save" type="file" accept="application/json" hidden></label></div><div class="notice">重新开始会清除本周目进度，但保留跨周目路线记录。</div><button class="subtle-button" data-reset>重新开始本周目</button></div>`);
     $("#setting-motion").addEventListener("change",e=>{state.settings.reduceMotion=e.target.checked;applySettings();save();});
     $("#setting-fear").addEventListener("change",e=>{state.settings.lowFear=e.target.checked;applySettings();save();});
     $("[data-export]").addEventListener("click",exportSave);$("#import-save").addEventListener("change",importSave);$("[data-reset]").addEventListener("click",()=>{if(confirm("确定清除本周目调查进度并重新开始吗？"))resetGame(false);});
@@ -842,7 +827,7 @@
     $("#app-nav").addEventListener("click",e=>{const btn=e.target.closest("[data-app]");if(btn)openApp(btn.dataset.app);});
     $(".system-icons").addEventListener("click",e=>{const btn=e.target.closest("[data-system]");if(btn)openSystemWindow(btn.dataset.system);});
     $("#notes").addEventListener("input",e=>{state.notes=e.target.value;save();});
-    $("#hint-btn").addEventListener("click",showHint);$("#support-btn").addEventListener("click",()=>showSupport(false));
+    $("#hint-btn").addEventListener("click",showHint);
     $("#notes-btn").addEventListener("click",()=>toggleNotes());$("#notes-close").addEventListener("click",()=>toggleNotes(false));
     $("#settings-btn").addEventListener("click",showSettings);$("#save-btn").addEventListener("click",()=>save(false));
     $("#sound-btn").addEventListener("click",()=>{state.settings.sound=!state.settings.sound;applySettings();save();if(state.settings.sound)startAmbience(state.currentApp==="case"?"rain":(["qq","sms","mail"].includes(state.currentApp)?"office":"disk"));else stopAmbience();toast(state.settings.sound?"环境声与界面音已开启。":"所有声音已关闭。","success");});
@@ -859,6 +844,6 @@
     applySettings();
   }
 
-  window.WuqiaoGame = { getState:()=>structuredClone(state), calculateEnding, openApp, showSupport, beginBoot, openSystemWindow };
+  window.WuqiaoGame = { getState:()=>structuredClone(state), calculateEnding, openApp, beginBoot, openSystemWindow };
   init();
 })();

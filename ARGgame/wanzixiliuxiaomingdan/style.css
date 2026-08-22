@@ -1984,24 +1984,6 @@ body::before {
   flex-shrink: 0;
 }
 
-.support-chip {
-  border: 1px solid rgba(184, 146, 58, 0.34);
-  background: linear-gradient(135deg, rgba(122, 31, 43, 0.42), rgba(184, 146, 58, 0.16));
-  color: #ead9a8;
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
-}
-
-.support-chip:hover {
-  border-color: rgba(184, 146, 58, 0.72);
-  box-shadow: 0 0 18px rgba(184, 146, 58, 0.16);
-  transform: translateY(-1px);
-}
 .header-search input {
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -2741,10 +2723,6 @@ body::before {
     padding: 5px 8px;
   }
 
-  .support-chip {
-    padding: 7px 9px;
-  }
-
   .about-section {
     grid-template-columns: 1fr;
   }
@@ -2825,8 +2803,7 @@ body::before {
 @media (pointer: coarse) {
   .btn,
   .header-btn,
-  .notepad-link,
-  .support-chip {
+  .notepad-link {
     min-height: 44px;
   }
 }

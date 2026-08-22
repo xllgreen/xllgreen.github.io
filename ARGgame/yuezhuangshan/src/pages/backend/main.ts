@@ -18,7 +18,7 @@ const { denied } = bootstrap({
   skin: 'backend', node: 'P05',
   accessDeniedHint: '工作台需要授权访问。先在岳桩资讯找到那篇被改的报道。',
 });
-if (denied) throw new Error('access denied');
+if (denied) { document.getElementById('root')!.hidden = true; }
 
 const root = document.getElementById('root')!;
 root.hidden = false;

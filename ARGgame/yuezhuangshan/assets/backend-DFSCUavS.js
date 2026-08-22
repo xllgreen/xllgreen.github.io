@@ -1,0 +1,11 @@
+import{B as a,r as g,m as y,u as m,d as f,I as B,p,i as C,P as s}from"./content-3TOPq97T.js";import{b as L,e as o}from"./bootstrap-DCiwK5RO.js";import{c as r,K as b,A as l,H as k,C as v}from"./clues-BYTSZugx.js";import{r as A,v as N}from"./hints-C2fXvdxr.js";const{denied:w}=L({pageId:"backend",brand:"研讨会工作台",domain:"conf-backend.yuezhuangshan.cn",skin:"backend",node:"P05",accessDeniedHint:"工作台需要授权访问。先在岳桩资讯找到那篇被改的报道。"});w&&(document.getElementById("root").hidden=!0);const H=document.getElementById("root");H.hidden=!1;document.getElementById("welcome").textContent=a.welcome;document.getElementById("loginHint").textContent=a.loginHint;document.getElementById("recordsTitle").textContent=a.recordsTitle;const P=document.getElementById("account"),u=document.getElementById("password"),i=document.getElementById("err"),O=document.getElementById("hintArea");document.getElementById("loginBtn").addEventListener("click",E);u.addEventListener("keydown",t=>{t.key==="Enter"&&E()});function E(){const t=P.value,n=u.value;if(i.textContent="",!t.trim()||!n.trim()){i.textContent="请填写账号与口令。";return}const c=r(t,l.LOGIN_ACCOUNT),e=r(n,l.LOGIN_PASSWORD);if(!c||!e){const d=g(s.LOGIN_P05);i.textContent=`账号或口令错误（第 ${d} 次）。`,S();return}y(s.LOGIN_P05),m("P06"),I()}function S(){h()}document.getElementById("hintBtn").addEventListener("click",()=>{A(s.LOGIN_P05),h()});function h(){const t=N(s.LOGIN_P05,k);O.innerHTML=t.length?`<div class="hint-box"><span class="hint-lvl">提示 L${t.length}</span><ul>${t.map(n=>`<li>${o(n)}</li>`).join("")}</ul></div>`:""}function I(t=!0){document.getElementById("loginView").hidden=!0;const n=document.getElementById("recordsView");n.hidden=!1;const c=document.getElementById("logsTable");c.innerHTML=`
+    <thead><tr><th>时间</th><th>闸机</th><th>结果</th><th>备注</th></tr></thead>
+    <tbody>
+      ${b.map(e=>{var d;return`
+        <tr class="${(d=e.note)!=null&&d.startsWith("⚠")?"warn":""}">
+          <td>${o(e.time)}</td>
+          <td>${o(e.gate)}</td>
+          <td>${o(e.result)}</td>
+          <td>${o(e.note??"")}</td>
+        </tr>`}).join("")}
+    </tbody>`,f(v.KEYCARD_MAINTENANCE),m("P07"),document.getElementById("surveillanceCap").hidden=!1,document.getElementById("labImg").src=B.labBlur,document.getElementById("afterRead").hidden=!1,t&&setTimeout(()=>p("phoneBuzz",{volumeScale:.7}),1200)}C("P06")&&I(!1);
