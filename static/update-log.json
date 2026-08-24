@@ -1,4 +1,565 @@
 {
-  "generatedAt": "2026-08-24 00:00 UTC",
-  "entries": []
+  "generatedAt": "2026-08-24 06:47 UTC",
+  "entries": [
+    {
+      "commit": "e2d312c",
+      "date": "2026-08-24 06:47 UTC",
+      "author": "xllstudio",
+      "message": "Merge branch 'main' of https://github.com/xllgreen/xllgreen.github.io",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/e2d312c189c80edfccc1730f89c7da0231ba4d71"
+    },
+    {
+      "commit": "5df4347",
+      "date": "2026-08-24 06:46 UTC",
+      "author": "xllstudio",
+      "message": "Update README",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/5df4347424c620041eac96c66ade11b161d7346c"
+    },
+    {
+      "commit": "a8919f8",
+      "date": "2026-08-23 16:18 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/a8919f80a12537964505cd3d0c55e583fab3f907"
+    },
+    {
+      "commit": "ec69bb8",
+      "date": "2026-08-22 16:17 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/ec69bb85e4ad6e45d6cb99682dd06f83bb0fae55"
+    },
+    {
+      "commit": "95044dd",
+      "date": "2026-08-22 11:48 UTC",
+      "author": "xllstudio",
+      "message": "update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/95044dd9820741bf483cba7ebe491d0d455ea2b0"
+    },
+    {
+      "commit": "8c22612",
+      "date": "2026-08-22 09:13 UTC",
+      "author": "xllstudio",
+      "message": "Summ",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/8c2261277f6e2aa4606dde54936dd5b3ff1c50b6"
+    },
+    {
+      "commit": "5f35b57",
+      "date": "2026-08-22 09:03 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/5f35b574d6a4234c12921eb73519f6e185fd3883"
+    },
+    {
+      "commit": "7b8a325",
+      "date": "2026-08-21 16:25 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/7b8a325a9ffc38f56a2636f8e31d479aa495b783"
+    },
+    {
+      "commit": "e22e093",
+      "date": "2026-08-20 16:27 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/e22e0931200bd2a0a1a949dde343fcda9286f960"
+    },
+    {
+      "commit": "2e822e9",
+      "date": "2026-08-20 12:40 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/2e822e965ef13fd2a7f113991073716443269887"
+    },
+    {
+      "commit": "29e706b",
+      "date": "2026-08-19 16:23 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/29e706b8e618f34a06ae2e5ae5a3296b4a4da737"
+    },
+    {
+      "commit": "367774a",
+      "date": "2026-08-19 06:16 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/367774addb99ead3d3504d157b5cbf6ff4e67828"
+    },
+    {
+      "commit": "ca3f29d",
+      "date": "2026-08-19 05:35 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update AI PriceHub data [skip ci]",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/ca3f29dc3f238ff689197ca3aa589dc7ce40a1e7"
+    },
+    {
+      "commit": "5d9226f",
+      "date": "2026-08-19 05:26 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/5d9226f9f652af6cb1b01da789fc38fd21b58f4f"
+    },
+    {
+      "commit": "b71d503",
+      "date": "2026-08-18 03:13 UTC",
+      "author": "xllstudio",
+      "message": "New",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/b71d503715d37357b8453a065fe879edbe6d25d9"
+    },
+    {
+      "commit": "08d5f39",
+      "date": "2026-08-17 15:45 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/08d5f394deaae02518172b1f92f1008606248d7e"
+    },
+    {
+      "commit": "60b0721",
+      "date": "2026-08-17 15:24 UTC",
+      "author": "xllstudio",
+      "message": "Up",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/60b0721930697da77e399d0dc0c262c338ded89b"
+    },
+    {
+      "commit": "5f95649",
+      "date": "2026-08-17 14:41 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/5f95649e314c72780d91ca64f7646ee5be60eec7"
+    },
+    {
+      "commit": "911239c",
+      "date": "2026-08-17 14:21 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/911239cca8ef606a112498b24058d9799ba58bc3"
+    },
+    {
+      "commit": "bc39d7b",
+      "date": "2026-08-17 14:09 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/bc39d7b886f459fd7eeea8b3e34708fb4f0100c4"
+    },
+    {
+      "commit": "13edb51",
+      "date": "2026-08-17 13:39 UTC",
+      "author": "xllstudio",
+      "message": "new update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/13edb5188f7639c4a3db872f98914fce5b63f91e"
+    },
+    {
+      "commit": "7f3d6e1",
+      "date": "2026-08-17 13:29 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/7f3d6e1d9ace05a952d8f686a6b89bb94ebcada6"
+    },
+    {
+      "commit": "7f3cfe1",
+      "date": "2026-08-17 09:16 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/7f3cfe1c5ca977869b50ed476619be90fca7b770"
+    },
+    {
+      "commit": "bef433a",
+      "date": "2026-08-17 08:48 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/bef433a5099b27f9635ba52abb0af1cc62beec73"
+    },
+    {
+      "commit": "90191b3",
+      "date": "2026-08-17 08:34 UTC",
+      "author": "xllstudio",
+      "message": "Error Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/90191b30472a6d1858c98b27f942b5ed1a704e2d"
+    },
+    {
+      "commit": "eaec4b7",
+      "date": "2026-08-17 08:18 UTC",
+      "author": "xllstudio",
+      "message": "Upadte",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/eaec4b73de8f34dd65cb260428626ad020859e8c"
+    },
+    {
+      "commit": "1238402",
+      "date": "2026-08-17 08:03 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/1238402af4af88f4b539c65234f64261272e8e5a"
+    },
+    {
+      "commit": "415f8dd",
+      "date": "2026-08-17 07:01 UTC",
+      "author": "xllstudio",
+      "message": "Pages Upadte",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/415f8dd8938abb4f2c82e527d09f6c70fa8a5059"
+    },
+    {
+      "commit": "4684117",
+      "date": "2026-08-06 04:43 UTC",
+      "author": "xllstudio",
+      "message": "Delete flashcards.js and tidy SkillPage headers",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/468411788661789b023b372e458ae59962f62183"
+    },
+    {
+      "commit": "305244e",
+      "date": "2026-08-06 03:36 UTC",
+      "author": "xllstudio",
+      "message": "Add site enhancement assets and tools page",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/305244e1b6c1b254ca70ab82ca367e3bc9214ed3"
+    },
+    {
+      "commit": "78c0d14",
+      "date": "2026-08-06 02:27 UTC",
+      "author": "xllstudio",
+      "message": "Remove SpeedTest page and related assets",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/78c0d1417896bf1313782771720c5d45cb77181e"
+    },
+    {
+      "commit": "77c8b42",
+      "date": "2026-08-05 17:14 UTC",
+      "author": "xllstudio",
+      "message": "Update test.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/77c8b42713119e28c390084aba1a29837990ef48"
+    },
+    {
+      "commit": "3fdc464",
+      "date": "2026-08-05 17:03 UTC",
+      "author": "xllstudio",
+      "message": "Use public LibreSpeed nodes; default no proxy",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/3fdc464ae67ac2a86e18c8666d648306d6efa7fe"
+    },
+    {
+      "commit": "173bbd7",
+      "date": "2026-08-05 16:54 UTC",
+      "author": "xllstudio",
+      "message": "Add Network SpeedTest page and proxy whitelist",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/173bbd7e8859fe03ca080f314e0e2e029b0e5cc2"
+    },
+    {
+      "commit": "e2fed97",
+      "date": "2026-08-05 16:20 UTC",
+      "author": "xllstudio",
+      "message": "Merge branch 'main' of https://github.com/xllgreen/xllgreen.github.io",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/e2fed97ffcc6ace32ba6f1cffd5682249b01e951"
+    },
+    {
+      "commit": "f25d49d",
+      "date": "2026-08-05 16:19 UTC",
+      "author": "xllstudio",
+      "message": "Update test.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/f25d49da1b278ca275a69ec7666dbd2f5da9368d"
+    },
+    {
+      "commit": "98aa0f4",
+      "date": "2026-08-05 16:11 UTC",
+      "author": "github-actions[bot]",
+      "message": "chore: auto-update speedtest servers (2026-08-05)",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/98aa0f4fb4d7b9e4dfd876e36b16d0013d546eb7"
+    },
+    {
+      "commit": "a012814",
+      "date": "2026-08-05 15:59 UTC",
+      "author": "xllstudio",
+      "message": "Add Deno proxy and base64 URL support",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/a01281488e6d6e99be00d8c175fbd1e35f8fec94"
+    },
+    {
+      "commit": "cc7929e",
+      "date": "2026-08-05 15:26 UTC",
+      "author": "xllstudio",
+      "message": "Speedtest proxy: use ?u param and improve validation",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/cc7929eca64a4d785f74da6f6d63d4ca4d41df84"
+    },
+    {
+      "commit": "8dfabf6",
+      "date": "2026-08-05 15:01 UTC",
+      "author": "xllstudio",
+      "message": "Add speedtest server updater and proxy support",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/8dfabf6ab1afbd1ac57641e404b876ad073ef746"
+    },
+    {
+      "commit": "2043c81",
+      "date": "2026-08-05 14:15 UTC",
+      "author": "xllstudio",
+      "message": "Add front-end network speedtest page",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/2043c816dd571b8c32c1b8379815bf6f2cf8721a"
+    },
+    {
+      "commit": "02b76d2",
+      "date": "2026-08-05 10:15 UTC",
+      "author": "xllstudio",
+      "message": "Refactor footer markup and styles",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/02b76d294a79518df5cb827c77e07f0cb0ebb562"
+    },
+    {
+      "commit": "b27f557",
+      "date": "2026-08-04 12:40 UTC",
+      "author": "xllstudio",
+      "message": "Add Terms of Use and site legal footer",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/b27f55746df01b80ef625835d108e8b420533b54"
+    },
+    {
+      "commit": "24f24e6",
+      "date": "2026-08-04 09:41 UTC",
+      "author": "xllstudio",
+      "message": "Create PrivacyPolicy.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/24f24e6ff28abc1dce80db7ccfdc63ccd9cb68eb"
+    },
+    {
+      "commit": "df7b4be",
+      "date": "2026-07-29 10:20 UTC",
+      "author": "xllstudio",
+      "message": "Add MedicalStuCloudDrive project and assets",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/df7b4becd6db6b1256065f36136a7e4161d38b84"
+    },
+    {
+      "commit": "224e6ea",
+      "date": "2026-07-25 09:47 UTC",
+      "author": "xllstudio",
+      "message": "Replace embedded iframe with redirect",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/224e6eaf96b3a382a3621ffb3b02cb253e456308"
+    },
+    {
+      "commit": "b8c910a",
+      "date": "2026-07-25 04:59 UTC",
+      "author": "xllstudio",
+      "message": "Add Claw fullscreen iframe pages",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/b8c910a844d41db58861546a3e8c0b36441de39f"
+    },
+    {
+      "commit": "4bc498d",
+      "date": "2026-07-19 11:39 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/4bc498db7b2436c6ff1ebad3008d8ba9ce24fb60"
+    },
+    {
+      "commit": "12e11af",
+      "date": "2026-07-19 11:33 UTC",
+      "author": "xllstudio",
+      "message": "Update script.js",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/12e11af45c2fb77a972dbb1164d7bc4f3f10cc92"
+    },
+    {
+      "commit": "69b943c",
+      "date": "2026-07-19 11:18 UTC",
+      "author": "xllstudio",
+      "message": "Normalize footer copyright text",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/69b943c497277fd8845144f67d841865fb7df9f6"
+    },
+    {
+      "commit": "24d689e",
+      "date": "2026-07-19 11:14 UTC",
+      "author": "xllstudio",
+      "message": "Update script.js",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/24d689e641576105155f2083132ce51c57c2541c"
+    },
+    {
+      "commit": "2e48599",
+      "date": "2026-07-19 08:21 UTC",
+      "author": "xllstudio",
+      "message": "Improve feedback UI, skill pages, and copy behavior",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/2e4859928ad79c75d12024ff4be4d91f2dd802ef"
+    },
+    {
+      "commit": "c77a754",
+      "date": "2026-07-19 07:51 UTC",
+      "author": "xllstudio",
+      "message": "Use local SkillPage links; fix About Me anchor",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/c77a754ef3f921ec3c81fce0e26b9ac1160de67c"
+    },
+    {
+      "commit": "d109d29",
+      "date": "2026-07-19 07:34 UTC",
+      "author": "xllstudio",
+      "message": "Add AboutUs and enhance skill pages UI",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/d109d2958a165abcc3e67d2f93cfb29c69d27b1b"
+    },
+    {
+      "commit": "1e6779b",
+      "date": "2026-07-19 06:31 UTC",
+      "author": "xllstudio",
+      "message": "Update SkillPage HTML templates and add Obstetrics",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/1e6779b6a59f1408e214b6dbc893d15d3cd88c36"
+    },
+    {
+      "commit": "5980ab5",
+      "date": "2026-07-19 06:25 UTC",
+      "author": "xllstudio",
+      "message": "Replace site links and author credits with Lin Wang",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/5980ab5eb4ba39e7cd627a501b5b0237e7aa4ab9"
+    },
+    {
+      "commit": "d00a329",
+      "date": "2026-07-19 05:34 UTC",
+      "author": "xllstudio",
+      "message": "Update",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/d00a32936160435109604c7d70bc759abd562b26"
+    },
+    {
+      "commit": "00bdd88",
+      "date": "2026-07-19 04:05 UTC",
+      "author": "xllstudio",
+      "message": "Embed README into Skill.html and add README styles",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/00bdd8883c1d29fcadfb8f410404e67abd12de3c"
+    },
+    {
+      "commit": "28996ec",
+      "date": "2026-07-19 03:39 UTC",
+      "author": "xllstudio",
+      "message": "Replace project image with i12.png",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/28996ec8c71aa4a9a61f0c202b79d5ae89a4dd85"
+    },
+    {
+      "commit": "9a3d01b",
+      "date": "2026-07-19 03:34 UTC",
+      "author": "xllstudio",
+      "message": "Update index.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/9a3d01b71e75cc6c6654d6ccbc6d3c885e5af4b5"
+    },
+    {
+      "commit": "7201cb6",
+      "date": "2026-07-19 03:32 UTC",
+      "author": "xllstudio",
+      "message": "Bump asset versions & rename Application#1 to Skill",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/7201cb6d96c56d8c01051a340b2637f11234fc2b"
+    },
+    {
+      "commit": "c1abe0e",
+      "date": "2026-07-19 03:18 UTC",
+      "author": "xllstudio",
+      "message": "New version",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/c1abe0e4d5c97a55f828277bc442cadf38401dec"
+    },
+    {
+      "commit": "e70f7f4",
+      "date": "2026-07-18 18:59 UTC",
+      "author": "xllstudio",
+      "message": "Create jekyll-gh-pages.yml",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/e70f7f45db30dbbf4edc42bb57dc789bbb6de22a"
+    },
+    {
+      "commit": "e14940b",
+      "date": "2026-07-18 18:30 UTC",
+      "author": "xllstudio",
+      "message": "Create static.yml",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/e14940b9f74f0b6eafca27a209e276f33360e4a4"
+    },
+    {
+      "commit": "db96a72",
+      "date": "2026-07-07 06:25 UTC",
+      "author": "xllstudio",
+      "message": "Update Application#1.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/db96a724c887b97726c35c4134e9a12ee9f1678b"
+    },
+    {
+      "commit": "0ea14a1",
+      "date": "2026-07-07 06:08 UTC",
+      "author": "xllstudio",
+      "message": "Add files via upload",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/0ea14a1645c10d930fb215c50b8f3e09cbe69bd4"
+    },
+    {
+      "commit": "48cf939",
+      "date": "2026-06-19 07:12 UTC",
+      "author": "xllstudio",
+      "message": "Update index.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/48cf939954edde9073fa6f628736575802c2acba"
+    },
+    {
+      "commit": "db68a61",
+      "date": "2026-06-19 07:09 UTC",
+      "author": "xllstudio",
+      "message": "Add files via upload",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/db68a6101b4ea8c818d3d9495a502ab74c4788ce"
+    },
+    {
+      "commit": "ff3c5ee",
+      "date": "2026-06-19 07:00 UTC",
+      "author": "xllstudio",
+      "message": "Delete potatoclock.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/ff3c5ee0297a364539dfbbb10ccd4fd149dfd7b4"
+    },
+    {
+      "commit": "aedf4c2",
+      "date": "2026-06-19 06:59 UTC",
+      "author": "xllstudio",
+      "message": "Update index.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/aedf4c2856f30fbec320c5f8622585a4fa511b31"
+    },
+    {
+      "commit": "d88fc9a",
+      "date": "2026-06-18 11:38 UTC",
+      "author": "xllstudio",
+      "message": "Update index.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/d88fc9a2c822b3bf5c21d6ff8144380f9974933b"
+    },
+    {
+      "commit": "c9190e8",
+      "date": "2026-06-18 11:34 UTC",
+      "author": "xllstudio",
+      "message": "Add files via upload",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/c9190e8f5ca33cfc4bd23c20a4be9e2ec20e3e07"
+    },
+    {
+      "commit": "aa2cf73",
+      "date": "2026-06-18 11:31 UTC",
+      "author": "xllstudio",
+      "message": "Update index.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/aa2cf73afdb443e35811ae17a7eecf81e74d2e8f"
+    },
+    {
+      "commit": "2028d82",
+      "date": "2026-06-18 11:29 UTC",
+      "author": "xllstudio",
+      "message": "Add files via upload",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/2028d82e23fce8fc051e90306281cbcdc32425fa"
+    },
+    {
+      "commit": "d62f342",
+      "date": "2026-06-18 11:24 UTC",
+      "author": "xllstudio",
+      "message": "Update CNAME",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/d62f3422e6e090fefb6c12be10224d13cf05db6c"
+    },
+    {
+      "commit": "434f677",
+      "date": "2026-06-18 11:10 UTC",
+      "author": "xllstudio",
+      "message": "Update CNAME",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/434f677af687e86d4780624ac3c91abc69a1fd1a"
+    },
+    {
+      "commit": "455880b",
+      "date": "2026-06-18 11:10 UTC",
+      "author": "xllstudio",
+      "message": "Update CNAME",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/455880bd7c38ca14c97758240d85b7eba4ef7180"
+    },
+    {
+      "commit": "ccf4fe8",
+      "date": "2026-06-18 11:09 UTC",
+      "author": "xllstudio",
+      "message": "Create CNAME",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/ccf4fe8140284e8a2c0be70551065dd293209056"
+    },
+    {
+      "commit": "7afdc35",
+      "date": "2025-08-24 04:09 UTC",
+      "author": "xllstudio",
+      "message": "Create SECURITY.md",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/7afdc35d5906d908dbfcef85b1098f38fc7d8ff6"
+    },
+    {
+      "commit": "d98240a",
+      "date": "2025-08-21 13:15 UTC",
+      "author": "xllstudio",
+      "message": "Update 404.html",
+      "url": "https://github.com/xllgreen/xllgreen.github.io/commit/d98240a6c8e2f83a8fef780f289b7995d136f480"
+    }
+  ]
 }
