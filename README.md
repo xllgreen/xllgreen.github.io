@@ -13,8 +13,6 @@
 - 应用下载与官方下载器
 - 医学 Skills 资源下载
 - 软件资源目录
-- 在线工具集合
-- AI PriceHub
 - ARG 游戏项目
 - 关于、反馈、隐私政策和使用条款等页面
 
@@ -26,11 +24,9 @@
 ├── Application.html           # 应用下载页
 ├── Skill.html                # 医学 Skills 下载页
 ├── Softwarebase.html         # 软件资源首页
-├── tools.html                # 在线工具首页
 ├── ARG.html                  # ARG 项目入口
 ├── ARGgame/                  # ARG 游戏及其资源
 ├── Softwarebase/             # 软件详情页
-├── tools/                    # 工具详情页
 ├── SkillPage/                # Skills 详情页
 ├── static/                   # 样式、脚本、字体和图片资源
 ├── assets/                   # 通用静态资源
